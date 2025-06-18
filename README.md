@@ -6,3 +6,5 @@ root: here are the original sources
 src: directory are coies of the sourcefiles (maybe some cleanup)
 
 bin: Assembler and disassembler (f9dasm or dasmfw)
+
+Readme.txt: Copy from Motorola Exordisk Manual with relevant Information
