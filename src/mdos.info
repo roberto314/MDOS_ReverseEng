@@ -1,0 +1,49 @@
+file mdos.sy 100
+option 6800
+#option ldchar :
+#option schowzero
+option noasc
+#option noaddr #disable for comments
+#option nohex #disable for comments
+option noflex
+option nofcc
+#option noforced # makes > before variable
+include common.info
+
+word 100-11f
+label 100 MDOS$
+label 100 VERS$$
+label 102 REVS$$
+label 104 KYI$SV
+label 106 ENDOS$
+label 108 ENDUS$
+label 10A ENDSY$
+label 10E RIBBA$
+label 110 ENDRV$
+label 112 GDBA$
+label 114 SYERR$
+label 116 SWI$SV
+label 118 SWI$UV
+label 11A IRQ$UV
+label 11C IRQ$SV
+label 11E CHFLG$
+label 120 SYIOCB
+label 145 SYPOCB
+label 16A SYEOCB
+
+data 0120-020f
+char 100-103
+label c1f TMP1
+label c20 TMP2
+label c21 TMP3
+
+label bdf HASH
+label be6 HASH2
+label bf4 HASH25
+
+unused 1273-20ff
+#lcomment c019 CC0 and CC1 set - external Serial clock (8xBaudrate)
+#const c559-c55a
+#word c6ef-c6f0
+#label c63F Set_32Char
+#char c724-c741

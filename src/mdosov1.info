@@ -1,0 +1,21 @@
+file mdosov1.sy 1273
+option 6800
+#option ldchar :
+#option schowzero
+option noasc
+#option noaddr #disable for comments
+#option nohex #disable for comments
+option noflex
+option nofcc
+#option noforced # makes > before variable
+include common.info
+
+
+#unused eb89-eb8f
+
+#lcomment c019 CC0 and CC1 set - external Serial clock (8xBaudrate)
+#const c559-c55a
+#word c6ef-c6f0
+#label c63F Set_32Char
+#char c724-c741
+#data 0102-020f

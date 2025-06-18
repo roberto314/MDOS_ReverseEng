@@ -1,0 +1,160 @@
+file exbug11.bin f000
+option 6800
+#option ldchar :
+#option schowzero
+#option noasc
+#option noaddr #disable for comments
+#option nohex #disable for comments
+option noflex
+option nofcc
+#option noforced # makes > before variable
+include common.info
+
+label f558 PWRUP1
+label F789 XBEGEN1
+label Faa7 XCBCDH1
+label F9c0 XCHEXL1
+label F9c4 XCHEXR1
+label Fa65 XINADD1
+label fa8b XINCH1
+label Faa0 XINCHN1
+label f9dc XOUTCH1
+label Fa24 XOUT2H1
+label Fa22 XOUT4H1
+label fa41 XPCRLF1
+label fa33 XPDATA1
+label fa35 XPDAT1
+label fa26 XPSPAC1
+
+label f564 from_floppy1
+#label 98 StartAddressH
+#unused c7f0-c7ff
+#lcomment c019 CC0 and CC1 set - external Serial clock (8xBaudrate)
+#const c559-c55a
+#word c6ef-c6f0
+#label c63F Set_32Char
+
+char f04a
+
+char f097
+char f09b
+char f09f
+char f0a3
+
+char f0c6
+char f0d5
+char f0d9
+char f0e8
+
+char f106
+char f10d
+char f114
+char f118
+char f127
+char f12e
+
+char f19c
+char f1a3
+char f1a7
+char f1ae
+char f1b2
+char f1b6
+
+char f1df
+char f1e6
+
+char f278
+char f27f
+char f286
+char f28d
+char f291
+char f295
+
+char f2ed
+char f2f1
+char f2f5
+char f2f9
+char f2fd
+char f301
+
+char f31b
+char f31f
+char f323
+char f327
+char f32b
+
+char f716
+char f720
+
+char f7d3
+char f7d7
+char f7e4
+
+char f80d
+char f811
+char f815
+
+char f826
+char f82a
+char f831
+
+char f8d1
+char f8e3
+char f8e7
+char f8eb
+
+char faac
+char fab0
+char fab4
+char fab8
+char fabc
+char fac0
+
+data faf4-fbff
+char faf5-fbff
+word faf9-fafa
+word faff-fb00
+word fb05-fb06
+word fb0b-fb0c
+word fb11-fb12
+word fb17-fb18
+word fb1d-fb1e
+word fb23-fb24
+word fb29-fb2a
+;word fb2d-fb2e
+;word fb1b-fb1c
+
+label f7bb LOAD
+label f7c0 VERIFY
+label f7b4 SEARCH
+label f719 PRINT
+label f719 PUNCH
+label f0f3 MAID
+label f623 S10
+label f626 S30
+label f62d S120
+label fae8 S240
+;label f627 TERM
+
+label fb2b GREETING
+label fb36 BEGINADDR
+label fb40 ENDADDR
+label fb4a CONTLDVERF
+label fb5a NOCHNGE
+label fb65 CHECKSM
+label fb6b ADRMEMTAP
+label fb79 INVALID
+label fb7f EXEC
+label fb85 SGLCONT
+label fb8f STOPONADDR
+label fba0 STOPADDR
+label fbab ABORTED
+label fbc4 BKPTERR
+label fbd0 S1_TXT
+label fbd6 S9_TXT
+label fbe5 S0_TXT
+label fbf5 HD_TXT
+
+#data 0102-020f
+
+unused fc00-ffff

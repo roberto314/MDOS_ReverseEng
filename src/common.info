@@ -1,0 +1,90 @@
+option labellen 16
+option copndlen 25
+
+label e800 OSLOAD
+label e822 FDINIT
+label e853 CHKERR
+label e85a PRNTER
+label e869 READSC
+label e86d READPS
+label e86f RDCRC
+label e872 RWTEST
+label e875 RESTOR
+label e878 SEEK
+label e87b WRTEST
+label e87e WRDDAM
+label e881 WRVERF
+label e884 WRITSC
+label e887 CLOCK
+label eb90 CLRTOP
+label eb98 TOP
+label ebc0 LPINIT
+label ebcc LIST
+label ebe4 LDATA0
+label ebf2 LDATA1
+
+;label f015 INCHP
+;label fa7f INCHP1
+;label fa6b INCHP2
+;label f018 OUTCH
+;label f9e2 OUTCH1
+;label f021 PCRLF
+;label f024 PDATA
+
+        
+label FOF3 REENT1  ; REENTER EXBUG COMMAND LEVEL
+label F564 REENT2  ; REENTER EXBUG COMMAND LEVEL
+label F5C2 REENT3  ; REENTER EXBUG COMMAND LEVEL
+label F8A4 ROBJREC ; READ OBJECT RECORD
+label F9CF OUTCNSF ; OUTPUT CHAR (NO SPEED FILL)
+label FBFB RTNUSR  ; RETURN TO USER MAP FROM SWI 
+
+
+used f000 PWRUP  ; ENTER EXBUG FROM RESTART
+used F003 XBEGEN ; INPUT START & END ADDRESSES
+used F006 XCBCDH ; CONVERT HEX TO BCD
+used F009 XCHEXL ; CONVERT MS BCD TO HEX (ASCI)
+used F00c XCHEXR ; CONVERT LS BCD TO HEX (ASCI)
+used F00f XINADD ; INPUT HEX ADDR INDIRECT (X)
+used F012 XINCH  ; INPUT ONE CHARACTER
+used F015 XINCHN ; INPUT ONE CHAR NO PARITY
+used F018 XOUTCH ; OUTPUT CHAR (WITH SPEED FILL)
+used F01b XOUT2H ; PRINT 2 HEX CHAR (X)
+used F01e XOUT4H ; PRINT 4 HEX CHAR (X)
+used f021 XPCRLF ; PRINT C/ R LI F (Uses A)
+used f024 XPDATA ; PRINT C/R L/F +DATA STRING
+used f027 XPDAT  ; PRINT DATA STRING (Enter with X)
+used f02a XPSPAC ; PRINT SPACE
+
+label f0f3 MAID$
+label fcfd SBIT$
+label ff16 XREG$P
+label ff18 XREG$X
+label ff1A XREG$A
+label ff1B XREG$B
+label ff1C XREG$C
+label ff1D XREG$S
+label ff1f BRKPT$
+label ff4f BKPIN$
+label ff53 AECHO
+label ff8a XSTAK$
+
+label fff8 IRQ$VC
+label fffa SWI$VC
+label fffc NMI$VC
+
+#label fcf4 CNACI$
+label fcf4 ACIA_0
+label fcf5 ACIA_1
+
+label fcf8 PIA_0
+label fcf9 PIA_1
+label fcfa PIA_2
+label fcfb PIA_3
+
+label fcfc PROM_0
+label fcfd PROM_1
+label fcfe PROM_2
+label fcff PROM_3
+
+label ff00 RAM_START

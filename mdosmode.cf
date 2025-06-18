@@ -1,0 +1,48 @@
+@*
+@*  CHAIN FILE TO SET 6800 MDOS  3.0X FOR SCROLL OR
+@*  CRT DELETE CHARACTER MODE OPERATION
+@*
+@*    To invoke:  =CHAIN MDOSMODE;SCROLL   for scroll mode
+@*                =CHAIN MDOSMODE;CRT       "  CRT     "
+@*
+@*  *******************************************
+@*  ** NEVER patch a factory master diskette **
+@*  **       (Make a backup copy first)      ** 
+@*  *******************************************
+@*
+@*  Patches are applied to drive #0 MDOS.
+@*
+@*   Abort with 'BREAK' key or
+@.   strike 'RETURN' to continue...
+@*
+/IFS SCROLL.CRT
+/*  ** ERROR **
+/*  Must specify "SCROLL" or "CRT" as option parameter!
+/ABORT
+/XIF
+/IFC SCROLL.CRT
+/*  ** ERROR **
+/*  Must specify "SCROLL" or "CRT" as option parameter!
+/ABORT
+/XIF
+/IFS SCROLL
+/*  ** SCROLL mode specified
+PATCH MDOSOV2.SY
+0O
+194F/7F,26,20,BD,1B,9C,27,DD,4D,26,01,5A,4A,FE,1B,E5,E7,02,A7
+./03,7F,1B,E8,3F,25,E6,00,BD,1B,10,24,C5,7E,1A,DC
+1984/EA
+19A5/C9
+Q
+/XIF
+/IFS CRT
+/*  ** CRT mode specified 
+PATCH MDOSOV2.SY
+0O
+194F/08,27,09,C1,7F,26,1C,C6,08,BD,1B,10,BD,1B,9C,27,AD,3F,25
+./09,BD,1B,C9,7F,1B,E8,BD,F0,2A,C6,08,20,BC,00,00
+1984/51
+19A5/30
+Q
+/XIF
+@* ** EOF **
