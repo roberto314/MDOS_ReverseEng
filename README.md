@@ -13,7 +13,8 @@ dis_all.sh: Script to disassemble everything
 
 assemble.sh: Script to assemble everything
 
-assembler is now: as0 (https://github.com/JimInCA/motorola-6800-assembler)
+assembler was: as0 (https://github.com/JimInCA/motorola-6800-assembler)
+assembler is now: The Macroassembler AS (asl) (http://john.ccac.rwth-aachen.de:8000/as/)
 
 disassembler is: dasmfw: (https://github.com/Arakula/dasmfw)
 

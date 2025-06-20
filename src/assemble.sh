@@ -1,10 +1,10 @@
 #!/bin/bash
 #
 
-#ASS=../bin/asl
-#ASS=../bin/a68
-ASS=../bin/as0
-#ASS=../bin/as1
+ASL=../bin/asl
+A68=../bin/a68
+AS0=../bin/as0
+AS1=../bin/as1
 P2B=../bin/p2bin
 CPU=6800
 #DIR="/home/rob/Projects/mc-6502_mini/"
@@ -17,13 +17,15 @@ PWD=`pwd`
 #######################################################################
 NAME=exbug12
 OFF=0xF000
-${ASS} ${NAME}.asm -L CRE C S > ${NAME}.lst 
-#${ASS} -cpu ${CPU} -L ${NAME}.asm > out.txt
-#${P2B} ${NAME}.p ${NAME}.bin >> out.txt
+## Use as0
+${AS0} ${NAME}.asm -L CRE C S > ${NAME}.lst 
+## Use asl
+${ASL} -cpu ${CPU} -L ${NAME}.asm #> out.txt
+${P2B} ${NAME}.p ${NAME}_b.bin #>> out.txt
 #rm ${NAME}.p
 #srec_cat ${NAME}.bin -binary -offset ${OFF} -o ${NAME}.s19 -Motorola -address_length=2 #-execution-start-address=0x0100
 #echo S9 >> ${NAME}.s19
-srec_cat ${NAME}.s19 -motorola -offset -${OFF} -o ${NAME}_b.bin -binary # strip off the beginning
+#srec_cat ${NAME}.s19 -motorola -offset -${OFF} -o ${NAME}_b.bin -binary # strip off the beginning
 #srec_cat ${NAME}.s19 -motorola -offset -${OFF} -fill 0xff 0x0000 0x37ff -o ${NAME}.bin -binary # strip off the beginning
 
 
