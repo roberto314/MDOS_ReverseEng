@@ -1,0 +1,31 @@
+Macro Assembler 1.42 Beta [Bld 216]
+(x86_64-unknown-linux)
+(C) 1992,2022 Alfred Arnold
+Motorola MPC821 Additions (C) 2012 Marcin Cieslak
+68RS08-Generator (C) 2006 Andreas Bolsch
+Mitsubishi M16C-Generator also (C) 1999 RMS
+XILINX KCPSM(Picoblaze)-Generator (C) 2003 Andreas Wassatsch
+TMS320C2x-Generator (C) 1994/96 Thomas Sailer
+TMS320C5x-Generator (C) 1995/96 Thomas Sailer
+Panafacom MN1610/1613-Generator (C) 2019 Haruo Asano
+MIL-STD 1750 Generator also (C) 2019 Oliver Kellogg
+GI CP-1600-Generator (C) 2021 Haruo Asano
+
+
+Assembling exbug12.asm
+PASS 1
+exbug12.asm(1395)
+PASS 2
+exbug12.asm(1395)
+
+0.05 seconds assembly time
+
+   1395 lines source file
+   1397 lines incl. macro expansions
+      2 passes
+      0 errors
+      0 warnings
+P2BIN/C V1.42 Beta [Bld 216]
+(C) 1992,2022 Alfred Arnold
+Deduced address range: 0x0000F000-0x0000FBFF
+exbug12.p==>>exbug12_b.bin  (3072 Bytes)

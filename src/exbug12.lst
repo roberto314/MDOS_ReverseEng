@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 1 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 1 - 2025-06-20 14:49:05
 
 
        1/       0 :                     ;dasmfw: Disassembler Framework V0.35
@@ -9,83 +9,83 @@
        6/       0 :                     ; Used Labels
        7/       0 :                     ;****************************************************
        8/       0 :                     
-       9/       0 :                     MASL     MACRO ; Macro for missing ASLD Instruction
-      10/       0 :                              LSLB
-      11/       0 :                              ROLA
-      12/       0 :                              ENDM
+       9/       0 :                     MASL            MACRO ; Macro for missing ASLD Instruction
+      10/       0 :                                     LSLB
+      11/       0 :                                     ROLA
+      12/       0 :                                     ENDM
       13/       0 :                     
-      14/       0 : =$0                  M0000   EQU     $0000
-      15/       0 : =$4                  M0004   EQU     $0004
-      16/       0 : =$317                M0317   EQU     $0317
-      17/       0 : =$72F                M072F   EQU     $072F
-      18/       0 : =$30D4               M30D4   EQU     $30D4
-      19/       0 : =$83FF               M83FF   EQU     $83FF
-      20/       0 : =$E800               OSLOAD  EQU     $E800
-      21/       0 : =$FCF4               ACIA_0  EQU     $FCF4
-      22/       0 : =$FCF5               ACIA_1  EQU     $FCF5
-      23/       0 : =$FCF8               PIA_0   EQU     $FCF8
-      24/       0 : =$FCF9               PIA_1   EQU     $FCF9
-      25/       0 : =$FCFA               PIA_2   EQU     $FCFA
-      26/       0 : =$FCFB               PIA_3   EQU     $FCFB
-      27/       0 : =$FCFD               PROM_1  EQU     $FCFD
-      28/       0 : =$FF00               RAM_START         EQU     $FF00
-      29/       0 : =$FF02               MFF02   EQU     $FF02
-      30/       0 : =$FF03               MFF03   EQU     $FF03
-      31/       0 : =$FF04               MFF04   EQU     $FF04
-      32/       0 : =$FF05               MFF05   EQU     $FF05
-      33/       0 : =$FF06               MFF06   EQU     $FF06
-      34/       0 : =$FF07               MFF07   EQU     $FF07
-      35/       0 : =$FF08               MFF08   EQU     $FF08
-      36/       0 : =$FF09               MFF09   EQU     $FF09
-      37/       0 : =$FF0A               MFF0A   EQU     $FF0A
-      38/       0 : =$FF0B               MFF0B   EQU     $FF0B
-      39/       0 : =$FF0C               MFF0C   EQU     $FF0C
-      40/       0 : =$FF0D               MFF0D   EQU     $FF0D
-      41/       0 : =$FF0E               MFF0E   EQU     $FF0E
-      42/       0 : =$FF10               MFF10   EQU     $FF10
-      43/       0 : =$FF12               MFF12   EQU     $FF12
-      44/       0 : =$FF13               MFF13   EQU     $FF13
-      45/       0 : =$FF14               MFF14   EQU     $FF14
-      46/       0 : =$FF16               XREGsP  EQU     $FF16
-      47/       0 : =$FF17               MFF17   EQU     $FF17
-      48/       0 : =$FF1C               XREGsC  EQU     $FF1C
-      49/       0 : =$FF1D               XREGsS  EQU     $FF1D
-      50/       0 : =$FF1F               BRKPTs  EQU     $FF1F
-      51/       0 : =$FF2F               MFF2F   EQU     $FF2F
-      52/       0 : =$FF4F               BKPINs  EQU     $FF4F
-      53/       0 : =$FF50               MFF50   EQU     $FF50
-      54/       0 : =$FF51               MFF51   EQU     $FF51
-      55/       0 : =$FF53               AECHO   EQU     $FF53
-      56/       0 : =$FF54               MFF54   EQU     $FF54
-      57/       0 : =$FF56               MFF56   EQU     $FF56
-      58/       0 : =$FF58               MFF58   EQU     $FF58
-      59/       0 : =$FF5A               MFF5A   EQU     $FF5A
-      60/       0 : =$FF5B               MFF5B   EQU     $FF5B
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 2 - 2025-06-20 14:44:45
+      14/       0 : =$0                  M0000           EQU     $0000
+      15/       0 : =$4                  M0004           EQU     $0004
+      16/       0 : =$317                M0317           EQU     $0317
+      17/       0 : =$72F                M072F           EQU     $072F
+      18/       0 : =$30D4               M30D4           EQU     $30D4
+      19/       0 : =$83FF               M83FF           EQU     $83FF
+      20/       0 : =$E800               OSLOAD          EQU     $E800
+      21/       0 : =$FCF4               ACIA_0          EQU     $FCF4
+      22/       0 : =$FCF5               ACIA_1          EQU     $FCF5
+      23/       0 : =$FCF8               PIA_0           EQU     $FCF8
+      24/       0 : =$FCF9               PIA_1           EQU     $FCF9
+      25/       0 : =$FCFA               PIA_2           EQU     $FCFA
+      26/       0 : =$FCFB               PIA_3           EQU     $FCFB
+      27/       0 : =$FCFD               PROM_1          EQU     $FCFD
+      28/       0 : =$FF00               RAM_START       EQU     $FF00
+      29/       0 : =$FF02               MFF02           EQU     $FF02
+      30/       0 : =$FF03               MFF03           EQU     $FF03
+      31/       0 : =$FF04               MFF04           EQU     $FF04
+      32/       0 : =$FF05               MFF05           EQU     $FF05
+      33/       0 : =$FF06               MFF06           EQU     $FF06
+      34/       0 : =$FF07               MFF07           EQU     $FF07
+      35/       0 : =$FF08               MFF08           EQU     $FF08
+      36/       0 : =$FF09               MFF09           EQU     $FF09
+      37/       0 : =$FF0A               MFF0A           EQU     $FF0A
+      38/       0 : =$FF0B               MFF0B           EQU     $FF0B
+      39/       0 : =$FF0C               MFF0C           EQU     $FF0C
+      40/       0 : =$FF0D               MFF0D           EQU     $FF0D
+      41/       0 : =$FF0E               MFF0E           EQU     $FF0E
+      42/       0 : =$FF10               MFF10           EQU     $FF10
+      43/       0 : =$FF12               MFF12           EQU     $FF12
+      44/       0 : =$FF13               MFF13           EQU     $FF13
+      45/       0 : =$FF14               MFF14           EQU     $FF14
+      46/       0 : =$FF16               XREGsP          EQU     $FF16
+      47/       0 : =$FF17               MFF17           EQU     $FF17
+      48/       0 : =$FF1C               XREGsC          EQU     $FF1C
+      49/       0 : =$FF1D               XREGsS          EQU     $FF1D
+      50/       0 : =$FF1F               BRKPTs          EQU     $FF1F
+      51/       0 : =$FF2F               MFF2F           EQU     $FF2F
+      52/       0 : =$FF4F               BKPINs          EQU     $FF4F
+      53/       0 : =$FF50               MFF50           EQU     $FF50
+      54/       0 : =$FF51               MFF51           EQU     $FF51
+      55/       0 : =$FF53               AECHO           EQU     $FF53
+      56/       0 : =$FF54               MFF54           EQU     $FF54
+      57/       0 : =$FF56               MFF56           EQU     $FF56
+      58/       0 : =$FF58               MFF58           EQU     $FF58
+      59/       0 : =$FF5A               MFF5A           EQU     $FF5A
+      60/       0 : =$FF5B               MFF5B           EQU     $FF5B
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 2 - 2025-06-20 14:49:05
 
 
-      61/       0 : =$FF5C               MFF5C   EQU     $FF5C
-      62/       0 : =$FF5D               MFF5D   EQU     $FF5D
-      63/       0 : =$FF5E               MFF5E   EQU     $FF5E
-      64/       0 : =$FF5F               MFF5F   EQU     $FF5F
-      65/       0 : =$FF60               MFF60   EQU     $FF60
-      66/       0 : =$FF61               MFF61   EQU     $FF61
-      67/       0 : =$FF62               MFF62   EQU     $FF62
-      68/       0 : =$FF63               MFF63   EQU     $FF63
-      69/       0 : =$FF8A               XSTAKs  EQU     $FF8A
-      70/       0 : =$FF8B               MFF8B   EQU     $FF8B
-      71/       0 : =$FF8C               MFF8C   EQU     $FF8C
-      72/       0 : =$FF8D               MFF8D   EQU     $FF8D
-      73/       0 : =$FF8E               MFF8E   EQU     $FF8E
-      74/       0 : =$FF90               MFF90   EQU     $FF90
-      75/       0 : =$FF93               MFF93   EQU     $FF93
-      76/       0 : =$FFD5               MFFD5   EQU     $FFD5
-      77/       0 : =$FFF6               MFFF6   EQU     $FFF6
-      78/       0 : =$FFF7               MFFF7   EQU     $FFF7
-      79/       0 : =$FFF8               IRQsVC  EQU     $FFF8
-      80/       0 : =$FFF9               MFFF9   EQU     $FFF9
-      81/       0 : =$FFFA               SWIsVC  EQU     $FFFA
-      82/       0 : =$FFFC               NMIsVC  EQU     $FFFC
+      61/       0 : =$FF5C               MFF5C           EQU     $FF5C
+      62/       0 : =$FF5D               MFF5D           EQU     $FF5D
+      63/       0 : =$FF5E               MFF5E           EQU     $FF5E
+      64/       0 : =$FF5F               MFF5F           EQU     $FF5F
+      65/       0 : =$FF60               MFF60           EQU     $FF60
+      66/       0 : =$FF61               MFF61           EQU     $FF61
+      67/       0 : =$FF62               MFF62           EQU     $FF62
+      68/       0 : =$FF63               MFF63           EQU     $FF63
+      69/       0 : =$FF8A               XSTAKs          EQU     $FF8A
+      70/       0 : =$FF8B               MFF8B           EQU     $FF8B
+      71/       0 : =$FF8C               MFF8C           EQU     $FF8C
+      72/       0 : =$FF8D               MFF8D           EQU     $FF8D
+      73/       0 : =$FF8E               MFF8E           EQU     $FF8E
+      74/       0 : =$FF90               MFF90           EQU     $FF90
+      75/       0 : =$FF93               MFF93           EQU     $FF93
+      76/       0 : =$FFD5               MFFD5           EQU     $FFD5
+      77/       0 : =$FFF6               MFFF6           EQU     $FFF6
+      78/       0 : =$FFF7               MFFF7           EQU     $FFF7
+      79/       0 : =$FFF8               IRQsVC          EQU     $FFF8
+      80/       0 : =$FFF9               MFFF9           EQU     $FFF9
+      81/       0 : =$FFFA               SWIsVC          EQU     $FFFA
+      82/       0 : =$FFFC               NMIsVC          EQU     $FFFC
       83/       0 :                     
       84/       0 :                     ;****************************************************
       85/       0 :                     ; Program's Code Areas
@@ -124,7 +124,7 @@
      118/    F046 : BD FA 7F            ZF046           JSR     XINCHN1                  ; F046: BD FA 7F       '...'
      119/    F049 : 81 3D                               CMPA    #'='                      ; F049: 81 3D          '.='
      120/    F04B : 26 EA                               BNE     ZF037                    ; F04B: 26 EA          '&.'
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 3 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 3 - 2025-06-20 14:49:05
 
 
      121/    F04D : BD F9 CB                            JSR     XPSPAC1                  ; F04D: BD F9 CB       '...'
@@ -176,8 +176,8 @@
      167/    F0B1 :                     ;                LSLB
      168/    F0B1 :                     ;                ROLA
      169/    F0B1 : (MACRO)                              MASL                             ; F0B1: 58 49          'XI'
-     169/    F0B1 : 58                           LSLB
-     169/    F0B2 : 49                           ROLA
+     169/    F0B1 : 58                                  LSLB
+     169/    F0B2 : 49                                  ROLA
      170/    F0B3 : 8D C7                               BSR     ZF07C                    ; F0B3: 8D C7          '..'
      171/    F0B5 : EB 01                               ADDB    $01,X                    ; F0B5: EB 01          '..'
      172/    F0B7 : A9 00                               ADCA    ,X                       ; F0B7: A9 00          '..'
@@ -187,7 +187,7 @@
      176/    F0C0 : E7 01                               STAB    $01,X                    ; F0C0: E7 01          '..'
      177/    F0C2 : BD FA 7F                            JSR     XINCHN1                  ; F0C2: BD FA 7F       '...'
      178/    F0C5 : 81 3D                               CMPA    #'='                      ; F0C5: 81 3D          '.='
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 4 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 4 - 2025-06-20 14:49:05
 
 
      179/    F0C7 : 26 D5                               BNE     ZF09E                    ; F0C7: 26 D5          '&.'
@@ -250,7 +250,7 @@
      236/    F150 : B6 FF 08            ZF150           LDAA    MFF08                    ; F150: B6 FF 08       '...'
      237/    F153 : F6 FF 09                            LDAB    MFF09                    ; F153: F6 FF 09       '...'
      238/    F156 : BD F2 AF                            JSR     ZF2AF                    ; F156: BD F2 AF       '...'
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 5 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 5 - 2025-06-20 14:49:05
 
 
      239/    F159 : 27 98                               BEQ     MAIDs                    ; F159: 27 98          ''.'
@@ -313,7 +313,7 @@
      296/    F1D6 : 27 E3                               BEQ     ZF1BB                    ; F1D6: 27 E3          ''.'
      297/    F1D8 : 09                                  DEX                              ; F1D8: 09             '.'
      298/    F1D9 : BD FA 21                            JSR     XPCRLF1                  ; F1D9: BD FA 21       '..!'
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 6 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 6 - 2025-06-20 14:49:05
 
 
      299/    F1DC : 20 E1                               BRA     ZF1BF                    ; F1DC: 20 E1          ' .'
@@ -376,7 +376,7 @@
      356/    F26A : 7F FF 54                            CLR     MFF54                    ; F26A: 7F FF 54       '..T'
      357/    F26D : 20 37                               BRA     ZF2A6                    ; F26D: 20 37          ' 7'
      358/    F26F : 7F FF 5D            ZF26F           CLR     MFF5D                    ; F26F: 7F FF 5D       '..]'
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 7 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 7 - 2025-06-20 14:49:05
 
 
      359/    F272 : 20 32                               BRA     ZF2A6                    ; F272: 20 32          ' 2'
@@ -439,7 +439,7 @@
      416/    F2F2 : 8D D1                               BSR     ZF2C5                    ; F2F2: 8D D1          '..'
      417/    F2F4 : 86 41                               LDAA    #'A'                      ; F2F4: 86 41          '.A'
      418/    F2F6 : 8D D6                               BSR     ZF2CE                    ; F2F6: 8D D6          '..'
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 8 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 8 - 2025-06-20 14:49:05
 
 
      419/    F2F8 : 86 42                               LDAA    #'B'                      ; F2F8: 86 42          '.B'
@@ -502,7 +502,7 @@
      476/    F37F : EE 00                               LDX     ,X                       ; F37F: EE 00          '..'
      477/    F381 : A6 00                               LDAA    ,X                       ; F381: A6 00          '..'
      478/    F383 : C6 3F                               LDAB    #$3F                     ; F383: C6 3F          '.?'
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 9 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 9 - 2025-06-20 14:49:05
 
 
      479/    F385 : E7 00                               STAB    ,X                       ; F385: E7 00          '..'
@@ -565,7 +565,7 @@
      536/    F406 : C6 05               ZF406           LDAB    #$05                     ; F406: C6 05          '..'
      537/    F408 : BE FF 1D                            LDS     XREGsS                   ; F408: BE FF 1D       '...'
      538/    F40B : CE FF 16                            LDX     #XREGsP                  ; F40B: CE FF 16       '...'
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 10 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 10 - 2025-06-20 14:49:05
 
 
      539/    F40E : A6 01               ZF40E           LDAA    $01,X                    ; F40E: A6 01          '..'
@@ -628,7 +628,7 @@
      596/    F487 : 7F FF 60                            CLR     MFF60                    ; F487: 7F FF 60       '..`'
      597/    F48A : 7F FF 54                            CLR     MFF54                    ; F48A: 7F FF 54       '..T'
      598/    F48D : 8E FF 8A            ZF48D           LDS     #XSTAKs                  ; F48D: 8E FF 8A       '...'
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 11 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 11 - 2025-06-20 14:49:05
 
 
      599/    F490 : BD FA A5                            JSR     ZFAA5                    ; F490: BD FA A5       '...'
@@ -691,7 +691,7 @@
      656/    F508 : BD FA A5                            JSR     ZFAA5                    ; F508: BD FA A5       '...'
      657/    F50B : 7D FF 50                            TST     MFF50                    ; F50B: 7D FF 50       '}.P'
      658/    F50E : 27 0C                               BEQ     ZF51C                    ; F50E: 27 0C          ''.'
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 12 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 12 - 2025-06-20 14:49:05
 
 
      659/    F510 : FE FF 51                            LDX     MFF51                    ; F510: FE FF 51       '..Q'
@@ -754,7 +754,7 @@
      716/    F59E : A7 02                               STAA    $02,X                    ; F59E: A7 02          '..'
      717/    F5A0 : 86 34                               LDAA    #$34                     ; F5A0: 86 34          '.4'
      718/    F5A2 : A7 03                               STAA    $03,X                    ; F5A2: A7 03          '..'
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 13 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 13 - 2025-06-20 14:49:05
 
 
      719/    F5A4 : 86 3C                               LDAA    #$3C                     ; F5A4: 86 3C          '.<'
@@ -817,7 +817,7 @@
      776/    F621 : 39                                  RTS                              ; F621: 39             '9'
      777/    F622 : 86 10               ZF622           LDAA    #$10                     ; F622: 86 10          '..'
      778/    F624 : 7E F9 CF            ZF624           JMP     OUTCNSF                  ; F624: 7E F9 CF       '~..'
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 14 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 14 - 2025-06-20 14:49:05
 
 
      779/    F627 : BD F9 CB            TERM            JSR     XPSPAC1                  ; F627: BD F9 CB       '...'
@@ -880,7 +880,7 @@
      836/    F6AF : BD FA 16                            JSR     XPDAT1                   ; F6AF: BD FA 16       '...'
      837/    F6B2 : 5F                                  CLRB                             ; F6B2: 5F             '_'
      838/    F6B3 : CE FF 58                            LDX     #MFF58                   ; F6B3: CE FF 58       '..X'
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 15 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 15 - 2025-06-20 14:49:05
 
 
      839/    F6B6 : 8D 45                               BSR     ZF6FD                    ; F6B6: 8D 45          '.E'
@@ -943,7 +943,7 @@
      896/    F739 : BD FA 21            ZF739           JSR     XPCRLF1                  ; F739: BD FA 21       '..!'
      897/    F73C : CE FF 08                            LDX     #MFF08                   ; F73C: CE FF 08       '...'
      898/    F73F : BD F9 C7                            JSR     XOUT4H1                  ; F73F: BD F9 C7       '...'
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 16 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 16 - 2025-06-20 14:49:05
 
 
      899/    F742 : FE FF 08                            LDX     MFF08                    ; F742: FE FF 08       '...'
@@ -1006,7 +1006,7 @@
      956/    F7CF : B7 FF 58                            STAA    MFF58                    ; F7CF: B7 FF 58       '..X'
      957/    F7D2 : 81 53                               CMPA    #'S'                      ; F7D2: 81 53          '.S'
      958/    F7D4 : 27 07                               BEQ     ZF7DD                    ; F7D4: 27 07          ''.'
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 17 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 17 - 2025-06-20 14:49:05
 
 
      959/    F7D6 : 81 43                               CMPA    #'C'                      ; F7D6: 81 43          '.C'
@@ -1069,7 +1069,7 @@
     1016/    F85F : 36                                  PSHA                             ; F85F: 36             '6'
     1017/    F860 : FF FF 56                            STX     MFF56                    ; F860: FF FF 56       '..V'
     1018/    F863 : 7D FF 61                            TST     MFF61                    ; F863: 7D FF 61       '}.a'
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 18 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 18 - 2025-06-20 14:49:05
 
 
     1019/    F866 : 26 0A                               BNE     ZF872                    ; F866: 26 0A          '&.'
@@ -1132,7 +1132,7 @@
     1076/    F8EE : B7 FF 8C            ZF8EE           STAA    MFF8C                    ; F8EE: B7 FF 8C       '...'
     1077/    F8F1 : 7F FF 8B                            CLR     MFF8B                    ; F8F1: 7F FF 8B       '...'
     1078/    F8F4 : 8D 52                               BSR     ZF948                    ; F8F4: 8D 52          '.R'
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 19 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 19 - 2025-06-20 14:49:05
 
 
     1079/    F8F6 : B7 FF 07                            STAA    MFF07                    ; F8F6: B7 FF 07       '...'
@@ -1195,7 +1195,7 @@
     1136/    F971 : B7 FF 5C            ZF971           STAA    MFF5C                    ; F971: B7 FF 5C       '..\'
     1137/    F974 : BD FA 40                            JSR     ZFA40                    ; F974: BD FA 40       '..@'
     1138/    F977 : FE FF 56                            LDX     MFF56                    ; F977: FE FF 56       '..V'
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 20 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 20 - 2025-06-20 14:49:05
 
 
     1139/    F97A : BD FA 2E                            JSR     ZFA2E                    ; F97A: BD FA 2E       '...'
@@ -1258,7 +1258,7 @@
     1196/    F9E9 : C6 04                               LDAB    #$04                     ; F9E9: C6 04          '..'
     1197/    F9EB : 7D FF 62                            TST     MFF62                    ; F9EB: 7D FF 62       '}.b'
     1198/    F9EE : 26 03                               BNE     ZF9F3                    ; F9EE: 26 03          '&.'
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 21 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 21 - 2025-06-20 14:49:05
 
 
     1199/    F9F0 : F6 FF F7                            LDAB    MFFF7                    ; F9F0: F6 FF F7       '...'
@@ -1321,7 +1321,7 @@
     1256/    FA5C : 32                                  PULA                             ; FA5C: 32             '2'
     1257/    FA5D : 7C FF 07                            INC     MFF07                    ; FA5D: 7C FF 07       '|..'
     1258/    FA60 : F6 FF 07                            LDAB    MFF07                    ; FA60: F6 FF 07       '...'
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 22 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 22 - 2025-06-20 14:49:05
 
 
     1259/    FA63 : C1 05                               CMPB    #$05                     ; FA63: C1 05          '..'
@@ -1384,7 +1384,7 @@
     1316/    FADC : CE 00 04                            LDX     #M0004                   ; FADC: CE 00 04       '...'
     1317/    FADF : 20 F0                               BRA     ZFAD1                    ; FADF: 20 F0          ' .'
     1318/    FAE1 : CE 03 17            S120            LDX     #M0317                   ; FAE1: CE 03 17       '...'
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 23 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 23 - 2025-06-20 14:49:05
 
 
     1319/    FAE4 : 86 FF               ZFAE4           LDAA    #$FF                     ; FAE4: 86 FF          '..'
@@ -1447,7 +1447,7 @@
              FB9F : 45 53 53 20       
     1366/    FBA3 : 04                                  FCB     $04                      ; FBA3: 04             '.'
     1367/    FBA4 : 53 54 4F 50 20 41   STOPADDR        FCC     'STOP ADDR '
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 24 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 24 - 2025-06-20 14:49:05
 
 
              FBAA : 44 44 52 20       
@@ -1481,7 +1481,7 @@
     1391/    FC00 :                     
     1392/    FC00 :                     
     1393/    FC00 :                                     END
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 25 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 25 - 2025-06-20 14:49:05
 
 
   Symbol Table (* = unused):
@@ -1544,7 +1544,7 @@
 *PACKING :                        0 - | *PADDING :                        0 - |
  PIA_0 :                       FCF8 - |  PIA_1 :                       FCF9 - |
  PIA_2 :                       FCFA - |  PIA_3 :                       FCFB - |
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 26 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 26 - 2025-06-20 14:49:05
 
 
  PROM_1 :                      FCFD - |  PUNCH :                       F71A C |
@@ -1557,7 +1557,7 @@
  SEARCH :                      F7B2 C |  SGLCONT :                     FB89 C |
  STOPADDR :                    FBA4 C |  STOPONADDR :                  FB93 C |
  SWISVC :                      FFFA - |  TERM :                        F627 C |
-*TIME :                  "14:44:45" - | *TRUE :                           1 - |
+*TIME :                  "14:49:05" - | *TRUE :                           1 - |
  VERIFY :                      F7BE C | *VERSION :                     142F - |
 *XBEGEN :                      F003 C |  XBEGEN1 :                     F787 C |
 *XCBCDH :                      F006 C |  XCBCDH1 :                     FA86 C |
@@ -1607,7 +1607,7 @@
  ZF2C5 :                       F2C5 C |  ZF2CE :                       F2CE C |
  ZF2D4 :                       F2D4 C |  ZF2E0 :                       F2E0 C |
  ZF2E3 :                       F2E3 C |  ZF306 :                       F306 C |
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 27 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 27 - 2025-06-20 14:49:05
 
 
  ZF314 :                       F314 C |  ZF316 :                       F316 C |
@@ -1670,7 +1670,7 @@
  ZF9DC :                       F9DC C |  ZF9F3 :                       F9F3 C |
  ZF9FD :                       F9FD C |  ZFA05 :                       FA05 C |
  ZFA07 :                       FA07 C |  ZFA25 :                       FA25 C |
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 28 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 28 - 2025-06-20 14:49:05
 
 
  ZFA2A :                       FA2A C |  ZFA2C :                       FA2C C |
@@ -1687,7 +1687,7 @@
     372 symbols
      46 unused symbols
 
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 29 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 29 - 2025-06-20 14:49:05
 
 
   Defined Macros:
@@ -1697,7 +1697,7 @@ MASL                                  |
 
       1 macro
 
- AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 30 - 2025-06-20 14:44:45
+ AS V1.42 Beta [Bld 216] - Source File exbug12.asm - Page 30 - 2025-06-20 14:49:05
 
 
   Code Pages:
@@ -1707,7 +1707,7 @@ STANDARD (0 changed characters)
 
 1 code page
 
-0.04 seconds assembly time
+0.05 seconds assembly time
 
    1395 lines source file
    1397 lines incl. macro expansions

@@ -6,80 +6,80 @@
 ; Used Labels
 ;****************************************************
 
-MASL     MACRO
-         LSLB
-         ROLA
-         ENDM
+MASL            MACRO ; Macro for missing ASLD Instruction
+                LSLB
+                ROLA
+                ENDM
 
-M0000   EQU     $0000
-M0004   EQU     $0004
-M0317   EQU     $0317
-M072F   EQU     $072F
-M30D4   EQU     $30D4
-M83FF   EQU     $83FF
-OSLOAD  EQU     $E800
-ACIA_0  EQU     $FCF4
-ACIA_1  EQU     $FCF5
-PIA_0   EQU     $FCF8
-PIA_1   EQU     $FCF9
-PIA_2   EQU     $FCFA
-PIA_3   EQU     $FCFB
-PROM_1  EQU     $FCFD
-RAM_START         EQU     $FF00
-MFF02   EQU     $FF02
-MFF03   EQU     $FF03
-MFF04   EQU     $FF04
-MFF05   EQU     $FF05
-MFF06   EQU     $FF06
-MFF07   EQU     $FF07
-MFF08   EQU     $FF08
-MFF09   EQU     $FF09
-MFF0A   EQU     $FF0A
-MFF0B   EQU     $FF0B
-MFF0C   EQU     $FF0C
-MFF0D   EQU     $FF0D
-MFF0E   EQU     $FF0E
-MFF10   EQU     $FF10
-MFF12   EQU     $FF12
-MFF13   EQU     $FF13
-MFF14   EQU     $FF14
-XREGsP  EQU     $FF16
-MFF17   EQU     $FF17
-XREGsC  EQU     $FF1C
-XREGsS  EQU     $FF1D
-BRKPTs  EQU     $FF1F
-MFF2F   EQU     $FF2F
-BKPINs  EQU     $FF4F
-MFF50   EQU     $FF50
-MFF51   EQU     $FF51
-AECHO   EQU     $FF53
-MFF54   EQU     $FF54
-MFF56   EQU     $FF56
-MFF58   EQU     $FF58
-MFF5A   EQU     $FF5A
-MFF5B   EQU     $FF5B
-MFF5C   EQU     $FF5C
-MFF5D   EQU     $FF5D
-MFF5E   EQU     $FF5E
-MFF5F   EQU     $FF5F
-MFF60   EQU     $FF60
-MFF61   EQU     $FF61
-MFF62   EQU     $FF62
-MFF63   EQU     $FF63
-XSTAKs  EQU     $FF8A
-MFF8B   EQU     $FF8B
-MFF8C   EQU     $FF8C
-MFF8D   EQU     $FF8D
-MFF8E   EQU     $FF8E
-MFF90   EQU     $FF90
-MFF93   EQU     $FF93
-MFFD5   EQU     $FFD5
-MFFF6   EQU     $FFF6
-MFFF7   EQU     $FFF7
-IRQsVC  EQU     $FFF8
-MFFF9   EQU     $FFF9
-SWIsVC  EQU     $FFFA
-NMIsVC  EQU     $FFFC
+M0000           EQU     $0000
+M0004           EQU     $0004
+M0317           EQU     $0317
+M072F           EQU     $072F
+M30D4           EQU     $30D4
+M83FF           EQU     $83FF
+OSLOAD          EQU     $E800
+ACIA_0          EQU     $FCF4
+ACIA_1          EQU     $FCF5
+PIA_0           EQU     $FCF8
+PIA_1           EQU     $FCF9
+PIA_2           EQU     $FCFA
+PIA_3           EQU     $FCFB
+PROM_1          EQU     $FCFD
+RAM_START       EQU     $FF00
+MFF02           EQU     $FF02
+MFF03           EQU     $FF03
+MFF04           EQU     $FF04
+MFF05           EQU     $FF05
+MFF06           EQU     $FF06
+MFF07           EQU     $FF07
+MFF08           EQU     $FF08
+MFF09           EQU     $FF09
+MFF0A           EQU     $FF0A
+MFF0B           EQU     $FF0B
+MFF0C           EQU     $FF0C
+MFF0D           EQU     $FF0D
+MFF0E           EQU     $FF0E
+MFF10           EQU     $FF10
+MFF12           EQU     $FF12
+MFF13           EQU     $FF13
+MFF14           EQU     $FF14
+XREGsP          EQU     $FF16
+MFF17           EQU     $FF17
+XREGsC          EQU     $FF1C
+XREGsS          EQU     $FF1D
+BRKPTs          EQU     $FF1F
+MFF2F           EQU     $FF2F
+BKPINs          EQU     $FF4F
+MFF50           EQU     $FF50
+MFF51           EQU     $FF51
+AECHO           EQU     $FF53
+MFF54           EQU     $FF54
+MFF56           EQU     $FF56
+MFF58           EQU     $FF58
+MFF5A           EQU     $FF5A
+MFF5B           EQU     $FF5B
+MFF5C           EQU     $FF5C
+MFF5D           EQU     $FF5D
+MFF5E           EQU     $FF5E
+MFF5F           EQU     $FF5F
+MFF60           EQU     $FF60
+MFF61           EQU     $FF61
+MFF62           EQU     $FF62
+MFF63           EQU     $FF63
+XSTAKs          EQU     $FF8A
+MFF8B           EQU     $FF8B
+MFF8C           EQU     $FF8C
+MFF8D           EQU     $FF8D
+MFF8E           EQU     $FF8E
+MFF90           EQU     $FF90
+MFF93           EQU     $FF93
+MFFD5           EQU     $FFD5
+MFFF6           EQU     $FFF6
+MFFF7           EQU     $FFF7
+IRQsVC          EQU     $FFF8
+MFFF9           EQU     $FFF9
+SWIsVC          EQU     $FFFA
+NMIsVC          EQU     $FFFC
 
 ;****************************************************
 ; Program's Code Areas
