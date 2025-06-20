@@ -3,8 +3,8 @@
 
 #ASS=../bin/asl
 #ASS=../bin/a68
-#ASS=../bin/as0
-ASS=../bin/as1
+ASS=../bin/as0
+#ASS=../bin/as1
 P2B=../bin/p2bin
 CPU=6800
 #DIR="/home/rob/Projects/mc-6502_mini/"

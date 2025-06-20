@@ -158,7 +158,7 @@ ZF0A8           ANDA    #$0F                     ; F0A8: 84 0F          '..'
                 LDAA    ,X                       ; F0AD: A6 00          '..'
                 LDAB    $01,X                    ; F0AF: E6 01          '..'
                 LSLB                             ; F0B1: 58 49          'XI'
-                ROLA
+                ROLA                 ; Was LSLD
                 BSR     ZF07C                    ; F0B3: 8D C7          '..'
                 ADDB    $01,X                    ; F0B5: EB 01          '..'
                 ADCA    ,X                       ; F0B7: A9 00          '..'

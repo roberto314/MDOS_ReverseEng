@@ -17,7 +17,10 @@ label fa14 XPDATA1
 label fa16 XPDAT1
 label f9cb XPSPAC1
 
+data f030
 data f02d-f036
+word f030-f031
+
 label f564 from_floppy1
 #label 98 StartAddressH
 #unused c7f0-c7ff

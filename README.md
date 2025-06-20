@@ -12,3 +12,8 @@ Readme.txt: Copy from Motorola Exordisk Manual with relevant Information
 dis_all.sh: Script to disassemble everything
 
 assemble.sh: Script to assemble everything
+
+assembler is now: as0 (https://github.com/JimInCA/motorola-6800-assembler)
+
+disassembler is: dasmfw: (https://github.com/Arakula/dasmfw)
+
