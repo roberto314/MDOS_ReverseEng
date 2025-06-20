@@ -1,13 +1,4 @@
 file floppy.bin e800
-option 6800
-#option ldchar :
-#option schowzero
-option noasc
-#option noaddr #disable for comments
-#option nohex #disable for comments
-option noflex
-option nofcc
-#option noforced # makes > before variable
 include common.info
 
 

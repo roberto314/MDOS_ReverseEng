@@ -1,3 +1,14 @@
+option 6800
+#option ldchar *
+#option cchar *
+#option multilabel on
+#option schowzero
+#option noasc
+#option noaddr #disable for comments
+#option nohex #disable for comments
+option noflex
+option nofcc
+#option noforced # makes > before variable
 option labellen 16
 option copndlen 25
 

@@ -1,13 +1,4 @@
 file exbug12.bin f000
-option 6800
-#option ldchar :
-#option schowzero
-#option noasc
-#option noaddr #disable for comments
-#option nohex #disable for comments
-option noflex
-option nofcc
-#option noforced # makes > before variable
 include common.info
 
 label f547 PWRUP1
@@ -26,6 +17,7 @@ label fa14 XPDATA1
 label fa16 XPDAT1
 label f9cb XPSPAC1
 
+data f02d-f036
 label f564 from_floppy1
 #label 98 StartAddressH
 #unused c7f0-c7ff

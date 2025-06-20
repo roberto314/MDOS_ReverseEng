@@ -8,3 +8,7 @@ src: directory are coies of the sourcefiles (maybe some cleanup)
 bin: Assembler and disassembler (f9dasm or dasmfw)
 
 Readme.txt: Copy from Motorola Exordisk Manual with relevant Information
+
+dis_all.sh: Script to disassemble everything
+
+assemble.sh: Script to assemble everything
