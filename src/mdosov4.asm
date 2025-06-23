@@ -7,6 +7,8 @@ Loaded: Info file "mdosov4.info"
 ;****************************************************
 
 Z1206   EQU     $1206
+Z1FFD   EQU     $1FFD
+OSLOAD  EQU     $E800
 PWRUP   EQU     $F000
 XBEGEN  EQU     $F003
 XCBCDH  EQU     $F006

@@ -11,28 +11,30 @@ option nofcc
 include common.info
 
 word 100-11f
-label 100 MDOS$
-label 100 VERS$$
-label 102 REVS$$
-label 104 KYI$SV
-label 106 ENDOS$
-label 108 ENDUS$
-label 10A ENDSY$
-label 10E RIBBA$
-label 110 ENDRV$
-label 112 GDBA$
-label 114 SYERR$
-label 116 SWI$SV
-label 118 SWI$UV
-label 11A IRQ$UV
-label 11C IRQ$SV
-label 11E CHFLG$
+label 100 MDOSs
+label 100 VERSss
+label 102 REVSss
+label 104 KYIsSV
+label 106 ENDOSs
+label 108 ENDUSs
+label 10A ENDSYs
+label 10E RIBBAs
+label 110 ENDRVs
+label 112 GDBAs
+label 114 SYERRs
+label 116 SWIsSV
+label 118 SWIsUV
+label 11A IRQsUV
+label 11C IRQsSV
+label 11E CHFLGs
 label 120 SYIOCB
 label 145 SYPOCB
 label 16A SYEOCB
 
 data 0120-020f
 char 100-103
+
+data 65c-750
 label c1f TMP1
 label c20 TMP2
 label c21 TMP3
@@ -40,6 +42,10 @@ label c21 TMP3
 label bdf HASH
 label be6 HASH2
 label bf4 HASH25
+
+data f1c-f30
+data fa5-10e4
+data 1105-1272
 
 unused 1273-20ff
 #lcomment c019 CC0 and CC1 set - external Serial clock (8xBaudrate)

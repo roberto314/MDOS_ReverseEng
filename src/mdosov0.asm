@@ -6,20 +6,22 @@ Loaded: Info file "mdosov0.info"
 ; Used Labels
 ;****************************************************
 
-M0000   EQU     $0000
-M0001   EQU     $0001
-M0006   EQU     $0006
-M0020   EQU     $0020
+RESRV   EQU     $0000
+RELES   EQU     $0001
+REWND   EQU     $0006
+MDERR   EQU     $0020
 M00FE   EQU     $00FE
 M010E   EQU     $010E
 Z0467   EQU     $0467
 Z04CE   EQU     $04CE
 Z11F2   EQU     $11F2
+Z1FFD   EQU     $1FFD
 M2406   EQU     $2406
 M240D   EQU     $240D
 M3F28   EQU     $3F28
 MB717   EQU     $B717
 MBD04   EQU     $BD04
+OSLOAD  EQU     $E800
 PWRUP   EQU     $F000
 XBEGEN  EQU     $F003
 XCBCDH  EQU     $F006
@@ -79,7 +81,7 @@ Z12A9           STX     M17E6                    ; 12A9: FF 17 E6       '...'
                 LDX     M17E8                    ; 12C0: FE 17 E8       '...'
                 INX                              ; 12C3: 08             '.'
                 BRA     Z12C9                    ; 12C4: 20 03          ' .'
-Z12C6           LDX     #M0020                   ; 12C6: CE 00 20       '.. '
+Z12C6           LDX     #MDERR                   ; 12C6: CE 00 20       '.. '
 Z12C9           STX     M17E8                    ; 12C9: FF 17 E8       '...'
                 LDX     M010E                    ; 12CC: FE 01 0E       '...'
                 STX     M17ED                    ; 12CF: FF 17 ED       '...'
@@ -117,11 +119,11 @@ Z1304           LDX     M17EF                    ; 1304: FE 17 EF       '...'
                 BITB    MFF17                    ; 130E: F5 FF 17       '...'
                 FCB     $FD                      ; 1311: FD             '.'
                 BRA     Z131E                    ; 1312: 20 0A          ' .'
-Z1314           LDX     #M0000                   ; 1314: CE 00 00       '...'
+Z1314           LDX     #RESRV                   ; 1314: CE 00 00       '...'
                 STX     M17F5                    ; 1317: FF 17 F5       '...'
                 DEX                              ; 131A: 09             '.'
                 STX     M17FD                    ; 131B: FF 17 FD       '...'
-Z131E           LDX     #M0001                   ; 131E: CE 00 01       '...'
+Z131E           LDX     #RELES                   ; 131E: CE 00 01       '...'
                 STX     M17EB                    ; 1321: FF 17 EB       '...'
                 LDAB    M17E5                    ; 1324: F6 17 E5       '...'
                 LDX     #M17EA                   ; 1327: CE 17 EA       '...'
@@ -136,7 +138,7 @@ Z1337           JSR     Z172E                    ; 1337: BD 17 2E       '...'
                 BCS     Z136A                    ; 133C: 25 2C          '%,'
                 LDX     M17F5                    ; 133E: FE 17 F5       '...'
                 STX     M17FB                    ; 1341: FF 17 FB       '...'
-                LDX     #M0001                   ; 1344: CE 00 01       '...'
+                LDX     #RELES                   ; 1344: CE 00 01       '...'
                 STX     M17F1                    ; 1347: FF 17 F1       '...'
 Z134A           JSR     Z175D                    ; 134A: BD 17 5D       '..]'
                 BCS     Z1364                    ; 134D: 25 15          '%.'
@@ -164,7 +166,7 @@ Z1382           LDX     M17E6                    ; 1382: FE 17 E6       '...'
                 LDAB    #$10                     ; 1385: C6 10          '..'
                 BITB    $0D,X                    ; 1387: E5 0D          '..'
                 BNE     Z13A7                    ; 1389: 26 1C          '&.'
-                LDX     #M0000                   ; 138B: CE 00 00       '...'
+                LDX     #RESRV                   ; 138B: CE 00 00       '...'
                 STX     M17F5                    ; 138E: FF 17 F5       '...'
                 JMP     Z1334                    ; 1391: 7E 13 34       '~.4'
 Z1394           LDX     M17F7                    ; 1394: FE 17 F7       '...'
@@ -469,7 +471,7 @@ Z161F           TST     ,X                       ; 161F: 6D 00          'm.'
                 BPL     Z1626                    ; 1621: 2A 03          '*.'
                 JMP     Z154B                    ; 1623: 7E 15 4B       '~.K'
 Z1626           STX     M17F3                    ; 1626: FF 17 F3       '...'
-                LDX     #M0001                   ; 1629: CE 00 01       '...'
+                LDX     #RELES                   ; 1629: CE 00 01       '...'
                 STX     M17EB                    ; 162C: FF 17 EB       '...'
                 LDAB    M17E5                    ; 162F: F6 17 E5       '...'
                 LDX     #M17EA                   ; 1632: CE 17 EA       '...'
@@ -590,7 +592,7 @@ Z16FB           JSR     Z17A9                    ; 16FB: BD 17 A9       '...'
                 JMP     Z16C1                    ; 172B: 7E 16 C1       '~..'
 Z172E           LDAB    M17F5                    ; 172E: F6 17 F5       '...'
                 LDAA    M17F6                    ; 1731: B6 17 F6       '...'
-                LDX     #M0006                   ; 1734: CE 00 06       '...'
+                LDX     #REWND                   ; 1734: CE 00 06       '...'
                 JSR     Z04CE                    ; 1737: BD 04 CE       '...'
                 BCC     Z173D                    ; 173A: 24 01          '$.'
                 RTS                              ; 173C: 39             '9'

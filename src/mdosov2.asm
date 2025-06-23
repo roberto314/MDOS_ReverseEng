@@ -10,6 +10,8 @@ M00E6   EQU     $00E6
 Z0467   EQU     $0467
 Z04CE   EQU     $04CE
 Z11FC   EQU     $11FC
+Z1FFD   EQU     $1FFD
+OSLOAD  EQU     $E800
 PWRUP   EQU     $F000
 XBEGEN  EQU     $F003
 XCBCDH  EQU     $F006
@@ -25,8 +27,7 @@ XPCRLF  EQU     $F021
 XPDATA  EQU     $F024
 XPDAT   EQU     $F027
 XPSPAC  EQU     $F02A
-RAM_START
-        EQU     $FF00
+RAMBGN  EQU     $FF00
 
 ;****************************************************
 ; Program's Code Areas
@@ -440,7 +441,7 @@ M1BF1           FCB     $00                      ; 1BF1: 00
                 FCB     $12                      ; 1BF4: 12             
                 FCB     $13                      ; 1BF5: 13             
                 FCB     $14                      ; 1BF6: 14             
-                CLR     RAM_START                ; 1BF7: 7F FF 00       
+                CLR     RAMBGN                   ; 1BF7: 7F FF 00       
                 FCB     $00                      ; 1BFA: 00             
                 FCB     $00                      ; 1BFB: 00             
                 FCB     $00                      ; 1BFC: 00             

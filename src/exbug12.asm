@@ -1,85 +1,81 @@
-;dasmfw: Disassembler Framework V0.35
-;Loaded: binary file "exbug12.bin"
-;Loaded: Info file "exbug12.info"
+dasmfw: Disassembler Framework V0.35
+Loaded: binary file "exbug12.bin"
+Loaded: Info file "exbug12.info"
 
 ;****************************************************
 ; Used Labels
 ;****************************************************
 
-MASL            MACRO ; Macro for missing ASLD Instruction
-                LSLB
-                ROLA
-                ENDM
-
-M0000           EQU     $0000
-M0004           EQU     $0004
-M0317           EQU     $0317
-M072F           EQU     $072F
-M30D4           EQU     $30D4
-M83FF           EQU     $83FF
-OSLOAD          EQU     $E800
-ACIA_0          EQU     $FCF4
-ACIA_1          EQU     $FCF5
-PIA_0           EQU     $FCF8
-PIA_1           EQU     $FCF9
-PIA_2           EQU     $FCFA
-PIA_3           EQU     $FCFB
-PROM_1          EQU     $FCFD
-RAM_START       EQU     $FF00
-MFF02           EQU     $FF02
-MFF03           EQU     $FF03
-MFF04           EQU     $FF04
-MFF05           EQU     $FF05
-MFF06           EQU     $FF06
-MFF07           EQU     $FF07
-MFF08           EQU     $FF08
-MFF09           EQU     $FF09
-MFF0A           EQU     $FF0A
-MFF0B           EQU     $FF0B
-MFF0C           EQU     $FF0C
-MFF0D           EQU     $FF0D
-MFF0E           EQU     $FF0E
-MFF10           EQU     $FF10
-MFF12           EQU     $FF12
-MFF13           EQU     $FF13
-MFF14           EQU     $FF14
-XREGsP          EQU     $FF16
-MFF17           EQU     $FF17
-XREGsC          EQU     $FF1C
-XREGsS          EQU     $FF1D
-BRKPTs          EQU     $FF1F
-MFF2F           EQU     $FF2F
-BKPINs          EQU     $FF4F
-MFF50           EQU     $FF50
-MFF51           EQU     $FF51
-AECHO           EQU     $FF53
-MFF54           EQU     $FF54
-MFF56           EQU     $FF56
-MFF58           EQU     $FF58
-MFF5A           EQU     $FF5A
-MFF5B           EQU     $FF5B
-MFF5C           EQU     $FF5C
-MFF5D           EQU     $FF5D
-MFF5E           EQU     $FF5E
-MFF5F           EQU     $FF5F
-MFF60           EQU     $FF60
-MFF61           EQU     $FF61
-MFF62           EQU     $FF62
-MFF63           EQU     $FF63
-XSTAKs          EQU     $FF8A
-MFF8B           EQU     $FF8B
-MFF8C           EQU     $FF8C
-MFF8D           EQU     $FF8D
-MFF8E           EQU     $FF8E
-MFF90           EQU     $FF90
-MFF93           EQU     $FF93
-MFFD5           EQU     $FFD5
-MFFF6           EQU     $FFF6
-MFFF7           EQU     $FFF7
-IRQsVC          EQU     $FFF8
-MFFF9           EQU     $FFF9
-SWIsVC          EQU     $FFFA
-NMIsVC          EQU     $FFFC
+RESRV   EQU     $0000
+GETRC   EQU     $0004
+M0317   EQU     $0317
+M072F   EQU     $072F
+Z1FFD   EQU     $1FFD
+M30D4   EQU     $30D4
+M83FF   EQU     $83FF
+OSLOAD  EQU     $E800
+ACIA_0  EQU     $FCF4
+ACIA_1  EQU     $FCF5
+PIA_0   EQU     $FCF8
+PIA_1   EQU     $FCF9
+PIA_2   EQU     $FCFA
+PIA_3   EQU     $FCFB
+PROM_1  EQU     $FCFD
+RAMBGN  EQU     $FF00
+MFF02   EQU     $FF02
+MFF03   EQU     $FF03
+MFF04   EQU     $FF04
+MFF05   EQU     $FF05
+MFF06   EQU     $FF06
+MFF07   EQU     $FF07
+MFF08   EQU     $FF08
+MFF09   EQU     $FF09
+MFF0A   EQU     $FF0A
+MFF0B   EQU     $FF0B
+MFF0C   EQU     $FF0C
+MFF0D   EQU     $FF0D
+MFF0E   EQU     $FF0E
+MFF10   EQU     $FF10
+MFF12   EQU     $FF12
+MFF13   EQU     $FF13
+MFF14   EQU     $FF14
+XREGsP  EQU     $FF16
+MFF17   EQU     $FF17
+XREGsC  EQU     $FF1C
+XREGsS  EQU     $FF1D
+BRKPTs  EQU     $FF1F
+MFF2F   EQU     $FF2F
+BKPINs  EQU     $FF4F
+MFF50   EQU     $FF50
+MFF51   EQU     $FF51
+AECHO   EQU     $FF53
+MFF54   EQU     $FF54
+MFF56   EQU     $FF56
+MFF58   EQU     $FF58
+MFF5A   EQU     $FF5A
+MFF5B   EQU     $FF5B
+MFF5C   EQU     $FF5C
+MFF5D   EQU     $FF5D
+MFF5E   EQU     $FF5E
+MFF5F   EQU     $FF5F
+MFF60   EQU     $FF60
+MFF61   EQU     $FF61
+MFF62   EQU     $FF62
+MFF63   EQU     $FF63
+XSTAKs  EQU     $FF8A
+MFF8B   EQU     $FF8B
+MFF8C   EQU     $FF8C
+MFF8D   EQU     $FF8D
+MFF8E   EQU     $FF8E
+MFF90   EQU     $FF90
+MFF93   EQU     $FF93
+MFFD5   EQU     $FFD5
+MFFF6   EQU     $FFF6
+MFFF7   EQU     $FFF7
+IRQsVC  EQU     $FFF8
+MFFF9   EQU     $FFF9
+SWIsVC  EQU     $FFFA
+NMIsVC  EQU     $FFFC
 
 ;****************************************************
 ; Program's Code Areas
@@ -116,7 +112,7 @@ ZF037           JSR     XCBCDH1                  ; F037: BD FA 86       '...'
                 ADDA    $01,X                    ; F042: AB 01          '..'
                 STAA    $01,X                    ; F044: A7 01          '..'
 ZF046           JSR     XINCHN1                  ; F046: BD FA 7F       '...'
-                CMPA    #'='                      ; F049: 81 3D          '.='
+                CMPA    #'=                      ; F049: 81 3D          '.='
                 BNE     ZF037                    ; F04B: 26 EA          '&.'
                 JSR     XPSPAC1                  ; F04D: BD F9 CB       '...'
                 LDX     #MF02D                   ; F050: CE F0 2D       '..-'
@@ -151,22 +147,20 @@ ZF089           LDX     #MFF08                   ; F089: CE FF 08       '...'
                 CLR     ,X                       ; F08F: 6F 00          'o.'
                 CLR     $01,X                    ; F091: 6F 01          'o.'
                 JSR     XINCHN1                  ; F093: BD FA 7F       '...'
-                CMPA    #'$'                     ; F096: 81 24          '.$'
+                CMPA    #'$                      ; F096: 81 24          '.$'
                 BEQ     ZF046                    ; F098: 27 AC          ''.'
-                CMPA    #'@'                      ; F09A: 81 40          '.@'
+                CMPA    #'@                      ; F09A: 81 40          '.@'
                 BEQ     ZF0E4                    ; F09C: 27 46          ''F'
-ZF09E           CMPA    #'0'                      ; F09E: 81 30          '.0'
+ZF09E           CMPA    #'0                      ; F09E: 81 30          '.0'
                 BMI     ZF0A6                    ; F0A0: 2B 04          '+.'
-                CMPA    #'9'                      ; F0A2: 81 39          '.9'
+                CMPA    #'9                      ; F0A2: 81 39          '.9'
                 BLE     ZF0A8                    ; F0A4: 2F 02          '/.'
 ZF0A6           BRA     ZF11E                    ; F0A6: 20 76          ' v'
 ZF0A8           ANDA    #$0F                     ; F0A8: 84 0F          '..'
                 STAA    MFF5A                    ; F0AA: B7 FF 5A       '..Z'
                 LDAA    ,X                       ; F0AD: A6 00          '..'
                 LDAB    $01,X                    ; F0AF: E6 01          '..'
-;                LSLB
-;                ROLA
-                MASL                             ; F0B1: 58 49          'XI'
+                ASLD                             ; F0B1: 58 49          'XI'
                 BSR     ZF07C                    ; F0B3: 8D C7          '..'
                 ADDB    $01,X                    ; F0B5: EB 01          '..'
                 ADCA    ,X                       ; F0B7: A9 00          '..'
@@ -175,22 +169,22 @@ ZF0A8           ANDA    #$0F                     ; F0A8: 84 0F          '..'
                 STAA    ,X                       ; F0BE: A7 00          '..'
                 STAB    $01,X                    ; F0C0: E7 01          '..'
                 JSR     XINCHN1                  ; F0C2: BD FA 7F       '...'
-                CMPA    #'='                      ; F0C5: 81 3D          '.='
+                CMPA    #'=                      ; F0C5: 81 3D          '.='
                 BNE     ZF09E                    ; F0C7: 26 D5          '&.'
 ZF0C9           JSR     XPSPAC1                  ; F0C9: BD F9 CB       '...'
                 LDX     #MFF08                   ; F0CC: CE FF 08       '...'
                 JSR     XOUT4H1                  ; F0CF: BD F9 C7       '...'
                 BRA     MAIDs                    ; F0D2: 20 1F          ' .'
-ZF0D4           CMPA    #'0'                      ; F0D4: 81 30          '.0'
+ZF0D4           CMPA    #'0                      ; F0D4: 81 30          '.0'
                 BMI     ZF0A6                    ; F0D6: 2B CE          '+.'
-                CMPA    #'8'                      ; F0D8: 81 38          '.8'
+                CMPA    #'8                      ; F0D8: 81 38          '.8'
                 BPL     ZF0A6                    ; F0DA: 2A CA          '*.'
                 BSR     ZF07C                    ; F0DC: 8D 9E          '..'
                 ANDA    #$07                     ; F0DE: 84 07          '..'
                 ADDA    $01,X                    ; F0E0: AB 01          '..'
                 STAA    $01,X                    ; F0E2: A7 01          '..'
 ZF0E4           JSR     XINCHN1                  ; F0E4: BD FA 7F       '...'
-                CMPA    #'='                      ; F0E7: 81 3D          '.='
+                CMPA    #'=                      ; F0E7: 81 3D          '.='
                 BNE     ZF0D4                    ; F0E9: 26 E9          '&.'
                 BRA     ZF0C9                    ; F0EB: 20 DC          ' .'
 MAID            CLR     MFF60                    ; F0ED: 7F FF 60       '..`'
@@ -202,24 +196,24 @@ MAIDs           LDS     #XSTAKs                  ; F0F3: 8E FF 8A       '...'
                 TSTB                             ; F0FF: 5D             ']'
                 BNE     ZF126                    ; F100: 26 24          '&$'
                 JSR     ZFA2E                    ; F102: BD FA 2E       '...'
-                CMPA    #'$'                      ; F105: 81 24          '.$'
+                CMPA    #'$                      ; F105: 81 24          '.$'
                 BNE     ZF10C                    ; F107: 26 03          '&.'
                 JMP     ZF316                    ; F109: 7E F3 16       '~..'
-ZF10C           CMPA    #';'                      ; F10C: 81 3B          '.;'
+ZF10C           CMPA    #';                      ; F10C: 81 3B          '.;'
                 BNE     ZF113                    ; F10E: 26 03          '&.'
                 JMP     ZF274                    ; F110: 7E F2 74       '~.t'
-ZF113           CMPA    #'N'                      ; F113: 81 4E          '.N'
+ZF113           CMPA    #'N                      ; F113: 81 4E          '.N'
                 BEQ     ZF14B                    ; F115: 27 34          ''4'
-                CMPA    #'#'                      ; F117: 81 23          '.#'
+                CMPA    #'#                      ; F117: 81 23          '.#'
                 BNE     ZF11E                    ; F119: 26 03          '&.'
                 JMP     ZF089                    ; F11B: 7E F0 89       '~..'
 ZF11E           LDX     #MFBC2                   ; F11E: CE FB C2       '...'
                 JSR     XPDAT1                   ; F121: BD FA 16       '...'
 ZF124           BRA     MAIDs                    ; F124: 20 CD          ' .'
-ZF126           CMPA    #';'                      ; F126: 81 3B          '.;'
+ZF126           CMPA    #';                      ; F126: 81 3B          '.;'
                 BEQ     ZF198                    ; F128: 27 6E          ''n'
                 LDX     MFF08                    ; F12A: FE FF 08       '...'
-                CMPA    #'/'                      ; F12D: 81 2F          './'
+                CMPA    #'/                      ; F12D: 81 2F          './'
                 BNE     ZF11E                    ; F12F: 26 ED          '&.'
                 JMP     ZF1CB                    ; F131: 7E F1 CB       '~..'
 ZF134           LDX     MFF08                    ; F134: FE FF 08       '...'
@@ -231,7 +225,7 @@ ZF13A           STX     MFF51                    ; F13A: FF FF 51       '..Q'
                 STAA    MFF50                    ; F142: B7 FF 50       '..P'
                 STAA    MFF54                    ; F145: B7 FF 54       '..T'
                 JMP     ZF406                    ; F148: 7E F4 06       '~..'
-ZF14B           LDX     #M0000                   ; F14B: CE 00 00       '...'
+ZF14B           LDX     #RESRV                   ; F14B: CE 00 00       '...'
                 BRA     ZF13A                    ; F14E: 20 EA          ' .'
 ZF150           LDAA    MFF08                    ; F150: B6 FF 08       '...'
                 LDAB    MFF09                    ; F153: F6 FF 09       '...'
@@ -267,19 +261,19 @@ ZF18F           INX                              ; F18F: 08             '.'
                 BNE     ZF17B                    ; F194: 26 E5          '&.'
                 BRA     ZF176                    ; F196: 20 DE          ' .'
 ZF198           JSR     XINCHN1                  ; F198: BD FA 7F       '...'
-                CMPA    #'G'                      ; F19B: 81 47          '.G'
+                CMPA    #'G                      ; F19B: 81 47          '.G'
                 BNE     ZF1A2                    ; F19D: 26 03          '&.'
                 JMP     ZF3F1                    ; F19F: 7E F3 F1       '~..'
-ZF1A2           CMPA    #'N'                      ; F1A2: 81 4E          '.N'
+ZF1A2           CMPA    #'N                      ; F1A2: 81 4E          '.N'
                 BEQ     ZF134                    ; F1A4: 27 8E          ''.'
-                CMPA    #'P'                      ; F1A6: 81 50          '.P'
+                CMPA    #'P                      ; F1A6: 81 50          '.P'
                 BNE     ZF1AD                    ; F1A8: 26 03          '&.'
                 JMP     ZF3D1                    ; F1AA: 7E F3 D1       '~..'
-ZF1AD           CMPA    #'U'                      ; F1AD: 81 55          '.U'
+ZF1AD           CMPA    #'U                      ; F1AD: 81 55          '.U'
                 BEQ     ZF178                    ; F1AF: 27 C7          ''.'
-                CMPA    #'V'                      ; F1B1: 81 56          '.V'
+                CMPA    #'V                      ; F1B1: 81 56          '.V'
                 BEQ     ZF150                    ; F1B3: 27 9B          ''.'
-                CMPA    #'W'                      ; F1B5: 81 57          '.W'
+                CMPA    #'W                      ; F1B5: 81 57          '.W'
                 BNE     ZF176                    ; F1B7: 26 BD          '&.'
                 BRA     ZF232                    ; F1B9: 20 77          ' w'
 ZF1BB           INX                              ; F1BB: 08             '.'
@@ -297,10 +291,10 @@ ZF1CB           JSR     ZF96A                    ; F1CB: BD F9 6A       '..j'
                 DEX                              ; F1D8: 09             '.'
                 JSR     XPCRLF1                  ; F1D9: BD FA 21       '..!'
                 BRA     ZF1BF                    ; F1DC: 20 E1          ' .'
-ZF1DE           CMPA    #';'                      ; F1DE: 81 3B          '.;'
+ZF1DE           CMPA    #';                      ; F1DE: 81 3B          '.;'
                 BNE     ZF176                    ; F1E0: 26 94          '&.'
                 JSR     XINCHN1                  ; F1E2: BD FA 7F       '...'
-                CMPA    #'O'                      ; F1E5: 81 4F          '.O'
+                CMPA    #'O                      ; F1E5: 81 4F          '.O'
                 BNE     ZF176                    ; F1E7: 26 8D          '&.'
                 LDX     MFF56                    ; F1E9: FE FF 56       '..V'
                 INX                              ; F1EC: 08             '.'
@@ -358,20 +352,20 @@ ZF267           CLR     MFF60                    ; F267: 7F FF 60       '..`'
 ZF26F           CLR     MFF5D                    ; F26F: 7F FF 5D       '..]'
                 BRA     ZF2A6                    ; F272: 20 32          ' 2'
 ZF274           JSR     XINCHN1                  ; F274: BD FA 7F       '...'
-                CMPA    #'G'                      ; F277: 81 47          '.G'
+                CMPA    #'G                      ; F277: 81 47          '.G'
                 BNE     ZF27E                    ; F279: 26 03          '&.'
                 JMP     ZF3E9                    ; F27B: 7E F3 E9       '~..'
-ZF27E           CMPA    #'N'                      ; F27E: 81 4E          '.N'
+ZF27E           CMPA    #'N                      ; F27E: 81 4E          '.N'
                 BNE     ZF285                    ; F280: 26 03          '&.'
                 JMP     ZF14B                    ; F282: 7E F1 4B       '~.K'
-ZF285           CMPA    #'P'                      ; F285: 81 50          '.P'
+ZF285           CMPA    #'P                      ; F285: 81 50          '.P'
                 BNE     ZF28C                    ; F287: 26 03          '&.'
                 JMP     ZF3C5                    ; F289: 7E F3 C5       '~..'
-ZF28C           CMPA    #'S'                      ; F28C: 81 53          '.S'
+ZF28C           CMPA    #'S                      ; F28C: 81 53          '.S'
                 BEQ     ZF26F                    ; F28E: 27 DF          ''.'
-                CMPA    #'T'                      ; F290: 81 54          '.T'
+                CMPA    #'T                      ; F290: 81 54          '.T'
                 BEQ     ZF267                    ; F292: 27 D3          ''.'
-                CMPA    #'U'                      ; F294: 81 55          '.U'
+                CMPA    #'U                      ; F294: 81 55          '.U'
                 BEQ     ZF29B                    ; F296: 27 03          ''.'
 ZF298           JMP     ZF11E                    ; F298: 7E F1 1E       '~..'
 ZF29B           LDX     #BRKPTs                  ; F29B: CE FF 1F       '...'
@@ -410,17 +404,17 @@ ZF2E0           JMP     ZFA25                    ; F2E0: 7E FA 25       '~.%'
 ZF2E3           JSR     ZFAA5                    ; F2E3: BD FA A5       '...'
                 JSR     XPCRLF1                  ; F2E6: BD FA 21       '..!'
                 LDX     #XREGsP                  ; F2E9: CE FF 16       '...'
-                LDAA    #'P'                      ; F2EC: 86 50          '.P'
+                LDAA    #'P                      ; F2EC: 86 50          '.P'
                 BSR     ZF2C5                    ; F2EE: 8D D5          '..'
-                LDAA    #'X'                      ; F2F0: 86 58          '.X'
+                LDAA    #'X                      ; F2F0: 86 58          '.X'
                 BSR     ZF2C5                    ; F2F2: 8D D1          '..'
-                LDAA    #'A'                      ; F2F4: 86 41          '.A'
+                LDAA    #'A                      ; F2F4: 86 41          '.A'
                 BSR     ZF2CE                    ; F2F6: 8D D6          '..'
-                LDAA    #'B'                      ; F2F8: 86 42          '.B'
+                LDAA    #'B                      ; F2F8: 86 42          '.B'
                 BSR     ZF2CE                    ; F2FA: 8D D2          '..'
-                LDAA    #'C'                      ; F2FC: 86 43          '.C'
+                LDAA    #'C                      ; F2FC: 86 43          '.C'
                 BSR     ZF2CE                    ; F2FE: 8D CE          '..'
-                LDAA    #'S'                      ; F300: 86 53          '.S'
+                LDAA    #'S                      ; F300: 86 53          '.S'
                 BSR     ZF2C5                    ; F302: 8D C1          '..'
                 BRA     ZF2A6                    ; F304: 20 A0          ' .'
 ZF306           JSR     XPSPAC1                  ; F306: BD F9 CB       '...'
@@ -431,15 +425,15 @@ ZF306           JSR     XPSPAC1                  ; F306: BD F9 CB       '...'
 ZF314           BRA     ZF2A6                    ; F314: 20 90          ' .'
 ZF316           JSR     XINCHN1                  ; F316: BD FA 7F       '...'
                 TAB                              ; F319: 16             '.'
-                CMPB    #'R'                      ; F31A: C1 52          '.R'
+                CMPB    #'R                      ; F31A: C1 52          '.R'
                 BEQ     ZF2E3                    ; F31C: 27 C5          ''.'
-                CMPB    #'V'                      ; F31E: C1 56          '.V'
+                CMPB    #'V                      ; F31E: C1 56          '.V'
                 BEQ     ZF331                    ; F320: 27 0F          ''.'
-                CMPB    #'M'                      ; F322: C1 4D          '.M'
+                CMPB    #'M                      ; F322: C1 4D          '.M'
                 BEQ     ZF306                    ; F324: 27 E0          ''.'
-                CMPB    #'T'                      ; F326: C1 54          '.T'
+                CMPB    #'T                      ; F326: C1 54          '.T'
                 BEQ     ZF356                    ; F328: 27 2C          '','
-                CMPB    #'S'                      ; F32A: C1 53          '.S'
+                CMPB    #'S                      ; F32A: C1 53          '.S'
                 BEQ     ZF341                    ; F32C: 27 13          ''.'
 ZF32E           JMP     ZF11E                    ; F32E: 7E F1 1E       '~..'
 ZF331           JSR     XPCRLF1                  ; F331: BD FA 21       '..!'
@@ -521,7 +515,7 @@ ZF3DE           LDS     MFF08                    ; F3DE: BE FF 08       '...'
                 STS     $20,X                    ; F3E2: AF 20          '. '
                 LDS     #XSTAKs                  ; F3E4: 8E FF 8A       '...'
                 BRA     ZF401                    ; F3E7: 20 18          ' .'
-ZF3E9           LDX     RAM_START                ; F3E9: FE FF 00       '...'
+ZF3E9           LDX     RAMBGN                   ; F3E9: FE FF 00       '...'
                 DEX                              ; F3EC: 09             '.'
                 LDX     ,X                       ; F3ED: EE 00          '..'
                 BRA     ZF3F4                    ; F3EF: 20 03          ' .'
@@ -679,7 +673,7 @@ ZF53C           LDX     #ABORTED                 ; F53C: CE FB AF       '...'
 PWRUP1          NOP                              ; F547: 01             '.'
                 SEI                              ; F548: 0F             '.'
                 CLRA                             ; F549: 4F             'O'
-                LDX     #M0000                   ; F54A: CE 00 00       '...'
+                LDX     #RESRV                   ; F54A: CE 00 00       '...'
                 STX     MFF0E                    ; F54D: FF FF 0E       '...'
                 STX     MFF10                    ; F550: FF FF 10       '...'
                 STX     MFFF6                    ; F553: FF FF F6       '...'
@@ -687,14 +681,14 @@ PWRUP1          NOP                              ; F547: 01             '.'
                 LDAA    #$03                     ; F559: 86 03          '..'
                 STAA    ACIA_0                   ; F55B: B7 FC F4       '...'
                 LDX     #M83FF                   ; F55E: CE 83 FF       '...'
-                STX     RAM_START                ; F561: FF FF 00       '...'
+                STX     RAMBGN                   ; F561: FF FF 00       '...'
                 LDS     #XSTAKs                  ; F564: 8E FF 8A       '...'
                 STS     XREGsS                   ; F567: BF FF 1D       '...'
 ZF56A           LDX     #MF4AA                   ; F56A: CE F4 AA       '...'
                 STX     NMIsVC                   ; F56D: FF FF FC       '...'
                 LDX     #MF448                   ; F570: CE F4 48       '..H'
                 STX     SWIsVC                   ; F573: FF FF FA       '...'
-                LDX     RAM_START                ; F576: FE FF 00       '...'
+                LDX     RAMBGN                   ; F576: FE FF 00       '...'
                 LDAA    #$07                     ; F579: 86 07          '..'
 ZF57B           DEX                              ; F57B: 09             '.'
                 DECA                             ; F57C: 4A             'J'
@@ -878,12 +872,12 @@ ZF704           CLRA                             ; F704: 4F             'O'
 ZF70C           LDX     #EXEC                    ; F70C: CE FB 83       '...'
                 JSR     XPDATA1                  ; F70F: BD FA 14       '...'
                 JSR     ZFA2C                    ; F712: BD FA 2C       '..,'
-                CMPA    #'Y'                      ; F715: 81 59          '.Y'
+                CMPA    #'Y                      ; F715: 81 59          '.Y'
                 BNE     ZF70C                    ; F717: 26 F3          '&.'
                 RTS                              ; F719: 39             '9'
 PUNCH           BSR     XBEGEN1                  ; F71A: 8D 6B          '.k'
                 LDAA    MFF04                    ; F71C: B6 FF 04       '...'
-                CMPA    #'R'                      ; F71F: 81 52          '.R'
+                CMPA    #'R                      ; F71F: 81 52          '.R'
                 BEQ     ZF726                    ; F721: 27 03          ''.'
                 JMP     ZF634                    ; F723: 7E F6 34       '~.4'
 ZF726           BSR     ZF70C                    ; F726: 8D E4          '..'
@@ -916,7 +910,7 @@ ZF763           JSR     XOUTCH1                  ; F763: BD F9 E2       '...'
                 DECB                             ; F767: 5A             'Z'
                 BNE     ZF755                    ; F768: 26 EB          '&.'
                 STX     MFF08                    ; F76A: FF FF 08       '...'
-                CPX     #M0000                   ; F76D: 8C 00 00       '...'
+                CPX     #RESRV                   ; F76D: 8C 00 00       '...'
                 BEQ     PUNCH                    ; F770: 27 A8          ''.'
                 LDAA    MFF0C                    ; F772: B6 FF 0C       '...'
                 LDAB    MFF0D                    ; F775: F6 FF 0D       '...'
@@ -954,14 +948,14 @@ ZF7C6           LDX     #SGLCONT                 ; F7C6: CE FB 89       '...'
                 JSR     XPDATA1                  ; F7C9: BD FA 14       '...'
                 JSR     ZFA2C                    ; F7CC: BD FA 2C       '..,'
                 STAA    MFF58                    ; F7CF: B7 FF 58       '..X'
-                CMPA    #'S'                      ; F7D2: 81 53          '.S'
+                CMPA    #'S                      ; F7D2: 81 53          '.S'
                 BEQ     ZF7DD                    ; F7D4: 27 07          ''.'
-                CMPA    #'C'                      ; F7D6: 81 43          '.C'
+                CMPA    #'C                      ; F7D6: 81 43          '.C'
                 BNE     ZF7C6                    ; F7D8: 26 EC          '&.'
                 JSR     XPCRLF1                  ; F7DA: BD FA 21       '..!'
 ZF7DD           JSR     ZF8A1                    ; F7DD: BD F8 A1       '...'
                 LDAA    MFF8C                    ; F7E0: B6 FF 8C       '...'
-                CMPA    #'0'                      ; F7E3: 81 30          '.0'
+                CMPA    #'0                      ; F7E3: 81 30          '.0'
                 BNE     ZF81A                    ; F7E5: 26 33          '&3'
                 LDAA    MFF8D                    ; F7E7: B6 FF 8D       '...'
                 LDX     #MFF8D                   ; F7EA: CE FF 8D       '...'
@@ -978,23 +972,23 @@ ZF7ED           INX                              ; F7ED: 08             '.'
 ZF803           LDX     #CONTLDVERF              ; F803: CE FB 4E       '..N'
                 JSR     XPDATA1                  ; F806: BD FA 14       '...'
                 JSR     ZFA2C                    ; F809: BD FA 2C       '..,'
-                CMPA    #'C'                      ; F80C: 81 43          '.C'
+                CMPA    #'C                      ; F80C: 81 43          '.C'
                 BEQ     ZF7DD                    ; F80E: 27 CD          ''.'
-                CMPA    #'L'                      ; F810: 81 4C          '.L'
+                CMPA    #'L                      ; F810: 81 4C          '.L'
                 BEQ     LOAD                     ; F812: 27 A5          ''.'
-                CMPA    #'V'                      ; F814: 81 56          '.V'
+                CMPA    #'V                      ; F814: 81 56          '.V'
                 BEQ     VERIFY                   ; F816: 27 A6          ''.'
                 BRA     ZF803                    ; F818: 20 E9          ' .'
 ZF81A           TST     MFF5A                    ; F81A: 7D FF 5A       '}.Z'
                 BMI     ZF7DD                    ; F81D: 2B BE          '+.'
                 JSR     ZF918                    ; F81F: BD F9 18       '...'
                 LDAA    MFF8C                    ; F822: B6 FF 8C       '...'
-                CMPA    #'1'                      ; F825: 81 31          '.1'
+                CMPA    #'1                      ; F825: 81 31          '.1'
                 BEQ     ZF836                    ; F827: 27 0D          ''.'
-                CMPA    #'9'                      ; F829: 81 39          '.9'
+                CMPA    #'9                      ; F829: 81 39          '.9'
                 BNE     ZF7DD                    ; F82B: 26 B0          '&.'
                 LDAA    MFF58                    ; F82D: B6 FF 58       '..X'
-                CMPA    #'C'                      ; F830: 81 43          '.C'
+                CMPA    #'C                      ; F830: 81 43          '.C'
                 BEQ     ZF7DD                    ; F832: 27 A9          ''.'
                 BRA     ZF89E                    ; F834: 20 68          ' h'
 ZF836           LDAA    MFF8D                    ; F836: B6 FF 8D       '...'
@@ -1059,7 +1053,7 @@ ZF8C0           SEC                              ; F8C0: 0D             '.'
                 BNE     ZF8D0                    ; F8C9: 26 05          '&.'
                 TST     MFF02                    ; F8CB: 7D FF 02       '}..'
                 BMI     ZF8A9                    ; F8CE: 2B D9          '+.'
-ZF8D0           CMPA    #'S'                      ; F8D0: 81 53          '.S'
+ZF8D0           CMPA    #'S                      ; F8D0: 81 53          '.S'
                 BNE     ZF8C0                    ; F8D2: 26 EC          '&.'
                 LDX     #MFF8D                   ; F8D4: CE FF 8D       '...'
 ZF8D7           SEC                              ; F8D7: 0D             '.'
@@ -1067,11 +1061,11 @@ ZF8D7           SEC                              ; F8D7: 0D             '.'
                 JSR     XINCHN1                  ; F8DB: BD FA 7F       '...'
                 CMPA    #$7F                     ; F8DE: 81 7F          '..'
                 BEQ     ZF8D7                    ; F8E0: 27 F5          ''.'
-                CMPA    #'0'                      ; F8E2: 81 30          '.0'
+                CMPA    #'0                      ; F8E2: 81 30          '.0'
                 BEQ     ZF8EE                    ; F8E4: 27 08          ''.'
-                CMPA    #'1'                      ; F8E6: 81 31          '.1'
+                CMPA    #'1                      ; F8E6: 81 31          '.1'
                 BEQ     ZF8EE                    ; F8E8: 27 04          ''.'
-                CMPA    #'9'                      ; F8EA: 81 39          '.9'
+                CMPA    #'9                      ; F8EA: 81 39          '.9'
                 BNE     ZF8C0                    ; F8EC: 26 D2          '&.'
 ZF8EE           STAA    MFF8C                    ; F8EE: B7 FF 8C       '...'
                 CLR     MFF8B                    ; F8F1: 7F FF 8B       '...'
@@ -1284,111 +1278,124 @@ XCBCDH1         CMPA    #$30                     ; FA86: 81 30          '.0'
                 SUBA    #$07                     ; FA96: 80 07          '..'
 ZFA98           ANDA    #$0F                     ; FA98: 84 0F          '..'
                 RTS                              ; FA9A: 39             '9'
-ZFA9B           TST     $FAE5                    ; FA9B: 7D FA E5       '}..'
+ZFA9B           TST     MFAE5                    ; FA9B: 7D FA E5       '}..'
                 RTS                              ; FA9E: 39             '9'
 ZFA9F           BSR     ZFA2A                    ; FA9F: 8D 89          '..'
                 LDAA    #$2D                     ; FAA1: 86 2D          '.-'
                 BRA     ZFA2A                    ; FAA3: 20 85          ' .'
 ZFAA5           JSR     XPCRLF1                  ; FAA5: BD FA 21       '..!'
 ZFAA8           LDX     #XREGsP                  ; FAA8: CE FF 16       '...'
-                LDAA    #'P'                      ; FAAB: 86 50          '.P'
+                LDAA    #'P                      ; FAAB: 86 50          '.P'
                 BSR     ZFAC8                    ; FAAD: 8D 19          '..'
-                LDAA    #'X'                      ; FAAF: 86 58          '.X'
+                LDAA    #'X                      ; FAAF: 86 58          '.X'
                 BSR     ZFAC8                    ; FAB1: 8D 15          '..'
-                LDAA    #'A'                      ; FAB3: 86 41          '.A'
+                LDAA    #'A                      ; FAB3: 86 41          '.A'
                 BSR     ZFAC3                    ; FAB5: 8D 0C          '..'
-                LDAA    #'B'                      ; FAB7: 86 42          '.B'
+                LDAA    #'B                      ; FAB7: 86 42          '.B'
                 BSR     ZFAC3                    ; FAB9: 8D 08          '..'
-                LDAA    #'C'                      ; FABB: 86 43          '.C'
+                LDAA    #'C                      ; FABB: 86 43          '.C'
                 BSR     ZFAC3                    ; FABD: 8D 04          '..'
-                LDAA    #'S'                      ; FABF: 86 53          '.S'
+                LDAA    #'S                      ; FABF: 86 53          '.S'
                 BRA     ZFAC8                    ; FAC1: 20 05          ' .'
 ZFAC3           BSR     ZFA9F                    ; FAC3: 8D DA          '..'
                 JMP     XOUT2H1                  ; FAC5: 7E F9 C9       '~..'
 ZFAC8           BSR     ZFA9F                    ; FAC8: 8D D5          '..'
                 JMP     XOUT4H1                  ; FACA: 7E F9 C7       '~..'
 S10             CLRA                             ; FACD: 4F             'O'
-                LDX     #M0000                   ; FACE: CE 00 00       '...'
+                LDX     #RESRV                   ; FACE: CE 00 00       '...'
 ZFAD1           STAA    MFF02                    ; FAD1: B7 FF 02       '...'
                 STX     MFFF6                    ; FAD4: FF FF F6       '...'
                 JMP     REENT3                   ; FAD7: 7E F5 C2       '~..'
 S30             LDAA    #$01                     ; FADA: 86 01          '..'
-                LDX     #M0004                   ; FADC: CE 00 04       '...'
+                LDX     #GETRC                   ; FADC: CE 00 04       '...'
                 BRA     ZFAD1                    ; FADF: 20 F0          ' .'
 S120            LDX     #M0317                   ; FAE1: CE 03 17       '...'
 ZFAE4           LDAA    #$FF                     ; FAE4: 86 FF          '..'
                 BRA     ZFAD1                    ; FAE6: 20 E9          ' .'
 S240            LDX     #M072F                   ; FAE8: CE 07 2F       '../'
                 BRA     ZFAE4                    ; FAEB: 20 F7          ' .'
-MFAED           FCC     'LOAD'
+MFAED           FCB     'L,'O,'A,'D              ; FAED: 4C 4F 41 44    'LOAD'
                 FDB     LOAD                     ; FAF1: F7 B9          '..'
-                FCC     'VERF'
+                FCB     'V,'E,'R,'F              ; FAF3: 56 45 52 46    'VERF'
                 FDB     VERIFY                   ; FAF7: F7 BE          '..'
-                FCC     'SRCH'
+                FCB     'S,'R,'C,'H              ; FAF9: 53 52 43 48    'SRCH'
                 FDB     SEARCH                   ; FAFD: F7 B2          '..'
-                FCC     'PRNT'
+                FCB     'P,'R,'N,'T              ; FAFF: 50 52 4E 54    'PRNT'
                 FDB     PUNCH                    ; FB03: F7 1A          '..'
-                FCC     'PNCH'
+                FCB     'P,'N,'C,'H              ; FB05: 50 4E 43 48    'PNCH'
                 FDB     PUNCH                    ; FB09: F7 1A          '..'
-                FCC     'MAID'
+                FCB     'M,'A,'I,'D              ; FB0B: 4D 41 49 44    'MAID'
                 FDB     MAID                     ; FB0F: F0 ED          '..'
-                FCC     'S10.'
+                FCB     'S,'1,'0,'.              ; FB11: 53 31 30 2E    'S10.'
                 FDB     S10                      ; FB15: FA CD          '..'
-                FCC     'S30.'
+                FCB     'S,'3,'0,'.              ; FB17: 53 33 30 2E    'S30.'
                 FDB     S30                      ; FB1B: FA DA          '..'
-                FCC     'S120'
+                FCB     'S,'1,'2,'0              ; FB1D: 53 31 32 30    'S120'
                 FDB     S120                     ; FB21: FA E1          '..'
-                FCC     'S240'
+                FCB     'S,'2,'4,'0              ; FB23: 53 32 34 30    'S240'
                 FDB     S240                     ; FB27: FA E8          '..'
-                FCC     'TERM'
+                FCB     'T,'E,'R,'M              ; FB29: 54 45 52 4D    'TERM'
                 FDB     TERM                     ; FB2D: F6 27          '.''
-GREETING        FCC     'EXBUG 1.2 '
+GREETING        FCB     'E,'X,'B,'U,'G,' ,'1,'.  ; FB2F: 45 58 42 55 47 20 31 2E 'EXBUG 1.'
+                FCB     '2,'                     ; FB37: 32 20          '2 '
                 FCB     $04                      ; FB39: 04             '.'
-BEGINADDR       FCC     'BEG ADDR '
+BEGINADDR       FCB     'B,'E,'G,' ,'A,'D,'D,'R  ; FB3A: 42 45 47 20 41 44 44 52 'BEG ADDR'
+                FCB     '                        ; FB42: 20             ' '
                 FCB     $04                      ; FB43: 04             '.'
-ENDADDR         FCC     'END ADDR '
+ENDADDR         FCB     'E,'N,'D,' ,'A,'D,'D,'R  ; FB44: 45 4E 44 20 41 44 44 52 'END ADDR'
+                FCB     '                        ; FB4C: 20             ' '
                 FCB     $04                      ; FB4D: 04             '.'
-CONTLDVERF      FCC     'CONT/LOAD/VERF '
+CONTLDVERF      FCB     'C,'O,'N,'T,'/,'L,'O,'A  ; FB4E: 43 4F 4E 54 2F 4C 4F 41 'CONT/LOA'
+                FCB     'D,'/,'V,'E,'R,'F,'      ; FB56: 44 2F 56 45 52 46 20 'D/VERF '
                 FCB     $04                      ; FB5D: 04             '.'
-NOCHNGE         FCC     'NO CHANGE'
+NOCHNGE         FCB     'N,'O,' ,'C,'H,'A,'N,'G  ; FB5E: 4E 4F 20 43 48 41 4E 47 'NO CHANG'
+                FCB     'E                       ; FB66: 45             'E'
                 FCB     $07,$04                  ; FB67: 07 04          '..'
-CHECKSM         FCC     'CKSM '
+CHECKSM         FCB     'C,'K,'S,'M,'            ; FB69: 43 4B 53 4D 20 'CKSM '
                 FCB     $04                      ; FB6E: 04             '.'
-ADRMEMTAP       FCC     'ADDR/MEM/TAPE'
+ADRMEMTAP       FCB     'A,'D,'D,'R,'/,'M,'E,'M  ; FB6F: 41 44 44 52 2F 4D 45 4D 'ADDR/MEM'
+                FCB     '/,'T,'A,'P,'E           ; FB77: 2F 54 41 50 45 '/TAPE'
                 FCB     $04                      ; FB7C: 04             '.'
-INVALID         FCC     ' INVL'
+INVALID         FCB     ' ,'I,'N,'V,'L           ; FB7D: 20 49 4E 56 4C ' INVL'
                 FCB     $04                      ; FB82: 04             '.'
-EXEC            FCC     'EXEC '
+EXEC            FCB     'E,'X,'E,'C,'            ; FB83: 45 58 45 43 20 'EXEC '
                 FCB     $04                      ; FB88: 04             '.'
-SGLCONT         FCC     'SGL/CONT '
+SGLCONT         FCB     'S,'G,'L,'/,'C,'O,'N,'T  ; FB89: 53 47 4C 2F 43 4F 4E 54 'SGL/CONT'
+                FCB     '                        ; FB91: 20             ' '
                 FCB     $04                      ; FB92: 04             '.'
-STOPONADDR      FCC     'STOP-ON-ADDRESS '
+STOPONADDR      FCB     'S,'T,'O,'P,'-,'O,'N,'-  ; FB93: 53 54 4F 50 2D 4F 4E 2D 'STOP-ON-'
+                FCB     'A,'D,'D,'R,'E,'S,'S,'   ; FB9B: 41 44 44 52 45 53 53 20 'ADDRESS '
                 FCB     $04                      ; FBA3: 04             '.'
-STOPADDR        FCC     'STOP ADDR '
+STOPADDR        FCB     'S,'T,'O,'P,' ,'A,'D,'D  ; FBA4: 53 54 4F 50 20 41 44 44 'STOP ADD'
+                FCB     'R,'                     ; FBAC: 52 20          'R '
                 FCB     $04                      ; FBAE: 04             '.'
-ABORTED         FCC     'ABORTED AT '
+ABORTED         FCB     'A,'B,'O,'R,'T,'E,'D,'   ; FBAF: 41 42 4F 52 54 45 44 20 'ABORTED '
+                FCB     'A,'T,'                  ; FBB7: 41 54 20       'AT '
                 FCB     $04                      ; FBBA: 04             '.'
 MFBBB           FCB     $14                      ; FBBB: 14             '.'
 MFBBC           FCB     $13,$00,$00,$00,$00,$04  ; FBBC: 13 00 00 00 00 04 '......'
 MFBC2           FCB     $07                      ; FBC2: 07             '.'
-                FCC     ' ?'
+                FCB     ' ,'?                    ; FBC3: 20 3F          ' ?'
                 FCB     $04                      ; FBC5: 04             '.'
-MFBC6           FCB     '*'                       ; FBC6: 2A             '*'
+MFBC6           FCB     '*                       ; FBC6: 2A             '*'
                 FCB     $04                      ; FBC7: 04             '.'
-BKPTERR         FCC     'BKPT ERROR '
+BKPTERR         FCB     'B,'K,'P,'T,' ,'E,'R,'R  ; FBC8: 42 4B 50 54 20 45 52 52 'BKPT ERR'
+                FCB     'O,'R,'                  ; FBD0: 4F 52 20       'OR '
                 FCB     $04                      ; FBD3: 04             '.'
 S1_TXT          FCB     $0d,$0a,$00              ; FBD4: 0D 0A 00       '...'
-                FCC     'S1'                    ; FBD7: 53 31          'S1'
+                FCB     'S,'1                    ; FBD7: 53 31          'S1'
                 FCB     $04                      ; FBD9: 04             '.'
 S9_TXT          FCB     $0d,$0a,$00              ; FBDA: 0D 0A 00       '...'
-                FCC     'S9030000FC'
+                FCB     'S,'9,'0,'3,'0,'0,'0,'0  ; FBDD: 53 39 30 33 30 30 30 30 'S9030000'
+                FCB     'F,'C                    ; FBE5: 46 43          'FC'
                 FCB     $0d,$04                  ; FBE7: 0D 04          '..'
 S0_TXT          FCB     $0d,$0a,$00              ; FBE9: 0D 0A 00       '...'
-                FCC     'S00B00005820'
+                FCB     'S,'0,'0,'B,'0,'0,'0,'0  ; FBEC: 53 30 30 42 30 30 30 30 'S00B0000'
+                FCB     '5,'8,'2,'0              ; FBF4: 35 38 32 30    '5820'
                 FCB     $04                      ; FBF8: 04             '.'
-HD_TXT          FCC     'HDR=X '
+HD_TXT          FCB     'H,'D                    ; FBF9: 48 44          'HD'
+RTNUSR          FCB     'R,'=,'X,'               ; FBFB: 52 3D 58 20    'R=X '
                 FCB     $04                      ; FBFF: 04             '.'
 
 
                 END
-

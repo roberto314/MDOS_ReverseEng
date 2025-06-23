@@ -9,4 +9,4 @@ include common.info
 #word c6ef-c6f0
 #label c63F Set_32Char
 #char c724-c741
-#data 0102-020f
+data 2135-21f4

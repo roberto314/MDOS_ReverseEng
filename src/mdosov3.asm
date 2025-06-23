@@ -9,9 +9,11 @@ Loaded: Info file "mdosov3.info"
 M00CE   EQU     $00CE
 M010E   EQU     $010E
 Z11FC   EQU     $11FC
+Z1FFD   EQU     $1FFD
 M5656   EQU     $5656
 MC602   EQU     $C602
 MCE1A   EQU     $CE1A
+OSLOAD  EQU     $E800
 PWRUP   EQU     $F000
 XBEGEN  EQU     $F003
 XCBCDH  EQU     $F006

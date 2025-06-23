@@ -6,19 +6,18 @@ Loaded: Info file "mdos.info"
 ; Used Labels
 ;****************************************************
 
-M0000   EQU     $0000
-M0001   EQU     $0001
-M0002   EQU     $0002
-M0003   EQU     $0003
-M0004   EQU     $0004
-M0005   EQU     $0005
-M0006   EQU     $0006
-M0008   EQU     $0008
-M000B   EQU     $000B
-M000C   EQU     $000C
-M000D   EQU     $000D
-M0033   EQU     $0033
-M0043   EQU     $0043
+RESRV   EQU     $0000
+RELES   EQU     $0001
+OPEN    EQU     $0002
+CLOSE   EQU     $0003
+GETRC   EQU     $0004
+PUTRC   EQU     $0005
+REWND   EQU     $0006
+PUTLS   EQU     $0008
+DSPLX   EQU     $000B
+DSPLZ   EQU     $000C
+CKBRK   EQU     $000D
+MDERR   EQU     $0020
 M007D   EQU     $007D
 M0082   EQU     $0082
 M00AE   EQU     $00AE
@@ -33,26 +32,15 @@ Z129D   EQU     $129D
 Z12A0   EQU     $12A0
 Z12A3   EQU     $12A3
 Z12A6   EQU     $12A6
-M189D   EQU     $189D
 Z1FFD   EQU     $1FFD
 Z2000   EQU     $2000
 M2001   EQU     $2001
-M210C   EQU     $210C
-M24BD   EQU     $24BD
-M3804   EQU     $3804
-M4350   EQU     $4350
-M4352   EQU     $4352
-M494E   EQU     $494E
 M4F27   EQU     $4F27
-M7C11   EQU     $7C11
 M8640   EQU     $8640
-M8641   EQU     $8641
 M8680   EQU     $8680
-M8DBD   EQU     $8DBD
 MA100   EQU     $A100
 MC604   EQU     $C604
 MC609   EQU     $C609
-MC60B   EQU     $C60B
 MC619   EQU     $C619
 OSLOAD  EQU     $E800
 CHKERR  EQU     $E853
@@ -78,31 +66,28 @@ XPCRLF  EQU     $F021
 XPDATA  EQU     $F024
 XPDAT   EQU     $F027
 XPSPAC  EQU     $F02A
-MAID$   EQU     $F0F3
+MAIDs   EQU     $F0F3
 ACIA_0  EQU     $FCF4
 ACIA_1  EQU     $FCF5
 PROM_0  EQU     $FCFC
 PROM_1  EQU     $FCFD
-RAM_START
-        EQU     $FF00
-XREG$P  EQU     $FF16
-XREG$X  EQU     $FF18
-XREG$S  EQU     $FF1D
-BRKPT$  EQU     $FF1F
+XREGsP  EQU     $FF16
+XREGsX  EQU     $FF18
+XREGsS  EQU     $FF1D
+BRKPTs  EQU     $FF1F
 MFF2F   EQU     $FF2F
-BKPIN$  EQU     $FF4F
+BKPINs  EQU     $FF4F
 AECHO   EQU     $FF53
 MFF63   EQU     $FF63
-XSTAK$  EQU     $FF8A
+XSTAKs  EQU     $FF8A
 MFF8D   EQU     $FF8D
 MFF9C   EQU     $FF9C
 MFF9E   EQU     $FF9E
 MFFDD   EQU     $FFDD
 MFFE3   EQU     $FFE3
-IRQ$VC  EQU     $FFF8
-SWI$VC  EQU     $FFFA
-NMI$VC  EQU     $FFFC
-MFFFF   EQU     $FFFF
+IRQsVC  EQU     $FFF8
+SWIsVC  EQU     $FFFA
+NMIsVC  EQU     $FFFC
 
 ;****************************************************
 ; Program's Code Areas
@@ -111,22 +96,22 @@ MFFFF   EQU     $FFFF
 
                 ORG     $0100
 
-VERS$$          FDB     8243                     ; 0100: 20 33          
-REVS$$          FDB     12341                    ; 0102: 30 35          
-KYI$SV          FDB     $03A8                    ; 0104: 03 A8          
-ENDOS$          FDB     $1FFF                    ; 0106: 1F FF          
-ENDUS$          FDB     M0000                    ; 0108: 00 00          
-ENDSY$          FDB     M0000                    ; 010A: 00 00          
-M010C           FDB     M0000                    ; 010C: 00 00          
-RIBBA$          FDB     $018F                    ; 010E: 01 8F          
-ENDRV$          FDB     $0020                    ; 0110: 00 20          
-GDBA$           FDB     $065C                    ; 0112: 06 5C          
-SYERR$          FDB     M0000                    ; 0114: 00 00          
-SWI$SV          FDB     M0000                    ; 0116: 00 00          
-SWI$UV          FDB     M0000                    ; 0118: 00 00          
-IRQ$UV          FDB     M0000                    ; 011A: 00 00          
-IRQ$SV          FDB     M0000                    ; 011C: 00 00          
-CHFLG$          FDB     $8000                    ; 011E: 80 00          
+VERSss          FDB     8243                     ; 0100: 20 33          
+REVSss          FDB     12341                    ; 0102: 30 35          
+KYIsSV          FDB     $03A8                    ; 0104: 03 A8          
+ENDOSs          FDB     $1FFF                    ; 0106: 1F FF          
+ENDUSs          FDB     RESRV                    ; 0108: 00 00          
+ENDSYs          FDB     RESRV                    ; 010A: 00 00          
+M010C           FDB     RESRV                    ; 010C: 00 00          
+RIBBAs          FDB     $018F                    ; 010E: 01 8F          
+ENDRVs          FDB     MDERR                    ; 0110: 00 20          
+GDBAs           FDB     $065C                    ; 0112: 06 5C          
+SYERRs          FDB     RESRV                    ; 0114: 00 00          
+SWIsSV          FDB     RESRV                    ; 0116: 00 00          
+SWIsUV          FDB     RESRV                    ; 0118: 00 00          
+IRQsUV          FDB     RESRV                    ; 011A: 00 00          
+IRQsSV          FDB     RESRV                    ; 011C: 00 00          
+CHFLGs          FDB     $8000                    ; 011E: 80 00          
 SYIOCB          FCB     $00,$11,$00,$00          ; 0120: 00 11 00 00    
 M0124           FCB     $00,$00                  ; 0124: 00 00          
 M0126           FCB     $00,$00                  ; 0126: 00 00          
@@ -184,7 +169,7 @@ M020F           FCB     $7D                      ; 020F: 7D
                 LDAA    $05,X                    ; 0215: A6 05          
                 LDAB    $06,X                    ; 0217: E6 06          
                 DECD                             ; 0219: C0 01 82 00    
-                LDX     #BRKPT$                  ; 021D: CE FF 1F       
+                LDX     #BRKPTs                  ; 021D: CE FF 1F       
 Z0220           CMPA    ,X                       ; 0220: A1 00          
                 BNE     Z0228                    ; 0222: 26 04          
                 CMPB    $01,X                    ; 0224: E1 01          
@@ -234,10 +219,10 @@ M026B           RTI                              ; 026B: 3B
 Z026C           LDAB    #$21                     ; 026C: C6 21          
                 JSR     Z0F31                    ; 026E: BD 0F 31       
                 JMP     Z0617                    ; 0271: 7E 06 17       
-Z0274           LDX     SWI$SV                   ; 0274: FE 01 16       
+Z0274           LDX     SWIsSV                   ; 0274: FE 01 16       
                 JMP     ,X                       ; 0277: 6E 00          
 Z0279           ASRB                             ; 0279: 57             
-                LDX     SWI$UV                   ; 027A: FE 01 18       
+                LDX     SWIsUV                   ; 027A: FE 01 18       
                 JMP     ,X                       ; 027D: 6E 00          
 M027F           FCB     $12                      ; 027F: 12             
                 CLR     M1282                    ; 0280: 7F 12 82       
@@ -260,7 +245,7 @@ Z0295           FCB     $04                      ; 0295: 04
                 FCB     $04                      ; 0297: 04             
                 SEC                              ; 0298: 0D             
                 FCB     $03                      ; 0299: 03             
-                ADCB    M0005                    ; 029A: D9 05          
+                ADCB    PUTRC                    ; 029A: D9 05          
                 BEQ     Z02A3                    ; 029C: 27 05          
                 PSHA                             ; 029E: 36             
                 FCB     $03                      ; 029F: 03             
@@ -275,8 +260,8 @@ Z02A5           FCB     $03                      ; 02A5: 03
                 LSR     M0381                    ; 02AA: 74 03 81       
                 FCB     $03                      ; 02AD: 03             
                 ORAA    #$03                     ; 02AE: 8A 03          
-                ANDA    M0003                    ; 02B0: 94 03          
-                LDS     M0006                    ; 02B2: 9E 06          
+                ANDA    CLOSE                    ; 02B0: 94 03          
+                LDS     REWND                    ; 02B2: 9E 06          
                 BLS     Z02C2                    ; 02B4: 23 0C          
                 BVC     Z02C1                    ; 02B6: 28 09          
                 FCB     $C7                      ; 02B8: C7             
@@ -298,13 +283,13 @@ Z02C2           COM     M1276                    ; 02C2: 73 12 76
                 FCB     $04                      ; 02CF: 04             
                 ORAA    #$04                     ; 02D0: 8A 04          
                 ADDA    #$04                     ; 02D2: 8B 04          
-                ANDA    M0004                    ; 02D4: 94 04          
+                ANDA    GETRC                    ; 02D4: 94 04          
                 STAA    $04,X                    ; 02D6: A7 04          
                 EORA    $04,X                    ; 02D8: A8 04          
                 ADCA    $04,X                    ; 02DA: A9 04          
                 ADCA    M04C6                    ; 02DC: B9 04 C6       
                 FCB     $04                      ; 02DF: 04             
-                ORAB    M0004                    ; 02E0: DA 04          
+                ORAB    GETRC                    ; 02E0: DA 04          
                 SUBB    $04,X                    ; 02E2: E0 04          
                 LDAB    $05,X                    ; 02E4: E6 05          
                 TAP                              ; 02E6: 06             
@@ -335,7 +320,7 @@ Z0304           PULA                             ; 0304: 32
                 BEQ     Z0328                    ; 0308: 27 1E          
 Z030A           LDAB    #$0F                     ; 030A: C6 0F          
                 LDAA    #$02                     ; 030C: 86 02          
-                TST     BKPIN$                   ; 030E: 7D FF 4F       
+                TST     BKPINs                   ; 030E: 7D FF 4F       
                 BNE     Z0317                    ; 0311: 26 04          
                 LDAB    #$2F                     ; 0313: C6 2F          
                 LDAA    #$02                     ; 0315: 86 02          
@@ -348,9 +333,9 @@ Z031C           LDAA    $06,X                    ; 031C: A6 06
                 DEX                              ; 031F: 09             
                 DECB                             ; 0320: 5A             
                 BNE     Z031C                    ; 0321: 26 F9          
-                LDX     NMI$VC                   ; 0323: FE FF FC       
+                LDX     NMIsVC                   ; 0323: FE FF FC       
                 JMP     ,X                       ; 0326: 6E 00          
-Z0328           LDX     IRQ$UV                   ; 0328: FE 01 1A       
+Z0328           LDX     IRQsUV                   ; 0328: FE 01 1A       
                 JMP     ,X                       ; 032B: 6E 00          
 Z032D           BSR     Z0347                    ; 032D: 8D 18          
                 LDX     $02,X                    ; 032F: EE 02          
@@ -652,14 +637,14 @@ Z0511           LDAB    $08,X                    ; 0511: E6 08
                 LDX     #WRVERF                  ; 0537: CE E8 81       
 Z053A           STX     M0563                    ; 053A: FF 05 63       
                 ANDB    #$03                     ; 053D: C4 03          
-                STAB    M0000                    ; 053F: D7 00          
-                LDX     #M0001                   ; 0541: CE 00 01       
+                STAB    RESRV                    ; 053F: D7 00          
+                LDX     #RELES                   ; 0541: CE 00 01       
                 BITA    #$40                     ; 0544: 85 40          
                 BEQ     Z054D                    ; 0546: 27 05          
                 TSX                              ; 0548: 30             
                 LDX     $05,X                    ; 0549: EE 05          
                 LDX     $05,X                    ; 054B: EE 05          
-Z054D           STX     M0003                    ; 054D: DF 03          
+Z054D           STX     CLOSE                    ; 054D: DF 03          
                 LDAB    #$03                     ; 054F: C6 03          
                 PSHA                             ; 0551: 36             
                 PSHB                             ; 0552: 37             
@@ -668,12 +653,12 @@ Z0553           TSX                              ; 0553: 30
                 LDAB    $01,X                    ; 0556: E6 01          
                 LDAA    $02,X                    ; 0558: A6 02          
                 LDX     $03,X                    ; 055A: EE 03          
-                STX     M0006                    ; 055C: DF 06          
-                STAB    M0001                    ; 055E: D7 01          
-                STAA    M0002                    ; 0560: 97 02          
-                JSR     >M0000                   ; 0562: BD 00 00       
+                STX     REWND                    ; 055C: DF 06          
+                STAB    RELES                    ; 055E: D7 01          
+                STAA    OPEN                     ; 0560: 97 02          
+                JSR     >RESRV                   ; 0562: BD 00 00       
                 BCC     Z057A                    ; 0565: 24 13          
-                LDAA    M0008                    ; 0567: 96 08          
+                LDAA    PUTLS                    ; 0567: 96 08          
                 CMPA    #$31                     ; 0569: 81 31          
                 BEQ     Z05C1                    ; 056B: 27 54          
                 CMPA    #$34                     ; 056D: 81 34          
@@ -687,7 +672,7 @@ Z057A           PULB                             ; 057A: 33
                 PULA                             ; 057B: 32             
                 TSX                              ; 057C: 30             
                 LDX     $05,X                    ; 057D: EE 05          
-                LDAB    M0008                    ; 057F: D6 08          
+                LDAB    PUTLS                    ; 057F: D6 08          
                 STAB    ,X                       ; 0581: E7 00          
                 BCC     Z05AB                    ; 0583: 24 26          
                 PSHA                             ; 0585: 36             
@@ -697,16 +682,16 @@ Z057A           PULB                             ; 057A: 33
                 BEQ     Z05A4                    ; 058A: 27 18          
                 CMPB    #$36                     ; 058C: C1 36          
                 BEQ     Z05A4                    ; 058E: 27 14          
-                LDAB    M0001                    ; 0590: D6 01          
-                LDAA    M0002                    ; 0592: 96 02          
-                ADDA    M0004                    ; 0594: 9B 04          
-                ADCB    M0003                    ; 0596: D9 03          
-                SUBA    M000C                    ; 0598: 90 0C          
-                SBCB    M000B                    ; 059A: D2 0B          
+                LDAB    RELES                    ; 0590: D6 01          
+                LDAA    OPEN                     ; 0592: 96 02          
+                ADDA    GETRC                    ; 0594: 9B 04          
+                ADCB    CLOSE                    ; 0596: D9 03          
+                SUBA    DSPLZ                    ; 0598: 90 0C          
+                SBCB    DSPLX                    ; 059A: D2 0B          
                 SUBA    #$01                     ; 059C: 80 01          
                 SBCB    #$00                     ; 059E: C2 00          
-                STAA    M0002                    ; 05A0: 97 02          
-                STAB    M0001                    ; 05A2: D7 01          
+                STAA    OPEN                     ; 05A0: 97 02          
+                STAB    RELES                    ; 05A2: D7 01          
 Z05A4           PULA                             ; 05A4: 32             
                 TAP                              ; 05A5: 06             
                 PULA                             ; 05A6: 32             
@@ -730,25 +715,25 @@ Z05C1           TSX                              ; 05C1: 30
                 BEQ     Z0579                    ; 05C4: 27 B3          
                 LDAB    ,X                       ; 05C6: E6 00          
                 LDX     #M0082                   ; 05C8: CE 00 82       
-                TST     M000D                    ; 05CB: 7D 00 0D       
+                TST     CKBRK                    ; 05CB: 7D 00 0D       
                 BMI     Z05D3                    ; 05CE: 2B 03          
-                LDX     #KYI$SV                  ; 05D0: CE 01 04       
+                LDX     #KYIsSV                  ; 05D0: CE 01 04       
 Z05D3           CMPB    #$02                     ; 05D3: C1 02          
                 BNE     Z05F0                    ; 05D5: 26 19          
-                LDAB    M0001                    ; 05D7: D6 01          
-                LDAA    M0002                    ; 05D9: 96 02          
+                LDAB    RELES                    ; 05D7: D6 01          
+                LDAA    OPEN                     ; 05D9: 96 02          
                 SWI                              ; 05DB: 3F             
                 BGT     Z0637                    ; 05DC: 2E 59          
                 BCC     Z05E5                    ; 05DE: 24 05          
                 JSR     RESTOR                   ; 05E0: BD E8 75       
                 BRA     Z05ED                    ; 05E3: 20 08          
 Z05E5           RORB                             ; 05E5: 56             
-                STAB    M0001                    ; 05E6: D7 01          
-                STAA    M0002                    ; 05E8: 97 02          
+                STAB    RELES                    ; 05E6: D7 01          
+                STAA    OPEN                     ; 05E8: 97 02          
                 JSR     SEEK                     ; 05EA: BD E8 78       
 Z05ED           JMP     Z0553                    ; 05ED: 7E 05 53       
-Z05F0           LDAB    M0001                    ; 05F0: D6 01          
-                LDAA    M0002                    ; 05F2: 96 02          
+Z05F0           LDAB    RELES                    ; 05F0: D6 01          
+                LDAA    OPEN                     ; 05F2: 96 02          
                 SWI                              ; 05F4: 3F             
                 BPL     Z05C5                    ; 05F5: 2A CE          
                 TPA                              ; 05F7: 07             
@@ -764,192 +749,127 @@ Z0601           SWI                              ; 0601: 3F
                 FCB     $DD                      ; 0608: DD             
                 STAB    M0115                    ; 0609: F7 01 15       
                 PSHA                             ; 060C: 36             
-                LDAA    SYERR$                   ; 060D: B6 01 14       
+                LDAA    SYERRs                   ; 060D: B6 01 14       
                 ORAA    #$80                     ; 0610: 8A 80          
-                STAA    SYERR$                   ; 0612: B7 01 14       
+                STAA    SYERRs                   ; 0612: B7 01 14       
                 PULA                             ; 0615: 32             
                 RTS                              ; 0616: 39             
-Z0617           LDX     SWI$SV                   ; 0617: FE 01 16       
-                STX     SWI$VC                   ; 061A: FF FF FA       
-                LDS     #XSTAK$                  ; 061D: 8E FF 8A       
+Z0617           LDX     SWIsSV                   ; 0617: FE 01 16       
+                STX     SWIsVC                   ; 061A: FF FF FA       
+                LDS     #XSTAKs                  ; 061D: 8E FF 8A       
                 JMP     OSLOAD                   ; 0620: 7E E8 00       
-                LDX     SWI$VC                   ; 0623: FE FF FA       
+                LDX     SWIsVC                   ; 0623: FE FF FA       
                 CPX     #M022F                   ; 0626: 8C 02 2F       
 Z0629           BEQ     Z0636                    ; 0629: 27 0B          
                 CPX     #M020F                   ; 062B: 8C 02 0F       
                 BEQ     Z0636                    ; 062E: 27 06          
-                LDS     #XSTAK$                  ; 0630: 8E FF 8A       
+                LDS     #XSTAKs                  ; 0630: 8E FF 8A       
                 JSR     Z2000                    ; 0633: BD 20 00       
-Z0636           LDS     ENDSY$                   ; 0636: BE 01 0A       
+Z0636           LDS     ENDSYs                   ; 0636: BE 01 0A       
                 LDX     #M026B                   ; 0639: CE 02 6B       
-                STX     SWI$UV                   ; 063C: FF 01 18       
-                STX     IRQ$UV                   ; 063F: FF 01 1A       
-                LDAA    CHFLG$                   ; 0642: B6 01 1E       
+                STX     SWIsUV                   ; 063C: FF 01 18       
+                STX     IRQsUV                   ; 063F: FF 01 1A       
+                LDAA    CHFLGs                   ; 0642: B6 01 1E       
                 ORAA    #$80                     ; 0645: 8A 80          
-                STAA    CHFLG$                   ; 0647: B7 01 1E       
+                STAA    CHFLGs                   ; 0647: B7 01 1E       
                 LDX     #M2001                   ; 064A: CE 20 01       
-                STX     ENDUS$                   ; 064D: FF 01 08       
-                CLR     M0000                    ; 0650: 7F 00 00       
+                STX     ENDUSs                   ; 064D: FF 01 08       
+                CLR     RESRV                    ; 0650: 7F 00 00       
                 JSR     RESTOR                   ; 0653: BD E8 75       
                 JSR     CHKERR                   ; 0656: BD E8 53       
                 JMP     Z1FFD                    ; 0659: 7E 1F FD       
-                LSRA                             ; 065C: 44             
-                FCB     $4B                      ; 065D: 4B             
-                TAP                              ; 065E: 06             
-                FCB     $72                      ; 065F: 72             
-                INCA                             ; 0660: 4C             
-                NEGB                             ; 0661: 50             
-                TAP                              ; 0662: 06             
-                CLR     M4352                    ; 0663: 7F 43 52       
-                TAP                              ; 0666: 06             
-                CPX     #M4350                   ; 0667: 8C 43 50       
-                TAP                              ; 066A: 06             
-                ADCA    M0043                    ; 066B: 99 43          
-                FCB     $4E                      ; 066D: 4E             
-                TAP                              ; 066E: 06             
-                LDAA    ,X                       ; 066F: A6 00          
-                FCB     $00                      ; 0671: 00             
-                NOP                              ; 0672: 01             
-                FCB     $00                      ; 0673: 00             
-                FCB     $00                      ; 0674: 00             
-                TAP                              ; 0675: 06             
-                FCB     $B3                      ; 0676: B3             
-                FCB     $00                      ; 0677: 00             
-                FCB     $00                      ; 0678: 00             
+                FCB     $44,$4B                  ; 065C: 44 4B          
+                FCB     $06                      ; 065E: 06             
+                FCB     $72,$4C,$50              ; 065F: 72 4C 50       
+                FCB     $06,$7F                  ; 0662: 06 7F          
+                FCB     $43,$52                  ; 0664: 43 52          
+                FCB     $06,$8C                  ; 0666: 06 8C          
+                FCB     $43,$50                  ; 0668: 43 50          
+                FCB     $06,$99                  ; 066A: 06 99          
+                FCB     $43,$4E                  ; 066C: 43 4E          
+                FCB     $06,$A6,$00,$00,$01,$00  ; 066E: 06 A6 00 00 01 00 
+                FCB     $00,$06,$B3,$00,$00      ; 0674: 00 06 B3 00 00 
                 FCB     $72                      ; 0679: 72             
-                FCB     $04                      ; 067A: 04             
-                FCB     $00                      ; 067B: 00             
-                FCB     $03                      ; 067C: 03             
-                FCB     $00                      ; 067D: 00             
-                FCB     $00                      ; 067E: 00             
-                NOP                              ; 067F: 01             
-                FCB     $00                      ; 0680: 00             
-                FCB     $00                      ; 0681: 00             
-                DEX                              ; 0682: 09             
-                LDS     M0000                    ; 0683: 9E 00          
-                FCB     $00                      ; 0685: 00             
-                CMPB    #$80                     ; 0686: C1 80          
-                FCB     $00                      ; 0688: 00             
-                FCB     $00                      ; 0689: 00             
-                FCB     $00                      ; 068A: 00             
-                FCB     $00                      ; 068B: 00             
-                NOP                              ; 068C: 01             
-                FCB     $00                      ; 068D: 00             
-                FCB     $00                      ; 068E: 00             
-                DEX                              ; 068F: 09             
-                SUBA    #$00                     ; 0690: 80 00          
+                FCB     $04,$00,$03,$00,$00,$01  ; 067A: 04 00 03 00 00 01 
+                FCB     $00,$00,$09,$9E,$00,$00  ; 0680: 00 00 09 9E 00 00 
+                FCB     $C1,$80,$00,$00,$00,$00  ; 0686: C1 80 00 00 00 00 
+                FCB     $01,$00,$00,$09,$80,$00  ; 068C: 01 00 00 09 80 00 
                 FCB     $00                      ; 0692: 00             
-                INS                              ; 0693: 31             
-                SUBA    #$00                     ; 0694: 80 00          
-                FCB     $00                      ; 0696: 00             
-                FCB     $00                      ; 0697: 00             
-                FCB     $00                      ; 0698: 00             
-                NOP                              ; 0699: 01             
-                FCB     $00                      ; 069A: 00             
-                FCB     $00                      ; 069B: 00             
-                DEX                              ; 069C: 09             
-                FCB     $8F                      ; 069D: 8F             
-                FCB     $00                      ; 069E: 00             
-                FCB     $00                      ; 069F: 00             
+                FCB     $31                      ; 0693: 31             
+                FCB     $80,$00,$00,$00,$00,$01  ; 0694: 80 00 00 00 00 01 
+                FCB     $00,$00,$09,$8F,$00,$00  ; 069A: 00 00 09 8F 00 00 
                 FCB     $51                      ; 06A0: 51             
-                SUBA    #$00                     ; 06A1: 80 00          
-                FCB     $00                      ; 06A3: 00             
-                FCB     $00                      ; 06A4: 00             
-                FCB     $00                      ; 06A5: 00             
-                NOP                              ; 06A6: 01             
-                FCB     $00                      ; 06A7: 00             
-                FCB     $00                      ; 06A8: 00             
-                DEX                              ; 06A9: 09             
-                COMB                             ; 06AA: 53             
-                FCB     $00                      ; 06AB: 00             
-                FCB     $00                      ; 06AC: 00             
+                FCB     $80,$00,$00,$00,$00,$01  ; 06A1: 80 00 00 00 00 01 
+                FCB     $00,$00,$09              ; 06A7: 00 00 09       
+                FCB     $53                      ; 06AA: 53             
+                FCB     $00,$00                  ; 06AB: 00 00          
                 FCB     $65                      ; 06AD: 65             
-                SUBA    #$00                     ; 06AE: 80 00          
-                FCB     $00                      ; 06B0: 00             
-                FCB     $00                      ; 06B1: 00             
-                FCB     $00                      ; 06B2: 00             
-                CLC                              ; 06B3: 0C             
-                BRA     Z0718                    ; 06B4: 20 62          
-                CLC                              ; 06B6: 0C             
-                BRA     Z0718                    ; 06B7: 20 5F          
-                CLC                              ; 06B9: 0C             
-                BRA     Z0718                    ; 06BA: 20 5C          
-                CLC                              ; 06BC: 0C             
-                BRA     Z0718                    ; 06BD: 20 59          
-                TSX                              ; 06BF: 30             
-                LDX     ,X                       ; 06C0: EE 00          
-                LDX     ,X                       ; 06C2: EE 00          
-                LDX     ,X                       ; 06C4: EE 00          
-                STX     M094F                    ; 06C6: FF 09 4F       
-                LDAA    $01,X                    ; 06C9: A6 01          
-                STAA    M0951                    ; 06CB: B7 09 51       
-                BPL     Z06F1                    ; 06CE: 2A 21          
-                LDAA    $1E,X                    ; 06D0: A6 1E          
-                ORAA    $1D,X                    ; 06D2: AA 1D          
-                BEQ     Z06E0                    ; 06D4: 27 0A          
-                LDAA    $24,X                    ; 06D6: A6 24          
-                LDAB    $23,X                    ; 06D8: E6 23          
-                CMPA    $1E,X                    ; 06DA: A1 1E          
-                SBCB    $1D,X                    ; 06DC: E2 1D          
-                BCC     Z06E4                    ; 06DE: 24 04          
-Z06E0           BSR     Z0761                    ; 06E0: 8D 7F          
-                BCS     Z0718                    ; 06E2: 25 34          
-Z06E4           INC     $1E,X                    ; 06E4: 6C 1E          
-                BNE     Z06EA                    ; 06E6: 26 02          
-                INC     $1D,X                    ; 06E8: 6C 1D          
-Z06EA           LDX     $1D,X                    ; 06EA: EE 1D          
-                DEX                              ; 06EC: 09             
-                LDAB    ,X                       ; 06ED: E6 00          
-                BRA     Z0718                    ; 06EF: 20 27          
-Z06F1           LDAA    $1E,X                    ; 06F1: A6 1E          
-                ORAA    $1D,X                    ; 06F3: AA 1D          
-                BNE     Z06FF                    ; 06F5: 26 08          
-                LDAA    $20,X                    ; 06F7: A6 20          
-                STAA    $1E,X                    ; 06F9: A7 1E          
-                LDAA    $1F,X                    ; 06FB: A6 1F          
-                STAA    $1D,X                    ; 06FD: A7 1D          
-Z06FF           LDX     $1D,X                    ; 06FF: EE 1D          
-                STAB    ,X                       ; 0701: E7 00          
-                LDX     M094F                    ; 0703: FE 09 4F       
-                INC     $1E,X                    ; 0706: 6C 1E          
-                BNE     Z070C                    ; 0708: 26 02          
-                INC     $1D,X                    ; 070A: 6C 1D          
-Z070C           LDAA    $24,X                    ; 070C: A6 24          
-                LDAB    $23,X                    ; 070E: E6 23          
-                CMPA    $1E,X                    ; 0710: A1 1E          
-                SBCB    $1D,X                    ; 0712: E2 1D          
-                BCC     Z0718                    ; 0714: 24 02          
-                BSR     Z0761                    ; 0716: 8D 49          
-Z0718           TSX                              ; 0718: 30             
-                LDX     ,X                       ; 0719: EE 00          
-                INS                              ; 071B: 31             
-                INS                              ; 071C: 31             
-                JMP     $02,X                    ; 071D: 6E 02          
-                LDAA    #$82                     ; 071F: 86 82          
-                CPX     #M8641                   ; 0721: 8C 86 41       
-                STX     M094F                    ; 0724: FF 09 4F       
-                CLR     ,X                       ; 0727: 6F 00          
-                TAB                              ; 0729: 16             
-                EORB    $01,X                    ; 072A: E8 01          
-                ANDB    #$03                     ; 072C: C4 03          
-                BEQ     Z073D                    ; 072E: 27 0D          
-                LDAB    $01,X                    ; 0730: E6 01          
-                BITB    #$20                     ; 0732: C5 20          
-                BEQ     Z073D                    ; 0734: 27 07          
-                BITB    #$10                     ; 0736: C5 10          
-                BEQ     Z0743                    ; 0738: 27 09          
-                LDAB    #$08                     ; 073A: C6 08          
-                CPX     #MC60B                   ; 073C: 8C C6 0B       
-                SEC                              ; 073F: 0D             
-                STAB    ,X                       ; 0740: E7 00          
-Z0742           RTS                              ; 0742: 39             
-Z0743           ANDB    #$3F                     ; 0743: C4 3F          
-                ANDA    #$C0                     ; 0745: 84 C0          
-                ABA                              ; 0747: 1B             
-                STAA    $01,X                    ; 0748: A7 01          
-                STAA    M0951                    ; 074A: B7 09 51       
-                BSR     Z0761                    ; 074D: 8D 12          
-                BRA     Z0742                    ; 074F: 20 F1          
+                FCB     $80,$00,$00,$00,$00,$0C  ; 06AE: 80 00 00 00 00 0C 
+                FCB     $20,$62                  ; 06B4: 20 62          
+                FCB     $0C                      ; 06B6: 0C             
+                FCB     $20,$5F                  ; 06B7: 20 5F          
+                FCB     $0C                      ; 06B9: 0C             
+                FCB     $20,$5C                  ; 06BA: 20 5C          
+                FCB     $0C                      ; 06BC: 0C             
+                FCB     $20,$59,$30              ; 06BD: 20 59 30       
+                FCB     $EE,$00,$EE,$00,$EE,$00  ; 06C0: EE 00 EE 00 EE 00 
+                FCB     $FF,$09                  ; 06C6: FF 09          
+                FCB     $4F                      ; 06C8: 4F             
+                FCB     $A6,$01,$B7,$09          ; 06C9: A6 01 B7 09    
+                FCB     $51,$2A,$21              ; 06CD: 51 2A 21       
+                FCB     $A6,$1E,$AA,$1D          ; 06D0: A6 1E AA 1D    
+                FCB     $27                      ; 06D4: 27             
+                FCB     $0A,$A6                  ; 06D5: 0A A6          
+                FCB     $24                      ; 06D7: 24             
+                FCB     $E6                      ; 06D8: E6             
+                FCB     $23                      ; 06D9: 23             
+                FCB     $A1,$1E,$E2,$1D          ; 06DA: A1 1E E2 1D    
+                FCB     $24                      ; 06DE: 24             
+                FCB     $04,$8D,$7F              ; 06DF: 04 8D 7F       
+                FCB     $25,$34,$6C              ; 06E2: 25 34 6C       
+                FCB     $1E,$26,$02              ; 06E5: 1E 26 02       
+                FCB     $6C                      ; 06E8: 6C             
+                FCB     $1D,$EE,$1D,$09,$E6,$00  ; 06E9: 1D EE 1D 09 E6 00 
+                FCB     $20,$27                  ; 06EF: 20 27          
+                FCB     $A6,$1E,$AA,$1D,$26,$08  ; 06F1: A6 1E AA 1D 26 08 
+                FCB     $A6                      ; 06F7: A6             
+                FCB     $20                      ; 06F8: 20             
+                FCB     $A7,$1E,$A6,$1F,$A7,$1D  ; 06F9: A7 1E A6 1F A7 1D 
+                FCB     $EE,$1D,$E7,$00,$FE,$09  ; 06FF: EE 1D E7 00 FE 09 
+                FCB     $4F,$6C                  ; 0705: 4F 6C          
+                FCB     $1E,$26,$02              ; 0707: 1E 26 02       
+                FCB     $6C                      ; 070A: 6C             
+                FCB     $1D,$A6                  ; 070B: 1D A6          
+                FCB     $24                      ; 070D: 24             
+                FCB     $E6                      ; 070E: E6             
+                FCB     $23                      ; 070F: 23             
+                FCB     $A1,$1E,$E2,$1D          ; 0710: A1 1E E2 1D    
+                FCB     $24                      ; 0714: 24             
+                FCB     $02,$8D                  ; 0715: 02 8D          
+                FCB     $49,$30                  ; 0717: 49 30          
+                FCB     $EE,$00                  ; 0719: EE 00          
+                FCB     $31,$31,$6E              ; 071B: 31 31 6E       
+                FCB     $02,$86,$82,$8C,$86      ; 071E: 02 86 82 8C 86 
+                FCB     $41                      ; 0723: 41             
+                FCB     $FF,$09                  ; 0724: FF 09          
+                FCB     $4F,$6F                  ; 0726: 4F 6F          
+                FCB     $00,$16,$E8,$01,$C4,$03  ; 0728: 00 16 E8 01 C4 03 
+                FCB     $27                      ; 072E: 27             
+                FCB     $0D,$E6,$01,$C5          ; 072F: 0D E6 01 C5    
+                FCB     $20,$27                  ; 0733: 20 27          
+                FCB     $07,$C5,$10              ; 0735: 07 C5 10       
+                FCB     $27                      ; 0738: 27             
+                FCB     $09,$C6,$08,$8C,$C6,$0B  ; 0739: 09 C6 08 8C C6 0B 
+                FCB     $0D,$E7,$00              ; 073F: 0D E7 00       
+                FCB     $39                      ; 0742: 39             
+                FCB     $C4                      ; 0743: C4             
+                FCB     $3F                      ; 0744: 3F             
+                FCB     $84,$C0,$1B,$A7,$01,$B7  ; 0745: 84 C0 1B A7 01 B7 
+                FCB     $09                      ; 074B: 09             
+                FCB     $51                      ; 074C: 51             
+                FCB     $8D,$12                  ; 074D: 8D 12          
+                FCB     $20                      ; 074F: 20             
+                FCB     $F1                      ; 0750: F1             
 Z0751           LDAB    #$11                     ; 0751: C6 11          
 Z0753           INS                              ; 0753: 31             
                 INS                              ; 0754: 31             
@@ -960,7 +880,7 @@ Z0753           INS                              ; 0753: 31
                 SEC                              ; 075D: 0D             
 Z075E           STAB    ,X                       ; 075E: E7 00          
                 RTS                              ; 0760: 39             
-Z0761           LDAA    $01,X                    ; 0761: A6 01          
+                LDAA    $01,X                    ; 0761: A6 01          
                 BPL     Z0775                    ; 0763: 2A 10          
                 LDAA    $14,X                    ; 0765: A6 14          
                 LDAB    $13,X                    ; 0767: E6 13          
@@ -1011,7 +931,7 @@ Z079A           LDAA    $12,X                    ; 079A: A6 12
 Z07BA           LDAB    $0A,X                    ; 07BA: E6 0A          
                 LDAA    M010F                    ; 07BC: B6 01 0F       
                 PSHA                             ; 07BF: 36             
-                LDAA    RIBBA$                   ; 07C0: B6 01 0E       
+                LDAA    RIBBAs                   ; 07C0: B6 01 0E       
                 PSHA                             ; 07C3: 36             
                 LDX     $15,X                    ; 07C4: EE 15          
                 SWI                              ; 07C6: 3F             
@@ -1026,7 +946,7 @@ Z07BA           LDAB    $0A,X                    ; 07BA: E6 0A
                 INS                              ; 07CF: 31             
                 INS                              ; 07D0: 31             
                 LDX     M094F                    ; 07D1: FE 09 4F       
-                LDAB    RIBBA$                   ; 07D4: F6 01 0E       
+                LDAB    RIBBAs                   ; 07D4: F6 01 0E       
                 LDAA    M010F                    ; 07D7: B6 01 0F       
                 STAB    $1D,X                    ; 07DA: E7 1D          
                 STAA    $1E,X                    ; 07DC: A7 1E          
@@ -1074,7 +994,7 @@ Z0827           INC     $1E,X                    ; 0827: 6C 1E
                 BNE     Z082D                    ; 0829: 26 02          
                 INC     $1D,X                    ; 082B: 6C 1D          
 Z082D           LDAA    M010F                    ; 082D: B6 01 0F       
-                LDAB    RIBBA$                   ; 0830: F6 01 0E       
+                LDAB    RIBBAs                   ; 0830: F6 01 0E       
                 ADDA    #$80                     ; 0833: 8B 80          
                 ADCB    #$00                     ; 0835: C9 00          
                 CMPA    $1E,X                    ; 0837: A1 1E          
@@ -1282,7 +1202,7 @@ Z0979           TSX                              ; 0979: 30
                 CLC                              ; 0989: 0C             
                 BRA     Z0979                    ; 098A: 20 ED          
                 JMP     Z1297                    ; 098C: 7E 12 97       
-M098F           JMP     Z129A                    ; 098F: 7E 12 9A       
+                JMP     Z129A                    ; 098F: 7E 12 9A       
                 JMP     Z129D                    ; 0992: 7E 12 9D       
                 JMP     Z12A0                    ; 0995: 7E 12 A0       
                 JMP     Z12A3                    ; 0998: 7E 12 A3       
@@ -1322,7 +1242,7 @@ Z09D2           RORB                             ; 09D2: 56
                 BNE     Z09CB                    ; 09D6: 26 F3          
                 LDAB    ,X                       ; 09D8: E6 00          
                 ANDB    #$03                     ; 09DA: C4 03          
-                STAB    M0000                    ; 09DC: D7 00          
+                STAB    RESRV                    ; 09DC: D7 00          
                 CLR     M0C23                    ; 09DE: 7F 0C 23       
                 LDAB    M0C22                    ; 09E1: F6 0C 22       
                 ANDB    #$21                     ; 09E4: C4 21          
@@ -1576,7 +1496,7 @@ Z0BCE           SWI                              ; 0BCE: 3F
                 SEI                              ; 0BCF: 0F             
 Z0BD0           LDX     TMP2                     ; 0BD0: FE 0C 20       
                 RTS                              ; 0BD3: 39             
-Z0BD4           LDAA    M0000                    ; 0BD4: 96 00          
+Z0BD4           LDAA    RESRV                    ; 0BD4: 96 00          
                 BEQ     Z0BDE                    ; 0BD6: 27 06          
                 JSR     RESTOR                   ; 0BD8: BD E8 75       
                 TSX                              ; 0BDB: 30             
@@ -1683,7 +1603,7 @@ Z0C87           LDAA    $0D,X                    ; 0C87: A6 0D
                 BITA    #$10                     ; 0C89: 85 10          
                 BNE     Z0C9C                    ; 0C8B: 26 0F          
 Z0C8D           JMP     Z0DD4                    ; 0C8D: 7E 0D D4       
-Z0C90           STAA    M0000                    ; 0C90: 97 00          
+Z0C90           STAA    RESRV                    ; 0C90: 97 00          
                 BEQ     Z0CA2                    ; 0C92: 27 0E          
                 JSR     RESTOR                   ; 0C94: BD E8 75       
                 TSX                              ; 0C97: 30             
@@ -1727,17 +1647,17 @@ Z0CE1           BPL     Z0CA0                    ; 0CE1: 2A BD
                 BITB    #$10                     ; 0CEA: C5 10          
                 BEQ     Z0D08                    ; 0CEC: 27 1A          
                 LDX     M0F2A                    ; 0CEE: FE 0F 2A       
-                LDAB    ENDSY$                   ; 0CF1: F6 01 0A       
+                LDAB    ENDSYs                   ; 0CF1: F6 01 0A       
                 LDAA    M010B                    ; 0CF4: B6 01 0B       
                 SWI                              ; 0CF7: 3F             
                 BLE     Z0D1F                    ; 0CF8: 2F 25          
                 FCB     $CD                      ; 0CFA: CD             
-                LDAB    ENDOS$                   ; 0CFB: F6 01 06       
+                LDAB    ENDOSs                   ; 0CFB: F6 01 06       
                 LDAA    M0107                    ; 0CFE: B6 01 07       
                 SWI                              ; 0D01: 3F             
                 BLE     Z0D28                    ; 0D02: 2F 24          
                 FCB     $C3                      ; 0D04: C3             
-                STX     ENDUS$                   ; 0D05: FF 01 08       
+                STX     ENDUSs                   ; 0D05: FF 01 08       
 Z0D08           LDX     M0F2C                    ; 0D08: FE 0F 2C       
                 LDAB    M0F1C                    ; 0D0B: F6 0F 1C       
                 BITB    #$04                     ; 0D0E: C5 04          
@@ -1754,7 +1674,7 @@ Z0D15           JSR     Z0E03                    ; 0D15: BD 0E 03
 Z0D28           BNE     Z0D61                    ; 0D28: 26 37          
 Z0D2A           JSR     Z0EA9                    ; 0D2A: BD 0E A9       
                 JSR     Z0E49                    ; 0D2D: BD 0E 49       
-                LDS     #XSTAK$                  ; 0D30: 8E FF 8A       
+                LDS     #XSTAKs                  ; 0D30: 8E FF 8A       
                 LDAB    M0F1C                    ; 0D33: F6 0F 1C       
                 BITB    #$80                     ; 0D36: C5 80          
                 BNE     Z0D3D                    ; 0D38: 26 03          
@@ -1810,7 +1730,7 @@ Z0D9E           LDAA    M0F26                    ; 0D9E: B6 0F 26
                 LDAB    M0F2D                    ; 0DAE: F6 0F 2D       
                 STAA    $11,X                    ; 0DB1: A7 11          
                 STAB    $12,X                    ; 0DB3: E7 12          
-                LDAB    M0008                    ; 0DB5: D6 08          
+                LDAB    PUTLS                    ; 0DB5: D6 08          
                 CMPB    #$30                     ; 0DB7: C1 30          
                 BNE     Z0DBD                    ; 0DB9: 26 02          
                 CLRB                             ; 0DBB: 5F             
@@ -1870,17 +1790,17 @@ Z0E1A           CLC                              ; 0E1A: 0C
                 BNE     Z0E36                    ; 0E20: 26 14          
                 BITB    #$80                     ; 0E22: C5 80          
                 BEQ     Z0E2E                    ; 0E24: 27 08          
-                LDAB    ENDRV$                   ; 0E26: F6 01 10       
+                LDAB    ENDRVs                   ; 0E26: F6 01 10       
                 LDAA    M0111                    ; 0E29: B6 01 11       
                 BRA     Z0E34                    ; 0E2C: 20 06          
-Z0E2E           LDAB    ENDOS$                   ; 0E2E: F6 01 06       
+Z0E2E           LDAB    ENDOSs                   ; 0E2E: F6 01 06       
                 LDAA    M0107                    ; 0E31: B6 01 07       
 Z0E34           SWI                              ; 0E34: 3F             
                 BLT     Z0E70                    ; 0E35: 2D 39          
                 LDAB    M0F1C                    ; 0E37: F6 0F 1C       
                 BITB    #$A0                     ; 0E3A: C5 A0          
                 BNE     Z0E47                    ; 0E3C: 26 09          
-                LDAB    ENDSY$                   ; 0E3E: F6 01 0A       
+                LDAB    ENDSYs                   ; 0E3E: F6 01 0A       
                 LDAA    M010B                    ; 0E41: B6 01 0B       
                 SWI                              ; 0E44: 3F             
                 BGT     Z0E80                    ; 0E45: 2E 39          
@@ -1889,19 +1809,19 @@ Z0E48           RTS                              ; 0E48: 39
 Z0E49           TSX                              ; 0E49: 30             
                 LDX     $07,X                    ; 0E4A: EE 07          
                 LDAA    M0F30                    ; 0E4C: B6 0F 30       
-                STAA    M0000                    ; 0E4F: 97 00          
+                STAA    RESRV                    ; 0E4F: 97 00          
                 LDX     M0F22                    ; 0E51: FE 0F 22       
                 INX                              ; 0E54: 08             
-Z0E55           STX     M0001                    ; 0E55: DF 01          
+Z0E55           STX     RELES                    ; 0E55: DF 01          
                 LDX     M0F24                    ; 0E57: FE 0F 24       
                 LDAA    $75,X                    ; 0E5A: A6 75          
                 ADDA    #$07                     ; 0E5C: 8B 07          
                 ANDA    #$F8                     ; 0E5E: 84 F8          
-                STAA    M0005                    ; 0E60: 97 05          
+                STAA    PUTRC                    ; 0E60: 97 05          
                 LDX     $76,X                    ; 0E62: EE 76          
-                STX     M0003                    ; 0E64: DF 03          
+                STX     CLOSE                    ; 0E64: DF 03          
                 LDX     M0F26                    ; 0E66: FE 0F 26       
-                STX     M0006                    ; 0E69: DF 06          
+                STX     REWND                    ; 0E69: DF 06          
                 RTS                              ; 0E6B: 39             
 Z0E6C           LDX     M0F24                    ; 0E6C: FE 0F 24       
                 LDX     $76,X                    ; 0E6F: EE 76          
@@ -1926,7 +1846,7 @@ Z0E95           RTS                              ; 0E95: 39
 Z0E96           INS                              ; 0E96: 31             
                 INS                              ; 0E97: 31             
                 JMP     Z0DD4                    ; 0E98: 7E 0D D4       
-Z0E9B           LDX     #BRKPT$                  ; 0E9B: CE FF 1F       
+Z0E9B           LDX     #BRKPTs                  ; 0E9B: CE FF 1F       
 Z0E9E           CLR     ,X                       ; 0E9E: 6F 00          
                 CPX     #MFF63                   ; 0EA0: 8C FF 63       
                 BEQ     Z0EA8                    ; 0EA3: 27 03          
@@ -1936,26 +1856,26 @@ Z0EA8           RTS                              ; 0EA8: 39
 Z0EA9           LDAB    M0F1C                    ; 0EA9: F6 0F 1C       
                 BITB    #$A0                     ; 0EAC: C5 A0          
                 BEQ     Z0EBF                    ; 0EAE: 27 0F          
-                LDX     SWI$SV                   ; 0EB0: FE 01 16       
-                STX     SWI$VC                   ; 0EB3: FF FF FA       
-                LDX     IRQ$SV                   ; 0EB6: FE 01 1C       
-                STX     IRQ$VC                   ; 0EB9: FF FF F8       
+                LDX     SWIsSV                   ; 0EB0: FE 01 16       
+                STX     SWIsVC                   ; 0EB3: FF FF FA       
+                LDX     IRQsSV                   ; 0EB6: FE 01 1C       
+                STX     IRQsVC                   ; 0EB9: FF FF F8       
                 JSR     Z0E9B                    ; 0EBC: BD 0E 9B       
 Z0EBF           RTS                              ; 0EBF: 39             
 Z0EC0           JSR     Z0ED3                    ; 0EC0: BD 0E D3       
                 BNE     Z0ED2                    ; 0EC3: 26 0D          
                 COMB                             ; 0EC5: 53             
-                STAB    SWI$VC                   ; 0EC6: F7 FF FA       
+                STAB    SWIsVC                   ; 0EC6: F7 FF FA       
                 JSR     Z0ED3                    ; 0EC9: BD 0E D3       
                 TPA                              ; 0ECC: 07             
                 COMB                             ; 0ECD: 53             
-                STAB    SWI$VC                   ; 0ECE: F7 FF FA       
+                STAB    SWIsVC                   ; 0ECE: F7 FF FA       
                 TAP                              ; 0ED1: 06             
 Z0ED2           RTS                              ; 0ED2: 39             
-Z0ED3           LDAB    SWI$VC                   ; 0ED3: F6 FF FA       
+Z0ED3           LDAB    SWIsVC                   ; 0ED3: F6 FF FA       
                 LDAA    #$30                     ; 0ED6: 86 30          
                 STAA    PROM_0                   ; 0ED8: B7 FC FC       
-                LDX     #SWI$VC                  ; 0EDB: CE FF FA       
+                LDX     #SWIsVC                  ; 0EDB: CE FF FA       
                 TST     PROM_0                   ; 0EDE: 7D FC FC       
                 LDAA    ,X                       ; 0EE1: A6 00          
                 PSHA                             ; 0EE3: 36             
@@ -1965,22 +1885,22 @@ Z0ED3           LDAB    SWI$VC                   ; 0ED3: F6 FF FA
                 CBA                              ; 0EEA: 11             
                 RTS                              ; 0EEB: 39             
 Z0EEC           LDX     M0F2C                    ; 0EEC: FE 0F 2C       
-                STX     XREG$P                   ; 0EEF: FF FF 16       
+                STX     XREGsP                   ; 0EEF: FF FF 16       
                 LDX     M0F26                    ; 0EF2: FE 0F 26       
-                STX     XREG$X                   ; 0EF5: FF FF 18       
+                STX     XREGsX                   ; 0EF5: FF FF 18       
                 LDX     M0F2A                    ; 0EF8: FE 0F 2A       
                 LDAB    M0F1C                    ; 0EFB: F6 0F 1C       
                 BITB    #$80                     ; 0EFE: C5 80          
                 BEQ     Z0F05                    ; 0F00: 27 03          
-                LDX     #XSTAK$                  ; 0F02: CE FF 8A       
-Z0F05           STX     XREG$S                   ; 0F05: FF FF 1D       
+                LDX     #XSTAKs                  ; 0F02: CE FF 8A       
+Z0F05           STX     XREGsS                   ; 0F05: FF FF 1D       
                 JSR     Z0E9B                    ; 0F08: BD 0E 9B       
                 JSR     Z0EA9                    ; 0F0B: BD 0E A9       
                 BITB    #$A0                     ; 0F0E: C5 A0          
                 BNE     Z0F18                    ; 0F10: 26 06          
                 LDX     #M020F                   ; 0F12: CE 02 0F       
-                STX     SWI$VC                   ; 0F15: FF FF FA       
-Z0F18           LDX     #MAID$                   ; 0F18: CE F0 F3       
+                STX     SWIsVC                   ; 0F15: FF FF FA       
+Z0F18           LDX     #MAIDs                   ; 0F18: CE F0 F3       
                 RTS                              ; 0F1B: 39             
 M0F1C           FCB     $00                      ; 0F1C: 00             
 M0F1D           FCB     $00                      ; 0F1D: 00             
@@ -1990,21 +1910,20 @@ M0F20           FCB     $00                      ; 0F20: 00
 M0F21           FCB     $00                      ; 0F21: 00             
 M0F22           FCB     $00                      ; 0F22: 00             
 M0F23           FCB     $00                      ; 0F23: 00             
-M0F24           FCB     $00                      ; 0F24: 00             
-                FCB     $00                      ; 0F25: 00             
+M0F24           FCB     $00,$00                  ; 0F24: 00 00          
 M0F26           FCB     $00                      ; 0F26: 00             
 M0F27           FCB     $00                      ; 0F27: 00             
 M0F28           FCB     $00                      ; 0F28: 00             
 M0F29           FCB     $00                      ; 0F29: 00             
-M0F2A           FCB     $00                      ; 0F2A: 00             
-                FCB     $00                      ; 0F2B: 00             
+M0F2A           FCB     $00,$00                  ; 0F2A: 00 00          
 M0F2C           FCB     $00                      ; 0F2C: 00             
 M0F2D           FCB     $00                      ; 0F2D: 00             
-M0F2E           EORB    $53,X                    ; 0F2E: E8 53          
+M0F2E           FCB     $E8                      ; 0F2E: E8             
+M0F2F           FCB     $53                      ; 0F2F: 53             
 M0F30           FCB     $00                      ; 0F30: 00             
 Z0F31           CLR     M110C                    ; 0F31: 7F 11 0C       
                 STX     M1105                    ; 0F34: FF 11 05       
-Z0F37           STAB    M110B                    ; 0F37: F7 11 0B       
+                STAB    M110B                    ; 0F37: F7 11 0B       
                 CMPB    #$01                     ; 0F3A: C1 01          
                 BLS     Z0F8B                    ; 0F3C: 23 4D          
                 TBA                              ; 0F3E: 17             
@@ -2016,7 +1935,7 @@ Z0F37           STAB    M110B                    ; 0F37: F7 11 0B
                 STX     M0170                    ; 0F4E: FF 01 70       
                 LDX     M017B                    ; 0F51: FE 01 7B       
                 BEQ     Z0F5F                    ; 0F54: 27 09          
-                LDX     #M0000                   ; 0F56: CE 00 00       
+                LDX     #RESRV                   ; 0F56: CE 00 00       
                 STX     M017B                    ; 0F59: FF 01 7B       
                 STX     M0187                    ; 0F5C: FF 01 87       
 Z0F5F           LDX     #SYEOCB                  ; 0F5F: CE 01 6A       
@@ -2054,153 +1973,114 @@ Z0F99           SWI                              ; 0F99: 3F
                 LDX     #MFF8D                   ; 0F9E: CE FF 8D       
                 LDAB    #$0D                     ; 0FA1: C6 0D          
                 STAB    ,X                       ; 0FA3: E7 00          
-M0FA5           INX                              ; 0FA5: 08             
-                LDAB    #$2A                     ; 0FA6: C6 2A          
-                STAB    ,X                       ; 0FA8: E7 00          
-                INX                              ; 0FAA: 08             
-                STAB    ,X                       ; 0FAB: E7 00          
-                INX                              ; 0FAD: 08             
-                STX     M1103                    ; 0FAE: FF 11 03       
-                LDX     M1105                    ; 0FB1: FE 11 05       
-                LDAB    M110B                    ; 0FB4: F6 11 0B       
-                BEQ     Z0FF7                    ; 0FB7: 27 3E          
-                CMPB    #$01                     ; 0FB9: C1 01          
-                BNE     Z0FD8                    ; 0FBB: 26 1B          
-                LDAB    $01,X                    ; 0FBD: E6 01          
-                LDAA    $02,X                    ; 0FBF: A6 02          
-                LDX     #M1190                   ; 0FC1: CE 11 90       
-                JSR     Z10E0                    ; 0FC4: BD 10 E0       
-                LDAA    M0000                    ; 0FC7: 96 00          
-                ORAA    #$30                     ; 0FC9: 8A 30          
-                STAA    M119E                    ; 0FCB: B7 11 9E       
-                LDAB    M0001                    ; 0FCE: D6 01          
-                LDAA    M0002                    ; 0FD0: 96 02          
-                LDX     #M11A4                   ; 0FD2: CE 11 A4       
-                JSR     Z10E0                    ; 0FD5: BD 10 E0       
-Z0FD8           LDX     M1101                    ; 0FD8: FE 11 01       
-                LDAA    ,X                       ; 0FDB: A6 00          
-                CMPA    #$04                     ; 0FDD: 81 04          
-                BEQ     Z103B                    ; 0FDF: 27 5A          
-                CMPA    #$5C                     ; 0FE1: 81 5C          
-                BEQ     Z1010                    ; 0FE3: 27 2B          
-                LDX     M1103                    ; 0FE5: FE 11 03       
-                STAA    ,X                       ; 0FE8: A7 00          
-                INX                              ; 0FEA: 08             
-                STX     M1103                    ; 0FEB: FF 11 03       
-                LDX     M1101                    ; 0FEE: FE 11 01       
-                INX                              ; 0FF1: 08             
-Z0FF2           STX     M1101                    ; 0FF2: FF 11 01       
-                BRA     Z0FD8                    ; 0FF5: 20 E1          
-Z0FF7           TST     M110C                    ; 0FF7: 7D 11 0C       
-                BNE     Z0FD8                    ; 0FFA: 26 DC          
-                INC     M110C                    ; 0FFC: 7C 11 0C       
-                LDAA    ,X                       ; 0FFF: A6 00          
-                DECA                             ; 1001: 4A             
-                CMPA    #$18                     ; 1002: 81 18          
-                BHI     Z0FD8                    ; 1004: 22 D2          
-                LDX     #M111E                   ; 1006: CE 11 1E       
-                SWI                              ; 1009: 3F             
-                BVC     Z0FF2                    ; 100A: 28 E6          
-                FCB     $00                      ; 100C: 00             
-                JMP     Z0F37                    ; 100D: 7E 0F 37       
-Z1010           INX                              ; 1010: 08             
-                STX     M1101                    ; 1011: FF 11 01       
-                LDAA    ,X                       ; 1014: A6 00          
-                LDX     #M110D                   ; 1016: CE 11 0D       
-                TST     ,X                       ; 1019: 6D 00          
-                BEQ     Z0FD8                    ; 101B: 27 BB          
-                CMPA    ,X                       ; 101D: A1 00          
-                BEQ     Z1027                    ; 101F: 27 06          
-                LDAB    #$04                     ; 1021: C6 04          
-                SWI                              ; 1023: 3F             
-                BEQ     Z1046                    ; 1024: 27 20          
-                SBCB    M7C11                    ; 1026: F2 7C 11       
-                FCB     $02                      ; 1029: 02             
-                BNE     Z102F                    ; 102A: 26 03          
-                INC     M1101                    ; 102C: 7C 11 01       
-Z102F           LDAB    $01,X                    ; 102F: E6 01          
-                LDX     $02,X                    ; 1031: EE 02          
-                STX     M1037                    ; 1033: FF 10 37       
-Z1036           JSR     Z1036                    ; 1036: BD 10 36       
-                BRA     Z0FD8                    ; 1039: 20 9D          
-Z103B           LDX     M1103                    ; 103B: FE 11 03       
-                LDAA    #$04                     ; 103E: 86 04          
-                STAA    ,X                       ; 1040: A7 00          
-                LDX     #M098F                   ; 1042: CE 09 8F       
-                JSR     $03,X                    ; 1045: AD 03          
-                NOP                              ; 1047: 01             
-                BRA     Z1018                    ; 1048: 20 CE          
-                STX     M8DBD                    ; 104A: FF 8D BD       
-                SUBB    M24BD                    ; 104D: F0 24 BD       
-                SUBB    M210C                    ; 1050: F0 21 0C       
-                RTS                              ; 1053: 39             
-                LDX     M1103                    ; 1054: FE 11 03       
-                STX     M1109                    ; 1057: FF 11 09       
-                LDX     M1105                    ; 105A: FE 11 05       
-                INX                              ; 105D: 08             
-                STX     M1107                    ; 105E: FF 11 07       
-                LDAB    #$08                     ; 1061: C6 08          
-                LDX     #M1107                   ; 1063: CE 11 07       
-                SWI                              ; 1066: 3F             
-                SBA                              ; 1067: 10             
-                LDX     M1109                    ; 1068: FE 11 09       
-                LDAA    #$2E                     ; 106B: 86 2E          
-                STAA    ,X                       ; 106D: A7 00          
-                INX                              ; 106F: 08             
-                STX     M1109                    ; 1070: FF 11 09       
-                LDAB    #$02                     ; 1073: C6 02          
-                LDX     #M1107                   ; 1075: CE 11 07       
-                SWI                              ; 1078: 3F             
-                SBA                              ; 1079: 10             
-                LDX     M1105                    ; 107A: FE 11 05       
-                LDAB    ,X                       ; 107D: E6 00          
-                LDX     M1109                    ; 107F: FE 11 09       
-                LDAA    #$3A                     ; 1082: 86 3A          
-                STAA    ,X                       ; 1084: A7 00          
-                INX                              ; 1086: 08             
-                STAB    ,X                       ; 1087: E7 00          
-                INX                              ; 1089: 08             
-                STX     M1103                    ; 108A: FF 11 03       
-                LDX     M1107                    ; 108D: FE 11 07       
-                STX     M1105                    ; 1090: FF 11 05       
-                RTS                              ; 1093: 39             
-Z1094           LDX     M1105                    ; 1094: FE 11 05       
-                STX     M1107                    ; 1097: FF 11 07       
-Z109A           LDX     M1103                    ; 109A: FE 11 03       
-                TBA                              ; 109D: 17             
-                ADDA    M1104                    ; 109E: BB 11 04       
-                STAA    M1104                    ; 10A1: B7 11 04       
-                BCC     Z10A9                    ; 10A4: 24 03          
-                INC     M1103                    ; 10A6: 7C 11 03       
-Z10A9           LDAA    M1108                    ; 10A9: B6 11 08       
-                CMPB    #$04                     ; 10AC: C1 04          
-                BNE     Z10B7                    ; 10AE: 26 07          
-                LDAB    M1107                    ; 10B0: F6 11 07       
-                JSR     Z10E0                    ; 10B3: BD 10 E0       
-                RTS                              ; 10B6: 39             
-Z10B7           JSR     Z10E5                    ; 10B7: BD 10 E5       
-                RTS                              ; 10BA: 39             
-                LDX     M1105                    ; 10BB: FE 11 05       
-                LDAA    ,X                       ; 10BE: A6 00          
-                CLR     M1107                    ; 10C0: 7F 11 07       
-                STAA    M1108                    ; 10C3: B7 11 08       
-                TBA                              ; 10C6: 17             
-                ASRA                             ; 10C7: 47             
-                ADDA    M1106                    ; 10C8: BB 11 06       
-                STAA    M1106                    ; 10CB: B7 11 06       
-                BCC     Z10D3                    ; 10CE: 24 03          
-                INC     M1105                    ; 10D0: 7C 11 05       
-Z10D3           BRA     Z109A                    ; 10D3: 20 C5          
-                TSX                              ; 10D5: 30             
-                LDX     $09,X                    ; 10D6: EE 09          
-                DEX                              ; 10D8: 09             
-                DEX                              ; 10D9: 09             
-                STX     M1105                    ; 10DA: FF 11 05       
-                JMP     Z1094                    ; 10DD: 7E 10 94       
-Z10E0           PSHA                             ; 10E0: 36             
-                TBA                              ; 10E1: 17             
-                BSR     Z10E5                    ; 10E2: 8D 01          
-                PULA                             ; 10E4: 32             
+M0FA5           FCB     $08,$C6                  ; 0FA5: 08 C6          
+                FCB     $2A                      ; 0FA7: 2A             
+                FCB     $E7,$00,$08,$E7,$00,$08  ; 0FA8: E7 00 08 E7 00 08 
+                FCB     $FF,$11,$03,$FE,$11,$05  ; 0FAE: FF 11 03 FE 11 05 
+                FCB     $F6,$11,$0B              ; 0FB4: F6 11 0B       
+                FCB     $27,$3E                  ; 0FB7: 27 3E          
+                FCB     $C1,$01,$26,$1B,$E6,$01  ; 0FB9: C1 01 26 1B E6 01 
+                FCB     $A6,$02,$CE,$11,$90,$BD  ; 0FBF: A6 02 CE 11 90 BD 
+                FCB     $10,$E0,$96,$00,$8A      ; 0FC5: 10 E0 96 00 8A 
+                FCB     $30                      ; 0FCA: 30             
+                FCB     $B7,$11,$9E,$D6,$01,$96  ; 0FCB: B7 11 9E D6 01 96 
+                FCB     $02,$CE,$11,$A4,$BD,$10  ; 0FD1: 02 CE 11 A4 BD 10 
+                FCB     $E0,$FE,$11,$01,$A6,$00  ; 0FD7: E0 FE 11 01 A6 00 
+                FCB     $81,$04                  ; 0FDD: 81 04          
+                FCB     $27,$5A                  ; 0FDF: 27 5A          
+                FCB     $81                      ; 0FE1: 81             
+                FCB     $5C,$27,$2B              ; 0FE2: 5C 27 2B       
+                FCB     $FE,$11,$03,$A7,$00,$08  ; 0FE5: FE 11 03 A7 00 08 
+                FCB     $FF,$11,$03,$FE,$11,$01  ; 0FEB: FF 11 03 FE 11 01 
+                FCB     $08,$FF,$11,$01          ; 0FF1: 08 FF 11 01    
+                FCB     $20                      ; 0FF5: 20             
+                FCB     $E1                      ; 0FF6: E1             
+                FCB     $7D                      ; 0FF7: 7D             
+                FCB     $11,$0C,$26,$DC          ; 0FF8: 11 0C 26 DC    
+                FCB     $7C                      ; 0FFC: 7C             
+                FCB     $11,$0C,$A6,$00          ; 0FFD: 11 0C A6 00    
+                FCB     $4A                      ; 1001: 4A             
+                FCB     $81,$18,$22,$D2,$CE,$11  ; 1002: 81 18 22 D2 CE 11 
+                FCB     $1E                      ; 1008: 1E             
+                FCB     $3F,$28                  ; 1009: 3F 28          
+                FCB     $E6,$00                  ; 100B: E6 00          
+                FCB     $7E                      ; 100D: 7E             
+                FCB     $0F                      ; 100E: 0F             
+                FCB     $37                      ; 100F: 37             
+                FCB     $08,$FF,$11,$01,$A6,$00  ; 1010: 08 FF 11 01 A6 00 
+                FCB     $CE,$11,$0D              ; 1016: CE 11 0D       
+                FCB     $6D                      ; 1019: 6D             
+                FCB     $00                      ; 101A: 00             
+                FCB     $27                      ; 101B: 27             
+                FCB     $BB,$A1,$00              ; 101C: BB A1 00       
+                FCB     $27                      ; 101F: 27             
+                FCB     $06,$C6,$04              ; 1020: 06 C6 04       
+                FCB     $3F,$27,$20              ; 1023: 3F 27 20       
+                FCB     $F2                      ; 1026: F2             
+                FCB     $7C                      ; 1027: 7C             
+                FCB     $11,$02,$26,$03          ; 1028: 11 02 26 03    
+                FCB     $7C                      ; 102C: 7C             
+                FCB     $11,$01,$E6,$01,$EE,$02  ; 102D: 11 01 E6 01 EE 02 
+                FCB     $FF,$10                  ; 1033: FF 10          
+                FCB     $37                      ; 1035: 37             
+                FCB     $BD,$10                  ; 1036: BD 10          
+                FCB     $36,$20                  ; 1038: 36 20          
+                FCB     $9D,$FE,$11,$03,$86,$04  ; 103A: 9D FE 11 03 86 04 
+                FCB     $A7,$00,$CE,$09,$8F,$AD  ; 1040: A7 00 CE 09 8F AD 
+                FCB     $03,$01                  ; 1046: 03 01          
+                FCB     $20                      ; 1048: 20             
+                FCB     $CE,$FF,$8D,$BD,$F0      ; 1049: CE FF 8D BD F0 
+                FCB     $24                      ; 104E: 24             
+                FCB     $BD,$F0                  ; 104F: BD F0          
+                FCB     $21                      ; 1051: 21             
+                FCB     $0C                      ; 1052: 0C             
+                FCB     $39                      ; 1053: 39             
+                FCB     $FE,$11,$03,$FF,$11,$09  ; 1054: FE 11 03 FF 11 09 
+                FCB     $FE,$11,$05,$08,$FF,$11  ; 105A: FE 11 05 08 FF 11 
+                FCB     $07,$C6,$08,$CE,$11,$07  ; 1060: 07 C6 08 CE 11 07 
+                FCB     $3F                      ; 1066: 3F             
+                FCB     $10,$FE,$11,$09,$86      ; 1067: 10 FE 11 09 86 
+                FCB     $2E                      ; 106C: 2E             
+                FCB     $A7,$00,$08,$FF,$11,$09  ; 106D: A7 00 08 FF 11 09 
+                FCB     $C6,$02,$CE,$11,$07      ; 1073: C6 02 CE 11 07 
+                FCB     $3F                      ; 1078: 3F             
+                FCB     $10,$FE,$11,$05,$E6,$00  ; 1079: 10 FE 11 05 E6 00 
+                FCB     $FE,$11,$09,$86          ; 107F: FE 11 09 86    
+                FCB     $3A                      ; 1083: 3A             
+                FCB     $A7,$00,$08,$E7,$00,$08  ; 1084: A7 00 08 E7 00 08 
+                FCB     $FF,$11,$03,$FE,$11,$07  ; 108A: FF 11 03 FE 11 07 
+                FCB     $FF,$11,$05              ; 1090: FF 11 05       
+                FCB     $39                      ; 1093: 39             
+                FCB     $FE,$11,$05,$FF,$11,$07  ; 1094: FE 11 05 FF 11 07 
+                FCB     $FE,$11,$03,$17,$BB,$11  ; 109A: FE 11 03 17 BB 11 
+                FCB     $04,$B7,$11,$04          ; 10A0: 04 B7 11 04    
+                FCB     $24                      ; 10A4: 24             
+                FCB     $03                      ; 10A5: 03             
+                FCB     $7C                      ; 10A6: 7C             
+                FCB     $11,$03,$B6,$11,$08,$C1  ; 10A7: 11 03 B6 11 08 C1 
+                FCB     $04,$26,$07,$F6,$11,$07  ; 10AD: 04 26 07 F6 11 07 
+                FCB     $BD,$10,$E0              ; 10B3: BD 10 E0       
+                FCB     $39                      ; 10B6: 39             
+                FCB     $BD,$10,$E5              ; 10B7: BD 10 E5       
+                FCB     $39                      ; 10BA: 39             
+                FCB     $FE,$11,$05,$A6,$00,$7F  ; 10BB: FE 11 05 A6 00 7F 
+                FCB     $11,$07,$B7,$11,$08,$17  ; 10C1: 11 07 B7 11 08 17 
+                FCB     $47                      ; 10C7: 47             
+                FCB     $BB,$11,$06,$B7,$11,$06  ; 10C8: BB 11 06 B7 11 06 
+                FCB     $24                      ; 10CE: 24             
+                FCB     $03                      ; 10CF: 03             
+                FCB     $7C                      ; 10D0: 7C             
+                FCB     $11,$05                  ; 10D1: 11 05          
+                FCB     $20                      ; 10D3: 20             
+                FCB     $C5                      ; 10D4: C5             
+                FCB     $30                      ; 10D5: 30             
+                FCB     $EE,$09,$09,$09,$FF,$11  ; 10D6: EE 09 09 09 FF 11 
+                FCB     $05                      ; 10DC: 05             
+                FCB     $7E                      ; 10DD: 7E             
+                FCB     $10,$94                  ; 10DE: 10 94          
+                FCB     $36                      ; 10E0: 36             
+                FCB     $17,$8D,$01              ; 10E1: 17 8D 01       
+                FCB     $32                      ; 10E4: 32             
 Z10E5           PSHA                             ; 10E5: 36             
                 BSR     Z10F2                    ; 10E6: 8D 0A          
                 STAA    ,X                       ; 10E8: A7 00          
@@ -2220,265 +2100,134 @@ Z10F6           ANDA    #$0F                     ; 10F6: 84 0F
                 BLS     Z1100                    ; 10FC: 23 02          
                 ADDA    #$07                     ; 10FE: 8B 07          
 Z1100           RTS                              ; 1100: 39             
-M1101           FCB     $00                      ; 1101: 00             
+                FCB     $00                      ; 1101: 00             
                 FCB     $00                      ; 1102: 00             
-M1103           FCB     $00                      ; 1103: 00             
-M1104           FCB     $00                      ; 1104: 00             
-M1105           FCB     $00                      ; 1105: 00             
-M1106           FCB     $00                      ; 1106: 00             
-M1107           FCB     $00                      ; 1107: 00             
-M1108           FCB     $00                      ; 1108: 00             
-M1109           FCB     $00                      ; 1109: 00             
-                FCB     $00                      ; 110A: 00             
+                FCB     $00                      ; 1103: 00             
+                FCB     $00                      ; 1104: 00             
+M1105           FCB     $00,$00                  ; 1105: 00 00          
+M1107           FCB     $00,$00,$00,$00          ; 1107: 00 00 00 00    
 M110B           FCB     $00                      ; 110B: 00             
 M110C           FCB     $00                      ; 110C: 00             
-M110D           TSX                              ; 110D: 30             
-                SEC                              ; 110E: 0D             
-                SBA                              ; 110F: 10             
-                LSRB                             ; 1110: 54             
-                INS                              ; 1111: 31             
-                FCB     $04                      ; 1112: 04             
-                SBA                              ; 1113: 10             
-                ANDA    M0033                    ; 1114: 94 33          
-                FCB     $02                      ; 1116: 02             
-                SBA                              ; 1117: 10             
-                ADDA    M3804                    ; 1118: BB 38 04       
-                SBA                              ; 111B: 10             
-                BITB    M0000                    ; 111C: D5 00          
-M111E           DEX                              ; 111E: 09             
-                BHI     Z1144                    ; 111F: 22 23          
-                BCC     Z112D                    ; 1121: 24 0A          
-                FCB     $1A                      ; 1123: 1A             
-                ABA                              ; 1124: 1B             
-                BCS     Z114D                    ; 1125: 25 26          
-                FCB     $13                      ; 1127: 13             
-                BEQ     Z1152                    ; 1128: 27 28          
-                BVS     Z1156                    ; 112A: 29 2A          
-                BMI     Z114A                    ; 112C: 2B 1C          
-                FCB     $15                      ; 112E: 15             
-                FCB     $03                      ; 112F: 03             
-                FCB     $02                      ; 1130: 02             
-                SBA                              ; 1131: 10             
-                BGE     Z1145                    ; 1132: 2C 11          
-                BLT     Z1164                    ; 1134: 2D 2E          
-                TXS                              ; 1136: 35             
-M1137           CBA                              ; 1137: 11             
-                LSRB                             ; 1138: 54             
-                CBA                              ; 1139: 11             
-                LSR     M494E                    ; 113A: 74 49 4E       
-                RORB                             ; 113D: 56             
-                FCB     $41                      ; 113E: 41             
-                INCA                             ; 113F: 4C             
-                ROLA                             ; 1140: 49             
-                LSRA                             ; 1141: 44             
-                BRA     Z1191                    ; 1142: 20 4D          
-Z1144           FCB     $45                      ; 1144: 45             
-Z1145           COMB                             ; 1145: 53             
-                COMB                             ; 1146: 53             
-                FCB     $41                      ; 1147: 41             
-                ASRA                             ; 1148: 47             
-                FCB     $45                      ; 1149: 45             
-Z114A           BRA     Z11A8                    ; 114A: 20 5C          
-                PULB                             ; 114C: 33             
-Z114D           BRA     M1190                    ; 114D: 20 41          
-                LSRB                             ; 114F: 54             
-                BRA     Z11AE                    ; 1150: 20 5C          
-Z1152           FCB     $38                      ; 1152: 38             
+                FCB     $30                      ; 110D: 30             
+                FCB     $0D,$10                  ; 110E: 0D 10          
+                FCB     $54,$31                  ; 1110: 54 31          
+                FCB     $04,$10,$94              ; 1112: 04 10 94       
+                FCB     $33                      ; 1115: 33             
+                FCB     $02,$10,$BB              ; 1116: 02 10 BB       
+                FCB     $38                      ; 1119: 38             
+                FCB     $04,$10,$D5,$00,$09,$22  ; 111A: 04 10 D5 00 09 22 
+                FCB     $23,$24                  ; 1120: 23 24          
+                FCB     $0A,$1A,$1B              ; 1122: 0A 1A 1B       
+                FCB     $25                      ; 1125: 25             
+                FCB     $26,$13                  ; 1126: 26 13          
+                FCB     $27,$28,$29,$2A,$2B      ; 1128: 27 28 29 2A 2B 
+                FCB     $1C,$15,$03,$02,$10      ; 112D: 1C 15 03 02 10 
+                FCB     $2C                      ; 1132: 2C             
+                FCB     $11                      ; 1133: 11             
+                FCB     $2D,$2E,$35              ; 1134: 2D 2E 35       
+M1137           FCB     $11                      ; 1137: 11             
+                FCB     $54                      ; 1138: 54             
+                FCB     $11                      ; 1139: 11             
+                FCB     $74                      ; 113A: 74             
+M113B           FCB     $49,$4E,$56,$41,$4C,$49  ; 113B: 49 4E 56 41 4C 49 
+                FCB     $44,$20,$4D,$45,$53,$53  ; 1141: 44 20 4D 45 53 53 
+                FCB     $41,$47,$45,$20,$5C,$33  ; 1147: 41 47 45 20 5C 33 
+                FCB     $20,$41,$54,$20,$5C,$38  ; 114D: 20 41 54 20 5C 38 
                 FCB     $04                      ; 1153: 04             
-                FCB     $55                      ; 1154: 55             
-                FCB     $4E                      ; 1155: 4E             
-Z1156           ROLA                             ; 1156: 49             
-                RORA                             ; 1157: 46             
-                BGT     Z117A                    ; 1158: 2E 20          
-                ROLA                             ; 115A: 49             
-                BLE     Z11AC                    ; 115B: 2F 4F          
-                BRA     M11A4                    ; 115D: 20 45          
-                FCB     $52                      ; 115F: 52             
-                FCB     $52                      ; 1160: 52             
-                CLRA                             ; 1161: 4F             
-                FCB     $52                      ; 1162: 52             
-                BLT     Z11B8                    ; 1163: 2D 53          
-                LSRB                             ; 1165: 54             
-                FCB     $41                      ; 1166: 41             
-                LSRB                             ; 1167: 54             
-                FCB     $55                      ; 1168: 55             
-                COMB                             ; 1169: 53             
-                FCB     $3D                      ; 116A: 3D             
-                INCB                             ; 116B: 5C             
-                PULB                             ; 116C: 33             
-                BRA     Z11B0                    ; 116D: 20 41          
-                LSRB                             ; 116F: 54             
-                BRA     Z11CE                    ; 1170: 20 5C          
+                FCB     $55,$4E,$49,$46,$2E,$20  ; 1154: 55 4E 49 46 2E 20 
+                FCB     $49,$2F,$4F,$20,$45,$52  ; 115A: 49 2F 4F 20 45 52 
+                FCB     $52,$4F,$52,$2D,$53,$54  ; 1160: 52 4F 52 2D 53 54 
+                FCB     $41,$54,$55,$53,$3D,$5C  ; 1166: 41 54 55 53 3D 5C 
+                FCB     $33,$20,$41,$54,$20,$5C  ; 116C: 33 20 41 54 20 5C 
                 FCB     $38                      ; 1172: 38             
                 FCB     $04                      ; 1173: 04             
-                NEGB                             ; 1174: 50             
-                FCB     $52                      ; 1175: 52             
-                CLRA                             ; 1176: 4F             
-                TSTA                             ; 1177: 4D             
-                BRA     Z11C3                    ; 1178: 20 49          
-Z117A           BLE     Z11CB                    ; 117A: 2F 4F          
-                BRA     Z11C3                    ; 117C: 20 45          
-                FCB     $52                      ; 117E: 52             
-                FCB     $52                      ; 117F: 52             
-                CLRA                             ; 1180: 4F             
-                FCB     $52                      ; 1181: 52             
-                BLT     Z11D7                    ; 1182: 2D 53          
-                LSRB                             ; 1184: 54             
-                FCB     $41                      ; 1185: 41             
-                LSRB                             ; 1186: 54             
-                FCB     $55                      ; 1187: 55             
-                COMB                             ; 1188: 53             
-                FCB     $3D                      ; 1189: 3D             
-                INCB                             ; 118A: 5C             
-                PULB                             ; 118B: 33             
-                BRA     Z11CF                    ; 118C: 20 41          
-                LSRB                             ; 118E: 54             
-                BRA     Z11E9                    ; 118F: 20 58          
-Z1191           ASLB                             ; 1191: 58             
-                ASLB                             ; 1192: 58             
-                ASLB                             ; 1193: 58             
-                BRA     Z11E5                    ; 1194: 20 4F          
-                FCB     $4E                      ; 1196: 4E             
-                BRA     Z11DD                    ; 1197: 20 44          
-                FCB     $52                      ; 1199: 52             
-                ROLA                             ; 119A: 49             
-                RORB                             ; 119B: 56             
-                FCB     $45                      ; 119C: 45             
-                BRA     Z11F7                    ; 119D: 20 58          
-                BLT     Z11F1                    ; 119F: 2D 50          
-                COMB                             ; 11A1: 53             
-                FCB     $4E                      ; 11A2: 4E             
-                BRA     Z11FD                    ; 11A3: 20 58          
-                ASLB                             ; 11A5: 58             
-                ASLB                             ; 11A6: 58             
-                ASLB                             ; 11A7: 58             
-Z11A8           FCB     $04                      ; 11A8: 04             
-M11A9           TSX                              ; 11A9: 30             
-                TSTA                             ; 11AA: 4D             
-                LSRA                             ; 11AB: 44             
-Z11AC           CLRA                             ; 11AC: 4F             
-                COMB                             ; 11AD: 53             
-Z11AE           CLRA                             ; 11AE: 4F             
-                RORB                             ; 11AF: 56             
-Z11B0           FCB     $00                      ; 11B0: 00             
-                BRA     Z1206                    ; 11B1: 20 53          
-                ROLB                             ; 11B3: 59             
-M11B4           FCB     $00                      ; 11B4: 00             
-M11B5           FCB     $00                      ; 11B5: 00             
-                FCB     $00                      ; 11B6: 00             
-                FCB     $00                      ; 11B7: 00             
-Z11B8           FCB     $00                      ; 11B8: 00             
-                FCB     $00                      ; 11B9: 00             
-                FCB     $00                      ; 11BA: 00             
-                FCB     $00                      ; 11BB: 00             
-                FCB     $00                      ; 11BC: 00             
-                FCB     $00                      ; 11BD: 00             
-                NOP                              ; 11BE: 01             
-                FCB     $8F                      ; 11BF: 8F             
-                FCB     $02                      ; 11C0: 02             
-                CLI                              ; 11C1: 0E             
-M11C2           STX     MFFFF                    ; 11C2: FF FF FF       
-                STX     MFFFF                    ; 11C5: FF FF FF       
-                STX     MFFFF                    ; 11C8: FF FF FF       
-Z11CB           STX     MFFFF                    ; 11CB: FF FF FF       
-Z11CE           STX     RAM_START                ; 11CE: FF FF 00       
-                FCB     $00                      ; 11D1: 00             
-                NOP                              ; 11D2: 01             
-                NOP                              ; 11D3: 01             
-                NOP                              ; 11D4: 01             
-                NOP                              ; 11D5: 01             
-                NOP                              ; 11D6: 01             
-Z11D7           NOP                              ; 11D7: 01             
-                NOP                              ; 11D8: 01             
-                NOP                              ; 11D9: 01             
-                NOP                              ; 11DA: 01             
-                NOP                              ; 11DB: 01             
-                NOP                              ; 11DC: 01             
-Z11DD           NOP                              ; 11DD: 01             
-                NOP                              ; 11DE: 01             
-                NOP                              ; 11DF: 01             
-                NOP                              ; 11E0: 01             
-                NOP                              ; 11E1: 01             
-M11E2           FCB     $02                      ; 11E2: 02             
-                FCB     $02                      ; 11E3: 02             
-                FCB     $03                      ; 11E4: 03             
-Z11E5           FCB     $03                      ; 11E5: 03             
-                FCB     $03                      ; 11E6: 03             
-M11E7           FCB     $04                      ; 11E7: 04             
-                FCB     $05                      ; 11E8: 05             
-Z11E9           TAP                              ; 11E9: 06             
+                FCB     $50,$52,$4F,$4D,$20,$49  ; 1174: 50 52 4F 4D 20 49 
+                FCB     $2F,$4F,$20,$45,$52,$52  ; 117A: 2F 4F 20 45 52 52 
+                FCB     $4F,$52,$2D,$53,$54,$41  ; 1180: 4F 52 2D 53 54 41 
+                FCB     $54,$55,$53,$3D,$5C,$33  ; 1186: 54 55 53 3D 5C 33 
+                FCB     $20,$41,$54,$20,$58,$58  ; 118C: 20 41 54 20 58 58 
+                FCB     $58,$58,$20,$4F,$4E,$20  ; 1192: 58 58 20 4F 4E 20 
+                FCB     $44,$52,$49,$56,$45,$20  ; 1198: 44 52 49 56 45 20 
+                FCB     $58,$2D,$50,$53,$4E,$20  ; 119E: 58 2D 50 53 4E 20 
+                FCB     $58,$58,$58,$58          ; 11A4: 58 58 58 58    
+                FCB     $04                      ; 11A8: 04             
+                FCB     $30,$4D,$44,$4F,$53,$4F  ; 11A9: 30 4D 44 4F 53 4F 
+                FCB     $56                      ; 11AF: 56             
+                FCB     $00                      ; 11B0: 00             
+                FCB     $20,$53,$59              ; 11B1: 20 53 59       
+                FCB     $00,$00,$00,$00,$00,$00  ; 11B4: 00 00 00 00 00 00 
+                FCB     $00,$00,$00,$00,$01,$8F  ; 11BA: 00 00 00 00 01 8F 
+                FCB     $02,$0E,$FF,$FF,$FF,$FF  ; 11C0: 02 0E FF FF FF FF 
+                FCB     $FF,$FF,$FF,$FF,$FF,$FF  ; 11C6: FF FF FF FF FF FF 
+                FCB     $FF,$FF,$FF,$FF,$00,$00  ; 11CC: FF FF FF FF 00 00 
+                FCB     $01,$01,$01,$01,$01,$01  ; 11D2: 01 01 01 01 01 01 
+                FCB     $01,$01,$01,$01,$01,$01  ; 11D8: 01 01 01 01 01 01 
+                FCB     $01,$01,$01,$01,$02,$02  ; 11DE: 01 01 01 01 02 02 
+                FCB     $03,$03,$03,$04,$05,$06  ; 11E4: 03 03 03 04 05 06 
                 FCB     $12                      ; 11EA: 12             
-M11EB           COM     M189D                    ; 11EB: 73 18 9D       
-                FCB     $1C                      ; 11EE: 1C             
-M11EF           SEC                              ; 11EF: 0D             
-                FCB     $1F                      ; 11F0: 1F             
-Z11F1           FCB     $FD                      ; 11F1: FD             
-                PSHA                             ; 11F2: 36             
-                TPA                              ; 11F3: 07             
-                LDX     #M11D0                   ; 11F4: CE 11 D0       
-Z11F7           LDAB    M11EB                    ; 11F7: F6 11 EB       
-                BRA     Z1218                    ; 11FA: 20 1C          
-                PSHA                             ; 11FC: 36             
-Z11FD           TPA                              ; 11FD: 07             
-                LDX     #M11E2                   ; 11FE: CE 11 E2       
-                LDAB    M11ED                    ; 1201: F6 11 ED       
-                BRA     Z1218                    ; 1204: 20 12          
-Z1206           PSHA                             ; 1206: 36             
-                TPA                              ; 1207: 07             
-                LDX     #M11E7                   ; 1208: CE 11 E7       
-                LDAB    M11EF                    ; 120B: F6 11 EF       
-                BRA     Z1218                    ; 120E: 20 08          
-                PSHA                             ; 1210: 36             
-                TPA                              ; 1211: 07             
-                LDX     #Z11E9                   ; 1212: CE 11 E9       
-                LDAB    Z11F1                    ; 1215: F6 11 F1       
-Z1218           PSHA                             ; 1218: 36             
-                STX     M122A                    ; 1219: FF 12 2A       
-                TSX                              ; 121C: 30             
-                LDAA    $03,X                    ; 121D: A6 03          
-                SUBA    #$03                     ; 121F: 80 03          
-                STAA    $03,X                    ; 1221: A7 03          
-                BCC     Z1227                    ; 1223: 24 02          
-                DEC     $02,X                    ; 1225: 6A 02          
-Z1227           LDAA    $03,X                    ; 1227: A6 03          
-                LDX     #M0000                   ; 1229: CE 00 00       
-                SBA                              ; 122C: 10             
-                CLRB                             ; 122D: 5F             
-                BITA    #$5C                     ; 122E: 85 5C          
-                SUBA    #$03                     ; 1230: 80 03          
-                BCC     Z122F                    ; 1232: 24 FB          
-                STAB    M1238                    ; 1234: F7 12 38       
-                LDAA    ,X                       ; 1237: A6 00          
-                ASLA                             ; 1239: 48             
-                STAA    M1247                    ; 123A: B7 12 47       
-                STAA    M1244                    ; 123D: B7 12 44       
-                LDX     #M11C2                   ; 1240: CE 11 C2       
-                LDAB    ,X                       ; 1243: E6 00          
-                INX                              ; 1245: 08             
-                LDAA    ,X                       ; 1246: A6 00          
-                STAB    M11B4                    ; 1248: F7 11 B4       
-                STAA    M11B5                    ; 124B: B7 11 B5       
-                LDAA    ENDOS$                   ; 124E: B6 01 06       
-                PSHA                             ; 1251: 36             
-                CLR     ENDOS$                   ; 1252: 7F 01 06       
-                LDX     #M11A9                   ; 1255: CE 11 A9       
-                LDAB    #$40                     ; 1258: C6 40          
-                SWI                              ; 125A: 3F             
-                ABA                              ; 125B: 1B             
-                BCS     Z126B                    ; 125C: 25 0D          
-                PULA                             ; 125E: 32             
-                STAA    ENDOS$                   ; 125F: B7 01 06       
-                TSX                              ; 1262: 30             
-                LDAB    $07,X                    ; 1263: E6 07          
-                LDX     $09,X                    ; 1265: EE 09          
-                PULA                             ; 1267: 32             
-                TAP                              ; 1268: 06             
-                PULA                             ; 1269: 32             
-                RTS                              ; 126A: 39             
-Z126B           LDAA    #$56                     ; 126B: 86 56          
-                STAA    M0008                    ; 126D: 97 08          
-                SEC                              ; 126F: 0D             
-                JSR     CHKERR                   ; 1270: BD E8 53       
+                FCB     $73                      ; 11EB: 73             
+                FCB     $18,$9D,$1C,$0D,$1F,$FD  ; 11EC: 18 9D 1C 0D 1F FD 
+                FCB     $36                      ; 11F2: 36             
+                FCB     $07,$CE,$11,$D0,$F6,$11  ; 11F3: 07 CE 11 D0 F6 11 
+                FCB     $EB                      ; 11F9: EB             
+                FCB     $20                      ; 11FA: 20             
+                FCB     $1C                      ; 11FB: 1C             
+                FCB     $36                      ; 11FC: 36             
+                FCB     $07,$CE,$11,$E2,$F6,$11  ; 11FD: 07 CE 11 E2 F6 11 
+                FCB     $ED                      ; 1203: ED             
+                FCB     $20                      ; 1204: 20             
+                FCB     $12                      ; 1205: 12             
+                FCB     $36                      ; 1206: 36             
+                FCB     $07,$CE,$11,$E7,$F6,$11  ; 1207: 07 CE 11 E7 F6 11 
+                FCB     $EF                      ; 120D: EF             
+                FCB     $20                      ; 120E: 20             
+                FCB     $08                      ; 120F: 08             
+                FCB     $36                      ; 1210: 36             
+                FCB     $07,$CE,$11,$E9,$F6,$11  ; 1211: 07 CE 11 E9 F6 11 
+                FCB     $F1                      ; 1217: F1             
+                FCB     $36                      ; 1218: 36             
+                FCB     $FF,$12                  ; 1219: FF 12          
+                FCB     $2A,$30                  ; 121B: 2A 30          
+                FCB     $A6,$03,$80,$03,$A7,$03  ; 121D: A6 03 80 03 A7 03 
+                FCB     $24                      ; 1223: 24             
+                FCB     $02                      ; 1224: 02             
+                FCB     $6A                      ; 1225: 6A             
+                FCB     $02,$A6,$03,$CE,$00,$00  ; 1226: 02 A6 03 CE 00 00 
+                FCB     $10                      ; 122C: 10             
+                FCB     $5F                      ; 122D: 5F             
+                FCB     $85                      ; 122E: 85             
+                FCB     $5C                      ; 122F: 5C             
+                FCB     $80,$03                  ; 1230: 80 03          
+                FCB     $24                      ; 1232: 24             
+                FCB     $FB,$F7,$12              ; 1233: FB F7 12       
+                FCB     $38                      ; 1236: 38             
+                FCB     $A6,$00                  ; 1237: A6 00          
+                FCB     $48                      ; 1239: 48             
+                FCB     $B7,$12                  ; 123A: B7 12          
+                FCB     $47                      ; 123C: 47             
+                FCB     $B7,$12                  ; 123D: B7 12          
+                FCB     $44                      ; 123F: 44             
+                FCB     $CE,$11,$C2,$E6,$00,$08  ; 1240: CE 11 C2 E6 00 08 
+                FCB     $A6,$00,$F7,$11,$B4,$B7  ; 1246: A6 00 F7 11 B4 B7 
+                FCB     $11,$B5,$B6,$01,$06      ; 124C: 11 B5 B6 01 06 
+                FCB     $36                      ; 1251: 36             
+                FCB     $7F,$01,$06,$CE,$11,$A9  ; 1252: 7F 01 06 CE 11 A9 
+                FCB     $C6                      ; 1258: C6             
+                FCB     $40,$3F                  ; 1259: 40 3F          
+                FCB     $1B                      ; 125B: 1B             
+                FCB     $25                      ; 125C: 25             
+                FCB     $0D                      ; 125D: 0D             
+                FCB     $32                      ; 125E: 32             
+                FCB     $B7,$01,$06              ; 125F: B7 01 06       
+                FCB     $30                      ; 1262: 30             
+                FCB     $E6,$07,$EE,$09          ; 1263: E6 07 EE 09    
+                FCB     $32                      ; 1267: 32             
+                FCB     $06                      ; 1268: 06             
+                FCB     $32,$39                  ; 1269: 32 39          
+                FCB     $86                      ; 126B: 86             
+                FCB     $56                      ; 126C: 56             
+                FCB     $97,$08,$0D,$BD,$E8      ; 126D: 97 08 0D BD E8 
+                FCB     $53                      ; 1272: 53             
 
 
                 END

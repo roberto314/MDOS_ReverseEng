@@ -609,7 +609,7 @@ MDOSOV0.SY   Diskette space allocation and deallocation.
 MDOSOV1.SY   Processing standard file names, allocating contiguous memory, reserving
              a device, releasing a device, writing standard records, writing FDRs, 
              writing End-of-file records, console reader / punch device handling.
-MDOSOV2.SY   Reaing standrd records, reading FDRs.
+MDOSOV2.SY   Reading standrd records, reading FDRs.
 MDOSOV3.SY   Closing a file / device, rewinding diskette files, changing file names
              and attributes.
 MDOSOV4.SY   Opening a file / device.

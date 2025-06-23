@@ -12,7 +12,74 @@ option nofcc
 option labellen 16
 option copndlen 25
 
-label e800 OSLOAD
+label   0   RESRV     ; RESERVE A DEVICE
+label   1   RELES     ; RELEASE A DEVICE
+label   2   OPEN      ; OPEN A FILE
+label   3   CLOSE     ; CLOSE A FILE
+label   4   GETRC     ; READ A RECORD
+label   5   PUTRC     ; WRITE A RECORD
+label   6   REWND     ; POSITION TO BEGINNING OF FILE
+label   7   GETLS     ; READ LOGICAL SECTOR
+label   8   PUTLS     ; WRITE LOGICAL SECTOR
+label   9   KEVIN     ; CONSOLE INPUT
+label   A   DSPLY     ; CONSOLE OUTPUT (TERM W/ CR)
+label   B   DSPLX     ; CONSOLE OUTPUT (TERM W/ E01)
+label   C   DSPLZ     ; CONSOLE OUTPUT (TERM W/ EOT, NO CHECK)
+label   D   CKBRK     ; CHECK CONSOLE FOR BREAK KEY
+label   E   DREAD     ; EROM DISK READ
+label   F   DWRIT     ; EROM DISK WRITE
+label  10   MOVE      ; MOVE A STRING
+label  11   CMPAR     ; COMPARE STRINGS
+label  12   STCHB     ; STORE BLANKS
+label  13   STCHR     ; STORE CHARACTERS
+label  14   ALPHA     ; CHECK ALPHABETIC CHARACTER
+label  15   NUMD      ; CHECK DECIMAL DIGIT
+label  16   ADDAM     ; INCREMENT MEMORY (DOUBLE BYTE) BY
+label  17   SUBAM     ; DECREMENT MEMORY (DOUBLE BYTE) BY
+label  18   MMA       ; MULTIPLY (SHIFT LEFT) MEMORY BY A
+label  19   DMA       ; DIVIDE (SHIFT RIGHT) MEMORY BY A
+label  1A   MDENT     ; ENTER MDOS WITHOUT RELOADING
+label  1B   LOAD      ; LOAD A FILE FROM DISK
+label  1C   DIRSM     ; DIRECTORY SEARCH AND MODIFY
+label  1D   PFNAM     ; PROCESS FILE NAME
+label  1E   ALUSM     ; ALLOCATE USER MEMORY
+label  1F   CHANG     ; CHANGE NAME/ATTRIBUTES
+label  20   MDERR     ; MDOS ERROR MESSAGE HANDLER
+label  21   ALLOC     ; ALLOCATE DISK SPACE
+label  22   DEALC     ; RETURN DISK SPACE
+label  23   EWORD     ; SET ERROR STATUS WORD FOR CHAIN
+label  24   TXBA      ; TRANSFER X TO B,A
+label  25   TBAX      ; TRANSFER B,A TO X
+label  26   XBAX      ; EXCHANGE B,A AND X
+label  27   ADBX      ; ADD B TO X
+label  28   ADAX      ; ADD A TO X
+label  29   ADDAX     ; ADD B,A TO X
+label  2A   ADXBA     ; ADD X TO B,A
+label  2B   SUBX      ; SUBTRACT B FROM X
+label  2C   SUAX      ; SUBTRACT A FROM X
+label  2D   SUBAX     ; SUBTRACT B,A FROM X
+label  2E   SUXBA     ; SUBTRACT X FROM B,A
+label  2F   CPBAX     ; COMPARE B.A TO X
+label  30   ASRX      ; SHIFT X RIGHT (ARITHMETIC)
+label  31   ASLX      ; SHIFT X LEFT (ARITHMETIC/LOGICAL)
+label  32   PSHX      ; PUSH X ON STACK
+label  33   PULX      ; PULL X FROM STACK
+label  34   PRINT     ; PRINT-TERMINATE WITH CR
+label  35   PRINX     ; PRINT-TERMINATE WITH EOT
+label  36   GETFD     ; READ FDR (RESIDENT MDOS ONLY)
+label  37   PUTFD     ; WRITE FDR (RESIDENT MDOS ONLY)
+label  38   PUTEF     ; WRITE EOF (RESIDENT MDOS ONLY)
+label  39   EREAD     ; DISK READ W/ ERR RETN
+label  3A   EWRIT     ; DISK WRITE W/ ERR RETN
+label  3B   MREAD     ; MULTIPLE SECTOR READ
+label  3C   MWRIT     ; MULTIPLE SECTOR WRITE
+label  3D   MERED     ; MULTIPLE SECTOR READ W/ ERR RETUR
+label  3E   MEWRT     ; MULTIPLE SECTOR WRITE W/ ERR RETU
+label  3F   BOOT      ; RELOAD MDOS
+
+used 1ffd Z1FFD
+
+used e800 OSLOAD
 label e822 FDINIT
 label e853 CHKERR
 label e85a PRNTER
@@ -34,15 +101,6 @@ label ebcc LIST
 label ebe4 LDATA0
 label ebf2 LDATA1
 
-;label f015 INCHP
-;label fa7f INCHP1
-;label fa6b INCHP2
-;label f018 OUTCH
-;label f9e2 OUTCH1
-;label f021 PCRLF
-;label f024 PDATA
-
-        
 label FOF3 REENT1  ; REENTER EXBUG COMMAND LEVEL
 label F564 REENT2  ; REENTER EXBUG COMMAND LEVEL
 label F5C2 REENT3  ; REENTER EXBUG COMMAND LEVEL
@@ -67,24 +125,24 @@ used f024 XPDATA ; PRINT C/R L/F +DATA STRING
 used f027 XPDAT  ; PRINT DATA STRING (Enter with X)
 used f02a XPSPAC ; PRINT SPACE
 
-label f0f3 MAID$
-label fcfd SBIT$
-label ff16 XREG$P
-label ff18 XREG$X
-label ff1A XREG$A
-label ff1B XREG$B
-label ff1C XREG$C
-label ff1D XREG$S
-label ff1f BRKPT$
-label ff4f BKPIN$
+label f0f3 MAIDs
+label fcfd SBITs
+label ff16 XREGsP
+label ff18 XREGsX
+label ff1A XREGsA
+label ff1B XREGsB
+label ff1C XREGsC
+label ff1D XREGsS
+label ff1f BRKPTs
+label ff4f BKPINs
 label ff53 AECHO
-label ff8a XSTAK$
+label ff8a XSTAKs
 
-label fff8 IRQ$VC
-label fffa SWI$VC
-label fffc NMI$VC
+label fff8 IRQsVC
+label fffa SWIsVC
+label fffc NMIsVC
 
-#label fcf4 CNACI$
+#label fcf4 CNACIs
 label fcf4 ACIA_0
 label fcf5 ACIA_1
 
@@ -98,4 +156,4 @@ label fcfd PROM_1
 label fcfe PROM_2
 label fcff PROM_3
 
-label ff00 RAM_START
+label ff00 RAMBGN

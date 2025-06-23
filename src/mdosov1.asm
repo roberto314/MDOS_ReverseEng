@@ -6,9 +6,9 @@ Loaded: Info file "mdosov1.info"
 ; Used Labels
 ;****************************************************
 
-M0000   EQU     $0000
-M0024   EQU     $0024
-M0033   EQU     $0033
+RESRV   EQU     $0000
+TXBA    EQU     $0024
+PULX    EQU     $0033
 M0106   EQU     $0106
 M0107   EQU     $0107
 M0108   EQU     $0108
@@ -32,6 +32,7 @@ M189A   EQU     $189A
 M189B   EQU     $189B
 M189C   EQU     $189C
 Z1F65   EQU     $1F65
+Z1FFD   EQU     $1FFD
 M20D9   EQU     $20D9
 M444B   EQU     $444B
 MC600   EQU     $C600
@@ -45,6 +46,7 @@ MC60A   EQU     $C60A
 MC60B   EQU     $C60B
 MC618   EQU     $C618
 MC6FF   EQU     $C6FF
+OSLOAD  EQU     $E800
 PWRUP   EQU     $F000
 XBEGEN  EQU     $F003
 XCBCDH  EQU     $F006
@@ -64,8 +66,7 @@ OUTCNSF EQU     $F9CF
 ACIA_0  EQU     $FCF4
 ACIA_1  EQU     $FCF5
 PROM_1  EQU     $FCFD
-RAM_START
-        EQU     $FF00
+RAMBGN  EQU     $FF00
 MFF02   EQU     $FF02
 MFF62   EQU     $FF62
 
@@ -495,7 +496,7 @@ Z1587           LDX     $02,X                    ; 1587: EE 02          '..'
                 STX     M1892                    ; 1589: FF 18 92       '...'
                 JSR     ,X                       ; 158C: AD 00          '..'
                 FCB     $18                      ; 158E: 18             '.'
-                ANDA    M0024                    ; 158F: 94 24          '.$'
+                ANDA    TXBA                     ; 158F: 94 24          '.$'
                 FCB     $03                      ; 1591: 03             '.'
                 JMP     Z1763                    ; 1592: 7E 17 63       '~.c'
                 LDX     M1894                    ; 1595: FE 18 94       '...'
@@ -706,7 +707,7 @@ Z1754           LDX     M1894                    ; 1754: FE 18 94       '...'
                 LDX     M1892                    ; 1770: FE 18 92       '...'
                 JSR     $03,X                    ; 1773: AD 03          '..'
                 FCB     $18                      ; 1775: 18             '.'
-                ANDA    M0033                    ; 1776: 94 33          '.3'
+                ANDA    PULX                     ; 1776: 94 33          '.3'
 Z1778           LDX     M1894                    ; 1778: FE 18 94       '...'
                 STAB    ,X                       ; 177B: E7 00          '..'
                 TSTB                             ; 177D: 5D             ']'
@@ -731,7 +732,7 @@ Z1797           BSR     Z17A8                    ; 1797: 8D 0F          '..'
                 LDAA    #$0C                     ; 17A2: 86 0C          '..'
                 STAA    ,X                       ; 17A4: A7 00          '..'
                 BRA     Z17D9                    ; 17A6: 20 31          ' 1'
-Z17A8           LDX     #RAM_START               ; 17A8: CE FF 00       '...'
+Z17A8           LDX     #RAMBGN                  ; 17A8: CE FF 00       '...'
 Z17AB           DEX                              ; 17AB: 09             '.'
                 BEQ     Z17BB                    ; 17AC: 27 0D          ''.'
                 LDAA    ACIA_0                   ; 17AE: B6 FC F4       '...'
@@ -782,7 +783,7 @@ Z1807           CMPB    #$0D                     ; 1807: C1 0D          '..'
                 BNE     Z1816                    ; 1809: 26 0B          '&.'
                 TST     MFF02                    ; 180B: 7D FF 02       '}..'
                 BPL     Z1816                    ; 180E: 2A 06          '*.'
-                LDX     #M0000                   ; 1810: CE 00 00       '...'
+                LDX     #RESRV                   ; 1810: CE 00 00       '...'
 Z1813           DEX                              ; 1813: 09             '.'
                 BNE     Z1813                    ; 1814: 26 FD          '&.'
 Z1816           RTS                              ; 1816: 39             '9'

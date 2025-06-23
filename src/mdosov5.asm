@@ -6,16 +6,17 @@ Loaded: Info file "mdosov5.info"
 ; Used Labels
 ;****************************************************
 
-M0000   EQU     $0000
-M0006   EQU     $0006
-M001C   EQU     $001C
-M001D   EQU     $001D
+RESRV   EQU     $0000
+REWND   EQU     $0006
+DIRSM   EQU     $001C
+PFNAM   EQU     $001D
 M0114   EQU     $0114
 M0115   EQU     $0115
 M011E   EQU     $011E
 M0291   EQU     $0291
 M097F   EQU     $097F
 Z1206   EQU     $1206
+Z1FFD   EQU     $1FFD
 M290D   EQU     $290D
 M404C   EQU     $404C
 M40FF   EQU     $40FF
@@ -23,6 +24,7 @@ M6572   EQU     $6572
 M696F   EQU     $696F
 M6F20   EQU     $6F20
 MB01C   EQU     $B01C
+OSLOAD  EQU     $E800
 PWRUP   EQU     $F000
 XBEGEN  EQU     $F003
 XCBCDH  EQU     $F006
@@ -38,8 +40,7 @@ XPCRLF  EQU     $F021
 XPDATA  EQU     $F024
 XPDAT   EQU     $F027
 XPSPAC  EQU     $F02A
-RAM_START
-        EQU     $FF00
+RAMBGN  EQU     $FF00
 MFFFF   EQU     $FFFF
 
 ;****************************************************
@@ -56,17 +57,17 @@ M1C16           FCB     $00                      ; 1C16: 00             '.'
                 BEQ     Z1C19                    ; 1C17: 27 00          ''.'
 Z1C19           FCB     $00                      ; 1C19: 00             '.'
 M1C1A           FCB     $00                      ; 1C1A: 00             '.'
-                BITA    M0000                    ; 1C1B: 95 00          '..'
+                BITA    RESRV                    ; 1C1B: 95 00          '..'
 M1C1D           FCB     $83                      ; 1C1D: 83             '.'
                 FCB     $1C                      ; 1C1E: 1C             '.'
                 TSTA                             ; 1C1F: 4D             'M'
                 FCB     $1C                      ; 1C20: 1C             '.'
                 FCB     $41                      ; 1C21: 41             'A'
                 FCB     $1C                      ; 1C22: 1C             '.'
-                SUBA    M0006                    ; 1C23: 90 06          '..'
+                SUBA    REWND                    ; 1C23: 90 06          '..'
                 COM     M40FF                    ; 1C25: 73 40 FF       's@.'
                 STX     M097F                    ; 1C28: FF 09 7F       '...'
-                STX     RAM_START                ; 1C2B: FF FF 00       '...'
+                STX     RAMBGN                   ; 1C2B: FF FF 00       '...'
                 SEV                              ; 1C2E: 0B             '.'
                 FCB     $00                      ; 1C2F: 00             '.'
                 CLV                              ; 1C30: 0A             '.'
@@ -77,8 +78,8 @@ M1C1D           FCB     $83                      ; 1C1D: 83             '.'
                 FCB     $00                      ; 1C35: 00             '.'
                 FCB     $00                      ; 1C36: 00             '.'
                 CMPA    MB01C                    ; 1C37: B1 B0 1C       '...'
-                LDAA    M001C                    ; 1C3A: 96 1C          '..'
-                CMPA    M001D                    ; 1C3C: 91 1D          '..'
+                LDAA    DIRSM                    ; 1C3A: 96 1C          '..'
+                CMPA    PFNAM                    ; 1C3C: 91 1D          '..'
                 SBA                              ; 1C3E: 10             '.'
                 FCB     $1D                      ; 1C3F: 1D             '.'
                 SBA                              ; 1C40: 10             '.'
