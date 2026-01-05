@@ -15,28 +15,29 @@ PWD=`pwd`
 # Assemble everything here and convert it to binary and s19
 #
 #######################################################################
-NAME=exbug12
-OFF=0xF000
 ## Use as0
 #${AS0} ${NAME}.asm -L CRE C S > ${NAME}.lst 
 
+NAME=floppy2_commented
+## Use asl
+${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
+${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
+rm ${NAME}.p
+cat out.txt | grep rror   # Check for Errors
+#######################################################################
+NAME=bootloader_commented
 ## Use asl
 ${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
 ${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
 rm ${NAME}.p
 cat out.txt | grep rror   # Check for Errors
 
+
+#OFF=0x100
 #srec_cat ${NAME}.bin -binary -offset ${OFF} -o ${NAME}.s19 -Motorola -address_length=2 #-execution-start-address=0x0100
 #echo S9 >> ${NAME}.s19
 #srec_cat ${NAME}.s19 -motorola -offset -${OFF} -o ${NAME}_b.bin -binary # strip off the beginning
 #srec_cat ${NAME}.s19 -motorola -offset -${OFF} -fill 0xff 0x0000 0x37ff -o ${NAME}.bin -binary # strip off the beginning
-
-
-
-
-
-
-
 
 #srec_cat ${NAME}.s199 -motorola -fill 0xff 0x0000 0x7fff -o ${NAME}.bin2 -binary # filled with FFs
 

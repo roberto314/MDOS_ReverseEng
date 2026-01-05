@@ -6,20 +6,20 @@ Loaded: Info file "bootloader.info"
 ; Used Labels
 ;****************************************************
 
-RESRV   EQU     $0000
-RELES   EQU     $0001
-OPEN    EQU     $0002
-CLOSE   EQU     $0003
-GETRC   EQU     $0004
-PUTRC   EQU     $0005
-REWND   EQU     $0006
-GETLS   EQU     $0007
-PUTLS   EQU     $0008
-DSPLX   EQU     $000B
-DSPLZ   EQU     $000C
+CURDRV  EQU     $0000
+STRSCTH EQU     $0001
+STRSCTL EQU     $0002
+NUMSCTH EQU     $0003
+NUMSCTL EQU     $0004
+LSCTLN  EQU     $0005
+CURADRH EQU     $0006
+CURADRL EQU     $0007
+FDSTAT  EQU     $0008
+SECTCNT EQU     $000B
+M000C   EQU     $000C
 M00A0   EQU     $00A0
+M03FF   EQU     $03FF
 Z1FFD   EQU     $1FFD
-M863F   EQU     $863F
 OSLOAD  EQU     $E800
 CHKERR  EQU     $E853
 READPS  EQU     $E86D
@@ -48,73 +48,77 @@ XPSPAC  EQU     $F02A
 
                 ORG     $0020
 
-                LDAA    OSLOAD                   ; 0020: B6 E8 00       '...'
-                CMPA    #$8E                     ; 0023: 81 8E          '..'
-                LDAA    #$50                     ; 0025: 86 50          '.P'
-                BCS     Z0098                    ; 0027: 25 6F          '%o'
-                INC     RESRV                    ; 0029: 7C 00 00       '|..'
-                JSR     RESTOR                   ; 002C: BD E8 75       '..u'
-                JSR     LPINIT                   ; 002F: BD EB C0       '...'
-                LDX     #M00A0                   ; 0032: CE 00 A0       '...'
-                LDAA    $75,X                    ; 0035: A6 75          '.u'
-                STAA    PUTRC                    ; 0037: 97 05          '..'
-                LDAB    ,X                       ; 0039: E6 00          '..'
-                BMI     Z0096                    ; 003B: 2B 59          '+Y'
-                ANDB    #$03                     ; 003D: C4 03          '..'
-                LDAA    $01,X                    ; 003F: A6 01          '..'
-                ASLA                             ; 0041: 48             'H'
-                ROLB                             ; 0042: 59             'Y'
-                ASLA                             ; 0043: 48             'H'
-                ROLB                             ; 0044: 59             'Y'
-                ADDA    #$01                     ; 0045: 8B 01          '..'
-                ADCB    #$00                     ; 0047: C9 00          '..'
-                STAB    RELES                    ; 0049: D7 01          '..'
-                STAA    OPEN                     ; 004B: 97 02          '..'
-                LDAB    $7A,X                    ; 004D: E6 7A          '.z'
-                LDAA    $7B,X                    ; 004F: A6 7B          '.{'
-                PSHA                             ; 0051: 36             '6'
-                PSHB                             ; 0052: 37             '7'
-                LDAA    $77,X                    ; 0053: A6 77          '.w'
-                LDAB    $76,X                    ; 0055: E6 76          '.v'
-                STAA    GETRC                    ; 0057: 97 04          '..'
-                STAB    CLOSE                    ; 0059: D7 03          '..'
-                LDX     $78,X                    ; 005B: EE 78          '.x'
-                STX     REWND                    ; 005D: DF 06          '..'
-                LDX     #GETLS                   ; 005F: CE 00 07       '...'
-Z0062           ASLA                             ; 0062: 48             'H'
-                ROLB                             ; 0063: 59             'Y'
-                DEX                              ; 0064: 09             '.'
-                BNE     Z0062                    ; 0065: 26 FB          '&.'
-                ADDA    GETLS                    ; 0067: 9B 07          '..'
-                ADCB    REWND                    ; 0069: D9 06          '..'
-                STAA    DSPLZ                    ; 006B: 97 0C          '..'
-                STAB    DSPLX                    ; 006D: D7 0B          '..'
-                LDX     #M007F                   ; 006F: CE 00 7F       '...'
-Z0072           LDAA    #$AA                     ; 0072: 86 AA          '..'
-                INX                              ; 0074: 08             '.'
-                LDAB    ,X                       ; 0075: E6 00          '..'
-                STAA    ,X                       ; 0077: A7 00          '..'
-                CMPA    ,X                       ; 0079: A1 00          '..'
-                TPA                              ; 007B: 07             '.'
-                STAB    ,X                       ; 007C: E7 00          '..'
-                TAP                              ; 007E: 06             '.'
-M007F           BNE     Z0091                    ; 007F: 26 10          '&.'
-                CPX     DSPLX                    ; 0081: 9C 0B          '..'
-                BNE     Z0072                    ; 0083: 26 ED          '&.'
-                CLR     RESRV                    ; 0085: 7F 00 00       '...'
-                LDAA    #$53                     ; 0088: 86 53          '.S'
-                PSHA                             ; 008A: 36             '6'
-                LDAA    #$E8                     ; 008B: 86 E8          '..'
-                PSHA                             ; 008D: 36             '6'
-                JMP     READPS                   ; 008E: 7E E8 6D       '~.m'
-Z0091           STX     RESRV                    ; 0091: DF 00          '..'
-                LDAA    #$4D                     ; 0093: 86 4D          '.M'
-                CPX     #M863F                   ; 0095: 8C 86 3F       '..?'
-Z0098           STAA    PUTLS                    ; 0098: 97 08          '..'
-                COMB                             ; 009A: 53             'S'
-                JMP     CHKERR                   ; 009B: 7E E8 53       '~.S'
-                FCB     $00                      ; 009E: 00             '.'
-                FCB     $00                      ; 009F: 00             '.'
+                INC     CURDRV                   ; 0020: 7C 00 00       
+                JSR     RESTOR                   ; 0023: BD E8 75       
+                JSR     LPINIT                   ; 0026: BD EB C0       
+                LDX     #M00A0                   ; 0029: CE 00 A0       
+                LDAA    $75,X                    ; 002C: A6 75          
+                STAA    LSCTLN                   ; 002E: 97 05          
+                LDAB    ,X                       ; 0030: E6 00          
+                BMI     Z008C                    ; 0032: 2B 58          
+                ANDB    #$03                     ; 0034: C4 03          
+                LDAA    $01,X                    ; 0036: A6 01          
+                ASLA                             ; 0038: 48             
+                ROLB                             ; 0039: 59             
+                ASLA                             ; 003A: 48             
+                ROLB                             ; 003B: 59             
+                ADDA    #$01                     ; 003C: 8B 01          
+                ADCB    #$00                     ; 003E: C9 00          
+                STAB    STRSCTH                  ; 0040: D7 01          
+                STAA    STRSCTL                  ; 0042: 97 02          
+                LDAA    $77,X                    ; 0044: A6 77          
+                LDAB    $76,X                    ; 0046: E6 76          
+                STAA    NUMSCTL                  ; 0048: 97 04          
+                STAB    NUMSCTH                  ; 004A: D7 03          
+                LDAB    $7A,X                    ; 004C: E6 7A          
+                LDAA    $7B,X                    ; 004E: A6 7B          
+                PSHA                             ; 0050: 36             
+                PSHB                             ; 0051: 37             
+                LDX     $78,X                    ; 0052: EE 78          
+                STX     CURADRH                  ; 0054: DF 06          
+                LDAA    NUMSCTL                  ; 0056: 96 04          
+                LDAB    NUMSCTH                  ; 0058: D6 03          
+                LDX     #CURADRL                 ; 005A: CE 00 07       
+Z005D           ASLA                             ; 005D: 48             
+                ROLB                             ; 005E: 59             
+                DEX                              ; 005F: 09             
+                BNE     Z005D                    ; 0060: 26 FB          
+                ADDA    CURADRL                  ; 0062: 9B 07          
+                ADCB    CURADRH                  ; 0064: D9 06          
+                STAA    M000C                    ; 0066: 97 0C          
+                STAB    SECTCNT                  ; 0068: D7 0B          
+                LDX     #M03FF                   ; 006A: CE 03 FF       
+Z006D           LDAA    #$4D                     ; 006D: 86 4D          
+                INX                              ; 006F: 08             
+                LDAB    ,X                       ; 0070: E6 00          
+                STAA    ,X                       ; 0072: A7 00          
+                CMPA    ,X                       ; 0074: A1 00          
+                TPA                              ; 0076: 07             
+                STAB    ,X                       ; 0077: E7 00          
+                TAP                              ; 0079: 06             
+                BNE     Z0094                    ; 007A: 26 18          
+                CPX     SECTCNT                  ; 007C: 9C 0B          
+                BNE     Z006D                    ; 007E: 26 ED          
+                CLR     CURDRV                   ; 0080: 7F 00 00       
+                LDAA    #$53                     ; 0083: 86 53          
+                PSHA                             ; 0085: 36             
+                LDAA    #$E8                     ; 0086: 86 E8          
+                PSHA                             ; 0088: 36             
+                JMP     READPS                   ; 0089: 7E E8 6D       
+Z008C           LDAA    #$3F                     ; 008C: 86 3F          
+Z008E           STAA    FDSTAT                   ; 008E: 97 08          
+                SEC                              ; 0090: 0D             
+                JMP     CHKERR                   ; 0091: 7E E8 53       
+Z0094           LDAA    #$4D                     ; 0094: 86 4D          
+                BRA     Z008E                    ; 0096: 20 F6          
+                FCB     $00                      ; 0098: 00             
+                FCB     $00                      ; 0099: 00             
+                FCB     $00                      ; 009A: 00             
+                FCB     $00                      ; 009B: 00             
+                FCB     $00                      ; 009C: 00             
+                FCB     $00                      ; 009D: 00             
+                FCB     $00                      ; 009E: 00             
+                FCB     $00                      ; 009F: 00             
 
 
                 END

@@ -1,0 +1,193 @@
+ AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 1 - 01/05/2026 06:56:24 PM
+
+
+       1/       0 :                     ; This file is loaded from floppy to address $20
+       2/       0 :                     ; It sits in sector $17 @ 0xB80
+       3/       0 :                     ;****************************************************
+       4/       0 :                     ; Used Labels
+       5/       0 :                     ;****************************************************
+       6/       0 :                     
+       7/       0 : =$0                  CURDRV  EQU     $0000
+       8/       0 : =$1                  STRSCTH EQU     $0001
+       9/       0 : =$2                  STRSCTL EQU     $0002
+      10/       0 : =$3                  NUMSCTH EQU     $0003
+      11/       0 : =$4                  NUMSCTL EQU     $0004
+      12/       0 : =$5                  LSCTLN  EQU     $0005
+      13/       0 : =$6                  CURADRH EQU     $0006
+      14/       0 : =$7                  CURADRL EQU     $0007
+      15/       0 : =$8                  FDSTAT  EQU     $0008
+      16/       0 : =$B                  SECTCNT EQU     $000B
+      17/       0 : =$C                  M000C   EQU     $000C
+      18/       0 : =$1FFD               Z1FFD   EQU     $1FFD
+      19/       0 : =$E800               OSLOAD  EQU     $E800
+      20/       0 : =$E853               CHKERR  EQU     $E853
+      21/       0 : =$E86D               READPS  EQU     $E86D
+      22/       0 : =$E875               RESTOR  EQU     $E875
+      23/       0 : =$EBC0               LPINIT  EQU     $EBC0
+      24/       0 : =$F000               PWRUP   EQU     $F000
+      25/       0 : =$F003               XBEGEN  EQU     $F003
+      26/       0 : =$F006               XCBCDH  EQU     $F006
+      27/       0 : =$F009               XCHEXL  EQU     $F009
+      28/       0 : =$F00C               XCHEXR  EQU     $F00C
+      29/       0 : =$F00F               XINADD  EQU     $F00F
+      30/       0 : =$F012               XINCH   EQU     $F012
+      31/       0 : =$F015               XINCHN  EQU     $F015
+      32/       0 : =$F018               XOUTCH  EQU     $F018
+      33/       0 : =$F01B               XOUT2H  EQU     $F01B
+      34/       0 : =$F01E               XOUT4H  EQU     $F01E
+      35/       0 : =$F021               XPCRLF  EQU     $F021
+      36/       0 : =$F024               XPDATA  EQU     $F024
+      37/       0 : =$F027               XPDAT   EQU     $F027
+      38/       0 : =$F02A               XPSPAC  EQU     $F02A
+      39/       0 :                     
+      40/       0 :                     ;****************************************************
+      41/       0 :                     ; Program's Code Areas
+      42/       0 :                     ;****************************************************
+      43/       0 :                     
+      44/       0 :                     
+      45/      20 :                                     ORG     $0020
+      46/      20 :                     
+      47/      20 : 7C 00 00                            INC     CURDRV                   ; 0020: 7C 00 00  ; 
+      48/      23 : BD E8 75                            JSR     RESTOR                   ; 0023: BD E8 75  ; 
+      49/      26 : BD EB C0                            JSR     LPINIT                   ; 0026: BD EB C0  ; 
+      50/      29 : CE 00 A0                            LDX     #$00A0                   ; 0029: CE 00 A0  ; 
+      51/      2C : A6 75                               LDAA    $75,X                    ; 002C: A6 75     ; $115 or 277
+      52/      2E : 97 05                               STAA    LSCTLN                   ; 002E: 97 05     ; 
+      53/      30 : E6 00                               LDAB    ,X                       ; 0030: E6 00     ; 
+      54/      32 : 2B 58                               BMI     Z008C                    ; 0032: 2B 58     ; Error '?'
+      55/      34 : C4 03                               ANDB    #$03                     ; 0034: C4 03     ; 
+      56/      36 : A6 01                               LDAA    $01,X                    ; 0036: A6 01     ; 
+      57/      38 : 48                                  ASLA                             ; 0038: 48        ; 
+      58/      39 : 59                                  ROLB                             ; 0039: 59        ; 
+      59/      3A : 48                                  ASLA                             ; 003A: 48        ; 
+      60/      3B : 59                                  ROLB                             ; 003B: 59        ; 
+ AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 2 - 01/05/2026 06:56:24 PM
+
+
+      61/      3C : 8B 01                               ADDA    #$01                     ; 003C: 8B 01     ; 
+      62/      3E : C9 00                               ADCB    #$00                     ; 003E: C9 00     ; 
+      63/      40 : D7 01                               STAB    STRSCTH                  ; 0040: D7 01     ; 
+      64/      42 : 97 02                               STAA    STRSCTL                  ; 0042: 97 02     ; 
+      65/      44 : A6 77                               LDAA    $77,X                    ; 0044: A6 77     ; 
+      66/      46 : E6 76                               LDAB    $76,X                    ; 0046: E6 76     ; 
+      67/      48 : 97 04                               STAA    NUMSCTL                  ; 0048: 97 04     ; 
+      68/      4A : D7 03                               STAB    NUMSCTH                  ; 004A: D7 03     ; 
+      69/      4C : E6 7A                               LDAB    $7A,X                    ; 004C: E6 7A     ; 
+      70/      4E : A6 7B                               LDAA    $7B,X                    ; 004E: A6 7B     ; 
+      71/      50 : 36                                  PSHA                             ; 0050: 36        ; 
+      72/      51 : 37                                  PSHB                             ; 0051: 37        ; 
+      73/      52 : EE 78                               LDX     $78,X                    ; 0052: EE 78     ; 
+      74/      54 : DF 06                               STX     CURADRH                  ; 0054: DF 06     ; 
+      75/      56 : 96 04                               LDAA    NUMSCTL                  ; 0056: 96 04     ; 
+      76/      58 : D6 03                               LDAB    NUMSCTH                  ; 0058: D6 03     ; 
+      77/      5A : CE 00 07                            LDX     #CURADRL                 ; 005A: CE 00 07  ; 
+      78/      5D : 48                  Z005D           ASLA                             ; 005D: 48        ; 
+      79/      5E : 59                                  ROLB                             ; 005E: 59        ; 
+      80/      5F : 09                                  DEX                              ; 005F: 09        ; 
+      81/      60 : 26 FB                               BNE     Z005D                    ; 0060: 26 FB     ; 
+      82/      62 : 9B 07                               ADDA    CURADRL                  ; 0062: 9B 07     ; 
+      83/      64 : D9 06                               ADCB    CURADRH                  ; 0064: D9 06     ; 
+      84/      66 : 97 0C                               STAA    M000C                    ; 0066: 97 0C     ; 
+      85/      68 : D7 0B                               STAB    SECTCNT                  ; 0068: D7 0B     ; 
+      86/      6A : CE 03 FF                            LDX     #$03FF                   ; 006A: CE 03 FF  ; 
+      87/      6D : 86 4D               Z006D           LDAA    #$4D                     ; 006D: 86 4D     ; 
+      88/      6F : 08                                  INX                              ; 006F: 08        ; 
+      89/      70 : E6 00                               LDAB    ,X                       ; 0070: E6 00     ; 
+      90/      72 : A7 00                               STAA    ,X                       ; 0072: A7 00     ; 
+      91/      74 : A1 00                               CMPA    ,X                       ; 0074: A1 00     ; 
+      92/      76 : 07                                  TPA                              ; 0076: 07        ; 
+      93/      77 : E7 00                               STAB    ,X                       ; 0077: E7 00     ; 
+      94/      79 : 06                                  TAP                              ; 0079: 06        ; 
+      95/      7A : 26 18                               BNE     Z0094                    ; 007A: 26 18     ; Error 'M'
+      96/      7C : 9C 0B                               CPX     SECTCNT                  ; 007C: 9C 0B     ; 
+      97/      7E : 26 ED                               BNE     Z006D                    ; 007E: 26 ED     ; 
+      98/      80 : 7F 00 00                            CLR     CURDRV                   ; 0080: 7F 00 00  ; 
+      99/      83 : 86 53                               LDAA    #$53                     ; 0083: 86 53     ; 
+     100/      85 : 36                                  PSHA                             ; 0085: 36        ; 
+     101/      86 : 86 E8                               LDAA    #$E8                     ; 0086: 86 E8     ; 
+     102/      88 : 36                                  PSHA                             ; 0088: 36        ; 
+     103/      89 : 7E E8 6D                            JMP     READPS                   ; 0089: 7E E8 6D  ; 
+     104/      8C :                     ;------------------------------------------------
+     105/      8C : 86 3F               Z008C           LDAA    #$3F                     ; 008C: 86 3F     ; $3F is '?'
+     106/      8E : 97 08               Z008E           STAA    FDSTAT                   ; 008E: 97 08     ; 
+     107/      90 : 0D                                  SEC                              ; 0090: 0D        ; 
+     108/      91 : 7E E8 53                            JMP     CHKERR                   ; 0091: 7E E8 53  ; 
+     109/      94 :                     ;------------------------------------------------
+     110/      94 : 86 4D               Z0094           LDAA    #$4D                     ; 0094: 86 4D     ; $4D is 'M'
+     111/      96 : 20 F6                               BRA     Z008E                    ; 0096: 20 F6     ; 
+     112/      98 :                     ;------------------------------------------------
+     113/      98 : 00                                  FCB     $00                      ; 0098: 00        ; filler
+     114/      99 : 00                                  FCB     $00                      ; 0099: 00        ; |
+     115/      9A : 00                                  FCB     $00                      ; 009A: 00        ; |
+     116/      9B : 00                                  FCB     $00                      ; 009B: 00        ; |
+     117/      9C : 00                                  FCB     $00                      ; 009C: 00        ; |
+     118/      9D : 00                                  FCB     $00                      ; 009D: 00        ; |
+     119/      9E : 00                                  FCB     $00                      ; 009E: 00        ; |
+     120/      9F : 00                                  FCB     $00                      ; 009F: 00        ; |
+ AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 3 - 01/05/2026 06:56:24 PM
+
+
+     121/      A0 :                     
+     122/      A0 :                     
+     123/      A0 :                                     END
+ AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 4 - 01/05/2026 06:56:24 PM
+
+
+  Symbol Table (* = unused):
+  --------------------------
+
+*ARCHITECTURE :                                      "x86_64-unknown-linux" - |
+*BIGENDIAN :                      0 - | *BRANCHEXT :                      0 - |
+*CASESENSITIVE :                  0 - |  CHKERR :                      E853 - |
+*COMPMODE :                       0 - | *CONSTPI :        3.141592653589793 - |
+ CURADRH :                        6 - |  CURADRL :                        7 - |
+ CURDRV :                         0 - | *CUSTOM :                         0 - |
+*DATE :                "01/05/2026" - | *FALSE :                          0 - |
+ FDSTAT :                         8 - | *FULLPMMU :                       1 - |
+*HAS64 :                          1 - | *HASDSP :                         0 - |
+*HASFPU :                         0 - | *HASPMMU :                        0 - |
+*INEXTMODE :                      0 - | *INLWORDMODE :                    0 - |
+*INMAXMODE :                      0 - | *INSRCMODE :                      0 - |
+*INSUPMODE :                      0 - | *LISTON :                         1 - |
+ LPINIT :                      EBC0 - |  LSCTLN :                         5 - |
+ M000C :                          C - | *MACEXP :                         7 - |
+*MOMCPU :                      6800 - | *MOMCPUNAME :                "6800" - |
+*NESTMAX :                      100 - |  NUMSCTH :                        3 - |
+ NUMSCTL :                        4 - | *OSLOAD :                      E800 - |
+*PACKING :                        0 - | *PADDING :                        0 - |
+*PWRUP :                       F000 - |  READPS :                      E86D - |
+*RELAXED :                        0 - |  RESTOR :                      E875 - |
+ SECTCNT :                        B - |  STRSCTH :                        1 - |
+ STRSCTL :                        2 - | *TIME :               "06:56:24 PM" - |
+*TRUE :                           1 - | *VERSION :                     142F - |
+*XBEGEN :                      F003 - | *XCBCDH :                      F006 - |
+*XCHEXL :                      F009 - | *XCHEXR :                      F00C - |
+*XINADD :                      F00F - | *XINCH :                       F012 - |
+*XINCHN :                      F015 - | *XOUT2H :                      F01B - |
+*XOUT4H :                      F01E - | *XOUTCH :                      F018 - |
+*XPCRLF :                      F021 - | *XPDAT :                       F027 - |
+*XPDATA :                      F024 - | *XPSPAC :                      F02A - |
+ Z005D :                         5D C |  Z006D :                         6D C |
+ Z008C :                         8C C |  Z008E :                         8E C |
+ Z0094 :                         94 C | *Z1FFD :                       1FFD - |
+*Z80SYNTAX :                      0 - |
+
+     68 symbols
+     48 unused symbols
+
+ AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 5 - 01/05/2026 06:56:24 PM
+
+
+  Code Pages:
+  ----------
+
+STANDARD (0 changed characters)
+
+1 code page
+
+0.00 seconds assembly time
+
+    124 lines source file
+      2 passes
+      0 errors
+      0 warnings

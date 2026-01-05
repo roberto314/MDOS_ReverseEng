@@ -9,3 +9,13 @@ include common.info
 #label c63F Set_32Char
 #char c724-c741
 #data 0102-020f
+label 00 CURDRV  
+label 01 STRSCTH 
+label 02 STRSCTL 
+label 03 NUMSCTH 
+label 04 NUMSCTL 
+label 05 LSCTLN  
+label 06 CURADRH 
+label 07 CURADRL
+label 08 FDSTAT  
+label 0B SECTCNT 

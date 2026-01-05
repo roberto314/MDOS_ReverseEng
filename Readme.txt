@@ -736,19 +736,19 @@ PROM U23:
 A4 is alwyas High, Addresses 0-F are not used.
                   Address 
 A1A0 IRQ Cntr   CPU    PROM   Entry
- L L  Lo  Lo    FCFC    10      00
+ L L  Lo  Lo    FCFC    10      00 - Is used by the Floppy Controller
  L H  Lo  Lo    FCFD    11      F1 - ACIA RX IRQ Enable, DIV1, 8N2, RTS Low No TX Interr.
  H L  Lo  Lo    FCFE    12      F0
  H H  Lo  Lo    FCFF    13      00
- L L  Lo  Hi    FCFC    14      00
+ L L  Lo  Hi    FCFC    14      00 - Is used by the Floppy Controller
  L H  Lo  Hi    FCFD    15      F5 - ACIA RX IRQ Enable, DIV1, 8N1, RTS Low No TX Interr.
  H L  Lo  Hi    FCFE    16      F0
  H H  Lo  Hi    FCFF    17      00
- L L  Hi  Lo    FCFC    18      00
+ L L  Hi  Lo    FCFC    18      00 - Is used by the Floppy Controller
  L H  Hi  Lo    FCFD    19      71 - ACIA RX IRQ Disable, DIV1, 8N2, RTS Low No TX Interr.
  H L  Hi  Lo    FCFE    1A      F0
  H H  Hi  Lo    FCFF    1B      00
- L L  Hi  Hi    FCFC    1C      00
+ L L  Hi  Hi    FCFC    1C      00 - Is used by the Floppy Controller
  L H  Hi  Hi    FCFD    1D      75 - ACIA RX IRQ Disable, DIV1, 8N1, RTS Low No TX Interr.
  H L  Hi  Hi    FCFE    1E      F0
  H H  Hi  Hi    FCFF    1F      00
@@ -759,4 +759,5 @@ A1A0 IRQ Cntr   CPU    PROM   Entry
  00 75 F000
   |  |   |__ Reset Vector
   |  |______ ACIA Config
-  |_________
+  |_________ Is used by the Floppy Controller
+

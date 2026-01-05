@@ -2,31 +2,33 @@ file floppy.bin e800
 include common.info
 
 
-data e86e
-data e871
-data e874
-data e877
-data e87a
-data e87d
-data e880
-data e883
-data e883
+;data e86e
+;data e871
+;data e874
+;data e877
+;data e87a
+;data e87d
+;data e880
+;data e883
+;data e883
+data ebf9-ebfd
+word ebfe-ebff
+
+data ea8f
+data ebbc-ebbf
+data EB9B
 
 label ec00 dPIA_0
 label ec01 dPIA_1
 label ec02 dPIA_2
 label ec04 SSDA_0
 label ec05 SSDA_1
-label EC10 PDATA
-label EC11 PCNTRL1
-label EC12 PSTAT
-label EC13 PCNTRL2
-label EBD2 LIST3
-label EBED LISTW
+
 unused eb89-eb8f
 
 #lcomment c019 CC0 and CC1 set - external Serial clock (8xBaudrate)
-#const c559-c55a
+const e832-e833
+
 #word c6ef-c6f0
 #label c63F Set_32Char
 #char c724-c741

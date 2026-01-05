@@ -1,0 +1,40 @@
+file floppy2.bin e800
+include common.info
+
+label 00 CURDRV   
+label 01 STRSCTH  
+label 02 STRSCTL  
+label 03 NUMSCTH  
+label 04 NUMSCTL  
+label 05 LSCTLN   
+label 06 CURADRH  
+label 07 CURADRL  
+label 08 FDSTAT   
+label 09 M0009    
+label 0A SECTOR   
+label 0B SECTCNT  
+label 0D STATSAV  
+label 0E FUNCSAV  
+label 0F NMIVECSAV
+label 13 TRACKSAV
+label 15 WRDCNT
+label 20 LDADDR
+;label 22 EXADDR
+;label 24 ONECON
+label ec00 PIAREGA
+label ec01 PIAREGB
+label ec02 PIACTRL
+label ec04 SSDA_0
+label ec05 SSDA_1
+
+;unused eb89-eb8f
+;data ebf9-ebfd
+;word ebfe-ebff
+data eb10
+#lcomment c019 CC0 and CC1 set - external Serial clock (8xBaudrate)
+;const e832-e833
+
+#word c6ef-c6f0
+#label c63F Set_32Char
+#char c724-c741
+#data ebcc-ebff

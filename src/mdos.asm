@@ -6,18 +6,17 @@ Loaded: Info file "mdos.info"
 ; Used Labels
 ;****************************************************
 
-RESRV   EQU     $0000
-RELES   EQU     $0001
-OPEN    EQU     $0002
-CLOSE   EQU     $0003
-GETRC   EQU     $0004
-PUTRC   EQU     $0005
-REWND   EQU     $0006
-PUTLS   EQU     $0008
-DSPLX   EQU     $000B
-DSPLZ   EQU     $000C
-CKBRK   EQU     $000D
-MDERR   EQU     $0020
+M0000   EQU     $0000
+M0001   EQU     $0001
+M0002   EQU     $0002
+M0003   EQU     $0003
+M0004   EQU     $0004
+M0005   EQU     $0005
+M0006   EQU     $0006
+M0008   EQU     $0008
+M000B   EQU     $000B
+M000C   EQU     $000C
+M000D   EQU     $000D
 M007D   EQU     $007D
 M0082   EQU     $0082
 M00AE   EQU     $00AE
@@ -100,17 +99,17 @@ VERSss          FDB     8243                     ; 0100: 20 33
 REVSss          FDB     12341                    ; 0102: 30 35          
 KYIsSV          FDB     $03A8                    ; 0104: 03 A8          
 ENDOSs          FDB     $1FFF                    ; 0106: 1F FF          
-ENDUSs          FDB     RESRV                    ; 0108: 00 00          
-ENDSYs          FDB     RESRV                    ; 010A: 00 00          
-M010C           FDB     RESRV                    ; 010C: 00 00          
+ENDUSs          FDB     M0000                    ; 0108: 00 00          
+ENDSYs          FDB     M0000                    ; 010A: 00 00          
+M010C           FDB     M0000                    ; 010C: 00 00          
 RIBBAs          FDB     $018F                    ; 010E: 01 8F          
-ENDRVs          FDB     MDERR                    ; 0110: 00 20          
+ENDRVs          FDB     $0020                    ; 0110: 00 20          
 GDBAs           FDB     $065C                    ; 0112: 06 5C          
-SYERRs          FDB     RESRV                    ; 0114: 00 00          
-SWIsSV          FDB     RESRV                    ; 0116: 00 00          
-SWIsUV          FDB     RESRV                    ; 0118: 00 00          
-IRQsUV          FDB     RESRV                    ; 011A: 00 00          
-IRQsSV          FDB     RESRV                    ; 011C: 00 00          
+SYERRs          FDB     M0000                    ; 0114: 00 00          
+SWIsSV          FDB     M0000                    ; 0116: 00 00          
+SWIsUV          FDB     M0000                    ; 0118: 00 00          
+IRQsUV          FDB     M0000                    ; 011A: 00 00          
+IRQsSV          FDB     M0000                    ; 011C: 00 00          
 CHFLGs          FDB     $8000                    ; 011E: 80 00          
 SYIOCB          FCB     $00,$11,$00,$00          ; 0120: 00 11 00 00    
 M0124           FCB     $00,$00                  ; 0124: 00 00          
@@ -245,7 +244,7 @@ Z0295           FCB     $04                      ; 0295: 04
                 FCB     $04                      ; 0297: 04             
                 SEC                              ; 0298: 0D             
                 FCB     $03                      ; 0299: 03             
-                ADCB    PUTRC                    ; 029A: D9 05          
+                ADCB    M0005                    ; 029A: D9 05          
                 BEQ     Z02A3                    ; 029C: 27 05          
                 PSHA                             ; 029E: 36             
                 FCB     $03                      ; 029F: 03             
@@ -260,8 +259,8 @@ Z02A5           FCB     $03                      ; 02A5: 03
                 LSR     M0381                    ; 02AA: 74 03 81       
                 FCB     $03                      ; 02AD: 03             
                 ORAA    #$03                     ; 02AE: 8A 03          
-                ANDA    CLOSE                    ; 02B0: 94 03          
-                LDS     REWND                    ; 02B2: 9E 06          
+                ANDA    M0003                    ; 02B0: 94 03          
+                LDS     M0006                    ; 02B2: 9E 06          
                 BLS     Z02C2                    ; 02B4: 23 0C          
                 BVC     Z02C1                    ; 02B6: 28 09          
                 FCB     $C7                      ; 02B8: C7             
@@ -283,13 +282,13 @@ Z02C2           COM     M1276                    ; 02C2: 73 12 76
                 FCB     $04                      ; 02CF: 04             
                 ORAA    #$04                     ; 02D0: 8A 04          
                 ADDA    #$04                     ; 02D2: 8B 04          
-                ANDA    GETRC                    ; 02D4: 94 04          
+                ANDA    M0004                    ; 02D4: 94 04          
                 STAA    $04,X                    ; 02D6: A7 04          
                 EORA    $04,X                    ; 02D8: A8 04          
                 ADCA    $04,X                    ; 02DA: A9 04          
                 ADCA    M04C6                    ; 02DC: B9 04 C6       
                 FCB     $04                      ; 02DF: 04             
-                ORAB    GETRC                    ; 02E0: DA 04          
+                ORAB    M0004                    ; 02E0: DA 04          
                 SUBB    $04,X                    ; 02E2: E0 04          
                 LDAB    $05,X                    ; 02E4: E6 05          
                 TAP                              ; 02E6: 06             
@@ -637,14 +636,14 @@ Z0511           LDAB    $08,X                    ; 0511: E6 08
                 LDX     #WRVERF                  ; 0537: CE E8 81       
 Z053A           STX     M0563                    ; 053A: FF 05 63       
                 ANDB    #$03                     ; 053D: C4 03          
-                STAB    RESRV                    ; 053F: D7 00          
-                LDX     #RELES                   ; 0541: CE 00 01       
+                STAB    M0000                    ; 053F: D7 00          
+                LDX     #M0001                   ; 0541: CE 00 01       
                 BITA    #$40                     ; 0544: 85 40          
                 BEQ     Z054D                    ; 0546: 27 05          
                 TSX                              ; 0548: 30             
                 LDX     $05,X                    ; 0549: EE 05          
                 LDX     $05,X                    ; 054B: EE 05          
-Z054D           STX     CLOSE                    ; 054D: DF 03          
+Z054D           STX     M0003                    ; 054D: DF 03          
                 LDAB    #$03                     ; 054F: C6 03          
                 PSHA                             ; 0551: 36             
                 PSHB                             ; 0552: 37             
@@ -653,12 +652,12 @@ Z0553           TSX                              ; 0553: 30
                 LDAB    $01,X                    ; 0556: E6 01          
                 LDAA    $02,X                    ; 0558: A6 02          
                 LDX     $03,X                    ; 055A: EE 03          
-                STX     REWND                    ; 055C: DF 06          
-                STAB    RELES                    ; 055E: D7 01          
-                STAA    OPEN                     ; 0560: 97 02          
-                JSR     >RESRV                   ; 0562: BD 00 00       
+                STX     M0006                    ; 055C: DF 06          
+                STAB    M0001                    ; 055E: D7 01          
+                STAA    M0002                    ; 0560: 97 02          
+                JSR     >M0000                   ; 0562: BD 00 00       
                 BCC     Z057A                    ; 0565: 24 13          
-                LDAA    PUTLS                    ; 0567: 96 08          
+                LDAA    M0008                    ; 0567: 96 08          
                 CMPA    #$31                     ; 0569: 81 31          
                 BEQ     Z05C1                    ; 056B: 27 54          
                 CMPA    #$34                     ; 056D: 81 34          
@@ -672,7 +671,7 @@ Z057A           PULB                             ; 057A: 33
                 PULA                             ; 057B: 32             
                 TSX                              ; 057C: 30             
                 LDX     $05,X                    ; 057D: EE 05          
-                LDAB    PUTLS                    ; 057F: D6 08          
+                LDAB    M0008                    ; 057F: D6 08          
                 STAB    ,X                       ; 0581: E7 00          
                 BCC     Z05AB                    ; 0583: 24 26          
                 PSHA                             ; 0585: 36             
@@ -682,16 +681,16 @@ Z057A           PULB                             ; 057A: 33
                 BEQ     Z05A4                    ; 058A: 27 18          
                 CMPB    #$36                     ; 058C: C1 36          
                 BEQ     Z05A4                    ; 058E: 27 14          
-                LDAB    RELES                    ; 0590: D6 01          
-                LDAA    OPEN                     ; 0592: 96 02          
-                ADDA    GETRC                    ; 0594: 9B 04          
-                ADCB    CLOSE                    ; 0596: D9 03          
-                SUBA    DSPLZ                    ; 0598: 90 0C          
-                SBCB    DSPLX                    ; 059A: D2 0B          
+                LDAB    M0001                    ; 0590: D6 01          
+                LDAA    M0002                    ; 0592: 96 02          
+                ADDA    M0004                    ; 0594: 9B 04          
+                ADCB    M0003                    ; 0596: D9 03          
+                SUBA    M000C                    ; 0598: 90 0C          
+                SBCB    M000B                    ; 059A: D2 0B          
                 SUBA    #$01                     ; 059C: 80 01          
                 SBCB    #$00                     ; 059E: C2 00          
-                STAA    OPEN                     ; 05A0: 97 02          
-                STAB    RELES                    ; 05A2: D7 01          
+                STAA    M0002                    ; 05A0: 97 02          
+                STAB    M0001                    ; 05A2: D7 01          
 Z05A4           PULA                             ; 05A4: 32             
                 TAP                              ; 05A5: 06             
                 PULA                             ; 05A6: 32             
@@ -715,25 +714,25 @@ Z05C1           TSX                              ; 05C1: 30
                 BEQ     Z0579                    ; 05C4: 27 B3          
                 LDAB    ,X                       ; 05C6: E6 00          
                 LDX     #M0082                   ; 05C8: CE 00 82       
-                TST     CKBRK                    ; 05CB: 7D 00 0D       
+                TST     M000D                    ; 05CB: 7D 00 0D       
                 BMI     Z05D3                    ; 05CE: 2B 03          
                 LDX     #KYIsSV                  ; 05D0: CE 01 04       
 Z05D3           CMPB    #$02                     ; 05D3: C1 02          
                 BNE     Z05F0                    ; 05D5: 26 19          
-                LDAB    RELES                    ; 05D7: D6 01          
-                LDAA    OPEN                     ; 05D9: 96 02          
+                LDAB    M0001                    ; 05D7: D6 01          
+                LDAA    M0002                    ; 05D9: 96 02          
                 SWI                              ; 05DB: 3F             
                 BGT     Z0637                    ; 05DC: 2E 59          
                 BCC     Z05E5                    ; 05DE: 24 05          
                 JSR     RESTOR                   ; 05E0: BD E8 75       
                 BRA     Z05ED                    ; 05E3: 20 08          
 Z05E5           RORB                             ; 05E5: 56             
-                STAB    RELES                    ; 05E6: D7 01          
-                STAA    OPEN                     ; 05E8: 97 02          
+                STAB    M0001                    ; 05E6: D7 01          
+                STAA    M0002                    ; 05E8: 97 02          
                 JSR     SEEK                     ; 05EA: BD E8 78       
 Z05ED           JMP     Z0553                    ; 05ED: 7E 05 53       
-Z05F0           LDAB    RELES                    ; 05F0: D6 01          
-                LDAA    OPEN                     ; 05F2: 96 02          
+Z05F0           LDAB    M0001                    ; 05F0: D6 01          
+                LDAA    M0002                    ; 05F2: 96 02          
                 SWI                              ; 05F4: 3F             
                 BPL     Z05C5                    ; 05F5: 2A CE          
                 TPA                              ; 05F7: 07             
@@ -774,7 +773,7 @@ Z0636           LDS     ENDSYs                   ; 0636: BE 01 0A
                 STAA    CHFLGs                   ; 0647: B7 01 1E       
                 LDX     #M2001                   ; 064A: CE 20 01       
                 STX     ENDUSs                   ; 064D: FF 01 08       
-                CLR     RESRV                    ; 0650: 7F 00 00       
+                CLR     M0000                    ; 0650: 7F 00 00       
                 JSR     RESTOR                   ; 0653: BD E8 75       
                 JSR     CHKERR                   ; 0656: BD E8 53       
                 JMP     Z1FFD                    ; 0659: 7E 1F FD       
@@ -1242,7 +1241,7 @@ Z09D2           RORB                             ; 09D2: 56
                 BNE     Z09CB                    ; 09D6: 26 F3          
                 LDAB    ,X                       ; 09D8: E6 00          
                 ANDB    #$03                     ; 09DA: C4 03          
-                STAB    RESRV                    ; 09DC: D7 00          
+                STAB    M0000                    ; 09DC: D7 00          
                 CLR     M0C23                    ; 09DE: 7F 0C 23       
                 LDAB    M0C22                    ; 09E1: F6 0C 22       
                 ANDB    #$21                     ; 09E4: C4 21          
@@ -1496,7 +1495,7 @@ Z0BCE           SWI                              ; 0BCE: 3F
                 SEI                              ; 0BCF: 0F             
 Z0BD0           LDX     TMP2                     ; 0BD0: FE 0C 20       
                 RTS                              ; 0BD3: 39             
-Z0BD4           LDAA    RESRV                    ; 0BD4: 96 00          
+Z0BD4           LDAA    M0000                    ; 0BD4: 96 00          
                 BEQ     Z0BDE                    ; 0BD6: 27 06          
                 JSR     RESTOR                   ; 0BD8: BD E8 75       
                 TSX                              ; 0BDB: 30             
@@ -1603,7 +1602,7 @@ Z0C87           LDAA    $0D,X                    ; 0C87: A6 0D
                 BITA    #$10                     ; 0C89: 85 10          
                 BNE     Z0C9C                    ; 0C8B: 26 0F          
 Z0C8D           JMP     Z0DD4                    ; 0C8D: 7E 0D D4       
-Z0C90           STAA    RESRV                    ; 0C90: 97 00          
+Z0C90           STAA    M0000                    ; 0C90: 97 00          
                 BEQ     Z0CA2                    ; 0C92: 27 0E          
                 JSR     RESTOR                   ; 0C94: BD E8 75       
                 TSX                              ; 0C97: 30             
@@ -1730,7 +1729,7 @@ Z0D9E           LDAA    M0F26                    ; 0D9E: B6 0F 26
                 LDAB    M0F2D                    ; 0DAE: F6 0F 2D       
                 STAA    $11,X                    ; 0DB1: A7 11          
                 STAB    $12,X                    ; 0DB3: E7 12          
-                LDAB    PUTLS                    ; 0DB5: D6 08          
+                LDAB    M0008                    ; 0DB5: D6 08          
                 CMPB    #$30                     ; 0DB7: C1 30          
                 BNE     Z0DBD                    ; 0DB9: 26 02          
                 CLRB                             ; 0DBB: 5F             
@@ -1809,19 +1808,19 @@ Z0E48           RTS                              ; 0E48: 39
 Z0E49           TSX                              ; 0E49: 30             
                 LDX     $07,X                    ; 0E4A: EE 07          
                 LDAA    M0F30                    ; 0E4C: B6 0F 30       
-                STAA    RESRV                    ; 0E4F: 97 00          
+                STAA    M0000                    ; 0E4F: 97 00          
                 LDX     M0F22                    ; 0E51: FE 0F 22       
                 INX                              ; 0E54: 08             
-Z0E55           STX     RELES                    ; 0E55: DF 01          
+Z0E55           STX     M0001                    ; 0E55: DF 01          
                 LDX     M0F24                    ; 0E57: FE 0F 24       
                 LDAA    $75,X                    ; 0E5A: A6 75          
                 ADDA    #$07                     ; 0E5C: 8B 07          
                 ANDA    #$F8                     ; 0E5E: 84 F8          
-                STAA    PUTRC                    ; 0E60: 97 05          
+                STAA    M0005                    ; 0E60: 97 05          
                 LDX     $76,X                    ; 0E62: EE 76          
-                STX     CLOSE                    ; 0E64: DF 03          
+                STX     M0003                    ; 0E64: DF 03          
                 LDX     M0F26                    ; 0E66: FE 0F 26       
-                STX     REWND                    ; 0E69: DF 06          
+                STX     M0006                    ; 0E69: DF 06          
                 RTS                              ; 0E6B: 39             
 Z0E6C           LDX     M0F24                    ; 0E6C: FE 0F 24       
                 LDX     $76,X                    ; 0E6F: EE 76          
@@ -1935,7 +1934,7 @@ Z0F31           CLR     M110C                    ; 0F31: 7F 11 0C
                 STX     M0170                    ; 0F4E: FF 01 70       
                 LDX     M017B                    ; 0F51: FE 01 7B       
                 BEQ     Z0F5F                    ; 0F54: 27 09          
-                LDX     #RESRV                   ; 0F56: CE 00 00       
+                LDX     #M0000                   ; 0F56: CE 00 00       
                 STX     M017B                    ; 0F59: FF 01 7B       
                 STX     M0187                    ; 0F5C: FF 01 87       
 Z0F5F           LDX     #SYEOCB                  ; 0F5F: CE 01 6A       
