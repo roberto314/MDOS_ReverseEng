@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 1 - 01/05/2026 06:56:24 PM
+ AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 1 - 01/05/2026 09:23:37 PM
 
 
        1/       0 :                     ; This file is loaded from floppy to address $20
@@ -50,33 +50,33 @@
       47/      20 : 7C 00 00                            INC     CURDRV                   ; 0020: 7C 00 00  ; 
       48/      23 : BD E8 75                            JSR     RESTOR                   ; 0023: BD E8 75  ; 
       49/      26 : BD EB C0                            JSR     LPINIT                   ; 0026: BD EB C0  ; 
-      50/      29 : CE 00 A0                            LDX     #$00A0                   ; 0029: CE 00 A0  ; 
-      51/      2C : A6 75                               LDAA    $75,X                    ; 002C: A6 75     ; $115 or 277
-      52/      2E : 97 05                               STAA    LSCTLN                   ; 002E: 97 05     ; 
-      53/      30 : E6 00                               LDAB    ,X                       ; 0030: E6 00     ; 
-      54/      32 : 2B 58                               BMI     Z008C                    ; 0032: 2B 58     ; Error '?'
-      55/      34 : C4 03                               ANDB    #$03                     ; 0034: C4 03     ; 
-      56/      36 : A6 01                               LDAA    $01,X                    ; 0036: A6 01     ; 
+      50/      29 : CE 00 A0                            LDX     #$00A0                   ; 0029: CE 00 A0  ; Start of RIB in Memory
+      51/      2C : A6 75                               LDAA    $75,X                    ; 002C: A6 75     ; RIB $75: the number of bytes to load from the last sector
+      52/      2E : 97 05                               STAA    LSCTLN                   ; 002E: 97 05     ; LAST SECTOR LENGTH
+      53/      30 : E6 00                               LDAB    ,X                       ; 0030: E6 00     ; X is at $A0
+      54/      32 : 2B 58                               BMI     Z008C                    ; 0032: 2B 58     ; RIB Byte 0 Bit 7 set - Error '?'
+      55/      34 : C4 03                               ANDB    #$03                     ; 0034: C4 03     ; isolate Bit 0,1
+      56/      36 : A6 01                               LDAA    $01,X                    ; 0036: A6 01     ; LDA from $76, ($76,77), the number of sectors to load
       57/      38 : 48                                  ASLA                             ; 0038: 48        ; 
       58/      39 : 59                                  ROLB                             ; 0039: 59        ; 
       59/      3A : 48                                  ASLA                             ; 003A: 48        ; 
       60/      3B : 59                                  ROLB                             ; 003B: 59        ; 
- AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 2 - 01/05/2026 06:56:24 PM
+ AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 2 - 01/05/2026 09:23:37 PM
 
 
       61/      3C : 8B 01                               ADDA    #$01                     ; 003C: 8B 01     ; 
       62/      3E : C9 00                               ADCB    #$00                     ; 003E: C9 00     ; 
       63/      40 : D7 01                               STAB    STRSCTH                  ; 0040: D7 01     ; 
       64/      42 : 97 02                               STAA    STRSCTL                  ; 0042: 97 02     ; 
-      65/      44 : A6 77                               LDAA    $77,X                    ; 0044: A6 77     ; 
-      66/      46 : E6 76                               LDAB    $76,X                    ; 0046: E6 76     ; 
+      65/      44 : A6 77                               LDAA    $77,X                    ; 0044: A6 77     ; |
+      66/      46 : E6 76                               LDAB    $76,X                    ; 0046: E6 76     ; ($76,77), the number of sectors to load
       67/      48 : 97 04                               STAA    NUMSCTL                  ; 0048: 97 04     ; 
       68/      4A : D7 03                               STAB    NUMSCTH                  ; 004A: D7 03     ; 
-      69/      4C : E6 7A                               LDAB    $7A,X                    ; 004C: E6 7A     ; 
-      70/      4E : A6 7B                               LDAA    $7B,X                    ; 004E: A6 7B     ; 
+      69/      4C : E6 7A                               LDAB    $7A,X                    ; 004C: E6 7A     ; |
+      70/      4E : A6 7B                               LDAA    $7B,X                    ; 004E: A6 7B     ; ($7A,7B), the starting execution address
       71/      50 : 36                                  PSHA                             ; 0050: 36        ; 
       72/      51 : 37                                  PSHB                             ; 0051: 37        ; 
-      73/      52 : EE 78                               LDX     $78,X                    ; 0052: EE 78     ; 
+      73/      52 : EE 78                               LDX     $78,X                    ; 0052: EE 78     ; ($78,79), the starting load address
       74/      54 : DF 06                               STX     CURADRH                  ; 0054: DF 06     ; 
       75/      56 : 96 04                               LDAA    NUMSCTL                  ; 0056: 96 04     ; 
       76/      58 : D6 03                               LDAB    NUMSCTH                  ; 0058: D6 03     ; 
@@ -102,10 +102,10 @@
       96/      7C : 9C 0B                               CPX     SECTCNT                  ; 007C: 9C 0B     ; 
       97/      7E : 26 ED                               BNE     Z006D                    ; 007E: 26 ED     ; 
       98/      80 : 7F 00 00                            CLR     CURDRV                   ; 0080: 7F 00 00  ; 
-      99/      83 : 86 53                               LDAA    #$53                     ; 0083: 86 53     ; 
-     100/      85 : 36                                  PSHA                             ; 0085: 36        ; 
-     101/      86 : 86 E8                               LDAA    #$E8                     ; 0086: 86 E8     ; 
-     102/      88 : 36                                  PSHA                             ; 0088: 36        ; 
+      99/      83 : 86 53                               LDAA    #$53                     ; 0083: 86 53     ; |
+     100/      85 : 36                                  PSHA                             ; 0085: 36        ; |
+     101/      86 : 86 E8                               LDAA    #$E8                     ; 0086: 86 E8     ; |
+     102/      88 : 36                                  PSHA                             ; 0088: 36        ; E853 is CHKERR
      103/      89 : 7E E8 6D                            JMP     READPS                   ; 0089: 7E E8 6D  ; 
      104/      8C :                     ;------------------------------------------------
      105/      8C : 86 3F               Z008C           LDAA    #$3F                     ; 008C: 86 3F     ; $3F is '?'
@@ -124,13 +124,13 @@
      118/      9D : 00                                  FCB     $00                      ; 009D: 00        ; |
      119/      9E : 00                                  FCB     $00                      ; 009E: 00        ; |
      120/      9F : 00                                  FCB     $00                      ; 009F: 00        ; |
- AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 3 - 01/05/2026 06:56:24 PM
+ AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 3 - 01/05/2026 09:23:37 PM
 
 
      121/      A0 :                     
      122/      A0 :                     
      123/      A0 :                                     END
- AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 4 - 01/05/2026 06:56:24 PM
+ AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 4 - 01/05/2026 09:23:37 PM
 
 
   Symbol Table (* = unused):
@@ -158,7 +158,7 @@
 *PWRUP :                       F000 - |  READPS :                      E86D - |
 *RELAXED :                        0 - |  RESTOR :                      E875 - |
  SECTCNT :                        B - |  STRSCTH :                        1 - |
- STRSCTL :                        2 - | *TIME :               "06:56:24 PM" - |
+ STRSCTL :                        2 - | *TIME :               "09:23:37 PM" - |
 *TRUE :                           1 - | *VERSION :                     142F - |
 *XBEGEN :                      F003 - | *XCBCDH :                      F006 - |
 *XCHEXL :                      F009 - | *XCHEXR :                      F00C - |
@@ -175,7 +175,7 @@
      68 symbols
      48 unused symbols
 
- AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 5 - 01/05/2026 06:56:24 PM
+ AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 5 - 01/05/2026 09:23:37 PM
 
 
   Code Pages:

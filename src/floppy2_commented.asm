@@ -149,12 +149,12 @@ CLOCK           LDAB    #$04                     ; E887: C6 04    ; Bit 2 set   
                 STX     NMIsVC                   ; E89D: FF FF FC  ; New NMIISR
                 LDX     #M0012                   ; E8A0: CE 00 12  ;                                         <******************** different
                 LDAA    #$01                     ; E8A3: 86 01     ; 
-                CMPA    CURDRV                   ; E8A5: 91 00     ; 
+                CMPA    CURDRV                   ; E8A5: 91 00     ; is 0 at start
                 BCS     ZE8BB                    ; E8A7: 25 12     ; 
                 BEQ     ZE8AD                    ; E8A9: 27 02     ; 
-                DEX                              ; E8AB: 09        ; 
-                INCA                             ; E8AC: 4C        ; 
-ZE8AD           STAA    PIAREGA                  ; E8AD: B7 EC 00  ; Write DS0 low to Register
+                DEX                              ; E8AB: 09        ; down to $11
+                INCA                             ; E8AC: 4C        ; A is 2 now
+ZE8AD           STAA    PIAREGA                  ; E8AD: B7 EC 00  ; Write DS0, TG43, DIRQ, HLD low, Set DS1
                 LDAA    ,X                       ; E8B0: A6 00     ; X @ $11 for Drive 0 or $12 for Drive 1
                 STAA    TRACKSAV                 ; E8B2: 97 13     ; 
                 LDAA    #$40                     ; E8B4: 86 40     ; PA6 (RDY)
@@ -207,14 +207,14 @@ ZE8FB           INCA                             ; E8FB: 4C        ;
                 STX     SECTCNT                  ; E906: DF 0B     ; 
                 LDAB    TRACKSAV                 ; E908: D6 13     ; 
 RESTORY         STAA    TRACKSAV                 ; E90A: 97 13     ; contains track (0 if RESTOR or 3)
-                SBA                              ; E90C: 10        ; B cont. $56 (86) if RESTOR
+                SBA                              ; E90C: 10        ; B cont. 0 if RESTOR
                 LDAB    PIAREGA                  ; E90D: F6 EC 00  ;                                        <******************** different
                 ORAB    #$08                     ; E910: CA 08     ; Isolate Bit 3 (DIRQ)
                 BCC     ZE917                    ; E912: 24 03     ; 
                 ANDB    #$F7                     ; E914: C4 F7     ; Isolate Bit 3 (DIRQ)
                 NEGA                             ; E916: 40        ; 
 ZE917           ANDB    #$EF                     ; E917: C4 EF     ; Isolate PA4 (HLD)
-                CMPA    #$04                     ; E919: 81 04     ; Compare A with Bit 3   <------------ WHY
+                CMPA    #$04                     ; E919: 81 04     ; Compare A with 4   <------------ WHY
                 BLS     ZE91F                    ; E91B: 23 02     ; 
                 ORAB    #$10                     ; E91D: CA 10     ; Set Bit 4 (HLD)
 ZE91F           STAB    PIAREGA                  ; E91F: F7 EC 00  ; Write to Port
@@ -222,7 +222,7 @@ ZE91F           STAB    PIAREGA                  ; E91F: F7 EC 00  ; Write to Po
                 BMI     ZE96A                    ; E923: 2B 45     ; 
                 BSR     STEP                     ; E925: 8D 1F     ; 
                 LDAB    PIAREGA                  ; E927: F6 EC 00  ; 
-                BPL     ZE917                    ; E92A: 2A EB     ; Bit 7 set? (TRK0)
+                BPL     ZE917                    ; E92A: 2A EB     ; Bit 7 clear? (TRK0)
                 TSTA                             ; E92C: 4D        ; 
                 BEQ     ZE96A                    ; E92D: 27 3B     ; 
                 LDAA    FUNCSAV                  ; E92F: 96 0E     ; 
