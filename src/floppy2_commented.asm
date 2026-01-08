@@ -21,7 +21,7 @@ M0012   EQU     $0012
 TRACKSAV EQU    $0013
 M0014   EQU     $0014
 WRDCNT  EQU     $0015
-M0016   EQU     $0016
+STACKSAV EQU     $0016
 M0018   EQU     $0018
 M0019   EQU     $0019
 LDADDR  EQU     $0020
@@ -142,17 +142,17 @@ CLOCK           LDAB    #$04                     ; E887: C6 04    ; Bit 2 set   
                 STAB    FUNCSAV                  ; E88D: D7 0E     ; Save Function
                 LDAA    #$30                     ; E88F: 86 30     ; 
                 STAA    FDSTAT                   ; E891: 97 08     ; Clear Errors ('0')
-                STS     M0016                    ; E893: 9F 16     ; Set Stackpointer
+                STS     STACKSAV                 ; E893: 9F 16     ; Set Stackpointer
                 LDX     NMIsVC                   ; E895: FE FF FC  ; |
                 STX     NMIVECSAV                ; E898: DF 0F     ; Save old NMIISR
                 LDX     #NMIISR                  ; E89A: CE E9 39  ; |
                 STX     NMIsVC                   ; E89D: FF FF FC  ; New NMIISR
-                LDX     #M0012                   ; E8A0: CE 00 12  ;                                         <******************** different
+                LDX     #$0012                   ; E8A0: CE 00 12  ;  
                 LDAA    #$01                     ; E8A3: 86 01     ; 
                 CMPA    CURDRV                   ; E8A5: 91 00     ; is 0 at start
-                BCS     ZE8BB                    ; E8A7: 25 12     ; 
-                BEQ     ZE8AD                    ; E8A9: 27 02     ; 
-                DEX                              ; E8AB: 09        ; down to $11
+                BCS     ZE8BB                    ; E8A7: 25 12     ; if CURDRV > 1 Error
+                BEQ     ZE8AD                    ; E8A9: 27 02     ; if CURRDRV == 1 leave it @ $12
+                DEX                              ; E8AB: 09        ; else, down to $11
                 INCA                             ; E8AC: 4C        ; A is 2 now
 ZE8AD           STAA    PIAREGA                  ; E8AD: B7 EC 00  ; Write DS0, TG43, DIRQ, HLD low, Set DS1
                 LDAA    ,X                       ; E8B0: A6 00     ; X @ $11 for Drive 0 or $12 for Drive 1
@@ -231,7 +231,7 @@ ZE91F           STAB    PIAREGA                  ; E91F: F7 EC 00  ; Write to Po
                 BSR     WAIT2                    ; E935: 8D 25     ; Wait
                 BRA     ERRHNDLR                 ; E937: 20 58     ; 
 ;------------------------------------------------
-NMIISR          LDS     M0016                    ; E939: 9E 16     ; 
+NMIISR          LDS     STACKSAV                 ; E939: 9E 16     ; 
                 LDAB    #$35                     ; E93B: C6 35     ; Set Error '5' (TIMEOUT)
 ;                CPX     #MC637                   ; E93D: 8C C6 37  ; 
                 FCB     $8C
