@@ -23,7 +23,7 @@ M0014   EQU     $0014
 WRDCNT  EQU     $0015
 STACKSAV EQU     $0016
 M0018   EQU     $0018
-M0019   EQU     $0019
+CLKFREQ EQU     $0019
 LDADDR  EQU     $0020
 ; The PIA has A0 and A1 switched!
 ; 00 with CRA2 Set is Peripheral Register A 
@@ -246,7 +246,7 @@ STEP            LDAB    #$34                     ; E946: C6 34     ; Bit 5,4,2 s
                 LDAB    #$3C                     ; E94B: C6 3C     ; Bit 5,4,3,2 set
                 STAB    PIACTRL                  ; E94D: F7 EC 02  ; CA2 high (STEP)
                 LDX     #$00FE                   ; E950: CE 00 FE  ;                                        <******************** different
-WAIT3           LDAB    M0019                    ; E953: D6 19     ; 
+WAIT3           LDAB    CLKFREQ                  ; E953: D6 19     ; 
 WAIT1           DECB                             ; E955: 5A        ; 
                 BNE     WAIT1                    ; E956: 26 FD     ; 
                 DEX                              ; E958: 09        ; 
@@ -378,7 +378,7 @@ ZEA32           LDAA    $04,X                    ; EA32: A6 04     ; We are on t
 ZEA3E           LDAA    $04,X                    ; EA3E: A6 04     ; Found Sector, Read SSDA Status Reg.
                 BPL     ZEA3E                    ; EA40: 2A FC     ; Wait for Data
                 TST     $05,X                    ; EA42: 6D 05     ; 
-                LDAA    M0019                    ; EA44: 96 19     ; 
+                LDAA    CLKFREQ                  ; EA44: 96 19     ; 
 ZEA46           SUBA    #$03                     ; EA46: 80 03     ; 
                 BHI     ZEA46                    ; EA48: 22 FC     ; 
                 LDAA    $01,X                    ; EA4A: A6 01     ; Read PIAREGB
@@ -396,7 +396,7 @@ ZEA52           TST     $04,X                    ; EA52: 6D 04     ; Read SSDA S
                 BNE     ZEA52                    ; EA5B: 26 F5     ; try again
                 LDAB    FUNCSAV                  ; EA5D: D6 0E     ; 
                 BMI     WRITINIT                 ; EA5F: 2B 7C     ; Bit 7 set - Write Function
-                LDAB    M0019                    ; EA61: D6 19     ; Waitloop
+                LDAB    CLKFREQ                  ; EA61: D6 19     ; Waitloop
                 ASLB                             ; EA63: 58        ; |
 ZEA64           INX                              ; EA64: 08        ; |
                 DEX                              ; EA65: 09        ; |
@@ -456,7 +456,7 @@ READCRC         LDAA    SSDA_0                   ; EABD: B6 EC 04  ; Read SSDA S
                 LDAA    SSDA_1                   ; EAC8: B6 EC 05  ; Read SSDA Data to A
                 BRA     READCRC                  ; EACB: 20 F0     ; continue
 ;------------------------------------------------
-ZEACD           LDAA    M0019                    ; EACD: 96 19     ; 
+ZEACD           LDAA    CLKFREQ                  ; EACD: 96 19     ; 
 ZEACF           SUBA    #$03                     ; EACF: 80 03     ; 
                 BHI     ZEACF                    ; EAD1: 22 FC     ; 
                 LDAA    PIAREGB                  ; EAD3: B6 EC 01  ; |
@@ -478,7 +478,7 @@ WRITINIT        LDX     #$C0DA                   ; EADD: CE C0 DA  ;
                 LDAA    #$10                     ; EAFB: 86 10     ; Bit 4
                 BITA    PIAREGB                  ; EAFD: B5 EC 01  ; Check Writeprot?
                 BEQ     DSKWPROT                 ; EB00: 27 93     ; If yes set Error
-                LDAA    M0019                    ; EB02: 96 19     ; Waitloop
+                LDAA    CLKFREQ                  ; EB02: 96 19     ; Waitloop
                 SUBA    #$03                     ; EB04: 80 03     ; |
                 ASLA                             ; EB06: 48        ; |
 ZEB07           DECA                             ; EB07: 4A        ; |
@@ -563,7 +563,7 @@ ZEB91           DECB                             ; EB91: 5A        ;
 ZEB9C           INCB                             ; EB9C: 5C        ; 
                 SUBA    #$16                     ; EB9D: 80 16     ; 
                 BCC     ZEB9C                    ; EB9F: 24 FB     ; 
-                STAB    M0019                    ; EBA1: D7 19     ; 
+                STAB    CLKFREQ                  ; EBA1: D7 19     ; 
                 JMP     ERRHNDLR                 ; EBA3: 7E E9 91  ; 
 ;------------------------------------------------
 FDINIT3         JSR     FDINIT                   ; EBA6: BD E8 22  ; 
