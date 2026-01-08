@@ -439,7 +439,7 @@ READSECT        LDAB    FUNCSAV                  ; EA9D: D6 0E     ; data addres
 ZEAA4           LDAA    SSDA_0                   ; EAA4: B6 EC 04  ; Read SSDA Status Reg.
                 BPL     ZEAA4                    ; EAA7: 2A FB     ; Wait and Test RDA for 2 Bytes Ready
                 LDAA    SSDA_1                   ; EAA9: B6 EC 05  ; Read Data to Buffer
-                CPX     PROM_0                   ; EAAC: BC FC FC  ; in PROM_0 is zero *** This does nothing ! ***
+                CPX     PROM_0                   ; EAAC: BC FC FC  ; X is on $20, in PROM_0 is zero *** This does nothing ! ***
                 STAA    ,X                       ; EAAF: A7 00     ; |
                 LDAA    SSDA_1                   ; EAB1: B6 EC 05  ; |
                 STAA    $01,X                    ; EAB4: A7 01     ; |
@@ -547,9 +547,9 @@ RETRG           LDX     #PIAREGA                 ; EB74: CE EC 00  ;
                 RTS                              ; EB84: 39        ; 
 ;------------------------------------------------
 CLKDMD          BSR     RETRG                    ; EB85: 8D ED     ; Retrigger NMI Timer
-                LDAB    $01,X                    ; EB87: E6 01     ; 
+                LDAB    $01,X                    ; EB87: E6 01     ; PIAREGB
                 CLRA                             ; EB89: 4F        ; 
-ZEB8A           LDAB    $03,X                    ; EB8A: E6 03     ; 
+ZEB8A           LDAB    $03,X                    ; EB8A: E6 03     ; PIACTRLB
                 BPL     ZEB8A                    ; EB8C: 2A FC     ; 
                 LDAB    $01,X                    ; EB8E: E6 01     ; 
 CLRTOP          CLRB                             ; EB90: 5F        ; 
