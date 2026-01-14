@@ -31,6 +31,13 @@ ${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
 ${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
 rm ${NAME}.p
 cat out.txt | grep rror   # Check for Errors
+#######################################################################
+NAME=exbug12_commented
+## Use asl
+${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
+${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
+rm ${NAME}.p
+cat out.txt | grep rror   # Check for Errors
 
 
 #OFF=0x100
