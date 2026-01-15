@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 1 - 01/14/2026 10:47:48 PM
+ AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 1 - 2026-01-15 10:46:08
 
 
        1/       0 :                     ; This file is loaded from floppy to address $20
@@ -61,7 +61,7 @@
       58/      39 : 59                                  ROLB                             ; 0039: 59        ; 
       59/      3A : 48                                  ASLA                             ; 003A: 48        ; 
       60/      3B : 59                                  ROLB                             ; 003B: 59        ; 
- AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 2 - 01/14/2026 10:47:48 PM
+ AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 2 - 2026-01-15 10:46:08
 
 
       61/      3C : 8B 01                               ADDA    #$01                     ; 003C: 8B 01     ; 
@@ -124,13 +124,13 @@
      118/      9D : 00                                  FCB     $00                      ; 009D: 00        ; |
      119/      9E : 00                                  FCB     $00                      ; 009E: 00        ; |
      120/      9F : 00                                  FCB     $00                      ; 009F: 00        ; |
- AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 3 - 01/14/2026 10:47:48 PM
+ AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 3 - 2026-01-15 10:46:08
 
 
      121/      A0 :                     
      122/      A0 :                     
      123/      A0 :                                     END
- AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 4 - 01/14/2026 10:47:48 PM
+ AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 4 - 2026-01-15 10:46:08
 
 
   Symbol Table (* = unused):
@@ -142,7 +142,7 @@
 *COMPMODE :                       0 - | *CONSTPI :        3.141592653589793 - |
  CURADRH :                        6 - |  CURADRL :                        7 - |
  CURDRV :                         0 - | *CUSTOM :                         0 - |
-*DATE :                "01/14/2026" - | *FALSE :                          0 - |
+*DATE :                "2026-01-15" - | *FALSE :                          0 - |
  FDSTAT :                         8 - | *FULLPMMU :                       1 - |
 *HAS64 :                          1 - | *HASDSP :                         0 - |
 *HASFPU :                         0 - | *HASPMMU :                        0 - |
@@ -158,7 +158,7 @@
 *PWRUP :                       F000 - |  READPS :                      E86D - |
 *RELAXED :                        0 - |  RESTOR :                      E875 - |
  SECTCNT :                        B - |  STRSCTH :                        1 - |
- STRSCTL :                        2 - | *TIME :               "10:47:48 PM" - |
+ STRSCTL :                        2 - | *TIME :                  "10:46:08" - |
 *TRUE :                           1 - | *VERSION :                     142F - |
 *XBEGEN :                      F003 - | *XCBCDH :                      F006 - |
 *XCHEXL :                      F009 - | *XCHEXR :                      F00C - |
@@ -175,7 +175,7 @@
      68 symbols
      48 unused symbols
 
- AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 5 - 01/14/2026 10:47:48 PM
+ AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 5 - 2026-01-15 10:46:08
 
 
   Code Pages:
