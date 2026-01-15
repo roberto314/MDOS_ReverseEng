@@ -51,7 +51,7 @@ XPSPAC  EQU     $F02A
                 LDAA    $75,X                    ; 002C: A6 75     ; RIB $75: the number of bytes to load from the last sector
                 STAA    LSCTLN                   ; 002E: 97 05     ; LAST SECTOR LENGTH
                 LDAB    ,X                       ; 0030: E6 00     ; X is at $A0
-                BMI     Z008C                    ; 0032: 2B 58     ; RIB Byte 0 Bit 7 set - Error '?'
+                BMI     SERRQM                   ; 0032: 2B 58     ; RIB Byte 0 Bit 7 set - Error '?'
                 ANDB    #$03                     ; 0034: C4 03     ; isolate Bit 0,1
                 LDAA    $01,X                    ; 0036: A6 01     ; LDA from $76, ($76,77), the number of sectors to load
                 ASLA                             ; 0038: 48        ; 
@@ -92,7 +92,7 @@ Z006D           LDAA    #$4D                     ; 006D: 86 4D     ;
                 TPA                              ; 0076: 07        ; 
                 STAB    ,X                       ; 0077: E7 00     ; 
                 TAP                              ; 0079: 06        ; 
-                BNE     Z0094                    ; 007A: 26 18     ; Error 'M'
+                BNE     SERRM                    ; 007A: 26 18     ; Error 'M'
                 CPX     SECTCNT                  ; 007C: 9C 0B     ; 
                 BNE     Z006D                    ; 007E: 26 ED     ; 
                 CLR     CURDRV                   ; 0080: 7F 00 00  ; 
@@ -102,12 +102,12 @@ Z006D           LDAA    #$4D                     ; 006D: 86 4D     ;
                 PSHA                             ; 0088: 36        ; E853 is CHKERR
                 JMP     READPS                   ; 0089: 7E E8 6D  ; 
 ;------------------------------------------------
-Z008C           LDAA    #$3F                     ; 008C: 86 3F     ; $3F is '?'
+SERRQM          LDAA    #'?'                     ; 008C: 86 3F     ; 
 Z008E           STAA    FDSTAT                   ; 008E: 97 08     ; 
                 SEC                              ; 0090: 0D        ; 
                 JMP     CHKERR                   ; 0091: 7E E8 53  ; 
-;------------------------------------------------
-Z0094           LDAA    #$4D                     ; 0094: 86 4D     ; $4D is 'M'
+
+SERRM           LDAA    #'M'                     ; 0094: 86 4D     ; 
                 BRA     Z008E                    ; 0096: 20 F6     ; 
 ;------------------------------------------------
                 FCB     $00                      ; 0098: 00        ; filler
