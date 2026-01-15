@@ -50,8 +50,8 @@ XPSPAC  EQU     $F02A
                 LDX     #$00A0                   ; 0029: CE 00 A0  ; Start of RIB in Memory
                 LDAA    $75,X                    ; 002C: A6 75     ; RIB $75: the number of bytes to load from the last sector
                 STAA    LSCTLN                   ; 002E: 97 05     ; LAST SECTOR LENGTH
-                LDAB    ,X                       ; 0030: E6 00     ; X is at $A0
-                BMI     SERRQM                   ; 0032: 2B 58     ; RIB Byte 0 Bit 7 set - Error '?'
+                LDAB    ,X                       ; 0030: E6 00     ; X is at $A0, Get Segment descriptor word
+                BMI     SERRQM                   ; 0032: 2B 58     ; RIB SDW Bit 7 set - Error '?'
                 ANDB    #$03                     ; 0034: C4 03     ; isolate Bit 0,1
                 LDAA    $01,X                    ; 0036: A6 01     ; LDA from $76, ($76,77), the number of sectors to load
                 ASLA                             ; 0038: 48        ; 
