@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 1 - 2026-01-15 10:46:08
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 1 - 01/15/2026 09:15:29 PM
 
 
        1/       0 :                     ; Ready to assemble with asl. binary matches original
@@ -61,7 +61,7 @@
       58/    E803 : 4F                                  CLRA                             ; E803: 4F        ; |    
       59/    E804 : 97 00                               STAA    CURDRV                   ; E804: 97 00     ; Set Drive to zero   
       60/    E806 : 8D 48                               BSR     FDINIT2                  ; E806: 8D 48     ; Init PIA and SSDA
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 2 - 2026-01-15 10:46:08
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 2 - 01/15/2026 09:15:29 PM
 
 
       61/    E808 : 8D 6B                               BSR     RESTOR                   ; E808: 8D 6B     ; 
@@ -124,7 +124,7 @@
      118/    E86B : D7 05                               STAB    LSCTLN                   ; E86B: D7 05      ; 
      119/    E86D : 5F                  READPS          CLRB                             ; E86D: 5F       ; NO Bit set    ; similar to READSC with the exception that the last sector is only partially read according to the contents of LSCTLN
      120/    E86E : 8C                                  FCB     $8C
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 3 - 2026-01-15 10:46:08
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 3 - 01/15/2026 09:15:29 PM
 
 
      121/    E86F : C6 40               RDCRC           LDAB    #$40                     ; E86F: C6 40    ; Bit 6 set     ; This entry point causes the number of sectors contained in NUMSCT beginning with STRSCT from CURDRV to be read to check their CRCs
@@ -187,7 +187,7 @@
      178/    E8D2 :                     ;------------------------------------------------
      179/    E8D2 : D6 02               RESTORN         LDAB    STRSCTL                  ; E8D2: D6 02     ; RESTOR is NOT active
      180/    E8D4 : 96 01                               LDAA    STRSCTH                  ; E8D4: 96 01     ; Get Startsector
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 4 - 2026-01-15 10:46:08
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 4 - 01/15/2026 09:15:29 PM
 
 
      181/    E8D6 : DB 04                               ADDB    NUMSCTL                  ; E8D6: DB 04     ; |
@@ -250,7 +250,7 @@
      238/    E93E : C6 37               ZE93E           LDAB    #$37                                       ; Set Error '7' (SEEK ERROR)
      239/    E940 : D7 08               SETERR          STAB    FDSTAT                   ; E940: D7 08     ; 
      240/    E942 : 8D 4D                               BSR     ERRHNDLR                 ; E942: 8D 4D     ; 
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 5 - 2026-01-15 10:46:08
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 5 - 01/15/2026 09:15:29 PM
 
 
      241/    E944 : 0D                                  SEC                              ; E944: 0D        ; 
@@ -313,7 +313,7 @@
      298/    E9A9 : 06                                  TAP                              ; E9A9: 06        ; Transfer A to Status Register
      299/    E9AA : 0C                                  CLC                              ; E9AA: 0C        ; 
      300/    E9AB : 39                                  RTS                              ; E9AB: 39        ; 
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 6 - 2026-01-15 10:46:08
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 6 - 01/15/2026 09:15:29 PM
 
 
      301/    E9AC :                     ;------------------------------------------------
@@ -376,7 +376,7 @@
      358/    EA1A :                     ; Looking for ID Addr. Mark, correct Track and Sector
      359/    EA1A :                     ;*************************************************
      360/    EA1A : 8D 90               ZEA1A           BSR     READINIT                 ; EA1A: 8D 90     ; X is on PIAREGA (EC00), Toggle RESET
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 7 - 2026-01-15 10:46:08
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 7 - 01/15/2026 09:15:29 PM
 
 
      361/    EA1C : A6 04               ZEA1C           LDAA    $04,X                    ; EA1C: A6 04     ; Read SSDA Status Reg.
@@ -439,7 +439,7 @@
      418/    EA85 :                     ;                CPX     #MC631                   ; EA85: 8C C6 31  ; 
      419/    EA85 : 8C                                  FCB     $8C
      420/    EA86 : C6 31               ZEA86           LDAB    #$31                                       ; (Set Error '1') (DATA CRC ERROR)
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 8 - 2026-01-15 10:46:08
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 8 - 01/15/2026 09:15:29 PM
 
 
      421/    EA88 :                     ;                CPX     #MC639                   ; EA88: 8C C6 39  ; 
@@ -502,7 +502,7 @@
      478/    EAFB : 86 10                               LDAA    #$10                     ; EAFB: 86 10     ; Bit 4
      479/    EAFD : B5 EC 01                            BITA    PIAREGB                  ; EAFD: B5 EC 01  ; Check Writeprot?
      480/    EB00 : 27 93                               BEQ     DSKWPROT                 ; EB00: 27 93     ; If yes set Error
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 9 - 2026-01-15 10:46:08
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 9 - 01/15/2026 09:15:29 PM
 
 
      481/    EB02 : 96 19                               LDAA    CLKFREQ                  ; EB02: 96 19     ; Waitloop
@@ -565,7 +565,7 @@
      538/    EB74 :                     ;------------------------------------------------
      539/    EB74 : CE EC 00            RETRG           LDX     #PIAREGA                 ; EB74: CE EC 00  ; 
      540/    EB77 : 86 36                               LDAA    #$36                     ; EB77: 86 36     ; |
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 10 - 2026-01-15 10:46:08
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 10 - 01/15/2026 09:15:29 PM
 
 
      541/    EB79 : A7 03                               STAA    $03,X                    ; EB79: A7 03     ; $36 -> PIACTRLB (CB2 Low - Trigger NMI Timer, IRQB Flag set by HL on CB1 - IDX, Select Output Reg. B)
@@ -628,7 +628,7 @@
      598/    EBDC : 27 CF                               BEQ     ZEBAD                    ; EBDC: 27 CF     ; 
      599/    EBDE : 32                                  PULA                             ; EBDE: 32        ; 
      600/    EBDF : B7 EC 27                            STAA    MEC27                    ; EBDF: B7 EC 27  ; <------------------------------------ no RAM here!
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 11 - 2026-01-15 10:46:08
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 11 - 01/15/2026 09:15:29 PM
 
 
      601/    EBE2 : 33                                  PULB                             ; EBE2: 33        ; 
@@ -657,7 +657,7 @@
      624/    EC00 :                     
      625/    EC00 :                     
      626/    EC00 :                                     END
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 12 - 2026-01-15 10:46:08
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 12 - 01/15/2026 09:15:29 PM
 
 
   Symbol Table (* = unused):
@@ -670,7 +670,7 @@
  CLOCK :                       E887 C |  CLRTOP :                      EB90 C |
 *COMPMODE :                       0 - | *CONSTPI :        3.141592653589793 - |
  CURADRH :                        6 - |  CURDRV :                         0 - |
-*CUSTOM :                         0 - | *DATE :                "2026-01-15" - |
+*CUSTOM :                         0 - | *DATE :                "01/15/2026" - |
  DRVRDY :                      E8C2 C |  DSKWPROT :                    EA95 C |
  ERRHNDLR :                    E991 C | *FALSE :                          0 - |
  FDINIT :                      E822 C |  FDINIT2 :                     E850 C |
@@ -707,7 +707,7 @@
  SSDA_0 :                      EC04 - |  SSDA_1 :                      EC05 - |
  STACKSAV :                      16 - |  STATSAV :                        D - |
  STEP :                        E946 C |  STRSCTH :                        1 - |
- STRSCTL :                        2 - | *TIME :                  "10:46:08" - |
+ STRSCTL :                        2 - | *TIME :               "09:15:29 PM" - |
  TRACKSAV :                      13 - | *TRUE :                           1 - |
 *VERSION :                     142F - |  WAIT1 :                       E955 C |
  WAIT2 :                       E95C C |  WAIT3 :                       E953 C |
@@ -720,7 +720,7 @@
  ZE8BB :                       E8BB C |  ZE8BE :                       E8BE C |
  ZE8CB :                       E8CB C |  ZE8EA :                       E8EA C |
  ZE8FB :                       E8FB C |  ZE917 :                       E917 C |
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 13 - 2026-01-15 10:46:08
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 13 - 01/15/2026 09:15:29 PM
 
 
  ZE91F :                       E91F C |  ZE93E :                       E93E C |
@@ -752,7 +752,7 @@
     163 symbols
      43 unused symbols
 
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 14 - 2026-01-15 10:46:08
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 14 - 01/15/2026 09:15:29 PM
 
 
   Code Pages:
@@ -762,7 +762,7 @@ STANDARD (0 changed characters)
 
 1 code page
 
-0.02 seconds assembly time
+0.00 seconds assembly time
 
     627 lines source file
       2 passes
