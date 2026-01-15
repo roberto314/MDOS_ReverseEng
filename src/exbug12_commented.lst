@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 1 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 1 - 01/15/2026 09:36:31 PM
 
 
        1/       0 :                     
@@ -61,7 +61,7 @@
       58/       0 : =$FCF5               ACIA_1  EQU     $FCF5
       59/       0 : =$FCF8               PIADRA  EQU     $FCF8
       60/       0 : =$FCF9               PIACRA  EQU     $FCF9
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 2 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 2 - 01/15/2026 09:36:31 PM
 
 
       61/       0 : =$FCFA               PIADRB  EQU     $FCFA
@@ -124,7 +124,7 @@
      118/       0 : =$FFFC               NMIsVC  EQU     $FFFC ; Interrupt Vectors
      119/       0 :                     
      120/       0 :                     ;****************************************************
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 3 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 3 - 01/15/2026 09:36:31 PM
 
 
      121/       0 :                     ; Program's Code Areas
@@ -187,7 +187,7 @@
      178/    F080 : 68 01                               ASL     $01,X                    ; F080: 68 01     ; 
      179/    F082 : 69 00                               ROL     ,X                       ; F082: 69 00     ; 
      180/    F084 : 68 01                               ASL     $01,X                    ; F084: 68 01     ; 
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 4 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 4 - 01/15/2026 09:36:31 PM
 
 
      181/    F086 : 69 00                               ROL     ,X                       ; F086: 69 00     ; 
@@ -250,7 +250,7 @@
      238/    F0FC : BD FA 40                            JSR     XINBFR                   ; F0FC: BD FA 40  ; input HEX digits to buffer (FF08)
      239/    F0FF : 5D                                  TSTB                             ; F0FF: 5D        ; 
      240/    F100 : 26 24                               BNE     DIGITS                   ; F100: 26 24     ; we received digits
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 5 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 5 - 01/15/2026 09:36:31 PM
 
 
      241/    F102 : BD FA 2E                            JSR     XCKBRK1                  ; F102: BD FA 2E  ; check for 'X' or '^'
@@ -313,7 +313,7 @@
      298/    F176 : 20 A6               ZF176           BRA     OUTQM                    ; F176: 20 A6     ; no match, output '?'
      299/    F178 :                     ;------------------------------------------------
      300/    F178 : CE FF 1F            ZF178           LDX     #BRKPTs                  ; F178: CE FF 1F  ; 
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 6 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 6 - 01/15/2026 09:36:31 PM
 
 
      301/    F17B : A6 00               ZF17B           LDAA    ,X                       ; F17B: A6 00     ; 
@@ -376,7 +376,7 @@
      358/    F1EC : 08                                  INX                              ; F1EC: 08        ; 
      359/    F1ED : FF FF 5A                            STX     TEMP2H                   ; F1ED: FF FF 5A  ; 
      360/    F1F0 : B6 FF 5A                            LDAA    TEMP2H                   ; F1F0: B6 FF 5A  ; 
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 7 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 7 - 01/15/2026 09:36:31 PM
 
 
      361/    F1F3 : F6 FF 5B                            LDAB    TEMP2L                   ; F1F3: F6 FF 5B  ; 
@@ -439,7 +439,7 @@
      418/    F274 : BD FA 7F            GOTCLN          JSR     XINCHN1                  ; F274: BD FA 7F  ; got ':', Get ASCII from Port
      419/    F277 : 81 47                               CMPA    #'G'                      ; F277: 81 47    ; 
      420/    F279 : 26 03                               BNE     ZF27E                    ; F279: 26 03     ; 
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 8 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 8 - 01/15/2026 09:36:31 PM
 
 
      421/    F27B : 7E F3 E9                            JMP     GOTcG                    ; F27B: 7E F3 E9  ; 
@@ -502,7 +502,7 @@
      478/    F2E3 : BD FA A5            GOTsR           JSR     PRNTREG1                 ; F2E3: BD FA A5  ; Got '$R', Print Registers
      479/    F2E6 : BD FA 21                            JSR     XPCRLF1                  ; F2E6: BD FA 21  ; Send LF, CR, NULL
      480/    F2E9 : CE FF 16                            LDX     #XREGsP                  ; F2E9: CE FF 16  ; 
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 9 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 9 - 01/15/2026 09:36:31 PM
 
 
      481/    F2EC : 86 50                               LDAA    #'P'                      ; F2EC: 86 50    ; 
@@ -565,7 +565,7 @@
      538/    F364 : 86 FF                               LDAA    #$FF                     ; F364: 86 FF     ; 
      539/    F366 : B7 FF 60                            STAA    MFF60                    ; F366: B7 FF 60  ; 
      540/    F369 : 7F FF 50                            CLR     MFF50                    ; F369: 7F FF 50  ; 
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 10 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 10 - 01/15/2026 09:36:31 PM
 
 
      541/    F36C : 20 A6                               BRA     ZF314                    ; F36C: 20 A6     ; 
@@ -628,7 +628,7 @@
      598/    F3DE : BE FF 08            ZF3DE           LDS     TEMP1H                   ; F3DE: BE FF 08  ; 
      599/    F3E1 : 34                                  DES                              ; F3E1: 34        ; 
      600/    F3E2 : AF 20                               STS     $20,X                    ; F3E2: AF 20     ; 
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 11 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 11 - 01/15/2026 09:36:31 PM
 
 
      601/    F3E4 : 8E FF 8A                            LDS     #XSTAKs                  ; F3E4: 8E FF 8A  ; 
@@ -691,7 +691,7 @@
      658/    F453 : A7 00                               STAA    ,X                       ; F453: A7 00     ; 
      659/    F455 : 09                                  DEX                              ; F455: 09        ; 
      660/    F456 : 5A                                  DECB                             ; F456: 5A        ; 
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 12 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 12 - 01/15/2026 09:36:31 PM
 
 
      661/    F457 : 26 F9                               BNE     ZF452                    ; F457: 26 F9     ; 
@@ -754,7 +754,7 @@
      718/    F4CB : 31                                  INS                              ; F4CB: 31        ; 
      719/    F4CC : 36                                  PSHA                             ; F4CC: 36        ; 
      720/    F4CD : B6 FF F8                            LDAA    IRQsVC                   ; F4CD: B6 FF F8  ; 
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 13 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 13 - 01/15/2026 09:36:31 PM
 
 
      721/    F4D0 : A7 05                               STAA    $05,X                    ; F4D0: A7 05     ; 
@@ -817,7 +817,7 @@
      778/    F54D : FF FF 0E                            STX     MFF0E                    ; F54D: FF FF 0E  ; |
      779/    F550 : FF FF 10                            STX     MFF10                    ; F550: FF FF 10  ; | Clear some memory addresses
      780/    F553 : FF FF F6                            STX     MFFF6                    ; F553: FF FF F6  ; |
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 14 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 14 - 01/15/2026 09:36:31 PM
 
 
      781/    F556 : B7 FF 02                            STAA    MFF02                    ; F556: B7 FF 02  ; |
@@ -880,7 +880,7 @@
      838/    F5DE : CE FA ED                            LDX     #XBUGCMD                 ; F5DE: CE FA ED  ; Load command strings start
      839/    F5E1 : 8D 11               ZF5E1           BSR     STRCMP                   ; F5E1: 8D 11     ; compare strings and start function
      840/    F5E3 : 8C FB 2F                            CPX     #GREETING                ; F5E3: 8C FB 2F  ; searched util end ?
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 15 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 15 - 01/15/2026 09:36:31 PM
 
 
      841/    F5E6 : 26 F9                               BNE     ZF5E1                    ; F5E6: 26 F9     ; no, try next command
@@ -943,7 +943,7 @@
      898/    F652 : BD F7 0C                            JSR     ASKEXEC                  ; F652: BD F7 0C  ; Execute ?
      899/    F655 : 0D                                  SEC                              ; F655: 0D        ; 
      900/    F656 : 79 FF 62                            ROL     PNCHTMP                  ; F656: 79 FF 62  ; signaling in PUNCH
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 16 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 16 - 01/15/2026 09:36:31 PM
 
 
      901/    F659 : 7D FF 02                            TST     MFF02                    ; F659: 7D FF 02  ; should be 0
@@ -1006,7 +1006,7 @@
      958/    F6DB : CE FB DA                            LDX     #S9_TXT                  ; F6DB: CE FB DA  ; |
      959/    F6DE : BD FA 16                            JSR     XPDAT1                   ; F6DE: BD FA 16  ; Print 'S9030000FC'
      960/    F6E1 : 8D 1F                               BSR     SNDNULL                  ; F6E1: 8D 1F     ; Send NULL $37 times
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 17 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 17 - 01/15/2026 09:36:31 PM
 
 
      961/    F6E3 : BD FA 21                            JSR     XPCRLF1                  ; F6E3: BD FA 21  ; Send LF, CR, NULL
@@ -1069,7 +1069,7 @@
     1018/    F75F : 2D 02                               BLT     ZF763                    ; F75F: 2D 02     ; yes
     1019/    F761 : 86 2E               ZF761           LDAA    #$2E                     ; F761: 86 2E     ; Output a '.' instead
     1020/    F763 : BD F9 E2            ZF763           JSR     XOUTCH1                  ; F763: BD F9 E2  ; print it
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 18 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 18 - 01/15/2026 09:36:31 PM
 
 
     1021/    F766 : 08                                  INX                              ; F766: 08        ; next address
@@ -1132,7 +1132,7 @@
     1078/    F7E7 : B6 FF 8D                            LDAA    MFF8D                    ; F7E7: B6 FF 8D  ; 
     1079/    F7EA : CE FF 8D                            LDX     #MFF8D                   ; F7EA: CE FF 8D  ; set up buffer
     1080/    F7ED : 08                  ZF7ED           INX                              ; F7ED: 08        ; 
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 19 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 19 - 01/15/2026 09:36:31 PM
 
 
     1081/    F7EE : 4A                                  DECA                             ; F7EE: 4A        ; 
@@ -1195,7 +1195,7 @@
     1138/    F872 : CE FF 56            ZF872           LDX     #DESTADR                 ; F872: CE FF 56  ; 
     1139/    F875 : BD FA 21                            JSR     XPCRLF1                  ; F875: BD FA 21  ; Send LF, CR, NULL
     1140/    F878 : BD F9 C7                            JSR     XOUT4H1                  ; F878: BD F9 C7  ; print destination address start
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 20 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 20 - 01/15/2026 09:36:31 PM
 
 
     1141/    F87B : FE FF 56                            LDX     DESTADR                  ; F87B: FE FF 56  ; 
@@ -1258,7 +1258,7 @@
     1198/    F8FB : 7A FF 07                            DEC     MFF07                    ; F8FB: 7A FF 07  ; decrement count
     1199/    F8FE : 26 F9                               BNE     ZF8F9                    ; F8FE: 26 F9     ; get whole line
     1200/    F900 : 7C FF 8B                            INC     MFF8B                    ; F900: 7C FF 8B  ; inc Checksum
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 21 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 21 - 01/15/2026 09:36:31 PM
 
 
     1201/    F903 : B6 FC FD                            LDAA    PROM_1                   ; F903: B6 FC FD  ; 
@@ -1321,7 +1321,7 @@
     1258/    F96F : 86 02                               LDAA    #$02                     ; F96F: 86 02     ; 2 characters (digits) needed
     1259/    F971 : B7 FF 5C            ZF971           STAA    MFF5C                    ; F971: B7 FF 5C  ; digits temp
     1260/    F974 : BD FA 40                            JSR     XINBFR                   ; F974: BD FA 40  ; input HEX digits to buffer (FF08)
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 22 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 22 - 01/15/2026 09:36:31 PM
 
 
     1261/    F977 : FE FF 56                            LDX     DESTADR                  ; F977: FE FF 56  ; destination address
@@ -1384,7 +1384,7 @@
     1318/    F9DC : 8D 29               ZF9DC           BSR     OUTHX2                   ; F9DC: 8D 29     ; Output high byte (INX)
     1319/    F9DE : 8D 27                               BSR     OUTHX2                   ; F9DE: 8D 27     ; Output low byte 
     1320/    F9E0 : 86 2F                               LDAA    #'/'                     ; F9E0: 86 2F     ; Load '/'
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 23 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 23 - 01/15/2026 09:36:31 PM
 
 
     1321/    F9E2 : 8D EB               XOUTCH1         BSR     OUTCNSF                  ; F9E2: 8D EB     ; output A to serial
@@ -1447,7 +1447,7 @@
     1378/    FA40 : CE FF 08            XINBFR          LDX     #TEMP1H                  ; FA40: CE FF 08  ; set up buffer
     1379/    FA43 : 7F FF 07            XINADD1         CLR     MFF07                    ; FA43: 7F FF 07  ; clear
     1380/    FA46 : 6F 00                               CLR     ,X                       ; FA46: 6F 00     ; |
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 24 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 24 - 01/15/2026 09:36:31 PM
 
 
     1381/    FA48 : 6F 01                               CLR     $01,X                    ; FA48: 6F 01     ; |
@@ -1510,7 +1510,7 @@
     1438/    FAAD : 8D 19                               BSR     PRNTLN4                  ; FAAD: 8D 19     ; |
     1439/    FAAF : 86 58                               LDAA    #'X'                      ; FAAF: 86 58    ; |
     1440/    FAB1 : 8D 15                               BSR     PRNTLN4                  ; FAB1: 8D 15     ; |
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 25 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 25 - 01/15/2026 09:36:31 PM
 
 
     1441/    FAB3 : 86 41                               LDAA    #'A'                      ; FAB3: 86 41    ; |
@@ -1573,7 +1573,7 @@
     1497/    FB3A : 42 45 47 20 41 44   BEGINADDR       FCC     'BEG ADDR '              ; FB3A: 42 45 47 20 41 44 44 52 20
              FB40 : 44 52 20          
     1498/    FB43 : 04                                  FCB     $04                      ; FB43: 04             
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 26 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 26 - 01/15/2026 09:36:31 PM
 
 
     1499/    FB44 : 45 4E 44 20 41 44   ENDADDR         FCC     'END ADDR '              ; FB44: 45 4E 44 20 41 44 44 52 20
@@ -1636,10 +1636,10 @@
     1542/    FC00 :                     
     1543/    FC00 :                     
     1544/    FC00 :                                     END
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 27 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 27 - 01/15/2026 09:36:31 PM
 
 
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 28 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 28 - 01/15/2026 09:36:31 PM
 
 
   Symbol Table (* = unused):
@@ -1702,7 +1702,7 @@
  MFF50 :                       FF50 - |  MFF51 :                       FF51 - |
  MFF54 :                       FF54 - |  MFF58 :                       FF58 - |
  MFF5C :                       FF5C - |  MFF5D :                       FF5D - |
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 29 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 29 - 01/15/2026 09:36:31 PM
 
 
  MFF5E :                       FF5E - |  MFF5F :                       FF5F - |
@@ -1744,7 +1744,7 @@
  SWISVC :                      FFFA - |  SWPWORD :                     F496 C |
  TEMP1H :                      FF08 - |  TEMP1L :                      FF09 - |
  TEMP2H :                      FF5A - |  TEMP2L :                      FF5B - |
- TERM :                        F627 C | *TIME :               "09:15:29 PM" - |
+ TERM :                        F627 C | *TIME :               "09:36:31 PM" - |
 *TRUE :                           1 - |  VERIFY :                      F7BE C |
 *VERSION :                     142F - |  WAIT1 :                       F61B C |
 *XBEGEN :                      F003 C |  XBEGEN1 :                     F787 C |
@@ -1765,7 +1765,7 @@
 *XPDATA :                      F024 C |  XPDATA1 :                     FA14 C |
 *XPSPAC :                      F02A C |  XPSPAC1 :                     F9CB C |
  XREGSC :                      FF1C - |  XREGSP :                      FF16 - |
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 30 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 30 - 01/15/2026 09:36:31 PM
 
 
  XREGSS :                      FF1D - |  XSTAKS :                      FF8A - |
@@ -1828,7 +1828,7 @@
  ZF8D7 :                       F8D7 C |  ZF8EE :                       F8EE C |
  ZF8F9 :                       F8F9 C |  ZF918 :                       F918 C |
  ZF91D :                       F91D C |  ZF935 :                       F935 C |
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 31 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 31 - 01/15/2026 09:36:31 PM
 
 
  ZF93B :                       F93B C |  ZF960 :                       F960 C |
@@ -1846,7 +1846,7 @@
     373 symbols
      48 unused symbols
 
- AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 32 - 01/15/2026 09:15:29 PM
+ AS V1.42 Beta [Bld 216] - Source File exbug12_commented.asm - Page 32 - 01/15/2026 09:36:31 PM
 
 
   Code Pages:
