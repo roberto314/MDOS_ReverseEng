@@ -124,17 +124,17 @@ NMIsVC  EQU     $FFFC ; Interrupt Vectors
 
                 ORG     $F000
 
-PWRUP           JMP     PWRUP1                   ; F000: 7E F5 47  ; 
+PWRUP           JMP     PWRUP1                   ; F000: 7E F5 47  ; Cold Start
 XBEGEN          JMP     XBEGEN1                  ; F003: 7E F7 87  ; Get Begin and Endaddress
-XCBCDH          JMP     XCBCDH1                  ; F006: 7E FA 86  ; Input HEX ?
+XCBCDH          JMP     XCBCDH1                  ; F006: 7E FA 86  ; Input HEX, convert to Number
 XCHEXL          JMP     XCHEXL1                  ; F009: 7E F9 B8  ; Convert HEX High Nibble
 XCHEXR          JMP     XCHEXR1                  ; F00C: 7E F9 BC  ; Convert HEX Low Nibble
-XINADD          JMP     XINADD1                  ; F00F: 7E FA 43  ; 
+XINADD          JMP     XINADD1                  ; F00F: 7E FA 43  ; Get HEX digits
 XINCH           JMP     XINCH1                   ; F012: 7E FA 6B  ; Get any Character from Serial Port
 XINCHN          JMP     XINCHN1                  ; F015: 7E FA 7F  ; Get only the first 127 ASCII Char. from Port
-XOUTCH          JMP     XOUTCH1                  ; F018: 7E F9 E2  ; 
-XOUT2H          JMP     XOUT2H1                  ; F01B: 7E F9 C9  ; 
-XOUT4H          JMP     XOUT4H1                  ; F01E: 7E F9 C7  ; 
+XOUTCH          JMP     XOUTCH1                  ; F018: 7E F9 E2  ; Print A
+XOUT2H          JMP     XOUT2H1                  ; F01B: 7E F9 C9  ; Print 2-digit HEX
+XOUT4H          JMP     XOUT4H1                  ; F01E: 7E F9 C7  ; Print 4-digit HEX
 XPCRLF          JMP     XPCRLF1                  ; F021: 7E FA 21  ; Send LF, CR, NULL
 XPDATA          JMP     XPDATA1                  ; F024: 7E FA 14  ; Starts with CRLF, otherwise same as below
 XPDAT           JMP     XPDAT1                   ; F027: 7E FA 16  ; Print String from X
@@ -253,7 +253,7 @@ ZF113           CMPA    #'N'                     ; F113: 81 4E     ;
                 BNE     OUTQM                    ; F119: 26 03     ; no match, output '?'
                 JMP     GOTHASH                  ; F11B: 7E F0 89  ; 
 ;------------------------------------------------
-OUTQM           LDX     #MFBC2                   ; F11E: CE FB C2  ; 
+OUTQM           LDX     #QSTMRK                  ; F11E: CE FB C2  ; 
                 JSR     XPDAT1                   ; F121: BD FA 16  ; 
 ZF124           BRA     MAIDs                    ; F124: 20 CD     ; 
 ;------------------------------------------------
@@ -1521,7 +1521,7 @@ ABORTED         FCC     'ABORTED '               ; FBAF: 41 42 4F 52 54 45 44 20
                 FCB     $04                      ; FBBA: 04             
 MFBBB           FCB     $14                      ; FBBB: 14             
 MFBBC           FCB     $13,$00,$00,$00,$00,$04  ; FBBC: 13 00 00 00 00 04 
-MFBC2           FCB     $07                      ; FBC2: 07             
+QSTMRK          FCB     $07                      ; FBC2: 07             
                 FCC     ' ?'                     ; FBC3: 20 3F          
                 FCB     $04                      ; FBC5: 04             
 STAR1           FCB     '*'                      ; FBC6: 2A             

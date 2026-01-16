@@ -757,7 +757,7 @@ Z0617           LDX     SWIsSV                   ; 0617: FE 01 16
                 STX     SWIsVC                   ; 061A: FF FF FA       
                 LDS     #XSTAKs                  ; 061D: 8E FF 8A       
                 JMP     OSLOAD                   ; 0620: 7E E8 00       
-                LDX     SWIsVC                   ; 0623: FE FF FA       
+OSSTART         LDX     SWIsVC                   ; 0623: FE FF FA       
                 CPX     #M022F                   ; 0626: 8C 02 2F       
 Z0629           BEQ     Z0636                    ; 0629: 27 0B          
                 CPX     #M020F                   ; 062B: 8C 02 0F       
