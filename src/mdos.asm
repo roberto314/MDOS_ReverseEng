@@ -95,22 +95,22 @@ NMIsVC  EQU     $FFFC
 
                 ORG     $0100
 
-VERSss          FDB     8243                     ; 0100: 20 33          
-REVSss          FDB     12341                    ; 0102: 30 35          
+VERSss          FDB     $2033                    ; 0100: 20 33          
+REVSss          FDB     $3035                    ; 0102: 30 35          
 KYIsSV          FDB     $03A8                    ; 0104: 03 A8          
 ENDOSs          FDB     $1FFF                    ; 0106: 1F FF          
-ENDUSs          FDB     M0000                    ; 0108: 00 00          
-ENDSYs          FDB     M0000                    ; 010A: 00 00          
-M010C           FDB     M0000                    ; 010C: 00 00          
+ENDUSs          FDB     M0000                    ; 0108: 00 00           gets init to: $2001
+ENDSYs          FDB     M0000                    ; 010A: 00 00           gets init to: $E7FF
+M010C           FDB     M0000                    ; 010C: 00 00           gets init to: $00AE
 RIBBAs          FDB     $018F                    ; 010E: 01 8F          
 ENDRVs          FDB     $0020                    ; 0110: 00 20          
 GDBAs           FDB     $065C                    ; 0112: 06 5C          
 SYERRs          FDB     M0000                    ; 0114: 00 00          
-SWIsSV          FDB     M0000                    ; 0116: 00 00          
-SWIsUV          FDB     M0000                    ; 0118: 00 00          
-IRQsUV          FDB     M0000                    ; 011A: 00 00          
+SWIsSV          FDB     M0000                    ; 0116: 00 00           gets init to: $F477
+SWIsUV          FDB     M0000                    ; 0118: 00 00           gets init to: $026B
+IRQsUV          FDB     M0000                    ; 011A: 00 00           gets init to: $026B
 IRQsSV          FDB     M0000                    ; 011C: 00 00          
-CHFLGs          FDB     $8000                    ; 011E: 80 00          
+CHFLGs          FDB     $8000                    ; 011E: 80 00           gets init to: $8000
 SYIOCB          FCB     $00,$11,$00,$00          ; 0120: 00 11 00 00    
 M0124           FCB     $00,$00                  ; 0124: 00 00          
 M0126           FCB     $00,$00                  ; 0126: 00 00          
@@ -214,7 +214,7 @@ Z0259           JSR     Z0259                    ; 0259: BD 02 59
                 ANDA    #$EF                     ; 0267: 84 EF          
                 ABA                              ; 0269: 1B             
                 PSHA                             ; 026A: 36             
-M026B           RTI                              ; 026B: 3B             
+ISR_UNUSD       RTI                              ; 026B: 3B             
 Z026C           LDAB    #$21                     ; 026C: C6 21          
                 JSR     Z0F31                    ; 026E: BD 0F 31       
                 JMP     Z0617                    ; 0271: 7E 06 17       
@@ -757,7 +757,7 @@ Z0617           LDX     SWIsSV                   ; 0617: FE 01 16
                 STX     SWIsVC                   ; 061A: FF FF FA       
                 LDS     #XSTAKs                  ; 061D: 8E FF 8A       
                 JMP     OSLOAD                   ; 0620: 7E E8 00       
-OSSTART         LDX     SWIsVC                   ; 0623: FE FF FA       
+SYSSTART        LDX     SWIsVC                   ; 0623: FE FF FA        Entry Point after floppy-boot
                 CPX     #M022F                   ; 0626: 8C 02 2F       
 Z0629           BEQ     Z0636                    ; 0629: 27 0B          
                 CPX     #M020F                   ; 062B: 8C 02 0F       
@@ -765,7 +765,7 @@ Z0629           BEQ     Z0636                    ; 0629: 27 0B
                 LDS     #XSTAKs                  ; 0630: 8E FF 8A       
                 JSR     Z2000                    ; 0633: BD 20 00       
 Z0636           LDS     ENDSYs                   ; 0636: BE 01 0A       
-                LDX     #M026B                   ; 0639: CE 02 6B       
+                LDX     #ISR_UNUSD               ; 0639: CE 02 6B       
                 STX     SWIsUV                   ; 063C: FF 01 18       
                 STX     IRQsUV                   ; 063F: FF 01 1A       
                 LDAA    CHFLGs                   ; 0642: B6 01 1E       
@@ -776,7 +776,7 @@ Z0636           LDS     ENDSYs                   ; 0636: BE 01 0A
                 CLR     M0000                    ; 0650: 7F 00 00       
                 JSR     RESTOR                   ; 0653: BD E8 75       
                 JSR     CHKERR                   ; 0656: BD E8 53       
-                JMP     Z1FFD                    ; 0659: 7E 1F FD       
+                JMP     Z1FFD                    ; 0659: 7E 1F FD        Continue in mdosov6
                 FCB     $44,$4B                  ; 065C: 44 4B          
                 FCB     $06                      ; 065E: 06             
                 FCB     $72,$4C,$50              ; 065F: 72 4C 50       
@@ -2125,35 +2125,29 @@ M110C           FCB     $00                      ; 110C: 00
                 FCB     $11                      ; 1133: 11             
                 FCB     $2D,$2E,$35              ; 1134: 2D 2E 35       
 M1137           FCB     $11                      ; 1137: 11             
-                FCB     $54                      ; 1138: 54             
+                FCB     'T                       ; 1138: 54             
                 FCB     $11                      ; 1139: 11             
-                FCB     $74                      ; 113A: 74             
-M113B           FCB     $49,$4E,$56,$41,$4C,$49  ; 113B: 49 4E 56 41 4C 49 
-                FCB     $44,$20,$4D,$45,$53,$53  ; 1141: 44 20 4D 45 53 53 
-                FCB     $41,$47,$45,$20,$5C,$33  ; 1147: 41 47 45 20 5C 33 
-                FCB     $20,$41,$54,$20,$5C,$38  ; 114D: 20 41 54 20 5C 38 
+                FCB     't                       ; 113A: 74             
+M113B           FCB     'I,'N,'V,'A,'L,'I,'D,'   ; 113B: 49 4E 56 41 4C 49 44 20 
+                FCB     'M,'E,'S,'S,'A,'G,'E,'   ; 1143: 4D 45 53 53 41 47 45 20 
+                FCB     '\,'3,' ,'A,'T,' ,'\,'8  ; 114B: 5C 33 20 41 54 20 5C 38 
                 FCB     $04                      ; 1153: 04             
-                FCB     $55,$4E,$49,$46,$2E,$20  ; 1154: 55 4E 49 46 2E 20 
-                FCB     $49,$2F,$4F,$20,$45,$52  ; 115A: 49 2F 4F 20 45 52 
-                FCB     $52,$4F,$52,$2D,$53,$54  ; 1160: 52 4F 52 2D 53 54 
-                FCB     $41,$54,$55,$53,$3D,$5C  ; 1166: 41 54 55 53 3D 5C 
-                FCB     $33,$20,$41,$54,$20,$5C  ; 116C: 33 20 41 54 20 5C 
-                FCB     $38                      ; 1172: 38             
+                FCB     'U,'N,'I,'F,'.,' ,'I,'/  ; 1154: 55 4E 49 46 2E 20 49 2F 
+                FCB     'O,' ,'E,'R,'R,'O,'R,'-  ; 115C: 4F 20 45 52 52 4F 52 2D 
+                FCB     'S,'T,'A,'T,'U,'S,'=,'\  ; 1164: 53 54 41 54 55 53 3D 5C 
+                FCB     '3,' ,'A,'T,' ,'\,'8     ; 116C: 33 20 41 54 20 5C 38 
                 FCB     $04                      ; 1173: 04             
-                FCB     $50,$52,$4F,$4D,$20,$49  ; 1174: 50 52 4F 4D 20 49 
-                FCB     $2F,$4F,$20,$45,$52,$52  ; 117A: 2F 4F 20 45 52 52 
-                FCB     $4F,$52,$2D,$53,$54,$41  ; 1180: 4F 52 2D 53 54 41 
-                FCB     $54,$55,$53,$3D,$5C,$33  ; 1186: 54 55 53 3D 5C 33 
-                FCB     $20,$41,$54,$20,$58,$58  ; 118C: 20 41 54 20 58 58 
-                FCB     $58,$58,$20,$4F,$4E,$20  ; 1192: 58 58 20 4F 4E 20 
-                FCB     $44,$52,$49,$56,$45,$20  ; 1198: 44 52 49 56 45 20 
-                FCB     $58,$2D,$50,$53,$4E,$20  ; 119E: 58 2D 50 53 4E 20 
-                FCB     $58,$58,$58,$58          ; 11A4: 58 58 58 58    
+                FCB     'P,'R,'O,'M,' ,'I,'/,'O  ; 1174: 50 52 4F 4D 20 49 2F 4F 
+                FCB     ' ,'E,'R,'R,'O,'R,'-,'S  ; 117C: 20 45 52 52 4F 52 2D 53 
+                FCB     'T,'A,'T,'U,'S,'=,'\,'3  ; 1184: 54 41 54 55 53 3D 5C 33 
+                FCB     ' ,'A,'T,' ,'X,'X,'X,'X  ; 118C: 20 41 54 20 58 58 58 58 
+                FCB     ' ,'O,'N,' ,'D,'R,'I,'V  ; 1194: 20 4F 4E 20 44 52 49 56 
+                FCB     'E,' ,'X,'-,'P,'S,'N,'   ; 119C: 45 20 58 2D 50 53 4E 20 
+                FCB     'X,'X,'X,'X              ; 11A4: 58 58 58 58    
                 FCB     $04                      ; 11A8: 04             
-                FCB     $30,$4D,$44,$4F,$53,$4F  ; 11A9: 30 4D 44 4F 53 4F 
-                FCB     $56                      ; 11AF: 56             
+                FCB     '0,'M,'D,'O,'S,'O,'V     ; 11A9: 30 4D 44 4F 53 4F 56 
                 FCB     $00                      ; 11B0: 00             
-                FCB     $20,$53,$59              ; 11B1: 20 53 59       
+                FCB     ' ,$53,$59               ; 11B1: 20 53 59       
                 FCB     $00,$00,$00,$00,$00,$00  ; 11B4: 00 00 00 00 00 00 
                 FCB     $00,$00,$00,$00,$01,$8F  ; 11BA: 00 00 00 00 01 8F 
                 FCB     $02,$0E,$FF,$FF,$FF,$FF  ; 11C0: 02 0E FF FF FF FF 

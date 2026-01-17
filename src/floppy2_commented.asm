@@ -17,7 +17,7 @@ SECTCNT EQU     $000B
 STATSAV EQU     $000D
 FUNCSAV EQU     $000E
 NMIVECSAV EQU     $000F
-M0012   EQU     $0012
+M0012   EQU     $0012 ; $11 and $12 are current Track of Drive 0,1
 TRACKSAV EQU    $0013
 ADDRMRK EQU     $0014
 DWRDCNT EQU     $0015
@@ -25,6 +25,8 @@ STACKSAV EQU     $0016
 DRDCNT  EQU     $0018
 CLKFREQ EQU     $0019
 LDADDR  EQU     $0020
+EXADDR     EQU     $0022
+ONECON     EQU     $0024
 ; The PIA has A0 and A1 switched!
 ; 00 with CRA2 Set is Peripheral Register A 
 ; 00 with CRA2 cleared is Data Direction Register A 
@@ -191,7 +193,7 @@ RESTORN         BITB    #$04                     ; E8CB: C5 04     ; Get Bit2 fr
                 BEQ     CLOCKN                   ; E8CD: 27 03     ; No Clock
                 JMP     CLKDMD                   ; E8CF: 7E EB 85  ; Calculate CPU Freq., goes to CLKDMD, ERRHNDLR and RST
 ;------------------------------------------------
-CLOCKN          LDAB    STRSCTL                  ; E8D2: D6 02     ; RESTOR is NOT active
+CLOCKN          LDAB    STRSCTL                  ; E8D2: D6 02     ; normal code flow (no CLOCK, no RESTOR)
                 LDAA    STRSCTH                  ; E8D4: 96 01     ; Get Startsector
                 ADDB    NUMSCTL                  ; E8D6: DB 04     ; |
                 ADCA    NUMSCTH                  ; E8D8: 99 03     ; Add Number of sectors
@@ -280,7 +282,9 @@ IE961           LDAA    TRACKSAV                 ; E961: 96 13     ; Function = 
                 CLRA                             ; E965: 4F        ; 
                 LDAB    #$56                     ; E966: C6 56     ; = 86 <------------------------------------ What is this??????
                 BRA     RESTORY   ; -->          ; E968: 20 A0     ; 
-
+;------------------------------------------------
+; Comes from RESTORY
+;------------------------------------------------
 ZE96A           LDX     #$02C0                   ; E96A: CE 02 C0  ; |
                 BSR     WAIT3                    ; E96D: 8D E4     ; Wait
                 LDAA    FUNCSAV                  ; E96F: 96 0E     ; What was the function?
@@ -294,6 +298,8 @@ ZE96A           LDX     #$02C0                   ; E96A: CE 02 C0  ; |
                 LDAB    #$6A                     ; E97E: C6 6A     ; yes, write DELETED DATA MARK (WRDDAM)
 IE980           STAB    ADDRMRK                  ; E980: D7 14     ; 
                 BRA     NXTSEC                   ; E982: 20 4F     ; next sector
+;------------------------------------------------
+; Comes from NXTSEC
 ;------------------------------------------------
 SECRDDONE       LDAA    FUNCSAV                  ; E984: 96 0E     ; Get Function
                 BPL     ERRHNDLR                 ; E986: 2A 09     ; Bit 7 not Set - done (READPS, RDCRC, RESTOR, SEEK, CLOCK)

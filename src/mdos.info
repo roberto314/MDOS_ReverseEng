@@ -2,7 +2,7 @@ file mdos.sy 100
 option 6800
 #option ldchar :
 #option schowzero
-option noasc
+#option noasc
 #option noaddr #disable for comments
 #option nohex #disable for comments
 option noflex
@@ -30,9 +30,13 @@ label 11E CHFLGs
 label 120 SYIOCB
 label 145 SYPOCB
 label 16A SYEOCB
+used 623 SYSSTART
+lcomment 623 Entry Point after floppy-boot
+label 026B ISR_UNUSD
+
+lcomment 0659 Continue in mdosov6
 
 data 0120-020f
-char 100-103
 
 data 65c-750
 label c1f TMP1
@@ -46,9 +50,18 @@ label bf4 HASH25
 data f1c-f30
 data fa5-10e4
 data 1105-1272
+char 1137-11B1
 
 unused 1273-20ff
-#lcomment c019 CC0 and CC1 set - external Serial clock (8xBaudrate)
+
+lcomment 108 gets init to: $2001
+lcomment 10a gets init to: $E7FF
+lcomment 10c gets init to: $00AE
+lcomment 116 gets init to: $F477
+lcomment 118 gets init to: $026B
+lcomment 11a gets init to: $026B
+lcomment 11e gets init to: $8000
+
 #const c559-c55a
 #word c6ef-c6f0
 #label c63F Set_32Char

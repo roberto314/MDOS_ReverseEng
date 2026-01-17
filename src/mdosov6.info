@@ -10,3 +10,4 @@ include common.info
 #label c63F Set_32Char
 #char c724-c741
 data 2135-21f4
+char 2135-21f4

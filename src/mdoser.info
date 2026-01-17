@@ -8,5 +8,6 @@ include common.info
 #const c559-c55a
 #word c6ef-c6f0
 #label c63F Set_32Char
-#char c724-c741
-#data 0102-020f
+
+data 1FFD-2684
+char 1FFD-2684

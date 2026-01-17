@@ -12,19 +12,19 @@ MIL-STD 1750 Generator also (C) 2019 Oliver Kellogg
 GI CP-1600-Generator (C) 2021 Haruo Asano
 
 
-Assembling exbug12_commented.asm
+Assembling exbug11_commented.asm
 PASS 1
-exbug12_commented.asm(1545)
+exbug11_commented.asm(1528)
 PASS 2
-exbug12_commented.asm(1545)
+exbug11_commented.asm(1528)
 
-0.00 seconds assembly time
+0.01 seconds assembly time
 
-   1545 lines source file
+   1528 lines source file
       2 passes
       0 errors
       0 warnings
 P2BIN/C V1.42 Beta [Bld 216]
 (C) 1992,2022 Alfred Arnold
 Deduced address range: 0x0000F000-0x0000FBFF
-exbug12_commented.p==>>exbug12_commented_b.bin  (3072 Bytes)
+exbug11_commented.p==>>exbug11_commented_b.bin  (3072 Bytes)

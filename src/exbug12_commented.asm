@@ -70,10 +70,10 @@ MFF06   EQU     $FF06 ; string Buffer for EXBUG
 MFF07   EQU     $FF07 ; string Buffer for EXBUG
 TEMP1H  EQU     $FF08
 TEMP1L  EQU     $FF09
-BEGADRH EQU     $FF0A
-BEGADRL EQU     $FF0B
-ENDADRH EQU     $FF0C
-ENDADRL EQU     $FF0D
+BEGAD1H EQU     $FF0A
+BEGAD1L EQU     $FF0B
+ENDAD1H EQU     $FF0C
+ENDAD1L EQU     $FF0D
 MFF0E   EQU     $FF0E
 MFF10   EQU     $FF10
 MFF12   EQU     $FF12
@@ -264,7 +264,7 @@ DIGITS          CMPA    #';'                     ; F126: 81 3B     ;
                 BNE     OUTQM                    ; F12F: 26 ED     ; no match, output '?'
                 JMP     nSLASH                   ; F131: 7E F1 CB  ; 
 ;------------------------------------------------
-GOT_N2          LDX     TEMP1H                   ; F134: FE FF 08  ; 
+TRACEN          LDX     TEMP1H                   ; F134: FE FF 08  ; 
                 BEQ     ZF13A                    ; F137: 27 01     ; 
                 DEX                              ; F139: 09        ; 
 ZF13A           STX     MFF51                    ; F13A: FF FF 51  ; 
@@ -277,7 +277,7 @@ ZF13A           STX     MFF51                    ; F13A: FF FF 51  ;
 GOTcN           LDX     #M0000                   ; F14B: CE 00 00  ; Got ':N' or 'N'
                 BRA     ZF13A                    ; F14E: 20 EA     ; 
 ;------------------------------------------------
-ZF150           LDAA    TEMP1H                   ; F150: B6 FF 08  ; 
+ENTBP           LDAA    TEMP1H                   ; F150: B6 FF 08  ; Enter Breakpoints
                 LDAB    TEMP1L                   ; F153: F6 FF 09  ; 
                 JSR     ZF2AF                    ; F156: BD F2 AF  ; 
                 BEQ     MAIDs                    ; F159: 27 98     ; 
@@ -297,7 +297,7 @@ ZF16F           INX                              ; F16F: 08        ;
                 BNE     ZF15E                    ; F174: 26 E8     ; 
 ZF176           BRA     OUTQM                    ; F176: 20 A6     ; no match, output '?'
 ;------------------------------------------------
-ZF178           LDX     #BRKPTs                  ; F178: CE FF 1F  ; 
+REMBP           LDX     #BRKPTs                  ; F178: CE FF 1F  ; Remove Breakpoints
 ZF17B           LDAA    ,X                       ; F17B: A6 00     ; 
                 CMPA    TEMP1H                   ; F17D: B1 FF 08  ; 
                 BNE     ZF18F                    ; F180: 26 0D     ; 
@@ -314,24 +314,24 @@ ZF18F           INX                              ; F18F: 08        ;
                 BNE     ZF17B                    ; F194: 26 E5     ; 
                 BRA     ZF176                    ; F196: 20 DE     ; 
 ;------------------------------------------------
-nCOLON          JSR     XINCHN1                  ; F198: BD FA 7F  ; Get ASCII from Port
-                CMPA    #'G'                      ; F19B: 81 47    ; 
+nCOLON          JSR     XINCHN1                  ; F198: BD FA 7F  ; Got nnnn: , Get ASCII from Port
+                CMPA    #'G'                     ; F19B: 81 47     ; 
                 BNE     ZF1A2                    ; F19D: 26 03     ; 
-                JMP     GOT_G2                   ; F19F: 7E F3 F1  ; 
+                JMP     EXECUP                   ; F19F: 7E F3 F1  ; 
 
-ZF1A2           CMPA    #'N'                      ; F1A2: 81 4E    ; 
-                BEQ     GOT_N2                   ; F1A4: 27 8E     ; 
-                CMPA    #'P'                      ; F1A6: 81 50    ; 
+ZF1A2           CMPA    #'N'                     ; F1A2: 81 4E     ; 
+                BEQ     TRACEN                   ; F1A4: 27 8E     ; 
+                CMPA    #'P'                     ; F1A6: 81 50     ; 
                 BNE     ZF1AD                    ; F1A8: 26 03     ; 
-                JMP     ZF3D1                    ; F1AA: 7E F3 D1  ; 
+                JMP     CONTBP                   ; F1AA: 7E F3 D1  ; 
 ;------------------------------------------------
 ZF1AD           CMPA    #'U'                      ; F1AD: 81 55    ; 
-                BEQ     ZF178                    ; F1AF: 27 C7     ; 
+                BEQ     REMBP                    ; F1AF: 27 C7     ; 
                 CMPA    #'V'                      ; F1B1: 81 56    ; 
-                BEQ     ZF150                    ; F1B3: 27 9B     ; 
+                BEQ     ENTBP                    ; F1B3: 27 9B     ; 
                 CMPA    #'W'                      ; F1B5: 81 57    ; 
                 BNE     ZF176                    ; F1B7: 26 BD     ; 
-                BRA     ZF232                    ; F1B9: 20 77     ; 
+                BRA     SRCHBT                   ; F1B9: 20 77     ; 
 ;------------------------------------------------
 ZF1BB           INX                              ; F1BB: 08        ; 
                 JSR     OUTCR                    ; F1BC: BD FA 25  ; 
@@ -349,10 +349,10 @@ nSLASH          JSR     GETHEX2                  ; F1CB: BD F9 6A  ;
                 JSR     XPCRLF1                  ; F1D9: BD FA 21  ; Send LF, CR, NULL
                 BRA     ZF1BF                    ; F1DC: 20 E1     ; 
 ;------------------------------------------------
-ZF1DE           CMPA    #';'                      ; F1DE: 81 3B    ; 
+ZF1DE           CMPA    #';'                     ; F1DE: 81 3B     ; 
                 BNE     ZF176                    ; F1E0: 26 94     ; 
                 JSR     XINCHN1                  ; F1E2: BD FA 7F  ; Get ASCII from Port
-                CMPA    #'O'                      ; F1E5: 81 4F    ; 
+                CMPA    #'O'                     ; F1E5: 81 4F     ; 
                 BNE     ZF176                    ; F1E7: 26 8D     ; 
                 LDX     DESTADR                  ; F1E9: FE FF 56  ; 
                 INX                              ; F1EC: 08        ; 
@@ -387,11 +387,11 @@ ZF21E           LDAA    TEMP1H                   ; F21E: B6 FF 08  ;
                 LSRB                             ; F22F: 54        ; 
                 BRA     ZF205                    ; F230: 20 D3     ; 
 ;------------------------------------------------
-ZF232           LDAA    TEMP1H                   ; F232: B6 FF 08  ; 
+SRCHBT          LDAA    TEMP1H                   ; F232: B6 FF 08  ; Search for Bitpattern
                 BNE     ZF298                    ; F235: 26 61     ; 
                 LDAA    TEMP1L                   ; F237: B6 FF 09  ; 
                 STAA    MFF13                    ; F23A: B7 FF 13  ; 
-                LDX     BEGADRH                  ; F23D: FE FF 0A  ; 
+                LDX     BEGAD1H                  ; F23D: FE FF 0A  ; 
 ZF240           STX     DESTADR                  ; F240: FF FF 56  ; 
                 LDAA    ,X                       ; F243: A6 00     ; 
                 EORA    MFF13                    ; F245: B8 FF 13  ; 
@@ -403,7 +403,7 @@ ZF240           STX     DESTADR                  ; F240: FF FF 56  ;
                 LDX     DESTADR                  ; F256: FE FF 56  ; 
                 JSR     XOUT2H1                  ; F259: BD F9 C9  ; 
 ZF25C           LDX     DESTADR                  ; F25C: FE FF 56  ; 
-                CPX     ENDADRH                  ; F25F: BC FF 0C  ; 
+                CPX     ENDAD1H                  ; F25F: BC FF 0C  ; 
                 BEQ     JMP2MAID                 ; F262: 27 42     ; 
                 INX                              ; F264: 08        ; 
                 BRA     ZF240                    ; F265: 20 D9     ; 
@@ -478,17 +478,17 @@ ZF2E0           JMP     OUTCR                    ; F2E0: 7E FA 25  ;
 GOTsR           JSR     PRNTREG1                 ; F2E3: BD FA A5  ; Got '$R', Print Registers
                 JSR     XPCRLF1                  ; F2E6: BD FA 21  ; Send LF, CR, NULL
                 LDX     #XREGsP                  ; F2E9: CE FF 16  ; 
-                LDAA    #'P'                      ; F2EC: 86 50    ; 
+                LDAA    #'P'                     ; F2EC: 86 50     ; 
                 BSR     GOTPXS                   ; F2EE: 8D D5     ; 
-                LDAA    #'X'                      ; F2F0: 86 58    ; 
+                LDAA    #'X'                     ; F2F0: 86 58     ; 
                 BSR     GOTPXS                   ; F2F2: 8D D1     ; 
-                LDAA    #'A'                      ; F2F4: 86 41    ; 
+                LDAA    #'A'                     ; F2F4: 86 41     ; 
                 BSR     GOTABC                   ; F2F6: 8D D6     ; 
-                LDAA    #'B'                      ; F2F8: 86 42    ; 
+                LDAA    #'B'                     ; F2F8: 86 42     ; 
                 BSR     GOTABC                   ; F2FA: 8D D2     ; 
-                LDAA    #'C'                      ; F2FC: 86 43    ; 
+                LDAA    #'C'                     ; F2FC: 86 43     ; 
                 BSR     GOTABC                   ; F2FE: 8D CE     ; 
-                LDAA    #'S'                      ; F300: 86 53    ; 
+                LDAA    #'S'                     ; F300: 86 53     ; 
                 BSR     GOTPXS                   ; F302: 8D C1     ; 
                 BRA     JMP2MAID                 ; F304: 20 A0     ; 
 ;------------------------------------------------
@@ -497,19 +497,19 @@ GOTsM           JSR     XPSPAC1                  ; F306: BD F9 CB  ; Got '$M', P
                 JSR     GETHEX2                  ; F30C: BD F9 6A  ; 
                 BMI     ZF32E                    ; F30F: 2B 1D     ; 
                 JSR     XBEGEN1                  ; F311: BD F7 87  ; Get Begin and Endaddress
-ZF314           BRA     JMP2MAID                 ; F314: 20 90     ; 
+J2MAID2         BRA     JMP2MAID                 ; F314: 20 90     ; 
 ;------------------------------------------------
 GOTDLR          JSR     XINCHN1                  ; F316: BD FA 7F  ; got dollar sign, Get ASCII from Port
                 TAB                              ; F319: 16        ; 
-                CMPB    #'R'                      ; F31A: C1 52    ; 
+                CMPB    #'R'                     ; F31A: C1 52     ; 
                 BEQ     GOTsR                    ; F31C: 27 C5     ; 
-                CMPB    #'V'                      ; F31E: C1 56    ; 
+                CMPB    #'V'                     ; F31E: C1 56     ; 
                 BEQ     GOTsV                    ; F320: 27 0F     ; 
-                CMPB    #'M'                      ; F322: C1 4D    ; 
+                CMPB    #'M'                     ; F322: C1 4D     ; 
                 BEQ     GOTsM                    ; F324: 27 E0     ; 
-                CMPB    #'T'                      ; F326: C1 54    ; 
+                CMPB    #'T'                     ; F326: C1 54     ; 
                 BEQ     GOTsT                    ; F328: 27 2C     ; 
-                CMPB    #'S'                      ; F32A: C1 53    ; 
+                CMPB    #'S'                     ; F32A: C1 53     ; 
                 BEQ     GOTsS                    ; F32C: 27 13     ; 
 ZF32E           JMP     OUTQM                    ; F32E: 7E F1 1E  ; no match, output '?'
 ;------------------------------------------------
@@ -519,7 +519,7 @@ GOTsV           JSR     XPCRLF1                  ; F331: BD FA 21  ; Got '$V', S
 ZF339           JSR     XOUT4H1                  ; F339: BD F9 C7  ; 
                 DECB                             ; F33C: 5A        ; 
                 BNE     ZF339                    ; F33D: 26 FA     ; 
-                BRA     ZF314                    ; F33F: 20 D3     ; 
+                BRA     J2MAID2                  ; F33F: 20 D3     ; 
 ;------------------------------------------------
 GOTsS           LDX     #STOPADDR                ; F341: CE FB A4  ; Got '$S', Load Text
                 JSR     XPDATA1                  ; F344: BD FA 14  ; Output it
@@ -528,7 +528,7 @@ GOTsS           LDX     #STOPADDR                ; F341: CE FB A4  ; Got '$S', L
                 BMI     ZF32E                    ; F34D: 2B DF     ; 
                 LDAA    #$FF                     ; F34F: 86 FF     ; 
                 STAA    MFF5D                    ; F351: B7 FF 5D  ; 
-                BRA     ZF314                    ; F354: 20 BE     ; 
+                BRA     J2MAID2                  ; F354: 20 BE     ; 
 ;------------------------------------------------
 GOTsT           LDX     #ENDADDR                 ; F356: CE FB 44  ; Got '$T', Load Text
                 JSR     XPDATA1                  ; F359: BD FA 14  ; Output it
@@ -538,7 +538,7 @@ GOTsT           LDX     #ENDADDR                 ; F356: CE FB 44  ; Got '$T', L
                 LDAA    #$FF                     ; F364: 86 FF     ; 
                 STAA    MFF60                    ; F366: B7 FF 60  ; 
                 CLR     MFF50                    ; F369: 7F FF 50  ; 
-                BRA     ZF314                    ; F36C: 20 A6     ; 
+                BRA     J2MAID2                  ; F36C: 20 A6     ; 
 ;------------------------------------------------
 ZF36E           TST     BKPINs                   ; F36E: 7D FF 4F  ; 
                 BNE     ZF39F                    ; F371: 26 2C     ; 
@@ -589,7 +589,7 @@ GOTcP           TST     MFF60                    ; F3C5: 7D FF 60  ; Got ':P'
                 BEQ     ZF401                    ; F3CD: 27 32     ; 
                 BRA     ZF3FC                    ; F3CF: 20 2B     ; 
 ;------------------------------------------------
-ZF3D1           TST     MFF60                    ; F3D1: 7D FF 60  ; 
+CONTBP          TST     MFF60                    ; F3D1: 7D FF 60  ; 
                 BNE     ZF3DB                    ; F3D4: 26 05     ; 
                 JSR     ZF2A9                    ; F3D6: BD F2 A9  ; 
                 BEQ     ZF3DE                    ; F3D9: 27 03     ; 
@@ -606,7 +606,7 @@ GOTcG           LDX     RAMBGN                   ; F3E9: FE FF 00  ; Got ':G'
                 LDX     ,X                       ; F3ED: EE 00     ; 
                 BRA     ZF3F4                    ; F3EF: 20 03     ; 
 ;------------------------------------------------
-GOT_G2          LDX     TEMP1H                   ; F3F1: FE FF 08  ; 
+EXECUP          LDX     TEMP1H                   ; F3F1: FE FF 08  ; 
 ZF3F4           STX     XREGsP                   ; F3F4: FF FF 16  ; 
                 TST     MFF60                    ; F3F7: 7D FF 60  ; 
                 BMI     ZF401                    ; F3FA: 2B 05     ; 
@@ -919,11 +919,11 @@ ZF67A           JSR     PADDCHKSM                ; F67A: BD F6 FD  ; Print it an
                 TSX                              ; F684: 30        ; transfer it to X
                 BSR     PADDCHKSM                ; F685: 8D 76     ; print checksum
                 PULB                             ; F687: 33        ; restore B
-                LDX     BEGADRH                  ; F688: FE FF 0A  ; |
+                LDX     BEGAD1H                  ; F688: FE FF 0A  ; |
                 STX     TEMP2H                   ; F68B: FF FF 5A  ; |
-ZF68E           LDAA    ENDADRL                  ; F68E: B6 FF 0D  ; |
+ZF68E           LDAA    ENDAD1L                  ; F68E: B6 FF 0D  ; |
                 SUBA    TEMP2L                   ; F691: B0 FF 5B  ; |
-                LDAB    ENDADRH                  ; F694: F6 FF 0C  ; | calculate linelength
+                LDAB    ENDAD1H                  ; F694: F6 FF 0C  ; | calculate linelength
                 SBCB    TEMP2H                   ; F697: F2 FF 5A  ; |
                 BNE     ZF6A0                    ; F69A: 26 04     ; |
                 CMPA    #$18                     ; F69C: 81 18     ; |
@@ -953,7 +953,7 @@ ZF6C2           BSR     PADDCHKSM                ; F6C2: 8D 39     ; print data
                 PULB                             ; F6D1: 33        ; restore B
                 LDX     TEMP2H                   ; F6D2: FE FF 5A  ; 
                 DEX                              ; F6D5: 09        ; 
-                CPX     ENDADRH                  ; F6D6: BC FF 0C  ; 
+                CPX     ENDAD1H                  ; F6D6: BC FF 0C  ; 
                 BNE     ZF68E                    ; F6D9: 26 B3     ; next line
                 LDX     #S9_TXT                  ; F6DB: CE FB DA  ; |
                 JSR     XPDAT1                   ; F6DE: BD FA 16  ; Print 'S9030000FC'
@@ -991,9 +991,8 @@ PUNCH           BSR     XBEGEN1                  ; F71A: 8D 6B     ; Get Begin a
                 CMPA    #'R'                     ; F71F: 81 52     ; is it an 'R' for PRNT or not for PNCH
                 BEQ     GOTPRNT                  ; F721: 27 03     ; 
                 JMP     GOTPNCH                  ; F723: 7E F6 34  ; 
-
 GOTPRNT         BSR     ASKEXEC                  ; F726: 8D E4     ; 
-                LDX     BEGADRH                  ; F728: FE FF 0A  ; 
+                LDX     BEGAD1H                  ; F728: FE FF 0A  ; 
                 STX     TEMP1H                   ; F72B: FF FF 08  ; temp
                 LDAA    TEMP1L                   ; F72E: B6 FF 09  ; get low byte
                 ANDA    #$F0                     ; F731: 84 F0     ; limit to 16 byte boundaries
@@ -1022,10 +1021,10 @@ ZF763           JSR     XOUTCH1                  ; F763: BD F9 E2  ; print it
                 DECB                             ; F767: 5A        ; next char
                 BNE     ZF755                    ; F768: 26 EB     ; done?
                 STX     TEMP1H                   ; F76A: FF FF 08  ; store new BEGADDR
-                CPX     #$0000                   ; F76D: 8C 00 00  ; 
+                CPX     #$0000                   ; F76D: 8C 00 00  ; |
                 BEQ     PUNCH                    ; F770: 27 A8     ; If overflow to 0000 begin anew
-                LDAA    ENDADRH                  ; F772: B6 FF 0C  ; 
-                LDAB    ENDADRL                  ; F775: F6 FF 0D  ; 
+                LDAA    ENDAD1H                  ; F772: B6 FF 0C  ; 
+                LDAB    ENDAD1L                  ; F775: F6 FF 0D  ; 
                 SUBB    TEMP1L                   ; F778: F0 FF 09  ; 
                 SBCA    TEMP1H                   ; F77B: B2 FF 08  ; 
                 BCS     PUNCH                    ; F77E: 25 9A     ; 
@@ -1037,18 +1036,18 @@ ZF763           JSR     XOUTCH1                  ; F763: BD F9 E2  ; print it
 ;------------------------------------------------
 XBEGEN1         LDX     #BEGINADDR               ; F787: CE FB 3A  ; Load Text (BEG ADDR)
                 JSR     XPDATA1                  ; F78A: BD FA 14  ; Output it
-                LDX     #BEGADRH                 ; F78D: CE FF 0A  ; Set pointer to destination
+                LDX     #BEGAD1H                 ; F78D: CE FF 0A  ; Set pointer to destination
                 JSR     GETHEX4                  ; F790: BD F9 61  ; get HEX address
                 BMI     XBEGEN1                  ; F793: 2B F2     ; problem, try again
 ZF795           LDX     #ENDADDR                 ; F795: CE FB 44  ; Load Text (END ADDR)
                 JSR     XPDATA1                  ; F798: BD FA 14  ; Output it
-                LDX     #ENDADRH                 ; F79B: CE FF 0C  ; Set pointer to destination
+                LDX     #ENDAD1H                 ; F79B: CE FF 0C  ; Set pointer to destination
                 JSR     GETHEX4                  ; F79E: BD F9 61  ; get HEX address
                 BMI     ZF795                    ; F7A1: 2B F2     ; problem, try again
-                LDAA    ENDADRH                  ; F7A3: B6 FF 0C  ; Test if END > BEGIN
-                LDAB    ENDADRL                  ; F7A6: F6 FF 0D  ; |
-                SUBB    BEGADRL                  ; F7A9: F0 FF 0B  ; |
-                SBCA    BEGADRH                  ; F7AC: B2 FF 0A  ; |
+                LDAA    ENDAD1H                  ; F7A3: B6 FF 0C  ; Test if END > BEGIN
+                LDAB    ENDAD1L                  ; F7A6: F6 FF 0D  ; |
+                SUBB    BEGAD1L                  ; F7A9: F0 FF 0B  ; |
+                SBCA    BEGAD1H                  ; F7AC: B2 FF 0A  ; |
                 BCS     XBEGEN1                  ; F7AF: 25 D6     ; no, try again
                 RTS                              ; F7B1: 39        ; 
 ;------------------------------------------------
@@ -1367,7 +1366,6 @@ XCKBRK2         BSR     XINCHN1                  ; FA2C: 8D 51     ; Get ASCII f
 XCKBRK1         CMPA    #'X'                     ; FA2E: 81 58     ; is it 'X'
                 BNE     ZFA35                    ; FA30: 26 03     ; no
                 JMP     REENT3                   ; FA32: 7E F5 C2  ; Got 'X' - restart
-
 ZFA35           CMPA    #'^'                     ; FA35: 81 5E     ; not 'X', is it '^'?
                 BEQ     ZFA3F                    ; FA37: 27 06     ; yes, done
                 CMPA    #$0D                     ; FA39: 81 0D     ; ignore CR and LF
@@ -1434,17 +1432,17 @@ STRTLIN         BSR     XOUTCH2                  ; FA9F: 8D 89     ; Print A
 ;------------------------------------------------
 PRNTREG1        JSR     XPCRLF1                  ; FAA5: BD FA 21  ; Send LF, CR, NULL
 PRNTREG2        LDX     #XREGsP                  ; FAA8: CE FF 16  ; Get register address
-                LDAA    #'P'                      ; FAAB: 86 50    ; |
+                LDAA    #'P'                     ; FAAB: 86 50     ; |
                 BSR     PRNTLN4                  ; FAAD: 8D 19     ; |
-                LDAA    #'X'                      ; FAAF: 86 58    ; |
+                LDAA    #'X'                     ; FAAF: 86 58     ; |
                 BSR     PRNTLN4                  ; FAB1: 8D 15     ; |
-                LDAA    #'A'                      ; FAB3: 86 41    ; |
+                LDAA    #'A'                     ; FAB3: 86 41     ; |
                 BSR     PRNTLN2                  ; FAB5: 8D 0C     ; |
-                LDAA    #'B'                      ; FAB7: 86 42    ; |
+                LDAA    #'B'                     ; FAB7: 86 42     ; |
                 BSR     PRNTLN2                  ; FAB9: 8D 08     ; |
-                LDAA    #'C'                      ; FABB: 86 43    ; |
+                LDAA    #'C'                     ; FABB: 86 43     ; |
                 BSR     PRNTLN2                  ; FABD: 8D 04     ; |
-                LDAA    #'S'                      ; FABF: 86 53    ; |
+                LDAA    #'S'                     ; FABF: 86 53     ; |
                 BRA     PRNTLN4                  ; FAC1: 20 05     ; print it
 
 PRNTLN2         BSR     STRTLIN                  ; FAC3: 8D DA     ; 
@@ -1470,24 +1468,24 @@ ZFAE4           LDAA    #$FF                     ; FAE4: 86 FF     ;
 S240            LDX     #M072F                   ; FAE8: CE 07 2F  ; 
                 BRA     ZFAE4                    ; FAEB: 20 F7     ; 
 ;------------------------------------------------
-XBUGCMD         FCC     'LOAD'                   ; FAED: 4C 4F 41 44    
-                FDB     LOAD                     ; FAF1: F7 B9          
-                FCC     'VERF'                   ; FAF3: 56 45 52 46    
-                FDB     VERIFY                   ; FAF7: F7 BE          
-                FCC     'SRCH'                   ; FAF9: 53 52 43 48    
-                FDB     SEARCH                   ; FAFD: F7 B2          
-                FCC     'PRNT'                   ; FAFF: 50 52 4E 54    
-                FDB     PUNCH                    ; FB03: F7 1A          
-                FCC     'PNCH'                   ; FB05: 50 4E 43 48    
-                FDB     PUNCH                    ; FB09: F7 1A          
-                FCC     'MAID'                   ; FB0B: 4D 41 49 44    
-                FDB     MAID                     ; FB0F: F0 ED          
-                FCC     'S10.'                   ; FB11: 53 31 30 2E    
-                FDB     S10                      ; FB15: FA CD          
-                FCC     'S30.'                   ; FB17: 53 33 30 2E    
-                FDB     S30                      ; FB1B: FA DA          
-                FCC     'S120'                   ; FB1D: 53 31 32 30    
-                FDB     S120                     ; FB21: FA E1          
+XBUGCMD         FCC     'LOAD'                   ; FAED: 4C 4F 41 44
+                FDB     LOAD                     ; FAF1: F7 B9      
+                FCC     'VERF'                   ; FAF3: 56 45 52 46
+                FDB     VERIFY                   ; FAF7: F7 BE      
+                FCC     'SRCH'                   ; FAF9: 53 52 43 48
+                FDB     SEARCH                   ; FAFD: F7 B2      
+                FCC     'PRNT'                   ; FAFF: 50 52 4E 54
+                FDB     PUNCH                    ; FB03: F7 1A      
+                FCC     'PNCH'                   ; FB05: 50 4E 43 48
+                FDB     PUNCH                    ; FB09: F7 1A      
+                FCC     'MAID'                   ; FB0B: 4D 41 49 44
+                FDB     MAID                     ; FB0F: F0 ED      
+                FCC     'S10.'                   ; FB11: 53 31 30 2E
+                FDB     S10                      ; FB15: FA CD      
+                FCC     'S30.'                   ; FB17: 53 33 30 2E
+                FDB     S30                      ; FB1B: FA DA      
+                FCC     'S120'                   ; FB1D: 53 31 32 30
+                FDB     S120                     ; FB21: FA E1      
                 FCC     'S240'                   ; FB23: 53 32 34 30    
                 FDB     S240                     ; FB27: FA E8          
                 FCC     'TERM'                   ; FB29: 54 45 52 4D    
@@ -1516,7 +1514,7 @@ STOPONADDR      FCC     'STOP-ON-ADDRESS '       ; FB93: 53 54 4F 50 2D 4F 4E 2D
                 FCB     $04                      ; FBA3: 04             
 STOPADDR        FCC     'STOP ADDR '             ; FBA4: 53 54 4F 50 20 41 44 44 52 20
                 FCB     $04                      ; FBAE: 04             
-ABORTED         FCC     'ABORTED '               ; FBAF: 41 42 4F 52 54 45 44 20 
+ABORTED         FCC     'ABORTED AT '            ; FBAF: 41 42 4F 52 54 45 44 20 41 54 20
                 FCC     'AT '                    ; FBB7: 41 54 20       
                 FCB     $04                      ; FBBA: 04             
 MFBBB           FCB     $14                      ; FBBB: 14             
