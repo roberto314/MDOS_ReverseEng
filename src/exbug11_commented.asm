@@ -669,36 +669,36 @@ ZF476           RTI                              ; F476: 3B        ;
 ;               SWI Interrupt Service Routine
 ;------------------------------------------------
 MF477           LDAB    #$07                     ; F477: C6 07     ; SWI ISR
-                LDX     #XREGsC                  ; F479: CE FF 1C  ;
-ZF47C           PULA                             ; F47C: 32        ;
-                STAA    ,X                       ; F47D: A7 00     ;
-                DEX                              ; F47F: 09        ;
-                DECB                             ; F480: 5A        ;
-                BNE     ZF47C                    ; F481: 26 F9     ;
-                STS     XREGsS                   ; F483: BF FF 1D  ;
-                LDS     #XSTAKs                  ; F486: 8E FF 8A  ;
-                BSR     SWPWRORD                 ; F489: 8D 34     ;
-                LDX     XREGsP                   ; F48B: FE FF 16  ;
-                DEX                              ; F48E: 09        ;
-                STX     XREGsP                   ; F48F: FF FF 16  ;
-                TST     BKPINs                   ; F492: 7D FF 4F  ;
-                BEQ     ZF4AB                    ; F495: 27 14     ;
-                JSR     ZF3C9                    ; F497: BD F3 C9  ;
-                JSR     ZF2B4                    ; F49A: BD F2 B4  ;
-                BNE     ZF4AB                    ; F49D: 26 0C     ;
-                LDS     $20,X                    ; F49F: AE 20     ;
-                BEQ     ZF4B7                    ; F4A1: 27 14     ;
-                DES                              ; F4A3: 34        ;
-                STS     $20,X                    ; F4A4: AF 20     ;
-                LDS     #XSTAKs                  ; F4A6: 8E FF 8A  ;
-                BRA     ZF42C                    ; F4A9: 20 81     ;
+                LDX     #XREGsC                  ; F479: CE FF 1C  ; set up store pointer
+ZF47C           PULA                             ; F47C: 32        ; get values from stack 
+                STAA    ,X                       ; F47D: A7 00     ; store it
+                DEX                              ; F47F: 09        ; next addr
+                DECB                             ; F480: 5A        ; next value
+                BNE     ZF47C                    ; F481: 26 F9     ; continue for 7 values
+                STS     XREGsS                   ; F483: BF FF 1D  ; save Stackpointer
+                LDS     #XSTAKs                  ; F486: 8E FF 8A  ; 
+                BSR     SWPWRORD                 ; F489: 8D 34     ; 
+                LDX     XREGsP                   ; F48B: FE FF 16  ; 
+                DEX                              ; F48E: 09        ; 
+                STX     XREGsP                   ; F48F: FF FF 16  ; 
+                TST     BKPINs                   ; F492: 7D FF 4F  ; 
+                BEQ     ZF4AB                    ; F495: 27 14     ; 
+                JSR     ZF3C9                    ; F497: BD F3 C9  ; 
+                JSR     ZF2B4                    ; F49A: BD F2 B4  ; 
+                BNE     ZF4AB                    ; F49D: 26 0C     ; 
+                LDS     $20,X                    ; F49F: AE 20     ; 
+                BEQ     ZF4B7                    ; F4A1: 27 14     ; 
+                DES                              ; F4A3: 34        ; 
+                STS     $20,X                    ; F4A4: AF 20     ; 
+                LDS     #XSTAKs                  ; F4A6: 8E FF 8A  ; 
+                BRA     ZF42C                    ; F4A9: 20 81     ; 
 
 ZF4AB           LDX     #BKPTERR                 ; F4AB: CE FB C4  ; Load Text
                 JSR     XPDATA1                  ; F4AE: BD FA 33  ; Output it
                 CLR     MFF60                    ; F4B1: 7F FF 60  ;
                 CLR     MFF54                    ; F4B4: 7F FF 54  ;
 ZF4B7           LDS     #XSTAKs                  ; F4B7: 8E FF 8A  ;
-                JSR     PRNTREG1                 ; F4BA: BD FA C9  ;
+                JSR     PRNTREG1                 ; F4BA: BD FA C9  ; Print Registers (with CRLF before)
                 BRA     ZF536                    ; F4BD: 20 77     ;
 ;------------------------------------------------
 SWPWRORD        LDX     #XREGsP                  ; F4BF: CE FF 16  ; SWAP 32bit word HI/LOW Bytes
@@ -722,34 +722,34 @@ MF4D8           LDAA    #$3C                     ; F4D8: 86 3C     ; NMI ISR
                 LDAA    #$34                     ; F4DD: 86 34     ; 
                 STAA    PIACRB                   ; F4DF: B7 FC FB  ; sel output reg., CB2 low
                 LDAB    #$07                     ; F4E2: C6 07     ;
-                LDX     #XREGsC                  ; F4E4: CE FF 1C  ;
-ZF4E7           PULA                             ; F4E7: 32        ;
-                STAA    ,X                       ; F4E8: A7 00     ;
-                DEX                              ; F4EA: 09        ;
-                DECB                             ; F4EB: 5A        ;
-                BNE     ZF4E7                    ; F4EC: 26 F9     ;
-                STS     XREGsS                   ; F4EE: BF FF 1D  ;
-                LDS     #XSTAKs                  ; F4F1: 8E FF 8A  ;
-                BSR     SWPWRORD                 ; F4F4: 8D C9     ;
-                JSR     ZF3C9                    ; F4F6: BD F3 C9  ;
-                LDAA    PIACRA                   ; F4F9: B6 FC F9  ;
-                LDAB    PIADRA                   ; F4FC: F6 FC F8  ;
-                BITA    #$80                     ; F4FF: 85 80     ;
-                BNE     ZF54D                    ; F501: 26 4A     ;
-                LDAA    PIACRB                   ; F503: B6 FC FB  ;
-                LDAB    PIADRB                   ; F506: F6 FC FA  ;
-                BITA    #$80                     ; F509: 85 80     ;
-                BNE     ZF539                    ; F50B: 26 2C     ;
-                TST     MFF60                    ; F50D: 7D FF 60  ;
-                BEQ     ZF544                    ; F510: 27 32     ;
-                JSR     PRNTREG1                 ; F512: BD FA C9  ;
-                TST     MFF50                    ; F515: 7D FF 50  ;
-                BEQ     ZF525                    ; F518: 27 0B     ;
-                LDX     MFF51                    ; F51A: FE FF 51  ;
-                BEQ     ZF52D                    ; F51D: 27 0E     ;
-                DEX                              ; F51F: 09        ;
-                STX     MFF51                    ; F520: FF FF 51  ;
-                BRA     ZF54A                    ; F523: 20 25     ;
+                LDX     #XREGsC                  ; F4E4: CE FF 1C  ; set up store pointer
+ZF4E7           PULA                             ; F4E7: 32        ; get values from stack 
+                STAA    ,X                       ; F4E8: A7 00     ; store it
+                DEX                              ; F4EA: 09        ; next addr
+                DECB                             ; F4EB: 5A        ; next value
+                BNE     ZF4E7                    ; F4EC: 26 F9     ; continue for 7 values
+                STS     XREGsS                   ; F4EE: BF FF 1D  ; save Stackpointer
+                LDS     #XSTAKs                  ; F4F1: 8E FF 8A  ; 
+                BSR     SWPWRORD                 ; F4F4: 8D C9     ; 
+                JSR     ZF3C9                    ; F4F6: BD F3 C9  ; 
+                LDAA    PIACRA                   ; F4F9: B6 FC F9  ; 
+                LDAB    PIADRA                   ; F4FC: F6 FC F8  ; 
+                BITA    #$80                     ; F4FF: 85 80     ; 
+                BNE     ZF54D                    ; F501: 26 4A     ; 
+                LDAA    PIACRB                   ; F503: B6 FC FB  ; 
+                LDAB    PIADRB                   ; F506: F6 FC FA  ; 
+                BITA    #$80                     ; F509: 85 80     ; 
+                BNE     ZF539                    ; F50B: 26 2C     ; 
+                TST     MFF60                    ; F50D: 7D FF 60  ; 
+                BEQ     ZF544                    ; F510: 27 32     ; 
+                JSR     PRNTREG1                 ; F512: BD FA C9  ; Print Registers (with CRLF before)
+                TST     MFF50                    ; F515: 7D FF 50  ; 
+                BEQ     ZF525                    ; F518: 27 0B     ; 
+                LDX     MFF51                    ; F51A: FE FF 51  ; 
+                BEQ     ZF52D                    ; F51D: 27 0E     ; 
+                DEX                              ; F51F: 09        ; 
+                STX     MFF51                    ; F520: FF FF 51  ; 
+                BRA     ZF54A                    ; F523: 20 25     ; 
 
 ZF525           LDX     XREGsP                   ; F525: FE FF 16  ;
                 CPX     MFF14                    ; F528: BC FF 14  ;
@@ -758,17 +758,17 @@ ZF52D           CLR     MFF60                    ; F52D: 7F FF 60  ;
                 CLR     MFF50                    ; F530: 7F FF 50  ;
                 CLR     MFF54                    ; F533: 7F FF 54  ;
 ZF536           JMP     MAIDs                    ; F536: 7E F0 F9  ;
-ZF539           LDX     #STOPONADDR              ; F539: CE FB 8F  ;
-                JSR     XPDATA1                  ; F53C: BD FA 33  ;
-                JSR     PRNTREG2                 ; F53F: BD FA CC  ;
+ZF539           LDX     #STOPONADDR              ; F539: CE FB 8F  ; Load Text
+                JSR     XPDATA1                  ; F53C: BD FA 33  ; Output it
+                JSR     PRNTREG2                 ; F53F: BD FA CC  ; Print Registers
                 BRA     ZF536                    ; F542: 20 F2     ;
 
 ZF544           JSR     ZF395                    ; F544: BD F3 95  ;
                 CLR     MFF54                    ; F547: 7F FF 54  ;
 ZF54A           JMP     ZF431                    ; F54A: 7E F4 31  ;
-ZF54D           LDX     #ABORTED                 ; F54D: CE FB AB  ;
-                JSR     XPDATA1                  ; F550: BD FA 33  ;
-                JSR     PRNTREG2                 ; F553: BD FA CC  ;
+ZF54D           LDX     #ABORTED                 ; F54D: CE FB AB  ; Load Text
+                JSR     XPDATA1                  ; F550: BD FA 33  ; Output it
+                JSR     PRNTREG2                 ; F553: BD FA CC  ; Print Registers
                 BRA     ZF567                    ; F556: 20 0F     ;
 ;------------------------------------------------
 PWRUP1          SEI                              ; F558: 0F        ; We start here after Reset

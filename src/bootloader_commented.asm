@@ -15,27 +15,10 @@ CURADRL EQU     $0007
 FDSTAT  EQU     $0008
 SECTCNTH EQU     $000B
 SECTCNTL EQU     $000C
-Z1FFD   EQU     $1FFD
-OSLOAD  EQU     $E800
 CHKERR  EQU     $E853
 READPS  EQU     $E86D
 RESTOR  EQU     $E875
 LPINIT  EQU     $EBC0
-PWRUP   EQU     $F000
-XBEGEN  EQU     $F003
-XCBCDH  EQU     $F006
-XCHEXL  EQU     $F009
-XCHEXR  EQU     $F00C
-XINADD  EQU     $F00F
-XINCH   EQU     $F012
-XINCHN  EQU     $F015
-XOUTCH  EQU     $F018
-XOUT2H  EQU     $F01B
-XOUT4H  EQU     $F01E
-XPCRLF  EQU     $F021
-XPDATA  EQU     $F024
-XPDAT   EQU     $F027
-XPSPAC  EQU     $F02A
 
 ;****************************************************
 ; Program's Code Areas
