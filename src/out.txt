@@ -14,13 +14,13 @@ GI CP-1600-Generator (C) 2021 Haruo Asano
 
 Assembling exbug11_commented.asm
 PASS 1
-exbug11_commented.asm(1528)
+exbug11_commented.asm(1531)
 PASS 2
-exbug11_commented.asm(1528)
+exbug11_commented.asm(1531)
 
-0.01 seconds assembly time
+0.00 seconds assembly time
 
-   1528 lines source file
+   1531 lines source file
       2 passes
       0 errors
       0 warnings

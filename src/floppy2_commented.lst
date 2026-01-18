@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 1 - 01/17/2026 08:50:18 PM
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 1 - 01/18/2026 07:25:52 PM
 
 
        1/       0 :                     ; Ready to assemble with asl. binary matches original
@@ -61,7 +61,7 @@
       58/    E800 :                     
       59/    E800 : 8E FF 8A            OSLOAD          LDS     #XSTAKs                  ; E800: 8E FF 8A  ; Set Stackpointer     
       60/    E803 : 4F                                  CLRA                             ; E803: 4F        ; |    
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 2 - 01/17/2026 08:50:18 PM
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 2 - 01/18/2026 07:25:52 PM
 
 
       61/    E804 : 97 00                               STAA    CURDRV                   ; E804: 97 00     ; Set Drive to zero   
@@ -124,7 +124,7 @@
      118/    E869 :                     ;                CPX     #MC680                   ; E883: 8C C6 80   ; These CPX are just a method to deactivate the code after the LDAB
      119/    E869 :                     ;                CPX     #MC604                   ; E886: 8C C6 04   ; These CPX are just a method to deactivate the code after the LDAB
      120/    E869 :                     ;*************************************************
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 3 - 01/17/2026 08:50:18 PM
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 3 - 01/18/2026 07:25:52 PM
 
 
      121/    E869 :                     ; Meaning of the Bits in FUNCSAV:
@@ -187,7 +187,7 @@
      178/    E8B6 : B5 EC 00                            BITA    PIAREGA                  ; E8B6: B5 EC 00  ; Check Drive Ready
      179/    E8B9 : 27 07                               BEQ     DRVRDY                   ; E8B9: 27 07     ; 
      180/    E8BB : C6 33               SERR3           LDAB    #$33                     ; E8BB: C6 33     ; Error '3' (DISK NOT READY)
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 4 - 01/17/2026 08:50:18 PM
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 4 - 01/18/2026 07:25:52 PM
 
 
      181/    E8BD :                     ;                CPX     #MC636                   ; E8BD: 8C C6 36  ; 
@@ -250,7 +250,7 @@
      238/    E922 : 4A                                  DECA                             ; E922: 4A        ; 
      239/    E923 : 2B 45                               BMI     ZE96A     ; -->          ; E923: 2B 45     ; 
      240/    E925 : 8D 1F                               BSR     STEP                     ; E925: 8D 1F     ; 
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 5 - 01/17/2026 08:50:18 PM
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 5 - 01/18/2026 07:25:52 PM
 
 
      241/    E927 : F6 EC 00                            LDAB    PIAREGA                  ; E927: F6 EC 00  ; 
@@ -313,7 +313,7 @@
      298/    E97E : C6 6A                               LDAB    #$6A                     ; E97E: C6 6A     ; yes, write DELETED DATA MARK (WRDDAM)
      299/    E980 : D7 14               IE980           STAB    ADDRMRK                  ; E980: D7 14     ; 
      300/    E982 : 20 4F                               BRA     NXTSEC                   ; E982: 20 4F     ; next sector
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 6 - 01/17/2026 08:50:18 PM
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 6 - 01/18/2026 07:25:52 PM
 
 
      301/    E984 :                     ;------------------------------------------------
@@ -376,7 +376,7 @@
      358/    E9DA : 27 A8                               BEQ     SECRDDONE   ; -->        ; E9DA: 27 A8     ; done?
      359/    E9DC : 80 1B                               SUBA    #$1B                     ; E9DC: 80 1B     ; Sector == 27?
      360/    E9DE : 24 EA                               BCC     INCTRK                   ; E9DE: 24 EA     ; increase Track
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 7 - 01/17/2026 08:50:18 PM
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 7 - 01/18/2026 07:25:52 PM
 
 
      361/    E9E0 : 86 05                               LDAA    #$05                     ; E9E0: 86 05     ; 
@@ -439,7 +439,7 @@
      418/    EA4C : 2B 3B                               BMI     SERR9                    ; EA4C: 2B 3B     ; PB7 High ? (CRC-0) - ERROR
      419/    EA4E :                     ;*************************************************
      420/    EA4E :                     ; Found corr. Track and Sector, now look for Data Addr. Mark
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 8 - 01/17/2026 08:50:18 PM
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 8 - 01/18/2026 07:25:52 PM
 
 
      421/    EA4E :                     ;*************************************************
@@ -502,7 +502,7 @@
      478/    EAB4 : A7 01                               STAA    $01,X                    ; EAB4: A7 01     ; |
      479/    EAB6 : 08                                  INX                              ; EAB6: 08        ; |
      480/    EAB7 : 08                                  INX                              ; EAB7: 08        ; |
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 9 - 01/17/2026 08:50:18 PM
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 9 - 01/18/2026 07:25:52 PM
 
 
      481/    EAB8 : 5A                                  DECB                             ; EAB8: 5A        ; |
@@ -565,7 +565,7 @@
      538/    EB2C : B5 EC 04            IEB2C           BITA    SSDA_0                   ; EB2C: B5 EC 04  ; Transmit Datareg. empty?
      539/    EB2F : 27 FB                               BEQ     IEB2C                    ; EB2F: 27 FB     ; If no, wait
      540/    EB31 : B6 FC FC            WRITSEC         LDAA    PROM_0                   ; EB31: B6 FC FC  ; in PROM_0 is zero
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 10 - 01/17/2026 08:50:18 PM
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 10 - 01/18/2026 07:25:52 PM
 
 
      541/    EB34 : 01                                  NOP                              ; EB34: 01        ;  
@@ -628,7 +628,7 @@
      598/    EB9C : 5C                  IEB9C           INCB                             ; EB9C: 5C        ;  
      599/    EB9D : 80 16                               SUBA    #$16                     ; EB9D: 80 16     ;  
      600/    EB9F : 24 FB                               BCC     IEB9C                    ; EB9F: 24 FB     ;  
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 11 - 01/17/2026 08:50:18 PM
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 11 - 01/18/2026 07:25:52 PM
 
 
      601/    EBA1 : D7 19                               STAB    CLKFREQ                  ; EBA1: D7 19     ; B is 3 for 1MHz
@@ -691,11 +691,11 @@
      658/    EBFF : 00                                  FCB     $00                      ; EBFF: 00             
      659/    EC00 :                     
      660/    EC00 :                     
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 12 - 01/17/2026 08:50:18 PM
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 12 - 01/18/2026 07:25:52 PM
 
 
      661/    EC00 :                                     END
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 13 - 01/17/2026 08:50:18 PM
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 13 - 01/18/2026 07:25:52 PM
 
 
   Symbol Table (* = unused):
@@ -711,7 +711,7 @@
 *CONSTPI :        3.141592653589793 - |  CRCOK :                       EACD C |
  CRCONLY :                     EABB C |  CURADRH :                        6 - |
  CURDRV :                         0 - | *CUSTOM :                         0 - |
- CWRDCNT :                        9 - | *DATE :                "01/17/2026" - |
+ CWRDCNT :                        9 - | *DATE :                "01/18/2026" - |
  DRDCNT :                        18 - |  DRVRDY :                      E8C2 C |
  DWRDCNT :                       15 - |  ERRHNDLR :                    E991 C |
 *EXADDR :                        22 - | *FALSE :                          0 - |
@@ -758,7 +758,7 @@
  PRNTER :                      E85A C |  PROM_0 :                      FCFC - |
 *PWRUP :                       F000 - | *RDCRC :                       E86F C |
  READCRC :                     EABD C |  READINIT :                    E9AC C |
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 14 - 01/17/2026 08:50:18 PM
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 14 - 01/18/2026 07:25:52 PM
 
 
 *READPS :                      E86D C |  READSC :                      E869 C |
@@ -776,7 +776,7 @@
  STACKSAV :                      16 - |  START :                       E9E5 C |
  STATSAV :                        D - |  STEP :                        E946 C |
  STRSCTH :                        1 - |  STRSCTL :                        2 - |
-*TIME :               "08:50:18 PM" - |  TRACKSAV :                      13 - |
+*TIME :               "07:25:52 PM" - |  TRACKSAV :                      13 - |
 *TRUE :                           1 - | *VERSION :                     142F - |
  WAIT1 :                       E955 C |  WAIT2 :                       E95C C |
  WAIT3 :                       E953 C | *WRDDAM :                      E87E C |
@@ -792,7 +792,7 @@
     165 symbols
      45 unused symbols
 
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 15 - 01/17/2026 08:50:18 PM
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 15 - 01/18/2026 07:25:52 PM
 
 
   Code Pages:

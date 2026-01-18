@@ -1,3 +1,6 @@
+;-------------------------------------
+; Exbug 1.2 for Motorola Exorciser System |
+;-------------------------------------
 
 ; For the first two cycles after Reset the ROM is activated 
 ; and the Reset Vector points to F000.

@@ -1,0 +1,34 @@
+file exorset_bug.bin f000
+option 6809
+#option ldchar *
+#option cchar *
+#option multilabel on
+#option schowzero
+#option noasc
+#option noaddr #disable for comments
+#option nohex #disable for comments
+option noflex
+option nofcc
+#option noforced # makes > before variable
+option labellen 16
+option copndlen 25
+
+label f2a5 RESET_ISR
+label fd6c NMI_ISR
+label fd33 IRQ_ISR
+label fd30 SWI_ISR
+
+data ff0d-fff7
+char ff0d-fff7
+label f953 PRINT
+word ff1a-ff1b
+label f841 PUNCH
+word ff20-ff21
+label f83a DUMP
+word ff26-ff27
+label f686 LOAD
+word ff2c-ff2d
+label f67f VERF
+word ff32-ff33
+
+data f278-f2a4

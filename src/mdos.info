@@ -52,7 +52,13 @@ data fa5-10e4
 data 1105-1272
 char 1137-11B1
 
-unused 1273-20ff
+#unused 1273-20ff
+unused 12a9-1ffc
+unused 20cc-20ff
+data 2081-208d
+
+label 022F SWI_ISR
+label 02FF IRQ_ISR
 
 lcomment 108 gets init to: $2001
 lcomment 10a gets init to: $E7FF

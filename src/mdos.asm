@@ -20,20 +20,7 @@ M000D   EQU     $000D
 M007D   EQU     $007D
 M0082   EQU     $0082
 M00AE   EQU     $00AE
-M1276   EQU     $1276
-M127C   EQU     $127C
-M1282   EQU     $1282
-Z1291   EQU     $1291
-Z1294   EQU     $1294
-Z1297   EQU     $1297
-Z129A   EQU     $129A
-Z129D   EQU     $129D
-Z12A0   EQU     $12A0
-Z12A3   EQU     $12A3
-Z12A6   EQU     $12A6
-Z1FFD   EQU     $1FFD
-Z2000   EQU     $2000
-M2001   EQU     $2001
+Z1F80   EQU     $1F80
 M4F27   EQU     $4F27
 M8640   EQU     $8640
 M8680   EQU     $8680
@@ -87,6 +74,7 @@ MFFE3   EQU     $FFE3
 IRQsVC  EQU     $FFF8
 SWIsVC  EQU     $FFFA
 NMIsVC  EQU     $FFFC
+MFFFF   EQU     $FFFF
 
 ;****************************************************
 ; Program's Code Areas
@@ -177,7 +165,7 @@ Z0228           INX                              ; 0228: 08
                 INX                              ; 0229: 08             
                 CPX     #MFF2F                   ; 022A: 8C FF 2F       
                 BNE     Z0220                    ; 022D: 26 F1          
-M022F           TSX                              ; 022F: 30             
+SWI_ISR         TSX                              ; 022F: 30             
                 LDS     $05,X                    ; 0230: AE 05          
                 DES                              ; 0232: 34             
                 PULB                             ; 0233: 33             
@@ -311,7 +299,7 @@ Z02F9           FCB     $05                      ; 02F9: 05
                 FCB     $05                      ; 02FB: 05             
                 BLT     Z0304                    ; 02FC: 2D 06          
                 TBA                              ; 02FE: 17             
-                TST     PROM_1                   ; 02FF: 7D FC FD       
+IRQ_ISR         TST     PROM_1                   ; 02FF: 7D FC FD       
                 BPL     Z030A                    ; 0302: 2A 06          
 Z0304           PULA                             ; 0304: 32             
                 PSHA                             ; 0305: 36             
@@ -758,7 +746,7 @@ Z0617           LDX     SWIsSV                   ; 0617: FE 01 16
                 LDS     #XSTAKs                  ; 061D: 8E FF 8A       
                 JMP     OSLOAD                   ; 0620: 7E E8 00       
 SYSSTART        LDX     SWIsVC                   ; 0623: FE FF FA        Entry Point after floppy-boot
-                CPX     #M022F                   ; 0626: 8C 02 2F       
+                CPX     #SWI_ISR                 ; 0626: 8C 02 2F       
 Z0629           BEQ     Z0636                    ; 0629: 27 0B          
                 CPX     #M020F                   ; 062B: 8C 02 0F       
                 BEQ     Z0636                    ; 062E: 27 06          
@@ -2145,22 +2133,23 @@ M113B           FCB     'I,'N,'V,'A,'L,'I,'D,'   ; 113B: 49 4E 56 41 4C 49 44 20
                 FCB     'E,' ,'X,'-,'P,'S,'N,'   ; 119C: 45 20 58 2D 50 53 4E 20 
                 FCB     'X,'X,'X,'X              ; 11A4: 58 58 58 58    
                 FCB     $04                      ; 11A8: 04             
-                FCB     '0,'M,'D,'O,'S,'O,'V     ; 11A9: 30 4D 44 4F 53 4F 56 
-                FCB     $00                      ; 11B0: 00             
+M11A9           FCB     '0,'M,'D,'O,'S,'O,'V     ; 11A9: 30 4D 44 4F 53 4F 56 
+M11B0           FCB     $00                      ; 11B0: 00             
                 FCB     ' ,$53,$59               ; 11B1: 20 53 59       
                 FCB     $00,$00,$00,$00,$00,$00  ; 11B4: 00 00 00 00 00 00 
                 FCB     $00,$00,$00,$00,$01,$8F  ; 11BA: 00 00 00 00 01 8F 
-                FCB     $02,$0E,$FF,$FF,$FF,$FF  ; 11C0: 02 0E FF FF FF FF 
-                FCB     $FF,$FF,$FF,$FF,$FF,$FF  ; 11C6: FF FF FF FF FF FF 
-                FCB     $FF,$FF,$FF,$FF,$00,$00  ; 11CC: FF FF FF FF 00 00 
-                FCB     $01,$01,$01,$01,$01,$01  ; 11D2: 01 01 01 01 01 01 
-                FCB     $01,$01,$01,$01,$01,$01  ; 11D8: 01 01 01 01 01 01 
-                FCB     $01,$01,$01,$01,$02,$02  ; 11DE: 01 01 01 01 02 02 
-                FCB     $03,$03,$03,$04,$05,$06  ; 11E4: 03 03 03 04 05 06 
-                FCB     $12                      ; 11EA: 12             
+                FCB     $02,$0E                  ; 11C0: 02 0E          
+M11C2           FCB     $FF,$FF,$FF,$FF,$FF,$FF  ; 11C2: FF FF FF FF FF FF 
+                FCB     $FF,$FF,$FF,$FF,$FF,$FF  ; 11C8: FF FF FF FF FF FF 
+                FCB     $FF,$FF                  ; 11CE: FF FF          
+M11D0           FCB     $00,$00,$01,$01,$01,$01  ; 11D0: 00 00 01 01 01 01 
+                FCB     $01,$01,$01,$01,$01,$01  ; 11D6: 01 01 01 01 01 01 
+                FCB     $01,$01,$01,$01,$01,$01  ; 11DC: 01 01 01 01 01 01 
+                FCB     $02,$02,$03,$03,$03,$04  ; 11E2: 02 02 03 03 03 04 
+                FCB     $05,$06,$12              ; 11E8: 05 06 12       
                 FCB     $73                      ; 11EB: 73             
                 FCB     $18,$9D,$1C,$0D,$1F,$FD  ; 11EC: 18 9D 1C 0D 1F FD 
-                FCB     $36                      ; 11F2: 36             
+Z11F2           FCB     $36                      ; 11F2: 36             
                 FCB     $07,$CE,$11,$D0,$F6,$11  ; 11F3: 07 CE 11 D0 F6 11 
                 FCB     $EB                      ; 11F9: EB             
                 FCB     $20                      ; 11FA: 20             
@@ -2175,7 +2164,7 @@ M113B           FCB     'I,'N,'V,'A,'L,'I,'D,'   ; 113B: 49 4E 56 41 4C 49 44 20
                 FCB     $EF                      ; 120D: EF             
                 FCB     $20                      ; 120E: 20             
                 FCB     $08                      ; 120F: 08             
-                FCB     $36                      ; 1210: 36             
+Z1210           FCB     $36                      ; 1210: 36             
                 FCB     $07,$CE,$11,$E9,$F6,$11  ; 1211: 07 CE 11 E9 F6 11 
                 FCB     $F1                      ; 1217: F1             
                 FCB     $36                      ; 1218: 36             
@@ -2217,10 +2206,123 @@ M113B           FCB     'I,'N,'V,'A,'L,'I,'D,'   ; 113B: 49 4E 56 41 4C 49 44 20
                 FCB     $32                      ; 1267: 32             
                 FCB     $06                      ; 1268: 06             
                 FCB     $32,$39                  ; 1269: 32 39          
-                FCB     $86                      ; 126B: 86             
+Z126B           FCB     $86                      ; 126B: 86             
                 FCB     $56                      ; 126C: 56             
                 FCB     $97,$08,$0D,$BD,$E8      ; 126D: 97 08 0D BD E8 
                 FCB     $53                      ; 1272: 53             
+                JSR     Z11F2                    ; 1273: BD 11 F2       
+M1276           JSR     Z11F2                    ; 1276: BD 11 F2       
+                JSR     Z11F2                    ; 1279: BD 11 F2       
+M127C           JSR     Z11F2                    ; 127C: BD 11 F2       
+                JSR     Z11F2                    ; 127F: BD 11 F2       
+M1282           JSR     Z11F2                    ; 1282: BD 11 F2       
+                JSR     Z11F2                    ; 1285: BD 11 F2       
+                JSR     Z11F2                    ; 1288: BD 11 F2       
+                JSR     Z11F2                    ; 128B: BD 11 F2       
+                JSR     Z11F2                    ; 128E: BD 11 F2       
+Z1291           JSR     Z11F2                    ; 1291: BD 11 F2       
+Z1294           JSR     Z11F2                    ; 1294: BD 11 F2       
+Z1297           JSR     Z11F2                    ; 1297: BD 11 F2       
+Z129A           JSR     Z11F2                    ; 129A: BD 11 F2       
+Z129D           JSR     Z11F2                    ; 129D: BD 11 F2       
+Z12A0           JSR     Z11F2                    ; 12A0: BD 11 F2       
+Z12A3           JSR     Z11F2                    ; 12A3: BD 11 F2       
+Z12A6           JSR     Z11F2                    ; 12A6: BD 11 F2       
+
+                ORG     $1FFD
+
+Z1FFD           JSR     Z1210                    ; 1FFD: BD 12 10       
+Z2000           SEI                              ; 2000: 0F             
+M2001           STS     M2081                    ; 2001: BF 20 81       
+                LDX     #MFFFF                   ; 2004: CE FF FF       
+Z2007           LDAA    #$AA                     ; 2007: 86 AA          
+                JMP     Z20BE                    ; 2009: 7E 20 BE       
+Z200C           STAA    ,X                       ; 200C: A7 00          
+                JMP     Z208E                    ; 200E: 7E 20 8E       
+Z2011           CMPA    ,X                       ; 2011: A1 00          
+                TPA                              ; 2013: 07             
+                STAB    ,X                       ; 2014: E7 00          
+                TAP                              ; 2016: 06             
+                BEQ     Z2007                    ; 2017: 27 EE          
+Z2019           DEX                              ; 2019: 09             
+                JMP     Z209E                    ; 201A: 7E 20 9E       
+Z201D           LDX     SWIsVC                   ; 201D: FE FF FA       
+                STX     SWIsSV                   ; 2020: FF 01 16       
+                LDX     IRQsVC                   ; 2023: FE FF F8       
+                STX     IRQsSV                   ; 2026: FF 01 1C       
+                LDX     #SWI_ISR                 ; 2029: CE 02 2F       
+                STX     SWIsVC                   ; 202C: FF FF FA       
+                LDX     #IRQ_ISR                 ; 202F: CE 02 FF       
+                STX     IRQsVC                   ; 2032: FF FF F8       
+                LDS     ENDSYs                   ; 2035: BE 01 0A       
+                LDAA    #$2F                     ; 2038: 86 2F          
+                LDX     #M11C2                   ; 203A: CE 11 C2       
+                STAA    M11B0                    ; 203D: B7 11 B0       
+Z2040           INC     M11B0                    ; 2040: 7C 11 B0       
+                STX     M2083                    ; 2043: FF 20 83       
+                LDX     #M11A9                   ; 2046: CE 11 A9       
+                LDAB    #$02                     ; 2049: C6 02          
+                SWI                              ; 204B: 3F             
+                FCB     $1C                      ; 204C: 1C             
+                BCC     Z2052                    ; 204D: 24 03          
+                JMP     Z126B                    ; 204F: 7E 12 6B       
+Z2052           LDAB    $0B,X                    ; 2052: E6 0B          
+                LDAA    $0C,X                    ; 2054: A6 0C          
+                LDX     M2083                    ; 2056: FE 20 83       
+                STAA    $01,X                    ; 2059: A7 01          
+                STAB    ,X                       ; 205B: E7 00          
+                INX                              ; 205D: 08             
+                INX                              ; 205E: 08             
+                CPX     #M11D0                   ; 205F: 8C 11 D0       
+                BNE     Z2040                    ; 2062: 26 DC          
+                CLRB                             ; 2064: 5F             
+                LDX     #M2085                   ; 2065: CE 20 85       
+                SWI                              ; 2068: 3F             
+                RTS                              ; 2069: 39             
+                JSR     CHKERR                   ; 206A: BD E8 53       
+                JSR     Z1F80                    ; 206D: BD 1F 80       
+                LDAB    #$0E                     ; 2070: C6 0E          
+                SWI                              ; 2072: 3F             
+                SBA                              ; 2073: 10             
+                LDX     #M2085                   ; 2074: CE 20 85       
+                SWI                              ; 2077: 3F             
+                FCB     $3A                      ; 2078: 3A             
+                JSR     CHKERR                   ; 2079: BD E8 53       
+                LDS     M2081                    ; 207C: BE 20 81       
+                CLI                              ; 207F: 0E             
+                RTS                              ; 2080: 39             
+M2081           FCB     $00,$00                  ; 2081: 00 00          
+M2083           FCB     $00,$00                  ; 2083: 00 00          
+M2085           FCB     $00,$00,$00,$01,$8F,$11  ; 2085: 00 00 00 01 8F 11 
+                FCB     $C2,$01,$B5              ; 208B: C2 01 B5       
+Z208E           STAB    Z2000                    ; 208E: F7 20 00       
+                CMPA    ,X                       ; 2091: A1 00          
+                BNE     Z209B                    ; 2093: 26 06          
+                COMA                             ; 2095: 43             
+                STAA    ,X                       ; 2096: A7 00          
+                JMP     Z2011                    ; 2098: 7E 20 11       
+Z209B           JMP     Z2019                    ; 209B: 7E 20 19       
+Z209E           STX     ENDSYs                   ; 209E: FF 01 0A       
+                LDAA    ENDSYs                   ; 20A1: B6 01 0A       
+                CMPA    #$3F                     ; 20A4: 81 3F          
+                BHI     Z20BB                    ; 20A6: 22 13          
+                BEQ     Z20B5                    ; 20A8: 27 0B          
+Z20AA           INX                              ; 20AA: 08             
+                STX     M0000                    ; 20AB: DF 00          
+                LDAA    #$4D                     ; 20AD: 86 4D          
+                STAA    M0008                    ; 20AF: 97 08          
+                SEC                              ; 20B1: 0D             
+                JMP     CHKERR                   ; 20B2: 7E E8 53       
+Z20B5           LDAA    M010B                    ; 20B5: B6 01 0B       
+                INCA                             ; 20B8: 4C             
+                BNE     Z20AA                    ; 20B9: 26 EF          
+Z20BB           JMP     Z201D                    ; 20BB: 7E 20 1D       
+Z20BE           INX                              ; 20BE: 08             
+                CPX     #Z2000                   ; 20BF: 8C 20 00       
+                BNE     Z20C7                    ; 20C2: 26 03          
+                LDX     #M209D                   ; 20C4: CE 20 9D       
+Z20C7           LDAB    ,X                       ; 20C7: E6 00          
+                JMP     Z200C                    ; 20C9: 7E 20 0C       
 
 
                 END
