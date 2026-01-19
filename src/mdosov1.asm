@@ -45,7 +45,6 @@ MC608   EQU     $C608
 MC60A   EQU     $C60A
 MC60B   EQU     $C60B
 MC618   EQU     $C618
-MC6FF   EQU     $C6FF
 OSLOAD  EQU     $E800
 PWRUP   EQU     $F000
 XBEGEN  EQU     $F003
@@ -81,9 +80,9 @@ MFF62   EQU     $FF62
                 JSR     Z11F2                    ; 1276: BD 11 F2       
                 JMP     Z12B7                    ; 1279: 7E 12 B7       
                 JMP     Z13C1                    ; 127C: 7E 13 C1       
-                JMP     Z1412                    ; 127F: 7E 14 12       
-                JMP     Z14E2                    ; 1282: 7E 14 E2       
-                JMP     Z150D                    ; 1285: 7E 15 0D       
+RESRV           JMP     Z1412                    ; 127F: 7E 14 12       
+RELES           JMP     Z14E2                    ; 1282: 7E 14 E2       
+PUTRC           JMP     Z150D                    ; 1285: 7E 15 0D       
                 JMP     Z1507                    ; 1288: 7E 15 07       
                 JMP     Z150A                    ; 128B: 7E 15 0A       
                 RTS                              ; 128E: 39             
@@ -437,8 +436,10 @@ Z1503           PULA                             ; 1503: 32
                 STAB    ,X                       ; 1504: E7 00          
                 RTS                              ; 1506: 39             
 Z1507           LDAB    #$00                     ; 1507: C6 00          
-                CPX     #MC6FF                   ; 1509: 8C C6 FF       
-                CPX     #MC601                   ; 150C: 8C C6 01       
+                FCB     $8C                      ; 1509: 8C             
+Z150A           LDAB    #$FF                     ; 150A: C6 FF          
+                FCB     $8C                      ; 150C: 8C             
+Z150D           LDAB    #$01                     ; 150D: C6 01          
                 STX     M1894                    ; 150F: FF 18 94       
                 STAB    M1896                    ; 1512: F7 18 96       
                 LDAA    $01,X                    ; 1515: A6 01          

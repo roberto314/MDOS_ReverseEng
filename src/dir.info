@@ -1,0 +1,37 @@
+file dir.sy 2000
+#option ldchar *
+#option cchar *
+#option multilabel on
+#option schowzero
+option noasc
+#option noaddr #disable for comments
+#option nohex #disable for comments
+option noflex
+option nofcc
+#option noforced # makes > before variable
+option labellen 16
+option copndlen 25
+
+label e875 RESTOR
+label 00 CURDRV 
+label 20 LDADDRH
+label 21 LDADDRL
+label 22 EXADDRH 
+label 23 EXADDRL
+label 24 ONECONH
+label 25 ONECONL
+
+#lcomment c019 CC0 and CC1 set - external Serial clock (8xBaudrate)
+#const c559-c55a
+#word c6ef-c6f0
+#label c63F Set_32Char
+data 2000-2003
+char 2000-2003
+used 2004 DIRSTART
+data 2465-24ce
+char 2465-24ce
+data 2438
+data 2448
+data 244b
+data 2461
+data 2463

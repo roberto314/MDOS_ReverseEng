@@ -57,7 +57,7 @@ lcomment 237 restore stackp. SP<-X-1
 lcomment 238 get status reg value
 lcomment 23a move to SR
 lcomment 23b get word address
-lcomment 23c check for Bit 7 set
+lcomment 23c check for Bit 7 set (Jump to USer Vector)
 lcomment 23e is it above $40 ?
 lcomment 242 patch LDX ,X two lines below
 lcomment 245 get vector table
@@ -72,6 +72,69 @@ lcomment 255 load old X from Stack to X
 lcomment 257 restore SR
 lcomment 258 get A from Stack into A
 lcomment 259 JSR to function from Jumptable
+lcomment 25c transfer stackp. +1 to X, X<-SP+1 (E7F9)
+
+data 3b7
+data 3c9
+data 3d6
+data 4aa
+data 4ac
+
+data 520
+data 523
+data 526
+data 52f
+data 532
+data 5be
+data 5f5
+data 602
+data 606
+data 7c7
+data 7cb
+data 7f9
+data 813
+data 815
+data 856
+data 858
+data 85a
+data 8cb
+data 903
+data a61
+data a94
+data aa5
+data ace
+data b07
+data b0d
+data b60
+data b76
+data bcb
+data bcf
+data c84
+data cba
+data cdc
+data cf8
+data d02
+data df6
+data e04
+data e09
+data e14
+data e16
+data e35
+data e45
+data f93
+data f9a
+data 100a
+data 1024
+data 1067
+data 1079
+data 125b
+
+data 5dc
+
+char 56a
+char 56e
+char 572
+char 576
 
 label 0279 B7_SET
 label 026c B6_SET
@@ -95,11 +158,26 @@ label bf4 HASH25
 data f1c-f30
 data 27f-2fe
 cvec 27f-2fe
-data fa5-10e4
-data 1105-11f1
-char 1137-11B1
+label 127f RESRV
+label 1282 RELES
+label 1c0d OPEN
+label 18a3 CLOSE
+label 189d GETRC
+label 1285 PUTRC
+label 18a6 REWND
+label 71f GETLS
+label 722 PUTLS
+label 3a8 KEYIN
+label 417 DISPLY
+label 41a DISPLX
+label 40d DISPLZ
 
-#unused 1273-20ff
+data 419 
+
+data 1101-11f1
+char 1128-11f1
+
+comment 1ffd the following code gets overwritten by mdosov6
 unused 12a9-1ffc
 unused 20cc-20ff
 data 2081-208d
@@ -114,6 +192,9 @@ lcomment 116 gets init to: $F477
 lcomment 118 gets init to: $026B
 lcomment 11a gets init to: $026B
 lcomment 11e gets init to: $8000
+
+comment 1273 the following code gets overwritten by mdosov1
+lcomment 1285 gets init to: $7e $150D in mdosov1
 
 #const c559-c55a
 #word c6ef-c6f0
