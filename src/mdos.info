@@ -34,9 +34,54 @@ used 623 SYSSTART
 lcomment 623 Entry Point after floppy-boot
 label 026B ISR_UNUSD
 
+comment 22f 
+comment 22f Stack after SWI:
+comment 22f [[SP]] ← [PC(LO)]     | +7 | E7FF | 4C
+comment 22f [[SP] - 1] ← [PC(HI)] | +6 | E7FE | 20
+comment 22f [[SP] - 2] ← [X(LO)]  | +5 | E7FD | A9
+comment 22f [[SP] - 3] ← [X(HI)]  | +4 | E7FC | 11
+comment 22f [[SP] - 4] ← [A]      | +3 | E7FB | 2F
+comment 22f [[SP] - 5] ← [B]      | +2 | E7FA | 02
+comment 22f [[SP] - 6] ← [SR]     | +1 | E7F9 | D0
+comment 22f [SP] ← [SP] - 7       | +0 | E7F8 | 00
+comment 22f [PC(HI)] ← [$FFFA]
+comment 22f [PC(LO)] ← [$FFFB]
+comment 22f 
+lcomment 22f transfer stackp. +1 to X, X<-SP+1 (E7F9)
+lcomment 230 load stackpointer with PC (204C)
+lcomment 232 decr. SP to 
+lcomment 233 get value from after SWI instruction into B, decr. SP
+lcomment 234 incr. SP (204D)
+lcomment 235 fix return address (jump over the byte after the SWI instr.)
+lcomment 237 restore stackp. SP<-X-1
+lcomment 238 get status reg value
+lcomment 23a move to SR
+lcomment 23b get word address
+lcomment 23c check for Bit 7 set
+lcomment 23e is it above $40 ?
+lcomment 242 patch LDX ,X two lines below
+lcomment 245 get vector table
+lcomment 248 get address with offset
+lcomment 24a patch JSR command below
+lcomment 24d transfer stackp. +1 to X, X<-SP+1 (E7F9)
+lcomment 24e load old A from Stack
+lcomment 250 push old A to Stack and decrement
+lcomment 251 load old SR from Stack to A
+lcomment 253 load old B from Stack to B
+lcomment 255 load old X from Stack to X
+lcomment 257 restore SR
+lcomment 258 get A from Stack into A
+lcomment 259 JSR to function from Jumptable
+
+label 0279 B7_SET
+label 026c B6_SET
+lcomment 279 restore B
+
 lcomment 0659 Continue in mdosov6
 
-data 0120-020f
+data 0120-020e
+char 14b-15a
+char 170-17e
 
 data 65c-750
 label c1f TMP1
@@ -48,8 +93,10 @@ label be6 HASH2
 label bf4 HASH25
 
 data f1c-f30
+data 27f-2fe
+cvec 27f-2fe
 data fa5-10e4
-data 1105-1272
+data 1105-11f1
 char 1137-11B1
 
 #unused 1273-20ff
