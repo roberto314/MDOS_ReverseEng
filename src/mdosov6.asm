@@ -10,15 +10,15 @@ M0008   EQU     $0008
 M00AD   EQU     $00AD
 M00AE   EQU     $00AE
 M00FE   EQU     $00FE
-M0100   EQU     $0100
-M0102   EQU     $0102
-M0114   EQU     $0114
+VERSss  EQU     $0100
+REVSss  EQU     $0102
+SYERRs  EQU     $0114
 M0115   EQU     $0115
-M011E   EQU     $011E
-M0120   EQU     $0120
+CHFLGs  EQU     $011E
+SYIOCB  EQU     $0120
 M0133   EQU     $0133
-M0145   EQU     $0145
-M016A   EQU     $016A
+SYPOCB  EQU     $0145
+SYEOCB  EQU     $016A
 M017B   EQU     $017B
 M11C2   EQU     $11C2
 M434D   EQU     $434D
@@ -63,12 +63,12 @@ Z200E           CLRB                             ; 200E: 5F
                 LDX     M2168                    ; 2014: FE 21 68       
                 LDX     $08,X                    ; 2017: EE 08          
                 STX     M213B                    ; 2019: FF 21 3B       
-                CPX     M0100                    ; 201C: BC 01 00       
+                CPX     VERSss                   ; 201C: BC 01 00       
                 BNE     Z2046                    ; 201F: 26 25          
                 LDX     M2168                    ; 2021: FE 21 68       
                 LDX     $0A,X                    ; 2024: EE 0A          
                 STX     M213E                    ; 2026: FF 21 3E       
-                CPX     M0102                    ; 2029: BC 01 02       
+                CPX     REVSss                   ; 2029: BC 01 02       
                 BNE     Z2046                    ; 202C: 26 18          
                 LDX     #M11C2                   ; 202E: CE 11 C2       
                 STX     M216A                    ; 2031: FF 21 6A       
@@ -94,21 +94,21 @@ Z2050           LDAB    #$00                     ; 2050: C6 00
                 JMP     Z2007                    ; 205B: 7E 20 07       
 Z205E           LDAA    #$55                     ; 205E: 86 55          
                 JMP     Z2048                    ; 2060: 7E 20 48       
-Z2063           LDX     #M0120                   ; 2063: CE 01 20       
+Z2063           LDX     #SYIOCB                  ; 2063: CE 01 20       
                 LDAA    $0A,X                    ; 2066: A6 0A          
                 BITA    #$40                     ; 2068: 85 40          
                 BEQ     Z2081                    ; 206A: 27 15          
-                LDX     #M0145                   ; 206C: CE 01 45       
+                LDX     #SYPOCB                  ; 206C: CE 01 45       
                 LDAA    $0A,X                    ; 206F: A6 0A          
                 BITA    #$40                     ; 2071: 85 40          
                 BEQ     Z2081                    ; 2073: 27 0C          
                 LDX     M017B                    ; 2075: FE 01 7B       
                 BEQ     Z20AD                    ; 2078: 27 33          
-                LDX     #M016A                   ; 207A: CE 01 6A       
+                LDX     #SYEOCB                  ; 207A: CE 01 6A       
                 SWI                              ; 207D: 3F             
                 FCB     $06                      ; 207E: 06             
                 BRA     Z20AD                    ; 207F: 20 2C          
-Z2081           LDX     #M0120                   ; 2081: CE 01 20       
+Z2081           LDX     #SYIOCB                  ; 2081: CE 01 20       
                 SWI                              ; 2084: 3F             
                 FCB     $00                      ; 2085: 00             
                 BCS     Z2050                    ; 2086: 25 C8          
@@ -118,14 +118,14 @@ Z2081           LDX     #M0120                   ; 2081: CE 01 20
                 LDAB    #$02                     ; 208C: C6 02          
                 ORAB    $01,X                    ; 208E: EA 01          
                 STAB    $01,X                    ; 2090: E7 01          
-                LDX     #M0145                   ; 2092: CE 01 45       
+                LDX     #SYPOCB                  ; 2092: CE 01 45       
                 SWI                              ; 2095: 3F             
                 FCB     $00                      ; 2096: 00             
                 BCS     Z2050                    ; 2097: 25 B7          
                 SWI                              ; 2099: 3F             
                 FCB     $02                      ; 209A: 02             
                 BCS     Z2050                    ; 209B: 25 B3          
-                LDX     #M016A                   ; 209D: CE 01 6A       
+                LDX     #SYEOCB                  ; 209D: CE 01 6A       
                 SWI                              ; 20A0: 3F             
                 FCB     $00                      ; 20A1: 00             
                 BCS     Z2050                    ; 20A2: 25 AC          
@@ -146,9 +146,9 @@ Z20AD           LDAA    #$3D                     ; 20AD: 86 3D
                 CLRB                             ; 20BB: 5F             
                 STAB    M0133                    ; 20BC: F7 01 33       
                 STAB    M0115                    ; 20BF: F7 01 15       
-                LDAA    M0114                    ; 20C2: B6 01 14       
+                LDAA    SYERRs                   ; 20C2: B6 01 14       
                 ANDA    #$0F                     ; 20C5: 84 0F          
-                STAA    M0114                    ; 20C7: B7 01 14       
+                STAA    SYERRs                   ; 20C7: B7 01 14       
                 LDX     #M00AD                   ; 20CA: CE 00 AD       
                 STX     M00FE                    ; 20CD: DF FE          
                 STX     M2141                    ; 20CF: FF 21 41       
@@ -197,9 +197,9 @@ Z2121           LDX     #M215E                   ; 2121: CE 21 5E
                 LDAB    #$80                     ; 2126: C6 80          
                 SWI                              ; 2128: 3F             
                 FCB     $23                      ; 2129: 23             
-                LDAA    M011E                    ; 212A: B6 01 1E       
+                LDAA    CHFLGs                   ; 212A: B6 01 1E       
                 ORAA    #$80                     ; 212D: 8A 80          
-                STAA    M011E                    ; 212F: B7 01 1E       
+                STAA    CHFLGs                   ; 212F: B7 01 1E       
                 JMP     Z200E                    ; 2132: 7E 20 0E       
 M2135           FCB     $0d                      ; 2135: 0D             
                 FCB     'M,'D,'O,'S,'            ; 2136: 4D 44 4F 53 20 

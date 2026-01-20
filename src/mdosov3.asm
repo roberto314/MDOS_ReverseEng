@@ -7,7 +7,7 @@ Loaded: Info file "mdosov3.info"
 ;****************************************************
 
 M00CE   EQU     $00CE
-M010E   EQU     $010E
+RIBBAs  EQU     $010E
 Z11FC   EQU     $11FC
 Z1FFD   EQU     $1FFD
 M5656   EQU     $5656
@@ -257,7 +257,7 @@ Z1A1F           TSX                              ; 1A1F: 30
                 CLR     M1A8A                    ; 1A35: 7F 1A 8A       
                 STAB    M1A8B                    ; 1A38: F7 1A 8B       
                 LDAB    $0A,X                    ; 1A3B: E6 0A          
-                LDX     M010E                    ; 1A3D: FE 01 0E       
+                LDX     RIBBAs                   ; 1A3D: FE 01 0E       
                 STX     M1A8C                    ; 1A40: FF 1A 8C       
                 LDX     #M1A89                   ; 1A43: CE 1A 89       
                 SWI                              ; 1A46: 3F             

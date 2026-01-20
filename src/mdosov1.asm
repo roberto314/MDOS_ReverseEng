@@ -9,14 +9,14 @@ Loaded: Info file "mdosov1.info"
 M0000   EQU     $0000
 M0024   EQU     $0024
 M0033   EQU     $0033
-M0106   EQU     $0106
+ENDOSs  EQU     $0106
 M0107   EQU     $0107
-M0108   EQU     $0108
+ENDUSs  EQU     $0108
 M0109   EQU     $0109
-M010A   EQU     $010A
+ENDSYs  EQU     $010A
 M010B   EQU     $010B
-M0112   EQU     $0112
-M0120   EQU     $0120
+GDBAs   EQU     $0112
+SYIOCB  EQU     $0120
 Z0358   EQU     $0358
 Z0359   EQU     $0359
 Z04CE   EQU     $04CE
@@ -267,10 +267,10 @@ Z13C1           PSHA                             ; 13C1: 36
                 CMPB    #$01                     ; 13C2: C1 01          
                 BEQ     Z13DB                    ; 13C4: 27 15          
                 BLT     Z13E2                    ; 13C6: 2D 1A          
-                LDX     M010A                    ; 13C8: FE 01 0A       
+                LDX     ENDSYs                   ; 13C8: FE 01 0A       
                 LDAA    M0109                    ; 13CB: B6 01 09       
-                LDAB    M0108                    ; 13CE: F6 01 08       
-                STX     M0108                    ; 13D1: FF 01 08       
+                LDAB    ENDUSs                   ; 13CE: F6 01 08       
+                STX     ENDUSs                   ; 13D1: FF 01 08       
                 SWI                              ; 13D4: 3F             
                 BLT     Z1416                    ; 13D5: 2D 3F          
                 BNE     Z1409                    ; 13D7: 26 30          
@@ -287,16 +287,16 @@ Z13DC           BNE     Z13DC                    ; 13DC: 26 FE
                 SWI                              ; 13E8: 3F             
                 BLE     Z1410                    ; 13E9: 2F 25          
                 FCB     $1E                      ; 13EB: 1E             
-                LDAB    M0106                    ; 13EC: F6 01 06       
+                LDAB    ENDOSs                   ; 13EC: F6 01 06       
                 LDAA    M0107                    ; 13EF: B6 01 07       
                 SWI                              ; 13F2: 3F             
                 BLE     Z1419                    ; 13F3: 2F 24          
                 TBA                              ; 13F5: 17             
                 LDAA    M0109                    ; 13F6: B6 01 09       
                 ADDA    #$01                     ; 13F9: 8B 01          
-                LDAB    M0108                    ; 13FB: F6 01 08       
+                LDAB    ENDUSs                   ; 13FB: F6 01 08       
                 ADCB    #$00                     ; 13FE: C9 00          
-                STX     M0108                    ; 1400: FF 01 08       
+                STX     ENDUSs                   ; 1400: FF 01 08       
                 TSX                              ; 1403: 30             
 Z1404           STAB    $06,X                    ; 1404: E7 06          
                 STAA    $07,X                    ; 1406: A7 07          
@@ -321,7 +321,7 @@ Z1416           BNE     Z1445                    ; 1416: 26 2D
                 SWI                              ; 1427: 3F             
                 FCB     $14                      ; 1428: 14             
                 BCS     Z1448                    ; 1429: 25 1D          
-                LDX     M0112                    ; 142B: FE 01 12       
+                LDX     GDBAs                    ; 142B: FE 01 12       
 Z142E           STX     M14DD                    ; 142E: FF 14 DD       
                 LDX     ,X                       ; 1431: EE 00          
                 BEQ     Z1448                    ; 1433: 27 13          
@@ -587,7 +587,7 @@ Z1646           LDAA    M1897                    ; 1646: B6 18 97
                 TST     M189C                    ; 165D: 7D 18 9C       
                 BGE     Z1679                    ; 1660: 2C 17          
                 LDX     M1894                    ; 1662: FE 18 94       
-                CPX     #M0120                   ; 1665: 8C 01 20       
+                CPX     #SYIOCB                  ; 1665: 8C 01 20       
                 BNE     Z1679                    ; 1668: 26 0F          
                 LDAB    $0A,X                    ; 166A: E6 0A          
                 BITB    #$20                     ; 166C: C5 20          

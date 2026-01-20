@@ -10,9 +10,9 @@ M0000   EQU     $0000
 M0006   EQU     $0006
 M001C   EQU     $001C
 M001D   EQU     $001D
-M0114   EQU     $0114
+SYERRs  EQU     $0114
 M0115   EQU     $0115
-M011E   EQU     $011E
+CHFLGs  EQU     $011E
 M0291   EQU     $0291
 M097F   EQU     $097F
 Z1206   EQU     $1206
@@ -287,14 +287,14 @@ M1D1E           FCB     $45                      ; 1D1E: 45
 M1D28           TPA                              ; 1D28: 07             
                 TPA                              ; 1D29: 07             
                 FCB     $04                      ; 1D2A: 04             
-Z1D2B           LDAA    M0114                    ; 1D2B: B6 01 14       
+Z1D2B           LDAA    SYERRs                   ; 1D2B: B6 01 14       
                 ASLA                             ; 1D2E: 48             
                 ASLA                             ; 1D2F: 48             
                 ASLA                             ; 1D30: 48             
                 ASLA                             ; 1D31: 48             
                 COMA                             ; 1D32: 43             
                 ANDA    #$F0                     ; 1D33: 84 F0          
-                ANDA    M0114                    ; 1D35: B4 01 14       
+                ANDA    SYERRs                   ; 1D35: B4 01 14       
                 BEQ     Z1D3F                    ; 1D38: 27 05          
                 LDAB    #$31                     ; 1D3A: C6 31          
 Z1D3C           JMP     Z1F11                    ; 1D3C: 7E 1F 11       
@@ -343,9 +343,9 @@ Z1D88           BSR     Z1DAE                    ; 1D88: 8D 24
                 INX                              ; 1D93: 08             
                 DECB                             ; 1D94: 5A             
                 BRA     Z1D88                    ; 1D95: 20 F1          
-Z1D97           LDAA    M011E                    ; 1D97: B6 01 1E       
+Z1D97           LDAA    CHFLGs                   ; 1D97: B6 01 1E       
                 ANDA    #$7F                     ; 1D9A: 84 7F          
-                STAA    M011E                    ; 1D9C: B7 01 1E       
+                STAA    CHFLGs                   ; 1D9C: B7 01 1E       
                 TSX                              ; 1D9F: 30             
                 LDAA    $03,X                    ; 1DA0: A6 03          
                 SBA                              ; 1DA2: 10             
@@ -408,7 +408,7 @@ Z1E13           TPA                              ; 1E13: 07
                 SEI                              ; 1E15: 0F             
                 LDAA    M1D19                    ; 1E16: B6 1D 19       
                 STAA    M1E2D                    ; 1E19: B7 1E 2D       
-                LDAB    M0114                    ; 1E1C: F6 01 14       
+                LDAB    SYERRs                   ; 1E1C: F6 01 14       
                 LDAA    M0115                    ; 1E1F: B6 01 15       
                 ANDB    M1D1A                    ; 1E22: F4 1D 1A       
                 ANDA    M1D1B                    ; 1E25: B4 1D 1B       
@@ -437,13 +437,13 @@ Z1E49           JSR     Z1E7E                    ; 1E49: BD 1E 7E
                 BNE     Z1E49                    ; 1E5D: 26 EA          
                 CLR     Z1C19                    ; 1E5F: 7F 1C 19       
                 BRA     Z1E36                    ; 1E62: 20 D2          
-Z1E64           LDAA    M0114                    ; 1E64: B6 01 14       
+Z1E64           LDAA    SYERRs                   ; 1E64: B6 01 14       
                 LDAB    M0115                    ; 1E67: F6 01 15       
                 ANDA    M1D1A                    ; 1E6A: B4 1D 1A       
                 ANDB    M1D1B                    ; 1E6D: F4 1D 1B       
                 ORAA    M1D18                    ; 1E70: BA 1D 18       
                 ORAB    M1D19                    ; 1E73: FA 1D 19       
-                STAA    M0114                    ; 1E76: B7 01 14       
+                STAA    SYERRs                   ; 1E76: B7 01 14       
                 STAB    M0115                    ; 1E79: F7 01 15       
                 BRA     Z1E36                    ; 1E7C: 20 B8          
 Z1E7E           CLRA                             ; 1E7E: 4F             
@@ -482,7 +482,7 @@ Z1EB6           CMPB    #$09                     ; 1EB6: C1 09
                 BEQ     Z1EC4                    ; 1EBD: 27 05          
                 LDAB    #$33                     ; 1EBF: C6 33          
 Z1EC1           JMP     Z1F11                    ; 1EC1: 7E 1F 11       
-Z1EC4           LDAA    M011E                    ; 1EC4: B6 01 1E       
+Z1EC4           LDAA    CHFLGs                   ; 1EC4: B6 01 1E       
                 BMI     Z1ECD                    ; 1EC7: 2B 04          
                 LDAB    #$34                     ; 1EC9: C6 34          
                 BRA     Z1EC1                    ; 1ECB: 20 F4          
@@ -525,8 +525,8 @@ Z1F12           BRA     Z1F12                    ; 1F12: 20 FE
                 NOP                              ; 1F14: 01             
                 FCB     $04                      ; 1F15: 04             
                 STX     M0291                    ; 1F16: FF 02 91       
-                CLR     M011E                    ; 1F19: 7F 01 1E       
-                CLR     M0114                    ; 1F1C: 7F 01 14       
+                CLR     CHFLGs                   ; 1F19: 7F 01 1E       
+                CLR     SYERRs                   ; 1F1C: 7F 01 14       
                 LDX     #M1C1C                   ; 1F1F: CE 1C 1C       
                 SWI                              ; 1F22: 3F             
                 FCB     $03                      ; 1F23: 03             

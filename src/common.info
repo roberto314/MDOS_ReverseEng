@@ -79,6 +79,26 @@ option copndlen 25
 
 used 1ffd Z1FFD
 
+label 100 MDOSs
+label 100 VERSss
+label 102 REVSss
+label 104 KYIsSV
+label 106 ENDOSs
+label 108 ENDUSs
+label 10A ENDSYs
+label 10E RIBBAs
+label 110 ENDRVs
+label 112 GDBAs
+label 114 SYERRs
+label 116 SWIsSV
+label 118 SWIsUV
+label 11A IRQsUV
+label 11C IRQsSV
+label 11E CHFLGs
+label 120 SYIOCB
+label 145 SYPOCB
+label 16A SYEOCB
+
 used e800 OSLOAD
 label e822 FDINIT
 label e853 CHKERR

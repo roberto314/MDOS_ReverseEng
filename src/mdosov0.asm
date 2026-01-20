@@ -11,7 +11,7 @@ M0001   EQU     $0001
 M0006   EQU     $0006
 M0020   EQU     $0020
 M00FE   EQU     $00FE
-M010E   EQU     $010E
+RIBBAs  EQU     $010E
 Z0467   EQU     $0467
 Z04CE   EQU     $04CE
 Z11F2   EQU     $11F2
@@ -83,7 +83,7 @@ Z12A9           STX     M17E6                    ; 12A9: FF 17 E6
                 BRA     Z12C9                    ; 12C4: 20 03          
 Z12C6           LDX     #M0020                   ; 12C6: CE 00 20       
 Z12C9           STX     M17E8                    ; 12C9: FF 17 E8       
-                LDX     M010E                    ; 12CC: FE 01 0E       
+                LDX     RIBBAs                   ; 12CC: FE 01 0E       
                 STX     M17ED                    ; 12CF: FF 17 ED       
                 LDX     M17E6                    ; 12D2: FE 17 E6       
                 LDX     $0B,X                    ; 12D5: EE 0B          
@@ -412,7 +412,7 @@ Z1599           LDAB    #$17                     ; 1599: C6 17
 Z159D           STX     M17E6                    ; 159D: FF 17 E6       
                 LDAB    ,X                       ; 15A0: E6 00          
                 STAB    M17E5                    ; 15A2: F7 17 E5       
-                LDX     M010E                    ; 15A5: FE 01 0E       
+                LDX     RIBBAs                   ; 15A5: FE 01 0E       
                 STX     M17ED                    ; 15A8: FF 17 ED       
                 LDX     M17E6                    ; 15AB: FE 17 E6       
                 LDX     $0B,X                    ; 15AE: EE 0B          
