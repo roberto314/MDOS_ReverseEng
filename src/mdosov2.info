@@ -18,4 +18,13 @@ include common.info
 #word c6ef-c6f0
 #label c63F Set_32Char
 #char c724-c741
-#data 0102-020f
+
+data 1961
+data 1998
+data 1ba6
+
+used 189d GETRC1     ;  4 - READ A RECORD
+used 18A0 GETFD1     ; 36 - READ FDR (RESIDENT MDOS ONLY)
+
+label 18b0 GETRC2
+label 18ac GETFD2

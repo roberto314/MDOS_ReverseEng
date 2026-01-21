@@ -134,15 +134,15 @@ Z2081           LDX     #SYIOCB                  ; 2081: CE 01 20
                 BCS     Z2050                    ; 20A6: 25 A8          
                 LDX     #M2135                   ; 20A8: CE 21 35       
                 SWI                              ; 20AB: 3F             
-                SEV                              ; 20AC: 0B             
+                FCB     $0B                      ; 20AC: 0B             
 Z20AD           LDAA    #$3D                     ; 20AD: 86 3D          
                 STAA    M0133                    ; 20AF: B7 01 33       
                 LDX     #M00AE                   ; 20B2: CE 00 AE       
                 LDAB    #$4F                     ; 20B5: C6 4F          
                 SWI                              ; 20B7: 3F             
-                SEC                              ; 20B8: 0D             
+                FCB     $0D                      ; 20B8: 0D             
                 SWI                              ; 20B9: 3F             
-                DEX                              ; 20BA: 09             
+                FCB     $09                      ; 20BA: 09             
                 CLRB                             ; 20BB: 5F             
                 STAB    M0133                    ; 20BC: F7 01 33       
                 STAB    M0115                    ; 20BF: F7 01 15       
@@ -174,7 +174,7 @@ Z20AD           LDAA    #$3D                     ; 20AD: 86 3D
                 LDAB    #$11                     ; 20FC: C6 11          
                 LDX     #CMDBFR                  ; 20FE: CE 21 45       
                 SWI                              ; 2101: 3F             
-                ABA                              ; 2102: 1B             
+                FCB     $1B                      ; 2102: 1B             
                 CMPB    #$03                     ; 2103: C1 03          
                 BEQ     Z2121                    ; 2105: 27 1A          
                 LDAA    #$0E                     ; 2107: 86 0E          

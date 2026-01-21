@@ -9,4 +9,23 @@ include common.info
 #word c6ef-c6f0
 #label c63F Set_32Char
 #char c724-c741
-#data 0102-020f
+
+data 1ca4
+data 1cb2
+data 1d0d
+data 1d4e
+data 1d5b
+data 1d6d
+data 1d7e
+data 1d88
+data 1e08
+data 1e27
+data 1e63
+data 1e65
+data 1e6e
+data 1e72
+data 1e74
+data 1e80
+
+used 1c0d OPEN1      ;  2 - OPEN A FILE
+label 1c13 OPEN2

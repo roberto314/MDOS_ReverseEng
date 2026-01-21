@@ -10,9 +10,85 @@ include common.info
 #label c63F Set_32Char
 #char c724-c741
 
+data 12f5
+data 1303
+data 138a
+data 13a8
+data 13b8
+data 13d5
+data 13d7
+data 13dc
+data 13e1
+data 13e9
+data 13f3
+data 1436
+data 147c
+data 14d2
 data 1509
 data 150c
+data 16e5
 
-used 127f RESRV
-used 1282 RELES
-used 1285 PUTRC
+data 1759
+data 175c
+data 175f
+data 1762
+data 1765
+data 1768
+data 14af
+data 14b2
+used 127f RESRV1     ;  0 - RESERVE A DEVICE
+used 1282 RELES1     ;  1 - RELEASE A DEVICE
+used 1285 PUTRC1     ;  5 - WRITE A RECORD
+used 1279 PFNAM1     ; 1D - PROCESS FILE NAME
+used 127C ALUSM1     ; 1E - ALLOCATE USER MEMORY
+used 1288 PUTFD1     ; 37 - WRITE FDR (RESIDENT MDOS ONLY)
+used 128B PUTEF1     ; 38 - WRITE EOF (RESIDENT MDOS ONLY)
+
+used  129a CRON1
+label 1817 CRON2
+used  129d CROFF1
+label 1831 CROFF2
+used  12a0 CRINIT1
+label 184e CRINIT2
+used  12a3 CRTERM1
+used  1297 CRCHAR1
+used  1782 CRCHAR2
+used  12A6 CPCHAR1
+used  17ff CPCHAR2
+
+
+label 1412 RESRV2
+label 14e2 RELES2
+label 150d PUTRC2
+label 12b7 PFNAM2
+label 13c1 ALUSM2
+label 1507 PUTFD2
+label 150a PUTEF2
+
+label 14dd GDBAsTMP
+label 1894 IOCBTMP
+label 14df DRVSTART
+lcomment 1515 load IOCDTT
+lcomment 1517 check file open
+lcomment 151e check sector/record
+lcomment 1527 check Mode Flags
+lcomment 1519 yes
+lcomment 151b no
+lcomment 1520 Record IO
+lcomment 1522 Sector IO
+lcomment 175a file open
+lcomment 1778 file open
+lcomment 177b set error flag
+
+lcomment 1412 get LUN
+lcomment 1414 Reserved?
+lcomment 1416 yes
+lcomment 1421 CHECK ALPHABETIC CHARACTER 
+lcomment 1428 CHECK ALPHABETIC CHARACTER 
+lcomment 141e get first char
+lcomment 1425 get second char
+lcomment 1431 get first GBD from 65c
+lcomment 1436 COMPARE B.A TO X
+lcomment 1437 found?
+lcomment 1440 no - continue
+lcomment 144e get start address of driver

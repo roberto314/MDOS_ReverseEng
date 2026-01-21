@@ -121,7 +121,7 @@ Z20A7           LDX     #CURDRV                  ; 20A7: CE 00 00
                 PULB                             ; 20B9: 33             
                 LDX     #M25D1                   ; 20BA: CE 25 D1       
                 SWI                              ; 20BD: 3F             
-                CLI                              ; 20BE: 0E             
+                FCB     $0E                      ; 20BE: 0E             
                 BCC     Z20C6                    ; 20BF: 24 05          
                 LDAB    #$01                     ; 20C1: C6 01          
                 JMP     Z2335                    ; 20C3: 7E 23 35       
@@ -132,7 +132,7 @@ Z20C6           LDX     #M24D1                   ; 20C6: CE 24 D1
                 LDX     #M25D6                   ; 20D2: CE 25 D6       
                 LDAB    #$08                     ; 20D5: C6 08          
                 SWI                              ; 20D7: 3F             
-                SBA                              ; 20D8: 10             
+                FCB     $10                      ; 20D8: 10             
                 LDX     #M247E                   ; 20D9: CE 24 7E       
                 JSR     Z2431                    ; 20DC: BD 24 31       
                 LDAB    #$20                     ; 20DF: C6 20          
@@ -155,7 +155,7 @@ Z20F1           LDAB    LDADDRH                  ; 20F1: D6 20
 Z2101           LDAB    #$01                     ; 2101: C6 01          
                 STAB    EXADDRH                  ; 2103: D7 22          
 Z2105           SWI                              ; 2105: 3F             
-                SEC                              ; 2106: 0D             
+                FCB     $0D                      ; 2106: 0D             
                 BCC     Z210C                    ; 2107: 24 03          
                 JMP     Z23A2                    ; 2109: 7E 23 A2       
 Z210C           LDAB    EXADDRH                  ; 210C: D6 22          
@@ -209,7 +209,7 @@ Z2142           JSR     Z2401                    ; 2142: BD 24 01
                 STX     M25D4                    ; 2180: FF 25 D4       
                 LDX     #M25D1                   ; 2183: CE 25 D1       
                 SWI                              ; 2186: 3F             
-                CLI                              ; 2187: 0E             
+                FCB     $0E                      ; 2187: 0E             
                 BCC     Z218F                    ; 2188: 24 05          
                 LDAB    #$01                     ; 218A: C6 01          
                 JMP     Z2335                    ; 218C: 7E 23 35       
@@ -217,13 +217,13 @@ Z218F           LDX     #CURDRV                  ; 218F: CE 00 00
                 STX     M24B9                    ; 2192: FF 24 B9       
                 LDX     #M2551                   ; 2195: CE 25 51       
                 STX     M0027                    ; 2198: DF 27          
-Z219A           LDAA    ,X                       ; 219A: A6 00          
+                LDAA    ,X                       ; 219A: A6 00          
                 BMI     Z21BC                    ; 219C: 2B 1E          
 Z219E           ANDA    #$7C                     ; 219E: 84 7C          
                 ADDA    #$04                     ; 21A0: 8B 04          
                 LDX     #M24B9                   ; 21A2: CE 24 B9       
                 SWI                              ; 21A5: 3F             
-                TAB                              ; 21A6: 16             
+                FCB     $16                      ; 21A6: 16             
                 LDX     M0027                    ; 21A7: DE 27          
                 INX                              ; 21A9: 08             
                 INX                              ; 21AA: 08             
@@ -234,9 +234,9 @@ Z219E           ANDA    #$7C                     ; 219E: 84 7C
                 LDAA    ONECONL                  ; 21B4: 96 25          
                 LDAB    ONECONH                  ; 21B6: D6 24          
                 SWI                              ; 21B8: 3F             
-                BVS     Z219A                    ; 21B9: 29 DF          
-Z21BB           BCC     Z21BB                    ; 21BB: 24 FE          
-                BCC     Z2178                    ; 21BD: 24 B9          
+                FCB     $29                      ; 21B9: 29             
+                STX     ONECONH                  ; 21BA: DF 24          
+Z21BC           LDX     M24B9                    ; 21BC: FE 24 B9       
                 STX     M25DA                    ; 21BF: FF 25 DA       
                 LDX     #M24BC                   ; 21C2: CE 24 BC       
                 STX     M25DC                    ; 21C5: FF 25 DC       
@@ -252,15 +252,15 @@ Z21D9           LDAA    M2551                    ; 21D9: B6 25 51
                 LDAA    #$40                     ; 21DE: 86 40          
                 LDAB    #$82                     ; 21E0: C6 82          
                 SWI                              ; 21E2: 3F             
-                BLS     Z21B3                    ; 21E3: 23 CE          
-                BNE     Z2215                    ; 21E5: 26 2E          
+                FCB     $23                      ; 21E3: 23             
+                LDX     #M262E                   ; 21E4: CE 26 2E       
                 STX     M25D6                    ; 21E7: FF 25 D6       
                 LDX     #M24C3                   ; 21EA: CE 24 C3       
                 STX     M25D8                    ; 21ED: FF 25 D8       
                 LDAB    #$0B                     ; 21F0: C6 0B          
                 LDX     #M25D6                   ; 21F2: CE 25 D6       
                 SWI                              ; 21F5: 3F             
-                SBA                              ; 21F6: 10             
+                FCB     $10                      ; 21F6: 10             
                 JMP     Z229F                    ; 21F7: 7E 22 9F       
 Z21FA           LDX     #M3030                   ; 21FA: CE 30 30       
                 STX     M24C3                    ; 21FD: FF 24 C3       
@@ -281,7 +281,7 @@ Z220C           LDAA    $01,X                    ; 220C: A6 01
                 FCB     $18                      ; 221C: 18             
                 LDX     M0027                    ; 221D: DE 27          
                 STX     M25DA                    ; 221F: FF 25 DA       
-Z2222           LDX     #M24C9                   ; 2222: CE 24 C9       
+                LDX     #M24C9                   ; 2222: CE 24 C9       
                 STX     M25DC                    ; 2225: FF 25 DC       
                 LDAB    #$04                     ; 2228: C6 04          
                 LDX     #M25DA                   ; 222A: CE 25 DA       
@@ -299,7 +299,7 @@ Z2222           LDX     #M24C9                   ; 2222: CE 24 C9
                 LDAB    #$03                     ; 2248: C6 03          
                 LDX     #M25DA                   ; 224A: CE 25 DA       
                 JSR     Z26C3                    ; 224D: BD 26 C3       
-Z2250           LDX     #M249F                   ; 2250: CE 24 9F       
+                LDX     #M249F                   ; 2250: CE 24 9F       
                 JSR     Z2431                    ; 2253: BD 24 31       
                 LDAB    M249F                    ; 2256: F6 24 9F       
                 CMPB    #$20                     ; 2259: C1 20          
@@ -320,8 +320,8 @@ Z2265           LDX     #M24C4                   ; 2265: CE 24 C4
                 LDAA    #$40                     ; 227B: 86 40          
                 LDAB    #$81                     ; 227D: C6 81          
                 SWI                              ; 227F: 3F             
-                BLS     Z2250                    ; 2280: 23 CE          
-                BNE     Z2222                    ; 2282: 26 9E          
+                FCB     $23                      ; 2280: 23             
+                LDX     #M269E                   ; 2281: CE 26 9E       
                 JSR     Z2431                    ; 2284: BD 24 31       
                 BRA     Z22A5                    ; 2287: 20 1C          
 Z2289           LDX     M0029                    ; 2289: DE 29          
@@ -332,7 +332,7 @@ Z2289           LDX     M0029                    ; 2289: DE 29
                 LDAB    ,X                       ; 2291: E6 00          
                 BMI     Z22A5                    ; 2293: 2B 10          
                 SWI                              ; 2295: 3F             
-                SEC                              ; 2296: 0D             
+                FCB     $0D                      ; 2296: 0D             
                 BCC     Z229C                    ; 2297: 24 03          
                 JMP     Z23A2                    ; 2299: 7E 23 A2       
 Z229C           JMP     Z220C                    ; 229C: 7E 22 0C       
@@ -396,22 +396,22 @@ Z2304           INC     EXADDRL                  ; 2304: 7C 00 23
                 JMP     Z2101                    ; 231A: 7E 21 01       
 Z231D           CMPB    #$01                     ; 231D: C1 01          
                 BNE     Z232F                    ; 231F: 26 0E          
-                LDAB    #$80                     ; 2321: C6 80          
+Z2321           LDAB    #$80                     ; 2321: C6 80          
                 LDAA    #$40                     ; 2323: 86 40          
                 SWI                              ; 2325: 3F             
-                BLS     Z22F6                    ; 2326: 23 CE          
-                BNE     Z2363                    ; 2328: 26 39          
+                FCB     $23                      ; 2326: 23             
+                LDX     #M2639                   ; 2327: CE 26 39       
                 JSR     Z2431                    ; 232A: BD 24 31       
                 BRA     Z23A2                    ; 232D: 20 73          
 Z232F           CMPB    #$03                     ; 232F: C1 03          
                 BEQ     Z2339                    ; 2331: 27 06          
                 LDAB    #$0C                     ; 2333: C6 0C          
 Z2335           SWI                              ; 2335: 3F             
-                BRA     Z2358                    ; 2336: 20 20          
-                ROL     $96,X                    ; 2338: 69 96          
-                BNE     Z2363                    ; 233A: 26 27          
-                ANDB    $96,X                    ; 233C: E4 96          
-                FCB     $21                      ; 233E: 21             
+                FCB     $20                      ; 2336: 20             
+                BRA     Z23A2                    ; 2337: 20 69          
+Z2339           LDAA    M0026                    ; 2339: 96 26          
+                BEQ     Z2321                    ; 233B: 27 E4          
+                LDAA    LDADDRL                  ; 233D: 96 21          
                 ANDA    #$03                     ; 233F: 84 03          
                 BEQ     Z236F                    ; 2341: 27 2C          
                 LDX     ONECONH                  ; 2343: DE 24          
@@ -422,11 +422,11 @@ Z2335           SWI                              ; 2335: 3F
                 LDX     #M25DA                   ; 2350: CE 25 DA       
                 JSR     Z2704                    ; 2353: BD 27 04       
                 LDX     ONECONH                  ; 2356: DE 24          
-Z2358           STX     M25DA                    ; 2358: FF 25 DA       
+                STX     M25DA                    ; 2358: FF 25 DA       
                 LDX     #M2674                   ; 235B: CE 26 74       
                 STX     M25DC                    ; 235E: FF 25 DC       
                 LDAB    #$03                     ; 2361: C6 03          
-Z2363           LDX     #M25DA                   ; 2363: CE 25 DA       
+                LDX     #M25DA                   ; 2363: CE 25 DA       
                 JSR     Z26C3                    ; 2366: BD 26 C3       
                 LDX     #M2652                   ; 2369: CE 26 52       
                 JSR     Z2431                    ; 236C: BD 24 31       
@@ -926,14 +926,14 @@ Z2612           FCB     $00                      ; 2612: 00
                 FCB     $00                      ; 262B: 00             
                 FCB     $00                      ; 262C: 00             
                 FCB     $00                      ; 262D: 00             
-                BPL     Z267E                    ; 262E: 2A 4E          
+M262E           BPL     Z267E                    ; 262E: 2A 4E          
                 CLRA                             ; 2630: 4F             
                 BRA     Z2686                    ; 2631: 20 53          
                 LSRA                             ; 2633: 44             
                 ASRB                             ; 2634: 57             
                 BEQ     Z268A                    ; 2635: 27 53          
                 BPL     Z2659                    ; 2637: 2A 20          
-                FCB     $4E                      ; 2639: 4E             
+M2639           FCB     $4E                      ; 2639: 4E             
                 CLRA                             ; 263A: 4F             
                 BRA     Z2681                    ; 263B: 20 44          
                 ROLA                             ; 263D: 49             
@@ -1014,7 +1014,7 @@ Z2695           BRA     Z26B7                    ; 2695: 20 20
                 BLE     Z26BF                    ; 2699: 2F 24          
                 BRA     Z26BD                    ; 269B: 20 20          
                 SEC                              ; 269D: 0D             
-                FCB     $4E                      ; 269E: 4E             
+M269E           FCB     $4E                      ; 269E: 4E             
                 CLRA                             ; 269F: 4F             
 Z26A0           BRA     Z26F6                    ; 26A0: 20 54          
                 FCB     $45                      ; 26A2: 45             

@@ -32,9 +32,9 @@ XPSPAC  EQU     $F02A
 
                 ORG     $1C0D
 
-                JMP     Z1C13                    ; 1C0D: 7E 1C 13       
+OPEN1           JMP     OPEN2                    ; 1C0D: 7E 1C 13       
                 JSR     Z1206                    ; 1C10: BD 12 06       
-Z1C13           STX     M1F2E                    ; 1C13: FF 1F 2E       
+OPEN2           STX     M1F2E                    ; 1C13: FF 1F 2E       
                 LDAB    #$10                     ; 1C16: C6 10          
                 BITB    $01,X                    ; 1C18: E5 01          
                 BNE     Z1C1F                    ; 1C1A: 26 03          
@@ -97,8 +97,8 @@ Z1C9B           LDX     M1F2E                    ; 1C9B: FE 1F 2E
                 JSR     Z1EFF                    ; 1C9E: BD 1E FF       
                 LDAB    #$0A                     ; 1CA1: C6 0A          
                 SWI                              ; 1CA3: 3F             
-                BEQ     Z1C6C                    ; 1CA4: 27 C6          
-                FCB     $02                      ; 1CA6: 02             
+                FCB     $27                      ; 1CA4: 27             
+                LDAB    #$02                     ; 1CA5: C6 02          
                 SWI                              ; 1CA7: 3F             
                 FCB     $1C                      ; 1CA8: 1C             
                 BCC     Z1CC6                    ; 1CA9: 24 1B          
@@ -106,7 +106,8 @@ Z1C9B           LDX     M1F2E                    ; 1C9B: FE 1F 2E
                 BEQ     Z1CB5                    ; 1CAD: 27 06          
                 LDAB    #$0C                     ; 1CAF: C6 0C          
                 SWI                              ; 1CB1: 3F             
-                BRA     Z1CF3                    ; 1CB2: 20 3F          
+                FCB     $20                      ; 1CB2: 20             
+                SWI                              ; 1CB3: 3F             
                 FCB     $1A                      ; 1CB4: 1A             
 Z1CB5           LDX     M1F2E                    ; 1CB5: FE 1F 2E       
                 LDAA    #$03                     ; 1CB8: 86 03          
@@ -148,7 +149,7 @@ Z1CE0           CLR     $1D,X                    ; 1CE0: 6F 1D
                 STX     M1F35                    ; 1D06: FF 1F 35       
                 LDX     #M1F32                   ; 1D09: CE 1F 32       
                 SWI                              ; 1D0C: 3F             
-                CLI                              ; 1D0D: 0E             
+                FCB     $0E                      ; 1D0D: 0E             
                 LDX     M1F35                    ; 1D0E: FE 1F 35       
                 LDAB    ,X                       ; 1D11: E6 00          
                 BPL     Z1D18                    ; 1D13: 2A 03          
@@ -178,23 +179,22 @@ Z1D42           TST     M1F4F                    ; 1D42: 7D 1F 4F
                 JMP     Z1C50                    ; 1D47: 7E 1C 50       
 Z1D4A           JSR     Z1F13                    ; 1D4A: BD 1F 13       
                 SWI                              ; 1D4D: 3F             
-                PSHA                             ; 1D4E: 36             
+                FCB     $36                      ; 1D4E: 36             
                 BEQ     Z1D54                    ; 1D4F: 27 03          
 Z1D51           JMP     Z1E9C                    ; 1D51: 7E 1E 9C       
 Z1D54           TST     $0B,X                    ; 1D54: 6D 0B          
                 BEQ     Z1D70                    ; 1D56: 27 18          
                 LDAB    #$0B                     ; 1D58: C6 0B          
                 SWI                              ; 1D5A: 3F             
-                BEQ     Z1D5C                    ; 1D5B: 27 FF          
-                FCB     $1F                      ; 1D5D: 1F             
-                PULB                             ; 1D5E: 33             
+                FCB     $27                      ; 1D5B: 27             
+                STX     M1F33                    ; 1D5C: FF 1F 33       
                 LDX     M1F2E                    ; 1D5F: FE 1F 2E       
                 LDX     $04,X                    ; 1D62: EE 04          
                 STX     M1F35                    ; 1D64: FF 1F 35       
                 LDAB    #$0A                     ; 1D67: C6 0A          
                 LDX     #M1F33                   ; 1D69: CE 1F 33       
                 SWI                              ; 1D6C: 3F             
-                CBA                              ; 1D6D: 11             
+                FCB     $11                      ; 1D6D: 11             
                 BNE     Z1D8C                    ; 1D6E: 26 1C          
 Z1D70           LDX     M1F2E                    ; 1D70: FE 1F 2E       
                 LDX     $04,X                    ; 1D73: EE 04          
@@ -202,13 +202,12 @@ Z1D70           LDX     M1F2E                    ; 1D70: FE 1F 2E
                 LDX     M1F2E                    ; 1D78: FE 1F 2E       
                 LDAB    #$0B                     ; 1D7B: C6 0B          
                 SWI                              ; 1D7D: 3F             
-                BEQ     Z1D7F                    ; 1D7E: 27 FF          
-                FCB     $1F                      ; 1D80: 1F             
-                TXS                              ; 1D81: 35             
+                FCB     $27                      ; 1D7E: 27             
+                STX     M1F35                    ; 1D7F: FF 1F 35       
                 LDAB    #$10                     ; 1D82: C6 10          
                 LDX     #M1F33                   ; 1D84: CE 1F 33       
                 SWI                              ; 1D87: 3F             
-                SBA                              ; 1D88: 10             
+                FCB     $10                      ; 1D88: 10             
                 JMP     Z1C50                    ; 1D89: 7E 1C 50       
 Z1D8C           LDX     M1F2E                    ; 1D8C: FE 1F 2E       
                 LDX     $04,X                    ; 1D8F: EE 04          
@@ -268,8 +267,8 @@ Z1DFF           LDX     M1F2E                    ; 1DFF: FE 1F 2E
                 JSR     Z1EFF                    ; 1E02: BD 1E FF       
                 LDAB    #$0A                     ; 1E05: C6 0A          
                 SWI                              ; 1E07: 3F             
-                BEQ     Z1DD0                    ; 1E08: 27 C6          
-                FCB     $04                      ; 1E0A: 04             
+                FCB     $27                      ; 1E08: 27             
+                LDAB    #$04                     ; 1E09: C6 04          
                 SWI                              ; 1E0B: 3F             
                 FCB     $1C                      ; 1E0C: 1C             
                 BCC     Z1E2A                    ; 1E0D: 24 1B          
@@ -284,7 +283,8 @@ Z1E1D           CMPB    #$07                     ; 1E1D: C1 07
                 JMP     Z1EE7                    ; 1E21: 7E 1E E7       
 Z1E24           LDAB    #$0C                     ; 1E24: C6 0C          
                 SWI                              ; 1E26: 3F             
-                BRA     Z1E68                    ; 1E27: 20 3F          
+                FCB     $20                      ; 1E27: 20             
+                SWI                              ; 1E28: 3F             
                 FCB     $1A                      ; 1E29: 1A             
 Z1E2A           LDX     M1F2E                    ; 1E2A: FE 1F 2E       
                 LDAA    #$08                     ; 1E2D: 86 08          
@@ -308,27 +308,27 @@ Z1E4D           LDX     M1F2E                    ; 1E4D: FE 1F 2E
                 LDX     $06,X                    ; 1E58: EE 06          
                 STX     M1F4D                    ; 1E5A: FF 1F 4D       
                 LDX     M1F2E                    ; 1E5D: FE 1F 2E       
-Z1E60           LDAB    #$0B                     ; 1E60: C6 0B          
+                LDAB    #$0B                     ; 1E60: C6 0B          
                 SWI                              ; 1E62: 3F             
-                BEQ     Z1EA4                    ; 1E63: 27 3F          
-Z1E65           BCC     Z1E65                    ; 1E65: 24 FE          
-                FCB     $1F                      ; 1E67: 1F             
-Z1E68           BGT     Z1E51                    ; 1E68: 2E E7          
-                FCB     $04                      ; 1E6A: 04             
+                FCB     $27                      ; 1E63: 27             
+                SWI                              ; 1E64: 3F             
+                FCB     $24                      ; 1E65: 24             
+                LDX     M1F2E                    ; 1E66: FE 1F 2E       
+                STAB    $04,X                    ; 1E69: E7 04          
                 STAA    $05,X                    ; 1E6B: A7 05          
                 SWI                              ; 1E6D: 3F             
-                BCS     Z1E36                    ; 1E6E: 25 C6          
-                SEI                              ; 1E70: 0F             
+                FCB     $25                      ; 1E6E: 25             
+                LDAB    #$0F                     ; 1E6F: C6 0F          
                 SWI                              ; 1E71: 3F             
-                BEQ     Z1EB3                    ; 1E72: 27 3F          
-Z1E74           BCC     Z1E74                    ; 1E74: 24 FE          
-                FCB     $1F                      ; 1E76: 1F             
-                BGT     Z1E60                    ; 1E77: 2E E7          
-                TAP                              ; 1E79: 06             
+                FCB     $27                      ; 1E72: 27             
+                SWI                              ; 1E73: 3F             
+                FCB     $24                      ; 1E74: 24             
+                LDX     M1F2E                    ; 1E75: FE 1F 2E       
+                STAB    $06,X                    ; 1E78: E7 06          
                 STAA    $07,X                    ; 1E7A: A7 07          
                 JSR     Z1F13                    ; 1E7C: BD 1F 13       
                 SWI                              ; 1E7F: 3F             
-                PSHB                             ; 1E80: 37             
+                FCB     $37                      ; 1E80: 37             
                 LDAB    M1F4B                    ; 1E81: F6 1F 4B       
                 LDAA    M1F4C                    ; 1E84: B6 1F 4C       
                 STAB    $04,X                    ; 1E87: E7 04          
@@ -350,7 +350,7 @@ Z1EA5           LDX     M1F30                    ; 1EA5: FE 1F 30
                 BNE     Z1EB1                    ; 1EAC: 26 03          
                 JMP     Z1ECF                    ; 1EAE: 7E 1E CF       
 Z1EB1           LDAA    #$60                     ; 1EB1: 86 60          
-Z1EB3           ANDA    $06,X                    ; 1EB3: A4 06          
+                ANDA    $06,X                    ; 1EB3: A4 06          
                 CMPA    #$60                     ; 1EB5: 81 60          
                 BNE     Z1ED3                    ; 1EB7: 26 1A          
                 JSR     Z1F1D                    ; 1EB9: BD 1F 1D       

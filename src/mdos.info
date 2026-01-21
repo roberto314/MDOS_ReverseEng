@@ -30,7 +30,6 @@ label 11E CHFLGs
 label 120 SYIOCB
 label 145 SYPOCB
 label 16A SYEOCB
-used 623 SYSSTART
 lcomment 623 Entry Point after floppy-boot
 label 026B ISR_UNUSD
 
@@ -128,6 +127,8 @@ data 1024
 data 1067
 data 1079
 data 125b
+data 2069
+data 2073
 
 data 5dc
 
@@ -140,13 +141,21 @@ label 0279 B7_SET
 label 026c B6_SET
 lcomment 279 restore B
 
-lcomment 0659 Continue in mdosov6
+lcomment 0659 Continue in mdosov6 after init
+lcomment 53f B is drive#
+lcomment 562 this gets patched to WRVERF or READSC
 
 data 0120-020e
 char 14b-15a
 char 170-17e
 
-data 65c-750
+data 65c-6b2
+used 6a7
+data 721
+data 73c
+data 757
+data 75a
+
 label c1f TMP1
 label c20 TMP2
 label c21 TMP3
@@ -158,27 +167,15 @@ label bf4 HASH25
 data f1c-f30
 data 27f-2fe
 cvec 27f-2fe
-label 127f RESRV
-label 1282 RELES
-label 1c0d OPEN
-label 18a3 CLOSE
-label 189d GETRC
-label 1285 PUTRC
-label 18a6 REWND
-label 71f GETLS
-label 722 PUTLS
-label 3a8 KEYIN
-label 417 DISPLY
-label 41a DISPLX
-label 40d DISPLZ
 
 data 419 
 
 data 1101-11f1
 char 1128-11f1
-
+char 128-129
 comment 1ffd the following code gets overwritten by mdosov6
-unused 12a9-1ffc
+unused 12a9-1f7f
+unused 1fac-1ffc
 unused 20cc-20ff
 data 2081-208d
 
@@ -196,7 +193,190 @@ lcomment 11e gets init to: $8000
 comment 1273 the following code gets overwritten by mdosov1
 lcomment 1285 gets init to: $7e $150D in mdosov1
 
-#const c559-c55a
-#word c6ef-c6f0
-#label c63F Set_32Char
-#char c724-c741
+
+label 127f RESRV1     ;  0 - RESERVE A DEVICE
+label 1282 RELES1     ;  1 - RELEASE A DEVICE
+label 1c0d OPEN1      ;  2 - OPEN A FILE
+label 18a3 CLOSE1     ;  3 - CLOSE A FILE
+label 189d GETRC1     ;  4 - READ A RECORD
+label 1285 PUTRC1     ;  5 - WRITE A RECORD
+label 18a6 REWND1     ;  6 - POSITION TO BEGINNING OF FILE
+label 071f GETLS1     ;  7 - READ LOGICAL SECTOR
+label 0722 PUTLS1     ;  8 - WRITE LOGICAL SECTOR
+label 03a8 KEVIN1     ;  9 - CONSOLE INPUT
+label 0417 DSPLY1     ;  A - CONSOLE OUTPUT (TERM W/ CR)
+label 041a DSPLX1     ;  B - CONSOLE OUTPUT (TERM W/ E01)
+label 040d DSPLZ1     ;  C - CONSOLE OUTPUT (TERM W/ EOT, NO CHECK)
+label 03D9 CKBRK1     ;  D - CHECK CONSOLE FOR BREAK KEY
+label 0527 DREAD1     ;  E - EROM DISK READ
+label 0536 DWRIT1     ;  F - EROM DISK WRITE
+label 032D MOVE1      ; 10 - MOVE A STRING
+label 0339 CMPAR1     ; 11 - COMPARE STRINGS
+label 0362 STCHB1     ; 12 - STORE BLANKS
+label 0364 STCHR1     ; 13 - STORE CHARACTERS
+label 036B ALPHA1     ; 14 - CHECK ALPHABETIC CHARACTER
+label 0374 NUMD1      ; 15 - CHECK DECIMAL DIGIT
+label 0381 ADDAM1     ; 16 - INCREMENT MEMORY (DOUBLE BYTE) BY
+label 038A SUBAM1     ; 17 - DECREMENT MEMORY (DOUBLE BYTE) BY
+label 0394 MMA1       ; 18 - MULTIPLY (SHIFT LEFT) MEMORY BY A
+label 039E DMA1       ; 19 - DIVIDE (SHIFT RIGHT) MEMORY BY A
+label 0623 MDENT1     ; 1A - ENTER MDOS WITHOUT RELOADING
+label 0C28 LOAD1      ; 1B - LOAD A FILE FROM DISK
+label 09C7 DIRSM1     ; 1C - DIRECTORY SEARCH AND MODIFY
+label 1279 PFNAM1     ; 1D - PROCESS FILE NAME
+label 127C ALUSM1     ; 1E - ALLOCATE USER MEMORY
+label 18A9 CHANG1     ; 1F - CHANGE NAME/ATTRIBUTES
+label 0F31 MDERR1     ; 20 - MDOS ERROR MESSAGE HANDLER
+label 1273 ALLOC1     ; 21 - ALLOCATE DISK SPACE
+label 1276 DEALC1     ; 22 - RETURN DISK SPACE
+label 0609 EWORD1     ; 23 - SET ERROR STATUS WORD FOR CHAIN
+label 0461 TXBA1      ; 24 - TRANSFER X TO B,A
+label 0471 TBAX1      ; 25 - TRANSFER B,A TO X
+label 0477 XBAX1      ; 26 - EXCHANGE B,A AND X
+label 0489 ADBX1      ; 27 - ADD B TO X
+label 048A ADAX1      ; 28 - ADD A TO X
+label 048B ADDAX1     ; 29 - ADD B,A TO X
+label 0494 ADXBA1     ; 2A - ADD X TO B,A
+label 04A7 SUBX1      ; 2B - SUBTRACT B FROM X
+label 04A8 SUAX1      ; 2C - SUBTRACT A FROM X
+label 04A9 SUBAX1     ; 2D - SUBTRACT B,A FROM X
+label 04B9 SUXBA1     ; 2E - SUBTRACT X FROM B,A
+label 04C6 CPBAX1     ; 2F - COMPARE B.A TO X
+label 04DA ASRX1      ; 30 - SHIFT X RIGHT (ARITHMETIC)
+label 04E0 ASLX1      ; 31 - SHIFT X LEFT (ARITHMETIC/LOGICAL)
+label 04E6 PSHX1      ; 32 - PUSH X ON STACK
+label 0506 PULX1      ; 33 - PULL X FROM STACK
+label 0446 PRINT1     ; 34 - PRINT-TERMINATE WITH CR
+label 0449 PRINX1     ; 35 - PRINT-TERMINATE WITH EOT
+label 18A0 GETFD1     ; 36 - READ FDR (RESIDENT MDOS ONLY)
+label 1288 PUTFD1     ; 37 - WRITE FDR (RESIDENT MDOS ONLY)
+label 128B PUTEF1     ; 38 - WRITE EOF (RESIDENT MDOS ONLY)
+label 0524 EREAD1     ; 39 - DISK READ W/ ERR RETN
+label 0533 EWRIT1     ; 3A - DISK WRITE W/ ERR RETN
+label 0521 MREAD1     ; 3B - MULTIPLE SECTOR READ
+label 0530 MWRIT1     ; 3C - MULTIPLE SECTOR WRITE
+label 051E MERED1     ; 3D - MULTIPLE SECTOR READ W/ ERR RETUR
+label 052D MEWRT1     ; 3E - MULTIPLE SECTOR WRITE W/ ERR RETU
+label 0617 BOOT1      ; 3F - RELOAD MDOS
+
+comment 65c ----------------- Standard Devices -------------------
+label 65c GDBsVEC
+char 65c-65d
+word 65e-65f
+char 660-661
+word 662-663
+char 664-665
+word 666-667
+char 668-669
+word 66a-66b
+char 66c-66d
+word 66e-66f
+
+comment 672 ----------------- Disk Drive
+label 672 DKCDB
+used 673 DKCDBIOC
+word 673-674
+used 675 DKCDBSDA
+word 675-676
+used 677 DKCDBHAD
+word 677-678
+label 679 DKCBDDF
+label 67a DKCBVDT
+label 67b DKCDBDDA
+label 67d DKCDBWST
+word  67b-67e
+comment 6b3 ----------------------------------------
+used 6b3 DKDEV_ON
+used 6b6 DKDEV_OFF
+used 6b9 DKDEV_INIT
+used 6bc DKDEV_TERM
+label 718 DKRETRN
+
+comment 67f ----------------- Line Printer
+label 67f LPCDB
+used 680 LPCDBIOC
+word 680-681
+used 682 LPCDBSDA
+word 682-683
+used 684 LPCDBHAD
+word 684-685
+label 686 LPCBDDF
+label 687 LPCDBVDT
+label 688 LPCDBDDA 
+label 68a LPCDBWST
+word  688-68b
+comment 99e ----------------------------------------
+used 99e LPDEV_ON
+used 9a1 LPDEV_OFF
+used 9a4 LPDEV_INIT
+used 9a7 LPDEV_TERM
+used 9aa LPDEV_CHAR
+label 9c0 LPRETRN
+
+comment 68c ----------------- Console reader
+label 68c CRCDB
+used 68d CRCDBIOC
+word 68d-68e
+used 68f CRCDBSDA
+word 68f-690
+used 691 CRCDBHAD
+word 691-692
+label 693 CRCBDDF
+label 694 CRCDBVDT
+label 695 CRCDBDDA
+label 697 CRCDBWST
+word  695-698
+comment 980 ----------------------------------------
+used 980 CRDEV_ON
+used 983 CRDEV_OFF
+used 986 CRDEV_INIT
+used 989 CRDEV_TERM
+used 98c CRDEV_CHAR
+
+
+comment 699 ----------------- Console punch
+label 699 CPCDB
+used 69a CPCDBIOC
+word 69a-69b
+used 69c CPCDBSDA
+word 69c-69d
+used 69e CPCDBHAD
+word 69e-69f
+label 6a0 CPCBDDF
+label 6a1 CPCDBVDT
+label 6a2 CPCDBDDA
+label 6a4 CPCDBWST
+word  6a2-6a5
+comment 98f ----------------------------------------
+used 98f CPDEV_ON
+used 992 CPDEV_OFF
+used 995 CPDEV_INIT
+used 998 CPDEV_TERM
+used 99b CPDEV_CHAR
+
+comment 6a6 ----------------- Console keyboard and / or display
+label 6a6 CNCDB
+used 6a7 CNCDBIOC
+word 6a7-6a8
+used 6a9 CNCDBSDA
+word 6a8-6a9
+used 6ab CNCDBHAD
+word 6ab-6ac
+label 6ad CNCBDDF
+label 6ae CNCDBVDT
+label 6af CNCDBDDA
+label 6b1 CNCDBWST
+word  6af-6b2
+comment 953 ----------------------------------------
+used 953 CNDEV_ON
+used 956 CNDEV_OFF
+used 959 CNDEV_INIT
+used 95c CNDEV_TERM
+used 95d CNRET
+
+used  129a CRON1
+used  129d CROFF1
+used  12a0 CRINIT1
+used  12a3 CRTERM1
+used  1297 CRCHAR1
+used  12A6 CPCHAR1

@@ -23,7 +23,7 @@ Z04CE   EQU     $04CE
 Z11F2   EQU     $11F2
 Z188B   EQU     $188B
 M1892   EQU     $1892
-M1894   EQU     $1894
+IOCBTMP EQU     $1894
 M1896   EQU     $1896
 M1897   EQU     $1897
 M1898   EQU     $1898
@@ -33,18 +33,10 @@ M189B   EQU     $189B
 M189C   EQU     $189C
 Z1F65   EQU     $1F65
 Z1FFD   EQU     $1FFD
-M20D9   EQU     $20D9
 M444B   EQU     $444B
-MC600   EQU     $C600
-MC601   EQU     $C601
-MC602   EQU     $C602
 MC603   EQU     $C603
-MC604   EQU     $C604
 MC605   EQU     $C605
 MC608   EQU     $C608
-MC60A   EQU     $C60A
-MC60B   EQU     $C60B
-MC618   EQU     $C618
 OSLOAD  EQU     $E800
 PWRUP   EQU     $F000
 XBEGEN  EQU     $F003
@@ -78,24 +70,24 @@ MFF62   EQU     $FF62
 
                 JSR     Z11F2                    ; 1273: BD 11 F2       
                 JSR     Z11F2                    ; 1276: BD 11 F2       
-                JMP     Z12B7                    ; 1279: 7E 12 B7       
-                JMP     Z13C1                    ; 127C: 7E 13 C1       
-RESRV           JMP     Z1412                    ; 127F: 7E 14 12       
-RELES           JMP     Z14E2                    ; 1282: 7E 14 E2       
-PUTRC           JMP     Z150D                    ; 1285: 7E 15 0D       
-                JMP     Z1507                    ; 1288: 7E 15 07       
-                JMP     Z150A                    ; 128B: 7E 15 0A       
+PFNAM1          JMP     PFNAM2                   ; 1279: 7E 12 B7       
+ALUSM1          JMP     ALUSM2                   ; 127C: 7E 13 C1       
+RESRV1          JMP     RESRV2                   ; 127F: 7E 14 12       
+RELES1          JMP     RELES2                   ; 1282: 7E 14 E2       
+PUTRC1          JMP     PUTRC2                   ; 1285: 7E 15 0D       
+PUTFD1          JMP     PUTFD2                   ; 1288: 7E 15 07       
+PUTEF1          JMP     PUTEF2                   ; 128B: 7E 15 0A       
                 RTS                              ; 128E: 39             
                 NOP                              ; 128F: 01             
                 NOP                              ; 1290: 01             
                 JMP     Z17BD                    ; 1291: 7E 17 BD       
                 JMP     Z17E5                    ; 1294: 7E 17 E5       
-                JMP     Z1782                    ; 1297: 7E 17 82       
-                JMP     Z1817                    ; 129A: 7E 18 17       
-                JMP     Z1831                    ; 129D: 7E 18 31       
-                JMP     Z184E                    ; 12A0: 7E 18 4E       
-                JMP     Z184E                    ; 12A3: 7E 18 4E       
-                JMP     Z17FF                    ; 12A6: 7E 17 FF       
+CRCHAR1         JMP     CRCHAR2                  ; 1297: 7E 17 82       
+CRON1           JMP     CRON2                    ; 129A: 7E 18 17       
+CROFF1          JMP     CROFF2                   ; 129D: 7E 18 31       
+CRINIT1         JMP     CRINIT2                  ; 12A0: 7E 18 4E       
+CRTERM1         JMP     CRINIT2                  ; 12A3: 7E 18 4E       
+CPCHAR1         JMP     CPCHAR2                  ; 12A6: 7E 17 FF       
 Z12A9           TSX                              ; 12A9: 30             
                 LDX     $07,X                    ; 12AA: EE 07          
                 LDX     ,X                       ; 12AC: EE 00          
@@ -105,7 +97,7 @@ Z12B1           TSX                              ; 12B1: 30
                 ORAB    $05,X                    ; 12B2: EA 05          
                 STAB    $05,X                    ; 12B4: E7 05          
                 RTS                              ; 12B6: 39             
-Z12B7           JSR     Z0358                    ; 12B7: BD 03 58       
+PFNAM2          JSR     Z0358                    ; 12B7: BD 03 58       
                 TSX                              ; 12BA: 30             
                 CLR     $03,X                    ; 12BB: 6F 03          
                 LDAB    #$08                     ; 12BD: C6 08          
@@ -138,7 +130,7 @@ Z12E9           CMPA    #$3A                     ; 12E9: 81 3A
                 INX                              ; 12F2: 08             
                 INX                              ; 12F3: 08             
                 SWI                              ; 12F4: 3F             
-                TBA                              ; 12F5: 17             
+                FCB     $17                      ; 12F5: 17             
                 LDAB    #$C1                     ; 12F6: C6 C1          
                 JSR     Z1338                    ; 12F8: BD 13 38       
                 JMP     Z1F65                    ; 12FB: 7E 1F 65       
@@ -146,7 +138,7 @@ Z12E9           CMPA    #$3A                     ; 12E9: 81 3A
                 INX                              ; 1300: 08             
                 INX                              ; 1301: 08             
                 SWI                              ; 1302: 3F             
-                TAB                              ; 1303: 16             
+                FCB     $16                      ; 1303: 16             
                 BSR     Z12A9                    ; 1304: 8D A3          
 Z1306           TSX                              ; 1306: 30             
                 LDAB    $03,X                    ; 1307: E6 03          
@@ -226,7 +218,7 @@ Z1382           TSX                              ; 1382: 30
                 INX                              ; 1387: 08             
                 INX                              ; 1388: 08             
                 SWI                              ; 1389: 3F             
-                TAB                              ; 138A: 16             
+                FCB     $16                      ; 138A: 16             
                 PULA                             ; 138B: 32             
                 PULB                             ; 138C: 33             
                 CMPA    #$2A                     ; 138D: 81 2A          
@@ -248,7 +240,7 @@ Z13A0           TSX                              ; 13A0: 30
                 PSHA                             ; 13A5: 36             
                 TBA                              ; 13A6: 17             
                 SWI                              ; 13A7: 3F             
-                TAB                              ; 13A8: 16             
+                FCB     $16                      ; 13A8: 16             
                 PULA                             ; 13A9: 32             
                 RTS                              ; 13AA: 39             
 Z13AB           LDAB    #$04                     ; 13AB: C6 04          
@@ -259,11 +251,11 @@ Z13AB           LDAB    #$04                     ; 13AB: C6 04
                 INX                              ; 13B4: 08             
                 LDAA    #$08                     ; 13B5: 86 08          
                 SWI                              ; 13B7: 3F             
-                TBA                              ; 13B8: 17             
+                FCB     $17                      ; 13B8: 17             
                 LDAB    #$88                     ; 13B9: C6 88          
                 JSR     Z1338                    ; 13BB: BD 13 38       
                 JMP     Z1327                    ; 13BE: 7E 13 27       
-Z13C1           PSHA                             ; 13C1: 36             
+ALUSM2          PSHA                             ; 13C1: 36             
                 CMPB    #$01                     ; 13C2: C1 01          
                 BEQ     Z13DB                    ; 13C4: 27 15          
                 BLT     Z13E2                    ; 13C6: 2D 1A          
@@ -272,26 +264,26 @@ Z13C1           PSHA                             ; 13C1: 36
                 LDAB    ENDUSs                   ; 13CE: F6 01 08       
                 STX     ENDUSs                   ; 13D1: FF 01 08       
                 SWI                              ; 13D4: 3F             
-                BLT     Z1416                    ; 13D5: 2D 3F          
-                BNE     Z1409                    ; 13D7: 26 30          
-Z13D9           BRA     Z1404                    ; 13D9: 20 29          
+                FCB     $2D                      ; 13D5: 2D             
+                SWI                              ; 13D6: 3F             
+                FCB     $26                      ; 13D7: 26             
+                TSX                              ; 13D8: 30             
+                BRA     Z1404                    ; 13D9: 20 29          
 Z13DB           SWI                              ; 13DB: 3F             
-Z13DC           BNE     Z13DC                    ; 13DC: 26 FE          
-                NOP                              ; 13DE: 01             
-                INX                              ; 13DF: 08             
+                FCB     $26                      ; 13DC: 26             
+                LDX     ENDUSs                   ; 13DD: FE 01 08       
                 SWI                              ; 13E0: 3F             
-                BVS     Z13D9                    ; 13E1: 29 F6          
-                NOP                              ; 13E3: 01             
-                CLV                              ; 13E4: 0A             
+                FCB     $29                      ; 13E1: 29             
+Z13E2           LDAB    ENDSYs                   ; 13E2: F6 01 0A       
                 LDAA    M010B                    ; 13E5: B6 01 0B       
                 SWI                              ; 13E8: 3F             
-                BLE     Z1410                    ; 13E9: 2F 25          
-                FCB     $1E                      ; 13EB: 1E             
+                FCB     $2F                      ; 13E9: 2F             
+                BCS     Z140A                    ; 13EA: 25 1E          
                 LDAB    ENDOSs                   ; 13EC: F6 01 06       
                 LDAA    M0107                    ; 13EF: B6 01 07       
                 SWI                              ; 13F2: 3F             
-                BLE     Z1419                    ; 13F3: 2F 24          
-                TBA                              ; 13F5: 17             
+                FCB     $2F                      ; 13F3: 2F             
+                BCC     Z140D                    ; 13F4: 24 17          
                 LDAA    M0109                    ; 13F6: B6 01 09       
                 ADDA    #$01                     ; 13F9: 8B 01          
                 LDAB    ENDUSs                   ; 13FB: F6 01 08       
@@ -301,52 +293,52 @@ Z13DC           BNE     Z13DC                    ; 13DC: 26 FE
 Z1404           STAB    $06,X                    ; 1404: E7 06          
                 STAA    $07,X                    ; 1406: A7 07          
                 CLRB                             ; 1408: 5F             
-Z1409           CPX     #MC603                   ; 1409: 8C C6 03       
+                CPX     #MC603                   ; 1409: 8C C6 03       
                 CPX     #MC605                   ; 140C: 8C C6 05       
                 PULA                             ; 140F: 32             
-Z1410           ASRB                             ; 1410: 57             
+                ASRB                             ; 1410: 57             
                 RTS                              ; 1411: 39             
-Z1412           LDAA    $0A,X                    ; 1412: A6 0A          
-                BITA    #$40                     ; 1414: 85 40          
-Z1416           BNE     Z1445                    ; 1416: 26 2D          
+RESRV2          LDAA    $0A,X                    ; 1412: A6 0A           get LUN
+                BITA    #$40                     ; 1414: 85 40           Reserved?
+                BNE     Z1445                    ; 1416: 26 2D           yes
                 ANDA    #$0F                     ; 1418: 84 0F          
                 CMPA    #$0A                     ; 141A: 81 0A          
                 BCC     Z1448                    ; 141C: 24 2A          
-                LDAA    $08,X                    ; 141E: A6 08          
+                LDAA    $08,X                    ; 141E: A6 08           get first char
                 SWI                              ; 1420: 3F             
-                FCB     $14                      ; 1421: 14             
+                FCB     $14                      ; 1421: 14              CHECK ALPHABETIC CHARACTER
                 BCS     Z1448                    ; 1422: 25 24          
                 TAB                              ; 1424: 16             
-                LDAA    $09,X                    ; 1425: A6 09          
+                LDAA    $09,X                    ; 1425: A6 09           get second char
                 SWI                              ; 1427: 3F             
-                FCB     $14                      ; 1428: 14             
+                FCB     $14                      ; 1428: 14              CHECK ALPHABETIC CHARACTER
                 BCS     Z1448                    ; 1429: 25 1D          
                 LDX     GDBAs                    ; 142B: FE 01 12       
-Z142E           STX     M14DD                    ; 142E: FF 14 DD       
-                LDX     ,X                       ; 1431: EE 00          
+Z142E           STX     GDBAsTMP                 ; 142E: FF 14 DD       
+                LDX     ,X                       ; 1431: EE 00           get first GBD from 65c
                 BEQ     Z1448                    ; 1433: 27 13          
                 SWI                              ; 1435: 3F             
-                BLE     Z145F                    ; 1436: 2F 27          
-                FCB     $12                      ; 1438: 12             
-                LDX     M14DD                    ; 1439: FE 14 DD       
+                FCB     $2F                      ; 1436: 2F              COMPARE B.A TO X
+                BEQ     Z144B                    ; 1437: 27 12           found?
+                LDX     GDBAsTMP                 ; 1439: FE 14 DD       
                 INX                              ; 143C: 08             
                 INX                              ; 143D: 08             
                 INX                              ; 143E: 08             
                 INX                              ; 143F: 08             
-                BRA     Z142E                    ; 1440: 20 EC          
+                BRA     Z142E                    ; 1440: 20 EC           no - continue
 Z1442           JMP     Z14AD                    ; 1442: 7E 14 AD       
 Z1445           JMP     Z14B0                    ; 1445: 7E 14 B0       
 Z1448           JMP     Z14B3                    ; 1448: 7E 14 B3       
-                LDX     M14DD                    ; 144B: FE 14 DD       
-                LDX     $02,X                    ; 144E: EE 02          
+Z144B           LDX     GDBAsTMP                 ; 144B: FE 14 DD       
+                LDX     $02,X                    ; 144E: EE 02           get start address of driver
                 BEQ     Z1442                    ; 1450: 27 F0          
-                STX     M14DF                    ; 1452: FF 14 DF       
-                LDX     M14DD                    ; 1455: FE 14 DD       
+                STX     DRVSTART                 ; 1452: FF 14 DF       
+                LDX     GDBAsTMP                 ; 1455: FE 14 DD       
                 LDX     ,X                       ; 1458: EE 00          
                 CPX     #M444B                   ; 145A: 8C 44 4B       
                 BNE     Z1462                    ; 145D: 26 03          
-Z145F           JMP     Z14B8                    ; 145F: 7E 14 B8       
-Z1462           LDX     M14DF                    ; 1462: FE 14 DF       
+                JMP     Z14B8                    ; 145F: 7E 14 B8       
+Z1462           LDX     DRVSTART                 ; 1462: FE 14 DF       
                 LDAA    ,X                       ; 1465: A6 00          
                 DECA                             ; 1467: 4A             
                 TSX                              ; 1468: 30             
@@ -355,19 +347,20 @@ Z1462           LDX     M14DF                    ; 1462: FE 14 DF
                 ANDB    #$0F                     ; 146D: C4 0F          
                 CBA                              ; 146F: 11             
                 BCS     Z14B3                    ; 1470: 25 41          
-                LDX     M14DF                    ; 1472: FE 14 DF       
+                LDX     DRVSTART                 ; 1472: FE 14 DF       
                 INX                              ; 1475: 08             
                 TSTB                             ; 1476: 5D             
 Z1477           BEQ     Z1480                    ; 1477: 27 07          
                 LDAA    #$0C                     ; 1479: 86 0C          
                 SWI                              ; 147B: 3F             
-                BVC     Z14D8                    ; 147C: 28 5A          
+                FCB     $28                      ; 147C: 28             
+                DECB                             ; 147D: 5A             
                 BRA     Z1477                    ; 147E: 20 F7          
-Z1480           STX     M14DF                    ; 1480: FF 14 DF       
+Z1480           STX     DRVSTART                 ; 1480: FF 14 DF       
                 LDX     $02,X                    ; 1483: EE 02          
                 BEQ     Z1442                    ; 1485: 27 BB          
                 LDAA    M14E0                    ; 1487: B6 14 E0       
-                LDAB    M14DF                    ; 148A: F6 14 DF       
+                LDAB    DRVSTART                 ; 148A: F6 14 DF       
                 TSX                              ; 148D: 30             
                 LDX     $05,X                    ; 148E: EE 05          
                 STAA    $09,X                    ; 1490: A7 09          
@@ -387,35 +380,37 @@ Z14A5           TSX                              ; 14A5: 30
                 STAB    ,X                       ; 14AA: E7 00          
                 RTS                              ; 14AC: 39             
 Z14AD           LDAB    #$05                     ; 14AD: C6 05          
-                CPX     #MC602                   ; 14AF: 8C C6 02       
-                CPX     #MC601                   ; 14B2: 8C C6 01       
+                FCB     $8C                      ; 14AF: 8C             
+Z14B0           LDAB    #$02                     ; 14B0: C6 02          
+                FCB     $8C                      ; 14B2: 8C             
+Z14B3           LDAB    #$01                     ; 14B3: C6 01          
                 SEC                              ; 14B5: 0D             
                 BRA     Z14A5                    ; 14B6: 20 ED          
 Z14B8           TSX                              ; 14B8: 30             
                 LDX     $05,X                    ; 14B9: EE 05          
                 LDAB    $0A,X                    ; 14BB: E6 0A          
                 ANDB    #$0F                     ; 14BD: C4 0F          
-                LDX     M14DF                    ; 14BF: FE 14 DF       
+                LDX     DRVSTART                 ; 14BF: FE 14 DF       
                 LDAA    ,X                       ; 14C2: A6 00          
                 STAA    M14E1                    ; 14C4: B7 14 E1       
                 INX                              ; 14C7: 08             
-                LDAA    $09,X                    ; 14C8: A6 09          
+Z14C8           LDAA    $09,X                    ; 14C8: A6 09          
                 CBA                              ; 14CA: 11             
                 BCC     Z14DA                    ; 14CB: 24 0D          
                 SUBB    $09,X                    ; 14CD: E0 09          
                 LDAA    #$0C                     ; 14CF: 86 0C          
                 SWI                              ; 14D1: 3F             
-                BVC     Z154E                    ; 14D2: 28 7A          
-                FCB     $14                      ; 14D4: 14             
-                CMPB    $26,X                    ; 14D5: E1 26          
-                SUBB    M20D9                    ; 14D7: F0 20 D9       
+                FCB     $28                      ; 14D2: 28             
+                DEC     M14E1                    ; 14D3: 7A 14 E1       
+                BNE     Z14C8                    ; 14D6: 26 F0          
+                BRA     Z14B3                    ; 14D8: 20 D9          
 Z14DA           JMP     Z1480                    ; 14DA: 7E 14 80       
-M14DD           FCB     $00                      ; 14DD: 00             
+GDBAsTMP        FCB     $00                      ; 14DD: 00             
                 FCB     $00                      ; 14DE: 00             
-M14DF           FCB     $00                      ; 14DF: 00             
+DRVSTART        FCB     $00                      ; 14DF: 00             
 M14E0           FCB     $00                      ; 14E0: 00             
 M14E1           FCB     $00                      ; 14E1: 00             
-Z14E2           PSHA                             ; 14E2: 36             
+RELES2          PSHA                             ; 14E2: 36             
                 LDAA    $0A,X                    ; 14E3: A6 0A          
                 BITA    #$40                     ; 14E5: 85 40          
                 BEQ     Z14FD                    ; 14E7: 27 14          
@@ -435,22 +430,22 @@ Z14FD           LDAB    #$03                     ; 14FD: C6 03
 Z1503           PULA                             ; 1503: 32             
                 STAB    ,X                       ; 1504: E7 00          
                 RTS                              ; 1506: 39             
-Z1507           LDAB    #$00                     ; 1507: C6 00          
+PUTFD2          LDAB    #$00                     ; 1507: C6 00          
                 FCB     $8C                      ; 1509: 8C             
-Z150A           LDAB    #$FF                     ; 150A: C6 FF          
+PUTEF2          LDAB    #$FF                     ; 150A: C6 FF          
                 FCB     $8C                      ; 150C: 8C             
-Z150D           LDAB    #$01                     ; 150D: C6 01          
-                STX     M1894                    ; 150F: FF 18 94       
+PUTRC2          LDAB    #$01                     ; 150D: C6 01          
+                STX     IOCBTMP                  ; 150F: FF 18 94       
                 STAB    M1896                    ; 1512: F7 18 96       
-                LDAA    $01,X                    ; 1515: A6 01          
-                BITA    #$10                     ; 1517: 85 10          
-                BEQ     Z151E                    ; 1519: 27 03          
-                JMP     Z175A                    ; 151B: 7E 17 5A       
-Z151E           BITA    #$20                     ; 151E: 85 20          
-                BEQ     Z1525                    ; 1520: 27 03          
-                JMP     Z175D                    ; 1522: 7E 17 5D       
+                LDAA    $01,X                    ; 1515: A6 01           load IOCDTT
+                BITA    #$10                     ; 1517: 85 10           check file open
+                BEQ     Z151E                    ; 1519: 27 03           yes
+                JMP     Z175A                    ; 151B: 7E 17 5A        no
+Z151E           BITA    #$20                     ; 151E: 85 20           check sector/record
+                BEQ     Z1525                    ; 1520: 27 03           Record IO
+                JMP     Z175D                    ; 1522: 7E 17 5D        Sector IO
 Z1525           ANDA    #$03                     ; 1525: 84 03          
-                CMPA    #$01                     ; 1527: 81 01          
+                CMPA    #$01                     ; 1527: 81 01           check Mode Flags
                 BNE     Z152E                    ; 1529: 26 03          
                 JMP     Z175D                    ; 152B: 7E 17 5D       
 Z152E           CLR     M1899                    ; 152E: 7F 18 99       
@@ -467,7 +462,7 @@ Z152E           CLR     M1899                    ; 152E: 7F 18 99
                 JMP     Z1760                    ; 1547: 7E 17 60       
 Z154A           LDAA    $17,X                    ; 154A: A6 17          
                 BITA    #$08                     ; 154C: 85 08          
-Z154E           BNE     Z1553                    ; 154E: 26 03          
+                BNE     Z1553                    ; 154E: 26 03          
                 CLR     M1899                    ; 1550: 7F 18 99       
 Z1553           LDAB    $04,X                    ; 1553: E6 04          
                 LDAA    $05,X                    ; 1555: A6 05          
@@ -479,7 +474,7 @@ Z1553           LDAB    $04,X                    ; 1553: E6 04
                 BITA    #$02                     ; 1562: 85 02          
                 BEQ     Z1580                    ; 1564: 27 1A          
                 INC     M189C                    ; 1566: 7C 18 9C       
-                LDX     M1894                    ; 1569: FE 18 94       
+                LDX     IOCBTMP                  ; 1569: FE 18 94       
                 LDAB    $0B,X                    ; 156C: E6 0B          
                 LDAA    $0C,X                    ; 156E: A6 0C          
                 CMPB    #$FF                     ; 1570: C1 FF          
@@ -500,7 +495,7 @@ Z1587           LDX     $02,X                    ; 1587: EE 02
                 ANDA    M0024                    ; 158F: 94 24          
                 FCB     $03                      ; 1591: 03             
                 JMP     Z1763                    ; 1592: 7E 17 63       
-                LDX     M1894                    ; 1595: FE 18 94       
+                LDX     IOCBTMP                  ; 1595: FE 18 94       
                 LDAA    $01,X                    ; 1598: A6 01          
                 ANDA    #$3F                     ; 159A: 84 3F          
                 ORAA    #$40                     ; 159C: 8A 40          
@@ -517,14 +512,14 @@ Z15B5           TST     M1896                    ; 15B5: 7D 18 96
                 BPL     Z15BD                    ; 15B8: 2A 03          
                 JMP     Z1639                    ; 15BA: 7E 16 39       
 Z15BD           CLR     M1898                    ; 15BD: 7F 18 98       
-Z15C0           LDX     M1894                    ; 15C0: FE 18 94       
+Z15C0           LDX     IOCBTMP                  ; 15C0: FE 18 94       
                 LDAA    $07,X                    ; 15C3: A6 07          
                 LDAB    $06,X                    ; 15C5: E6 06          
                 LDX     $02,X                    ; 15C7: EE 02          
                 JSR     Z04CE                    ; 15C9: BD 04 CE       
                 BCS     Z1646                    ; 15CC: 25 78          
                 LDAB    ,X                       ; 15CE: E6 00          
-                LDX     M1894                    ; 15D0: FE 18 94       
+                LDX     IOCBTMP                  ; 15D0: FE 18 94       
                 INC     $03,X                    ; 15D3: 6C 03          
                 BNE     Z15D9                    ; 15D5: 26 02          
                 INC     $02,X                    ; 15D7: 6C 02          
@@ -579,14 +574,14 @@ Z1646           LDAA    M1897                    ; 1646: B6 18 97
                 BNE     Z1672                    ; 164B: 26 25          
                 TST     M1896                    ; 164D: 7D 18 96       
                 BEQ     Z1672                    ; 1650: 27 20          
-                LDX     M1894                    ; 1652: FE 18 94       
+                LDX     IOCBTMP                  ; 1652: FE 18 94       
                 LDX     $06,X                    ; 1655: EE 06          
                 LDAB    ,X                       ; 1657: E6 00          
                 CMPB    #$0D                     ; 1659: C1 0D          
                 BEQ     Z167E                    ; 165B: 27 21          
                 TST     M189C                    ; 165D: 7D 18 9C       
                 BGE     Z1679                    ; 1660: 2C 17          
-                LDX     M1894                    ; 1662: FE 18 94       
+                LDX     IOCBTMP                  ; 1662: FE 18 94       
                 CPX     #SYIOCB                  ; 1665: 8C 01 20       
                 BNE     Z1679                    ; 1668: 26 0F          
                 LDAB    $0A,X                    ; 166A: E6 0A          
@@ -637,13 +632,14 @@ Z16D1           CLR     M189A                    ; 16D1: 7F 18 9A
                 CLRA                             ; 16D4: 4F             
                 TST     M1896                    ; 16D5: 7D 18 96       
                 BMI     Z16F0                    ; 16D8: 2B 16          
-                LDX     M1894                    ; 16DA: FE 18 94       
+                LDX     IOCBTMP                  ; 16DA: FE 18 94       
                 LDAB    $06,X                    ; 16DD: E6 06          
                 LDAA    $07,X                    ; 16DF: A6 07          
                 LDX     $04,X                    ; 16E1: EE 04          
                 DEX                              ; 16E3: 09             
                 SWI                              ; 16E4: 3F             
-                BGT     Z1744                    ; 16E5: 2E 5D          
+                FCB     $2E                      ; 16E5: 2E             
+                TSTB                             ; 16E6: 5D             
                 BEQ     Z16EC                    ; 16E7: 27 03          
 Z16E9           JMP     Z1766                    ; 16E9: 7E 17 66       
 Z16EC           CMPA    #$FF                     ; 16EC: 81 FF          
@@ -687,21 +683,27 @@ Z173D           RTS                              ; 173D: 39
 Z173E           ORAB    #$30                     ; 173E: CA 30          
                 CMPB    #$3A                     ; 1740: C1 3A          
                 BCS     Z1746                    ; 1742: 25 02          
-Z1744           ADDB    #$07                     ; 1744: CB 07          
+                ADDB    #$07                     ; 1744: CB 07          
 Z1746           RTS                              ; 1746: 39             
 Z1747           LDAB    M1898                    ; 1747: F6 18 98       
                 CLR     M1898                    ; 174A: 7F 18 98       
                 ORAB    #$80                     ; 174D: CA 80          
                 CLR     M189B                    ; 174F: 7F 18 9B       
                 BRA     Z171C                    ; 1752: 20 C8          
-Z1754           LDX     M1894                    ; 1754: FE 18 94       
+Z1754           LDX     IOCBTMP                  ; 1754: FE 18 94       
                 LDAB    ,X                       ; 1757: E6 00          
-                CPX     #MC608                   ; 1759: 8C C6 08       
-                CPX     #MC60B                   ; 175C: 8C C6 0B       
-                CPX     #MC60A                   ; 175F: 8C C6 0A       
-                CPX     #MC604                   ; 1762: 8C C6 04       
-                CPX     #MC618                   ; 1765: 8C C6 18       
-                CPX     #MC600                   ; 1768: 8C C6 00       
+                FCB     $8C                      ; 1759: 8C             
+Z175A           LDAB    #$08                     ; 175A: C6 08           file open
+                FCB     $8C                      ; 175C: 8C             
+Z175D           LDAB    #$0B                     ; 175D: C6 0B          
+                FCB     $8C                      ; 175F: 8C             
+Z1760           LDAB    #$0A                     ; 1760: C6 0A          
+                FCB     $8C                      ; 1762: 8C             
+Z1763           LDAB    #$04                     ; 1763: C6 04          
+                FCB     $8C                      ; 1765: 8C             
+Z1766           LDAB    #$18                     ; 1766: C6 18          
+                FCB     $8C                      ; 1768: 8C             
+Z1769           LDAB    #$00                     ; 1769: C6 00          
                 CMPB    #$08                     ; 176B: C1 08          
                 BEQ     Z1778                    ; 176D: 27 09          
                 PSHB                             ; 176F: 37             
@@ -709,13 +711,13 @@ Z1754           LDX     M1894                    ; 1754: FE 18 94
                 JSR     $03,X                    ; 1773: AD 03          
                 FCB     $18                      ; 1775: 18             
                 ANDA    M0033                    ; 1776: 94 33          
-Z1778           LDX     M1894                    ; 1778: FE 18 94       
-                STAB    ,X                       ; 177B: E7 00          
+Z1778           LDX     IOCBTMP                  ; 1778: FE 18 94        file open
+                STAB    ,X                       ; 177B: E7 00           set error flag
                 TSTB                             ; 177D: 5D             
                 BEQ     Z1781                    ; 177E: 27 01          
                 SEC                              ; 1780: 0D             
 Z1781           RTS                              ; 1781: 39             
-Z1782           DEC     M17FE                    ; 1782: 7A 17 FE       
+CRCHAR2         DEC     M17FE                    ; 1782: 7A 17 FE       
                 BNE     Z1797                    ; 1785: 26 10          
                 TST     MFF02                    ; 1787: 7D FF 02       
                 BPL     Z1797                    ; 178A: 2A 0B          
@@ -776,7 +778,7 @@ Z17E5           LDAA    PROM_1                   ; 17E5: B6 FC FD
                 CLC                              ; 17FB: 0C             
 Z17FC           BRA     Z17D9                    ; 17FC: 20 DB          
 M17FE           ASRB                             ; 17FE: 57             
-Z17FF           BSR     Z1807                    ; 17FF: 8D 06          
+CPCHAR2         BSR     Z1807                    ; 17FF: 8D 06          
                 TBA                              ; 1801: 17             
                 JSR     XOUTCH                   ; 1802: BD F0 18       
                 BRA     Z17D9                    ; 1805: 20 D2          
@@ -788,7 +790,7 @@ Z1807           CMPB    #$0D                     ; 1807: C1 0D
 Z1813           DEX                              ; 1813: 09             
                 BNE     Z1813                    ; 1814: 26 FD          
 Z1816           RTS                              ; 1816: 39             
-Z1817           BSR     Z181B                    ; 1817: 8D 02          
+CRON2           BSR     Z181B                    ; 1817: 8D 02          
                 BRA     Z17D9                    ; 1819: 20 BE          
 Z181B           INC     MFF62                    ; 181B: 7C FF 62       
                 TST     MFF02                    ; 181E: 7D FF 02       
@@ -800,7 +802,7 @@ Z1829           LDAA    #$7F                     ; 1829: 86 7F
                 BSR     Z17E2                    ; 182B: 8D B5          
                 LDAA    #$12                     ; 182D: 86 12          
                 BRA     Z17E2                    ; 182F: 20 B1          
-Z1831           LDAA    #$14                     ; 1831: 86 14          
+CROFF2          LDAA    #$14                     ; 1831: 86 14          
                 BSR     Z17E2                    ; 1833: 8D AD          
                 CLR     MFF62                    ; 1835: 7F FF 62       
                 TST     MFF02                    ; 1838: 7D FF 02       
@@ -814,7 +816,7 @@ Z1847           BSR     Z17E2                    ; 1847: 8D 99
                 DECB                             ; 1849: 5A             
                 BNE     Z1847                    ; 184A: 26 FB          
                 BRA     Z17D9                    ; 184C: 20 8B          
-Z184E           BSR     Z181B                    ; 184E: 8D CB          
+CRINIT2         BSR     Z181B                    ; 184E: 8D CB          
                 LDAB    #$32                     ; 1850: C6 32          
                 CLRA                             ; 1852: 4F             
 Z1853           BSR     Z17E2                    ; 1853: 8D 8D          
@@ -824,7 +826,7 @@ Z1853           BSR     Z17E2                    ; 1853: 8D 8D
                 JSR     XOUTCH                   ; 185A: BD F0 18       
                 TAB                              ; 185D: 16             
                 BSR     Z1807                    ; 185E: 8D A7          
-                BRA     Z1831                    ; 1860: 20 CF          
+                BRA     CROFF2                   ; 1860: 20 CF          
                 FCB     $00                      ; 1862: 00             
 
 

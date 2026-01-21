@@ -6,7 +6,6 @@ Loaded: Info file "mdosov2.info"
 ; Used Labels
 ;****************************************************
 
-M00E6   EQU     $00E6
 Z0467   EQU     $0467
 Z04CE   EQU     $04CE
 Z11FC   EQU     $11FC
@@ -36,14 +35,14 @@ RAMBGN  EQU     $FF00
 
                 ORG     $189D
 
-                JMP     Z18B0                    ; 189D: 7E 18 B0       
-                JMP     Z18AC                    ; 18A0: 7E 18 AC       
+GETRC1          JMP     GETRC2                   ; 189D: 7E 18 B0       
+GETFD1          JMP     GETFD2                   ; 18A0: 7E 18 AC       
                 JSR     Z11FC                    ; 18A3: BD 11 FC       
                 JSR     Z11FC                    ; 18A6: BD 11 FC       
                 JSR     Z11FC                    ; 18A9: BD 11 FC       
-Z18AC           LDAB    #$01                     ; 18AC: C6 01          
+GETFD2          LDAB    #$01                     ; 18AC: C6 01          
                 BRA     Z18B1                    ; 18AE: 20 01          
-Z18B0           CLRB                             ; 18B0: 5F             
+GETRC2          CLRB                             ; 18B0: 5F             
 Z18B1           STAB    M1BE7                    ; 18B1: F7 1B E7       
                 STX     M1BE5                    ; 18B4: FF 1B E5       
                 LDX     $08,X                    ; 18B7: EE 08          
@@ -119,11 +118,12 @@ Z1949           TST     M1BE9                    ; 1949: 7D 1B E9
 Z195B           JSR     Z1B9C                    ; 195B: BD 1B 9C       
                 BEQ     Z190D                    ; 195E: 27 AD          
                 SWI                              ; 1960: 3F             
-                BCS     Z196C                    ; 1961: 25 09          
+                FCB     $25                      ; 1961: 25             
+                DEX                              ; 1962: 09             
                 JSR     Z1BC9                    ; 1963: BD 1B C9       
                 CLR     M1BE8                    ; 1966: 7F 1B E8       
                 JSR     XPSPAC                   ; 1969: BD F0 2A       
-Z196C           LDAB    #$08                     ; 196C: C6 08          
+                LDAB    #$08                     ; 196C: C6 08          
                 BRA     Z192C                    ; 196E: 20 BC          
                 FCB     $00                      ; 1970: 00             
                 FCB     $00                      ; 1971: 00             
@@ -143,9 +143,9 @@ Z198D           LDX     M1BE5                    ; 198D: FE 1B E5
                 LDAA    $03,X                    ; 1992: A6 03          
                 LDX     M1BEC                    ; 1994: FE 1B EC       
                 SWI                              ; 1997: 3F             
-                BLE     Z19C1                    ; 1998: 2F 27          
-                ADCA    M00E6                    ; 199A: 99 E6          
-                FCB     $00                      ; 199C: 00             
+                FCB     $2F                      ; 1998: 2F             
+                BEQ     Z1934                    ; 1999: 27 99          
+                LDAB    ,X                       ; 199B: E6 00          
                 INX                              ; 199D: 08             
                 STX     M1BEC                    ; 199E: FF 1B EC       
                 JSR     Z1B10                    ; 19A1: BD 1B 10       
@@ -389,7 +389,8 @@ Z1B9C           LDX     M1BE5                    ; 1B9C: FE 1B E5
                 LDAA    $03,X                    ; 1BA1: A6 03          
                 LDX     $04,X                    ; 1BA3: EE 04          
                 SWI                              ; 1BA5: 3F             
-                BLE     Z1BE1                    ; 1BA6: 2F 39          
+                FCB     $2F                      ; 1BA6: 2F             
+                RTS                              ; 1BA7: 39             
 Z1BA8           LDX     M1BE5                    ; 1BA8: FE 1B E5       
                 LDAB    $06,X                    ; 1BAB: E6 06          
                 LDAA    $07,X                    ; 1BAD: A6 07          

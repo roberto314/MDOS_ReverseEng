@@ -9,4 +9,47 @@ include common.info
 #word c6ef-c6f0
 #label c63F Set_32Char
 #char c724-c741
-#data 0102-020f
+
+data 12bf
+data 12f5
+data 130b
+data 132b
+data 13b6
+data 140f
+data 1429
+data 142b
+data 143b
+data 146a
+data 1475
+data 14c4
+data 14d7
+data 14df
+data 151f
+data 1536
+data 1579
+data 15ca
+data 15fd
+data 160b
+data 1636
+data 1645
+data 1678
+data 167a
+data 16aa
+data 16de
+data 16f4
+data 170b
+data 1743
+data 1796
+data 17a3
+data 17a7
+data 17b3
+data 17bb
+data 17ca
+
+
+used 1273 ALLOC1     ; 21 - ALLOCATE DISK SPACE
+used 1276 DEALC1     ; 22 - RETURN DISK SPACE
+label 12a9 ALLOC2
+label 159d DEALC2
+
+unused 17e5-187a

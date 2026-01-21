@@ -9,4 +9,37 @@ include common.info
 #word c6ef-c6f0
 #label c63F Set_32Char
 #char c724-c741
-#data 0102-020f
+
+data 1936
+data 193c
+data 193e
+data 1945
+data 1947
+data 194c
+data 1957
+data 1969
+data 19bf
+data 19cd
+data 19dd
+data 19e4
+data 19e6
+data 1a47
+data 1a57
+data 1a67
+data 1a72
+data 1b1a
+data 1b40
+data 1b48
+data 1b52
+data 1b5a
+data 1b73
+data 1ba0
+data 1bb1
+
+used 18a3 CLOSE1     ;  3 - CLOSE A FILE
+used 18a6 REWND1     ;  6 - POSITION TO BEGINNING OF FILE
+used 18A9 CHANG1     ; 1F - CHANGE NAME/ATTRIBUTES
+
+label 18ac CLOSE2
+label 1a10 REWND2
+label 1a8e CHANG2
