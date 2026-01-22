@@ -102,32 +102,48 @@ SWIsUV          FDB     M0000                    ; 0118: 00 00           gets in
 IRQsUV          FDB     M0000                    ; 011A: 00 00           gets init to: $026B
 IRQsSV          FDB     M0000                    ; 011C: 00 00          
 CHFLGs          FDB     $8000                    ; 011E: 80 00           gets init to: $8000
-SYIOCB          FCB     $00,$11,$00,$00          ; 0120: 00 11 00 00    
-M0124           FCB     $00,$00                  ; 0124: 00 00          
-M0126           FCB     $00,$00                  ; 0126: 00 00          
-                FCB     'C,'N                    ; 0128: 43 4E          
-M012A           FCB     $30,$20,$20,$20,$20,$20  ; 012A: 30 20 20 20 20 20 
-                FCB     $20,$20,$20,$20,$20      ; 0130: 20 20 20 20 20 
-                FCB     $00,$00,$05,$00,$00,$00  ; 0135: 00 00 05 00 00 00 
-                FCB     $00,$00,$00,$00,$00,$00  ; 013B: 00 00 00 00 00 00 
-                FCB     $00,$7F,$00,$00          ; 0141: 00 7F 00 00    
-SYPOCB          FCB     $00,$12,$00,$00          ; 0145: 00 12 00 00    
-M0149           FCB     $00,$00                  ; 0149: 00 00          
-M014B           FCB     $00,$00                  ; 014B: 00 00          
-                FCB     'L,'P,'0,' ,' ,' ,' ,'   ; 014D: 4C 50 30 20 20 20 20 20 
-                FCB     ' ,' ,' ,' ,'            ; 0155: 20 20 20 20 20 
-                FCB     $00,$00,$05,$00,$00,$00  ; 015A: 00 00 05 00 00 00 
-                FCB     $00,$00,$00,$00,$00,$00  ; 0160: 00 00 00 00 00 00 
-                FCB     $00,$7F,$00,$00          ; 0166: 00 7F 00 00    
-SYEOCB          FCB     $00,$11                  ; 016A: 00 11          
-M016C           FCB     $00,$00                  ; 016C: 00 00          
-M016E           FCB     $00,$00                  ; 016E: 00 00          
-M0170           FCB     $00,$00                  ; 0170: 00 00          
-                FCB     'D,'K,'0,'M,'D,'O,'S,'E  ; 0172: 44 4B 30 4D 44 4F 53 45 
-                FCB     'R                       ; 017A: 52             
-M017B           FCB     ' ,' ,'S,'Y              ; 017B: 20 20 53 59    
-                FCB     $00,$00,$05,$00,$00,$00  ; 017F: 00 00 05 00 00 00 
-                FCB     $00,$00                  ; 0185: 00 00          
+SYIOCB          FCB     $00                      ; 0120: 00             
+IODTT           FCB     $11                      ; 0121: 11             
+IOCDBP          FDB     M0000                    ; 0122: 00 00          
+IOCDBS          FDB     M0000                    ; 0124: 00 00          
+IOCDBE          FDB     M0000                    ; 0126: 00 00          
+IOCGDW          FCB     'C,'N                    ; 0128: 43 4E          
+IOCLUN          FCB     $30,$20,$20,$20,$20,$20  ; 012A: 30 20 20 20 20 20 
+                FCB     $20,$20,$20              ; 0130: 20 20 20       
+IOCSUF          FCB     $20,$20                  ; 0133: 20 20          
+IOCRIB          FCB     $00,$00                  ; 0135: 00 00          
+IOCFDF          FCB     $05,$00,$00,$00          ; 0137: 05 00 00 00    
+IOCDEN          FCB     $00,$00                  ; 013B: 00 00          
+IOCSBP          FCB     $00,$00,$00,$00,$00,$7F  ; 013D: 00 00 00 00 00 7F 
+                FCB     $00,$00                  ; 0143: 00 00          
+SYPOCB          FCB     $00                      ; 0145: 00             
+PODTT           FCB     $12                      ; 0146: 12             
+POCDBP          FDB     M0000                    ; 0147: 00 00          
+POCDBS          FDB     M0000                    ; 0149: 00 00          
+POCDBE          FDB     M0000                    ; 014B: 00 00          
+POCGDW          FCB     'L,'P                    ; 014D: 4C 50          
+POCLUN          FCB     '0,' ,' ,' ,' ,'         ; 014F: 30 20 20 20 20 20 
+POCSUF          FCB     ' ,'                     ; 0155: 20 20          
+POCRIB          FCB     ' ,'                     ; 0157: 20 20          
+POCFDF          FCB     '                        ; 0159: 20             
+                FCB     $00,$00,$05              ; 015A: 00 00 05       
+POCDEN          FCB     $00,$00                  ; 015D: 00 00          
+POCSBP          FCB     $00,$00,$00,$00,$00,$00  ; 015F: 00 00 00 00 00 00 
+                FCB     $00,$00,$7F,$00,$00      ; 0165: 00 00 7F 00 00 
+SYEOCB          FCB     $00                      ; 016A: 00             
+EODTT           FCB     $11                      ; 016B: 11             
+EOCDBP          FDB     M0000                    ; 016C: 00 00          
+EOCDBS          FDB     M0000                    ; 016E: 00 00          
+EOCDBE          FDB     M0000                    ; 0170: 00 00          
+EOCGDW          FCB     'D,'K                    ; 0172: 44 4B          
+EOCLUN          FCB     '0                       ; 0174: 30             
+EOCNAM          FCB     'M,'D,'O,'S,'E,'R        ; 0175: 4D 44 4F 53 45 52 
+M017B           FCB     ' ,'                     ; 017B: 20 20          
+EOCSUF          FCB     'S,'Y                    ; 017D: 53 59          
+EOCRIB          FCB     $00,$00                  ; 017F: 00 00          
+EOCFDF          FCB     $05,$00                  ; 0181: 05 00          
+EOCDEN          FCB     $00,$00                  ; 0183: 00 00          
+EOCSBP          FCB     $00,$00                  ; 0185: 00 00          
 M0187           FCB     $00,$00,$01,$8F,$02,$0E  ; 0187: 00 00 01 8F 02 0E 
                 FCB     $00,$00,$00,$00,$00,$00  ; 018D: 00 00 00 00 00 00 
                 FCB     $00,$00,$00,$00,$00,$00  ; 0193: 00 00 00 00 00 00 
@@ -390,7 +406,7 @@ Z039F           LSR     ,X                       ; 039F: 64 00
                 BNE     Z039F                    ; 03A4: 26 F9          
                 PULA                             ; 03A6: 32             
                 RTS                              ; 03A7: 39             
-KEVIN1          STX     M0124                    ; 03A8: FF 01 24       
+KEVIN1          STX     IOCDBS                   ; 03A8: FF 01 24       
                 CPX     #M00AE                   ; 03AB: 8C 00 AE       
                 BNE     Z03B6                    ; 03AE: 26 06          
                 CMPB    #$50                     ; 03B0: C1 50          
@@ -398,7 +414,7 @@ KEVIN1          STX     M0124                    ; 03A8: FF 01 24
                 LDAB    #$4F                     ; 03B4: C6 4F          
 Z03B6           SWI                              ; 03B6: 3F             
                 FCB     $27                      ; 03B7: 27             
-                STX     M0126                    ; 03B8: FF 01 26       
+                STX     IOCDBE                   ; 03B8: FF 01 26       
                 LDX     #SYIOCB                  ; 03BB: CE 01 20       
                 SWI                              ; 03BE: 3F             
                 FCB     $04                      ; 03BF: 04             
@@ -446,19 +462,19 @@ Z0405           LDAA    ACIA_0                   ; 0405: B6 FC F4
                 BITA    #$02                     ; 0408: 85 02          
                 BEQ     Z0405                    ; 040A: 27 F9          
                 RTS                              ; 040C: 39             
-DSPLZ1          LDAB    M012A                    ; 040D: F6 01 2A       
+DSPLZ1          LDAB    IOCLUN                   ; 040D: F6 01 2A       
                 ANDB    #$DF                     ; 0410: C4 DF          
-                STAB    M012A                    ; 0412: F7 01 2A       
+                STAB    IOCLUN                   ; 0412: F7 01 2A       
                 BRA     DSPLX1                   ; 0415: 20 03          
 DSPLY1          LDAB    #$0D                     ; 0417: C6 0D          
                 FCB     $8C                      ; 0419: 8C             
 DSPLX1          LDAB    #$04                     ; 041A: C6 04          
-                STX     M0124                    ; 041C: FF 01 24       
+                STX     IOCDBS                   ; 041C: FF 01 24       
                 DEX                              ; 041F: 09             
 Z0420           INX                              ; 0420: 08             
                 CMPB    ,X                       ; 0421: E1 00          
                 BNE     Z0420                    ; 0423: 26 FB          
-                STX     M0126                    ; 0425: FF 01 26       
+                STX     IOCDBE                   ; 0425: FF 01 26       
                 LDX     #SYIOCB                  ; 0428: CE 01 20       
                 SWI                              ; 042B: 3F             
                 FCB     $05                      ; 042C: 05             
@@ -477,12 +493,12 @@ Z0438           LDAB    $06,X                    ; 0438: E6 06
                 RTS                              ; 0445: 39             
 PRINT1          LDAB    #$0D                     ; 0446: C6 0D          
                 CPX     #MC604                   ; 0448: 8C C6 04       
-                STX     M0149                    ; 044B: FF 01 49       
+                STX     POCDBS                   ; 044B: FF 01 49       
                 DEX                              ; 044E: 09             
 Z044F           INX                              ; 044F: 08             
                 CMPB    ,X                       ; 0450: E1 00          
                 BNE     Z044F                    ; 0452: 26 FB          
-                STX     M014B                    ; 0454: FF 01 4B       
+                STX     POCDBE                   ; 0454: FF 01 4B       
                 LDX     #SYPOCB                  ; 0457: CE 01 45       
                 SWI                              ; 045A: 3F             
                 FCB     $05                      ; 045B: 05             
@@ -1979,9 +1995,9 @@ Z0F37           STAB    M110B                    ; 0F37: F7 11 0B
                 LDX     #M1107                   ; 0F3F: CE 11 07       
                 JSR     Z10E5                    ; 0F42: BD 10 E5       
                 LDX     #MFF9C                   ; 0F45: CE FF 9C       
-                STX     M016E                    ; 0F48: FF 01 6E       
+                STX     EOCDBS                   ; 0F48: FF 01 6E       
                 LDX     #MFFDD                   ; 0F4B: CE FF DD       
-                STX     M0170                    ; 0F4E: FF 01 70       
+                STX     EOCDBE                   ; 0F4E: FF 01 70       
                 LDX     M017B                    ; 0F51: FE 01 7B       
                 BEQ     Z0F5F                    ; 0F54: 27 09          
                 LDX     #M0000                   ; 0F56: CE 00 00       
@@ -1996,7 +2012,7 @@ Z0F5F           LDX     #SYEOCB                  ; 0F5F: CE 01 6A
 Z0F6A           LDX     MFF9C                    ; 0F6A: FE FF 9C       
                 CPX     M1107                    ; 0F6D: BC 11 07       
                 BNE     Z0F5F                    ; 0F70: 26 ED          
-                LDX     M016C                    ; 0F72: FE 01 6C       
+                LDX     EOCDBP                   ; 0F72: FE 01 6C       
                 LDAB    #$04                     ; 0F75: C6 04          
                 STAB    ,X                       ; 0F77: E7 00          
                 LDX     #MFF9E                   ; 0F79: CE FF 9E       

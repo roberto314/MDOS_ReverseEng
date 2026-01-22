@@ -28,8 +28,48 @@ label 11A IRQsUV
 label 11C IRQsSV
 label 11E CHFLGs
 label 120 SYIOCB
+label 121 IODTT
+label 122 IOCDBP
+label 124 IOCDBS
+label 126 IOCDBE
+word 122-127
+label 128 IOCGDW
+label 12a IOCLUN
+label 133 IOCSUF
+label 135 IOCRIB
+label 137 IOCFDF
+label 13b IOCDEN
+label 13d IOCSBP
+
 label 145 SYPOCB
+label 146 PODTT
+label 147 POCDBP
+label 149 POCDBS
+label 14b POCDBE
+word 147-14c
+label 14d POCGDW
+label 14f POCLUN
+label 155 POCSUF
+label 157 POCRIB
+label 159 POCFDF
+label 15d POCDEN
+label 15f POCSBP
+
 label 16A SYEOCB
+label 16b EODTT
+label 16c EOCDBP
+label 16e EOCDBS
+label 170 EOCDBE
+word 16c-171
+label 172 EOCGDW
+label 174 EOCLUN
+label 175 EOCNAM
+label 17d EOCSUF
+label 17f EOCRIB
+label 181 EOCFDF
+label 183 EOCDEN
+label 185 EOCSBP
+
 lcomment 623 Entry Point after floppy-boot
 label 026B ISR_UNUSD
 
