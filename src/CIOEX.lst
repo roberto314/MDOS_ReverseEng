@@ -1,0 +1,135 @@
+ AS V1.42 Beta [Bld 216] - Source File CIOEX.asm - Page 1 - 01/22/2026 06:46:05 PM
+
+
+       1/       0 :                     SYSCALL  MACRO PAR
+       2/       0 :                              SWI
+       3/       0 :                              FCB  PAR
+       4/       0 :                              ENDM
+       5/       0 :                     ;
+       6/       0 :                     ; SYSCALLS USED
+       7/       0 :                     ;
+       8/       0 : =$9                  KEYIN    EQU $09
+       9/       0 : =$4                  DSPLY    EQU $04
+      10/       0 : =$1A                 MDENT    EQU $1A
+      11/       0 : =$27                 ADBX     EQU $27
+      12/       0 :                     
+      13/    2000 :                              ORG  $2000
+      14/    2000 : CE 20 48            START    LDX  #PROMPT
+      15/    2003 : (MACRO)                       SYSCALL DSPLY ; SHOW INPUT PROMPT
+      15/    2003 : 3F                           SWI
+      15/    2004 : 04                           FCB  DSPLY
+      16/    2005 :                     ;
+      17/    2005 :                     ; INPUT THE STRING FROM CONSOLE
+      18/    2005 :                     ;
+      19/    2005 : C6 0A               INPUT    LDAB #10      ; MAX 10 CHAR
+      20/    2007 : CE 20 32                     LDX  #IBUFF
+      21/    200A : (MACRO)                       SYSCALL KEYIN ; GET INPUT STRING
+      21/    200A : 3F                           SWI
+      21/    200B : 09                           FCB  KEYIN
+      22/    200C : 5D                           TSTB          ; CHECK FOR ZERO INPUT
+      23/    200D : 26 02                        BNE  SWAP
+      24/    200F : (MACRO)                       SYSCALL MDENT ; EXIT IF NO INPUT
+      24/    200F : 3F                           SWI
+      24/    2010 : 1A                           FCB  MDENT
+      25/    2011 :                     ;
+      26/    2011 :                     ; INVERT STRING INTO OBUFF
+      27/    2011 :                     ;
+      28/    2011 : CE 20 3D            SWAP     LDX  #OBUFF
+      29/    2014 : (MACRO)                       SYSCALL ADBX ; POINT TO END OF OBUFF
+      29/    2014 : 3F                           SWI
+      29/    2015 : 27                           FCB  ADBX
+      30/    2016 : 86 0D                        LDAA #$0D    ; STORE TERMINATOR
+      31/    2018 : A7 00                        STAA ,X
+      32/    201A : 09                           DEX
+      33/    201B : BF 20 66                     STS  STKSAV  ; SAVE STACK POINTER
+      34/    201E : 8E 20 31                     LDS  #IBUFF-1
+      35/    2021 : 32                  LOOP     PULA         ; GET CHAR
+      36/    2022 : A7 00                        STAA ,X      ; STORE CHAR
+      37/    2024 : 09                           DEX          ; BUMP POINTER
+      38/    2025 : 5A                           DECB
+      39/    2026 : 26 F9                        BNE  LOOP    ; LOOP UNTIL ZERO
+      40/    2028 : BE 20 66                     LDS  STKSAV  ; RESTORE STACK
+      41/    202B : CE 20 3D                     LDX  #OBUFF
+      42/    202E : (MACRO)                       SYSCALL DSPLY ; SHOW INVERTED STRING
+      42/    202E : 3F                           SWI
+      42/    202F : 04                           FCB  DSPLY
+      43/    2030 : 20 D3                        BRA  INPUT
+      44/    2032 :                     ;
+      45/    2032 :                     ; WORKING STORAGE
+      46/    2032 :                     ;                 
+      47/    2032 :                     
+      48/    2032 :                     IBUFF    RMB  10+1         ; INPUT BUFFER
+      49/    203D :                     OBUFF    RMB  10+1         ; OUTPUT BUFFER
+      50/    2048 : 45 4E 54 45 52 20   PROMPT   FCC  'ENTER STRINGS < 11 CHARACTERS'
+ AS V1.42 Beta [Bld 216] - Source File CIOEX.asm - Page 2 - 01/22/2026 06:46:05 PM
+
+
+             204E : 53 54 52 49 4E 47 
+             2054 : 53 20 3C 20 31 31 
+             205A : 20 43 48 41 52 41 
+             2060 : 43 54 45 52 53    
+      51/    2065 : 0D                           FCB  $0D          ; CR
+      52/    2066 : 00 00               STKSAV   FDB  0            ; SAVE AREA
+      53/    2068 :                              RMB  80           ; STACK SET HERE BY LOAD
+      54/    20B8 :                     
+      55/    20B8 :                              END  START        ; BEGIN EXECUTION AT THIS LABEL
+ AS V1.42 Beta [Bld 216] - Source File CIOEX.asm - Page 3 - 01/22/2026 06:46:05 PM
+
+
+  Symbol Table (* = unused):
+  --------------------------
+
+ ADBX :                          27 - |
+*ARCHITECTURE :                                      "x86_64-unknown-linux" - |
+*BIGENDIAN :                      0 - | *BRANCHEXT :                      0 - |
+*CASESENSITIVE :                  0 - | *COMPMODE :                       0 - |
+*CONSTPI :        3.141592653589793 - | *CUSTOM :                         0 - |
+*DATE :                "01/22/2026" - |  DSPLY :                          4 - |
+*FALSE :                          0 - | *FULLPMMU :                       1 - |
+*HAS64 :                          1 - | *HASDSP :                         0 - |
+*HASFPU :                         0 - | *HASPMMU :                        0 - |
+ IBUFF :                       2032 C | *INEXTMODE :                      0 - |
+*INLWORDMODE :                    0 - | *INMAXMODE :                      0 - |
+ INPUT :                       2005 C | *INSRCMODE :                      0 - |
+*INSUPMODE :                      0 - |  KEYIN :                          9 - |
+*LISTON :                         1 - |  LOOP :                        2021 C |
+*MACEXP :                         7 - |  MDENT :                         1A - |
+*MOMCPU :                      6800 - | *MOMCPUNAME :                "6800" - |
+*NESTMAX :                      100 - |  OBUFF :                       203D C |
+*PACKING :                        0 - | *PADDING :                        0 - |
+ PROMPT :                      2048 C | *RELAXED :                        0 - |
+ START :                       2000 C |  STKSAV :                      2066 C |
+ SWAP :                        2011 C | *TIME :               "06:46:05 PM" - |
+*TRUE :                           1 - | *VERSION :                     142F - |
+*Z80SYNTAX :                      0 - |
+
+     43 symbols
+     31 unused symbols
+
+ AS V1.42 Beta [Bld 216] - Source File CIOEX.asm - Page 4 - 01/22/2026 06:46:05 PM
+
+
+  Defined Macros:
+  ---------------
+
+SYSCALL                               |
+
+      1 macro
+
+ AS V1.42 Beta [Bld 216] - Source File CIOEX.asm - Page 5 - 01/22/2026 06:46:05 PM
+
+
+  Code Pages:
+  ----------
+
+STANDARD (0 changed characters)
+
+1 code page
+
+0.01 seconds assembly time
+
+     55 lines source file
+     65 lines incl. macro expansions
+      2 passes
+      0 errors
+      0 warnings

@@ -1,0 +1,55 @@
+SYSCALL  MACRO PAR
+         SWI
+         FCB  PAR
+         ENDM
+;
+; SYSCALLS USED
+;
+KEYIN    EQU $09
+DSPLY    EQU $04
+MDENT    EQU $1A
+ADBX     EQU $27
+
+         ORG  $2000
+START    LDX  #PROMPT
+         SYSCALL DSPLY ; SHOW INPUT PROMPT
+;
+; INPUT THE STRING FROM CONSOLE
+;
+INPUT    LDAB #10      ; MAX 10 CHAR
+         LDX  #IBUFF
+         SYSCALL KEYIN ; GET INPUT STRING
+         TSTB          ; CHECK FOR ZERO INPUT
+         BNE  SWAP
+         SYSCALL MDENT ; EXIT IF NO INPUT
+;
+; INVERT STRING INTO OBUFF
+;
+SWAP     LDX  #OBUFF
+         SYSCALL ADBX ; POINT TO END OF OBUFF
+         LDAA #$0D    ; STORE TERMINATOR
+         STAA ,X
+         DEX
+         STS  STKSAV  ; SAVE STACK POINTER
+         LDS  #IBUFF-1
+LOOP     PULA         ; GET CHAR
+         STAA ,X      ; STORE CHAR
+         DEX          ; BUMP POINTER
+         DECB
+         BNE  LOOP    ; LOOP UNTIL ZERO
+         LDS  STKSAV  ; RESTORE STACK
+         LDX  #OBUFF
+         SYSCALL DSPLY ; SHOW INVERTED STRING
+         BRA  INPUT
+;
+; WORKING STORAGE
+;                 
+
+IBUFF    RMB  10+1         ; INPUT BUFFER
+OBUFF    RMB  10+1         ; OUTPUT BUFFER
+PROMPT   FCC  'ENTER STRINGS < 11 CHARACTERS'
+         FCB  $0D          ; CR
+STKSAV   FDB  0            ; SAVE AREA
+         RMB  80           ; STACK SET HERE BY LOAD
+
+         END  START        ; BEGIN EXECUTION AT THIS LABEL

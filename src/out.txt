@@ -12,17 +12,20 @@ MIL-STD 1750 Generator also (C) 2019 Oliver Kellogg
 GI CP-1600-Generator (C) 2021 Haruo Asano
 
 
-Assembling mdoser_commented.asm
+Assembling CIOEX.asm
 PASS 1
-mdoser_commented.asm(499)
+CIOEX.asm(55)
+PASS 2
+CIOEX.asm(55)
 
-0.00 seconds assembly time
+0.01 seconds assembly time
 
-    499 lines source file
-      1 pass
+     55 lines source file
+     65 lines incl. macro expansions
+      2 passes
       0 errors
       0 warnings
 P2BIN/C V1.42 Beta [Bld 216]
 (C) 1992,2022 Alfred Arnold
-Deduced address range: 0x00001FFD-0x00002684
-mdoser_commented.p==>>mdoser_commented_b.bin  (1672 Bytes)
+Deduced address range: 0x00002000-0x00002067
+CIOEX.p==>>CIOEX_b.bin  (82 Bytes)

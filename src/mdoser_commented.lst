@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 1 - 2026-01-22 11:11:11
+ AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 1 - 01/22/2026 06:46:05 PM
 
 
        1/       0 :                     
@@ -61,7 +61,7 @@
              20BE : 41 42 4F 52 54 45 
              20C4 : 44 20 42 59 20 42 
              20CA : 52 45 41 4B 20 4B 
- AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 2 - 2026-01-22 11:11:11
+ AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 2 - 01/22/2026 06:46:05 PM
 
 
              20D0 : 45 59             
@@ -124,7 +124,7 @@
              21C7 : 46 49 4C 45 20 54 
              21CD : 59 50 45 53       
       72/    21D1 : 0D 0A                        FCB  $0d,$0a
- AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 3 - 2026-01-22 11:11:11
+ AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 3 - 01/22/2026 06:46:05 PM
 
 
       73/    21D3 : 32 37 20                     FCC '27 ' 
@@ -187,7 +187,7 @@
      107/    22BF : 49 4E 56 41 4C 49            FCC 'INVALID FILE NAME'
              22C5 : 44 20 46 49 4C 45 
              22CB : 20 4E 41 4D 45    
- AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 4 - 2026-01-22 11:11:11
+ AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 4 - 01/22/2026 06:46:05 PM
 
 
      108/    22D0 : 0D 0A                        FCB  $0d,$0a
@@ -250,7 +250,7 @@
      142/    23B8 : 33 34 20                     FCC '34 '
      143/    23BB : 49 4E 56 41 4C 49            FCC 'INVALID START/END SPECIFICATIONS'
              23C1 : 44 20 53 54 41 52 
- AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 5 - 2026-01-22 11:11:11
+ AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 5 - 01/22/2026 06:46:05 PM
 
 
              23C7 : 54 2F 45 4E 44 20 
@@ -313,7 +313,7 @@
      172/    24BF : 0D 0A                        FCB  $0d,$0a
      173/    24C1 : 31 30 20                     FCC '10 ' 
      174/    24C4 : 34 32 20                     FCC '42 '
- AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 6 - 2026-01-22 11:11:11
+ AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 6 - 01/22/2026 06:46:05 PM
 
 
      175/    24C7 : 53 45 47 4D 45 4E            FCC 'SEGMENT DESCRIPTOR SPACE FULL'
@@ -376,7 +376,7 @@
      201/    25CB : 33 32 20                     FCC '32 ' 
      202/    25CE : 34 39 20                     FCC '49 '
      203/    25D1 : 43 48 41 49 4E 20            FCC 'CHAIN ABORTED BY ILLEGAL OPERATOR'
- AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 7 - 2026-01-22 11:11:11
+ AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 7 - 01/22/2026 06:46:05 PM
 
 
              25D7 : 41 42 4F 52 54 45 
@@ -439,7 +439,7 @@
      239/    2685 :                     ;                FCB     $0d,$0a                  ; 2060: 0D 0A          
      240/    2685 :                     ;                FCB     '0,'8,' ,'0,'5,' ,'\,'0  ; 2062: 30 38 20 30 35 20 5C 30 
      241/    2685 :                     ;                FCB     ' ,'D,'U,'P,'L,'I,'C,'A  ; 206A: 20 44 55 50 4C 49 43 41 
- AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 8 - 2026-01-22 11:11:11
+ AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 8 - 01/22/2026 06:46:05 PM
 
 
      242/    2685 :                     ;                FCB     'T,'E,' ,'F,'I,'L,'E,'   ; 2072: 54 45 20 46 49 4C 45 20 
@@ -502,7 +502,7 @@
      299/    2685 :                     ;                FCB     $0d,$0a                  ; 21D1: 0D 0A          
      300/    2685 :                     ;                FCB     '2,'7,' ,'1,'7,' ,'I,'N  ; 21D3: 32 37 20 31 37 20 49 4E 
      301/    2685 :                     ;                FCB     'V,'A,'L,'I,'D,' ,'D,'A  ; 21DB: 56 41 4C 49 44 20 44 41 
- AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 9 - 2026-01-22 11:11:11
+ AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 9 - 01/22/2026 06:46:05 PM
 
 
      302/    2685 :                     ;                FCB     'T,'A,' ,'T,'R,'A,'N,'S  ; 21E3: 54 41 20 54 52 41 4E 53 
@@ -565,7 +565,7 @@
      359/    2685 :                     ;                FCB     'G,'I,'C,'A,'L,' ,'U,'N  ; 233B: 47 49 43 41 4C 20 55 4E 
      360/    2685 :                     ;                FCB     'I,'T,' ,'N,'U,'M,'B,'E  ; 2343: 49 54 20 4E 55 4D 42 45 
      361/    2685 :                     ;                FCB     'R                       ; 234B: 52             
- AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 10 - 2026-01-22 11:11:11
+ AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 10 - 01/22/2026 06:46:05 PM
 
 
      362/    2685 :                     ;                FCB     $0d,$0a                  ; 234C: 0D 0A          
@@ -628,7 +628,7 @@
      419/    2685 :                     ;                FCB     $0d,$0a                  ; 24A0: 0D 0A          
      420/    2685 :                     ;                FCB     '0,'3,' ,'4,'1,' ,'I,'N  ; 24A2: 30 33 20 34 31 20 49 4E 
      421/    2685 :                     ;                FCB     'S,'U,'F,'F,'I,'C,'I,'E  ; 24AA: 53 55 46 46 49 43 49 45 
- AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 11 - 2026-01-22 11:11:11
+ AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 11 - 01/22/2026 06:46:05 PM
 
 
      422/    2685 :                     ;                FCB     'N,'T,' ,'D,'I,'S,'K,'   ; 24B2: 4E 54 20 44 49 53 4B 20 
@@ -691,7 +691,7 @@
      479/    2685 :                     ;                FCB     '3,'4,' ,'5,'1,' ,'C,'H  ; 261C: 33 34 20 35 31 20 43 48 
      480/    2685 :                     ;                FCB     'A,'I,'N,' ,'A,'B,'O,'R  ; 2624: 41 49 4E 20 41 42 4F 52 
      481/    2685 :                     ;                FCB     'T,'E,'D,' ,'B,'Y,' ,'P  ; 262C: 54 45 44 20 42 59 20 50 
- AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 12 - 2026-01-22 11:11:11
+ AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 12 - 01/22/2026 06:46:05 PM
 
 
      482/    2685 :                     ;                FCB     'R,'E,'M,'A,'T,'U,'R,'E  ; 2634: 52 45 4D 41 54 55 52 45 
@@ -711,7 +711,7 @@
      496/    2685 :                     ;
      497/    2685 :                     ;
      498/    2685 :                                     END
- AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 13 - 2026-01-22 11:11:11
+ AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 13 - 01/22/2026 06:46:05 PM
 
 
   Symbol Table (* = unused):
@@ -721,7 +721,7 @@
 *BIGENDIAN :                      0 - | *BRANCHEXT :                      0 - |
 *CASESENSITIVE :                  0 - | *COMPMODE :                       0 - |
 *CONSTPI :        3.141592653589793 - | *CUSTOM :                         0 - |
-*DATE :                "2026-01-22" - | *FALSE :                          0 - |
+*DATE :                "01/22/2026" - | *FALSE :                          0 - |
 *FULLPMMU :                       1 - | *HAS64 :                          1 - |
 *HASDSP :                         0 - | *HASFPU :                         0 - |
 *HASPMMU :                        0 - | *INEXTMODE :                      0 - |
@@ -731,13 +731,13 @@
 *MOMCPU :                      6800 - | *MOMCPUNAME :                "6800" - |
 *NESTMAX :                      100 - | *PACKING :                        0 - |
 *PADDING :                        0 - | *RELAXED :                        0 - |
-*TIME :                  "11:11:11" - | *TRUE :                           1 - |
+*TIME :               "06:46:05 PM" - | *TRUE :                           1 - |
 *VERSION :                     142F - | *Z80SYNTAX :                      0 - |
 
      31 symbols
      31 unused symbols
 
- AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 14 - 2026-01-22 11:11:11
+ AS V1.42 Beta [Bld 216] - Source File mdoser_commented.asm - Page 14 - 01/22/2026 06:46:05 PM
 
 
   Code Pages:

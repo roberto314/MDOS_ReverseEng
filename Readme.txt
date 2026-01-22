@@ -654,8 +654,8 @@ diaqram:
 0100 |       MOOS VARIABLES            |
      |    IOCBs and SYSTEM BUFFERS     |
       ---------------------------------
-     |          SWI HANDLER            |
-     |     KERNEL SYSTEM FUNCTIONS     |
+022F |          SWI HANDLER            |
+027F |     KERNEL SYSTEM FUNCTIONS     |
       ---------------------------------
      |  CONTROLLER DESCRIPTOR BLOCKS   |
       ---------------------------------

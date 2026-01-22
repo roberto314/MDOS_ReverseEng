@@ -15,4 +15,5 @@
 ../bin/dasmfw -dasm=6800 -info mdosov6.info > mdosov6.asm
 ../bin/dasmfw -dasm=6800 -info mdoser.info > mdoser.asm
 ../bin/dasmfw -dasm=6800 -info dir.info > dir.asm
+../bin/dasmfw -dasm=6800 -info format.info > format.asm
 #../bin/dasmfw -dasm=6809 -info exorset_bug.info > exorset_bug.asm

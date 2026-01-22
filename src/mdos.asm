@@ -88,7 +88,7 @@ MFFFF   EQU     $FFFF
 
 VERSss          FDB     $2033                    ; 0100: 20 33          
 REVSss          FDB     $3035                    ; 0102: 30 35          
-KYIsSV          FDB     KEVIN1                   ; 0104: 03 A8          
+KYIsSV          FDB     KEYIN1                   ; 0104: 03 A8          
 ENDOSs          FDB     $1FFF                    ; 0106: 1F FF          
 ENDUSs          FDB     M0000                    ; 0108: 00 00           gets init to: $2001
 ENDSYs          FDB     M0000                    ; 010A: 00 00           gets init to: $E7FF
@@ -250,7 +250,7 @@ M027F           FDB     RESRV1                   ; 027F: 12 7F
                 FDB     REWND1                   ; 028B: 18 A6          
                 FDB     GETLS1                   ; 028D: 07 1F          
                 FDB     PUTLS1                   ; 028F: 07 22          
-                FDB     KEVIN1                   ; 0291: 03 A8          
+                FDB     KEYIN1                   ; 0291: 03 A8          
                 FDB     DSPLY1                   ; 0293: 04 17          
                 FDB     DSPLX1                   ; 0295: 04 1A          
                 FDB     DSPLZ1                   ; 0297: 04 0D          
@@ -406,7 +406,8 @@ Z039F           LSR     ,X                       ; 039F: 64 00
                 BNE     Z039F                    ; 03A4: 26 F9          
                 PULA                             ; 03A6: 32             
                 RTS                              ; 03A7: 39             
-KEVIN1          STX     IOCDBS                   ; 03A8: FF 01 24       
+; ------------------------------------------------
+KEYIN1          STX     IOCDBS                   ; 03A8: FF 01 24       
                 CPX     #M00AE                   ; 03AB: 8C 00 AE       
                 BNE     Z03B6                    ; 03AE: 26 06          
                 CMPB    #$50                     ; 03B0: C1 50          
@@ -2446,11 +2447,13 @@ Z2052           LDAB    $0B,X                    ; 2052: E6 0B
 Z207C           LDS     M2081                    ; 207C: BE 20 81       
                 CLI                              ; 207F: 0E             
                 RTS                              ; 2080: 39             
-M2081           FCB     $00,$00                  ; 2081: 00 00          
-M2083           FCB     $00,$00                  ; 2083: 00 00          
-M2085           FCB     $00,$00,$00,$01,$8F      ; 2085: 00 00 00 01 8F 
-M208A           FCB     $11,$C2                  ; 208A: 11 C2          
-M208C           FCB     $01,$B5                  ; 208C: 01 B5          
+M2081           FDB     M0000                    ; 2081: 00 00          
+M2083           FDB     M0000                    ; 2083: 00 00          
+M2085           FDB     M0000                    ; 2085: 00 00          
+                FCB     $00                      ; 2087: 00             
+                FDB     $018F                    ; 2088: 01 8F          
+M208A           FDB     M11C2                    ; 208A: 11 C2          
+M208C           FDB     $01B5                    ; 208C: 01 B5          
 Z208E           STAB    Z2000                    ; 208E: F7 20 00       
                 CMPA    ,X                       ; 2091: A1 00          
                 BNE     Z209B                    ; 2093: 26 06          

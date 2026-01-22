@@ -243,7 +243,7 @@ label 1285 PUTRC1     ;  5 - WRITE A RECORD
 label 18a6 REWND1     ;  6 - POSITION TO BEGINNING OF FILE
 label 071f GETLS1     ;  7 - READ LOGICAL SECTOR
 label 0722 PUTLS1     ;  8 - WRITE LOGICAL SECTOR
-label 03a8 KEVIN1     ;  9 - CONSOLE INPUT
+label 03a8 KEYIN1     ;  9 - CONSOLE INPUT
 label 0417 DSPLY1     ;  A - CONSOLE OUTPUT (TERM W/ CR)
 label 041a DSPLX1     ;  B - CONSOLE OUTPUT (TERM W/ E01)
 label 040d DSPLZ1     ;  C - CONSOLE OUTPUT (TERM W/ EOT, NO CHECK)
@@ -298,6 +298,7 @@ label 0530 MWRIT1     ; 3C - MULTIPLE SECTOR WRITE
 label 051E MERED1     ; 3D - MULTIPLE SECTOR READ W/ ERR RETUR
 label 052D MEWRT1     ; 3E - MULTIPLE SECTOR WRITE W/ ERR RETU
 label 0617 BOOT1      ; 3F - RELOAD MDOS
+comment 3a8 ------------------------------------------------
 
 comment 65c ----------------- Standard Devices -------------------
 label 65c GDBsVEC
@@ -420,3 +421,6 @@ used  12a0 CRINIT1
 used  12a3 CRTERM1
 used  1297 CRCHAR1
 used  12A6 CPCHAR1
+
+word 2081-2086
+word 2088-208d

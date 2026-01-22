@@ -1,0 +1,72 @@
+file format.sy 2000
+#option ldchar *
+#option cchar *
+#option multilabel on
+#option schowzero
+option noasc
+#option noaddr #disable for comments
+#option nohex #disable for comments
+option noflex
+option nofcc
+#option noforced # makes > before variable
+option labellen 16
+option copndlen 25
+
+label E822 FDINIT  
+label E872 RWTEST
+label E878 SEEK
+label EC00 PIAREGA 
+label EC01 PIAREGB 
+label EC02 PIACTRLA
+label EC03 PIACTRLB
+label EC04 SSDA_0  
+label EC05 SSDA_1  
+label FFFC NMIsVC
+
+label e875 RESTOR
+label 00 CURDRV 
+label 00 CURDRV  
+label 01 STRSCTH 
+label 02 STRSCTL 
+label 03 NUMSCTH 
+label 04 NUMSCTL 
+;label 05 LSCTLN  
+label 06 CURADRH 
+label 08 FDSTAT  
+;label 09 CWRDCNT 
+;label 0A SofTRK  
+label 0B SECTCNT 
+;label 0D STATSAV 
+
+label 20 LDADDRH
+label 21 LDADDRL
+label 22 EXADDRH 
+label 23 EXADDRL
+label 24 ONECONH
+label 25 ONECONL
+
+data 2000-2005
+char 2000-2003
+used 2006 FORMATSTART
+unused 234e-23FF
+
+data 232f-234d
+char 232f-234d
+
+data 2012
+data 2059
+data 2060
+data 2112
+const 22d1
+const 22f7
+const 2301
+const 21cc
+const 21d6
+const 21e9
+const 21ff
+const 2256
+const 21b8
+const 21c1
+const 218a
+const 2190
+const 2184
