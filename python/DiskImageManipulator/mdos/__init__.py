@@ -131,7 +131,7 @@ class class_MDOS(object):
                         print(f'Terminator: {SDW:04X} Log. Sect. of EOF: {EOFSECT:02X}')
                     else:
                         STARTCL = SDW & 0x03FF # lower 10 bits are Starting Cluster
-                        CONTCL = ((SDW & 0x7C00)>>9)+1  # Bits 10-14 are Number of contin. clusters - 1
+                        CONTCL = ((SDW & 0x7C00)>>10)+1  # Bits 10-14 are Number of contin. clusters - 1
                         print(f'SDW{i}: {SDW:04X} STARTCLUSTER: {STARTCL:04X} Continuous Cluster: {CONTCL:02X}')
                 i += 1
             if TYP == 'ASC' or TYP == 'ACB':
