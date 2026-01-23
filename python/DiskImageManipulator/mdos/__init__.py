@@ -136,8 +136,8 @@ class class_MDOS(object):
                 i += 1
             if TYP == 'ASC' or TYP == 'ACB':
                 ENDLD = 0
-                FSIZ = CONTCL * 4 * 128
-                #FSIZ = EOFSECT * 128
+                #FSIZ = CONTCL * 4 * 128
+                FSIZ = (EOFSECT  + 2 ) * 128
                 ENDDSK = e[2] * 128 + FSIZ - 1
 
             if 'MDOS' in e[0]:
