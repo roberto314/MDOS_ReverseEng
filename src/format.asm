@@ -33,7 +33,6 @@ M0034   EQU     $0034
 M004C   EQU     $004C
 M00FE   EQU     $00FE
 M01BD   EQU     $01BD
-M234E   EQU     $234E
 FDINIT  EQU     $E822
 RWTEST  EQU     $E872
 RESTOR  EQU     $E875
@@ -100,11 +99,11 @@ Z2024           STAB    ONECONH                  ; 2024: D7 24
                 LDX     #M233E                   ; 2055: CE 23 3E       
                 SWI                              ; 2058: 3F             
                 FCB     $0A                      ; 2059: 0A             
-                LDX     #M234E                   ; 205A: CE 23 4E       
+                LDX     #STORAGE                 ; 205A: CE 23 4E       
                 LDAB    #$01                     ; 205D: C6 01          
                 SWI                              ; 205F: 3F             
                 FCB     $09                      ; 2060: 09             
-                LDAA    M234E                    ; 2061: B6 23 4E       
+                LDAA    STORAGE                  ; 2061: B6 23 4E       
                 CMPA    #$59                     ; 2064: 81 59          
                 BEQ     Z206A                    ; 2066: 27 02          
                 SWI                              ; 2068: 3F             
@@ -439,6 +438,7 @@ M233E           FCB     'F,'O,'R,'M,'A,'T,' ,'D  ; 233E: 46 4F 52 4D 41 54 20 44
                 FCB     'R,'I,'V,'E,'            ; 2346: 52 49 56 45 20 
 M234B           FCB     'X,'?                    ; 234B: 58 3F          
                 FCB     $0d                      ; 234D: 0D             
+STORAGE         FCB     $00                      ; 234E: 00             
 
 
                 END

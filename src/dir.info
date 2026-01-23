@@ -28,9 +28,11 @@ label 25 ONECONL
 data 2000-2003
 char 2000-2003
 used 2004 DIRSTART
-data 2465-24ce
-char 2465-24ce
+data 2465-26c2
+char 262e-26c2
 
+char 2465-24ce
+char 25de-25e3
 data 20be
 data 20d8
 data 2106

@@ -62,6 +62,20 @@ cat out.txt | grep rror   # Check for Errors
 OFF=0x2000
 srec_cat ${NAME}_b.bin -binary -offset ${OFF} -o ${NAME}.s19 -Motorola -address_length=2 #-execution-start-address=0x0100
 echo S9 >> ${NAME}.s19
+#######################################################################
+NAME=format_commented
+## Use asl
+${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
+${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
+rm ${NAME}.p
+cat out.txt | grep rror   # Check for Errors
+#######################################################################
+NAME=dir_commented
+## Use asl
+${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
+${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
+rm ${NAME}.p
+cat out.txt | grep rror   # Check for Errors
 
 
 

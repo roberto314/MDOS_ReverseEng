@@ -44,10 +44,8 @@
 ;
 ; the 'extra' Portions of RAM and ROM are for my own
 ; remake with the kees1948 CPUXXCMI Board. They are otherwise free.
-;
-;****************************************************
-; Used Labels
-;****************************************************
+
+         include "mdoseq.inc"
 
 M0000   EQU     $0000
 M0004   EQU     $0004
@@ -82,16 +80,10 @@ MFF10   EQU     $FF10
 MFF12   EQU     $FF12
 MFF13   EQU     $FF13
 MFF14   EQU     $FF14
-XREGsP  EQU     $FF16
 MFF17   EQU     $FF17
-XREGsC  EQU     $FF1C
-XREGsS  EQU     $FF1D
-BRKPTs  EQU     $FF1F
 MFF2F   EQU     $FF2F
-BKPINs  EQU     $FF4F
 MFF50   EQU     $FF50
 MFF51   EQU     $FF51
-AECHO   EQU     $FF53
 MFF54   EQU     $FF54
 DESTADR EQU     $FF56
 MFF58   EQU     $FF58
@@ -105,7 +97,6 @@ MFF60   EQU     $FF60
 MFF61   EQU     $FF61
 PNCHTMP EQU     $FF62
 MFF63   EQU     $FF63
-XSTAKs  EQU     $FF8A
 MFF8B   EQU     $FF8B
 MFF8C   EQU     $FF8C
 MFF8D   EQU     $FF8D
@@ -117,8 +108,6 @@ MFFF6   EQU     $FFF6
 MFFF7   EQU     $FFF7
 IRQsVC  EQU     $FFF8 ; Interrupt Vectors
 MFFF9   EQU     $FFF9 ; Interrupt Vectors (IRQ low)
-SWIsVC  EQU     $FFFA ; Interrupt Vectors
-NMIsVC  EQU     $FFFC ; Interrupt Vectors
 
 ;****************************************************
 ; Program's Code Areas
@@ -235,7 +224,8 @@ GOTas           JSR     XINCHN1                  ; F0E4: BD FA 7F  ; Got '@$', G
 ;------------------------------------------------
 MAID            CLR     MFF60                    ; F0ED: 7F FF 60  ; MAID Entry point
                 CLR     MFF54                    ; F0F0: 7F FF 54  ; 
-MAIDs           LDS     #XSTAKs                  ; F0F3: 8E FF 8A  ; 
+;MAIDs           
+                LDS     #XSTAKs                  ; F0F3: 8E FF 8A  ; 
                 LDX     #STAR1                   ; F0F6: CE FB C6  ; Load Prompt '*'
                 JSR     XPDATA1                  ; F0F9: BD FA 14  ; Output
                 JSR     XINBFR                   ; F0FC: BD FA 40  ; input HEX digits to buffer (FF08)
@@ -1518,7 +1508,6 @@ STOPONADDR      FCC     'STOP-ON-ADDRESS '       ; FB93: 53 54 4F 50 2D 4F 4E 2D
 STOPADDR        FCC     'STOP ADDR '             ; FBA4: 53 54 4F 50 20 41 44 44 52 20
                 FCB     $04                      ; FBAE: 04             
 ABORTED         FCC     'ABORTED AT '            ; FBAF: 41 42 4F 52 54 45 44 20 41 54 20
-                FCC     'AT '                    ; FBB7: 41 54 20       
                 FCB     $04                      ; FBBA: 04             
 MFBBB           FCB     $14                      ; FBBB: 14             
 MFBBC           FCB     $13,$00,$00,$00,$00,$04  ; FBBC: 13 00 00 00 00 04 

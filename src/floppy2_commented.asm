@@ -1,16 +1,12 @@
 ; Ready to assemble with asl. binary matches original
-;****************************************************
-; Used Labels
-;****************************************************
 
-CURDRV  EQU     $0000
+         include "mdoseq.inc"
+
 STRSCTH EQU     $0001
 STRSCTL EQU     $0002
 NUMSCTH EQU     $0003
 NUMSCTL EQU     $0004
-LSCTLN  EQU     $0005
 CURADRH EQU     $0006
-FDSTAT  EQU     $0008
 CWRDCNT EQU     $0009
 SofTRK  EQU     $000A
 SECTCNT EQU     $000B
@@ -46,8 +42,6 @@ PWRUP   EQU     $F000
 XOUTCH  EQU     $F018
 REENT2  EQU     $F564
 PROM_0  EQU     $FCFC
-XSTAKs  EQU     $FF8A
-NMIsVC  EQU     $FFFC
 
 ;****************************************************
 ; Program's Code Areas
@@ -72,7 +66,8 @@ OSLOAD          LDS     #XSTAKs                  ; E800: 8E FF 8A  ; Set Stackpo
                 BSR     CHKERR                   ; E81D: 8D 34     ; Check for Erroro
                 JMP     LDADDR                   ; E81F: 7E 00 20  ; Execute loaded code....
 ;------------------------------------------------
-FDINIT          LDX     #$0000                   ; E822: CE 00 00  ; |
+;FDINIT
+                LDX     #$0000                   ; E822: CE 00 00  ; |
                 STX     PIACTRL                  ; E825: FF EC 02  ; clr both control Reg.
                 STX     PIAREGA                  ; E828: FF EC 00  ; Set A and B to Input
                 LDX     #$D0DA                   ; E82B: CE D0 DA  ; 
@@ -91,13 +86,15 @@ IE84F           RTS                              ; E84F: 39        ; Both Output
 ;------------------------------------------------
 FDINIT2         JSR     FDINIT3                  ; E850: BD EB A6  ; 
 ;------------------------------------------------
-CHKERR          BCC     IE84F                    ; E853: 24 FA     ; no carry - no error
+;CHKERR
+                BCC     IE84F                    ; E853: 24 FA     ; no carry - no error
                 BSR     PRNTER                   ; E855: 8D 03     ; Print for ex.: 'E2 ' for Error 0x32
                 JMP     REENT2                   ; E857: 7E F5 64  ; 
 ;------------------------------------------------
 ;
 ;------------------------------------------------
-PRNTER          LDAA    #$45                     ; E85A: 86 45      ; Load 'E'
+;PRNTER
+                LDAA    #$45                     ; E85A: 86 45      ; Load 'E'
                 BSR     IE866                    ; E85C: 8D 08      ; 
                 LDAA    FDSTAT                   ; E85E: 96 08      ; 
                 BSR     IE866                    ; E860: 8D 04      ; 
@@ -131,25 +128,35 @@ IE866           JMP     XOUTCH                   ; E866: 7E F0 18   ; Print Accu
 ; |----------------------- 7: write function (can be set alone)
 ;
 ;*************************************************
-READSC          LDAB    #$80                     ; E869: C6 80    ; NO Bit set    ; causes the number of sectors contained in NUMSCT beginning with STRSCT from CURDRV to be read into memory starting at the address contained in CURADR
+;READSC
+                LDAB    #$80                     ; E869: C6 80    ; NO Bit set    ; causes the number of sectors contained in NUMSCT beginning with STRSCT from CURDRV to be read into memory starting at the address contained in CURADR
                 STAB    LSCTLN                   ; E86B: D7 05 
-READPS          CLRB                             ; E86D: 5F       ; NO Bit set    ; similar to READSC with the exception that the last sector is only partially read according to the contents of LSCTLN
+;READPS
+                CLRB                             ; E86D: 5F       ; NO Bit set    ; similar to READSC with the exception that the last sector is only partially read according to the contents of LSCTLN
                 FCB     $8C
-RDCRC           LDAB    #$40                     ; E86F: C6 40    ; Bit 6 set     ; causes the number of sectors contained in NUMSCT beginning with STRSCT from CURDRV to be read to check their CRCs
+;RDCRC 
+                LDAB    #$40                     ; E86F: C6 40    ; Bit 6 set     ; causes the number of sectors contained in NUMSCT beginning with STRSCT from CURDRV to be read to check their CRCs
                 FCB     $8C
-RWTEST          LDAB    #$C2                     ; E872: C6 C2    ; Bit 7,6,1 set ; same as WRTEST + readback and check CRC
+;RWTEST
+                LDAB    #$C2                     ; E872: C6 C2    ; Bit 7,6,1 set ; same as WRTEST + readback and check CRC
                 FCB     $8C
-RESTOR          LDAB    #$08                     ; E875: C6 08    ; Bit 3 set     ; causes the read/write head on CURDRV to be positioned to cylinder zero. The only parameter required is CURDRV.
+;RESTOR
+                LDAB    #$08                     ; E875: C6 08    ; Bit 3 set     ; causes the read/write head on CURDRV to be positioned to cylinder zero. The only parameter required is CURDRV.
                 FCB     $8C
-SEEK            LDAB    #$10                     ; E878: C6 10    ; Bit 4 set     ; causes the read/write head of CURDRV to be positioned to the cylinder containing STRSCT
+;SEEK  
+                LDAB    #$10                     ; E878: C6 10    ; Bit 4 set     ; causes the read/write head of CURDRV to be positioned to the cylinder containing STRSCT
                 FCB     $8C
-WRTEST          LDAB    #$82                     ; E87B: C6 82    ; Bit 7,1 set   ; causes the two bytes of data pointed to by the address in CURADR and the address+ 1 to be written to alternating bytes, respectively
+;WRTEST
+                LDAB    #$82                     ; E87B: C6 82    ; Bit 7,1 set   ; causes the two bytes of data pointed to by the address in CURADR and the address+ 1 to be written to alternating bytes, respectively
                 FCB     $8C
-WRDDAM          LDAB    #$81                     ; E87E: C6 81    ; Bit 7,0 set   ; causes a deleted data address mark to be written
+;WRDDAM
+                LDAB    #$81                     ; E87E: C6 81    ; Bit 7,0 set   ; causes a deleted data address mark to be written
                 FCB     $8C
-WRVERF          LDAB    #$C0                     ; E881: C6 C0    ; Bit 7,6 set   ; same as WRITSC + CRC Verify
+;WRVERF
+                LDAB    #$C0                     ; E881: C6 C0    ; Bit 7,6 set   ; same as WRITSC + CRC Verify
                 FCB     $8C
-WRITSC          LDAB    #$80                     ; E884: C6 80    ; Bit 7 set     ; causes NUMSCT sectors beginning with STRSCT of CURDRV to be written from memory beginning at CURADR
+;WRITSC
+                LDAB    #$80                     ; E884: C6 80    ; Bit 7 set     ; causes NUMSCT sectors beginning with STRSCT of CURDRV to be written from memory beginning at CURADR
                 FCB     $8C
 CLOCK           LDAB    #$04                     ; E887: C6 04    ; Bit 2 set     ; calculate clock frequency of CPU
 
@@ -614,14 +621,16 @@ ZEBAD           LDAB    MEC26                    ; EBAD: F6 EC 26  ; <----------
 ZEBBB           LDAB    MEC26                    ; EBBB: F6 EC 26  ; <------------------------------------ no RAM here!
                 BRA     ZEBCF                    ; EBBE: 20 0F     ; 
 ;------------------------------------------------
-LPINIT          LDAA    #$03                     ; EBC0: 86 03     ; 
+;LPINIT
+                LDAA    #$03                     ; EBC0: 86 03     ; 
                 STAA    MEC26                    ; EBC2: B7 EC 26  ; <------------------------------------ no RAM here!
                 LDAA    #$15                     ; EBC5: 86 15     ; 
                 STAA    MEC26                    ; EBC7: B7 EC 26  ; <------------------------------------ no RAM here! 
                 RTS                              ; EBCA: 39        ; 
 ;------------------------------------------------
                 NOP                              ; EBCB: 01        ; 
-LIST            PSHB                             ; EBCC: 37        ; 
+;LIST
+                PSHB                             ; EBCC: 37        ; 
                 BRA     ZEBAC                    ; EBCD: 20 DD     ; 
 ;------------------------------------------------
 ZEBCF           BITB    #$01                     ; EBCF: C5 01     ; 

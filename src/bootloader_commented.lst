@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 1 - 01/22/2026 06:46:05 PM
+ AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 1 - 2026-01-23 11:21:24
 
 
        1/       0 :                     ; This file is loaded from floppy to address $20
@@ -61,7 +61,7 @@
       58/      42 : 97 02                               STAA    STRSCTL                  ; 0042: 97 02     ; Startsector (25, $19) 25*128=$C80
       59/      44 : A6 77                               LDAA    $77,X                    ; 0044: A6 77     ; |
       60/      46 : E6 76                               LDAB    $76,X                    ; 0046: E6 76     ; ($76,77), the number of sectors to load ($0040)
- AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 2 - 01/22/2026 06:46:05 PM
+ AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 2 - 2026-01-23 11:21:24
 
 
       61/      48 : 97 04                               STAA    NUMSCTL                  ; 0048: 97 04     ; |
@@ -121,7 +121,7 @@
      115/      A0 :                     
      116/      A0 :                     
      117/      A0 :                                     END
- AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 3 - 01/22/2026 06:46:05 PM
+ AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 3 - 2026-01-23 11:21:24
 
 
   Symbol Table (* = unused):
@@ -133,7 +133,7 @@
 *COMPMODE :                       0 - | *CONSTPI :        3.141592653589793 - |
  CURADRH :                        6 - |  CURADRL :                        7 - |
  CURDRV :                         0 - | *CUSTOM :                         0 - |
-*DATE :                "01/22/2026" - | *FALSE :                          0 - |
+*DATE :                "2026-01-23" - | *FALSE :                          0 - |
  FDSTAT :                         8 - | *FULLPMMU :                       1 - |
 *HAS64 :                          1 - | *HASDSP :                         0 - |
 *HASFPU :                         0 - | *HASPMMU :                        0 - |
@@ -149,7 +149,7 @@
  RESTOR :                      E875 - |  SECTCNTH :                       B - |
  SECTCNTL :                       C - |  SERRM :                         94 C |
  SERRQM :                        8C C |  STRSCTH :                        1 - |
- STRSCTL :                        2 - | *TIME :               "06:46:05 PM" - |
+ STRSCTL :                        2 - | *TIME :                  "11:21:24" - |
 *TRUE :                           1 - | *VERSION :                     142F - |
  Z005D :                         5D C |  Z006D :                         6D C |
  Z008E :                         8E C | *Z80SYNTAX :                      0 - |
@@ -157,7 +157,7 @@
      51 symbols
      31 unused symbols
 
- AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 4 - 01/22/2026 06:46:05 PM
+ AS V1.42 Beta [Bld 216] - Source File bootloader_commented.asm - Page 4 - 2026-01-23 11:21:24
 
 
   Code Pages:

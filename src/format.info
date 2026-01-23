@@ -48,10 +48,10 @@ label 25 ONECONL
 data 2000-2005
 char 2000-2003
 used 2006 FORMATSTART
-unused 234e-23FF
+unused 234f-23FF
 
-data 232f-234d
-char 232f-234d
+data 232f-234e
+char 232f-234e
 
 data 2012
 data 2059
@@ -70,3 +70,5 @@ const 21c1
 const 218a
 const 2190
 const 2184
+
+label 234E STORAGE

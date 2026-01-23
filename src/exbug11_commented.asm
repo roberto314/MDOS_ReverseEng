@@ -45,9 +45,8 @@
 ; the 'extra' Portions of RAM and ROM are for my own
 ; remake with the kees1948 CPUXXCMI Board. They are otherwise free.
 ;
-;****************************************************
-; Used Labels
-;****************************************************
+
+         include "mdoseq.inc"
 
 M0000   EQU     $0000
 M0004   EQU     $0004
@@ -82,16 +81,10 @@ ENDAD2H EQU     $FF10
 MFF12   EQU     $FF12
 MFF13   EQU     $FF13
 MFF14   EQU     $FF14
-XREGsP  EQU     $FF16
 MFF17   EQU     $FF17
-XREGsC  EQU     $FF1C
-XREGsS  EQU     $FF1D
-BRKPTs  EQU     $FF1F
 MFF2F   EQU     $FF2F
-BKPINs  EQU     $FF4F
 MFF50   EQU     $FF50
 MFF51   EQU     $FF51
-AECHO   EQU     $FF53
 MFF54   EQU     $FF54
 DESTADR EQU     $FF56
 MFF58   EQU     $FF58
@@ -105,7 +98,6 @@ MFF60   EQU     $FF60
 MFF61   EQU     $FF61
 PNCHTMP EQU     $FF62
 MFF63   EQU     $FF63
-XSTAKs  EQU     $FF8A
 MFF8B   EQU     $FF8B
 MFF8C   EQU     $FF8C
 MFF8D   EQU     $FF8D
@@ -117,8 +109,6 @@ MFFF6   EQU     $FFF6
 MFFF7   EQU     $FFF7
 IRQsVC  EQU     $FFF8 ; Interrupt Vectors
 MFFF9   EQU     $FFF9 ; Interrupt Vectors (IRQ low)
-SWIsVC  EQU     $FFFA ; Interrupt Vectors
-NMIsVC  EQU     $FFFC ; Interrupt Vectors
 RSTsVC  EQU     $FFFE ; Interrupt Vectors
 
 ;****************************************************
@@ -238,7 +228,8 @@ GOTas           JSR     XINCHN1                  ; F0EA: BD FA A0  ; Got '@$', G
 ;------------------------------------------------
 MAID            CLR     MFF60                    ; F0F3: 7F FF 60  ; MAID Entry point
                 CLR     MFF54                    ; F0F6: 7F FF 54  ; 
-MAIDs           LDS     #XSTAKs                  ; F0F9: 8E FF 8A  ; 
+;MAIDs
+                LDS     #XSTAKs                  ; F0F9: 8E FF 8A  ; 
                 LDX     #STAR1                   ; F0FC: CE FB C2  ; Load Prompt '*'
                 JSR     XPDATA1                  ; F0FF: BD FA 33  ; Output
                 JSR     XINBFR                   ; F102: BD FA 62  ; input HEX digits to buffer (FF08)
