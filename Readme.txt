@@ -155,7 +155,7 @@ the CAT that represent clusters beyond the physical end of the diskette are
 marked as allocated so that they cannot be used by any MOOS functions.
 
 On single-sided diskettes, bytes 0-$3E of the CAT correspond to the physical 
-locations on the diskette; however, in byte S3E, bits 0-3 are set to one since 
+locations on the diskette; however, in byte $3E, bits 0-3 are set to one since 
 no physical sectors correspond to those cluster numbers. Bytes $3F-7F are set to 
 all ones. The cluster division for allocation only includes 2000 (decimal) sectors. 
 Since there are 2002 sectors, the last two physical sectors of a single-sided diskette 
@@ -243,12 +243,12 @@ E-F    2   Zeroes
 
 The attribute field of a directory has the following format:
 F  E  D  C  B  A  9  8  7  6  5  4  3  2  1  0
-|  |  |  |  |  |  |  <---- not used (=0) ---->
-|  |  |  |  |     |___ File Format (0 = user defined,
-|  |  |  |  |  ?                    2 = memory-image,
-|  |  |  |  |                       3 = binary record,
-|  |  |  |  |                       5 = ASCII record,
-|  |  |  |  |                       7 = ASCII-converted binary record)
+|  |  |  |  |  |  |  |  <-- not used (=0) --->
+|  |  |  |  |  |__|__|_ File Format (0 = user defined,
+|  |  |  |  |                        2 = memory-image,
+|  |  |  |  |                        3 = binary record,
+|  |  |  |  |                        5 = ASCII record,
+|  |  |  |  |                        7 = ASCII-converted binary record)
 |  |  |  |  |   
 |  |  |  |  |_ Non-compressed space bit                    
 |  |  |  |____ Contiguous allocation bit
@@ -258,7 +258,7 @@ F  E  D  C  B  A  9  8  7  6  5  4  3  2  1  0
 
 Associated with each directory entry is an eiqht-bit number, the directory 
 entry number (DEN), which is a function of the physical location of the entry 
-within the directory. [he DEN is not found anywhere in the directory. It is a
+within the directory. The DEN is not found anywhere in the directory. It is a
 calculated quantity and is interpreted as follows:
 
   7 6 5 4 3   2 1 0
@@ -275,7 +275,7 @@ calculated quantity and is interpreted as follows:
 The Bootblock is a small loader program that is brought into memory along with 
 the next physical sector by the diskette controller during system initialization. 
 The second sector that is loaded contains information regarding the size of the 
-resident operating system. From this information, the Bootblack program configures
+resident operating system. From this information, the Bootblock program configures
 the diskette controller to load into memory the actual resident operating system.
 
 24.2 File Structure
@@ -294,7 +294,7 @@ contained in the directory entry of a file.
 
 MDOS accesses sectors within a file by logical sector number (LSN). Since the first
 physical sector of a file is not really a data sector, the RIB is given an LSN of
-minus one (SFFFF). Therefore, logical sector zero of a file (the first data sector) 
+minus one ($FFFF). Therefore, logical sector zero of a file (the first data sector) 
 is actually the second physical sector of the file. Logical sector numbers for data
 sectors are numbered sequentially beginning with zero. Thus, even though a file may
 be segmented (not physically contiguous on the diskette), it is treated as a 
@@ -314,7 +314,7 @@ and one terminator.
 
 The RIB of a memory-image file contains some adiitional information that describes 
 where the contents of the file are to be loaded in memory. This information includes 
-the starting I01d address, the number of sectors to load, the number of bytes in the 
+the starting Load address, the number of sectors to load, the number of bytes in the 
 last sector, and the starting execution address.
 
 The memory-image file load information is described in the following paragraphs. Both 
@@ -322,7 +322,7 @@ the content and the location of each field are described. The offsets used to re
 to the various bytes are relative to zero (zero being the first byte of the RIS sector).
 
 1. Byte 117 ($75), the number of bytes to load from the last sector, must be non-zero, 
-   a multiple of 8, and less than or equal to 128 (S80).
+   a multiple of 8, and less than or equal to 128 ($80).
 2. Bytes 118-119 ($76,77), the number of sectors to load, must contain a number that 
    is non-zero, less than the total number of sectors allocated to the file, and less 
    than or equal to 512 ($200).
@@ -337,7 +337,7 @@ to the various bytes are relative to zero (zero being the first byte of the RIS 
          EL = (NSL - 1) * 128 + NBLS + SL - 1
    where EL is the ending load address, NSL is the number of sectors to load (bytes
    118-119), NBLS is the number of bytes in the last sector (byte 117), and SL is
-   the starting load address (bytes 120-12). The ending load address must be less 
+   the starting load address (bytes 120-121). The ending load address must be less 
    than 65536.
 5. Bytes 122-123 ($7A,7B), the starting execution address, must lie within the range 
    of addresses spanned by the file (greater than or equal to the starting load 

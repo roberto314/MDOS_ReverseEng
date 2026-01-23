@@ -43,19 +43,21 @@ MFFE6   EQU     $FFE6
 
                 ORG     $2000
 
-M2000           FCC     '0300'                   ; 
+M2000           FCC     '0300'                   ; Version
 M2004           FCB     $E5,$E5                  ; 
 FORMATSTART     STS     M0027                    ; 
-                LDAA    MEBFF                    ; 
+                LDAA    MEBFF                    ; Get some kind of Disk EPROM Version
                 CMPA    #$45                     ; 
                 BNE     Z201D                    ; 
                 LDAB    #$0A                     ; 
-Z2011           SCALL   MDERR1
-                SCALL   MDENT1
+Z2011           SCALL   MDERR1                   ;
+                SCALL   MDENT1                   ;
 Z2015           LDAB    #$0B                     ; 
                 BRA     Z2011                    ; 
+;------------------------------------------------
 Z2019           LDAB    #$04                     ; 
                 BRA     Z2011                    ; 
+;------------------------------------------------
 Z201D           CLRB                             ; 
                 CMPA    #$43                     ; 
                 BEQ     Z2024                    ; 
@@ -68,7 +70,7 @@ Z2024           STAB    ONECONH                  ;
                 LDX     #M232F                   ; 
                 STX     M233C                    ; 
                 LDX     #M233A                   ; 
-                SCALL   PFNAM1
+                SCALL   PFNAM1                   ;
                 LDAA    #$20                     ; 
                 CMPA    M2330                    ; 
                 BNE     Z2015                    ; 
@@ -81,14 +83,14 @@ Z2024           STAB    ONECONH                  ;
                 BGT     Z2019                    ; 
                 STAB    M234B                    ; 
                 LDX     #M233E                   ; 
-                SCALL   DSPLY1
-                LDX     #STORAGE                 ; 
-                LDAB    #$01                     ; 
-                SCALL   KEYIN1
+                SCALL   DSPLY1                   ; Output Question "Format Drive X?"
+                LDX     #STORAGE                 ; Set up input buffer
+                LDAB    #$01                     ; expect one character
+                SCALL   KEYIN1                   ; Get it
                 LDAA    STORAGE                  ; 
-                CMPA    #$59                     ; 
-                BEQ     Z206A                    ; 
-                SCALL   MDENT1
+                CMPA    #'Y'                     ;
+                BEQ     Z206A                    ; is it Y ? 
+                SCALL   MDENT1                   ; No, bail
 Z206A           LDAB    M234B                    ; 
                 ANDB    #$0F                     ; 
                 STAB    CURDRV                   ; 
@@ -111,13 +113,14 @@ Z208C           STAB    PIAREGB                  ;
 Z2094           STAB    PIAREGA                  ; 
                 TST     ONECONH                  ; 
                 BNE     Z20A7                    ; 
-                LDAA    MEBFE                    ; 
+                LDAA    MEBFE                    ; Get some kind of Disk EPROM Version
                 CMPA    #$11                     ; 
                 BEQ     Z20A7                    ; 
                 CMPA    #$12                     ; 
                 BNE     Z20AB                    ; 
 Z20A7           LDAA    #$FF                     ; 
                 BRA     Z20B0                    ; 
+;------------------------------------------------
 Z20AB           LDAA    PIAREGA                  ; 
                 ASLA                             ; 
                 ASLA                             ; 
@@ -126,6 +129,7 @@ Z20B0           STAA    M002C                    ;
                 LDAA    #$33                     ; 
                 STAA    FDSTAT                   ; 
                 BRA     Z210A                    ; 
+;------------------------------------------------
 Z20BA           LDX     #M001A                   ; 
                 LDAA    M002C                    ; 
                 BMI     Z20C4                    ; 
@@ -170,9 +174,9 @@ Z2104           STAA    STRSCTL                  ;
 Z210A           STAA    M002D                    ; 
 Z210C           LDAB    #$01                     ; 
                 LDX     #M002D                   ; 
-                SCALL   MDERR1
+                SCALL   MDERR1                   ; 
                 BCS     Z210C                    ; 
-                SCALL   MDENT1
+                SCALL   MDENT1                   ; 
 Z2117           LDAA    M0029                    ; 
                 SUBA    #$04                     ; 
                 BCS     Z2132                    ; 
@@ -180,6 +184,7 @@ Z2117           LDAA    M0029                    ;
                 BCC     Z2126                    ; 
                 LDX     #M2000                   ; 
                 BRA     Z212F                    ; 
+;------------------------------------------------
 Z2126           LDX     #M22AB                   ; 
                 STX     M21F0                    ; 
                 LDX     #M01BD                   ; 
@@ -239,6 +244,7 @@ Z2180           DECA                             ;
                 LDAA    #$32                     ; 
                 STAA    FDSTAT                   ; 
                 JMP     Z210A                    ; 
+;------------------------------------------------
 Z21AD           ANDA    #$60                     ; 
                 STAA    PIAREGB                  ; 
 Z21B2           LDAA    PIACTRLB                 ; 
@@ -315,6 +321,7 @@ Z224B           BITA    SSDA_0                   ;
                 CMPA    #$35                     ; 
                 BEQ     Z226D                    ; 
                 JMP     Z21D3                    ; 
+;------------------------------------------------
 Z226D           LDAA    PIACTRLB                 ; 
                 BPL     Z226D                    ; 
                 DEC     PIAREGB                  ; 
@@ -327,9 +334,11 @@ Z226D           LDAA    PIACTRLB                 ;
                 BMI     Z2289                    ; 
                 LDAA    #$23                     ; 
                 JMP     Z2176                    ; 
+;------------------------------------------------
 Z2289           JSR     RWTEST                   ; 
                 BCC     Z2291                    ; 
                 JMP     Z20F4                    ; 
+;------------------------------------------------
 Z2291           LDAA    STRSCTL                  ; 
                 LDAB    STRSCTH                  ; 
                 ADDA    NUMSCTL                  ; 
@@ -341,10 +350,12 @@ Z2291           LDAA    STRSCTL                  ;
                 CMPA    EXADDRH                  ; 
                 BCS     Z22A9                    ; 
                 JMP     Z2152                    ; 
+;------------------------------------------------
 Z22A9           SCALL   MDENT1
 M22AB           LDAA    #$82                     ; 
                 BITA    LDADDRH                  ; 
                 RTS                              ; 
+;------------------------------------------------
 Z22B0           TPA                              ; 
                 SEI                              ; 
                 STAA    M002B                    ; 
@@ -361,6 +372,7 @@ Z22B0           TPA                              ;
                 DECA                             ; 
                 STAA    $02,X                    ; 
                 RTS                              ; 
+;------------------------------------------------
 Z22D0           LDX     #$3C3E                   ; 
                 STX     PIACTRLA                 ; 
                 LDX     PIAREGA                  ; 
@@ -369,6 +381,7 @@ Z22D0           LDX     #$3C3E                   ;
                 LDAA    M002B                    ; 
                 TAP                              ; 
                 RTS                              ; 
+;------------------------------------------------
 Z22E2           LDAA    #$18                     ; 
 Z22E4           BITA    SSDA_0                   ; 
                 BEQ     Z22E4                    ; 
@@ -396,6 +409,7 @@ Z230D           DECA                             ;
                 DECB                             ; 
                 BNE     Z2306                    ; 
                 RTS                              ; 
+;------------------------------------------------
 M2319           LDS     M0027                    ; 
                 BSR     Z22D0                    ; 
                 JSR     FDINIT                   ; 
@@ -407,6 +421,7 @@ M2319           LDS     M0027                    ;
                 ADDA    STRSCTL                  ; 
                 ADCB    STRSCTH                  ; 
                 JMP     Z2104                    ; 
+;------------------------------------------------
 M232F           FCC     ' '                      ; 
 M2330           FCC     '        '               ; 
 M2338           FCC     '  '                     ; 
