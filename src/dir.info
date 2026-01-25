@@ -16,10 +16,7 @@ label e875 RESTOR
 label 00 CURDRV 
 label 20 LDADDRH
 label 21 LDADDRL
-label 22 EXADDRH 
-label 23 EXADDRL
-label 24 ONECONH
-label 25 ONECONL
+label 25 NMISAV
 
 #lcomment c019 CC0 and CC1 set - external Serial clock (8xBaudrate)
 #const c559-c55a

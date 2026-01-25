@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 1 - 2026-01-23 11:21:24
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 1 - 01/24/2026 02:35:53 PM
 
 
        1/       0 :                     ; Ready to assemble with asl. binary matches original
@@ -61,7 +61,7 @@
 (1)   55/       0 : =$14                 ALPHA1   EQU $14 ; CHECK ALPHABETIC CHARACTER
 (1)   56/       0 : =$15                 NUMD1    EQU $15 ; CHECK DECIMAL DIGIT
 (1)   57/       0 : =$16                 ADDAM1   EQU $16 ; INCREMENT MEMORY (DOUBLE BYTE) BY
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm(mdoseq.inc) - Page 2 - 2026-01-23 11:21:24
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm(mdoseq.inc) - Page 2 - 01/24/2026 02:35:53 PM
 
 
 (1)   58/       0 : =$17                 SUBAM1   EQU $17 ; DECREMENT MEMORY (DOUBLE BYTE) BY
@@ -124,7 +124,7 @@
 (1)  115/       0 : =$C                  FF       EQU  $C ; FORM FEED
 (1)  116/       0 : =$D                  CR       EQU  $D ; CARRIAGE RETURN
 (1)  117/       0 : =$E                  SO       EQU  $E ; SHIFT OUT
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm(mdoseq.inc) - Page 3 - 2026-01-23 11:21:24
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm(mdoseq.inc) - Page 3 - 01/24/2026 02:35:53 PM
 
 
 (1)  118/       0 : =$F                  SI       EQU  $F ; SHIFT IN
@@ -171,292 +171,292 @@
 (1)  159/       0 : =$1A                 SCsTRK   EQU 26  ; NUMBER OF SECTORS/TRACK (SINGLE S
 (1)  160/       0 : =$34                 SCsTKD   EQU 52  ; NUMBER OF SECTORS/CYLINDER (DOUBL
 (1)  161/       0 : =$4                  SCsCLS   EQU 4   ; NUMBER OF SECTORS / CLUSTER
-(1)  162/       0 :                     
-(1)  163/       0 : =$7D0                SCsMAX EQU 2000 ; MAXIMUM NO. OF USABLE SECTORS (SI
-(1)  164/       0 : =$FA4                SCsMXD EQU 4004 ; MAXIMUM NO. OF USABLE SECTORS <DO
-(1)  165/       0 : =$20                 DFCLSs EQU 32   ; DEFAULT NO. OF CLUSTERS
-(1)  166/       0 :                     
-(1)  167/       0 :                     ;
-(1)  168/       0 :                     ; DISK ID SECTOR OFFSETS
-(1)  169/       0 :                     ;
-(1)  170/       0 : =$0                  DIDsID  EQU  0   ; OFFSET TO DISK ID (8 BYTES)
-(1)  171/       0 : =$8                  DIDsVN  EQU  8   ; OFFSET TO VERSION NUMBER (2 BYTES
-(1)  172/       0 : =$A                  DIDsRN  EQU  10  ; OFFSET TO REVISION NUMBER (2 BYTE
-(1)  173/       0 : =$C                  DIDsDT  EQU  12  ; OFFSET TO DATE (6 BYTES)
-(1)  174/       0 : =$12                 DIDsNM  EQU  18  ; OFFSET TO USER NAME (20 BYTES)
-(1)  175/       0 : =$26                 DIDsRB  EQU  38  ; OFFSET TO RIB ADDRS. (20 BYTES)
-(1)  176/       0 :                     
-(1)  177/       0 :                     ;
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm(mdoseq.inc) - Page 4 - 2026-01-23 11:21:24
+(1)  162/       0 : =$7D0                SCsMAX EQU 2000 ; MAXIMUM NO. OF USABLE SECTORS (SI
+(1)  163/       0 : =$FA4                SCsMXD EQU 4004 ; MAXIMUM NO. OF USABLE SECTORS <DO
+(1)  164/       0 : =$20                 DFCLSs EQU 32   ; DEFAULT NO. OF CLUSTERS
+(1)  165/       0 :                     
+(1)  166/       0 :                     ;
+(1)  167/       0 :                     ; DISK ID SECTOR OFFSETS
+(1)  168/       0 :                     ;
+(1)  169/       0 : =$0                  DIDsID  EQU  0   ; OFFSET TO DISK ID (8 BYTES)
+(1)  170/       0 : =$8                  DIDsVN  EQU  8   ; OFFSET TO VERSION NUMBER (2 BYTES
+(1)  171/       0 : =$A                  DIDsRN  EQU  10  ; OFFSET TO REVISION NUMBER (2 BYTE
+(1)  172/       0 : =$C                  DIDsDT  EQU  12  ; OFFSET TO DATE (6 BYTES)
+(1)  173/       0 : =$12                 DIDsNM  EQU  18  ; OFFSET TO USER NAME (20 BYTES)
+(1)  174/       0 : =$26                 DIDsRB  EQU  38  ; OFFSET TO RIB ADDRS. (20 BYTES)
+(1)  175/       0 :                     
+(1)  176/       0 :                     ;
+(1)  177/       0 :                     ; DIRECTORY ENTRY OFFSET
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm(mdoseq.inc) - Page 4 - 01/24/2026 02:35:53 PM
 
 
-(1)  178/       0 :                     ; DIRECTORY ENTRY OFFSET
-(1)  179/       0 :                     ;
-(1)  180/       0 : =$0                  DIRsNM  EQU 0   ; OFFSET TO NAME (8 BYTES)
-(1)  181/       0 : =$8                  DIRsSX  EQU 8   ; OFFSET TO SUFFIX (2 BYTES)
-(1)  182/       0 : =$A                  DIRsRB  EQU 10  ; OFFSET TO RIB ADDRESS (2 BYTES)
-(1)  183/       0 : =$C                  DIRsAT  EQU 12  ; OFFSET OF ATTRIBUTES (2 BYTES)
-(1)  184/       0 : =$E                  DIRsNU  EQU 14  ; OFFSET TO NOT USED AREA (2 BYTES)
-(1)  185/       0 :                     
-(1)  186/       0 :                     ;
-(1)  187/       0 :                     ; RIB BINARY FILE OFFSET
-(1)  188/       0 :                     ;
-(1)  189/       0 : =$75                 RIBsLB  EQU 117 ; NUMBER OF BYTES IN LAST SECTOR
-(1)  190/       0 : =$76                 RIBsSL  EQU 118 ; NUMBER OF SECTORS TO LOAD
-(1)  191/       0 : =$78                 RIBsLA  EQU 120 ; MEMORY LOAD ADDRESS
-(1)  192/       0 : =$7A                 RIBsSA  EQU 122 ; START EXECUTION ADDRESS
-(1)  193/       0 :                     
-(1)  194/       0 :                     ;
-(1)  195/       0 :                     ; UNIFIED I/O CONTROL BLOCK OFFSETS
-(1)  196/       0 :                     ;
-(1)  197/       0 : =$0                  IOCSTA  EQU 0  ; ERROR STATUS
-(1)  198/       0 : =$1                  IOCDTT  EQU 1  ; DATA TRANSFER TYPE
-(1)  199/       0 : =$2                  IOCDBP  EQU 2  ; DATA BUFFER POINTER
-(1)  200/       0 : =$4                  IOCDBS  EQU 4  ; DATA BUFFER START ADDRESS
-(1)  201/       0 : =$6                  JOCDBE  EQU 6  ; DATA BUFFER END ADDRESS
-(1)  202/       0 : =$8                  IOCGDW  EQU 8  ; GENERIC DEVICE TYPE/CDB ADDRESS
-(1)  203/       0 : =$A                  IOCLUN  EQU 10 ; LOGICAL UNIT NUMBER
-(1)  204/       0 : =$B                  IOCNAM  EQU 11 ; FILE NAME
-(1)  205/       0 : =$B                  IOCMLS  EQU 11 ; MAXIMUM REFERENCED LSN
-(1)  206/       0 : =$D                  IOCSDW  EQU 13 ; CURRENT SEGMENT DESCRIPTOR WORD
-(1)  207/       0 : =$F                  IOCSLS  EQU 15 ; 1ST LOGICAL SECTOR OF CURRENT SEG
-(1)  208/       0 : =$11                 IOCLSN  EQU 17 ; CURRENT LOGICAL SECTOR NUMBER
-(1)  209/       0 : =$13                 IOCSUF  EQU 19 ; FILE NAME SUFFIX
-(1)  210/       0 : =$13                 IOCEOF  EQU 19 ; LOGICAL END OF FIl.E
-(1)  211/       0 : =$15                 IOCRIB  EQU 21 ; PHYSICAL DISK ADDRESS OF R. I.B.
-(1)  212/       0 : =$17                 IOCFDF  EQU 23 ; FILE DESCRIPTOR FLAGS
-(1)  213/       0 : =$1B                 IOCDEN  EQU 27 ; DIRECTORY ENTRY NUMBER
-(1)  214/       0 : =$1D                 IOCSBP  EQU 29 ; SECTOR BUFFER POINTER/INITIAL SIZ
-(1)  215/       0 : =$1F                 IOCSBS  EQU 31 ; SECTOR BUFFER START ADDRESS
-(1)  216/       0 : =$21                 IOCSBE  EQU 33 ; SECTOR BUFFER END ADDRESS
-(1)  217/       0 : =$23                 IOCSBI  EQU 35 ; SECTOR BUFFER INTERNAL PTR
-(1)  218/       0 : =$25                 IOCBLN  EQU IOCSBI+2-IOCSTA ; IOCB LENGTH
-(1)  219/       0 :                     
-(1)  220/       0 :                     ;
-(1)  221/       0 :                     ; UNIFIED I/O ERROR STATUS
-(1)  222/       0 :                     ;
-(1)  223/       0 : =$0                  IsNOER  EQU  $0 ; NO ERRORS, NORMAL RETURN
-(1)  224/       0 : =$1                  IsNODV  EQU  $1 ; NO SUCH DEVICE
-(1)  225/       0 : =$2                  IsRES   EQU  $2 ; DEVICE RESERVED ALREADY
-(1)  226/       0 : =$3                  IsNORV  EQU  $3 ; DEVICE NOT RESERVED
-(1)  227/       0 : =$4                  IsNRDY  EQU  $4 ; DEVICE NOT READY
-(1)  228/       0 : =$5                  IsIVDV  EQU  $5 ; INVALID DEVICE
-(1)  229/       0 : =$6                  IsDUPE  EQU  $6 ; DUPLICATE FILE NAME
-(1)  230/       0 : =$7                  IsNONM  EQU  $7 ; FILE NAME NOT FOUND
-(1)  231/       0 : =$8                  IsCLOS  EQU  $8 ; INVALID OPEN/CLOSED FLAG
-(1)  232/       0 : =$9                  IsEOF   EQU  $9 ; END OF FILE
-(1)  233/       0 : =$A                  IsFTYP  EQU  $A ; INVALID FILE TYPE
-(1)  234/       0 : =$B                  IsDTYP  EQU  $B ; INVALID DATA TRANSFER TVPE
-(1)  235/       0 : =$C                  IsEOM   EQU  $C ; END OF MEDIA
-(1)  236/       0 : =$D                  IsBUFQ  EQU  $D ; BUFFER OVERFLOW
-(1)  237/       0 : =$E                  IsCKSM  EQU  $E ; CHECKSUM ERROR
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm(mdoseq.inc) - Page 5 - 2026-01-23 11:21:24
+(1)  178/       0 :                     ;
+(1)  179/       0 : =$0                  DIRsNM  EQU 0   ; OFFSET TO NAME (8 BYTES)
+(1)  180/       0 : =$8                  DIRsSX  EQU 8   ; OFFSET TO SUFFIX (2 BYTES)
+(1)  181/       0 : =$A                  DIRsRB  EQU 10  ; OFFSET TO RIB ADDRESS (2 BYTES)
+(1)  182/       0 : =$C                  DIRsAT  EQU 12  ; OFFSET OF ATTRIBUTES (2 BYTES)
+(1)  183/       0 : =$E                  DIRsNU  EQU 14  ; OFFSET TO NOT USED AREA (2 BYTES)
+(1)  184/       0 :                     
+(1)  185/       0 :                     ;
+(1)  186/       0 :                     ; RIB BINARY FILE OFFSET
+(1)  187/       0 :                     ;
+(1)  188/       0 : =$75                 RIBsLB  EQU 117 ; NUMBER OF BYTES IN LAST SECTOR
+(1)  189/       0 : =$76                 RIBsSL  EQU 118 ; NUMBER OF SECTORS TO LOAD
+(1)  190/       0 : =$78                 RIBsLA  EQU 120 ; MEMORY LOAD ADDRESS
+(1)  191/       0 : =$7A                 RIBsSA  EQU 122 ; START EXECUTION ADDRESS
+(1)  192/       0 :                     
+(1)  193/       0 :                     ;
+(1)  194/       0 :                     ; UNIFIED I/O CONTROL BLOCK OFFSETS
+(1)  195/       0 :                     ;
+(1)  196/       0 : =$0                  IOCSTA  EQU 0  ; ERROR STATUS
+(1)  197/       0 : =$1                  IOCDTT  EQU 1  ; DATA TRANSFER TYPE
+(1)  198/       0 : =$2                  IOCDBP  EQU 2  ; DATA BUFFER POINTER
+(1)  199/       0 : =$4                  IOCDBS  EQU 4  ; DATA BUFFER START ADDRESS
+(1)  200/       0 : =$6                  JOCDBE  EQU 6  ; DATA BUFFER END ADDRESS
+(1)  201/       0 : =$8                  IOCGDW  EQU 8  ; GENERIC DEVICE TYPE/CDB ADDRESS
+(1)  202/       0 : =$A                  IOCLUN  EQU 10 ; LOGICAL UNIT NUMBER
+(1)  203/       0 : =$B                  IOCNAM  EQU 11 ; FILE NAME
+(1)  204/       0 : =$B                  IOCMLS  EQU 11 ; MAXIMUM REFERENCED LSN
+(1)  205/       0 : =$D                  IOCSDW  EQU 13 ; CURRENT SEGMENT DESCRIPTOR WORD
+(1)  206/       0 : =$F                  IOCSLS  EQU 15 ; 1ST LOGICAL SECTOR OF CURRENT SEG
+(1)  207/       0 : =$11                 IOCLSN  EQU 17 ; CURRENT LOGICAL SECTOR NUMBER
+(1)  208/       0 : =$13                 IOCSUF  EQU 19 ; FILE NAME SUFFIX
+(1)  209/       0 : =$13                 IOCEOF  EQU 19 ; LOGICAL END OF FIl.E
+(1)  210/       0 : =$15                 IOCRIB  EQU 21 ; PHYSICAL DISK ADDRESS OF R. I.B.
+(1)  211/       0 : =$17                 IOCFDF  EQU 23 ; FILE DESCRIPTOR FLAGS
+(1)  212/       0 : =$1B                 IOCDEN  EQU 27 ; DIRECTORY ENTRY NUMBER
+(1)  213/       0 : =$1D                 IOCSBP  EQU 29 ; SECTOR BUFFER POINTER/INITIAL SIZ
+(1)  214/       0 : =$1F                 IOCSBS  EQU 31 ; SECTOR BUFFER START ADDRESS
+(1)  215/       0 : =$21                 IOCSBE  EQU 33 ; SECTOR BUFFER END ADDRESS
+(1)  216/       0 : =$23                 IOCSBI  EQU 35 ; SECTOR BUFFER INTERNAL PTR
+(1)  217/       0 : =$25                 IOCBLN  EQU IOCSBI+2-IOCSTA ; IOCB LENGTH
+(1)  218/       0 :                     
+(1)  219/       0 :                     ;
+(1)  220/       0 :                     ; UNIFIED I/O ERROR STATUS
+(1)  221/       0 :                     ;
+(1)  222/       0 : =$0                  IsNOER  EQU  $0 ; NO ERRORS, NORMAL RETURN
+(1)  223/       0 : =$1                  IsNODV  EQU  $1 ; NO SUCH DEVICE
+(1)  224/       0 : =$2                  IsRES   EQU  $2 ; DEVICE RESERVED ALREADY
+(1)  225/       0 : =$3                  IsNORV  EQU  $3 ; DEVICE NOT RESERVED
+(1)  226/       0 : =$4                  IsNRDY  EQU  $4 ; DEVICE NOT READY
+(1)  227/       0 : =$5                  IsIVDV  EQU  $5 ; INVALID DEVICE
+(1)  228/       0 : =$6                  IsDUPE  EQU  $6 ; DUPLICATE FILE NAME
+(1)  229/       0 : =$7                  IsNONM  EQU  $7 ; FILE NAME NOT FOUND
+(1)  230/       0 : =$8                  IsCLOS  EQU  $8 ; INVALID OPEN/CLOSED FLAG
+(1)  231/       0 : =$9                  IsEOF   EQU  $9 ; END OF FILE
+(1)  232/       0 : =$A                  IsFTYP  EQU  $A ; INVALID FILE TYPE
+(1)  233/       0 : =$B                  IsDTYP  EQU  $B ; INVALID DATA TRANSFER TVPE
+(1)  234/       0 : =$C                  IsEOM   EQU  $C ; END OF MEDIA
+(1)  235/       0 : =$D                  IsBUFQ  EQU  $D ; BUFFER OVERFLOW
+(1)  236/       0 : =$E                  IsCKSM  EQU  $E ; CHECKSUM ERROR
+(1)  237/       0 : =$F                  IsWRIT  EQU  $F ; FILE IS WRITE PROTECTED
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm(mdoseq.inc) - Page 5 - 01/24/2026 02:35:53 PM
 
 
-(1)  238/       0 : =$F                  IsWRIT  EQU  $F ; FILE IS WRITE PROTECTED
-(1)  239/       0 : =$10                 IsDELT  EQU $10 ; FILE IS DELETE PROTECTED
-(1)  240/       0 : =$11                 IsRANG  EQU $11 ; LOQICAL SECTOR NUMBER OUT OF RANG
-(1)  241/       0 : =$12                 IsFSPC  EQU $12 ; NO DISK FILE SPACE AVAILABLE
-(1)  242/       0 : =$13                 IsDSPC  EQU $13 ; NO DIRECTORY SPACE AVAILABL.E
-(1)  243/       0 : =$14                 IsSSPC  EQU $14 ; NO SEGMENT DESCRIPTOR SPACE AVAIL
-(1)  244/       0 : =$15                 IsIDEN  EQU $15 ; INVALID DIR. ENTRY NO.
-(1)  245/       0 : =$16                 IsRIB   EQU $16 ; INVALID RIB
-(1)  246/       0 : =$17                 IsDEAL  EQU $17 ; CAN'T DEALLOCATE ALL SPACE
-(1)  247/       0 : =$18                 IsRECL  EQU $18 ; BINARY RECORD LENGTH TOO LRGE
-(1)  248/       0 : =$19                 IsSECB  EQU $19 ; SECTOR BUFFER SIZE ERROR
-(1)  249/       0 :                     
-(1)  250/       0 :                     ;
-(1)  251/       0 :                     ; MDOS INTERNAL VARIABLE AND LOCATION EQUATES
-(1)  252/       0 :                     ;
-(1)  253/       0 : =$100                MDOSs   EQU $100  ; START OF MDOS ASECT
-(1)  254/       0 : =$50                 CBUFLs  EQU  80   ; COMMAND BUFFER LENGTH
-(1)  255/       0 : =$AE                 CBUFFs  EQU  MDOSs-CBUFLs-2 ; COMMAND BUFFER LOCATION
-(1)  256/       0 : =$FE                 CBUFPs  EQU  CBUFFs+CBUFLs  ; COMMAND BUFFER SCAN POINTER
-(1)  257/       0 : =$100                VERSss  EQU  MDOSs    ; VERSION#
-(1)  258/       0 : =$102                REVSss  EQU  VERSss+2 ; REVISION#
-(1)  259/       0 : =$104                KYIsSV  EQU  REVSss+2 ; SAVE AREA FOR KEYINs VECTOR
-(1)  260/       0 : =$106                ENDOSs  EQU  KYIsSV+2 ; END OF MDOS
-(1)  261/       0 : =$108                ENDUSs  EQU  ENDOSs+2 ; END OF USER PROGRAM AREA
-(1)  262/       0 : =$10A                ENDSYs  EQU  ENDUSs+2 ; END OF SYSTEM (MDOS) RAM
-(1)  263/       0 : =$10E                RIBBAs  EQU  ENDSYs+4 ; RIB BUFFER ADDRESS
-(1)  264/       0 : =$110                ENDRVs  EQU  RIBBAs+2 ; END OF MDOS ROM VARIABLES
-(1)  265/       0 : =$112                GDBAs   EQU  ENDRVs+2 ; GENERIC DEVICE TABLE ADDRESS
-(1)  266/       0 :                     
-(1)  267/       0 : =$114                SYERRs  EQU GDBAs+2  ; SYSTEM ERROR STATUS WORD
-(1)  268/       0 : =$116                SWIsSV  EQU SYERRs+2 ; SWI VECTOR SAVE AREA
-(1)  269/       0 : =$118                SWIsUV  EQU SWIsSV+2 ; SWI USER VECTOR
-(1)  270/       0 : =$11A                IRGsUV  EQU SWIsUV+2 ; IRG USER VECTOR
-(1)  271/       0 : =$11C                IRGsSV  EQU IRGsUV+2 ; IRG VECTOR SAVE AREA
-(1)  272/       0 : =$11E                CHFLGs  EQU IRGsSV+2 ; CHAIN FUNCTION FLAG WORD
-(1)  273/       0 : =$120                SYIOCB  EQU CHFLGs+2 ; SYSTEM CONSOLE IOCB
-(1)  274/       0 : =$145                SYPOCB  EQU SYIOCB+IOCBLN ; SYSTEM PRINTER IOCB
-(1)  275/       0 : =$16A                SYEOCB  EQU SYPOCB+IOCBLN ; ERR MSG FILE
-(1)  276/       0 :                     
-(1)  277/       0 :                     ;
-(1)  278/       0 :                     ; LOGICAL UNIT NUMBER - BIT DEF
-(1)  279/       0 :                     ;
-(1)  280/       0 : =$40                 LUsRES EQU %01000000 ; IOCB RESERVED FLAG
-(1)  281/       0 :                     
-(1)  282/       0 :                     ;
-(1)  283/       0 :                     ; IOCDTT BIT DEFINITIONS
-(1)  284/       0 :                     ;
-(1)  285/       0 : =$0                  DTsOPP EQU %00000000 ; OPEN UPDATE/INPUT
-(1)  286/       0 : =$1                  DTsOPI EQU %00000001 ; OPEN INPUT MODE
-(1)  287/       0 : =$2                  DTsOPO EQU %00000010 ; OPEN OUTPUT MODE
-(1)  288/       0 : =$3                  DTsOPU EQU %00000011 ; OPEN UPDATE MODE
-(1)  289/       0 : =$4                  DTsNFF EQU %00000100 ; NON-FILE FORMAT I/O FLAG
-(1)  290/       0 : =$8                  DTsTRU EQU %00001000 ; TRUNCATE FLAG
-(1)  291/       0 : =$10                 DTsCLS EQU %00010000 ; FILE OPEN/CLOSE FLAG
-(1)  292/       0 : =$20                 DTsSIO EQU %00100000 ; SECTOR I/O FLAG
-(1)  293/       0 : =$40                 DTsOUT EQU %01000000 ; OUTPUT TRANSFER TYPE
-(1)  294/       0 : =$80                 DTsINP EQU %10000000 ; INPUT TRANSFER TYPE
-(1)  295/       0 :                     
-(1)  296/       0 :                     ;
-(1)  297/       0 :                     ; IOCFDF BIT DEFINITIONS
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm(mdoseq.inc) - Page 6 - 2026-01-23 11:21:24
+(1)  238/       0 : =$10                 IsDELT  EQU $10 ; FILE IS DELETE PROTECTED
+(1)  239/       0 : =$11                 IsRANG  EQU $11 ; LOQICAL SECTOR NUMBER OUT OF RANG
+(1)  240/       0 : =$12                 IsFSPC  EQU $12 ; NO DISK FILE SPACE AVAILABLE
+(1)  241/       0 : =$13                 IsDSPC  EQU $13 ; NO DIRECTORY SPACE AVAILABL.E
+(1)  242/       0 : =$14                 IsSSPC  EQU $14 ; NO SEGMENT DESCRIPTOR SPACE AVAIL
+(1)  243/       0 : =$15                 IsIDEN  EQU $15 ; INVALID DIR. ENTRY NO.
+(1)  244/       0 : =$16                 IsRIB   EQU $16 ; INVALID RIB
+(1)  245/       0 : =$17                 IsDEAL  EQU $17 ; CAN'T DEALLOCATE ALL SPACE
+(1)  246/       0 : =$18                 IsRECL  EQU $18 ; BINARY RECORD LENGTH TOO LRGE
+(1)  247/       0 : =$19                 IsSECB  EQU $19 ; SECTOR BUFFER SIZE ERROR
+(1)  248/       0 :                     
+(1)  249/       0 :                     ;
+(1)  250/       0 :                     ; MDOS INTERNAL VARIABLE AND LOCATION EQUATES
+(1)  251/       0 :                     ;
+(1)  252/       0 : =$100                MDOSs   EQU $100  ; START OF MDOS ASECT
+(1)  253/       0 : =$50                 CBUFLs  EQU  80   ; COMMAND BUFFER LENGTH
+(1)  254/       0 : =$AE                 CBUFFs  EQU  MDOSs-CBUFLs-2 ; COMMAND BUFFER LOCATION
+(1)  255/       0 : =$FE                 CBUFPs  EQU  CBUFFs+CBUFLs  ; COMMAND BUFFER SCAN POINTER
+(1)  256/       0 : =$100                VERSss  EQU  MDOSs    ; VERSION#
+(1)  257/       0 : =$102                REVSss  EQU  VERSss+2 ; REVISION#
+(1)  258/       0 : =$104                KYIsSV  EQU  REVSss+2 ; SAVE AREA FOR KEYINs VECTOR
+(1)  259/       0 : =$106                ENDOSs  EQU  KYIsSV+2 ; END OF MDOS
+(1)  260/       0 : =$108                ENDUSs  EQU  ENDOSs+2 ; END OF USER PROGRAM AREA
+(1)  261/       0 : =$10A                ENDSYs  EQU  ENDUSs+2 ; END OF SYSTEM (MDOS) RAM
+(1)  262/       0 : =$10E                RIBBAs  EQU  ENDSYs+4 ; RIB BUFFER ADDRESS
+(1)  263/       0 : =$110                ENDRVs  EQU  RIBBAs+2 ; END OF MDOS ROM VARIABLES
+(1)  264/       0 : =$112                GDBAs   EQU  ENDRVs+2 ; GENERIC DEVICE TABLE ADDRESS
+(1)  265/       0 :                     
+(1)  266/       0 : =$114                SYERRs  EQU GDBAs+2  ; SYSTEM ERROR STATUS WORD
+(1)  267/       0 : =$116                SWIsSV  EQU SYERRs+2 ; SWI VECTOR SAVE AREA
+(1)  268/       0 : =$118                SWIsUV  EQU SWIsSV+2 ; SWI USER VECTOR
+(1)  269/       0 : =$11A                IRGsUV  EQU SWIsUV+2 ; IRG USER VECTOR
+(1)  270/       0 : =$11C                IRGsSV  EQU IRGsUV+2 ; IRG VECTOR SAVE AREA
+(1)  271/       0 : =$11E                CHFLGs  EQU IRGsSV+2 ; CHAIN FUNCTION FLAG WORD
+(1)  272/       0 : =$120                SYIOCB  EQU CHFLGs+2 ; SYSTEM CONSOLE IOCB
+(1)  273/       0 : =$145                SYPOCB  EQU SYIOCB+IOCBLN ; SYSTEM PRINTER IOCB
+(1)  274/       0 : =$16A                SYEOCB  EQU SYPOCB+IOCBLN ; ERR MSG FILE
+(1)  275/       0 :                     
+(1)  276/       0 :                     ;
+(1)  277/       0 :                     ; LOGICAL UNIT NUMBER - BIT DEF
+(1)  278/       0 :                     ;
+(1)  279/       0 : =$40                 LUsRES EQU %01000000 ; IOCB RESERVED FLAG
+(1)  280/       0 :                     
+(1)  281/       0 :                     ;
+(1)  282/       0 :                     ; IOCDTT BIT DEFINITIONS
+(1)  283/       0 :                     ;
+(1)  284/       0 : =$0                  DTsOPP EQU %00000000 ; OPEN UPDATE/INPUT
+(1)  285/       0 : =$1                  DTsOPI EQU %00000001 ; OPEN INPUT MODE
+(1)  286/       0 : =$2                  DTsOPO EQU %00000010 ; OPEN OUTPUT MODE
+(1)  287/       0 : =$3                  DTsOPU EQU %00000011 ; OPEN UPDATE MODE
+(1)  288/       0 : =$4                  DTsNFF EQU %00000100 ; NON-FILE FORMAT I/O FLAG
+(1)  289/       0 : =$8                  DTsTRU EQU %00001000 ; TRUNCATE FLAG
+(1)  290/       0 : =$10                 DTsCLS EQU %00010000 ; FILE OPEN/CLOSE FLAG
+(1)  291/       0 : =$20                 DTsSIO EQU %00100000 ; SECTOR I/O FLAG
+(1)  292/       0 : =$40                 DTsOUT EQU %01000000 ; OUTPUT TRANSFER TYPE
+(1)  293/       0 : =$80                 DTsINP EQU %10000000 ; INPUT TRANSFER TYPE
+(1)  294/       0 :                     
+(1)  295/       0 :                     ;
+(1)  296/       0 :                     ; IOCFDF BIT DEFINITIONS
+(1)  297/       0 :                     ;
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm(mdoseq.inc) - Page 6 - 01/24/2026 02:35:53 PM
 
 
-(1)  298/       0 :                     ;
-(1)  299/       0 : =$0                  FDsFMU EQU %00000000 ; USER DEFINED FORMAT (SECTOR I/O)
-(1)  300/       0 : =$1                  FDsFMD EQU %00000001 ; DEFAULT OBJECT REC'D FORMAT
-(1)  301/       0 : =$2                  FDsFML EQU %00000010 ; BINARY LOAD FORMAT
-(1)  302/       0 : =$3                  FDsFMB EQU %00000011 ; BINARY RECORD FORMAT
-(1)  303/       0 : =$5                  FDsFMA EQU %00000101 ; ASCII RECORD FORMAT
-(1)  304/       0 : =$7                  FDsFMC EQU %00000111 ; ASCI-CONVERTED-BINARY REC'O FORM
-(1)  305/       0 : =$8                  FDsCMP EQU %00001000 ; SPACE COMPRESSION FLAG
-(1)  306/       0 : =$10                 FDsCON EQU %00010000 ; CONTIGUOUS ALLOCATION FLAG
-(1)  307/       0 : =$20                 FDsSYS EQU %00100000 ; SYSTEM FILE ATTRIBUTE
-(1)  308/       0 : =$40                 FDsDEL EQU %01000000 ; DELETE PROTECTION ATTRIBUTE
-(1)  309/       0 : =$80                 FDsWRT EQU %10000000 ; WRITE PROTECTION ATTRIBUTE
-(1)  310/       0 :                     
-(1)  311/       0 :                     ;
-(1)  312/       0 :                     ; UNIFIED I/O CONTROL DESCRIPTION BLOCK OFFSETS
-(1)  313/       0 :                     ;
-(1)  314/       0 : =$0                  CDBIOC EQU  0 ; ADDRESS OF IOCB
-(1)  315/       0 : =$2                  CDBSDA EQU  2 ; SOFTWARE DRIVER ADDRESS
-(1)  316/       0 : =$4                  CDBHAD EQU  4 ; HARDWARE ADDRESS
-(1)  317/       0 : =$6                  CDBDDF EQU  6 ; DEVICE DESCRIPTOR FLAGS
-(1)  318/       0 : =$7                  CDBVDT EQU  7 ; VALID DATA TYPE
-(1)  319/       0 : =$8                  CDBDDA EQU  8 ; DEVICE DEPENDENT AREA
-(1)  320/       0 : =$A                  CDBWST EQU 10 ; WORKING STORAGE
-(1)  321/       0 : =$C                  CDBLEN EQU CDBWST+2 ; CDB LENGTH
-(1)  322/       0 :                     
-(1)  323/       0 :                     ;
-(1)  324/       0 :                     ; CDBDDF BIT DEFINITIONS
-(1)  325/       0 :                     ;
-(1)  326/       0 : =$1                  DDsFMC EQU $00000001 ; ASCII-CONVERTED-BINARY IS DEFAUL
-(1)  327/       0 : =$2                  DDsLOG EQU %00000010 ; LOGICAL SECTOR I/O FLAG
-(1)  328/       0 : =$4                  DDsCNS EQU %00000100 ; CONSOLE FLAG
-(1)  329/       0 : =$8                  DDsRWD EQU %00001000 ; REWIND FLAG
-(1)  330/       0 : =$10                 DDsOCF EQU %00010000 ; OPEN/CLOSE FLAG
-(1)  331/       0 : =$20                 DDsINP EQU %00100000 ; INPUT DEVICE FLAG
-(1)  332/       0 : =$40                 DDsOUT EQU %01000000 ; OUTPUT DEVICE FLAG
-(1)  333/       0 : =$80                 DDsRES EQU %10000000 ; RESERVABLE DEVICE FLAG
-(1)  334/       0 :                     
-(1)  335/       0 :                     ;
-(1)  336/       0 :                     ; CDBVDT BIT DEFINITIONS
-(1)  337/       0 :                     ;
-(1)  338/       0 : =$4                  VDsBIN EQU %00000100 ; BINARY OBJECT FLAG
-(1)  339/       0 : =$8                  VDsGDB EQU %00001000 ; TEMP GDB POINTER FLAG
-(1)  340/       0 : =$10                 VDsSDA EQU %00010000 ; TEMP SDA POINTER FLAG
-(1)  341/       0 : =$80                 VDsNFF EQU %10000000 ; NON-FILE FORMAT FLAG
-(1)  342/       0 :                     
-(1)  343/       0 :                     ;
-(1)  344/       0 :                     ; DEVICE DRIVER ENTRY OFFSET
-(1)  345/       0 :                     ;
-(1)  346/       0 : =$0                  DVsON   EQU 0   ; DEVICE ON OFFSET
-(1)  347/       0 : =$3                  DVsOFF  EQU 3   ; DEVICE OFF OFFSET
-(1)  348/       0 : =$6                  DVsINT  EQU 6   ; DEVICE INTIALIZATION OFFSET
-(1)  349/       0 : =$9                  DVsTRM  EQU 9   ; DEVICE TERMINATION OFFSET
-(1)  350/       0 : =$C                  DVsIO   EQU 12  ; DEVICE CHARACTER INPUT/OUTPUT OFF
-(1)  351/       0 :                     
-(1)  352/       0 :                     ;
-(1)  353/       0 :                     ; DISK EROM EQUATES
-(1)  354/       0 :                     ;
-(1)  355/       0 : =$0                  CURDRV  EQU  0 ; CURRENT DRIVE NUMBER
-(1)  356/       0 : =$1                  STRSCT  EQU  1 ; STARTING PHYSICAL SECTOR NUMBER
-(1)  357/       0 : =$3                  NUMSCT  EQU  3 ; NUMBER OF SECTORS TO OPERATE UPON
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm(mdoseq.inc) - Page 7 - 2026-01-23 11:21:24
+(1)  298/       0 : =$0                  FDsFMU EQU %00000000 ; USER DEFINED FORMAT (SECTOR I/O)
+(1)  299/       0 : =$1                  FDsFMD EQU %00000001 ; DEFAULT OBJECT REC'D FORMAT
+(1)  300/       0 : =$2                  FDsFML EQU %00000010 ; BINARY LOAD FORMAT
+(1)  301/       0 : =$3                  FDsFMB EQU %00000011 ; BINARY RECORD FORMAT
+(1)  302/       0 : =$5                  FDsFMA EQU %00000101 ; ASCII RECORD FORMAT
+(1)  303/       0 : =$7                  FDsFMC EQU %00000111 ; ASCI-CONVERTED-BINARY REC'O FORM
+(1)  304/       0 : =$8                  FDsCMP EQU %00001000 ; SPACE COMPRESSION FLAG
+(1)  305/       0 : =$10                 FDsCON EQU %00010000 ; CONTIGUOUS ALLOCATION FLAG
+(1)  306/       0 : =$20                 FDsSYS EQU %00100000 ; SYSTEM FILE ATTRIBUTE
+(1)  307/       0 : =$40                 FDsDEL EQU %01000000 ; DELETE PROTECTION ATTRIBUTE
+(1)  308/       0 : =$80                 FDsWRT EQU %10000000 ; WRITE PROTECTION ATTRIBUTE
+(1)  309/       0 :                     
+(1)  310/       0 :                     ;
+(1)  311/       0 :                     ; UNIFIED I/O CONTROL DESCRIPTION BLOCK OFFSETS
+(1)  312/       0 :                     ;
+(1)  313/       0 : =$0                  CDBIOC EQU  0 ; ADDRESS OF IOCB
+(1)  314/       0 : =$2                  CDBSDA EQU  2 ; SOFTWARE DRIVER ADDRESS
+(1)  315/       0 : =$4                  CDBHAD EQU  4 ; HARDWARE ADDRESS
+(1)  316/       0 : =$6                  CDBDDF EQU  6 ; DEVICE DESCRIPTOR FLAGS
+(1)  317/       0 : =$7                  CDBVDT EQU  7 ; VALID DATA TYPE
+(1)  318/       0 : =$8                  CDBDDA EQU  8 ; DEVICE DEPENDENT AREA
+(1)  319/       0 : =$A                  CDBWST EQU 10 ; WORKING STORAGE
+(1)  320/       0 : =$C                  CDBLEN EQU CDBWST+2 ; CDB LENGTH
+(1)  321/       0 :                     
+(1)  322/       0 :                     ;
+(1)  323/       0 :                     ; CDBDDF BIT DEFINITIONS
+(1)  324/       0 :                     ;
+(1)  325/       0 : =$1                  DDsFMC EQU $00000001 ; ASCII-CONVERTED-BINARY IS DEFAUL
+(1)  326/       0 : =$2                  DDsLOG EQU %00000010 ; LOGICAL SECTOR I/O FLAG
+(1)  327/       0 : =$4                  DDsCNS EQU %00000100 ; CONSOLE FLAG
+(1)  328/       0 : =$8                  DDsRWD EQU %00001000 ; REWIND FLAG
+(1)  329/       0 : =$10                 DDsOCF EQU %00010000 ; OPEN/CLOSE FLAG
+(1)  330/       0 : =$20                 DDsINP EQU %00100000 ; INPUT DEVICE FLAG
+(1)  331/       0 : =$40                 DDsOUT EQU %01000000 ; OUTPUT DEVICE FLAG
+(1)  332/       0 : =$80                 DDsRES EQU %10000000 ; RESERVABLE DEVICE FLAG
+(1)  333/       0 :                     
+(1)  334/       0 :                     ;
+(1)  335/       0 :                     ; CDBVDT BIT DEFINITIONS
+(1)  336/       0 :                     ;
+(1)  337/       0 : =$4                  VDsBIN EQU %00000100 ; BINARY OBJECT FLAG
+(1)  338/       0 : =$8                  VDsGDB EQU %00001000 ; TEMP GDB POINTER FLAG
+(1)  339/       0 : =$10                 VDsSDA EQU %00010000 ; TEMP SDA POINTER FLAG
+(1)  340/       0 : =$80                 VDsNFF EQU %10000000 ; NON-FILE FORMAT FLAG
+(1)  341/       0 :                     
+(1)  342/       0 :                     ;
+(1)  343/       0 :                     ; DEVICE DRIVER ENTRY OFFSET
+(1)  344/       0 :                     ;
+(1)  345/       0 : =$0                  DVsON   EQU 0   ; DEVICE ON OFFSET
+(1)  346/       0 : =$3                  DVsOFF  EQU 3   ; DEVICE OFF OFFSET
+(1)  347/       0 : =$6                  DVsINT  EQU 6   ; DEVICE INTIALIZATION OFFSET
+(1)  348/       0 : =$9                  DVsTRM  EQU 9   ; DEVICE TERMINATION OFFSET
+(1)  349/       0 : =$C                  DVsIO   EQU 12  ; DEVICE CHARACTER INPUT/OUTPUT OFF
+(1)  350/       0 :                     
+(1)  351/       0 :                     ;
+(1)  352/       0 :                     ; DISK EROM EQUATES
+(1)  353/       0 :                     ;
+(1)  354/       0 : =$0                  CURDRV  EQU  0 ; CURRENT DRIVE NUMBER
+(1)  355/       0 : =$1                  STRSCT  EQU  1 ; STARTING PHYSICAL SECTOR NUMBER
+(1)  356/       0 : =$3                  NUMSCT  EQU  3 ; NUMBER OF SECTORS TO OPERATE UPON
+(1)  357/       0 : =$5                  LSCTLN  EQU  5 ; # OF BYTES TO READ FROM LAST SECT
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm(mdoseq.inc) - Page 7 - 01/24/2026 02:35:53 PM
 
 
-(1)  358/       0 : =$5                  LSCTLN  EQU  5 ; # OF BYTES TO READ FROM LAST SECT
-(1)  359/       0 : =$6                  CURADR  EQU  6 ; MEMORY ADDRESS FOR DISK TRANSFER
-(1)  360/       0 : =$8                  FDSTAT  EQU  8 ; DISK TRANSFER STATUS
-(1)  361/       0 : =$B                  SCTCNT  EQU 11 ; SECTOR COUNT USED IN DETERMINING
-(1)  362/       0 : =$D                  SIDES   EQU $D ; - ->SINGLEi + -> DOUBLE SIDED
-(1)  363/       0 :                     
-(1)  364/       0 :                     ;
-(1)  365/       0 :                     ; EROM ENTRY POINTS
-(1)  366/       0 :                     ;
-(1)  367/       0 : =$E800               DSLOAD  EQU  $E800 ; BOOTSTRAP THE OPERATING SYSTEM
-(1)  368/       0 : =$E822               FDINIT  EQU  $E822 ; INITIALIZE THE DISK'S PIA AND SSD
-(1)  369/       0 : =$E853               CHKERR  EQU  $E853 ; CHECK AND PRINT ERROR FROM FDSTAT
-(1)  370/       0 : =$E85A               PRNTER  EQU  $E85A ; PRINT ERROR FROM FDSTAT
-(1)  371/       0 : =$E869               READSC  EQU  $E869 ; READ SECTOR(S)
-(1)  372/       0 : =$E86D               READPS  EQU  $E86D ; READ PARTIAL SECTOR
-(1)  373/       0 : =$E86F               RDCRC   EQU  $E86F ; READ AND CHECK FOR CRC
-(1)  374/       0 : =$E872               RWTEST  EQU  $E872 ; WRITE/READ TEST
-(1)  375/       0 : =$E875               RESTOR  EQU  $E875 ; MOVE HEAD TO TRACK 0
-(1)  376/       0 : =$E878               SEEK    EQU  $E878 ; POSITION HEAD TO TRACK OF "STRSCT
-(1)  377/       0 : =$E87B               WRTEST  EQU  $E87B ; WRITE TEST
-(1)  378/       0 : =$E87E               WRDDAM  EQU  $E87E ; WRITE DELETED DATA MARK
-(1)  379/       0 : =$E881               WRVERF  EQU  $E881 ; WRITE AND VERIFY CRC
-(1)  380/       0 : =$E884               WRITSC  EQU  $E884 ; WRITE SECTDR(S)
-(1)  381/       0 :                     
-(1)  382/       0 :                     ;
-(1)  383/       0 :                     ; EROM ERROR EQUATES
-(1)  384/       0 :                     ;
-(1)  385/       0 : ='1'                 ERsCRC  EQU  '1' ; DATA CRC ERROR
-(1)  386/       0 : ='2'                 ERsWRT  EQU  '2' ; WRITE PROTECTED DISK
-(1)  387/       0 : ='3'                 ERsRDY  EQU  '3' ; DISK NOT READY
-(1)  388/       0 : ='4'                 ERsMRK  EQU  '4' ; DELETED DATA MARK ENCOUNTERED
-(1)  389/       0 : ='5'                 ERsTIM  EQU  '5' ; TIMEOUT
-(1)  390/       0 : ='6'                 ERsDAD  EQU  '6' ; INVALID DISK ADDRESS
-(1)  391/       0 : ='7'                 ERsSEK  EQU  '7' ; SEEK ERROR
-(1)  392/       0 : ='8'                 ERsDMA  EQU  '8' ; DATA ADDRESS MARK ERROR
-(1)  393/       0 : ='9'                 ERsACR  EQU  '9' ; ADDRESS MARK CRC ERROR
-(1)  394/       0 :                     
-(1)  395/       0 :                     ;
-(1)  396/       0 :                     ; MISCELLANEOUS EROM EQUATES
-(1)  397/       0 :                     ;
-(1)  398/       0 : =$5                  RETRYs  EQU  5   ; RETRY COUNT FOR DISK READ/WRITE E
-(1)  399/       0 :                     
-(1)  400/       0 :                     ;
-(1)  401/       0 :                     ; LINE PRINTER EQUATES
-(1)  402/       0 :                     ;
-(1)  403/       0 : =$EBC0               LPINIT  EQU $EBC0 ; INIT PRINTER PIA
-(1)  404/       0 : =$EBCC               LIST    EQU $EBCC ; PRINT CONTENTS OF 'A'
-(1)  405/       0 : =$EBE4               LDATA   EQU $EBE4 ; PRINT STRING. CR/LF
-(1)  406/       0 : =$EBF2               LDATA1  EQU $EBF2 ; PRINT STRING, NO CR/LF
-(1)  407/       0 :                     
-(1)  408/       0 :                     ;
-(1)  409/       0 :                     ; EXBUG EQUATES FOR MDOS
-(1)  410/       0 :                     ;
-(1)  411/       0 :                     
-(1)  412/       0 : =$F015               INCHNP EQU  $F015  ; INPUT CHARACTER (NO PARITY)
-(1)  413/       0 : =$F018               OUTCH  EQU  $F018  ; OUTPUT ONE CHARACTER
-(1)  414/       0 : =$F021               PCRLF  EQU  $F021  ; PRINT LF/CR
-(1)  415/       0 : =$F024               PDATA  EQU  $F024  ; PRINT STRING
-(1)  416/       0 : =$FCFD               SBITs  EQU  $FCFD  ; BIT 7 INDICATES IRG OCCURRED (IF
-(1)  417/       0 : =$FF1F               BRKPTs EQU  $FF1F  ; MAID'S BREAKPOINT TABLE <8 FDB'S)
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm(mdoseq.inc) - Page 8 - 2026-01-23 11:21:24
+(1)  358/       0 : =$6                  CURADR  EQU  6 ; MEMORY ADDRESS FOR DISK TRANSFER
+(1)  359/       0 : =$8                  FDSTAT  EQU  8 ; DISK TRANSFER STATUS
+(1)  360/       0 : =$B                  SCTCNT  EQU 11 ; SECTOR COUNT USED IN DETERMINING
+(1)  361/       0 : =$D                  SIDES   EQU $D ; - ->SINGLEi + -> DOUBLE SIDED
+(1)  362/       0 :                     
+(1)  363/       0 :                     ;
+(1)  364/       0 :                     ; EROM ENTRY POINTS
+(1)  365/       0 :                     ;
+(1)  366/       0 : =$E800               DSLOAD  EQU  $E800 ; BOOTSTRAP THE OPERATING SYSTEM
+(1)  367/       0 : =$E822               FDINIT  EQU  $E822 ; INITIALIZE THE DISK'S PIA AND SSD
+(1)  368/       0 : =$E853               CHKERR  EQU  $E853 ; CHECK AND PRINT ERROR FROM FDSTAT
+(1)  369/       0 : =$E85A               PRNTER  EQU  $E85A ; PRINT ERROR FROM FDSTAT
+(1)  370/       0 : =$E869               READSC  EQU  $E869 ; READ SECTOR(S)
+(1)  371/       0 : =$E86D               READPS  EQU  $E86D ; READ PARTIAL SECTOR
+(1)  372/       0 : =$E86F               RDCRC   EQU  $E86F ; READ AND CHECK FOR CRC
+(1)  373/       0 : =$E872               RWTEST  EQU  $E872 ; WRITE/READ TEST
+(1)  374/       0 : =$E875               RESTOR  EQU  $E875 ; MOVE HEAD TO TRACK 0
+(1)  375/       0 : =$E878               SEEK    EQU  $E878 ; POSITION HEAD TO TRACK OF "STRSCT
+(1)  376/       0 : =$E87B               WRTEST  EQU  $E87B ; WRITE TEST
+(1)  377/       0 : =$E87E               WRDDAM  EQU  $E87E ; WRITE DELETED DATA MARK
+(1)  378/       0 : =$E881               WRVERF  EQU  $E881 ; WRITE AND VERIFY CRC
+(1)  379/       0 : =$E884               WRITSC  EQU  $E884 ; WRITE SECTDR(S)
+(1)  380/       0 :                     
+(1)  381/       0 :                     ;
+(1)  382/       0 :                     ; EROM ERROR EQUATES
+(1)  383/       0 :                     ;
+(1)  384/       0 : ='1'                 ERsCRC  EQU  '1' ; DATA CRC ERROR
+(1)  385/       0 : ='2'                 ERsWRT  EQU  '2' ; WRITE PROTECTED DISK
+(1)  386/       0 : ='3'                 ERsRDY  EQU  '3' ; DISK NOT READY
+(1)  387/       0 : ='4'                 ERsMRK  EQU  '4' ; DELETED DATA MARK ENCOUNTERED
+(1)  388/       0 : ='5'                 ERsTIM  EQU  '5' ; TIMEOUT
+(1)  389/       0 : ='6'                 ERsDAD  EQU  '6' ; INVALID DISK ADDRESS
+(1)  390/       0 : ='7'                 ERsSEK  EQU  '7' ; SEEK ERROR
+(1)  391/       0 : ='8'                 ERsDMA  EQU  '8' ; DATA ADDRESS MARK ERROR
+(1)  392/       0 : ='9'                 ERsACR  EQU  '9' ; ADDRESS MARK CRC ERROR
+(1)  393/       0 :                     
+(1)  394/       0 :                     ;
+(1)  395/       0 :                     ; MISCELLANEOUS EROM EQUATES
+(1)  396/       0 :                     ;
+(1)  397/       0 : =$5                  RETRYs  EQU  5   ; RETRY COUNT FOR DISK READ/WRITE E
+(1)  398/       0 :                     
+(1)  399/       0 :                     ;
+(1)  400/       0 :                     ; LINE PRINTER EQUATES
+(1)  401/       0 :                     ;
+(1)  402/       0 : =$EBC0               LPINIT  EQU $EBC0 ; INIT PRINTER PIA
+(1)  403/       0 : =$EBCC               LIST    EQU $EBCC ; PRINT CONTENTS OF 'A'
+(1)  404/       0 : =$EBE4               LDATA   EQU $EBE4 ; PRINT STRING. CR/LF
+(1)  405/       0 : =$EBF2               LDATA1  EQU $EBF2 ; PRINT STRING, NO CR/LF
+(1)  406/       0 :                     
+(1)  407/       0 :                     ;
+(1)  408/       0 :                     ; EXBUG EQUATES FOR MDOS
+(1)  409/       0 :                     ;
+(1)  410/       0 :                     
+(1)  411/       0 : =$F015               INCHNP EQU  $F015  ; INPUT CHARACTER (NO PARITY)
+(1)  412/       0 : =$F018               OUTCH  EQU  $F018  ; OUTPUT ONE CHARACTER
+(1)  413/       0 : =$F021               PCRLF  EQU  $F021  ; PRINT LF/CR
+(1)  414/       0 : =$F024               PDATA  EQU  $F024  ; PRINT STRING
+(1)  415/       0 : =$FCFD               SBITs  EQU  $FCFD  ; BIT 7 INDICATES IRG OCCURRED (IF
+(1)  416/       0 : =$FF1F               BRKPTs EQU  $FF1F  ; MAID'S BREAKPOINT TABLE <8 FDB'S)
+(1)  417/       0 : =$FF4F               BKPINs EQU  $FF4F  ; EXBUG BREAKPOINTS IN MEMORY
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm(mdoseq.inc) - Page 8 - 01/24/2026 02:35:53 PM
 
 
-(1)  418/       0 : =$FF4F               BKPINs EQU  $FF4F  ; EXBUG BREAKPOINTS IN MEMORY
-(1)  419/       0 : =$FF53               AECHO  EQU  $FF53  ; INPUT CHARACTER ECHO FLAG (O=>ECH
-(1)  420/       0 : =$FFF8               IRGsVC EQU  $FFF8  ; IRG VECTOR
-(1)  421/       0 : =$FFFA               SWIsVC EQU  $FFFA  ; SWI VECTOR
-(1)  422/       0 : =$FFFC               NMIsVC EQU  $FFFC  ; NMI VECTOR
-(1)  423/       0 : =$FF8A               XSTAKs EQU  $FF8A  ; EXBUG STACK
-(1)  424/       0 : =$F0F3               MAIDs  EQU  $F0F3  ; MAID ENTRY POINT
-(1)  425/       0 : =$FF16               XREGsP EQU  $FF16  ; MAID P-REG.
-(1)  426/       0 : =$FF18               XREGsX EQU  $FF18  ; MAID X-REG.
-(1)  427/       0 : =$FF1A               XREGsA EQU  $FF1A  ; MAID A-REG.
-(1)  428/       0 : =$FF1B               XREGsB EQU  $FF1B  ; MAID B-REG.
-(1)  429/       0 : =$FF1C               XREGsC EQU  $FF1C  ; MAID C-REG.
-(1)  430/       0 : =$FF1D               XREGsS EQU  $FF1D  ; MAID S-REG.
-(1)  431/       0 : =$FF63               BRKPEs EQU  $FF63  ; END OF MAID BREAKPOINT TABLE
-(1)  432/       0 : =$FCF4               CNACIs EQU  $FCF4  ; CONSOLE ACIA
+(1)  418/       0 : =$FF53               AECHO  EQU  $FF53  ; INPUT CHARACTER ECHO FLAG (O=>ECH
+(1)  419/       0 : =$FFF8               IRGsVC EQU  $FFF8  ; IRG VECTOR
+(1)  420/       0 : =$FFFA               SWIsVC EQU  $FFFA  ; SWI VECTOR
+(1)  421/       0 : =$FFFC               NMIsVC EQU  $FFFC  ; NMI VECTOR
+(1)  422/       0 : =$FF8A               XSTAKs EQU  $FF8A  ; EXBUG STACK
+(1)  423/       0 : =$F0F3               MAIDs  EQU  $F0F3  ; MAID ENTRY POINT
+(1)  424/       0 : =$FF16               XREGsP EQU  $FF16  ; MAID P-REG.
+(1)  425/       0 : =$FF18               XREGsX EQU  $FF18  ; MAID X-REG.
+(1)  426/       0 : =$FF1A               XREGsA EQU  $FF1A  ; MAID A-REG.
+(1)  427/       0 : =$FF1B               XREGsB EQU  $FF1B  ; MAID B-REG.
+(1)  428/       0 : =$FF1C               XREGsC EQU  $FF1C  ; MAID C-REG.
+(1)  429/       0 : =$FF1D               XREGsS EQU  $FF1D  ; MAID S-REG.
+(1)  430/       0 : =$FF63               BRKPEs EQU  $FF63  ; END OF MAID BREAKPOINT TABLE
+(1)  431/       0 : =$FCF4               CNACIs EQU  $FCF4  ; CONSOLE ACIA
+(1)  432/       0 :                     
 (1)  433/       0 :                     
 (1)  434/       0 :                     
 (1)  435/       0 :                     
@@ -478,7 +478,6 @@
 (1)  451/       0 :                     
 (1)  452/       0 :                     
 (1)  453/       0 :                     
-(1)  454/       0 :                     
        4/       0 :                     
        5/       0 : =$1                  STRSCTH EQU     $0001
        6/       0 : =$2                  STRSCTL EQU     $0002
@@ -502,10 +501,10 @@
       24/       0 : =$22                 EXADDR     EQU     $0022
       25/       0 : =$24                 ONECON     EQU     $0024
       26/       0 :                     ; The PIA has A0 and A1 switched!
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 9 - 2026-01-23 11:21:24
-
-
       27/       0 :                     ; 00 with CRA2 Set is Peripheral Register A 
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 9 - 01/24/2026 02:35:53 PM
+
+
       28/       0 :                     ; 00 with CRA2 cleared is Data Direction Register A 
       29/       0 :                     ; 01 with CRB2 Set is Peripheral Register B 
       30/       0 :                     ; 01 with CRB2 cleared is Data Direction Register B 
@@ -565,10 +564,10 @@
       84/    E84C : FF EC 02                            STX     PIACTRL                  ; E84C: FF EC 02  ; Select both Output Reg., Set CA2 (STEP), Set CB2 (NMI Timer), IRQB (IRQ) Set by LH Transition of CB1 (IDX)
       85/    E84F : 39                  IE84F           RTS                              ; E84F: 39        ; Both Output Regsters Selected
       86/    E850 :                     ;------------------------------------------------
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 10 - 2026-01-23 11:21:24
-
-
       87/    E850 : BD EB A6            FDINIT2         JSR     FDINIT3                  ; E850: BD EB A6  ; 
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 10 - 01/24/2026 02:35:53 PM
+
+
       88/    E853 :                     ;------------------------------------------------
       89/    E853 :                     ;CHKERR
       90/    E853 : 24 FA                               BCC     IE84F                    ; E853: 24 FA     ; no carry - no error
@@ -628,10 +627,10 @@
      144/    E875 : C6 08                               LDAB    #$08                     ; E875: C6 08    ; Bit 3 set     ; causes the read/write head on CURDRV to be positioned to cylinder zero. The only parameter required is CURDRV.
      145/    E877 : 8C                                  FCB     $8C
      146/    E878 :                     ;SEEK  
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 11 - 2026-01-23 11:21:24
-
-
      147/    E878 : C6 10                               LDAB    #$10                     ; E878: C6 10    ; Bit 4 set     ; causes the read/write head of CURDRV to be positioned to the cylinder containing STRSCT
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 11 - 01/24/2026 02:35:53 PM
+
+
      148/    E87A : 8C                                  FCB     $8C
      149/    E87B :                     ;WRTEST
      150/    E87B : C6 82                               LDAB    #$82                     ; E87B: C6 82    ; Bit 7,1 set   ; causes the two bytes of data pointed to by the address in CURADR and the address+ 1 to be written to alternating bytes, respectively
@@ -670,7 +669,7 @@
      183/    E8B2 : 97 13                               STAA    TRACKSAV                 ; E8B2: 97 13     ; 
      184/    E8B4 : 86 40                               LDAA    #$40                     ; E8B4: 86 40     ; PA6 (RDY)
      185/    E8B6 : B5 EC 00                            BITA    PIAREGA                  ; E8B6: B5 EC 00  ; Check Drive Ready
-     186/    E8B9 : 27 07                               BEQ     DRVRDY                   ; E8B9: 27 07     ; 
+     186/    E8B9 : 27 07                               BEQ     DRVRDY                   ; E8B9: 27 07     ; no problem if RDY is low
      187/    E8BB : C6 33               SERR3           LDAB    #$33                     ; E8BB: C6 33     ; Error '3' (DISK NOT READY)
      188/    E8BD :                     ;                CPX     #MC636                   ; E8BD: 8C C6 36  ; 
      189/    E8BD : 8C                                  FCB     $8C
@@ -691,10 +690,10 @@
      204/    E8D4 : 96 01                               LDAA    STRSCTH                  ; E8D4: 96 01     ; Get Startsector
      205/    E8D6 : DB 04                               ADDB    NUMSCTL                  ; E8D6: DB 04     ; |
      206/    E8D8 : 99 03                               ADCA    NUMSCTH                  ; E8D8: 99 03     ; Add Number of sectors
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 12 - 2026-01-23 11:21:24
-
-
      207/    E8DA : 25 E2                               BCS     SERR6                    ; E8DA: 25 E2     ; Set Error '6': INVALID DISK ADDRESS
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 12 - 01/24/2026 02:35:53 PM
+
+
      208/    E8DC : C1 D3                               CMPB    #$D3                     ; E8DC: C1 D3     ; |
      209/    E8DE : 82 07                               SBCA    #$07                     ; E8DE: 82 07     ; 0x7D3 = 2003 (sector too big)
      210/    E8E0 : 24 DC                               BCC     SERR6                    ; E8E0: 24 DC     ; Set Error '6': INVALID DISK ADDRESS
@@ -754,10 +753,10 @@
      264/    E93E : C6 37               SERR7           LDAB    #$37                                       ; Set Error '7' (SEEK ERROR)
      265/    E940 : D7 08               SETERR          STAB    FDSTAT                   ; E940: D7 08     ; 
      266/    E942 : 8D 4D                               BSR     ERRHNDLR                 ; E942: 8D 4D     ; 
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 13 - 2026-01-23 11:21:24
-
-
      267/    E944 : 0D                                  SEC                              ; E944: 0D        ; 
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 13 - 01/24/2026 02:35:53 PM
+
+
      268/    E945 : 39                                  RTS                              ; E945: 39        ; 
      269/    E946 :                     ;------------------------------------------------
      270/    E946 :                     ;
@@ -817,10 +816,10 @@
      324/    E99C : 96 13                               LDAA    TRACKSAV                 ; E99C: 96 13     ; 
      325/    E99E : D6 00                               LDAB    CURDRV                   ; E99E: D6 00     ; 
      326/    E9A0 : 27 03                               BEQ     IE9A5                    ; E9A0: 27 03     ; 
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 14 - 2026-01-23 11:21:24
-
-
      327/    E9A2 : 97 12                               STAA    M0012                    ; E9A2: 97 12     ; 
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 14 - 01/24/2026 02:35:53 PM
+
+
      328/    E9A4 :                     ;                CPX     #$9711                   ; E9A4: 8C 97 11  ; 
      329/    E9A4 : 8C                                  FCB     $8C
      330/    E9A5 : 97 11               IE9A5           STAA    $11                                       ;
@@ -880,10 +879,10 @@
      384/    E9FB : 8B 40               NOCRC           ADDA    #$40                     ; E9FB: 8B 40     ; 
      385/    E9FD : 97 09                               STAA    CWRDCNT                  ; E9FD: 97 09     ; 
      386/    E9FF : BD EB 74                            JSR     RETRG                    ; E9FF: BD EB 74  ; Retrigger NMI Timer
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 15 - 2026-01-23 11:21:24
-
-
      387/    EA02 : 96 13                               LDAA    TRACKSAV                 ; EA02: 96 13     ; 
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 15 - 01/24/2026 02:35:53 PM
+
+
      388/    EA04 : CA 0C                               ORAB    #$0C                     ; EA04: CA 0C     ; In B is FUNCSAV<<1, isol. Bit 2,3 (RWTEST, WRTEST, CLOCK)
      389/    EA06 : 81 2B                               CMPA    #$2B                     ; EA06: 81 2B     ; check for Track > 43
      390/    EA08 : 23 02                               BLS     IEA0C                    ; EA08: 23 02     ; No
@@ -943,10 +942,10 @@
      444/    EA67 : 26 FB                               BNE     IEA64                    ; EA67: 26 FB     ; |
      445/    EA69 : C6 04                               LDAB    #$04                     ; EA69: C6 04     ; Try four times
      446/    EA6B : BD E9 AC            IEA6B           JSR     READINIT                 ; EA6B: BD E9 AC  ; Initialize SSDA for Read, Toggle RESET
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 16 - 2026-01-23 11:21:24
-
-
      447/    EA6E : DE 06                               LDX     CURADRH                  ; EA6E: DE 06     ; Load Start Address
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 16 - 01/24/2026 02:35:53 PM
+
+
      448/    EA70 : B6 EC 04            IEA70           LDAA    SSDA_0                   ; EA70: B6 EC 04  ; Read SSDA Status Reg.
      449/    EA73 : 2A FB                               BPL     IEA70                    ; EA73: 2A FB     ; Wait and Test RDA for 2 Bytes Ready
      450/    EA75 : B6 EC 05                            LDAA    SSDA_1                   ; EA75: B6 EC 05  ; Read Data
@@ -1006,10 +1005,10 @@
      504/    EAD8 : DF 06                               STX     CURADRH                  ; EAD8: DF 06     ; CRC ok
      505/    EADA : 7E E9 D3                            JMP     NXTSEC     ; -->         ; EADA: 7E E9 D3  ; next sector
      506/    EADD :                     ;------------------------------------------------
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 17 - 2026-01-23 11:21:24
-
-
      507/    EADD :                     ;
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 17 - 01/24/2026 02:35:53 PM
+
+
      508/    EADD :                     ;------------------------------------------------
      509/    EADD : CE C0 DA            WRITINIT        LDX     #$C0DA                   ; EADD: CE C0 DA  ; 
      510/    EAE0 : FF EC 04                            STX     SSDA_0                   ; EAE0: FF EC 04  ; 
@@ -1069,10 +1068,10 @@
      564/    EB53 : A5 04               IEB53           BITA    $04,X                    ; EB53: A5 04     ; Check SSDA Status Reg.
      565/    EB55 : 27 FC                               BEQ     IEB53                    ; EB55: 27 FC     ; Wait for Data
      566/    EB57 : C6 08                               LDAB    #$08                     ; EB57: C6 08     ; 
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 18 - 2026-01-23 11:21:24
-
-
      567/    EB59 : E7 01                               STAB    $01,X                    ; EB59: E7 01     ; 
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 18 - 01/24/2026 02:35:53 PM
+
+
      568/    EB5B : E7 05                               STAB    $05,X                    ; EB5B: E7 05     ; 
      569/    EB5D : A5 04               IEB5D           BITA    $04,X                    ; EB5D: A5 04     ; 
      570/    EB5F : 27 FC                               BEQ     IEB5D                    ; EB5F: 27 FC     ; 
@@ -1132,10 +1131,10 @@
      624/    EBC0 :                     ;LPINIT
      625/    EBC0 : 86 03                               LDAA    #$03                     ; EBC0: 86 03     ; 
      626/    EBC2 : B7 EC 26                            STAA    MEC26                    ; EBC2: B7 EC 26  ; <------------------------------------ no RAM here!
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 19 - 2026-01-23 11:21:24
-
-
      627/    EBC5 : 86 15                               LDAA    #$15                     ; EBC5: 86 15     ; 
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 19 - 01/24/2026 02:35:53 PM
+
+
      628/    EBC7 : B7 EC 26                            STAA    MEC26                    ; EBC7: B7 EC 26  ; <------------------------------------ no RAM here! 
      629/    EBCA : 39                                  RTS                              ; EBCA: 39        ; 
      630/    EBCB :                     ;------------------------------------------------
@@ -1179,7 +1178,7 @@
      668/    EC00 :                     
      669/    EC00 :                     
      670/    EC00 :                                     END
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 20 - 2026-01-23 11:21:24
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 20 - 01/24/2026 02:35:53 PM
 
 
   Symbol Table (* = unused):
@@ -1215,7 +1214,7 @@
  CRCONLY :                     EABB C | *CURADR :                         6 - |
  CURADRH :                        6 - |  CURDRV :                         0 - |
 *CUSTOM :                         0 - |  CWRDCNT :                        9 - |
-*DATE :                "2026-01-23" - | *DC1 :                           11 - |
+*DATE :                "01/24/2026" - | *DC1 :                           11 - |
 *DC2 :                           12 - | *DC3 :                           13 - |
 *DC4 :                           14 - | *DDSCNS :                         4 - |
 *DDSFMC :                         1 - | *DDSINP :                        20 - |
@@ -1242,7 +1241,7 @@
 *DVSINT :                         6 - | *DVSIO :                          C - |
 *DVSOFF :                         3 - | *DVSON :                          0 - |
 *DVSTRM :                         9 - |  DWRDCNT :                       15 - |
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 21 - 2026-01-23 11:21:24
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 21 - 01/24/2026 02:35:53 PM
 
 
 *DWRIT1 :                         F - | *EDT :                            4 - |
@@ -1305,7 +1304,7 @@
  IOCSBI :                        23 - | *IOCSBP :                        1D - |
 *IOCSBS :                        1F - | *IOCSDW :                         D - |
 *IOCSLS :                         F - |  IOCSTA :                         0 - |
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 22 - 2026-01-23 11:21:24
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 22 - 01/24/2026 02:35:53 PM
 
 
 *IOCSUF :                        13 - |  IRGSSV :                       11C - |
@@ -1368,7 +1367,7 @@
 *RIBSLA :                        78 - | *RIBSLB :                        75 - |
 *RIBSSA :                        7A - | *RIBSSL :                        76 - |
 *RS :                            1E - | *RUBOUT :                        7F - |
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 23 - 2026-01-23 11:21:24
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 23 - 01/24/2026 02:35:53 PM
 
 
 *RWTEST :                      E872 - | *SBITS :                       FCFD - |
@@ -1401,7 +1400,7 @@
 *SWISVC :                      FFFA - | *SYEOCB :                       16A - |
  SYERRS :                       114 - |  SYIOCB :                       120 - |
 *SYN :                           16 - |  SYPOCB :                       145 - |
-*TBAX1 :                         25 - | *TIME :                  "11:21:24" - |
+*TBAX1 :                         25 - | *TIME :               "02:35:53 PM" - |
  TRACKSAV :                      13 - | *TRUE :                           1 - |
 *TXBA1 :                         24 - | *US :                            1F - |
 *VDSBIN :                         4 - | *VDSGDB :                         8 - |
@@ -1425,7 +1424,7 @@
     451 symbols
     307 unused symbols
 
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 24 - 2026-01-23 11:21:24
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 24 - 01/24/2026 02:35:53 PM
 
 
   Defined Macros:
@@ -1436,7 +1435,7 @@ SKIP2                                 |
 
       3 macros
 
- AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 25 - 2026-01-23 11:21:24
+ AS V1.42 Beta [Bld 216] - Source File floppy2_commented.asm - Page 25 - 01/24/2026 02:35:53 PM
 
 
   Code Pages:
@@ -1446,9 +1445,9 @@ STANDARD (0 changed characters)
 
 1 code page
 
-0.02 seconds assembly time
+0.01 seconds assembly time
 
-   1125 lines source file
+   1124 lines source file
       2 passes
       0 errors
       0 warnings

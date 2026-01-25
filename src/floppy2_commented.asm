@@ -183,7 +183,7 @@ IE8AD           STAA    PIAREGA                  ; E8AD: B7 EC 00  ; Write DS0, 
                 STAA    TRACKSAV                 ; E8B2: 97 13     ; 
                 LDAA    #$40                     ; E8B4: 86 40     ; PA6 (RDY)
                 BITA    PIAREGA                  ; E8B6: B5 EC 00  ; Check Drive Ready
-                BEQ     DRVRDY                   ; E8B9: 27 07     ; 
+                BEQ     DRVRDY                   ; E8B9: 27 07     ; no problem if RDY is low
 SERR3           LDAB    #$33                     ; E8BB: C6 33     ; Error '3' (DISK NOT READY)
 ;                CPX     #MC636                   ; E8BD: 8C C6 36  ; 
                 FCB     $8C
@@ -356,8 +356,8 @@ READINIT        LDX     #$D0D8                   ; E9AC: CE D0 D8  ; Select CR2 
 ; updates SECTCNT, SofTRK, CWRDCNT, DWRDCNT
 ;------------------------------------------------
 INCTRK          STAA    SofTRK                   ; E9CA: 97 0A     ; store new Sector of Track
-                JSR     STEP                     ; E9CC: BD E9 46  ; move to next Track (X < 0)
-                BSR     WAIT2                    ; E9CF: 8D 8B     ; wait some more (X < 0)
+                JSR     STEP                     ; E9CC: BD E9 46  ; move to next Track (X = 0)
+                BSR     WAIT2                    ; E9CF: 8D 8B     ; wait some more (X = 0)
                 INC     $13,X                    ; E9D1: 6C 13     ; increment TRACKSAV
 NXTSEC          INC     SofTRK                   ; E9D3: 7C 00 0A  ; increment Sector of Track
                 LDAA    SofTRK                   ; E9D6: 96 0A     ; Load it to A
@@ -417,7 +417,7 @@ IEA32           LDAA    $04,X                    ; EA32: A6 04     ; We are on t
                 BNE     IEA1A                    ; EA3C: 26 DC     ; Try again
 IEA3E           LDAA    $04,X                    ; EA3E: A6 04     ; Found Sector, Read SSDA Status Reg.
                 BPL     IEA3E                    ; EA40: 2A FC     ; Wait for Data
-                TST     $05,X                    ; EA42: 6D 05     ; 
+                TST     $05,X                    ; EA42: 6D 05     ; SSDA Data Reg
                 LDAA    CLKFREQ                  ; EA44: 96 19     ; 
 IEA46           SUBA    #$03                     ; EA46: 80 03     ; 
                 BHI     IEA46                    ; EA48: 22 FC     ; 
@@ -512,25 +512,26 @@ WRITINIT        LDX     #$C0DA                   ; EADD: CE C0 DA  ;
                 STX     SSDA_0                   ; EAE6: FF EC 04  ; 
                 LDX     #$C270                   ; EAE9: CE C2 70  ; 
                 STX     SSDA_0                   ; EAEC: FF EC 04  ; 
-                INC     PIAREGB                  ; EAEF: 7C EC 01  ; 
+                INC     PIAREGB                  ; EAEF: 7C EC 01  ; Reset inactive (PB0 high)
                 LDAA    #$82                     ; EAF2: 86 82     ; Bit 1,7
-                STAA    SSDA_0                   ; EAF4: B7 EC 04  ; WG off, PB7 is an Input 
-                DEX                              ; EAF7: 09        ; 
-                STAA    PIAREGB                  ; EAF8: B7 EC 01  ; 
-                LDAA    #$10                     ; EAFB: 86 10     ; Bit 4
+                STAA    SSDA_0                   ; EAF4: B7 EC 04  ; 
+                DEX                              ; EAF7: 09        ; timing
+                STAA    PIAREGB                  ; EAF8: B7 EC 01  ; WG off, PB0 low, PB7 is an Input 
+                LDAA    #$10                     ; EAFB: 86 10     ; Bit 4 (PB4 = WPT)
                 BITA    PIAREGB                  ; EAFD: B5 EC 01  ; Check Writeprot?
-                BEQ     SERR2                    ; EB00: 27 93     ; If yes set Error
+;                BEQ     SERR2                     ; EB00: 27 93     ; If low set Error
+                BNE     SERR2    ;<needs changing! ; EB00: 27 93     ; If high set Error (otherwise it conflicts with format.sy)
                 LDAA    CLKFREQ                  ; EB02: 96 19     ; Waitloop
                 SUBA    #$03                     ; EB04: 80 03     ; |
                 ASLA                             ; EB06: 48        ; |
 IEB07           DECA                             ; EB07: 4A        ; |
                 BPL     IEB07                    ; EB08: 2A FD     ; |
-                CLR     PIAREGB                  ; EB0A: 7F EC 01  ; Clear all PB (Set to Write, Reset off, ShiftCRC off, WG on)
-                RORB                             ; EB0D: 56        ; 
-                BCC     IEB11                    ; EB0E: 24 01     ; 
+                CLR     PIAREGB                  ; EB0A: 7F EC 01  ; Clear all PB (Set to Write, Reset active, ShiftCRC off, WG on)
+                RORB                             ; EB0D: 56        ; useless or timing?
+                BCC     IEB11                    ; EB0E: 24 01     ; useless or timing? 
 ;                BITA    #$56                     ; EB10: 85 56     ; 
                 FCB     $85                
-IEB11           RORB                             ;                 
+IEB11           RORB                             ;                 ; useless or timing?
                 LDX     #$0005                   ; EB12: CE 00 05  ; 
                 JSR     WAIT3                    ; EB15: BD E9 53  ; 
                 LDAB    #$40                     ; EB18: C6 40     ; 
@@ -563,19 +564,19 @@ IEB4D           BITA    $04,X                    ; EB4D: A5 04     ; Check SSDA 
                 STAB    $05,X                    ; EB51: E7 05     ; Store B to Data Register
 IEB53           BITA    $04,X                    ; EB53: A5 04     ; Check SSDA Status Reg.
                 BEQ     IEB53                    ; EB55: 27 FC     ; Wait for Data
-                LDAB    #$08                     ; EB57: C6 08     ; 
-                STAB    $01,X                    ; EB59: E7 01     ; 
-                STAB    $05,X                    ; EB5B: E7 05     ; 
-IEB5D           BITA    $04,X                    ; EB5D: A5 04     ; 
-                BEQ     IEB5D                    ; EB5F: 27 FC     ; 
-                LDAB    #$FF                     ; EB61: C6 FF     ; 
-                STAB    $05,X                    ; EB63: E7 05     ; 
-                STAB    $05,X                    ; EB65: E7 05     ; 
-IEB67           BITA    $04,X                    ; EB67: A5 04     ; 
-                BEQ     IEB67                    ; EB69: 27 FC     ; 
-                CLR     $01,X                    ; EB6B: 6F 01     ; 
-                INC     $01,X                    ; EB6D: 6C 01     ; 
-                INC     $01,X                    ; EB6F: 6C 01     ; 
+                LDAB    #$08                     ; EB57: C6 08     ; |
+                STAB    $01,X                    ; EB59: E7 01     ; Store $8 to PIAREGB
+                STAB    $05,X                    ; EB5B: E7 05     ; Store $8 to SSDA Data Reg.
+IEB5D           BITA    $04,X                    ; EB5D: A5 04     ; Check SSDA Status Reg.
+                BEQ     IEB5D                    ; EB5F: 27 FC     ; Wait for Data
+                LDAB    #$FF                     ; EB61: C6 FF     ; |
+                STAB    $05,X                    ; EB63: E7 05     ; |
+                STAB    $05,X                    ; EB65: E7 05     ; Store $FF to SSDA Data Reg.
+IEB67           BITA    $04,X                    ; EB67: A5 04     ; Check SSDA Status Reg.
+                BEQ     IEB67                    ; EB69: 27 FC     ; Wait for Data
+                CLR     $01,X                    ; EB6B: 6F 01     ; Clear PIAREGB           - toggle Reset and WG high
+                INC     $01,X                    ; EB6D: 6C 01     ; |                       - toggle Reset and WG high
+                INC     $01,X                    ; EB6F: 6C 01     ; should be $2 in PIAREGB - toggle Reset and WG high
                 JMP     NXTSEC    ; -->          ; EB71: 7E E9 D3  ; next sector
 ;------------------------------------------------
 RETRG           LDX     #PIAREGA                 ; EB74: CE EC 00  ; 

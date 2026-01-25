@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 1 - 2026-01-23 11:21:24
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 1 - 01/24/2026 02:35:53 PM
 
 
        1/       0 :                              include "mdoseq.inc"
@@ -61,7 +61,7 @@
 (1)   57/       0 : =$16                 ADDAM1   EQU $16 ; INCREMENT MEMORY (DOUBLE BYTE) BY
 (1)   58/       0 : =$17                 SUBAM1   EQU $17 ; DECREMENT MEMORY (DOUBLE BYTE) BY
 (1)   59/       0 : =$18                 MMA1     EQU $18 ; MULTIPLY (SHIFT LEFT) MEMORY BY A
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 2 - 2026-01-23 11:21:24
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 2 - 01/24/2026 02:35:53 PM
 
 
 (1)   60/       0 : =$19                 DMA1     EQU $19 ; DIVIDE (SHIFT RIGHT) MEMORY BY A
@@ -124,7 +124,7 @@
 (1)  117/       0 : =$E                  SO       EQU  $E ; SHIFT OUT
 (1)  118/       0 : =$F                  SI       EQU  $F ; SHIFT IN
 (1)  119/       0 : =$10                 DLE      EQU $10 ; DATA LINK ESCAPE
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 3 - 2026-01-23 11:21:24
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 3 - 01/24/2026 02:35:53 PM
 
 
 (1)  120/       0 : =$11                 DC1      EQU $11 ; DEVICE CONTROL 1
@@ -169,292 +169,292 @@
 (1)  159/       0 : =$1A                 SCsTRK   EQU 26  ; NUMBER OF SECTORS/TRACK (SINGLE S
 (1)  160/       0 : =$34                 SCsTKD   EQU 52  ; NUMBER OF SECTORS/CYLINDER (DOUBL
 (1)  161/       0 : =$4                  SCsCLS   EQU 4   ; NUMBER OF SECTORS / CLUSTER
-(1)  162/       0 :                     
-(1)  163/       0 : =$7D0                SCsMAX EQU 2000 ; MAXIMUM NO. OF USABLE SECTORS (SI
-(1)  164/       0 : =$FA4                SCsMXD EQU 4004 ; MAXIMUM NO. OF USABLE SECTORS <DO
-(1)  165/       0 : =$20                 DFCLSs EQU 32   ; DEFAULT NO. OF CLUSTERS
-(1)  166/       0 :                     
-(1)  167/       0 :                     ;
-(1)  168/       0 :                     ; DISK ID SECTOR OFFSETS
-(1)  169/       0 :                     ;
-(1)  170/       0 : =$0                  DIDsID  EQU  0   ; OFFSET TO DISK ID (8 BYTES)
-(1)  171/       0 : =$8                  DIDsVN  EQU  8   ; OFFSET TO VERSION NUMBER (2 BYTES
-(1)  172/       0 : =$A                  DIDsRN  EQU  10  ; OFFSET TO REVISION NUMBER (2 BYTE
-(1)  173/       0 : =$C                  DIDsDT  EQU  12  ; OFFSET TO DATE (6 BYTES)
-(1)  174/       0 : =$12                 DIDsNM  EQU  18  ; OFFSET TO USER NAME (20 BYTES)
-(1)  175/       0 : =$26                 DIDsRB  EQU  38  ; OFFSET TO RIB ADDRS. (20 BYTES)
-(1)  176/       0 :                     
-(1)  177/       0 :                     ;
-(1)  178/       0 :                     ; DIRECTORY ENTRY OFFSET
-(1)  179/       0 :                     ;
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 4 - 2026-01-23 11:21:24
+(1)  162/       0 : =$7D0                SCsMAX EQU 2000 ; MAXIMUM NO. OF USABLE SECTORS (SI
+(1)  163/       0 : =$FA4                SCsMXD EQU 4004 ; MAXIMUM NO. OF USABLE SECTORS <DO
+(1)  164/       0 : =$20                 DFCLSs EQU 32   ; DEFAULT NO. OF CLUSTERS
+(1)  165/       0 :                     
+(1)  166/       0 :                     ;
+(1)  167/       0 :                     ; DISK ID SECTOR OFFSETS
+(1)  168/       0 :                     ;
+(1)  169/       0 : =$0                  DIDsID  EQU  0   ; OFFSET TO DISK ID (8 BYTES)
+(1)  170/       0 : =$8                  DIDsVN  EQU  8   ; OFFSET TO VERSION NUMBER (2 BYTES
+(1)  171/       0 : =$A                  DIDsRN  EQU  10  ; OFFSET TO REVISION NUMBER (2 BYTE
+(1)  172/       0 : =$C                  DIDsDT  EQU  12  ; OFFSET TO DATE (6 BYTES)
+(1)  173/       0 : =$12                 DIDsNM  EQU  18  ; OFFSET TO USER NAME (20 BYTES)
+(1)  174/       0 : =$26                 DIDsRB  EQU  38  ; OFFSET TO RIB ADDRS. (20 BYTES)
+(1)  175/       0 :                     
+(1)  176/       0 :                     ;
+(1)  177/       0 :                     ; DIRECTORY ENTRY OFFSET
+(1)  178/       0 :                     ;
+(1)  179/       0 : =$0                  DIRsNM  EQU 0   ; OFFSET TO NAME (8 BYTES)
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 4 - 01/24/2026 02:35:53 PM
 
 
-(1)  180/       0 : =$0                  DIRsNM  EQU 0   ; OFFSET TO NAME (8 BYTES)
-(1)  181/       0 : =$8                  DIRsSX  EQU 8   ; OFFSET TO SUFFIX (2 BYTES)
-(1)  182/       0 : =$A                  DIRsRB  EQU 10  ; OFFSET TO RIB ADDRESS (2 BYTES)
-(1)  183/       0 : =$C                  DIRsAT  EQU 12  ; OFFSET OF ATTRIBUTES (2 BYTES)
-(1)  184/       0 : =$E                  DIRsNU  EQU 14  ; OFFSET TO NOT USED AREA (2 BYTES)
-(1)  185/       0 :                     
-(1)  186/       0 :                     ;
-(1)  187/       0 :                     ; RIB BINARY FILE OFFSET
-(1)  188/       0 :                     ;
-(1)  189/       0 : =$75                 RIBsLB  EQU 117 ; NUMBER OF BYTES IN LAST SECTOR
-(1)  190/       0 : =$76                 RIBsSL  EQU 118 ; NUMBER OF SECTORS TO LOAD
-(1)  191/       0 : =$78                 RIBsLA  EQU 120 ; MEMORY LOAD ADDRESS
-(1)  192/       0 : =$7A                 RIBsSA  EQU 122 ; START EXECUTION ADDRESS
-(1)  193/       0 :                     
-(1)  194/       0 :                     ;
-(1)  195/       0 :                     ; UNIFIED I/O CONTROL BLOCK OFFSETS
-(1)  196/       0 :                     ;
-(1)  197/       0 : =$0                  IOCSTA  EQU 0  ; ERROR STATUS
-(1)  198/       0 : =$1                  IOCDTT  EQU 1  ; DATA TRANSFER TYPE
-(1)  199/       0 : =$2                  IOCDBP  EQU 2  ; DATA BUFFER POINTER
-(1)  200/       0 : =$4                  IOCDBS  EQU 4  ; DATA BUFFER START ADDRESS
-(1)  201/       0 : =$6                  JOCDBE  EQU 6  ; DATA BUFFER END ADDRESS
-(1)  202/       0 : =$8                  IOCGDW  EQU 8  ; GENERIC DEVICE TYPE/CDB ADDRESS
-(1)  203/       0 : =$A                  IOCLUN  EQU 10 ; LOGICAL UNIT NUMBER
-(1)  204/       0 : =$B                  IOCNAM  EQU 11 ; FILE NAME
-(1)  205/       0 : =$B                  IOCMLS  EQU 11 ; MAXIMUM REFERENCED LSN
-(1)  206/       0 : =$D                  IOCSDW  EQU 13 ; CURRENT SEGMENT DESCRIPTOR WORD
-(1)  207/       0 : =$F                  IOCSLS  EQU 15 ; 1ST LOGICAL SECTOR OF CURRENT SEG
-(1)  208/       0 : =$11                 IOCLSN  EQU 17 ; CURRENT LOGICAL SECTOR NUMBER
-(1)  209/       0 : =$13                 IOCSUF  EQU 19 ; FILE NAME SUFFIX
-(1)  210/       0 : =$13                 IOCEOF  EQU 19 ; LOGICAL END OF FIl.E
-(1)  211/       0 : =$15                 IOCRIB  EQU 21 ; PHYSICAL DISK ADDRESS OF R. I.B.
-(1)  212/       0 : =$17                 IOCFDF  EQU 23 ; FILE DESCRIPTOR FLAGS
-(1)  213/       0 : =$1B                 IOCDEN  EQU 27 ; DIRECTORY ENTRY NUMBER
-(1)  214/       0 : =$1D                 IOCSBP  EQU 29 ; SECTOR BUFFER POINTER/INITIAL SIZ
-(1)  215/       0 : =$1F                 IOCSBS  EQU 31 ; SECTOR BUFFER START ADDRESS
-(1)  216/       0 : =$21                 IOCSBE  EQU 33 ; SECTOR BUFFER END ADDRESS
-(1)  217/       0 : =$23                 IOCSBI  EQU 35 ; SECTOR BUFFER INTERNAL PTR
-(1)  218/       0 : =$25                 IOCBLN  EQU IOCSBI+2-IOCSTA ; IOCB LENGTH
-(1)  219/       0 :                     
-(1)  220/       0 :                     ;
-(1)  221/       0 :                     ; UNIFIED I/O ERROR STATUS
-(1)  222/       0 :                     ;
-(1)  223/       0 : =$0                  IsNOER  EQU  $0 ; NO ERRORS, NORMAL RETURN
-(1)  224/       0 : =$1                  IsNODV  EQU  $1 ; NO SUCH DEVICE
-(1)  225/       0 : =$2                  IsRES   EQU  $2 ; DEVICE RESERVED ALREADY
-(1)  226/       0 : =$3                  IsNORV  EQU  $3 ; DEVICE NOT RESERVED
-(1)  227/       0 : =$4                  IsNRDY  EQU  $4 ; DEVICE NOT READY
-(1)  228/       0 : =$5                  IsIVDV  EQU  $5 ; INVALID DEVICE
-(1)  229/       0 : =$6                  IsDUPE  EQU  $6 ; DUPLICATE FILE NAME
-(1)  230/       0 : =$7                  IsNONM  EQU  $7 ; FILE NAME NOT FOUND
-(1)  231/       0 : =$8                  IsCLOS  EQU  $8 ; INVALID OPEN/CLOSED FLAG
-(1)  232/       0 : =$9                  IsEOF   EQU  $9 ; END OF FILE
-(1)  233/       0 : =$A                  IsFTYP  EQU  $A ; INVALID FILE TYPE
-(1)  234/       0 : =$B                  IsDTYP  EQU  $B ; INVALID DATA TRANSFER TVPE
-(1)  235/       0 : =$C                  IsEOM   EQU  $C ; END OF MEDIA
-(1)  236/       0 : =$D                  IsBUFQ  EQU  $D ; BUFFER OVERFLOW
-(1)  237/       0 : =$E                  IsCKSM  EQU  $E ; CHECKSUM ERROR
-(1)  238/       0 : =$F                  IsWRIT  EQU  $F ; FILE IS WRITE PROTECTED
-(1)  239/       0 : =$10                 IsDELT  EQU $10 ; FILE IS DELETE PROTECTED
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 5 - 2026-01-23 11:21:24
+(1)  180/       0 : =$8                  DIRsSX  EQU 8   ; OFFSET TO SUFFIX (2 BYTES)
+(1)  181/       0 : =$A                  DIRsRB  EQU 10  ; OFFSET TO RIB ADDRESS (2 BYTES)
+(1)  182/       0 : =$C                  DIRsAT  EQU 12  ; OFFSET OF ATTRIBUTES (2 BYTES)
+(1)  183/       0 : =$E                  DIRsNU  EQU 14  ; OFFSET TO NOT USED AREA (2 BYTES)
+(1)  184/       0 :                     
+(1)  185/       0 :                     ;
+(1)  186/       0 :                     ; RIB BINARY FILE OFFSET
+(1)  187/       0 :                     ;
+(1)  188/       0 : =$75                 RIBsLB  EQU 117 ; NUMBER OF BYTES IN LAST SECTOR
+(1)  189/       0 : =$76                 RIBsSL  EQU 118 ; NUMBER OF SECTORS TO LOAD
+(1)  190/       0 : =$78                 RIBsLA  EQU 120 ; MEMORY LOAD ADDRESS
+(1)  191/       0 : =$7A                 RIBsSA  EQU 122 ; START EXECUTION ADDRESS
+(1)  192/       0 :                     
+(1)  193/       0 :                     ;
+(1)  194/       0 :                     ; UNIFIED I/O CONTROL BLOCK OFFSETS
+(1)  195/       0 :                     ;
+(1)  196/       0 : =$0                  IOCSTA  EQU 0  ; ERROR STATUS
+(1)  197/       0 : =$1                  IOCDTT  EQU 1  ; DATA TRANSFER TYPE
+(1)  198/       0 : =$2                  IOCDBP  EQU 2  ; DATA BUFFER POINTER
+(1)  199/       0 : =$4                  IOCDBS  EQU 4  ; DATA BUFFER START ADDRESS
+(1)  200/       0 : =$6                  JOCDBE  EQU 6  ; DATA BUFFER END ADDRESS
+(1)  201/       0 : =$8                  IOCGDW  EQU 8  ; GENERIC DEVICE TYPE/CDB ADDRESS
+(1)  202/       0 : =$A                  IOCLUN  EQU 10 ; LOGICAL UNIT NUMBER
+(1)  203/       0 : =$B                  IOCNAM  EQU 11 ; FILE NAME
+(1)  204/       0 : =$B                  IOCMLS  EQU 11 ; MAXIMUM REFERENCED LSN
+(1)  205/       0 : =$D                  IOCSDW  EQU 13 ; CURRENT SEGMENT DESCRIPTOR WORD
+(1)  206/       0 : =$F                  IOCSLS  EQU 15 ; 1ST LOGICAL SECTOR OF CURRENT SEG
+(1)  207/       0 : =$11                 IOCLSN  EQU 17 ; CURRENT LOGICAL SECTOR NUMBER
+(1)  208/       0 : =$13                 IOCSUF  EQU 19 ; FILE NAME SUFFIX
+(1)  209/       0 : =$13                 IOCEOF  EQU 19 ; LOGICAL END OF FIl.E
+(1)  210/       0 : =$15                 IOCRIB  EQU 21 ; PHYSICAL DISK ADDRESS OF R. I.B.
+(1)  211/       0 : =$17                 IOCFDF  EQU 23 ; FILE DESCRIPTOR FLAGS
+(1)  212/       0 : =$1B                 IOCDEN  EQU 27 ; DIRECTORY ENTRY NUMBER
+(1)  213/       0 : =$1D                 IOCSBP  EQU 29 ; SECTOR BUFFER POINTER/INITIAL SIZ
+(1)  214/       0 : =$1F                 IOCSBS  EQU 31 ; SECTOR BUFFER START ADDRESS
+(1)  215/       0 : =$21                 IOCSBE  EQU 33 ; SECTOR BUFFER END ADDRESS
+(1)  216/       0 : =$23                 IOCSBI  EQU 35 ; SECTOR BUFFER INTERNAL PTR
+(1)  217/       0 : =$25                 IOCBLN  EQU IOCSBI+2-IOCSTA ; IOCB LENGTH
+(1)  218/       0 :                     
+(1)  219/       0 :                     ;
+(1)  220/       0 :                     ; UNIFIED I/O ERROR STATUS
+(1)  221/       0 :                     ;
+(1)  222/       0 : =$0                  IsNOER  EQU  $0 ; NO ERRORS, NORMAL RETURN
+(1)  223/       0 : =$1                  IsNODV  EQU  $1 ; NO SUCH DEVICE
+(1)  224/       0 : =$2                  IsRES   EQU  $2 ; DEVICE RESERVED ALREADY
+(1)  225/       0 : =$3                  IsNORV  EQU  $3 ; DEVICE NOT RESERVED
+(1)  226/       0 : =$4                  IsNRDY  EQU  $4 ; DEVICE NOT READY
+(1)  227/       0 : =$5                  IsIVDV  EQU  $5 ; INVALID DEVICE
+(1)  228/       0 : =$6                  IsDUPE  EQU  $6 ; DUPLICATE FILE NAME
+(1)  229/       0 : =$7                  IsNONM  EQU  $7 ; FILE NAME NOT FOUND
+(1)  230/       0 : =$8                  IsCLOS  EQU  $8 ; INVALID OPEN/CLOSED FLAG
+(1)  231/       0 : =$9                  IsEOF   EQU  $9 ; END OF FILE
+(1)  232/       0 : =$A                  IsFTYP  EQU  $A ; INVALID FILE TYPE
+(1)  233/       0 : =$B                  IsDTYP  EQU  $B ; INVALID DATA TRANSFER TVPE
+(1)  234/       0 : =$C                  IsEOM   EQU  $C ; END OF MEDIA
+(1)  235/       0 : =$D                  IsBUFQ  EQU  $D ; BUFFER OVERFLOW
+(1)  236/       0 : =$E                  IsCKSM  EQU  $E ; CHECKSUM ERROR
+(1)  237/       0 : =$F                  IsWRIT  EQU  $F ; FILE IS WRITE PROTECTED
+(1)  238/       0 : =$10                 IsDELT  EQU $10 ; FILE IS DELETE PROTECTED
+(1)  239/       0 : =$11                 IsRANG  EQU $11 ; LOQICAL SECTOR NUMBER OUT OF RANG
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 5 - 01/24/2026 02:35:53 PM
 
 
-(1)  240/       0 : =$11                 IsRANG  EQU $11 ; LOQICAL SECTOR NUMBER OUT OF RANG
-(1)  241/       0 : =$12                 IsFSPC  EQU $12 ; NO DISK FILE SPACE AVAILABLE
-(1)  242/       0 : =$13                 IsDSPC  EQU $13 ; NO DIRECTORY SPACE AVAILABL.E
-(1)  243/       0 : =$14                 IsSSPC  EQU $14 ; NO SEGMENT DESCRIPTOR SPACE AVAIL
-(1)  244/       0 : =$15                 IsIDEN  EQU $15 ; INVALID DIR. ENTRY NO.
-(1)  245/       0 : =$16                 IsRIB   EQU $16 ; INVALID RIB
-(1)  246/       0 : =$17                 IsDEAL  EQU $17 ; CAN'T DEALLOCATE ALL SPACE
-(1)  247/       0 : =$18                 IsRECL  EQU $18 ; BINARY RECORD LENGTH TOO LRGE
-(1)  248/       0 : =$19                 IsSECB  EQU $19 ; SECTOR BUFFER SIZE ERROR
-(1)  249/       0 :                     
-(1)  250/       0 :                     ;
-(1)  251/       0 :                     ; MDOS INTERNAL VARIABLE AND LOCATION EQUATES
-(1)  252/       0 :                     ;
-(1)  253/       0 : =$100                MDOSs   EQU $100  ; START OF MDOS ASECT
-(1)  254/       0 : =$50                 CBUFLs  EQU  80   ; COMMAND BUFFER LENGTH
-(1)  255/       0 : =$AE                 CBUFFs  EQU  MDOSs-CBUFLs-2 ; COMMAND BUFFER LOCATION
-(1)  256/       0 : =$FE                 CBUFPs  EQU  CBUFFs+CBUFLs  ; COMMAND BUFFER SCAN POINTER
-(1)  257/       0 : =$100                VERSss  EQU  MDOSs    ; VERSION#
-(1)  258/       0 : =$102                REVSss  EQU  VERSss+2 ; REVISION#
-(1)  259/       0 : =$104                KYIsSV  EQU  REVSss+2 ; SAVE AREA FOR KEYINs VECTOR
-(1)  260/       0 : =$106                ENDOSs  EQU  KYIsSV+2 ; END OF MDOS
-(1)  261/       0 : =$108                ENDUSs  EQU  ENDOSs+2 ; END OF USER PROGRAM AREA
-(1)  262/       0 : =$10A                ENDSYs  EQU  ENDUSs+2 ; END OF SYSTEM (MDOS) RAM
-(1)  263/       0 : =$10E                RIBBAs  EQU  ENDSYs+4 ; RIB BUFFER ADDRESS
-(1)  264/       0 : =$110                ENDRVs  EQU  RIBBAs+2 ; END OF MDOS ROM VARIABLES
-(1)  265/       0 : =$112                GDBAs   EQU  ENDRVs+2 ; GENERIC DEVICE TABLE ADDRESS
-(1)  266/       0 :                     
-(1)  267/       0 : =$114                SYERRs  EQU GDBAs+2  ; SYSTEM ERROR STATUS WORD
-(1)  268/       0 : =$116                SWIsSV  EQU SYERRs+2 ; SWI VECTOR SAVE AREA
-(1)  269/       0 : =$118                SWIsUV  EQU SWIsSV+2 ; SWI USER VECTOR
-(1)  270/       0 : =$11A                IRGsUV  EQU SWIsUV+2 ; IRG USER VECTOR
-(1)  271/       0 : =$11C                IRGsSV  EQU IRGsUV+2 ; IRG VECTOR SAVE AREA
-(1)  272/       0 : =$11E                CHFLGs  EQU IRGsSV+2 ; CHAIN FUNCTION FLAG WORD
-(1)  273/       0 : =$120                SYIOCB  EQU CHFLGs+2 ; SYSTEM CONSOLE IOCB
-(1)  274/       0 : =$145                SYPOCB  EQU SYIOCB+IOCBLN ; SYSTEM PRINTER IOCB
-(1)  275/       0 : =$16A                SYEOCB  EQU SYPOCB+IOCBLN ; ERR MSG FILE
-(1)  276/       0 :                     
-(1)  277/       0 :                     ;
-(1)  278/       0 :                     ; LOGICAL UNIT NUMBER - BIT DEF
-(1)  279/       0 :                     ;
-(1)  280/       0 : =$40                 LUsRES EQU %01000000 ; IOCB RESERVED FLAG
-(1)  281/       0 :                     
-(1)  282/       0 :                     ;
-(1)  283/       0 :                     ; IOCDTT BIT DEFINITIONS
-(1)  284/       0 :                     ;
-(1)  285/       0 : =$0                  DTsOPP EQU %00000000 ; OPEN UPDATE/INPUT
-(1)  286/       0 : =$1                  DTsOPI EQU %00000001 ; OPEN INPUT MODE
-(1)  287/       0 : =$2                  DTsOPO EQU %00000010 ; OPEN OUTPUT MODE
-(1)  288/       0 : =$3                  DTsOPU EQU %00000011 ; OPEN UPDATE MODE
-(1)  289/       0 : =$4                  DTsNFF EQU %00000100 ; NON-FILE FORMAT I/O FLAG
-(1)  290/       0 : =$8                  DTsTRU EQU %00001000 ; TRUNCATE FLAG
-(1)  291/       0 : =$10                 DTsCLS EQU %00010000 ; FILE OPEN/CLOSE FLAG
-(1)  292/       0 : =$20                 DTsSIO EQU %00100000 ; SECTOR I/O FLAG
-(1)  293/       0 : =$40                 DTsOUT EQU %01000000 ; OUTPUT TRANSFER TYPE
-(1)  294/       0 : =$80                 DTsINP EQU %10000000 ; INPUT TRANSFER TYPE
-(1)  295/       0 :                     
-(1)  296/       0 :                     ;
-(1)  297/       0 :                     ; IOCFDF BIT DEFINITIONS
-(1)  298/       0 :                     ;
-(1)  299/       0 : =$0                  FDsFMU EQU %00000000 ; USER DEFINED FORMAT (SECTOR I/O)
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 6 - 2026-01-23 11:21:24
+(1)  240/       0 : =$12                 IsFSPC  EQU $12 ; NO DISK FILE SPACE AVAILABLE
+(1)  241/       0 : =$13                 IsDSPC  EQU $13 ; NO DIRECTORY SPACE AVAILABL.E
+(1)  242/       0 : =$14                 IsSSPC  EQU $14 ; NO SEGMENT DESCRIPTOR SPACE AVAIL
+(1)  243/       0 : =$15                 IsIDEN  EQU $15 ; INVALID DIR. ENTRY NO.
+(1)  244/       0 : =$16                 IsRIB   EQU $16 ; INVALID RIB
+(1)  245/       0 : =$17                 IsDEAL  EQU $17 ; CAN'T DEALLOCATE ALL SPACE
+(1)  246/       0 : =$18                 IsRECL  EQU $18 ; BINARY RECORD LENGTH TOO LRGE
+(1)  247/       0 : =$19                 IsSECB  EQU $19 ; SECTOR BUFFER SIZE ERROR
+(1)  248/       0 :                     
+(1)  249/       0 :                     ;
+(1)  250/       0 :                     ; MDOS INTERNAL VARIABLE AND LOCATION EQUATES
+(1)  251/       0 :                     ;
+(1)  252/       0 : =$100                MDOSs   EQU $100  ; START OF MDOS ASECT
+(1)  253/       0 : =$50                 CBUFLs  EQU  80   ; COMMAND BUFFER LENGTH
+(1)  254/       0 : =$AE                 CBUFFs  EQU  MDOSs-CBUFLs-2 ; COMMAND BUFFER LOCATION
+(1)  255/       0 : =$FE                 CBUFPs  EQU  CBUFFs+CBUFLs  ; COMMAND BUFFER SCAN POINTER
+(1)  256/       0 : =$100                VERSss  EQU  MDOSs    ; VERSION#
+(1)  257/       0 : =$102                REVSss  EQU  VERSss+2 ; REVISION#
+(1)  258/       0 : =$104                KYIsSV  EQU  REVSss+2 ; SAVE AREA FOR KEYINs VECTOR
+(1)  259/       0 : =$106                ENDOSs  EQU  KYIsSV+2 ; END OF MDOS
+(1)  260/       0 : =$108                ENDUSs  EQU  ENDOSs+2 ; END OF USER PROGRAM AREA
+(1)  261/       0 : =$10A                ENDSYs  EQU  ENDUSs+2 ; END OF SYSTEM (MDOS) RAM
+(1)  262/       0 : =$10E                RIBBAs  EQU  ENDSYs+4 ; RIB BUFFER ADDRESS
+(1)  263/       0 : =$110                ENDRVs  EQU  RIBBAs+2 ; END OF MDOS ROM VARIABLES
+(1)  264/       0 : =$112                GDBAs   EQU  ENDRVs+2 ; GENERIC DEVICE TABLE ADDRESS
+(1)  265/       0 :                     
+(1)  266/       0 : =$114                SYERRs  EQU GDBAs+2  ; SYSTEM ERROR STATUS WORD
+(1)  267/       0 : =$116                SWIsSV  EQU SYERRs+2 ; SWI VECTOR SAVE AREA
+(1)  268/       0 : =$118                SWIsUV  EQU SWIsSV+2 ; SWI USER VECTOR
+(1)  269/       0 : =$11A                IRGsUV  EQU SWIsUV+2 ; IRG USER VECTOR
+(1)  270/       0 : =$11C                IRGsSV  EQU IRGsUV+2 ; IRG VECTOR SAVE AREA
+(1)  271/       0 : =$11E                CHFLGs  EQU IRGsSV+2 ; CHAIN FUNCTION FLAG WORD
+(1)  272/       0 : =$120                SYIOCB  EQU CHFLGs+2 ; SYSTEM CONSOLE IOCB
+(1)  273/       0 : =$145                SYPOCB  EQU SYIOCB+IOCBLN ; SYSTEM PRINTER IOCB
+(1)  274/       0 : =$16A                SYEOCB  EQU SYPOCB+IOCBLN ; ERR MSG FILE
+(1)  275/       0 :                     
+(1)  276/       0 :                     ;
+(1)  277/       0 :                     ; LOGICAL UNIT NUMBER - BIT DEF
+(1)  278/       0 :                     ;
+(1)  279/       0 : =$40                 LUsRES EQU %01000000 ; IOCB RESERVED FLAG
+(1)  280/       0 :                     
+(1)  281/       0 :                     ;
+(1)  282/       0 :                     ; IOCDTT BIT DEFINITIONS
+(1)  283/       0 :                     ;
+(1)  284/       0 : =$0                  DTsOPP EQU %00000000 ; OPEN UPDATE/INPUT
+(1)  285/       0 : =$1                  DTsOPI EQU %00000001 ; OPEN INPUT MODE
+(1)  286/       0 : =$2                  DTsOPO EQU %00000010 ; OPEN OUTPUT MODE
+(1)  287/       0 : =$3                  DTsOPU EQU %00000011 ; OPEN UPDATE MODE
+(1)  288/       0 : =$4                  DTsNFF EQU %00000100 ; NON-FILE FORMAT I/O FLAG
+(1)  289/       0 : =$8                  DTsTRU EQU %00001000 ; TRUNCATE FLAG
+(1)  290/       0 : =$10                 DTsCLS EQU %00010000 ; FILE OPEN/CLOSE FLAG
+(1)  291/       0 : =$20                 DTsSIO EQU %00100000 ; SECTOR I/O FLAG
+(1)  292/       0 : =$40                 DTsOUT EQU %01000000 ; OUTPUT TRANSFER TYPE
+(1)  293/       0 : =$80                 DTsINP EQU %10000000 ; INPUT TRANSFER TYPE
+(1)  294/       0 :                     
+(1)  295/       0 :                     ;
+(1)  296/       0 :                     ; IOCFDF BIT DEFINITIONS
+(1)  297/       0 :                     ;
+(1)  298/       0 : =$0                  FDsFMU EQU %00000000 ; USER DEFINED FORMAT (SECTOR I/O)
+(1)  299/       0 : =$1                  FDsFMD EQU %00000001 ; DEFAULT OBJECT REC'D FORMAT
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 6 - 01/24/2026 02:35:53 PM
 
 
-(1)  300/       0 : =$1                  FDsFMD EQU %00000001 ; DEFAULT OBJECT REC'D FORMAT
-(1)  301/       0 : =$2                  FDsFML EQU %00000010 ; BINARY LOAD FORMAT
-(1)  302/       0 : =$3                  FDsFMB EQU %00000011 ; BINARY RECORD FORMAT
-(1)  303/       0 : =$5                  FDsFMA EQU %00000101 ; ASCII RECORD FORMAT
-(1)  304/       0 : =$7                  FDsFMC EQU %00000111 ; ASCI-CONVERTED-BINARY REC'O FORM
-(1)  305/       0 : =$8                  FDsCMP EQU %00001000 ; SPACE COMPRESSION FLAG
-(1)  306/       0 : =$10                 FDsCON EQU %00010000 ; CONTIGUOUS ALLOCATION FLAG
-(1)  307/       0 : =$20                 FDsSYS EQU %00100000 ; SYSTEM FILE ATTRIBUTE
-(1)  308/       0 : =$40                 FDsDEL EQU %01000000 ; DELETE PROTECTION ATTRIBUTE
-(1)  309/       0 : =$80                 FDsWRT EQU %10000000 ; WRITE PROTECTION ATTRIBUTE
-(1)  310/       0 :                     
-(1)  311/       0 :                     ;
-(1)  312/       0 :                     ; UNIFIED I/O CONTROL DESCRIPTION BLOCK OFFSETS
-(1)  313/       0 :                     ;
-(1)  314/       0 : =$0                  CDBIOC EQU  0 ; ADDRESS OF IOCB
-(1)  315/       0 : =$2                  CDBSDA EQU  2 ; SOFTWARE DRIVER ADDRESS
-(1)  316/       0 : =$4                  CDBHAD EQU  4 ; HARDWARE ADDRESS
-(1)  317/       0 : =$6                  CDBDDF EQU  6 ; DEVICE DESCRIPTOR FLAGS
-(1)  318/       0 : =$7                  CDBVDT EQU  7 ; VALID DATA TYPE
-(1)  319/       0 : =$8                  CDBDDA EQU  8 ; DEVICE DEPENDENT AREA
-(1)  320/       0 : =$A                  CDBWST EQU 10 ; WORKING STORAGE
-(1)  321/       0 : =$C                  CDBLEN EQU CDBWST+2 ; CDB LENGTH
-(1)  322/       0 :                     
-(1)  323/       0 :                     ;
-(1)  324/       0 :                     ; CDBDDF BIT DEFINITIONS
-(1)  325/       0 :                     ;
-(1)  326/       0 : =$1                  DDsFMC EQU $00000001 ; ASCII-CONVERTED-BINARY IS DEFAUL
-(1)  327/       0 : =$2                  DDsLOG EQU %00000010 ; LOGICAL SECTOR I/O FLAG
-(1)  328/       0 : =$4                  DDsCNS EQU %00000100 ; CONSOLE FLAG
-(1)  329/       0 : =$8                  DDsRWD EQU %00001000 ; REWIND FLAG
-(1)  330/       0 : =$10                 DDsOCF EQU %00010000 ; OPEN/CLOSE FLAG
-(1)  331/       0 : =$20                 DDsINP EQU %00100000 ; INPUT DEVICE FLAG
-(1)  332/       0 : =$40                 DDsOUT EQU %01000000 ; OUTPUT DEVICE FLAG
-(1)  333/       0 : =$80                 DDsRES EQU %10000000 ; RESERVABLE DEVICE FLAG
-(1)  334/       0 :                     
-(1)  335/       0 :                     ;
-(1)  336/       0 :                     ; CDBVDT BIT DEFINITIONS
-(1)  337/       0 :                     ;
-(1)  338/       0 : =$4                  VDsBIN EQU %00000100 ; BINARY OBJECT FLAG
-(1)  339/       0 : =$8                  VDsGDB EQU %00001000 ; TEMP GDB POINTER FLAG
-(1)  340/       0 : =$10                 VDsSDA EQU %00010000 ; TEMP SDA POINTER FLAG
-(1)  341/       0 : =$80                 VDsNFF EQU %10000000 ; NON-FILE FORMAT FLAG
-(1)  342/       0 :                     
-(1)  343/       0 :                     ;
-(1)  344/       0 :                     ; DEVICE DRIVER ENTRY OFFSET
-(1)  345/       0 :                     ;
-(1)  346/       0 : =$0                  DVsON   EQU 0   ; DEVICE ON OFFSET
-(1)  347/       0 : =$3                  DVsOFF  EQU 3   ; DEVICE OFF OFFSET
-(1)  348/       0 : =$6                  DVsINT  EQU 6   ; DEVICE INTIALIZATION OFFSET
-(1)  349/       0 : =$9                  DVsTRM  EQU 9   ; DEVICE TERMINATION OFFSET
-(1)  350/       0 : =$C                  DVsIO   EQU 12  ; DEVICE CHARACTER INPUT/OUTPUT OFF
-(1)  351/       0 :                     
-(1)  352/       0 :                     ;
-(1)  353/       0 :                     ; DISK EROM EQUATES
-(1)  354/       0 :                     ;
-(1)  355/       0 : =$0                  CURDRV  EQU  0 ; CURRENT DRIVE NUMBER
-(1)  356/       0 : =$1                  STRSCT  EQU  1 ; STARTING PHYSICAL SECTOR NUMBER
-(1)  357/       0 : =$3                  NUMSCT  EQU  3 ; NUMBER OF SECTORS TO OPERATE UPON
-(1)  358/       0 : =$5                  LSCTLN  EQU  5 ; # OF BYTES TO READ FROM LAST SECT
-(1)  359/       0 : =$6                  CURADR  EQU  6 ; MEMORY ADDRESS FOR DISK TRANSFER
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 7 - 2026-01-23 11:21:24
+(1)  300/       0 : =$2                  FDsFML EQU %00000010 ; BINARY LOAD FORMAT
+(1)  301/       0 : =$3                  FDsFMB EQU %00000011 ; BINARY RECORD FORMAT
+(1)  302/       0 : =$5                  FDsFMA EQU %00000101 ; ASCII RECORD FORMAT
+(1)  303/       0 : =$7                  FDsFMC EQU %00000111 ; ASCI-CONVERTED-BINARY REC'O FORM
+(1)  304/       0 : =$8                  FDsCMP EQU %00001000 ; SPACE COMPRESSION FLAG
+(1)  305/       0 : =$10                 FDsCON EQU %00010000 ; CONTIGUOUS ALLOCATION FLAG
+(1)  306/       0 : =$20                 FDsSYS EQU %00100000 ; SYSTEM FILE ATTRIBUTE
+(1)  307/       0 : =$40                 FDsDEL EQU %01000000 ; DELETE PROTECTION ATTRIBUTE
+(1)  308/       0 : =$80                 FDsWRT EQU %10000000 ; WRITE PROTECTION ATTRIBUTE
+(1)  309/       0 :                     
+(1)  310/       0 :                     ;
+(1)  311/       0 :                     ; UNIFIED I/O CONTROL DESCRIPTION BLOCK OFFSETS
+(1)  312/       0 :                     ;
+(1)  313/       0 : =$0                  CDBIOC EQU  0 ; ADDRESS OF IOCB
+(1)  314/       0 : =$2                  CDBSDA EQU  2 ; SOFTWARE DRIVER ADDRESS
+(1)  315/       0 : =$4                  CDBHAD EQU  4 ; HARDWARE ADDRESS
+(1)  316/       0 : =$6                  CDBDDF EQU  6 ; DEVICE DESCRIPTOR FLAGS
+(1)  317/       0 : =$7                  CDBVDT EQU  7 ; VALID DATA TYPE
+(1)  318/       0 : =$8                  CDBDDA EQU  8 ; DEVICE DEPENDENT AREA
+(1)  319/       0 : =$A                  CDBWST EQU 10 ; WORKING STORAGE
+(1)  320/       0 : =$C                  CDBLEN EQU CDBWST+2 ; CDB LENGTH
+(1)  321/       0 :                     
+(1)  322/       0 :                     ;
+(1)  323/       0 :                     ; CDBDDF BIT DEFINITIONS
+(1)  324/       0 :                     ;
+(1)  325/       0 : =$1                  DDsFMC EQU $00000001 ; ASCII-CONVERTED-BINARY IS DEFAUL
+(1)  326/       0 : =$2                  DDsLOG EQU %00000010 ; LOGICAL SECTOR I/O FLAG
+(1)  327/       0 : =$4                  DDsCNS EQU %00000100 ; CONSOLE FLAG
+(1)  328/       0 : =$8                  DDsRWD EQU %00001000 ; REWIND FLAG
+(1)  329/       0 : =$10                 DDsOCF EQU %00010000 ; OPEN/CLOSE FLAG
+(1)  330/       0 : =$20                 DDsINP EQU %00100000 ; INPUT DEVICE FLAG
+(1)  331/       0 : =$40                 DDsOUT EQU %01000000 ; OUTPUT DEVICE FLAG
+(1)  332/       0 : =$80                 DDsRES EQU %10000000 ; RESERVABLE DEVICE FLAG
+(1)  333/       0 :                     
+(1)  334/       0 :                     ;
+(1)  335/       0 :                     ; CDBVDT BIT DEFINITIONS
+(1)  336/       0 :                     ;
+(1)  337/       0 : =$4                  VDsBIN EQU %00000100 ; BINARY OBJECT FLAG
+(1)  338/       0 : =$8                  VDsGDB EQU %00001000 ; TEMP GDB POINTER FLAG
+(1)  339/       0 : =$10                 VDsSDA EQU %00010000 ; TEMP SDA POINTER FLAG
+(1)  340/       0 : =$80                 VDsNFF EQU %10000000 ; NON-FILE FORMAT FLAG
+(1)  341/       0 :                     
+(1)  342/       0 :                     ;
+(1)  343/       0 :                     ; DEVICE DRIVER ENTRY OFFSET
+(1)  344/       0 :                     ;
+(1)  345/       0 : =$0                  DVsON   EQU 0   ; DEVICE ON OFFSET
+(1)  346/       0 : =$3                  DVsOFF  EQU 3   ; DEVICE OFF OFFSET
+(1)  347/       0 : =$6                  DVsINT  EQU 6   ; DEVICE INTIALIZATION OFFSET
+(1)  348/       0 : =$9                  DVsTRM  EQU 9   ; DEVICE TERMINATION OFFSET
+(1)  349/       0 : =$C                  DVsIO   EQU 12  ; DEVICE CHARACTER INPUT/OUTPUT OFF
+(1)  350/       0 :                     
+(1)  351/       0 :                     ;
+(1)  352/       0 :                     ; DISK EROM EQUATES
+(1)  353/       0 :                     ;
+(1)  354/       0 : =$0                  CURDRV  EQU  0 ; CURRENT DRIVE NUMBER
+(1)  355/       0 : =$1                  STRSCT  EQU  1 ; STARTING PHYSICAL SECTOR NUMBER
+(1)  356/       0 : =$3                  NUMSCT  EQU  3 ; NUMBER OF SECTORS TO OPERATE UPON
+(1)  357/       0 : =$5                  LSCTLN  EQU  5 ; # OF BYTES TO READ FROM LAST SECT
+(1)  358/       0 : =$6                  CURADR  EQU  6 ; MEMORY ADDRESS FOR DISK TRANSFER
+(1)  359/       0 : =$8                  FDSTAT  EQU  8 ; DISK TRANSFER STATUS
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 7 - 01/24/2026 02:35:53 PM
 
 
-(1)  360/       0 : =$8                  FDSTAT  EQU  8 ; DISK TRANSFER STATUS
-(1)  361/       0 : =$B                  SCTCNT  EQU 11 ; SECTOR COUNT USED IN DETERMINING
-(1)  362/       0 : =$D                  SIDES   EQU $D ; - ->SINGLEi + -> DOUBLE SIDED
-(1)  363/       0 :                     
-(1)  364/       0 :                     ;
-(1)  365/       0 :                     ; EROM ENTRY POINTS
-(1)  366/       0 :                     ;
-(1)  367/       0 : =$E800               DSLOAD  EQU  $E800 ; BOOTSTRAP THE OPERATING SYSTEM
-(1)  368/       0 : =$E822               FDINIT  EQU  $E822 ; INITIALIZE THE DISK'S PIA AND SSD
-(1)  369/       0 : =$E853               CHKERR  EQU  $E853 ; CHECK AND PRINT ERROR FROM FDSTAT
-(1)  370/       0 : =$E85A               PRNTER  EQU  $E85A ; PRINT ERROR FROM FDSTAT
-(1)  371/       0 : =$E869               READSC  EQU  $E869 ; READ SECTOR(S)
-(1)  372/       0 : =$E86D               READPS  EQU  $E86D ; READ PARTIAL SECTOR
-(1)  373/       0 : =$E86F               RDCRC   EQU  $E86F ; READ AND CHECK FOR CRC
-(1)  374/       0 : =$E872               RWTEST  EQU  $E872 ; WRITE/READ TEST
-(1)  375/       0 : =$E875               RESTOR  EQU  $E875 ; MOVE HEAD TO TRACK 0
-(1)  376/       0 : =$E878               SEEK    EQU  $E878 ; POSITION HEAD TO TRACK OF "STRSCT
-(1)  377/       0 : =$E87B               WRTEST  EQU  $E87B ; WRITE TEST
-(1)  378/       0 : =$E87E               WRDDAM  EQU  $E87E ; WRITE DELETED DATA MARK
-(1)  379/       0 : =$E881               WRVERF  EQU  $E881 ; WRITE AND VERIFY CRC
-(1)  380/       0 : =$E884               WRITSC  EQU  $E884 ; WRITE SECTDR(S)
-(1)  381/       0 :                     
-(1)  382/       0 :                     ;
-(1)  383/       0 :                     ; EROM ERROR EQUATES
-(1)  384/       0 :                     ;
-(1)  385/       0 : ='1'                 ERsCRC  EQU  '1' ; DATA CRC ERROR
-(1)  386/       0 : ='2'                 ERsWRT  EQU  '2' ; WRITE PROTECTED DISK
-(1)  387/       0 : ='3'                 ERsRDY  EQU  '3' ; DISK NOT READY
-(1)  388/       0 : ='4'                 ERsMRK  EQU  '4' ; DELETED DATA MARK ENCOUNTERED
-(1)  389/       0 : ='5'                 ERsTIM  EQU  '5' ; TIMEOUT
-(1)  390/       0 : ='6'                 ERsDAD  EQU  '6' ; INVALID DISK ADDRESS
-(1)  391/       0 : ='7'                 ERsSEK  EQU  '7' ; SEEK ERROR
-(1)  392/       0 : ='8'                 ERsDMA  EQU  '8' ; DATA ADDRESS MARK ERROR
-(1)  393/       0 : ='9'                 ERsACR  EQU  '9' ; ADDRESS MARK CRC ERROR
-(1)  394/       0 :                     
-(1)  395/       0 :                     ;
-(1)  396/       0 :                     ; MISCELLANEOUS EROM EQUATES
-(1)  397/       0 :                     ;
-(1)  398/       0 : =$5                  RETRYs  EQU  5   ; RETRY COUNT FOR DISK READ/WRITE E
-(1)  399/       0 :                     
-(1)  400/       0 :                     ;
-(1)  401/       0 :                     ; LINE PRINTER EQUATES
-(1)  402/       0 :                     ;
-(1)  403/       0 : =$EBC0               LPINIT  EQU $EBC0 ; INIT PRINTER PIA
-(1)  404/       0 : =$EBCC               LIST    EQU $EBCC ; PRINT CONTENTS OF 'A'
-(1)  405/       0 : =$EBE4               LDATA   EQU $EBE4 ; PRINT STRING. CR/LF
-(1)  406/       0 : =$EBF2               LDATA1  EQU $EBF2 ; PRINT STRING, NO CR/LF
-(1)  407/       0 :                     
-(1)  408/       0 :                     ;
-(1)  409/       0 :                     ; EXBUG EQUATES FOR MDOS
-(1)  410/       0 :                     ;
-(1)  411/       0 :                     
-(1)  412/       0 : =$F015               INCHNP EQU  $F015  ; INPUT CHARACTER (NO PARITY)
-(1)  413/       0 : =$F018               OUTCH  EQU  $F018  ; OUTPUT ONE CHARACTER
-(1)  414/       0 : =$F021               PCRLF  EQU  $F021  ; PRINT LF/CR
-(1)  415/       0 : =$F024               PDATA  EQU  $F024  ; PRINT STRING
-(1)  416/       0 : =$FCFD               SBITs  EQU  $FCFD  ; BIT 7 INDICATES IRG OCCURRED (IF
-(1)  417/       0 : =$FF1F               BRKPTs EQU  $FF1F  ; MAID'S BREAKPOINT TABLE <8 FDB'S)
-(1)  418/       0 : =$FF4F               BKPINs EQU  $FF4F  ; EXBUG BREAKPOINTS IN MEMORY
-(1)  419/       0 : =$FF53               AECHO  EQU  $FF53  ; INPUT CHARACTER ECHO FLAG (O=>ECH
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 8 - 2026-01-23 11:21:24
+(1)  360/       0 : =$B                  SCTCNT  EQU 11 ; SECTOR COUNT USED IN DETERMINING
+(1)  361/       0 : =$D                  SIDES   EQU $D ; - ->SINGLEi + -> DOUBLE SIDED
+(1)  362/       0 :                     
+(1)  363/       0 :                     ;
+(1)  364/       0 :                     ; EROM ENTRY POINTS
+(1)  365/       0 :                     ;
+(1)  366/       0 : =$E800               DSLOAD  EQU  $E800 ; BOOTSTRAP THE OPERATING SYSTEM
+(1)  367/       0 : =$E822               FDINIT  EQU  $E822 ; INITIALIZE THE DISK'S PIA AND SSD
+(1)  368/       0 : =$E853               CHKERR  EQU  $E853 ; CHECK AND PRINT ERROR FROM FDSTAT
+(1)  369/       0 : =$E85A               PRNTER  EQU  $E85A ; PRINT ERROR FROM FDSTAT
+(1)  370/       0 : =$E869               READSC  EQU  $E869 ; READ SECTOR(S)
+(1)  371/       0 : =$E86D               READPS  EQU  $E86D ; READ PARTIAL SECTOR
+(1)  372/       0 : =$E86F               RDCRC   EQU  $E86F ; READ AND CHECK FOR CRC
+(1)  373/       0 : =$E872               RWTEST  EQU  $E872 ; WRITE/READ TEST
+(1)  374/       0 : =$E875               RESTOR  EQU  $E875 ; MOVE HEAD TO TRACK 0
+(1)  375/       0 : =$E878               SEEK    EQU  $E878 ; POSITION HEAD TO TRACK OF "STRSCT
+(1)  376/       0 : =$E87B               WRTEST  EQU  $E87B ; WRITE TEST
+(1)  377/       0 : =$E87E               WRDDAM  EQU  $E87E ; WRITE DELETED DATA MARK
+(1)  378/       0 : =$E881               WRVERF  EQU  $E881 ; WRITE AND VERIFY CRC
+(1)  379/       0 : =$E884               WRITSC  EQU  $E884 ; WRITE SECTDR(S)
+(1)  380/       0 :                     
+(1)  381/       0 :                     ;
+(1)  382/       0 :                     ; EROM ERROR EQUATES
+(1)  383/       0 :                     ;
+(1)  384/       0 : ='1'                 ERsCRC  EQU  '1' ; DATA CRC ERROR
+(1)  385/       0 : ='2'                 ERsWRT  EQU  '2' ; WRITE PROTECTED DISK
+(1)  386/       0 : ='3'                 ERsRDY  EQU  '3' ; DISK NOT READY
+(1)  387/       0 : ='4'                 ERsMRK  EQU  '4' ; DELETED DATA MARK ENCOUNTERED
+(1)  388/       0 : ='5'                 ERsTIM  EQU  '5' ; TIMEOUT
+(1)  389/       0 : ='6'                 ERsDAD  EQU  '6' ; INVALID DISK ADDRESS
+(1)  390/       0 : ='7'                 ERsSEK  EQU  '7' ; SEEK ERROR
+(1)  391/       0 : ='8'                 ERsDMA  EQU  '8' ; DATA ADDRESS MARK ERROR
+(1)  392/       0 : ='9'                 ERsACR  EQU  '9' ; ADDRESS MARK CRC ERROR
+(1)  393/       0 :                     
+(1)  394/       0 :                     ;
+(1)  395/       0 :                     ; MISCELLANEOUS EROM EQUATES
+(1)  396/       0 :                     ;
+(1)  397/       0 : =$5                  RETRYs  EQU  5   ; RETRY COUNT FOR DISK READ/WRITE E
+(1)  398/       0 :                     
+(1)  399/       0 :                     ;
+(1)  400/       0 :                     ; LINE PRINTER EQUATES
+(1)  401/       0 :                     ;
+(1)  402/       0 : =$EBC0               LPINIT  EQU $EBC0 ; INIT PRINTER PIA
+(1)  403/       0 : =$EBCC               LIST    EQU $EBCC ; PRINT CONTENTS OF 'A'
+(1)  404/       0 : =$EBE4               LDATA   EQU $EBE4 ; PRINT STRING. CR/LF
+(1)  405/       0 : =$EBF2               LDATA1  EQU $EBF2 ; PRINT STRING, NO CR/LF
+(1)  406/       0 :                     
+(1)  407/       0 :                     ;
+(1)  408/       0 :                     ; EXBUG EQUATES FOR MDOS
+(1)  409/       0 :                     ;
+(1)  410/       0 :                     
+(1)  411/       0 : =$F015               INCHNP EQU  $F015  ; INPUT CHARACTER (NO PARITY)
+(1)  412/       0 : =$F018               OUTCH  EQU  $F018  ; OUTPUT ONE CHARACTER
+(1)  413/       0 : =$F021               PCRLF  EQU  $F021  ; PRINT LF/CR
+(1)  414/       0 : =$F024               PDATA  EQU  $F024  ; PRINT STRING
+(1)  415/       0 : =$FCFD               SBITs  EQU  $FCFD  ; BIT 7 INDICATES IRG OCCURRED (IF
+(1)  416/       0 : =$FF1F               BRKPTs EQU  $FF1F  ; MAID'S BREAKPOINT TABLE <8 FDB'S)
+(1)  417/       0 : =$FF4F               BKPINs EQU  $FF4F  ; EXBUG BREAKPOINTS IN MEMORY
+(1)  418/       0 : =$FF53               AECHO  EQU  $FF53  ; INPUT CHARACTER ECHO FLAG (O=>ECH
+(1)  419/       0 : =$FFF8               IRGsVC EQU  $FFF8  ; IRG VECTOR
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 8 - 01/24/2026 02:35:53 PM
 
 
-(1)  420/       0 : =$FFF8               IRGsVC EQU  $FFF8  ; IRG VECTOR
-(1)  421/       0 : =$FFFA               SWIsVC EQU  $FFFA  ; SWI VECTOR
-(1)  422/       0 : =$FFFC               NMIsVC EQU  $FFFC  ; NMI VECTOR
-(1)  423/       0 : =$FF8A               XSTAKs EQU  $FF8A  ; EXBUG STACK
-(1)  424/       0 : =$F0F3               MAIDs  EQU  $F0F3  ; MAID ENTRY POINT
-(1)  425/       0 : =$FF16               XREGsP EQU  $FF16  ; MAID P-REG.
-(1)  426/       0 : =$FF18               XREGsX EQU  $FF18  ; MAID X-REG.
-(1)  427/       0 : =$FF1A               XREGsA EQU  $FF1A  ; MAID A-REG.
-(1)  428/       0 : =$FF1B               XREGsB EQU  $FF1B  ; MAID B-REG.
-(1)  429/       0 : =$FF1C               XREGsC EQU  $FF1C  ; MAID C-REG.
-(1)  430/       0 : =$FF1D               XREGsS EQU  $FF1D  ; MAID S-REG.
-(1)  431/       0 : =$FF63               BRKPEs EQU  $FF63  ; END OF MAID BREAKPOINT TABLE
-(1)  432/       0 : =$FCF4               CNACIs EQU  $FCF4  ; CONSOLE ACIA
+(1)  420/       0 : =$FFFA               SWIsVC EQU  $FFFA  ; SWI VECTOR
+(1)  421/       0 : =$FFFC               NMIsVC EQU  $FFFC  ; NMI VECTOR
+(1)  422/       0 : =$FF8A               XSTAKs EQU  $FF8A  ; EXBUG STACK
+(1)  423/       0 : =$F0F3               MAIDs  EQU  $F0F3  ; MAID ENTRY POINT
+(1)  424/       0 : =$FF16               XREGsP EQU  $FF16  ; MAID P-REG.
+(1)  425/       0 : =$FF18               XREGsX EQU  $FF18  ; MAID X-REG.
+(1)  426/       0 : =$FF1A               XREGsA EQU  $FF1A  ; MAID A-REG.
+(1)  427/       0 : =$FF1B               XREGsB EQU  $FF1B  ; MAID B-REG.
+(1)  428/       0 : =$FF1C               XREGsC EQU  $FF1C  ; MAID C-REG.
+(1)  429/       0 : =$FF1D               XREGsS EQU  $FF1D  ; MAID S-REG.
+(1)  430/       0 : =$FF63               BRKPEs EQU  $FF63  ; END OF MAID BREAKPOINT TABLE
+(1)  431/       0 : =$FCF4               CNACIs EQU  $FCF4  ; CONSOLE ACIA
+(1)  432/       0 :                     
 (1)  433/       0 :                     
 (1)  434/       0 :                     
 (1)  435/       0 :                     
@@ -476,7 +476,6 @@
 (1)  451/       0 :                     
 (1)  452/       0 :                     
 (1)  453/       0 :                     
-(1)  454/       0 :                     
        2/       0 :                     
        3/       0 : =$1                  STRSCTH EQU     $0001
        4/       0 : =$2                  STRSCTL EQU     $0002
@@ -495,17 +494,17 @@
       17/       0 : =$27                 M0027   EQU     $0027
       18/       0 : =$29                 M0029   EQU     $0029
       19/       0 : =$2A                 M002A   EQU     $002A
-      20/       0 : =$2B                 M002B   EQU     $002B
+      20/       0 : =$2B                 STATS2  EQU     $002B
       21/       0 : =$2C                 M002C   EQU     $002C
       22/       0 : =$2D                 M002D   EQU     $002D
       23/       0 : =$2E                 M002E   EQU     $002E
       24/       0 : =$34                 M0034   EQU     $0034
       25/       0 : =$4C                 M004C   EQU     $004C
       26/       0 : =$FE                 M00FE   EQU     $00FE
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 9 - 2026-01-23 11:21:24
-
-
       27/       0 : =$1BD                M01BD   EQU     $01BD
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 9 - 01/24/2026 02:35:53 PM
+
+
       28/       0 : =$EBFE               MEBFE   EQU     $EBFE
       29/       0 : =$EBFF               MEBFF   EQU     $EBFF
       30/       0 : =$EC00               PIAREGA EQU     $EC00
@@ -524,609 +523,627 @@
       43/       0 :                     
       44/    2000 :                                     ORG     $2000
       45/    2000 :                     
-      46/    2000 : 30 33 30 30         M2000           FCC     '0300'                   ; 
+      46/    2000 : 30 33 30 30         M2000           FCC     '0300'                   ; Version
       47/    2004 : E5 E5               M2004           FCB     $E5,$E5                  ; 
       48/    2006 : 9F 27               FORMATSTART     STS     M0027                    ; 
-      49/    2008 : B6 EB FF                            LDAA    MEBFF                    ; 
-      50/    200B : 81 45                               CMPA    #$45                     ; 
+      49/    2008 : B6 EB FF                            LDAA    MEBFF                    ; Get some kind of Disk EPROM Version
+      50/    200B : 81 45                               CMPA    #$45                     ; is it $45
       51/    200D : 26 0E                               BNE     Z201D                    ; 
-      52/    200F : C6 0A                               LDAB    #$0A                     ; 
-      53/    2011 : (MACRO)              Z2011           SCALL   MDERR1
+      52/    200F : C6 0A                               LDAB    #$0A                     ; yes, print error "INVALID DEVICE"
+      53/    2011 : (MACRO)              Z2011           SCALL   MDERR1                   ;
       53/    2011 : 3F                           SWI
       53/    2012 : 20                           FCB  MDERR1
-      54/    2013 : (MACRO)                              SCALL   MDENT1
+      54/    2013 : (MACRO)                              SCALL   MDENT1                   ; bail
       54/    2013 : 3F                           SWI
       54/    2014 : 1A                           FCB  MDENT1
-      55/    2015 : C6 0B               Z2015           LDAB    #$0B                     ; 
+      55/    2015 : C6 0B               SERRB           LDAB    #$0B                     ; 
       56/    2017 : 20 F8                               BRA     Z2011                    ; 
-      57/    2019 : C6 04               Z2019           LDAB    #$04                     ; 
-      58/    201B : 20 F4                               BRA     Z2011                    ; 
-      59/    201D : 5F                  Z201D           CLRB                             ; 
-      60/    201E : 81 43                               CMPA    #$43                     ; 
-      61/    2020 : 27 02                               BEQ     Z2024                    ; 
-      62/    2022 : C6 10                               LDAB    #$10                     ; 
-      63/    2024 : D7 24               Z2024           STAB    ONECONH                  ; 
-      64/    2026 : 86 31                               LDAA    #$31                     ; 
-      65/    2028 : B7 23 2F                            STAA    M232F                    ; 
-      66/    202B : DE FE                               LDX     M00FE                    ; 
-      67/    202D : FF 23 3A                            STX     M233A                    ; 
-      68/    2030 : CE 23 2F                            LDX     #M232F                   ; 
-      69/    2033 : FF 23 3C                            STX     M233C                    ; 
-      70/    2036 : CE 23 3A                            LDX     #M233A                   ; 
-      71/    2039 : (MACRO)                              SCALL   PFNAM1
-      71/    2039 : 3F                           SWI
-      71/    203A : 1D                           FCB  PFNAM1
-      72/    203B : 86 20                               LDAA    #$20                     ; 
-      73/    203D : B1 23 30                            CMPA    M2330                    ; 
-      74/    2040 : 26 D3                               BNE     Z2015                    ; 
-      75/    2042 : B1 23 38                            CMPA    M2338                    ; 
-      76/    2045 : 26 CE                               BNE     Z2015                    ; 
-      77/    2047 : F6 23 2F                            LDAB    M232F                    ; 
-      78/    204A : C1 30                               CMPB    #$30                     ; 
-      79/    204C : 2F CB                               BLE     Z2019                    ; 
-      80/    204E : C1 33                               CMPB    #$33                     ; 
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 10 - 2026-01-23 11:21:24
+      57/    2019 :                     ;------------------------------------------------
+      58/    2019 : C6 04               Z2019           LDAB    #$04                     ; print error "INVALID LOGICAL UNIT NUMBER"
+      59/    201B : 20 F4                               BRA     Z2011                    ; 
+      60/    201D :                     ;------------------------------------------------
+      61/    201D : 5F                  Z201D           CLRB                             ; EBFF is not $45
+      62/    201E : 81 43                               CMPA    #$43                     ; is it $43
+      63/    2020 : 27 02                               BEQ     Z2024                    ; 
+      64/    2022 : C6 10                               LDAB    #$10                     ; 
+      65/    2024 : D7 24               Z2024           STAB    ONECONH                  ; 
+      66/    2026 : 86 31                               LDAA    #$31                     ; LUN
+      67/    2028 : B7 23 2F                            STAA    M232F                    ; store logical unit # to filename area
+      68/    202B : DE FE                               LDX     M00FE                    ; 
+      69/    202D : FF 23 3A                            STX     M233A                    ; Address of Input Buffer
+      70/    2030 : CE 23 2F                            LDX     #M232F                   ; 
+      71/    2033 : FF 23 3C                            STX     M233C                    ; Address of Standard Filename area (11bytes)
+      72/    2036 : CE 23 3A                            LDX     #M233A                   ; X: The address of a file name packet
+      73/    2039 : (MACRO)                              SCALL   PFNAM1                   ; PROCESS FILE NAME
+      73/    2039 : 3F                           SWI
+      73/    203A : 1D                           FCB  PFNAM1
+      74/    203B : 86 20                               LDAA    #$20                     ; 
+      75/    203D : B1 23 30                            CMPA    M2330                    ; check first Byte for $20 (SPACE)
+      76/    2040 : 26 D3                               BNE     SERRB                    ; Set Error index to $B (COMMAND SYNTAX ERROR)
+      77/    2042 : B1 23 38                            CMPA    M2338                    ; check last Byte for $20 (SPACE)
+      78/    2045 : 26 CE                               BNE     SERRB                    ; Set Error index to $B (COMMAND SYNTAX ERROR)
+      79/    2047 : F6 23 2F                            LDAB    M232F                    ; Check LUN
+      80/    204A : C1 30                               CMPB    #$30                     ; 
+      81/    204C : 2F CB                               BLE     Z2019                    ; below $30 - Error 4
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 10 - 01/24/2026 02:35:53 PM
 
 
-      81/    2050 : 2E C7                               BGT     Z2019                    ; 
-      82/    2052 : F7 23 4B                            STAB    M234B                    ; 
-      83/    2055 : CE 23 3E                            LDX     #M233E                   ; 
-      84/    2058 : (MACRO)                              SCALL   DSPLY1
-      84/    2058 : 3F                           SWI
-      84/    2059 : 0A                           FCB  DSPLY1
-      85/    205A : CE 23 4E                            LDX     #STORAGE                 ; 
-      86/    205D : C6 01                               LDAB    #$01                     ; 
-      87/    205F : (MACRO)                              SCALL   KEYIN1
-      87/    205F : 3F                           SWI
-      87/    2060 : 09                           FCB  KEYIN1
-      88/    2061 : B6 23 4E                            LDAA    STORAGE                  ; 
-      89/    2064 : 81 59                               CMPA    #$59                     ; 
-      90/    2066 : 27 02                               BEQ     Z206A                    ; 
-      91/    2068 : (MACRO)                              SCALL   MDENT1
-      91/    2068 : 3F                           SWI
-      91/    2069 : 1A                           FCB  MDENT1
-      92/    206A : F6 23 4B            Z206A           LDAB    M234B                    ; 
-      93/    206D : C4 0F                               ANDB    #$0F                     ; 
-      94/    206F : D7 00                               STAB    CURDRV                   ; 
-      95/    2071 : CE 00 4C                            LDX     #M004C                   ; 
-      96/    2074 : DF 20                               STX     LDADDRH                  ; 
-      97/    2076 : CE 20 06                            LDX     #FORMATSTART             ; 
-      98/    2079 : DF 2E                               STX     M002E                    ; 
-      99/    207B : CE 20 04                            LDX     #M2004                   ; 
-     100/    207E : DF 06                               STX     CURADRH                  ; 
-     101/    2080 : BD E8 22                            JSR     FDINIT                   ; 
-     102/    2083 : 96 00                               LDAA    CURDRV                   ; 
-     103/    2085 : C6 66                               LDAB    #$66                     ; 
-     104/    2087 : 44                                  LSRA                             ; 
-     105/    2088 : 27 02                               BEQ     Z208C                    ; 
-     106/    208A : C6 46                               LDAB    #$46                     ; 
-     107/    208C : F7 EC 01            Z208C           STAB    PIAREGB                  ; 
-     108/    208F : C6 02                               LDAB    #$02                     ; 
-     109/    2091 : 24 01                               BCC     Z2094                    ; 
-     110/    2093 : 54                                  LSRB                             ; 
-     111/    2094 : F7 EC 00            Z2094           STAB    PIAREGA                  ; 
-     112/    2097 : 7D 00 24                            TST     ONECONH                  ; 
-     113/    209A : 26 0B                               BNE     Z20A7                    ; 
-     114/    209C : B6 EB FE                            LDAA    MEBFE                    ; 
-     115/    209F : 81 11                               CMPA    #$11                     ; 
-     116/    20A1 : 27 04                               BEQ     Z20A7                    ; 
-     117/    20A3 : 81 12                               CMPA    #$12                     ; 
-     118/    20A5 : 26 04                               BNE     Z20AB                    ; 
-     119/    20A7 : 86 FF               Z20A7           LDAA    #$FF                     ; 
-     120/    20A9 : 20 05                               BRA     Z20B0                    ; 
-     121/    20AB : B6 EC 00            Z20AB           LDAA    PIAREGA                  ; 
-     122/    20AE : 48                                  ASLA                             ; 
-     123/    20AF : 48                                  ASLA                             ; 
-     124/    20B0 : 97 2C               Z20B0           STAA    M002C                    ; 
-     125/    20B2 : 24 06                               BCC     Z20BA                    ; 
-     126/    20B4 : 86 33                               LDAA    #$33                     ; 
-     127/    20B6 : 97 08                               STAA    FDSTAT                   ; 
-     128/    20B8 : 20 50                               BRA     Z210A                    ; 
-     129/    20BA : CE 00 1A            Z20BA           LDX     #M001A                   ; 
-     130/    20BD : 96 2C                               LDAA    M002C                    ; 
-     131/    20BF : 2B 03                               BMI     Z20C4                    ; 
-     132/    20C1 : CE 00 34                            LDX     #M0034                   ; 
-     133/    20C4 : DF 03               Z20C4           STX     NUMSCTH                  ; 
-     134/    20C6 : BD 22 B0                            JSR     Z22B0                    ; 
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 11 - 2026-01-23 11:21:24
+      82/    204E : C1 33                               CMPB    #$33                     ; 
+      83/    2050 : 2E C7                               BGT     Z2019                    ; above $33 - Error 4
+      84/    2052 : F7 23 4B                            STAB    DRVNUM                   ; store drive #
+      85/    2055 : CE 23 3E                            LDX     #M233E                   ; |
+      86/    2058 : (MACRO)                              SCALL   DSPLY1                   ; Output Question "Format Drive X?"
+      86/    2058 : 3F                           SWI
+      86/    2059 : 0A                           FCB  DSPLY1
+      87/    205A : CE 23 4E                            LDX     #STORAGE                 ; Set up input buffer
+      88/    205D : C6 01                               LDAB    #$01                     ; expect one character
+      89/    205F : (MACRO)                              SCALL   KEYIN1                   ; Get it
+      89/    205F : 3F                           SWI
+      89/    2060 : 09                           FCB  KEYIN1
+      90/    2061 : B6 23 4E                            LDAA    STORAGE                  ; 
+      91/    2064 : 81 59                               CMPA    #'Y'                     ;
+      92/    2066 : 27 02                               BEQ     Z206A                    ; is it Y ? 
+      93/    2068 : (MACRO)                              SCALL   MDENT1                   ; No, bail
+      93/    2068 : 3F                           SWI
+      93/    2069 : 1A                           FCB  MDENT1
+      94/    206A : F6 23 4B            Z206A           LDAB    DRVNUM                   ; get drive # ($30 for drv. 0)
+      95/    206D : C4 0F                               ANDB    #$0F                     ; convert from ASCII to number
+      96/    206F : D7 00                               STAB    CURDRV                   ; store drive # for floppy controller
+      97/    2071 : CE 00 4C                            LDX     #$004C                   ; 
+      98/    2074 : DF 20                               STX     LDADDRH                  ; 
+      99/    2076 : CE 20 06                            LDX     #$2006                   ; 
+     100/    2079 : DF 2E                               STX     M002E                    ; 
+     101/    207B : CE 20 04                            LDX     #$2004                   ; 
+     102/    207E : DF 06                               STX     CURADRH                  ; 
+     103/    2080 : BD E8 22                            JSR     FDINIT                   ; the version i have only inits DS0,1 to high and ignores DS2,3
+     104/    2083 : 96 00                               LDAA    CURDRV                   ; can be 0-3
+     105/    2085 : C6 66                               LDAB    #$66                     ; Bit 1,2,5,6 - WG, READ, DS3 off, DS2 off
+     106/    2087 : 44                                  LSRA                             ; check Bit 1, is it drive 2 or 3 ?
+     107/    2088 : 27 02                               BEQ     Z208C                    ; zero, must be 0 or 1
+     108/    208A : C6 46                               LDAB    #$46                     ; otherwise it must be DRV 2 or 3, Bit 1,2,6 - WG, READ, DS3 off, DS2 on
+     109/    208C : F7 EC 01            Z208C           STAB    PIAREGB                  ; ******************* PROBLEM: DS3 is never on!
+     110/    208F : C6 02                               LDAB    #$02                     ; Bit 1 - DS1
+     111/    2091 : 24 01                               BCC     Z2094                    ; carry clr = Drv. 0 or Drv. 2
+     112/    2093 : 54                                  LSRB                             ; 2>>1 = 1, DS0 high (DS1 active)
+     113/    2094 : F7 EC 00            Z2094           STAB    PIAREGA                  ; or DS1 high, DS0 active, ****** PROBLEM: DS1 + DS2 is on!
+     114/    2097 : 7D 00 24                            TST     ONECONH                  ; 
+     115/    209A : 26 0B                               BNE     Z20A7                    ; 
+     116/    209C : B6 EB FE                            LDAA    MEBFE                    ; Get some kind of Disk EPROM Version
+     117/    209F : 81 11                               CMPA    #$11                     ; 
+     118/    20A1 : 27 04                               BEQ     Z20A7                    ; Version 11 ignores RDY
+     119/    20A3 : 81 12                               CMPA    #$12                     ; Version 12 ignores RDY too
+     120/    20A5 : 26 04                               BNE     CHKRDY                   ; all other Versions use RDY Signal
+     121/    20A7 : 86 FF               Z20A7           LDAA    #$FF                     ; 
+     122/    20A9 : 20 05                               BRA     Z20B0                    ; 
+     123/    20AB :                     ;------------------------------------------------
+     124/    20AB : B6 EC 00            CHKRDY          LDAA    PIAREGA                  ; 
+     125/    20AE : 48                                  ASLA                             ; |
+     126/    20AF : 48                                  ASLA                             ; shift PA6 (RDY) into carry
+     127/    20B0 : 97 2C               Z20B0           STAA    M002C                    ; 
+     128/    20B2 : 24 06                               BCC     Z20BA                    ; no problem if RDY is low
+     129/    20B4 : 86 33                               LDAA    #$33                     ; Error '3' (DISK NOT READY)
+     130/    20B6 : 97 08                               STAA    FDSTAT                   ; 
+     131/    20B8 : 20 50                               BRA     Z210A                    ; Jump to show Error Msg.
+     132/    20BA :                     ;------------------------------------------------
+     133/    20BA : CE 00 1A            Z20BA           LDX     #M001A                   ; 
+     134/    20BD : 96 2C                               LDAA    M002C                    ; 
+     135/    20BF : 2B 03                               BMI     Z20C4                    ; 
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 11 - 01/24/2026 02:35:53 PM
 
 
-     135/    20C9 : E6 01                               LDAB    $01,X                    ; 
-     136/    20CB : 4F                                  CLRA                             ; 
-     137/    20CC : E6 03               Z20CC           LDAB    $03,X                    ; 
-     138/    20CE : 2A FC                               BPL     Z20CC                    ; 
-     139/    20D0 : E6 01                               LDAB    $01,X                    ; 
-     140/    20D2 : 5F                  Z20D2           CLRB                             ; 
-     141/    20D3 : 5A                  Z20D3           DECB                             ; 
-     142/    20D4 : 26 FD                               BNE     Z20D3                    ; 
-     143/    20D6 : 4C                                  INCA                             ; 
-     144/    20D7 : 6D 03                               TST     $03,X                    ; 
-     145/    20D9 : 2A F7                               BPL     Z20D2                    ; 
-     146/    20DB : 5C                                  INCB                             ; 
-     147/    20DC : 80 4B                               SUBA    #$4B                     ; 
-     148/    20DE : 5C                  Z20DE           INCB                             ; 
-     149/    20DF : 80 16                               SUBA    #$16                     ; 
-     150/    20E1 : 24 FB                               BCC     Z20DE                    ; 
-     151/    20E3 : D7 29                               STAB    M0029                    ; 
-     152/    20E5 : 54                                  LSRB                             ; 
-     153/    20E6 : D7 2A                               STAB    M002A                    ; 
-     154/    20E8 : 86 03                               LDAA    #$03                     ; 
-     155/    20EA : A7 01                               STAA    $01,X                    ; 
-     156/    20EC : BD 22 D0                            JSR     Z22D0                    ; 
-     157/    20EF : BD E8 75                            JSR     RESTOR                   ; 
-     158/    20F2 : 24 23                               BCC     Z2117                    ; 
-     159/    20F4 : D6 01               Z20F4           LDAB    STRSCTH                  ; 
-     160/    20F6 : 96 02                               LDAA    STRSCTL                  ; 
-     161/    20F8 : 9B 04                               ADDA    NUMSCTL                  ; 
-     162/    20FA : D9 03                               ADCB    NUMSCTH                  ; 
-     163/    20FC : 90 0C                               SUBA    M000C                    ; 
-     164/    20FE : D2 0B                               SBCB    SECTCNT                  ; 
-     165/    2100 : 80 01                               SUBA    #$01                     ; 
-     166/    2102 : C2 00                               SBCB    #$00                     ; 
-     167/    2104 : 97 02               Z2104           STAA    STRSCTL                  ; 
-     168/    2106 : D7 01                               STAB    STRSCTH                  ; 
-     169/    2108 : 96 08                               LDAA    FDSTAT                   ; 
-     170/    210A : 97 2D               Z210A           STAA    M002D                    ; 
-     171/    210C : C6 01               Z210C           LDAB    #$01                     ; 
-     172/    210E : CE 00 2D                            LDX     #M002D                   ; 
-     173/    2111 : (MACRO)                              SCALL   MDERR1
-     173/    2111 : 3F                           SWI
-     173/    2112 : 20                           FCB  MDERR1
-     174/    2113 : 25 F7                               BCS     Z210C                    ; 
-     175/    2115 : (MACRO)                              SCALL   MDENT1
-     175/    2115 : 3F                           SWI
-     175/    2116 : 1A                           FCB  MDENT1
-     176/    2117 : 96 29               Z2117           LDAA    M0029                    ; 
-     177/    2119 : 80 04                               SUBA    #$04                     ; 
-     178/    211B : 25 15                               BCS     Z2132                    ; 
-     179/    211D : 80 03                               SUBA    #$03                     ; 
-     180/    211F : 24 05                               BCC     Z2126                    ; 
-     181/    2121 : CE 20 00                            LDX     #M2000                   ; 
-     182/    2124 : 20 09                               BRA     Z212F                    ; 
-     183/    2126 : CE 22 AB            Z2126           LDX     #M22AB                   ; 
-     184/    2129 : FF 21 F0                            STX     M21F0                    ; 
-     185/    212C : CE 01 BD                            LDX     #M01BD                   ; 
-     186/    212F : FF 21 EE            Z212F           STX     M21EE                    ; 
-     187/    2132 : 96 20               Z2132           LDAA    LDADDRH                  ; 
-     188/    2134 : 97 22                               STAA    EXADDRH                  ; 
-     189/    2136 : CE FF E6                            LDX     #MFFE6                   ; 
-     190/    2139 : 7D 00 2C                            TST     M002C                    ; 
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 12 - 2026-01-23 11:21:24
+     136/    20C1 : CE 00 34                            LDX     #M0034                   ; 
+     137/    20C4 : DF 03               Z20C4           STX     NUMSCTH                  ; 
+     138/    20C6 : BD 22 B0                            JSR     SETUPNMI                 ; 
+     139/    20C9 : E6 01                               LDAB    $01,X                    ; 
+     140/    20CB : 4F                                  CLRA                             ; 
+     141/    20CC : E6 03               Z20CC           LDAB    $03,X                    ; 
+     142/    20CE : 2A FC                               BPL     Z20CC                    ; 
+     143/    20D0 : E6 01                               LDAB    $01,X                    ; 
+     144/    20D2 : 5F                  Z20D2           CLRB                             ; 
+     145/    20D3 : 5A                  Z20D3           DECB                             ; 
+     146/    20D4 : 26 FD                               BNE     Z20D3                    ; 
+     147/    20D6 : 4C                                  INCA                             ; 
+     148/    20D7 : 6D 03                               TST     $03,X                    ; 
+     149/    20D9 : 2A F7                               BPL     Z20D2                    ; 
+     150/    20DB : 5C                                  INCB                             ; 
+     151/    20DC : 80 4B                               SUBA    #$4B                     ; 
+     152/    20DE : 5C                  Z20DE           INCB                             ; 
+     153/    20DF : 80 16                               SUBA    #$16                     ; 
+     154/    20E1 : 24 FB                               BCC     Z20DE                    ; 
+     155/    20E3 : D7 29                               STAB    M0029                    ; 
+     156/    20E5 : 54                                  LSRB                             ; 
+     157/    20E6 : D7 2A                               STAB    M002A                    ; 
+     158/    20E8 : 86 03                               LDAA    #$03                     ; 
+     159/    20EA : A7 01                               STAA    $01,X                    ; 
+     160/    20EC : BD 22 D0                            JSR     Z22D0                    ; Init PIA
+     161/    20EF : BD E8 75                            JSR     RESTOR                   ; 
+     162/    20F2 : 24 23                               BCC     Z2117                    ; 
+     163/    20F4 : D6 01               Z20F4           LDAB    STRSCTH                  ; 
+     164/    20F6 : 96 02                               LDAA    STRSCTL                  ; 
+     165/    20F8 : 9B 04                               ADDA    NUMSCTL                  ; 
+     166/    20FA : D9 03                               ADCB    NUMSCTH                  ; 
+     167/    20FC : 90 0C                               SUBA    M000C                    ; 
+     168/    20FE : D2 0B                               SBCB    SECTCNT                  ; 
+     169/    2100 : 80 01                               SUBA    #$01                     ; 
+     170/    2102 : C2 00                               SBCB    #$00                     ; 
+     171/    2104 : 97 02               Z2104           STAA    STRSCTL                  ; 
+     172/    2106 : D7 01                               STAB    STRSCTH                  ; 
+     173/    2108 : 96 08                               LDAA    FDSTAT                   ; 
+     174/    210A : 97 2D               Z210A           STAA    M002D                    ; 
+     175/    210C : C6 01               Z210C           LDAB    #$01                     ; Error: "**PROM I/O ERROR -- STATUS = \3 AT h DRIVE i - PSN j"
+     176/    210E : CE 00 2D                            LDX     #M002D                   ; 
+     177/    2111 : (MACRO)                              SCALL   MDERR1                   ; Bail
+     177/    2111 : 3F                           SWI
+     177/    2112 : 20                           FCB  MDERR1
+     178/    2113 : 25 F7                               BCS     Z210C                    ; 
+     179/    2115 : (MACRO)                              SCALL   MDENT1                   ; 
+     179/    2115 : 3F                           SWI
+     179/    2116 : 1A                           FCB  MDENT1
+     180/    2117 : 96 29               Z2117           LDAA    M0029                    ; 
+     181/    2119 : 80 04                               SUBA    #$04                     ; 
+     182/    211B : 25 15                               BCS     Z2132                    ; 
+     183/    211D : 80 03                               SUBA    #$03                     ; 
+     184/    211F : 24 05                               BCC     Z2126                    ; 
+     185/    2121 : CE 20 00                            LDX     #M2000                   ; 
+     186/    2124 : 20 09                               BRA     Z212F                    ; 
+     187/    2126 :                     ;------------------------------------------------
+     188/    2126 : CE 22 AB            Z2126           LDX     #M22AB                   ; 
+     189/    2129 : FF 21 F0                            STX     M21F0                    ; 
+     190/    212C : CE 01 BD                            LDX     #M01BD                   ; 
+     191/    212F : FF 21 EE            Z212F           STX     M21EE                    ; 
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 12 - 01/24/2026 02:35:53 PM
 
 
-     191/    213C : 2B 03                               BMI     Z2141                    ; 
-     192/    213E : CE FF CC                            LDX     #MFFCC                   ; 
-     193/    2141 : DF 01               Z2141           STX     STRSCTH                  ; 
-     194/    2143 : D6 02               Z2143           LDAB    STRSCTL                  ; 
-     195/    2145 : DB 04                               ADDB    NUMSCTL                  ; 
-     196/    2147 : D7 02                               STAB    STRSCTL                  ; 
-     197/    2149 : D6 01                               LDAB    STRSCTH                  ; 
-     198/    214B : C9 00                               ADCB    #$00                     ; 
-     199/    214D : D7 01                               STAB    STRSCTH                  ; 
-     200/    214F : 4A                                  DECA                             ; 
-     201/    2150 : 2A F1                               BPL     Z2143                    ; 
-     202/    2152 : BD E8 78            Z2152           JSR     SEEK                     ; 
-     203/    2155 : 25 9D                               BCS     Z20F4                    ; 
-     204/    2157 : 96 24                               LDAA    ONECONH                  ; 
-     205/    2159 : 44                                  LSRA                             ; 
-     206/    215A : 44                                  LSRA                             ; 
-     207/    215B : 44                                  LSRA                             ; 
-     208/    215C : 44                                  LSRA                             ; 
-     209/    215D : 9B 22                               ADDA    EXADDRH                  ; 
-     210/    215F : F6 EC 00                            LDAB    PIAREGA                  ; 
-     211/    2162 : CA 04                               ORAB    #$04                     ; 
-     212/    2164 : 81 2B                               CMPA    #$2B                     ; 
-     213/    2166 : 23 02                               BLS     Z216A                    ; 
-     214/    2168 : C4 FB                               ANDB    #$FB                     ; 
-     215/    216A : F7 EC 00            Z216A           STAB    PIAREGA                  ; 
-     216/    216D : 86 01                               LDAA    #$01                     ; 
-     217/    216F : 97 23                               STAA    EXADDRL                  ; 
-     218/    2171 : B6 EC 01                            LDAA    PIAREGB                  ; 
-     219/    2174 : 8A 40                               ORAA    #$40                     ; 
-     220/    2176 : B7 EC 01            Z2176           STAA    PIAREGB                  ; 
-     221/    2179 : BD 22 B0                            JSR     Z22B0                    ; 
-     222/    217C : C6 27                               LDAB    #$27                     ; 
-     223/    217E : 96 2A                               LDAA    M002A                    ; 
-     224/    2180 : 4A                  Z2180           DECA                             ; 
-     225/    2181 : 26 FD                               BNE     Z2180                    ; 
-     226/    2183 : CE C0 DA                            LDX     #$C0DA                   ; 
-     227/    2186 : FF EC 04                            STX     SSDA_0                   ; 
-     228/    2189 : CE C1 FF                            LDX     #$C1FF                   ; 
-     229/    218C : FF EC 04                            STX     SSDA_0                   ; 
-     230/    218F : CE 82 70                            LDX     #$8270                   ; 
-     231/    2192 : FF EC 04                            STX     SSDA_0                   ; 
-     232/    2195 : B6 EC 01                            LDAA    PIAREGB                  ; 
-     233/    2198 : 84 F2                               ANDA    #$F2                     ; 
-     234/    219A : B7 EC 01                            STAA    PIAREGB                  ; 
-     235/    219D : 98 24                               EORA    ONECONH                  ; 
-     236/    219F : 85 10                               BITA    #$10                     ; 
-     237/    21A1 : 26 0A                               BNE     Z21AD                    ; 
-     238/    21A3 : BD 22 D0                            JSR     Z22D0                    ; 
-     239/    21A6 : 86 32                               LDAA    #$32                     ; 
-     240/    21A8 : 97 08                               STAA    FDSTAT                   ; 
-     241/    21AA : 7E 21 0A                            JMP     Z210A                    ; 
-     242/    21AD : 84 60               Z21AD           ANDA    #$60                     ; 
-     243/    21AF : B7 EC 01                            STAA    PIAREGB                  ; 
-     244/    21B2 : B6 EC 03            Z21B2           LDAA    PIACTRLB                 ; 
-     245/    21B5 : 2A FB                               BPL     Z21B2                    ; 
-     246/    21B7 : CE 82 10                            LDX     #$8210                   ; 
-     247/    21BA : FF EC 04                            STX     SSDA_0                   ; 
-     248/    21BD : BD 22 E2                            JSR     Z22E2                    ; 
-     249/    21C0 : CE 83 F7                            LDX     #$83F7                   ; 
-     250/    21C3 : FF EC 04                            STX     SSDA_0                   ; 
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 13 - 2026-01-23 11:21:24
+     192/    2132 : 96 20               Z2132           LDAA    LDADDRH                  ; 
+     193/    2134 : 97 22                               STAA    EXADDRH                  ; 
+     194/    2136 : CE FF E6                            LDX     #MFFE6                   ; 
+     195/    2139 : 7D 00 2C                            TST     M002C                    ; 
+     196/    213C : 2B 03                               BMI     Z2141                    ; 
+     197/    213E : CE FF CC                            LDX     #MFFCC                   ; 
+     198/    2141 : DF 01               Z2141           STX     STRSCTH                  ; 
+     199/    2143 : D6 02               Z2143           LDAB    STRSCTL                  ; 
+     200/    2145 : DB 04                               ADDB    NUMSCTL                  ; 
+     201/    2147 : D7 02                               STAB    STRSCTL                  ; 
+     202/    2149 : D6 01                               LDAB    STRSCTH                  ; 
+     203/    214B : C9 00                               ADCB    #$00                     ; 
+     204/    214D : D7 01                               STAB    STRSCTH                  ; 
+     205/    214F : 4A                                  DECA                             ; 
+     206/    2150 : 2A F1                               BPL     Z2143                    ; 
+     207/    2152 : BD E8 78            Z2152           JSR     SEEK                     ; 
+     208/    2155 : 25 9D                               BCS     Z20F4                    ; 
+     209/    2157 : 96 24                               LDAA    ONECONH                  ; 
+     210/    2159 : 44                                  LSRA                             ; 
+     211/    215A : 44                                  LSRA                             ; 
+     212/    215B : 44                                  LSRA                             ; 
+     213/    215C : 44                                  LSRA                             ; 
+     214/    215D : 9B 22                               ADDA    EXADDRH                  ; 
+     215/    215F : F6 EC 00                            LDAB    PIAREGA                  ; Load PIAA
+     216/    2162 : CA 04                               ORAB    #$04                     ; isolate bit 2 (TG43)
+     217/    2164 : 81 2B                               CMPA    #$2B                     ; check for Track > 43
+     218/    2166 : 23 02                               BLS     Z216A                    ; No
+     219/    2168 : C4 FB                               ANDB    #$FB                     ; Clr Bit 2 (TG43 on PA2)
+     220/    216A : F7 EC 00            Z216A           STAB    PIAREGA                  ; write
+     221/    216D : 86 01                               LDAA    #$01                     ; 
+     222/    216F : 97 23                               STAA    EXADDRL                  ; 
+     223/    2171 : B6 EC 01                            LDAA    PIAREGB                  ; 
+     224/    2174 : 8A 40                               ORAA    #$40                     ; set Bit 6 (DS3 off)
+     225/    2176 : B7 EC 01            Z2176           STAA    PIAREGB                  ; 
+     226/    2179 : BD 22 B0                            JSR     SETUPNMI                 ; 
+     227/    217C : C6 27                               LDAB    #$27                     ; 
+     228/    217E : 96 2A                               LDAA    M002A                    ; 
+     229/    2180 : 4A                  Z2180           DECA                             ; 
+     230/    2181 : 26 FD                               BNE     Z2180                    ; 
+     231/    2183 : CE C0 DA                            LDX     #$C0DA                   ; 
+     232/    2186 : FF EC 04                            STX     SSDA_0                   ; 
+     233/    2189 : CE C1 FF                            LDX     #$C1FF                   ; 
+     234/    218C : FF EC 04                            STX     SSDA_0                   ; 
+     235/    218F : CE 82 70                            LDX     #$8270                   ; 
+     236/    2192 : FF EC 04                            STX     SSDA_0                   ; 
+     237/    2195 : B6 EC 01                            LDAA    PIAREGB                  ; 
+     238/    2198 : 84 F2                               ANDA    #$F2                     ; clr bit 0,2,3 (RESET, WRITE, SHIFT-CRC)
+     239/    219A : B7 EC 01                            STAA    PIAREGB                  ; 
+     240/    219D : 98 24                               EORA    ONECONH                  ; 
+     241/    219F : 85 10                               BITA    #$10                     ; 
+     242/    21A1 : 26 0A                               BNE     Z21AD                    ; 
+     243/    21A3 : BD 22 D0                            JSR     Z22D0                    ; Init PIA
+     244/    21A6 : 86 32                               LDAA    #$32                     ; 
+     245/    21A8 : 97 08                               STAA    FDSTAT                   ; Error: "DISK WRITE PROTECTED"
+     246/    21AA : 7E 21 0A                            JMP     Z210A                    ; Output Error "PROM I/O..."
+     247/    21AD :                     ;------------------------------------------------
+     248/    21AD : 84 60               Z21AD           ANDA    #$60                     ; Set Bit 5,6 (DS2 and DS3 off)
+     249/    21AF : B7 EC 01                            STAA    PIAREGB                  ; 
+     250/    21B2 : B6 EC 03            Z21B2           LDAA    PIACTRLB                 ; 
+     251/    21B5 : 2A FB                               BPL     Z21B2                    ; 
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 13 - 01/24/2026 02:35:53 PM
 
 
-     251/    21C6 : 86 7A                               LDAA    #$7A                     ; 
-     252/    21C8 : B7 EC 05                            STAA    SSDA_1                   ; 
-     253/    21CB : CE 81 FF                            LDX     #$81FF                   ; 
-     254/    21CE : FF EC 04                            STX     SSDA_0                   ; 
-     255/    21D1 : C6 17                               LDAB    #$17                     ; 
-     256/    21D3 : 86 18               Z21D3           LDAA    #$18                     ; 
-     257/    21D5 : CE 82 10                            LDX     #$8210                   ; 
-     258/    21D8 : FF EC 04                            STX     SSDA_0                   ; 
-     259/    21DB : B5 EC 04            Z21DB           BITA    SSDA_0                   ; 
-     260/    21DE : 27 FB                               BEQ     Z21DB                    ; 
-     261/    21E0 : B7 EC 05                            STAA    SSDA_1                   ; 
-     262/    21E3 : B5 EC 04            Z21E3           BITA    SSDA_0                   ; 
-     263/    21E6 : 27 FB                               BEQ     Z21E3                    ; 
-     264/    21E8 : CE C2 70                            LDX     #$C270                   ; 
-     265/    21EB : FF EC 04                            STX     SSDA_0                   ; 
-     266/    21EE : 85 00               M21EE           BITA    #$00                     ; 
-     267/    21F0 : 86 82               M21F0           LDAA    #$82                     ; 
-     268/    21F2 : 7C EC 01                            INC     PIAREGB                  ; 
-     269/    21F5 : 7A EC 01                            DEC     PIAREGB                  ; 
-     270/    21F8 : B7 EC 04                            STAA    SSDA_0                   ; 
-     271/    21FB : BD 22 E2                            JSR     Z22E2                    ; 
-     272/    21FE : CE 83 F5                            LDX     #$83F5                   ; 
-     273/    2201 : FF EC 04                            STX     SSDA_0                   ; 
-     274/    2204 : C6 7E                               LDAB    #$7E                     ; 
-     275/    2206 : 86 40                               LDAA    #$40                     ; 
-     276/    2208 : F7 EC 05                            STAB    SSDA_1                   ; 
-     277/    220B : B5 EC 04            Z220B           BITA    SSDA_0                   ; 
-     278/    220E : 27 FB                               BEQ     Z220B                    ; 
-     279/    2210 : D6 22                               LDAB    EXADDRH                  ; 
-     280/    2212 : F7 EC 05                            STAB    SSDA_1                   ; 
-     281/    2215 : 5F                                  CLRB                             ; 
-     282/    2216 : F7 EC 05                            STAB    SSDA_1                   ; 
-     283/    2219 : B5 EC 04            Z2219           BITA    SSDA_0                   ; 
-     284/    221C : 27 FB                               BEQ     Z2219                    ; 
-     285/    221E : D6 23                               LDAB    EXADDRL                  ; 
-     286/    2220 : F7 EC 05                            STAB    SSDA_1                   ; 
-     287/    2223 : 5F                                  CLRB                             ; 
-     288/    2224 : F7 EC 05                            STAB    SSDA_1                   ; 
-     289/    2227 : B5 EC 04            Z2227           BITA    SSDA_0                   ; 
-     290/    222A : 27 FB                               BEQ     Z2227                    ; 
-     291/    222C : F7 EC 05                            STAB    SSDA_1                   ; 
-     292/    222F : B5 EC 04            Z222F           BITA    SSDA_0                   ; 
-     293/    2232 : 27 FB                               BEQ     Z222F                    ; 
-     294/    2234 : F6 EC 01                            LDAB    PIAREGB                  ; 
-     295/    2237 : CA 08                               ORAB    #$08                     ; 
-     296/    2239 : F7 EC 01                            STAB    PIAREGB                  ; 
-     297/    223C : F7 EC 05                            STAB    SSDA_1                   ; 
-     298/    223F : B5 EC 04            Z223F           BITA    SSDA_0                   ; 
-     299/    2242 : 27 FB                               BEQ     Z223F                    ; 
-     300/    2244 : 86 FF                               LDAA    #$FF                     ; 
-     301/    2246 : B7 EC 05                            STAA    SSDA_1                   ; 
-     302/    2249 : 86 40                               LDAA    #$40                     ; 
-     303/    224B : B5 EC 04            Z224B           BITA    SSDA_0                   ; 
-     304/    224E : 27 FB                               BEQ     Z224B                    ; 
-     305/    2250 : C4 60                               ANDB    #$60                     ; 
-     306/    2252 : F7 EC 01                            STAB    PIAREGB                  ; 
-     307/    2255 : CE 81 FF                            LDX     #$81FF                   ; 
-     308/    2258 : FF EC 04                            STX     SSDA_0                   ; 
-     309/    225B : C6 AC                               LDAB    #$AC                     ; 
-     310/    225D : 96 23                               LDAA    EXADDRL                  ; 
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 14 - 2026-01-23 11:21:24
+     252/    21B7 : CE 82 10                            LDX     #$8210                   ; 
+     253/    21BA : FF EC 04                            STX     SSDA_0                   ; 
+     254/    21BD : BD 22 E2                            JSR     Z22E2                    ; 
+     255/    21C0 : CE 83 F7                            LDX     #$83F7                   ; 
+     256/    21C3 : FF EC 04                            STX     SSDA_0                   ; 
+     257/    21C6 : 86 7A                               LDAA    #$7A                     ; 
+     258/    21C8 : B7 EC 05                            STAA    SSDA_1                   ; 
+     259/    21CB : CE 81 FF                            LDX     #$81FF                   ; 
+     260/    21CE : FF EC 04                            STX     SSDA_0                   ; 
+     261/    21D1 : C6 17                               LDAB    #$17                     ; 
+     262/    21D3 : 86 18               Z21D3           LDAA    #$18                     ; 
+     263/    21D5 : CE 82 10                            LDX     #$8210                   ; 
+     264/    21D8 : FF EC 04                            STX     SSDA_0                   ; 
+     265/    21DB : B5 EC 04            Z21DB           BITA    SSDA_0                   ; 
+     266/    21DE : 27 FB                               BEQ     Z21DB                    ; 
+     267/    21E0 : B7 EC 05                            STAA    SSDA_1                   ; 
+     268/    21E3 : B5 EC 04            Z21E3           BITA    SSDA_0                   ; 
+     269/    21E6 : 27 FB                               BEQ     Z21E3                    ; 
+     270/    21E8 : CE C2 70                            LDX     #$C270                   ; 
+     271/    21EB : FF EC 04                            STX     SSDA_0                   ; 
+     272/    21EE : 85 00               M21EE           BITA    #$00                     ; 
+     273/    21F0 : 86 82               M21F0           LDAA    #$82                     ; 
+     274/    21F2 : 7C EC 01                            INC     PIAREGB                  ; |
+     275/    21F5 : 7A EC 01                            DEC     PIAREGB                  ; Toggle PB0 (RESET)
+     276/    21F8 : B7 EC 04                            STAA    SSDA_0                   ; 
+     277/    21FB : BD 22 E2                            JSR     Z22E2                    ; 
+     278/    21FE : CE 83 F5                            LDX     #$83F5                   ; 
+     279/    2201 : FF EC 04                            STX     SSDA_0                   ; 
+     280/    2204 : C6 7E                               LDAB    #$7E                     ; 
+     281/    2206 : 86 40                               LDAA    #$40                     ; 
+     282/    2208 : F7 EC 05                            STAB    SSDA_1                   ; 
+     283/    220B : B5 EC 04            Z220B           BITA    SSDA_0                   ; 
+     284/    220E : 27 FB                               BEQ     Z220B                    ; 
+     285/    2210 : D6 22                               LDAB    EXADDRH                  ; 
+     286/    2212 : F7 EC 05                            STAB    SSDA_1                   ; 
+     287/    2215 : 5F                                  CLRB                             ; 
+     288/    2216 : F7 EC 05                            STAB    SSDA_1                   ; 
+     289/    2219 : B5 EC 04            Z2219           BITA    SSDA_0                   ; 
+     290/    221C : 27 FB                               BEQ     Z2219                    ; 
+     291/    221E : D6 23                               LDAB    EXADDRL                  ; 
+     292/    2220 : F7 EC 05                            STAB    SSDA_1                   ; 
+     293/    2223 : 5F                                  CLRB                             ; 
+     294/    2224 : F7 EC 05                            STAB    SSDA_1                   ; 
+     295/    2227 : B5 EC 04            Z2227           BITA    SSDA_0                   ; 
+     296/    222A : 27 FB                               BEQ     Z2227                    ; 
+     297/    222C : F7 EC 05                            STAB    SSDA_1                   ; 
+     298/    222F : B5 EC 04            Z222F           BITA    SSDA_0                   ; 
+     299/    2232 : 27 FB                               BEQ     Z222F                    ; 
+     300/    2234 : F6 EC 01                            LDAB    PIAREGB                  ; |
+     301/    2237 : CA 08                               ORAB    #$08                     ; Set SHIFT-CRC high
+     302/    2239 : F7 EC 01                            STAB    PIAREGB                  ; |
+     303/    223C : F7 EC 05                            STAB    SSDA_1                   ; 
+     304/    223F : B5 EC 04            Z223F           BITA    SSDA_0                   ; 
+     305/    2242 : 27 FB                               BEQ     Z223F                    ; 
+     306/    2244 : 86 FF                               LDAA    #$FF                     ; 
+     307/    2246 : B7 EC 05                            STAA    SSDA_1                   ; 
+     308/    2249 : 86 40                               LDAA    #$40                     ; 
+     309/    224B : B5 EC 04            Z224B           BITA    SSDA_0                   ; 
+     310/    224E : 27 FB                               BEQ     Z224B                    ; 
+     311/    2250 : C4 60                               ANDB    #$60                     ; Set Bit 5,6 (DS2 and DS3 off)
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 14 - 01/24/2026 02:35:53 PM
 
 
-     311/    225F : 4C                                  INCA                             ; 
-     312/    2260 : 97 23                               STAA    EXADDRL                  ; 
-     313/    2262 : 81 1B                               CMPA    #$1B                     ; 
-     314/    2264 : 27 07                               BEQ     Z226D                    ; 
-     315/    2266 : 81 35                               CMPA    #$35                     ; 
-     316/    2268 : 27 03                               BEQ     Z226D                    ; 
-     317/    226A : 7E 21 D3                            JMP     Z21D3                    ; 
-     318/    226D : B6 EC 03            Z226D           LDAA    PIACTRLB                 ; 
-     319/    2270 : 2A FB                               BPL     Z226D                    ; 
-     320/    2272 : 7A EC 01                            DEC     PIAREGB                  ; 
-     321/    2275 : 7A EC 01                            DEC     PIAREGB                  ; 
-     322/    2278 : 8D 56                               BSR     Z22D0                    ; 
-     323/    227A : 96 23                               LDAA    EXADDRL                  ; 
-     324/    227C : 81 1B                               CMPA    #$1B                     ; 
-     325/    227E : 26 09                               BNE     Z2289                    ; 
-     326/    2280 : 96 2C                               LDAA    M002C                    ; 
-     327/    2282 : 2B 05                               BMI     Z2289                    ; 
-     328/    2284 : 86 23                               LDAA    #$23                     ; 
-     329/    2286 : 7E 21 76                            JMP     Z2176                    ; 
-     330/    2289 : BD E8 72            Z2289           JSR     RWTEST                   ; 
-     331/    228C : 24 03                               BCC     Z2291                    ; 
-     332/    228E : 7E 20 F4                            JMP     Z20F4                    ; 
-     333/    2291 : 96 02               Z2291           LDAA    STRSCTL                  ; 
-     334/    2293 : D6 01                               LDAB    STRSCTH                  ; 
-     335/    2295 : 9B 04                               ADDA    NUMSCTL                  ; 
-     336/    2297 : C9 00                               ADCB    #$00                     ; 
-     337/    2299 : 97 02                               STAA    STRSCTL                  ; 
-     338/    229B : D7 01                               STAB    STRSCTH                  ; 
-     339/    229D : 7C 00 22                            INC     EXADDRH                  ; 
-     340/    22A0 : 96 21                               LDAA    LDADDRL                  ; 
-     341/    22A2 : 91 22                               CMPA    EXADDRH                  ; 
-     342/    22A4 : 25 03                               BCS     Z22A9                    ; 
-     343/    22A6 : 7E 21 52                            JMP     Z2152                    ; 
-     344/    22A9 : (MACRO)              Z22A9           SCALL   MDENT1
-     344/    22A9 : 3F                           SWI
-     344/    22AA : 1A                           FCB  MDENT1
-     345/    22AB : 86 82               M22AB           LDAA    #$82                     ; 
-     346/    22AD : 95 20                               BITA    LDADDRH                  ; 
-     347/    22AF : 39                                  RTS                              ; 
-     348/    22B0 : 07                  Z22B0           TPA                              ; 
-     349/    22B1 : 0F                                  SEI                              ; 
-     350/    22B2 : 97 2B                               STAA    M002B                    ; 
-     351/    22B4 : FE FF FC                            LDX     NMIsVC                   ; 
-     352/    22B7 : DF 25                               STX     ONECONL                  ; 
-     353/    22B9 : CE 23 19                            LDX     #M2319                   ; 
-     354/    22BC : FF FF FC                            STX     NMIsVC                   ; 
-     355/    22BF : CE EC 00                            LDX     #PIAREGA                 ; 
-     356/    22C2 : 86 36                               LDAA    #$36                     ; 
-     357/    22C4 : A7 03                               STAA    $03,X                    ; 
-     358/    22C6 : 86 3E                               LDAA    #$3E                     ; 
-     359/    22C8 : A7 03                               STAA    $03,X                    ; 
-     360/    22CA : E6 00                               LDAB    ,X                       ; 
-     361/    22CC : 4A                                  DECA                             ; 
-     362/    22CD : A7 02                               STAA    $02,X                    ; 
-     363/    22CF : 39                                  RTS                              ; 
-     364/    22D0 : CE 3C 3E            Z22D0           LDX     #$3C3E                   ; 
-     365/    22D3 : FF EC 02                            STX     PIACTRLA                 ; 
-     366/    22D6 : FE EC 00                            LDX     PIAREGA                  ; 
-     367/    22D9 : DE 25                               LDX     ONECONL                  ; 
-     368/    22DB : FF FF FC                            STX     NMIsVC                   ; 
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 15 - 2026-01-23 11:21:24
+     312/    2252 : F7 EC 01                            STAB    PIAREGB                  ; |
+     313/    2255 : CE 81 FF                            LDX     #$81FF                   ; 
+     314/    2258 : FF EC 04                            STX     SSDA_0                   ; 
+     315/    225B : C6 AC                               LDAB    #$AC                     ; 
+     316/    225D : 96 23                               LDAA    EXADDRL                  ; 
+     317/    225F : 4C                                  INCA                             ; 
+     318/    2260 : 97 23                               STAA    EXADDRL                  ; 
+     319/    2262 : 81 1B                               CMPA    #$1B                     ; 
+     320/    2264 : 27 07                               BEQ     Z226D                    ; 
+     321/    2266 : 81 35                               CMPA    #$35                     ; 
+     322/    2268 : 27 03                               BEQ     Z226D                    ; 
+     323/    226A : 7E 21 D3                            JMP     Z21D3                    ; 
+     324/    226D :                     ;------------------------------------------------
+     325/    226D : B6 EC 03            Z226D           LDAA    PIACTRLB                 ; |
+     326/    2270 : 2A FB                               BPL     Z226D                    ; Wait for PB7 (CRC-0) low
+     327/    2272 : 7A EC 01                            DEC     PIAREGB                  ; 
+     328/    2275 : 7A EC 01                            DEC     PIAREGB                  ; 
+     329/    2278 : 8D 56                               BSR     Z22D0                    ; Init PIA
+     330/    227A : 96 23                               LDAA    EXADDRL                  ; 
+     331/    227C : 81 1B                               CMPA    #$1B                     ; 
+     332/    227E : 26 09                               BNE     Z2289                    ; 
+     333/    2280 : 96 2C                               LDAA    M002C                    ; 
+     334/    2282 : 2B 05                               BMI     Z2289                    ; 
+     335/    2284 : 86 23                               LDAA    #$23                     ; 
+     336/    2286 : 7E 21 76                            JMP     Z2176                    ; 
+     337/    2289 :                     ;------------------------------------------------
+     338/    2289 : BD E8 72            Z2289           JSR     RWTEST                   ; 
+     339/    228C : 24 03                               BCC     Z2291                    ; 
+     340/    228E : 7E 20 F4                            JMP     Z20F4                    ; 
+     341/    2291 :                     ;------------------------------------------------
+     342/    2291 : 96 02               Z2291           LDAA    STRSCTL                  ; 
+     343/    2293 : D6 01                               LDAB    STRSCTH                  ; 
+     344/    2295 : 9B 04                               ADDA    NUMSCTL                  ; 
+     345/    2297 : C9 00                               ADCB    #$00                     ; 
+     346/    2299 : 97 02                               STAA    STRSCTL                  ; 
+     347/    229B : D7 01                               STAB    STRSCTH                  ; 
+     348/    229D : 7C 00 22                            INC     EXADDRH                  ; 
+     349/    22A0 : 96 21                               LDAA    LDADDRL                  ; 
+     350/    22A2 : 91 22                               CMPA    EXADDRH                  ; 
+     351/    22A4 : 25 03                               BCS     Z22A9                    ; 
+     352/    22A6 : 7E 21 52                            JMP     Z2152                    ; 
+     353/    22A9 :                     ;------------------------------------------------
+     354/    22A9 : (MACRO)              Z22A9           SCALL   MDENT1
+     354/    22A9 : 3F                           SWI
+     354/    22AA : 1A                           FCB  MDENT1
+     355/    22AB : 86 82               M22AB           LDAA    #$82                     ; 
+     356/    22AD : 95 20                               BITA    LDADDRH                  ; 
+     357/    22AF : 39                                  RTS                              ; 
+     358/    22B0 :                     ;------------------------------------------------
+     359/    22B0 : 07                  SETUPNMI        TPA                              ; 
+     360/    22B1 : 0F                                  SEI                              ; 
+     361/    22B2 : 97 2B                               STAA    STATS2                   ; 
+     362/    22B4 : FE FF FC                            LDX     NMIsVC                   ; 
+     363/    22B7 : DF 25                               STX     ONECONL                  ; 
+     364/    22B9 : CE 23 19                            LDX     #NMI_ISR                 ; 
+     365/    22BC : FF FF FC                            STX     NMIsVC                   ; 
+     366/    22BF : CE EC 00                            LDX     #PIAREGA                 ; 
+     367/    22C2 : 86 36                               LDAA    #$36                     ; 
+     368/    22C4 : A7 03                               STAA    $03,X                    ; 
+     369/    22C6 : 86 3E                               LDAA    #$3E                     ; 
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 15 - 01/24/2026 02:35:53 PM
 
 
-     369/    22DE : 96 2B                               LDAA    M002B                    ; 
-     370/    22E0 : 06                                  TAP                              ; 
-     371/    22E1 : 39                                  RTS                              ; 
-     372/    22E2 : 86 18               Z22E2           LDAA    #$18                     ; 
-     373/    22E4 : B5 EC 04            Z22E4           BITA    SSDA_0                   ; 
-     374/    22E7 : 27 FB                               BEQ     Z22E4                    ; 
-     375/    22E9 : 96 2A                               LDAA    M002A                    ; 
-     376/    22EB : 4A                  Z22EB           DECA                             ; 
-     377/    22EC : 26 FD                               BNE     Z22EB                    ; 
-     378/    22EE : 86 18                               LDAA    #$18                     ; 
-     379/    22F0 : B7 EC 05                            STAA    SSDA_1                   ; 
-     380/    22F3 : 5A                                  DECB                             ; 
-     381/    22F4 : 26 EE                               BNE     Z22E4                    ; 
-     382/    22F6 : CE 81 AA                            LDX     #$81AA                   ; 
-     383/    22F9 : C6 05                               LDAB    #$05                     ; 
-     384/    22FB : 01                                  NOP                              ; 
-     385/    22FC : 01                                  NOP                              ; 
-     386/    22FD : FF EC 04                            STX     SSDA_0                   ; 
-     387/    2300 : CE 82 10                            LDX     #$8210                   ; 
-     388/    2303 : FF EC 04                            STX     SSDA_0                   ; 
-     389/    2306 : B5 EC 04            Z2306           BITA    SSDA_0                   ; 
-     390/    2309 : 27 FB                               BEQ     Z2306                    ; 
-     391/    230B : 96 2A                               LDAA    M002A                    ; 
-     392/    230D : 4A                  Z230D           DECA                             ; 
-     393/    230E : 26 FD                               BNE     Z230D                    ; 
-     394/    2310 : 86 18                               LDAA    #$18                     ; 
-     395/    2312 : B7 EC 05                            STAA    SSDA_1                   ; 
-     396/    2315 : 5A                                  DECB                             ; 
-     397/    2316 : 26 EE                               BNE     Z2306                    ; 
-     398/    2318 : 39                                  RTS                              ; 
-     399/    2319 : 9E 27               M2319           LDS     M0027                    ; 
-     400/    231B : 8D B3                               BSR     Z22D0                    ; 
-     401/    231D : BD E8 22                            JSR     FDINIT                   ; 
-     402/    2320 : 86 35                               LDAA    #$35                     ; 
-     403/    2322 : 97 08                               STAA    FDSTAT                   ; 
-     404/    2324 : 96 23                               LDAA    EXADDRL                  ; 
-     405/    2326 : 4A                                  DECA                             ; 
-     406/    2327 : 5F                                  CLRB                             ; 
-     407/    2328 : 9B 02                               ADDA    STRSCTL                  ; 
-     408/    232A : D9 01                               ADCB    STRSCTH                  ; 
-     409/    232C : 7E 21 04                            JMP     Z2104                    ; 
-     410/    232F : 20                  M232F           FCC     ' '                      ; 
-     411/    2330 : 20 20 20 20 20 20   M2330           FCC     '        '               ; 
+     370/    22C8 : A7 03                               STAA    $03,X                    ; 
+     371/    22CA : E6 00                               LDAB    ,X                       ; 
+     372/    22CC : 4A                                  DECA                             ; 
+     373/    22CD : A7 02                               STAA    $02,X                    ; 
+     374/    22CF : 39                                  RTS                              ; 
+     375/    22D0 :                     ;------------------------------------------------
+     376/    22D0 : CE 3C 3E            Z22D0           LDX     #$3C3E                   ; Select both Output Reg., Set CA2 (STEP), Set CB2 (NMI Timer), IRQB (IRQ) Set by LH Transition of CB1 (IDX)
+     377/    22D3 : FF EC 02                            STX     PIACTRLA                 ; 
+     378/    22D6 : FE EC 00                            LDX     PIAREGA                  ; 
+     379/    22D9 : DE 25                               LDX     ONECONL                  ; 
+     380/    22DB : FF FF FC                            STX     NMIsVC                   ; 
+     381/    22DE : 96 2B                               LDAA    STATS2                   ; 
+     382/    22E0 : 06                                  TAP                              ; 
+     383/    22E1 : 39                                  RTS                              ; 
+     384/    22E2 :                     ;------------------------------------------------
+     385/    22E2 : 86 18               Z22E2           LDAA    #$18                     ; 
+     386/    22E4 : B5 EC 04            Z22E4           BITA    SSDA_0                   ; 
+     387/    22E7 : 27 FB                               BEQ     Z22E4                    ; 
+     388/    22E9 : 96 2A                               LDAA    M002A                    ; 
+     389/    22EB : 4A                  Z22EB           DECA                             ; 
+     390/    22EC : 26 FD                               BNE     Z22EB                    ; 
+     391/    22EE : 86 18                               LDAA    #$18                     ; 
+     392/    22F0 : B7 EC 05                            STAA    SSDA_1                   ; 
+     393/    22F3 : 5A                                  DECB                             ; 
+     394/    22F4 : 26 EE                               BNE     Z22E4                    ; 
+     395/    22F6 : CE 81 AA                            LDX     #$81AA                   ; 
+     396/    22F9 : C6 05                               LDAB    #$05                     ; 
+     397/    22FB : 01                                  NOP                              ; 
+     398/    22FC : 01                                  NOP                              ; 
+     399/    22FD : FF EC 04                            STX     SSDA_0                   ; 
+     400/    2300 : CE 82 10                            LDX     #$8210                   ; 
+     401/    2303 : FF EC 04                            STX     SSDA_0                   ; 
+     402/    2306 : B5 EC 04            Z2306           BITA    SSDA_0                   ; 
+     403/    2309 : 27 FB                               BEQ     Z2306                    ; 
+     404/    230B : 96 2A                               LDAA    M002A                    ; 
+     405/    230D : 4A                  Z230D           DECA                             ; 
+     406/    230E : 26 FD                               BNE     Z230D                    ; 
+     407/    2310 : 86 18                               LDAA    #$18                     ; 
+     408/    2312 : B7 EC 05                            STAA    SSDA_1                   ; 
+     409/    2315 : 5A                                  DECB                             ; 
+     410/    2316 : 26 EE                               BNE     Z2306                    ; 
+     411/    2318 : 39                                  RTS                              ; 
+     412/    2319 :                     ;------------------------------------------------
+     413/    2319 : 9E 27               NMI_ISR         LDS     M0027                    ; 
+     414/    231B : 8D B3                               BSR     Z22D0                    ; Init PIA
+     415/    231D : BD E8 22                            JSR     FDINIT                   ; 
+     416/    2320 : 86 35                               LDAA    #$35                     ; Error: "TIMEOUT"
+     417/    2322 : 97 08                               STAA    FDSTAT                   ; 
+     418/    2324 : 96 23                               LDAA    EXADDRL                  ; 
+     419/    2326 : 4A                                  DECA                             ; 
+     420/    2327 : 5F                                  CLRB                             ; 
+     421/    2328 : 9B 02                               ADDA    STRSCTL                  ; 
+     422/    232A : D9 01                               ADCB    STRSCTH                  ; 
+     423/    232C : 7E 21 04                            JMP     Z2104                    ; 
+     424/    232F :                     ;------------------------------------------------
+     425/    232F : 20                  M232F           FCC     ' '                      ; 
+     426/    2330 : 20 20 20 20 20 20   M2330           FCC     '        '               ; 
              2336 : 20 20             
-     412/    2338 : 20 20               M2338           FCC     '  '                     ; 
-     413/    233A : 00 00               M233A           FCB     $00,$00                  ; 
-     414/    233C : 00 00               M233C           FCB     $00,$00                  ; 
-     415/    233E : 46 4F 52 4D 41 54   M233E           FCC     'FORMAT DRIVE '          ; 
+     427/    2338 : 20 20               M2338           FCC     '  '                     ; 
+     428/    233A : 00 00               M233A           FDB     $0000                    ; 
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 16 - 01/24/2026 02:35:53 PM
+
+
+     429/    233C : 00 00               M233C           FDB     $0000                    ; 
+     430/    233E : 46 4F 52 4D 41 54   M233E           FCC     'FORMAT DRIVE '          ; 
              2344 : 20 44 52 49 56 45 
              234A : 20                
-     416/    234B : 58 3F               M234B           FCC     'X?'                     ; 
-     417/    234D : 0D                                  FCB     $0d                      ; 
-     418/    234E : 00                  STORAGE         FCB     $00                      ; 
-     419/    234F :                                     REPT    $B1                      ; Filler
-     420/    234F :                                     FCB     $00
-     421/    234F :                                     ENDM
-     420/    234F : 00                                  FCB     $00
-     420/    2350 : 00                                  FCB     $00
-     420/    2351 : 00                                  FCB     $00
-     420/    2352 : 00                                  FCB     $00
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 16 - 2026-01-23 11:21:24
+     431/    234B : 58 3F               DRVNUM          FCC     'X?'                     ; 
+     432/    234D : 0D                                  FCB     $0d                      ; 
+     433/    234E : 00                  STORAGE         FCB     $00                      ; 
+     434/    234F :                                     REPT    $B1                      ; Filler
+     435/    234F :                                     FCB     $00
+     436/    234F :                                     ENDM
+     435/    234F : 00                                  FCB     $00
+     435/    2350 : 00                                  FCB     $00
+     435/    2351 : 00                                  FCB     $00
+     435/    2352 : 00                                  FCB     $00
+     435/    2353 : 00                                  FCB     $00
+     435/    2354 : 00                                  FCB     $00
+     435/    2355 : 00                                  FCB     $00
+     435/    2356 : 00                                  FCB     $00
+     435/    2357 : 00                                  FCB     $00
+     435/    2358 : 00                                  FCB     $00
+     435/    2359 : 00                                  FCB     $00
+     435/    235A : 00                                  FCB     $00
+     435/    235B : 00                                  FCB     $00
+     435/    235C : 00                                  FCB     $00
+     435/    235D : 00                                  FCB     $00
+     435/    235E : 00                                  FCB     $00
+     435/    235F : 00                                  FCB     $00
+     435/    2360 : 00                                  FCB     $00
+     435/    2361 : 00                                  FCB     $00
+     435/    2362 : 00                                  FCB     $00
+     435/    2363 : 00                                  FCB     $00
+     435/    2364 : 00                                  FCB     $00
+     435/    2365 : 00                                  FCB     $00
+     435/    2366 : 00                                  FCB     $00
+     435/    2367 : 00                                  FCB     $00
+     435/    2368 : 00                                  FCB     $00
+     435/    2369 : 00                                  FCB     $00
+     435/    236A : 00                                  FCB     $00
+     435/    236B : 00                                  FCB     $00
+     435/    236C : 00                                  FCB     $00
+     435/    236D : 00                                  FCB     $00
+     435/    236E : 00                                  FCB     $00
+     435/    236F : 00                                  FCB     $00
+     435/    2370 : 00                                  FCB     $00
+     435/    2371 : 00                                  FCB     $00
+     435/    2372 : 00                                  FCB     $00
+     435/    2373 : 00                                  FCB     $00
+     435/    2374 : 00                                  FCB     $00
+     435/    2375 : 00                                  FCB     $00
+     435/    2376 : 00                                  FCB     $00
+     435/    2377 : 00                                  FCB     $00
+     435/    2378 : 00                                  FCB     $00
+     435/    2379 : 00                                  FCB     $00
+     435/    237A : 00                                  FCB     $00
+     435/    237B : 00                                  FCB     $00
+     435/    237C : 00                                  FCB     $00
+     435/    237D : 00                                  FCB     $00
+     435/    237E : 00                                  FCB     $00
+     435/    237F : 00                                  FCB     $00
+     435/    2380 : 00                                  FCB     $00
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 17 - 01/24/2026 02:35:53 PM
 
 
-     420/    2353 : 00                                  FCB     $00
-     420/    2354 : 00                                  FCB     $00
-     420/    2355 : 00                                  FCB     $00
-     420/    2356 : 00                                  FCB     $00
-     420/    2357 : 00                                  FCB     $00
-     420/    2358 : 00                                  FCB     $00
-     420/    2359 : 00                                  FCB     $00
-     420/    235A : 00                                  FCB     $00
-     420/    235B : 00                                  FCB     $00
-     420/    235C : 00                                  FCB     $00
-     420/    235D : 00                                  FCB     $00
-     420/    235E : 00                                  FCB     $00
-     420/    235F : 00                                  FCB     $00
-     420/    2360 : 00                                  FCB     $00
-     420/    2361 : 00                                  FCB     $00
-     420/    2362 : 00                                  FCB     $00
-     420/    2363 : 00                                  FCB     $00
-     420/    2364 : 00                                  FCB     $00
-     420/    2365 : 00                                  FCB     $00
-     420/    2366 : 00                                  FCB     $00
-     420/    2367 : 00                                  FCB     $00
-     420/    2368 : 00                                  FCB     $00
-     420/    2369 : 00                                  FCB     $00
-     420/    236A : 00                                  FCB     $00
-     420/    236B : 00                                  FCB     $00
-     420/    236C : 00                                  FCB     $00
-     420/    236D : 00                                  FCB     $00
-     420/    236E : 00                                  FCB     $00
-     420/    236F : 00                                  FCB     $00
-     420/    2370 : 00                                  FCB     $00
-     420/    2371 : 00                                  FCB     $00
-     420/    2372 : 00                                  FCB     $00
-     420/    2373 : 00                                  FCB     $00
-     420/    2374 : 00                                  FCB     $00
-     420/    2375 : 00                                  FCB     $00
-     420/    2376 : 00                                  FCB     $00
-     420/    2377 : 00                                  FCB     $00
-     420/    2378 : 00                                  FCB     $00
-     420/    2379 : 00                                  FCB     $00
-     420/    237A : 00                                  FCB     $00
-     420/    237B : 00                                  FCB     $00
-     420/    237C : 00                                  FCB     $00
-     420/    237D : 00                                  FCB     $00
-     420/    237E : 00                                  FCB     $00
-     420/    237F : 00                                  FCB     $00
-     420/    2380 : 00                                  FCB     $00
-     420/    2381 : 00                                  FCB     $00
-     420/    2382 : 00                                  FCB     $00
-     420/    2383 : 00                                  FCB     $00
-     420/    2384 : 00                                  FCB     $00
-     420/    2385 : 00                                  FCB     $00
-     420/    2386 : 00                                  FCB     $00
-     420/    2387 : 00                                  FCB     $00
-     420/    2388 : 00                                  FCB     $00
-     420/    2389 : 00                                  FCB     $00
-     420/    238A : 00                                  FCB     $00
-     420/    238B : 00                                  FCB     $00
-     420/    238C : 00                                  FCB     $00
-     420/    238D : 00                                  FCB     $00
-     420/    238E : 00                                  FCB     $00
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 17 - 2026-01-23 11:21:24
+     435/    2381 : 00                                  FCB     $00
+     435/    2382 : 00                                  FCB     $00
+     435/    2383 : 00                                  FCB     $00
+     435/    2384 : 00                                  FCB     $00
+     435/    2385 : 00                                  FCB     $00
+     435/    2386 : 00                                  FCB     $00
+     435/    2387 : 00                                  FCB     $00
+     435/    2388 : 00                                  FCB     $00
+     435/    2389 : 00                                  FCB     $00
+     435/    238A : 00                                  FCB     $00
+     435/    238B : 00                                  FCB     $00
+     435/    238C : 00                                  FCB     $00
+     435/    238D : 00                                  FCB     $00
+     435/    238E : 00                                  FCB     $00
+     435/    238F : 00                                  FCB     $00
+     435/    2390 : 00                                  FCB     $00
+     435/    2391 : 00                                  FCB     $00
+     435/    2392 : 00                                  FCB     $00
+     435/    2393 : 00                                  FCB     $00
+     435/    2394 : 00                                  FCB     $00
+     435/    2395 : 00                                  FCB     $00
+     435/    2396 : 00                                  FCB     $00
+     435/    2397 : 00                                  FCB     $00
+     435/    2398 : 00                                  FCB     $00
+     435/    2399 : 00                                  FCB     $00
+     435/    239A : 00                                  FCB     $00
+     435/    239B : 00                                  FCB     $00
+     435/    239C : 00                                  FCB     $00
+     435/    239D : 00                                  FCB     $00
+     435/    239E : 00                                  FCB     $00
+     435/    239F : 00                                  FCB     $00
+     435/    23A0 : 00                                  FCB     $00
+     435/    23A1 : 00                                  FCB     $00
+     435/    23A2 : 00                                  FCB     $00
+     435/    23A3 : 00                                  FCB     $00
+     435/    23A4 : 00                                  FCB     $00
+     435/    23A5 : 00                                  FCB     $00
+     435/    23A6 : 00                                  FCB     $00
+     435/    23A7 : 00                                  FCB     $00
+     435/    23A8 : 00                                  FCB     $00
+     435/    23A9 : 00                                  FCB     $00
+     435/    23AA : 00                                  FCB     $00
+     435/    23AB : 00                                  FCB     $00
+     435/    23AC : 00                                  FCB     $00
+     435/    23AD : 00                                  FCB     $00
+     435/    23AE : 00                                  FCB     $00
+     435/    23AF : 00                                  FCB     $00
+     435/    23B0 : 00                                  FCB     $00
+     435/    23B1 : 00                                  FCB     $00
+     435/    23B2 : 00                                  FCB     $00
+     435/    23B3 : 00                                  FCB     $00
+     435/    23B4 : 00                                  FCB     $00
+     435/    23B5 : 00                                  FCB     $00
+     435/    23B6 : 00                                  FCB     $00
+     435/    23B7 : 00                                  FCB     $00
+     435/    23B8 : 00                                  FCB     $00
+     435/    23B9 : 00                                  FCB     $00
+     435/    23BA : 00                                  FCB     $00
+     435/    23BB : 00                                  FCB     $00
+     435/    23BC : 00                                  FCB     $00
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 18 - 01/24/2026 02:35:53 PM
 
 
-     420/    238F : 00                                  FCB     $00
-     420/    2390 : 00                                  FCB     $00
-     420/    2391 : 00                                  FCB     $00
-     420/    2392 : 00                                  FCB     $00
-     420/    2393 : 00                                  FCB     $00
-     420/    2394 : 00                                  FCB     $00
-     420/    2395 : 00                                  FCB     $00
-     420/    2396 : 00                                  FCB     $00
-     420/    2397 : 00                                  FCB     $00
-     420/    2398 : 00                                  FCB     $00
-     420/    2399 : 00                                  FCB     $00
-     420/    239A : 00                                  FCB     $00
-     420/    239B : 00                                  FCB     $00
-     420/    239C : 00                                  FCB     $00
-     420/    239D : 00                                  FCB     $00
-     420/    239E : 00                                  FCB     $00
-     420/    239F : 00                                  FCB     $00
-     420/    23A0 : 00                                  FCB     $00
-     420/    23A1 : 00                                  FCB     $00
-     420/    23A2 : 00                                  FCB     $00
-     420/    23A3 : 00                                  FCB     $00
-     420/    23A4 : 00                                  FCB     $00
-     420/    23A5 : 00                                  FCB     $00
-     420/    23A6 : 00                                  FCB     $00
-     420/    23A7 : 00                                  FCB     $00
-     420/    23A8 : 00                                  FCB     $00
-     420/    23A9 : 00                                  FCB     $00
-     420/    23AA : 00                                  FCB     $00
-     420/    23AB : 00                                  FCB     $00
-     420/    23AC : 00                                  FCB     $00
-     420/    23AD : 00                                  FCB     $00
-     420/    23AE : 00                                  FCB     $00
-     420/    23AF : 00                                  FCB     $00
-     420/    23B0 : 00                                  FCB     $00
-     420/    23B1 : 00                                  FCB     $00
-     420/    23B2 : 00                                  FCB     $00
-     420/    23B3 : 00                                  FCB     $00
-     420/    23B4 : 00                                  FCB     $00
-     420/    23B5 : 00                                  FCB     $00
-     420/    23B6 : 00                                  FCB     $00
-     420/    23B7 : 00                                  FCB     $00
-     420/    23B8 : 00                                  FCB     $00
-     420/    23B9 : 00                                  FCB     $00
-     420/    23BA : 00                                  FCB     $00
-     420/    23BB : 00                                  FCB     $00
-     420/    23BC : 00                                  FCB     $00
-     420/    23BD : 00                                  FCB     $00
-     420/    23BE : 00                                  FCB     $00
-     420/    23BF : 00                                  FCB     $00
-     420/    23C0 : 00                                  FCB     $00
-     420/    23C1 : 00                                  FCB     $00
-     420/    23C2 : 00                                  FCB     $00
-     420/    23C3 : 00                                  FCB     $00
-     420/    23C4 : 00                                  FCB     $00
-     420/    23C5 : 00                                  FCB     $00
-     420/    23C6 : 00                                  FCB     $00
-     420/    23C7 : 00                                  FCB     $00
-     420/    23C8 : 00                                  FCB     $00
-     420/    23C9 : 00                                  FCB     $00
-     420/    23CA : 00                                  FCB     $00
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 18 - 2026-01-23 11:21:24
+     435/    23BD : 00                                  FCB     $00
+     435/    23BE : 00                                  FCB     $00
+     435/    23BF : 00                                  FCB     $00
+     435/    23C0 : 00                                  FCB     $00
+     435/    23C1 : 00                                  FCB     $00
+     435/    23C2 : 00                                  FCB     $00
+     435/    23C3 : 00                                  FCB     $00
+     435/    23C4 : 00                                  FCB     $00
+     435/    23C5 : 00                                  FCB     $00
+     435/    23C6 : 00                                  FCB     $00
+     435/    23C7 : 00                                  FCB     $00
+     435/    23C8 : 00                                  FCB     $00
+     435/    23C9 : 00                                  FCB     $00
+     435/    23CA : 00                                  FCB     $00
+     435/    23CB : 00                                  FCB     $00
+     435/    23CC : 00                                  FCB     $00
+     435/    23CD : 00                                  FCB     $00
+     435/    23CE : 00                                  FCB     $00
+     435/    23CF : 00                                  FCB     $00
+     435/    23D0 : 00                                  FCB     $00
+     435/    23D1 : 00                                  FCB     $00
+     435/    23D2 : 00                                  FCB     $00
+     435/    23D3 : 00                                  FCB     $00
+     435/    23D4 : 00                                  FCB     $00
+     435/    23D5 : 00                                  FCB     $00
+     435/    23D6 : 00                                  FCB     $00
+     435/    23D7 : 00                                  FCB     $00
+     435/    23D8 : 00                                  FCB     $00
+     435/    23D9 : 00                                  FCB     $00
+     435/    23DA : 00                                  FCB     $00
+     435/    23DB : 00                                  FCB     $00
+     435/    23DC : 00                                  FCB     $00
+     435/    23DD : 00                                  FCB     $00
+     435/    23DE : 00                                  FCB     $00
+     435/    23DF : 00                                  FCB     $00
+     435/    23E0 : 00                                  FCB     $00
+     435/    23E1 : 00                                  FCB     $00
+     435/    23E2 : 00                                  FCB     $00
+     435/    23E3 : 00                                  FCB     $00
+     435/    23E4 : 00                                  FCB     $00
+     435/    23E5 : 00                                  FCB     $00
+     435/    23E6 : 00                                  FCB     $00
+     435/    23E7 : 00                                  FCB     $00
+     435/    23E8 : 00                                  FCB     $00
+     435/    23E9 : 00                                  FCB     $00
+     435/    23EA : 00                                  FCB     $00
+     435/    23EB : 00                                  FCB     $00
+     435/    23EC : 00                                  FCB     $00
+     435/    23ED : 00                                  FCB     $00
+     435/    23EE : 00                                  FCB     $00
+     435/    23EF : 00                                  FCB     $00
+     435/    23F0 : 00                                  FCB     $00
+     435/    23F1 : 00                                  FCB     $00
+     435/    23F2 : 00                                  FCB     $00
+     435/    23F3 : 00                                  FCB     $00
+     435/    23F4 : 00                                  FCB     $00
+     435/    23F5 : 00                                  FCB     $00
+     435/    23F6 : 00                                  FCB     $00
+     435/    23F7 : 00                                  FCB     $00
+     435/    23F8 : 00                                  FCB     $00
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 19 - 01/24/2026 02:35:53 PM
 
 
-     420/    23CB : 00                                  FCB     $00
-     420/    23CC : 00                                  FCB     $00
-     420/    23CD : 00                                  FCB     $00
-     420/    23CE : 00                                  FCB     $00
-     420/    23CF : 00                                  FCB     $00
-     420/    23D0 : 00                                  FCB     $00
-     420/    23D1 : 00                                  FCB     $00
-     420/    23D2 : 00                                  FCB     $00
-     420/    23D3 : 00                                  FCB     $00
-     420/    23D4 : 00                                  FCB     $00
-     420/    23D5 : 00                                  FCB     $00
-     420/    23D6 : 00                                  FCB     $00
-     420/    23D7 : 00                                  FCB     $00
-     420/    23D8 : 00                                  FCB     $00
-     420/    23D9 : 00                                  FCB     $00
-     420/    23DA : 00                                  FCB     $00
-     420/    23DB : 00                                  FCB     $00
-     420/    23DC : 00                                  FCB     $00
-     420/    23DD : 00                                  FCB     $00
-     420/    23DE : 00                                  FCB     $00
-     420/    23DF : 00                                  FCB     $00
-     420/    23E0 : 00                                  FCB     $00
-     420/    23E1 : 00                                  FCB     $00
-     420/    23E2 : 00                                  FCB     $00
-     420/    23E3 : 00                                  FCB     $00
-     420/    23E4 : 00                                  FCB     $00
-     420/    23E5 : 00                                  FCB     $00
-     420/    23E6 : 00                                  FCB     $00
-     420/    23E7 : 00                                  FCB     $00
-     420/    23E8 : 00                                  FCB     $00
-     420/    23E9 : 00                                  FCB     $00
-     420/    23EA : 00                                  FCB     $00
-     420/    23EB : 00                                  FCB     $00
-     420/    23EC : 00                                  FCB     $00
-     420/    23ED : 00                                  FCB     $00
-     420/    23EE : 00                                  FCB     $00
-     420/    23EF : 00                                  FCB     $00
-     420/    23F0 : 00                                  FCB     $00
-     420/    23F1 : 00                                  FCB     $00
-     420/    23F2 : 00                                  FCB     $00
-     420/    23F3 : 00                                  FCB     $00
-     420/    23F4 : 00                                  FCB     $00
-     420/    23F5 : 00                                  FCB     $00
-     420/    23F6 : 00                                  FCB     $00
-     420/    23F7 : 00                                  FCB     $00
-     420/    23F8 : 00                                  FCB     $00
-     420/    23F9 : 00                                  FCB     $00
-     420/    23FA : 00                                  FCB     $00
-     420/    23FB : 00                                  FCB     $00
-     420/    23FC : 00                                  FCB     $00
-     420/    23FD : 00                                  FCB     $00
-     420/    23FE : 00                                  FCB     $00
-     420/    23FF : 00                                  FCB     $00
-     422/    2400 :                                     END
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 19 - 2026-01-23 11:21:24
+     435/    23F9 : 00                                  FCB     $00
+     435/    23FA : 00                                  FCB     $00
+     435/    23FB : 00                                  FCB     $00
+     435/    23FC : 00                                  FCB     $00
+     435/    23FD : 00                                  FCB     $00
+     435/    23FE : 00                                  FCB     $00
+     435/    23FF : 00                                  FCB     $00
+     437/    2400 :                                     END
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 20 - 01/24/2026 02:35:53 PM
 
 
   Symbol Table (* = unused):
@@ -1151,28 +1168,29 @@
 *CDBSDA :                         2 - | *CDBVDT :                         7 - |
  CDBWST :                         A - | *CHANG1 :                        1F - |
  CHFLGS :                       11E - | *CHKERR :                      E853 - |
-*CKBRK1 :                         D - | *CLOSE1 :                         3 - |
-*CMPAR1 :                        11 - | *CNACIS :                      FCF4 - |
-*COMPMODE :                       0 - | *CONSTPI :        3.141592653589793 - |
-*CPBAX1 :                        2F - | *CR :                             D - |
-*CURADR :                         6 - |  CURADRH :                        6 - |
- CURDRV :                         0 - | *CUSTOM :                         0 - |
-*DATE :                "2026-01-23" - | *DC1 :                           11 - |
-*DC2 :                           12 - | *DC3 :                           13 - |
-*DC4 :                           14 - | *DDSCNS :                         4 - |
-*DDSFMC :                         1 - | *DDSINP :                        20 - |
-*DDSLOG :                         2 - | *DDSOCF :                        10 - |
-*DDSOUT :                        40 - | *DDSRES :                        80 - |
-*DDSRWD :                         8 - | *DEALC1 :                        22 - |
-*DEVDLM :                       '#' - | *DFCLSS :                        20 - |
-*DIDSDT :                         C - | *DIDSID :                         0 - |
-*DIDSNM :                        12 - | *DIDSRB :                        26 - |
-*DIDSRN :                         A - | *DIDSVN :                         8 - |
-*DIRSAT :                         C - | *DIRSM1 :                        1C - |
-*DIRSNM :                         0 - | *DIRSNU :                         E - |
-*DIRSRB :                         A - | *DIRSSX :                         8 - |
-*DLE :                           10 - | *DMA1 :                          19 - |
-*DREAD1 :                         E - | *DRVDLM :                       ':' - |
+ CHKRDY :                      20AB C | *CKBRK1 :                         D - |
+*CLOSE1 :                         3 - | *CMPAR1 :                        11 - |
+*CNACIS :                      FCF4 - | *COMPMODE :                       0 - |
+*CONSTPI :        3.141592653589793 - | *CPBAX1 :                        2F - |
+*CR :                             D - | *CURADR :                         6 - |
+ CURADRH :                        6 - |  CURDRV :                         0 - |
+*CUSTOM :                         0 - | *DATE :                "01/24/2026" - |
+*DC1 :                           11 - | *DC2 :                           12 - |
+*DC3 :                           13 - | *DC4 :                           14 - |
+*DDSCNS :                         4 - | *DDSFMC :                         1 - |
+*DDSINP :                        20 - | *DDSLOG :                         2 - |
+*DDSOCF :                        10 - | *DDSOUT :                        40 - |
+*DDSRES :                        80 - | *DDSRWD :                         8 - |
+*DEALC1 :                        22 - | *DEVDLM :                       '#' - |
+*DFCLSS :                        20 - | *DIDSDT :                         C - |
+*DIDSID :                         0 - | *DIDSNM :                        12 - |
+*DIDSRB :                        26 - | *DIDSRN :                         A - |
+*DIDSVN :                         8 - | *DIRSAT :                         C - |
+*DIRSM1 :                        1C - | *DIRSNM :                         0 - |
+*DIRSNU :                         E - | *DIRSRB :                         A - |
+*DIRSSX :                         8 - | *DLE :                           10 - |
+*DMA1 :                          19 - | *DREAD1 :                         E - |
+*DRVDLM :                       ':' - |  DRVNUM :                      234B C |
 *DSLOAD :                      E800 - | *DSPLX1 :                         B - |
  DSPLY1 :                         A - | *DSPLZ1 :                         C - |
 *DTSCLS :                        10 - | *DTSINP :                        80 - |
@@ -1188,10 +1206,10 @@
  ENDSYS :                       10A - |  ENDUSS :                       108 - |
 *ENG :                            5 - | *EREAD1 :                        39 - |
 *ERSACR :                       '9' - | *ERSCRC :                       '1' - |
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 21 - 01/24/2026 02:35:53 PM
+
+
 *ERSDAD :                       '6' - | *ERSDMA :                       '8' - |
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 20 - 2026-01-23 11:21:24
-
-
 *ERSMRK :                       '4' - | *ERSRDY :                       '3' - |
 *ERSSEK :                       '7' - | *ERSTIM :                       '5' - |
 *ERSWRT :                       '2' - | *ESC :                           1B - |
@@ -1206,7 +1224,7 @@
 *FDSFML :                         2 - | *FDSFMU :                         0 - |
 *FDSSYS :                        20 - |  FDSTAT :                         8 - |
 *FDSWRT :                        80 - | *FF :                             C - |
- FORMATSTART :                 2006 C | *FS :                            1C - |
+*FORMATSTART :                 2006 C | *FS :                            1C - |
 *FULLPMMU :                       1 - |  GDBAS :                        112 - |
 *GETFD1 :                        36 - | *GETLS1 :                         7 - |
 *GETRC1 :                         4 - | *GS :                            1D - |
@@ -1250,30 +1268,29 @@
 *LUSRES :                        40 - |  M000C :                          C - |
  M001A :                         1A - |  M0027 :                         27 - |
  M0029 :                         29 - |  M002A :                         2A - |
- M002B :                         2B - |  M002C :                         2C - |
- M002D :                         2D - |  M002E :                         2E - |
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 21 - 2026-01-23 11:21:24
+ M002C :                         2C - |  M002D :                         2D - |
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 22 - 01/24/2026 02:35:53 PM
 
 
- M0034 :                         34 - |  M004C :                         4C - |
- M00FE :                         FE - |  M01BD :                        1BD - |
- M2000 :                       2000 C |  M2004 :                       2004 C |
- M21EE :                       21EE C |  M21F0 :                       21F0 C |
- M22AB :                       22AB C |  M2319 :                       2319 C |
+ M002E :                         2E - |  M0034 :                         34 - |
+*M004C :                         4C - |  M00FE :                         FE - |
+ M01BD :                        1BD - |  M2000 :                       2000 C |
+*M2004 :                       2004 C |  M21EE :                       21EE C |
+ M21F0 :                       21F0 C |  M22AB :                       22AB C |
  M232F :                       232F C |  M2330 :                       2330 C |
  M2338 :                       2338 C |  M233A :                       233A C |
  M233C :                       233C C |  M233E :                       233E C |
- M234B :                       234B C | *MACEXP :                         7 - |
-*MAIDS :                       F0F3 - |  MDENT1 :                        1A - |
- MDERR1 :                        20 - |  MDOSS :                        100 - |
- MEBFE :                       EBFE - |  MEBFF :                       EBFF - |
-*MERED1 :                        3D - | *MEWRT1 :                        3E - |
- MFFCC :                       FFCC - |  MFFE6 :                       FFE6 - |
-*MMA1 :                          18 - | *MOMCPU :                      6800 - |
-*MOMCPUNAME :                "6800" - | *MOVE1 :                         10 - |
-*MREAD1 :                        3B - | *MWRIT1 :                        3C - |
-*NAK :                           15 - | *NESTMAX :                      100 - |
- NMISVC :                      FFFC - | *NULL :                           0 - |
+*MACEXP :                         7 - | *MAIDS :                       F0F3 - |
+ MDENT1 :                        1A - |  MDERR1 :                        20 - |
+ MDOSS :                        100 - |  MEBFE :                       EBFE - |
+ MEBFF :                       EBFF - | *MERED1 :                        3D - |
+*MEWRT1 :                        3E - |  MFFCC :                       FFCC - |
+ MFFE6 :                       FFE6 - | *MMA1 :                          18 - |
+*MOMCPU :                      6800 - | *MOMCPUNAME :                "6800" - |
+*MOVE1 :                         10 - | *MREAD1 :                        3B - |
+*MWRIT1 :                        3C - | *NAK :                           15 - |
+*NESTMAX :                      100 - |  NMISVC :                      FFFC - |
+ NMI_ISR :                     2319 C | *NULL :                           0 - |
 *NUMD1 :                         15 - | *NUMSCT :                         3 - |
  NUMSCTH :                        3 - |  NUMSCTL :                        4 - |
  ONECONH :                       24 - |  ONECONL :                       25 - |
@@ -1305,68 +1322,68 @@
 *SCSSIZ :                        80 - | *SCSTKD :                        34 - |
 *SCSTRK :                        1A - | *SCTCNT :                         B - |
  SECTCNT :                        B - |  SEEK :                        E878 - |
+ SERRB :                       2015 C |  SETUPNMI :                    22B0 C |
 *SI :                             F - | *SIDES :                          D - |
 *SO :                             E - | *SOH :                            1 - |
 *SPACE :                         20 - |  SSDA_0 :                      EC04 - |
- SSDA_1 :                      EC05 - | *STCHB1 :                        12 - |
-*STCHR1 :                        13 - |  STORAGE :                     234E C |
-*STRSCT :                         1 - |  STRSCTH :                        1 - |
- STRSCTL :                        2 - | *STX :                            2 - |
-*SUAX1 :                         2C - | *SUB :                           1A - |
-*SUBAM1 :                        17 - | *SUBAX1 :                        2D - |
-*SUBX1 :                         2B - | *SUFDLM :                       '.' - |
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 22 - 2026-01-23 11:21:24
+ SSDA_1 :                      EC05 - |  STATS2 :                        2B - |
+*STCHB1 :                        12 - | *STCHR1 :                        13 - |
+ STORAGE :                     234E C | *STRSCT :                         1 - |
+ STRSCTH :                        1 - |  STRSCTL :                        2 - |
+*STX :                            2 - | *SUAX1 :                         2C - |
+*SUB :                           1A - | *SUBAM1 :                        17 - |
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 23 - 01/24/2026 02:35:53 PM
 
 
-*SUXBA1 :                        2E - |  SWISSV :                       116 - |
- SWISUV :                       118 - | *SWISVC :                      FFFA - |
-*SYEOCB :                       16A - |  SYERRS :                       114 - |
- SYIOCB :                       120 - | *SYN :                           16 - |
- SYPOCB :                       145 - | *TBAX1 :                         25 - |
-*TIME :                  "11:21:24" - | *TRUE :                           1 - |
-*TXBA1 :                         24 - | *US :                            1F - |
-*VDSBIN :                         4 - | *VDSGDB :                         8 - |
-*VDSNFF :                        80 - | *VDSSDA :                        10 - |
-*VERSION :                     142F - |  VERSSS :                       100 - |
-*VT :                             B - | *WRDDAM :                      E87E - |
-*WRITSC :                      E884 - | *WRTEST :                      E87B - |
-*WRVERF :                      E881 - | *XBAX1 :                         26 - |
-*XREGSA :                      FF1A - | *XREGSB :                      FF1B - |
-*XREGSC :                      FF1C - | *XREGSP :                      FF16 - |
-*XREGSS :                      FF1D - | *XREGSX :                      FF18 - |
-*XSTAKS :                      FF8A - |  Z2011 :                       2011 C |
- Z2015 :                       2015 C |  Z2019 :                       2019 C |
+*SUBAX1 :                        2D - | *SUBX1 :                         2B - |
+*SUFDLM :                       '.' - | *SUXBA1 :                        2E - |
+ SWISSV :                       116 - |  SWISUV :                       118 - |
+*SWISVC :                      FFFA - | *SYEOCB :                       16A - |
+ SYERRS :                       114 - |  SYIOCB :                       120 - |
+*SYN :                           16 - |  SYPOCB :                       145 - |
+*TBAX1 :                         25 - | *TIME :               "02:35:53 PM" - |
+*TRUE :                           1 - | *TXBA1 :                         24 - |
+*US :                            1F - | *VDSBIN :                         4 - |
+*VDSGDB :                         8 - | *VDSNFF :                        80 - |
+*VDSSDA :                        10 - | *VERSION :                     142F - |
+ VERSSS :                       100 - | *VT :                             B - |
+*WRDDAM :                      E87E - | *WRITSC :                      E884 - |
+*WRTEST :                      E87B - | *WRVERF :                      E881 - |
+*XBAX1 :                         26 - | *XREGSA :                      FF1A - |
+*XREGSB :                      FF1B - | *XREGSC :                      FF1C - |
+*XREGSP :                      FF16 - | *XREGSS :                      FF1D - |
+*XREGSX :                      FF18 - | *XSTAKS :                      FF8A - |
+ Z2011 :                       2011 C |  Z2019 :                       2019 C |
  Z201D :                       201D C |  Z2024 :                       2024 C |
  Z206A :                       206A C |  Z208C :                       208C C |
  Z2094 :                       2094 C |  Z20A7 :                       20A7 C |
- Z20AB :                       20AB C |  Z20B0 :                       20B0 C |
- Z20BA :                       20BA C |  Z20C4 :                       20C4 C |
- Z20CC :                       20CC C |  Z20D2 :                       20D2 C |
- Z20D3 :                       20D3 C |  Z20DE :                       20DE C |
- Z20F4 :                       20F4 C |  Z2104 :                       2104 C |
- Z210A :                       210A C |  Z210C :                       210C C |
- Z2117 :                       2117 C |  Z2126 :                       2126 C |
- Z212F :                       212F C |  Z2132 :                       2132 C |
- Z2141 :                       2141 C |  Z2143 :                       2143 C |
- Z2152 :                       2152 C |  Z216A :                       216A C |
- Z2176 :                       2176 C |  Z2180 :                       2180 C |
- Z21AD :                       21AD C |  Z21B2 :                       21B2 C |
- Z21D3 :                       21D3 C |  Z21DB :                       21DB C |
- Z21E3 :                       21E3 C |  Z220B :                       220B C |
- Z2219 :                       2219 C |  Z2227 :                       2227 C |
- Z222F :                       222F C |  Z223F :                       223F C |
- Z224B :                       224B C |  Z226D :                       226D C |
- Z2289 :                       2289 C |  Z2291 :                       2291 C |
- Z22A9 :                       22A9 C |  Z22B0 :                       22B0 C |
+ Z20B0 :                       20B0 C |  Z20BA :                       20BA C |
+ Z20C4 :                       20C4 C |  Z20CC :                       20CC C |
+ Z20D2 :                       20D2 C |  Z20D3 :                       20D3 C |
+ Z20DE :                       20DE C |  Z20F4 :                       20F4 C |
+ Z2104 :                       2104 C |  Z210A :                       210A C |
+ Z210C :                       210C C |  Z2117 :                       2117 C |
+ Z2126 :                       2126 C |  Z212F :                       212F C |
+ Z2132 :                       2132 C |  Z2141 :                       2141 C |
+ Z2143 :                       2143 C |  Z2152 :                       2152 C |
+ Z216A :                       216A C |  Z2176 :                       2176 C |
+ Z2180 :                       2180 C |  Z21AD :                       21AD C |
+ Z21B2 :                       21B2 C |  Z21D3 :                       21D3 C |
+ Z21DB :                       21DB C |  Z21E3 :                       21E3 C |
+ Z220B :                       220B C |  Z2219 :                       2219 C |
+ Z2227 :                       2227 C |  Z222F :                       222F C |
+ Z223F :                       223F C |  Z224B :                       224B C |
+ Z226D :                       226D C |  Z2289 :                       2289 C |
+ Z2291 :                       2291 C |  Z22A9 :                       22A9 C |
  Z22D0 :                       22D0 C |  Z22E2 :                       22E2 C |
  Z22E4 :                       22E4 C |  Z22EB :                       22EB C |
  Z2306 :                       2306 C |  Z230D :                       230D C |
 *Z80SYNTAX :                      0 - |
 
     440 symbols
-    301 unused symbols
+    304 unused symbols
 
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 23 - 2026-01-23 11:21:24
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 24 - 01/24/2026 02:35:53 PM
 
 
   Defined Macros:
@@ -1377,7 +1394,7 @@ SKIP2                                 |
 
       3 macros
 
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 24 - 2026-01-23 11:21:24
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 25 - 01/24/2026 02:35:53 PM
 
 
   Code Pages:
@@ -1387,10 +1404,10 @@ STANDARD (0 changed characters)
 
 1 code page
 
-0.01 seconds assembly time
+0.00 seconds assembly time
 
-    877 lines source file
-   1072 lines incl. macro expansions
+    891 lines source file
+   1086 lines incl. macro expansions
       2 passes
       0 errors
       0 warnings

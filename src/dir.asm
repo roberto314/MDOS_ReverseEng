@@ -9,10 +9,10 @@ Loaded: Info file "dir.info"
 CURDRV  EQU     $0000
 LDADDRH EQU     $0020
 LDADDRL EQU     $0021
-EXADDRH EQU     $0022
-EXADDRL EQU     $0023
-ONECONH EQU     $0024
-ONECONL EQU     $0025
+M0022   EQU     $0022
+M0023   EQU     $0023
+M0024   EQU     $0024
+NMISAV  EQU     $0025
 M0026   EQU     $0026
 M0027   EQU     $0027
 M0028   EQU     $0028
@@ -35,10 +35,10 @@ RESTOR  EQU     $E875
                 FCB     '0,'3,'0,'0              ; 2000: 30 33 30 30    
 DIRSTART        CLI                              ; 2004: 0E             
                 CLRA                             ; 2005: 4F             
-                STAA    ONECONH                  ; 2006: 97 24          
-                STAA    ONECONL                  ; 2008: 97 25          
+                STAA    M0024                    ; 2006: 97 24          
+                STAA    NMISAV                   ; 2008: 97 25          
                 STAA    M0026                    ; 200A: 97 26          
-                STAA    EXADDRL                  ; 200C: 97 23          
+                STAA    M0023                    ; 200C: 97 23          
                 INCA                             ; 200E: 4C             
                 STAA    M002D                    ; 200F: 97 2D          
                 LDAA    #$0D                     ; 2011: 86 0D          
@@ -150,25 +150,25 @@ Z20F1           LDAB    LDADDRH                  ; 20F1: D6 20
                 BITB    #$02                     ; 20F7: C5 02          
                 BNE     Z20EE                    ; 20F9: 26 F3          
                 LDAB    #$02                     ; 20FB: C6 02          
-                STAB    EXADDRH                  ; 20FD: D7 22          
+                STAB    M0022                    ; 20FD: D7 22          
                 BRA     Z2105                    ; 20FF: 20 04          
 Z2101           LDAB    #$01                     ; 2101: C6 01          
-                STAB    EXADDRH                  ; 2103: D7 22          
+                STAB    M0022                    ; 2103: D7 22          
 Z2105           SWI                              ; 2105: 3F             
                 FCB     $0D                      ; 2106: 0D             
                 BCC     Z210C                    ; 2107: 24 03          
                 JMP     Z23A2                    ; 2109: 7E 23 A2       
-Z210C           LDAB    EXADDRH                  ; 210C: D6 22          
+Z210C           LDAB    M0022                    ; 210C: D6 22          
                 LDX     #M2465                   ; 210E: CE 24 65       
                 SWI                              ; 2111: 3F             
                 FCB     $1C                      ; 2112: 1C             
                 BCC     Z2118                    ; 2113: 24 03          
                 JMP     Z231D                    ; 2115: 7E 23 1D       
-Z2118           LDAA    EXADDRL                  ; 2118: 96 23          
+Z2118           LDAA    M0023                    ; 2118: 96 23          
                 BEQ     Z2121                    ; 211A: 27 05          
                 JSR     Z23D1                    ; 211C: BD 23 D1       
                 BNE     Z2105                    ; 211F: 26 E4          
-Z2121           LDAA    EXADDRH                  ; 2121: 96 22          
+Z2121           LDAA    M0022                    ; 2121: 96 22          
                 DECA                             ; 2123: 4A             
                 BNE     Z2133                    ; 2124: 26 0D          
                 LDAA    LDADDRL                  ; 2126: 96 21          
@@ -231,11 +231,11 @@ Z219E           ANDA    #$7C                     ; 219E: 84 7C
                 LDAA    ,X                       ; 21AD: A6 00          
                 BPL     Z219E                    ; 21AF: 2A ED          
                 LDX     M24B9                    ; 21B1: FE 24 B9       
-                LDAA    ONECONL                  ; 21B4: 96 25          
-                LDAB    ONECONH                  ; 21B6: D6 24          
+                LDAA    NMISAV                   ; 21B4: 96 25          
+                LDAB    M0024                    ; 21B6: D6 24          
                 SWI                              ; 21B8: 3F             
                 FCB     $29                      ; 21B9: 29             
-                STX     ONECONH                  ; 21BA: DF 24          
+                STX     M0024                    ; 21BA: DF 24          
 Z21BC           LDX     M24B9                    ; 21BC: FE 24 B9       
                 STX     M25DA                    ; 21BF: FF 25 DA       
                 LDX     #M24BC                   ; 21C2: CE 24 BC       
@@ -338,7 +338,7 @@ Z2289           LDX     M0029                    ; 2289: DE 29
 Z229C           JMP     Z220C                    ; 229C: 7E 22 0C       
 Z229F           LDX     #M249F                   ; 229F: CE 24 9F       
                 JSR     Z2431                    ; 22A2: BD 24 31       
-Z22A5           LDAA    EXADDRH                  ; 22A5: 96 22          
+Z22A5           LDAA    M0022                    ; 22A5: 96 22          
                 BITA    #$02                     ; 22A7: 85 02          
                 BEQ     Z22AE                    ; 22A9: 27 03          
                 JMP     Z2339                    ; 22AB: 7E 23 39       
@@ -384,7 +384,7 @@ Z22F6           INC     M002C                    ; 22F6: 7C 00 2C
                 LDAA    ,X                       ; 22FF: A6 00          
                 CBA                              ; 2301: 11             
                 BNE     Z22F6                    ; 2302: 26 F2          
-Z2304           INC     EXADDRL                  ; 2304: 7C 00 23       
+Z2304           INC     M0023                    ; 2304: 7C 00 23       
                 LDX     #M2466                   ; 2307: CE 24 66       
                 STX     M25D6                    ; 230A: FF 25 D6       
                 LDX     #M25E8                   ; 230D: CE 25 E8       
@@ -414,14 +414,14 @@ Z2339           LDAA    M0026                    ; 2339: 96 26
                 LDAA    LDADDRL                  ; 233D: 96 21          
                 ANDA    #$03                     ; 233F: 84 03          
                 BEQ     Z236F                    ; 2341: 27 2C          
-                LDX     ONECONH                  ; 2343: DE 24          
+                LDX     M0024                    ; 2343: DE 24          
                 STX     M25DA                    ; 2345: FF 25 DA       
                 LDX     #M266F                   ; 2348: CE 26 6F       
                 STX     M25DC                    ; 234B: FF 25 DC       
                 LDAB    #$04                     ; 234E: C6 04          
                 LDX     #M25DA                   ; 2350: CE 25 DA       
                 JSR     Z2704                    ; 2353: BD 27 04       
-                LDX     ONECONH                  ; 2356: DE 24          
+                LDX     M0024                    ; 2356: DE 24          
                 STX     M25DA                    ; 2358: FF 25 DA       
                 LDX     #M2674                   ; 235B: CE 26 74       
                 STX     M25DC                    ; 235E: FF 25 DC       
