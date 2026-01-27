@@ -193,7 +193,7 @@ SERR6           LDAB    #$36                                       ; Set Error '
 DRVRDY          BITB    #$08                     ; E8C2: C5 08     ; Get Bit3 from FUNCSAV (RESTOR)
                 BEQ     RESTORN                  ; E8C4: 27 05     ; Not RESTOR
                 CLRB                             ; E8C6: 5F        ; 
-                LDAA    #$03                     ; E8C7: 86 03     ; <------------------------------------ What is this??????
+                LDAA    #$03                     ; E8C7: 86 03     ; Go to Track 3
                 BRA     RESTORY                  ; E8C9: 20 3F          
 ;------------------------------------------------
 RESTORN         BITB    #$04                     ; E8CB: C5 04     ; Get Bit2 from FUNCSAV (CLOCK)
@@ -233,12 +233,12 @@ IE8FB           INCA                             ; E8FB: 4C        ; A is still 
 RESTORY         STAA    TRACKSAV                 ; E90A: 97 13     ; contains track (0 if RESTOR or 3)
                 SBA                              ; E90C: 10        ; B cont. 0 if RESTOR
                 LDAB    PIAREGA                  ; E90D: F6 EC 00  ; 
-                ORAB    #$08                     ; E910: CA 08     ; Isolate Bit 3 (DIRQ) | Check direction to STEP
+                ORAB    #$08                     ; E910: CA 08     ; Set Bit 3 (DIRQ) | Check direction to STEP
                 BCC     IE917                    ; E912: 24 03     ;                      | Check direction to STEP
-                ANDB    #$F7                     ; E914: C4 F7     ; Isolate Bit 3 (DIRQ) | Check direction to STEP
+                ANDB    #$F7                     ; E914: C4 F7     ; Clear Bit 3 (DIRQ) | Check direction to STEP
                 NEGA                             ; E916: 40        ; 
 IE917           ANDB    #$EF                     ; E917: C4 EF     ; Isolate PA4 (HLD)
-                CMPA    #$04                     ; E919: 81 04     ; Compare A with 4   <------------ WHY
+                CMPA    #$04                     ; E919: 81 04     ; Compare A with Track 4
                 BLS     IE91F                    ; E91B: 23 02     ; 
                 ORAB    #$10                     ; E91D: CA 10     ; Set Bit 4 (HLD)
 IE91F           STAB    PIAREGA                  ; E91F: F7 EC 00  ; Write to Port

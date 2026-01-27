@@ -104,7 +104,7 @@ Z206A           LDAB    DRVNUM                   ; get drive # ($31 for drv. 1)
                 STX     M002E                    ; second part of Error Packet (pg. 380 of MDOS User Guide Jun79)
                 LDX     #$2004                   ; 
                 STX     CURADRH                  ; Which data to write to disk
-                JSR     FDINIT                   ; the version i have only inits DS0,1 to high and ignores DS2,3
+                JSR     FDINIT    ;EXORDISK      ; the version i have only inits DS0,1 to high and ignores DS2,3
 ;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ; This is an enlightnig piece of code. It shows how the EXORDISK 3 PIA is connected
 ; to the Diskdrives. We have four Outputs. One (PB6) is identified as SIDE Output, 
@@ -179,7 +179,7 @@ Z20DE           INCB                             ;
                 LDAA    #$03                     ; 
                 STAA    $01,X                    ; 3 -> PIAREGB (WG high, RESET inactive)
                 JSR     Z22D0                    ; Init PIA
-                JSR     RESTOR                   ; Set up drive
+                JSR     RESTOR   ;EXORDISK       ; Set up drive
                 BCC     Z2117                    ; no error
 Z20F4           LDAB    STRSCTH                  ; 
                 LDAA    STRSCTL                  ; 
@@ -225,7 +225,7 @@ Z2143           LDAB    STRSCTL                  ;
                 STAB    STRSCTH                  ; 
                 DECA                             ; 
                 BPL     Z2143                    ; 
-Z2152           JSR     SEEK                     ; get to next track
+Z2152           JSR     SEEK         ;EXORDISK   ; get to next track
                 BCS     Z20F4                    ; error or done
                 LDAA    M0024                    ; init w. $10
                 LSRA                             ; 
@@ -356,7 +356,7 @@ SIDEDONE        LDAA    PIACTRLB                 ; |
                 LDAA    #$23                     ; value for PIAREGB
                 JMP     Z2176                    ; 
 ;------------------------------------------------
-Z2289           JSR     RWTEST                   ; actually write data to disk
+Z2289           JSR     RWTEST    ;EXORDISK      ; actually write data to disk
                 BCC     Z2291                    ; 
                 JMP     Z20F4                    ; Error or done
 ;------------------------------------------------
@@ -433,7 +433,7 @@ Z230D           DECA                             ; |
 ;------------------------------------------------
 NMI_ISR         LDS     STACKSAV                 ; 
                 BSR     Z22D0                    ; Init PIA
-                JSR     FDINIT                   ; 
+                JSR     FDINIT   ;EXORDISK       ; 
                 LDAA    #$35                     ; Error: "TIMEOUT"
                 STAA    FDSTAT                   ; 
                 LDAA    M0023                    ; 
