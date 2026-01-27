@@ -4,7 +4,9 @@ Loaded: Info file "floppy.info"
 
 ; This version does not work with my Exordisk remake!
 ; There are some differences, especially in the way
-; STEP and DIR work.
+; STEP and DIR work. Also the Clock Function is missing,
+; this suggests only 1MHz possible.
+; The Disk Diagnostic Routines are here though.
 ; look for the file floppy2 - this works and 
 ; is able to reassemble with asl.
 
@@ -28,8 +30,8 @@ LSCTLN     EQU     $0005
 CURADRH    EQU     $0006
 CURADRL    EQU     $0007
 FDSTAT     EQU     $0008
-M0009      EQU     $0009
-SECTOR     EQU     $000A
+CWRDCNT    EQU     $0009
+SofTRK     EQU     $000A
 SECTCNT    EQU     $000B
 STATSAV    EQU     $000D
 FUNCSAV    EQU     $000E
@@ -37,11 +39,11 @@ NMIVECSAV  EQU     $000F
 M0011      EQU     $0011
 M0012      EQU     $0012
 TRACKSAV   EQU     $0013
-M0014      EQU     $0014
-WRDCNT     EQU     $0015
-M0016      EQU     $0016
-M0018      EQU     $0018
-M0019      EQU     $0019
+ADDRMRK    EQU     $0014
+DWRDCNT    EQU     $0015
+STACKSAV   EQU     $0016
+DRDCNT     EQU     $0018
+STPDIR     EQU     $0019
 LDADDR     EQU     $0020
 EXADDR     EQU     $0022
 ONECON     EQU     $0024
@@ -155,16 +157,16 @@ READPS          CLRB                             ; E86D: 5F       ;
                 STAB    FUNCSAV                  ; E88A: D7 0E    ; Save Function
                 LDAA    #$30                     ; E88C: 86 30    ; 
                 STAA    FDSTAT                   ; E88E: 97 08    ; Clear Errors ('0')
-                STS     M0016                    ; E890: 9F 16    ; Set Stackpointer
+                STS     STACKSAV                 ; E890: 9F 16    ; Set Stackpointer
                 LDX     NMI$VC                   ; E892: FE FF FC ; |
                 STX     NMIVECSAV                ; E895: DF 0F    ; Save old NMIISR
                 LDX     #NMIISR                  ; E897: CE E9 30 ; |
                 STX     NMI$VC                   ; E89A: FF FF FC ; New NMIISR
-                LDX     #M0011                   ; E89D: CE 00 11 ; 
-                LDAA    PIAREGA                  ; E8A0: B6 EC 00 ; |
-                ORAA    #$03                     ; E8A3: 8A 03    ; Get PA0,1 (DS0,1) (Low active)
-                DECA                             ; E8A5: 4A       ; Set DS0 low
-                TST     CURDRV                   ; E8A6: 7D 00 00 ; should be zero
+                LDX     #M0011      ;different   ; E89D: CE 00 11 ; 
+                LDAA    PIAREGA     ;|           ; E8A0: B6 EC 00 ; |
+                ORAA    #$03        ;|           ; E8A3: 8A 03    ; Get PA0,1 (DS0,1) (Low active)
+                DECA                ;|           ; E8A5: 4A       ; Set DS0 low
+                TST     CURDRV      ;|           ; E8A6: 7D 00 00 ; should be zero
                 BEQ     ZE8AD                    ; E8A9: 27 02    ; 
                 INX                              ; E8AB: 08       ; 
                 DECA                             ; E8AC: 4A       ; 
@@ -181,7 +183,7 @@ ZE8AD           STAA    PIAREGA                  ; E8AD: B7 EC 00 ; Write DS0 lo
 DRVRDY          BITB    #$08                     ; E8C2: C5 08    ; Get Bit3 from FUNCSAV (RESTOR)
                 BEQ     RESTORN                  ; E8C4: 27 05    ; 
                 CLRA                             ; E8C6: 4F       ; 
-                LDAB    #$56                     ; E8C7: C6 56    ; <------------------------------------ What is this??????
+                LDAB    #$56         ;different  ; E8C7: C6 56    ; <------------------------------------ What is this??????
                 BRA     RESTORY                  ; E8C9: 20 38    ; 
 ;------------------------------------------------
 RESTORN         LDAB    STRSCTL                  ; E8CB: D6 02    ; RESTOR is NOT active
@@ -193,15 +195,15 @@ RESTORN         LDAB    STRSCTL                  ; E8CB: D6 02    ; RESTOR is NO
                 SBCA    #$07                     ; E8D7: 82 07    ; 0x7D3 = 2003 (sector too big)
                 BCC     ZE8BE                    ; E8D9: 24 E3    ; Set Error '6': INVALID DISK ADDRESS
                 LDAA    #$FF                     ; E8DB: 86 FF    ; 
-                STAA    SECTOR                   ; E8DD: 97 0A    ; 
+                STAA    SofTRK                   ; E8DD: 97 0A    ; 
                 LDAA    STRSCTH                  ; E8DF: 96 01    ; Startsector is usually at $17 at boot
                 LDAB    STRSCTL                  ; E8E1: D6 02    ; |
-ZE8E3           INC     SECTOR                   ; E8E3: 7C 00 0A ; is now at 0
+ZE8E3           INC     SofTRK                   ; E8E3: 7C 00 0A ; is now at 0
                 SUBB    #$D0                     ; E8E6: C0 D0    ; 0xd0 = 208 (8 tracks exactly)
                 SBCA    #$00                     ; E8E8: 82 00    ; 
                 BCC     ZE8E3                    ; E8EA: 24 F7    ; 
                 ADDB    #$D0                     ; E8EC: CB D0    ; 
-                LDAA    SECTOR                   ; E8EE: 96 0A    ; is 0
+                LDAA    SofTRK                   ; E8EE: 96 0A    ; is 0
                 ASLA                             ; E8F0: 48       ; 
                 ASLA                             ; E8F1: 48       ; 
                 ASLA                             ; E8F2: 48       ; 
@@ -210,17 +212,17 @@ ZE8F4           INCA                             ; E8F4: 4C       ;
                 SUBB    #$1A                     ; E8F5: C0 1A    ; $1a = 26
                 BCC     ZE8F4                    ; E8F7: 24 FB    ; 
                 ADDB    #$1A                     ; E8F9: CB 1A    ; $1a = 26
-                STAB    SECTOR                   ; E8FB: D7 0A    ; 
+                STAB    SofTRK                   ; E8FB: D7 0A    ; 
                 LDX     NUMSCTH                  ; E8FD: DE 03    ; 
                 STX     SECTCNT                  ; E8FF: DF 0B    ; 
                 LDAB    TRACKSAV                 ; E901: D6 13    ; 
 RESTORY         STAA    TRACKSAV                 ; E903: 97 13    ; contains track (0 if RESTOR)
                 SBA                              ; E905: 10       ; B cont. $56 (86) if RESTOR
-                STAA    M0019                    ; E906: 97 19    ; 
-                BCC     ZE90B                    ; E908: 24 01    ; 
-                NEGA                             ; E90A: 40       ; 
-ZE90B           LDAB    PIAREGA                  ; E90B: F6 EC 00 ; 
-                ANDB    #$EF                     ; E90E: C4 EF    ; Isolate PA4 (HLD)
+                STAA    STPDIR      ;different   ; E906: 97 19    ; new Variable - Step Direction
+                BCC     ZE90B       ;|           ; E908: 24 01    ; 
+                NEGA                ;|           ; E90A: 40       ; 
+ZE90B           LDAB    PIAREGA     ;|           ; E90B: F6 EC 00 ; 
+                ANDB    #$EF        ;|           ; E90E: C4 EF    ; Isolate PA4 (HLD)
                 CMPA    #$04                     ; E910: 81 04    ; Compare A with Bit 3
                 BLS     ZE916                    ; E912: 23 02    ; No
                 ORAB    #$10                     ; E914: CA 10    ; Set Bit 4
@@ -234,62 +236,62 @@ ZE916           STAB    PIAREGA                  ; E916: F7 EC 00 ; PA4 (HLD)
                 BEQ     ZE964                    ; E924: 27 3E    ; 
                 LDAA    FUNCSAV                  ; E926: 96 0E    ; 
                 BITA    #$08                     ; E928: 85 08    ; 
-                BEQ     ZE935                    ; E92A: 27 09    ; Function = RESTOR, Set Error
+                BEQ     SERR7                    ; E92A: 27 09    ; Function = RESTOR, Set Error
                 BSR     WAIT2                    ; E92C: 8D 31    ; Wait
                 BRA     ERRHNDLR                 ; E92E: 20 5A    ; 
 ;------------------------------------------------
-NMIISR          LDS     M0016                    ; E930: 9E 16    ; 
+NMIISR          LDS     STACKSAV                 ; E930: 9E 16    ; 
                 LDAB    #$35                     ; E932: C6 35    ; Set Error '5' (TIMEOUT)
-                CPX     #$C637                   ; E934: 8C C6 37 ; ZE935: C6 37 = LDAB #$37 Set Error '7' (SEEK ERROR)
+                CPX     #$C637                   ; E934: 8C C6 37 ; SERR7: C6 37 = LDAB #$37 Set Error '7' (SEEK ERROR)
 SETERR          STAB    FDSTAT                   ; E937: D7 08    ; 
                 BSR     ERRHNDLR                 ; E939: 8D 4F    ; 
                 SEC                              ; E93B: 0D       ; 
                 RTS                              ; E93C: 39       ; 
 ;------------------------------------------------
-STEP            TST     M0019                    ; E93D: 7D 00 19 ; 
-                BPL     ZE94E                    ; E940: 2A 0C    ; 
+STEP            TST     STPDIR       ;different  ; E93D: 7D 00 19 ; 
+                BPL     ZE94E        ;different  ; E940: 2A 0C    ; 
                 LDAB    #$34                     ; E942: C6 34    ; Bit 5,4,2 set
                 STAB    PIACTRL                  ; E944: F7 EC 02 ; CA2 low (STEP)
                 LDAB    #$3C                     ; E947: C6 3C    ; Bit 5,4,3,2 set
                 STAB    PIACTRL                  ; E949: F7 EC 02 ; CA2 high (STEP)
                 BRA     WAIT3                    ; E94C: 20 0A    ; 
 ;------------------------------------------------
-ZE94E           ANDB    #$F7                     ; E94E: C4 F7    ; Clr Bit3 (DIRQ)
-                STAB    PIAREGA                  ; E950: F7 EC 00 ; 
-                ORAB    #$08                     ; E953: CA 08    ; Set Bit3 (DIRQ)
-                STAB    PIAREGA                  ; E955: F7 EC 00 ; 
-WAIT3           LDX     #$04E2                   ; E958: CE 04 E2 ; Waitloop
-WAIT1           DEX                              ; E95B: 09       ; |
-                BNE     WAIT1                    ; E95C: 26 FD    ; |
+ZE94E           ANDB    #$F7         ;different  ; E94E: C4 F7    ; Clr Bit3 (DIRQ)
+                STAB    PIAREGA      ;different  ; E950: F7 EC 00 ; 
+                ORAB    #$08         ;different  ; E953: CA 08    ; Set Bit3 (DIRQ)
+                STAB    PIAREGA      ;different  ; E955: F7 EC 00 ; 
+WAIT3           LDX     #$04E2       ;different  ; E958: CE 04 E2 ; Waitloop
+WAIT1           DEX                  ;different  ; E95B: 09       ; |
+                BNE     WAIT1        ;different  ; E95C: 26 FD    ; |
                 RTS                              ; E95E: 39       ; 
 ;------------------------------------------------
-WAIT2           LDX     #$09C4                   ; E95F: CE 09 C4 ; Waitloop
-                BRA     WAIT1                    ; E962: 20 F7    ; |
+WAIT2           LDX     #$09C4       ;different  ; E95F: CE 09 C4 ; Waitloop
+                BRA     WAIT1        ;different  ; E962: 20 F7    ; |
 ;------------------------------------------------
-ZE964           BSR     WAIT2                    ; E964: 8D F9    ; Wait
-                BSR     WAIT2                    ; E966: 8D F7    ; Wait
+ZE964           BSR     WAIT2        ;different  ; E964: 8D F9    ; Wait
+                BSR     WAIT2        ;different  ; E966: 8D F7    ; Wait
                 LDAA    FUNCSAV                  ; E968: 96 0E    ; 
                 BITA    #$08                     ; E96A: 85 08    ; Is Function = RESTOR ?
-                BNE     ZE935                    ; E96C: 26 C7    ; If yes Set Error '7' (SEEK ERROR)
+                BNE     SERR7                    ; E96C: 26 C7    ; If yes Set Error '7' (SEEK ERROR)
                 BITA    #$10                     ; E96E: 85 10    ; Is FUNCTION SEEK?
                 BNE     ERRHNDLR                 ; E970: 26 18    ; 
                 LDAB    #$6F                     ; E972: C6 6F    ; 
                 RORA                             ; E974: 46       ; 
                 BCC     ZE979                    ; E975: 24 02    ; 
                 LDAB    #$6A                     ; E977: C6 6A    ; 
-ZE979           STAB    M0014                    ; E979: D7 14    ; 
-                BRA     ZE9D1                    ; E97B: 20 54    ; next sector
+ZE979           STAB    ADDRMRK                  ; E979: D7 14    ; 
+                BRA     NXTSEC                   ; E97B: 20 54    ; next sector
 ;------------------------------------------------
-ZE97D           LDAA    FUNCSAV                  ; E97D: 96 0E    ; 
+SECRDDONE       LDAA    FUNCSAV                  ; E97D: 96 0E    ; 
                 BPL     ERRHNDLR                 ; E97F: 2A 09    ; 
                 ANDA    #$40                     ; E981: 84 40    ; 
                 STAA    FUNCSAV                  ; E983: 97 0E    ; 
                 BEQ     ERRHNDLR                 ; E985: 27 03    ; 
-                JMP     RESTORN                  ; E987: 7E E8 CB ; 
+                JMP     RESTORN     ;different   ; E987: 7E E8 CB ; 
 ;------------------------------------------------
-ERRHNDLR        LDAA    #$03                     ; E98A: 86 03    ; Set Bit 0,1
+ERRHNDLR        LDAA    #$03        ;different   ; E98A: 86 03    ; Set Bit 0,1
                 STAA    PIAREGB                  ; E98C: B7 EC 01 ; Set PB0,1 (RESET and WG)
-                JSR     ZE849                    ; E98F: BD E8 49 ; Init PIA (only CA2, CB2) and X @ EC00
+                JSR     ZE849       ;different   ; E98F: BD E8 49 ; Init PIA (only CA2, CB2) and X @ EC00
                 LDX     NMIVECSAV                ; E992: DE 0F    ; |
                 STX     NMI$VC                   ; E994: FF FF FC ; Restore old NMIISR
                 LDAA    TRACKSAV                 ; E997: 96 13    ; 
@@ -318,46 +320,46 @@ READINIT        LDX     #$D0D8                   ; E9A7: CE D0 D8 ; Select CR2 a
                 STAA    $05,X                    ; E9C2: A7 05    ; 
                 RTS                              ; E9C4: 39       ; 
 ;------------------------------------------------
-ZE9C5           INC     TRACKSAV                 ; E9C5: 7C 00 13 ; 
-                LDAB    PIAREGA                  ; E9C8: F6 EC 00 ; 
+INCTRK          INC     TRACKSAV      ;different ; E9C5: 7C 00 13 ; 
+                LDAB    PIAREGA       ;different ; E9C8: F6 EC 00 ; 
                 BSR     ZE94E                    ; E9CB: 8D 81    ; Set DIRQ
-                STAA    SECTOR                   ; E9CD: 97 0A    ; 
+                STAA    SofTRK                   ; E9CD: 97 0A    ; 
                 BSR     WAIT2                    ; E9CF: 8D 8E    ; 
-ZE9D1           INC     SECTOR                   ; E9D1: 7C 00 0A ; 
-                LDAA    SECTOR                   ; E9D4: 96 0A    ; 
+NXTSEC          INC     SofTRK                   ; E9D1: 7C 00 0A ; 
+                LDAA    SofTRK                   ; E9D4: 96 0A    ; 
                 LDX     SECTCNT                  ; E9D6: DE 0B    ; 
-                BEQ     ZE97D                    ; E9D8: 27 A3    ; 
+                BEQ     SECRDDONE                ; E9D8: 27 A3    ; 
                 SUBA    #$1B                     ; E9DA: 80 1B    ; Sector == 27?
-                BCC     ZE9C5                    ; E9DC: 24 E7    ; increase Track
+                BCC     INCTRK                   ; E9DC: 24 E7    ; increase Track
                 LDAA    #$05                     ; E9DE: 86 05    ; 
-                STAA    M0018                    ; E9E0: 97 18    ; 
+                STAA    DRDCNT                   ; E9E0: 97 18    ; 
                 DEX                              ; E9E2: 09       ; 
-ZE9E3           LDAA    #$40                     ; E9E3: 86 40    ; One Sector is $40 words
+START           LDAA    #$40                     ; E9E3: 86 40    ; One Sector is $40 words
                 STX     SECTCNT                  ; E9E5: DF 0B    ; 
                 BNE     ZE9F0                    ; E9E7: 26 07    ; 
-                LDAA    LSCTLN                   ; E9E9: 96 05    ; LAST SECTOR LENGTH (1-128)
+                LDAA    LSCTLN                   ; E9E9: 96 05    ; LAST SofTRK LENGTH (1-128)
                 ADDA    #$07                     ; E9EB: 8B 07    ; 
                 LSRA                             ; E9ED: 44       ; convert to words
                 ANDA    #$FC                     ; E9EE: 84 FC    ; 
-ZE9F0           STAA    WRDCNT                   ; E9F0: 97 15    ; is $40 for every full sector
+ZE9F0           STAA    DWRDCNT                  ; E9F0: 97 15    ; is $40 for every full sector
                 NEGA                             ; E9F2: 40       ; 
                 LDAB    FUNCSAV                  ; E9F3: D6 0E    ; 
                 ASLB                             ; E9F5: 58       ; 
-                BPL     ZE9F9                    ; E9F6: 2A 01    ; if reading jump
+                BPL     NOCRC                    ; E9F6: 2A 01    ; if reading jump
                 CLRA                             ; E9F8: 4F       ; 
-ZE9F9           ADDA    #$40                     ; E9F9: 8B 40    ; 
-                STAA    M0009                    ; E9FB: 97 09    ; 
-                LDX     #PIAREGA                 ; E9FD: CE EC 00 ; 
-                LDAA    #$36                     ; EA00: 86 36    ; |
-                STAA    $03,X                    ; EA02: A7 03    ; $36 -> PIACTRLB (CB2 Low - Trigger NMI Timer, IRQB Flag set by HL on CB1 - IDX, Select Output Reg. B)
-                LDAA    #$3E                     ; EA04: 86 3E    ; |
-                STAA    $03,X                    ; EA06: A7 03    ; $3E -> PIACTRLB (CB2 high)
-                LDAB    ,X                       ; EA08: E6 00    ; Get Port A
-                DECA                             ; EA0A: 4A       ; 
-                STAA    $02,X                    ; EA0B: A7 02    ; $3D -> PIACTRLA (En. IRQA interrupt by CA1 - NMI Timer, Sel. Output Reg. A, CA2 high - STEP)
+NOCRC           ADDA    #$40                     ; E9F9: 8B 40    ; 
+                STAA    CWRDCNT                  ; E9FB: 97 09    ; 
+                LDX     #PIAREGA      ;differnt  ; E9FD: CE EC 00 ; 
+                LDAA    #$36          ;differnt  ; EA00: 86 36    ; |
+                STAA    $03,X         ;differnt  ; EA02: A7 03    ; $36 -> PIACTRLB (CB2 Low - Trigger NMI Timer, IRQB Flag set by HL on CB1 - IDX, Select Output Reg. B)
+                LDAA    #$3E          ;differnt  ; EA04: 86 3E    ; |
+                STAA    $03,X         ;differnt  ; EA06: A7 03    ; $3E -> PIACTRLB (CB2 high)
+                LDAB    ,X            ;differnt  ; EA08: E6 00    ; Get Port A
+                DECA                  ;differnt  ; EA0A: 4A       ; 
+                STAA    $02,X         ;differnt  ; EA0B: A7 02    ; $3D -> PIACTRLA (En. IRQA interrupt by CA1 - NMI Timer, Sel. Output Reg. A, CA2 high - STEP)
                 LDAA    TRACKSAV                 ; EA0D: 96 13    ; 
-                ORAB    #$04                     ; EA0F: CA 04    ; isolate PA2 (TG43)
-                CMPA    #$2A                     ; EA11: 81 2A    ; check for Track > 42
+                ORAB    #$04          ;differnt  ; EA0F: CA 04    ; isolate PA2 (TG43)
+                CMPA    #$2A          ;differnt  ; EA11: 81 2A    ; check for Track > 42
                 BLS     ZEA17                    ; EA13: 23 02    ; No
                 ANDB    #$FB                     ; EA15: C4 FB    ; Clear Bit 2 (TG43)
 ZEA17           STAB    ,X                       ; EA17: E7 00    ; Set Port
@@ -384,21 +386,21 @@ ZEA3D           LDAA    $04,X                    ; EA3D: A6 04    ; We are on th
                 BPL     ZEA3D                    ; EA3F: 2A FC    ; Wait for Data
                 LDAA    $05,X                    ; EA41: A6 05    ; Read SSDA Data Reg into A
                 LDAB    $05,X                    ; EA43: E6 05    ; Read SSDA Data Reg into B
-                CMPA    SECTOR                   ; EA45: 91 0A    ; Compare with sector
+                CMPA    SofTRK                   ; EA45: 91 0A    ; Compare with sector
                 BNE     ZEA25                    ; EA47: 26 DC    ; Try again
 ZEA49           LDAA    $04,X                    ; EA49: A6 04    ; Found Sector, Read SSDA Status Reg.
                 BPL     ZEA49                    ; EA4B: 2A FC    ; Wait for Data
                 LDAA    $05,X                    ; EA4D: A6 05    ; Read SSDA Data Reg into A
-                LDAA    $05,X                    ; EA4F: A6 05    ; Read SSDA Data Reg into A
-                INCA                             ; EA51: 4C       ; 
-                INX                              ; EA52: 08       ; Set X to EC01
-                LDAA    ,X                       ; EA53: A6 00    ; Read PIAREGB
-                BMI     ZEA81                    ; EA55: 2B 2A    ; PB7 High ? (CRC-0) - ERROR
-                LDAB    FUNCSAV                  ; EA57: D6 0E    ; 
-                BMI     WRITINIT                 ; EA59: 2B 73    ; Bit 7 set - Write Function
-                LDX     #$0029                   ; EA5B: CE 00 29 ; Waitloop
-ZEA5E           DEX                              ; EA5E: 09       ; |
-                BNE     ZEA5E                    ; EA5F: 26 FD    ; |
+                LDAA    $05,X       ;differnt    ; EA4F: A6 05    ; Read SSDA Data Reg into A
+                INCA                ;differnt    ; EA51: 4C       ; 
+                INX                 ;differnt    ; EA52: 08       ; Set X to EC01
+                LDAA    ,X          ;differnt    ; EA53: A6 00    ; Read PIAREGB
+                BMI     ZEA81       ;differnt    ; EA55: 2B 2A    ; PB7 High ? (CRC-0) - ERROR
+                LDAB    FUNCSAV     ;differnt    ; EA57: D6 0E    ; 
+                BMI     WRITINIT    ;differnt    ; EA59: 2B 73    ; Bit 7 set - Write Function
+                LDX     #$0029      ;differnt    ; EA5B: CE 00 29 ; Waitloop
+ZEA5E           DEX                 ;differnt    ; EA5E: 09       ; |
+                BNE     ZEA5E       ;differnt    ; EA5F: 26 FD    ; |
 ;*************************************************
 ; Found corr. Track and Sector, now look for Data Addr. Mark
 ;*************************************************
@@ -417,19 +419,19 @@ ZEA68           LDAA    SSDA_0                   ; EA68: B6 EC 04 ; Read SSDA St
                 LDAB    #$38                     ; EA7B: C6 38    ; 
                 CPX     #$C631                   ; EA7D: 8C C6 31 ; ZEA7E: C6 31 = LDAB #$31 (Set Error '1') (DATA CRC ERROR)
                 CPX     #$C639                   ; EA80: 8C C6 39 ; ZEA81: C6 39 = LDAB #$39 (Set Error '9') (ADDRESS MARK CRC ERROR)
-                DEC     M0018                    ; EA83: 7A 00 18 ; 
+                DEC     DRDCNT                   ; EA83: 7A 00 18 ; 
                 BEQ     ZEA92                    ; EA86: 27 0A    ; 
                 LDX     SECTCNT                  ; EA88: DE 0B    ; 
-                JMP     ZE9E3                    ; EA8A: 7E E9 E3 ; 
+                JMP     START                    ; EA8A: 7E E9 E3 ; 
 ;------------------------------------------------
-DSKWPROT        LDAB    #$32                     ; EA8D: C6 32    ; Set Error '2' (DISK WRITE PROTECTED)
+SERR2           LDAB    #$32                     ; EA8D: C6 32    ; Set Error '2' (DISK WRITE PROTECTED)
                 CPX     #$C634                   ; EA8F: 8C C6 34 ; ZEA90: C6 34 = LDAB #$34 (Set Error '4') (READ DELETED DATA MARK)
 ZEA92           JMP     SETERR                   ; EA92: 7E E9 37 ; 
 ;------------------------------------------------
 READSECT        LDAB    FUNCSAV                  ; EA95: D6 0E    ; data address mark found
                 ASLB                             ; EA97: 58       ; 
-                BMI     READCRC                  ; EA98: 2B 16    ; Check for READCRC ($40)
-                LDAB    WRDCNT                   ; EA9A: D6 15    ; Wordcount?
+                BMI     CRCONLY                  ; EA98: 2B 16    ; Check for CRCONLY ($40)
+                LDAB    DWRDCNT                  ; EA9A: D6 15    ; Wordcount?
 ZEA9C           LDAA    SSDA_0                   ; EA9C: B6 EC 04 ; Read SSDA Status Reg.
                 BPL     ZEA9C                    ; EA9F: 2A FB    ; Wait and Test RDA for 2 Bytes Ready
                 LDAA    SSDA_1                   ; EAA1: B6 EC 05 ; Read Data to Buffer
@@ -440,26 +442,26 @@ ZEA9C           LDAA    SSDA_0                   ; EA9C: B6 EC 04 ; Read SSDA St
                 INX                              ; EAAC: 08       ; |
                 DECB                             ; EAAD: 5A       ; |
                 BNE     ZEA9C                    ; EAAE: 26 EC    ; |
-READCRC         LDAA    SSDA_0                   ; EAB0: B6 EC 04 ; Read SSDA Status Reg.
-                BPL     READCRC                  ; EAB3: 2A FB    ; Wait and Test RDA for 2 Bytes Ready
+CRCONLY         LDAA    SSDA_0      ;different   ; EAB0: B6 EC 04 ; Read SSDA Status Reg.
+                BPL     CRCONLY     ;different   ; EAB3: 2A FB    ; Wait and Test RDA for 2 Bytes Ready
                 LDAA    SSDA_1                   ; EAB5: B6 EC 05 ; Read SSDA Data to A
                 LDAA    SSDA_1                   ; EAB8: B6 EC 05 ; Read SSDA Data to A
-                LDAB    M0009                    ; EABB: D6 09    ; Counter
+                LDAB    CWRDCNT                  ; EABB: D6 09    ; Counter
                 BEQ     ZEAC4                    ; EABD: 27 05    ; finished ?
-                DEC     M0009                    ; EABF: 7A 00 09 ; dec. counter
-                BRA     READCRC                  ; EAC2: 20 EC    ; continue
-;------------------------------------------------
+                DEC     CWRDCNT                  ; EABF: 7A 00 09 ; dec. counter
+                BRA     CRCONLY                  ; EAC2: 20 EC    ; continue
+
 ZEAC4           LDAA    PIAREGB                  ; EAC4: B6 EC 01 ; |
                 BMI     ZEA7E                    ; EAC7: 2B B5    ; PB7 High ? (CRC-0) Error
                 STX     CURADRH                  ; EAC9: DF 06    ; CRC ok
-                JMP     ZE9D1                    ; EACB: 7E E9 D1 ; next sector
+                JMP     NXTSEC                   ; EACB: 7E E9 D1 ; next sector
 ;------------------------------------------------
-WRITINIT        LDAA    #$04                     ; EACE: 86 04    ; 
-ZEAD0           TST     SSDA_0                   ; EAD0: 7D EC 04 ; Wait and Check RIE Flag ?
-                BPL     ZEAD0                    ; EAD3: 2A FB    ; |
-                CMPA    SSDA_1                   ; EAD5: B1 EC 05 ; |
-                CMPA    SSDA_1                   ; EAD8: B1 EC 05 ; |
-                DECA                             ; EADB: 4A       ; |
+WRITINIT        LDAA    #$04         ;different  ; EACE: 86 04    ; 
+ZEAD0           TST     SSDA_0       ;different  ; EAD0: 7D EC 04 ; Wait and Check RIE Flag ?
+                BPL     ZEAD0        ;different  ; EAD3: 2A FB    ; |
+                CMPA    SSDA_1       ;different  ; EAD5: B1 EC 05 ; |
+                CMPA    SSDA_1       ;different  ; EAD8: B1 EC 05 ; |
+                DECA                 ;different  ; EADB: 4A       ; |
                 BNE     ZEAD0                    ; EADC: 26 F2    ; |
                 LDX     #$C0DA                   ; EADE: CE C0 DA ; 
                 STX     SSDA_0                   ; EAE1: FF EC 04 ; 
@@ -473,7 +475,7 @@ ZEAD0           TST     SSDA_0                   ; EAD0: 7D EC 04 ; Wait and Che
                 STAA    SSDA_0                   ; EAF8: B7 EC 04 ; 
                 LDAA    #$10                     ; EAFB: 86 10    ; Bit 4
                 BITA    PIAREGB                  ; EAFD: B5 EC 01 ; Check Writeprot?
-                BNE     DSKWPROT                 ; EB00: 26 8B    ; If yes set Error
+                BNE     SERR2                    ; EB00: 26 8B    ; If yes set Error
                 RORB                             ; EB02: 56       ; 
                 BCC     ZEB06                    ; EB03: 24 01    ; 
                 BITA    #$56                     ; EB05: 85 56    ; 
@@ -490,17 +492,17 @@ ZEB17           BITA    SSDA_0                   ; EB17: B5 EC 04 ;
                 DECB                             ; EB1F: 5A       ; 
                 BNE     ZEB17                    ; EB20: 26 F5    ; 
                 LDAB    #$40                     ; EB22: C6 40    ; 
-                LDAA    M0014                    ; EB24: 96 14    ; 
+                LDAA    ADDRMRK                  ; EB24: 96 14    ; 
                 LDX     #$83F5                   ; EB26: CE 83 F5 ; 
                 STX     SSDA_0                   ; EB29: FF EC 04 ; 
                 LDX     CURADRH                  ; EB2C: DE 06    ; 
                 STAA    SSDA_1                   ; EB2E: B7 EC 05 ; 
-                JMP     ZEB3B                    ; EB31: 7E EB 3B ; 
-;------------------------------------------------
+                JMP     WRITSEC                  ; EB31: 7E EB 3B ; 
+
 ZEB34           LDAA    #$40                     ; EB34: 86 40    ; 
 ZEB36           BITA    SSDA_0                   ; EB36: B5 EC 04 ; 
                 BEQ     ZEB36                    ; EB39: 27 FB    ; 
-ZEB3B           LDAA    ,X                       ; EB3B: A6 00    ; 
+WRITSEC         LDAA    ,X                       ; EB3B: A6 00    ; 
                 STAA    SSDA_1                   ; EB3D: B7 EC 05 ; 
                 LDAA    $01,X                    ; EB40: A6 01    ; 
                 STAA    SSDA_1                   ; EB42: B7 EC 05 ; 
@@ -509,37 +511,37 @@ ZEB3B           LDAA    ,X                       ; EB3B: A6 00    ;
                 INX                              ; EB48: 08       ; 
 ZEB49           DECB                             ; EB49: 5A       ; 
                 BNE     ZEB34                    ; EB4A: 26 E8    ; 
-                STX     CURADRH                  ; EB4C: DF 06    ; 
-                LDAA    #$40                     ; EB4E: 86 40    ; 
-ZEB50           BITA    SSDA_0                   ; EB50: B5 EC 04 ; 
-                BEQ     ZEB50                    ; EB53: 27 FB    ; 
-                STAB    SSDA_1                   ; EB55: F7 EC 05 ; 
-ZEB58           BITA    SSDA_0                   ; EB58: B5 EC 04 ; 
-                BEQ     ZEB58                    ; EB5B: 27 FB    ; 
-                LDAB    #$08                     ; EB5D: C6 08    ; Bit 3
-                STAB    PIAREGB                  ; EB5F: F7 EC 01 ; 
-                STAB    SSDA_1                   ; EB62: F7 EC 05 ; 
-ZEB65           BITA    SSDA_0                   ; EB65: B5 EC 04 ; 
-                BEQ     ZEB65                    ; EB68: 27 FB    ; 
-                LDAB    #$FF                     ; EB6A: C6 FF    ; 
-                STAB    SSDA_1                   ; EB6C: F7 EC 05 ; 
-                STAB    SSDA_1                   ; EB6F: F7 EC 05 ; 
-ZEB72           BITA    SSDA_0                   ; EB72: B5 EC 04 ; 
-                BEQ     ZEB72                    ; EB75: 27 FB    ; 
-                CLR     PIAREGB                  ; EB77: 7F EC 01 ; 
-                INC     PIAREGB                  ; EB7A: 7C EC 01 ; 
-                INC     PIAREGB                  ; EB7D: 7C EC 01 ; 
-                LDX     #$003C                   ; EB80: CE 00 3C ; Waitloop
-ZEB83           DEX                              ; EB83: 09       ; |
-                BNE     ZEB83                    ; EB84: 26 FD    ; |
-                JMP     ZE9D1                    ; EB86: 7E E9 D1 ; next sector
+                STX     CURADRH   ;different     ; EB4C: DF 06    ; 
+                LDAA    #$40      ;different     ; EB4E: 86 40    ; 
+ZEB50           BITA    SSDA_0    ;different     ; EB50: B5 EC 04 ; 
+                BEQ     ZEB50     ;different     ; EB53: 27 FB    ; 
+                STAB    SSDA_1    ;different     ; EB55: F7 EC 05 ; 
+ZEB58           BITA    SSDA_0    ;different     ; EB58: B5 EC 04 ; 
+                BEQ     ZEB58     ;different     ; EB5B: 27 FB    ; 
+                LDAB    #$08      ;different     ; EB5D: C6 08    ; Bit 3
+                STAB    PIAREGB   ;different     ; EB5F: F7 EC 01 ; 
+                STAB    SSDA_1    ;different     ; EB62: F7 EC 05 ; 
+ZEB65           BITA    SSDA_0    ;different     ; EB65: B5 EC 04 ; 
+                BEQ     ZEB65     ;different     ; EB68: 27 FB    ; 
+                LDAB    #$FF      ;different     ; EB6A: C6 FF    ; 
+                STAB    SSDA_1    ;different     ; EB6C: F7 EC 05 ; 
+                STAB    SSDA_1    ;different     ; EB6F: F7 EC 05 ; 
+ZEB72           BITA    SSDA_0    ;different     ; EB72: B5 EC 04 ; 
+                BEQ     ZEB72     ;different     ; EB75: 27 FB    ; 
+                CLR     PIAREGB   ;different     ; EB77: 7F EC 01 ; 
+                INC     PIAREGB   ;different     ; EB7A: 7C EC 01 ; 
+                INC     PIAREGB   ;different     ; EB7D: 7C EC 01 ; 
+                LDX     #$003C    ;different     ; EB80: CE 00 3C ; Waitloop
+ZEB83           DEX               ;different     ; EB83: 09       ; |
+                BNE     ZEB83     ;different     ; EB84: 26 FD    ; |
+                JMP     NXTSEC                   ; EB86: 7E E9 D1 ; next sector
 ;------------------------------------------------
 ; Disk Mini Diagnostic Routine
 ;------------------------------------------------
 
                 ORG     $EB90
 
-CLRTOP          LDX     #M0014                   ; EB90: CE 00 14 ; Diagnostic with clear
+CLRTOP          LDX     #ADDRMRK                 ; EB90: CE 00 14 ; Diagnostic with clear
 ZEB93           CLR     $5F,X                    ; EB93: 6F 5F    ; Clear $60-$73
                 DEX                              ; EB95: 09       ; |
                 BNE     ZEB93                    ; EB96: 26 FB    ; |

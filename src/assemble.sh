@@ -18,6 +18,13 @@ PWD=`pwd`
 ## Use as0
 #${AS0} ${NAME}.asm -L CRE C S > ${NAME}.lst 
 
+NAME=floppy_commented
+## Use asl
+${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
+${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
+rm ${NAME}.p
+cat out.txt | grep rror   # Check for Errors
+#######################################################################
 NAME=floppy2_commented
 ## Use asl
 ${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
