@@ -139,7 +139,7 @@ Z20C6           LDX     #BUF128_1                ; 20C6: CE 24 D1       ; Build 
                 BNE     VALIDFN                  ; 20E7: 26 08          ; no
                 LDAA    $09,X                    ; 20E9: A6 09          ; check end of string
                 CBA                              ; 20EB: 11             ; 
-                BEQ     CHKBRKKY                 ; 20EC: 27 13          ; only space, check Break
+                BEQ     CHKBRK0                  ; 20EC: 27 13          ; only space, check Break
 ALLOK           JMP     FNAMGIVEN                ; 20EE: 7E 22 B1       ; Filename given in command
 ;------------------------------------------------
 VALIDFN         LDAB    PFNMSTAT                 ; 20F1: D6 20          ; (PFNAM: pg. 381)
@@ -149,11 +149,11 @@ VALIDFN         LDAB    PFNMSTAT                 ; 20F1: D6 20          ; (PFNAM
                 BNE     ALLOK                    ; 20F9: 26 F3          ; 
                 LDAB    #$02                     ; 20FB: C6 02          ; filename given
                 STAB    DIRSMFLAG                ; 20FD: D7 22          ; 
-                BRA     Z2105                    ; 20FF: 20 04          ; 
+                BRA     CHKBRK1                  ; 20FF: 20 04          ; 
 ;------------------------------------------------
-CHKBRKKY        LDAB    #$01                     ; 2101: C6 01          ; Bit 0 - Search for Next Direntry
+CHKBRK0         LDAB    #$01                     ; 2101: C6 01          ; Bit 0 - Search for Next Direntry
                 STAB    DIRSMFLAG                ; 2103: D7 22          ; 
-Z2105           SCALL   CKBRK1                                          ; CHECK CONSOLE FOR BREAK KEY
+CHKBRK1         SCALL   CKBRK1                                          ; CHECK CONSOLE FOR BREAK KEY
                 BCC     NOBRK                    ; 2107: 24 03          ; 
                 JMP     BRKDET                   ; 2109: 7E 23 A2       ; 
 ;------------------------------------------------
@@ -164,20 +164,20 @@ NOBRK           LDAB    DIRSMFLAG                ; 210C: D6 22          ;
                 JMP     DIRSMERR                 ; 2115: 7E 23 1D       ; 
 ;------------------------------------------------
 Z2118           LDAA    ENTRYNUM                 ; 2118: 96 23          ; 
-                BEQ     Z2121                    ; 211A: 27 05          ; 
+                BEQ     Z2121                    ; 211A: 27 05          ; first entry is header
                 JSR     Z23D1                    ; 211C: BD 23 D1       ; 
-                BNE     Z2105                    ; 211F: 26 E4          ; 
+                BNE     CHKBRK1                  ; 211F: 26 E4          ; 
 Z2121           LDAA    DIRSMFLAG                ; 2121: 96 22          ; 
                 DECA                             ; 2123: 4A             ; 
                 BNE     Z2133                    ; 2124: 26 0D          ; 
                 LDAA    OPTIONS                  ; 2126: 96 21          ; 
                 BITA    #$08                     ; 2128: 85 08          ; include system files ?
                 BNE     Z2133                    ; 212A: 26 07          ; 
-                LDAA    M2472                    ; 212C: B6 24 72       ; 
+                LDAA    M2472                    ; 212C: B6 24 72       ; no
                 BITA    #$20                     ; 212F: 85 20          ; 
-                BNE     Z2105                    ; 2131: 26 D2          ; 
+                BNE     CHKBRK1                  ; 2131: 26 D2          ; 
 Z2133           INC     M0026                    ; 2133: 7C 00 26       ; 
-                JSR     Z23B2                    ; 2136: BD 23 B2       ; 
+                JSR     MOVSTRNG                 ; 2136: BD 23 B2       ; 
                 LDAA    OPTIONS                  ; 2139: 96 21          ; 
                 ANDA    #$03                     ; 213B: 84 03          ; 
                 BNE     Z2142                    ; 213D: 26 03          ; 
@@ -336,10 +336,10 @@ Z229F           LDX     #M249F                   ; 229F: CE 24 9F       ;
                 JSR     OUTPUTTXT                ; 22A2: BD 24 31       ; 
 Z22A5           LDAA    DIRSMFLAG                ; 22A5: 96 22          ; 
                 BITA    #$02                     ; 22A7: 85 02          ; 
-                BEQ     Z22AE                    ; 22A9: 27 03          ; 
+                BEQ     CHKBRK2                  ; 22A9: 27 03          ; 
                 JMP     Z2339                    ; 22AB: 7E 23 39       ; 
 ;------------------------------------------------
-Z22AE           JMP     Z2105                    ; 22AE: 7E 21 05       ; 
+CHKBRK2         JMP     CHKBRK1                  ; 22AE: 7E 21 05       ; 
 ;------------------------------------------------
 FNAMGIVEN       CLRB                             ; 22B1: 5F             ; 
                 STAB    M002B                    ; 22B2: D7 2B          ; 
@@ -394,7 +394,7 @@ Z2304           INC     ENTRYNUM                 ; 2304: 7C 00 23       ;
                 LDX     #BUFPTR01                ; 2313: CE 25 D6       ; 
                 LDAB    #$0A                     ; 2316: C6 0A          ; 
                 SCALL   MOVE1                                           ; 
-                JMP     CHKBRKKY                 ; 231A: 7E 21 01       ; 
+                JMP     CHKBRK0                  ; 231A: 7E 21 01       ; 
 ;------------------------------------------------
 DIRSMERR        CMPB    #$01                     ; 231D: C1 01          ; Direntry found ?
                 BNE     Z232F                    ; 231F: 26 0E          ; yes
@@ -459,7 +459,7 @@ BRKDET          LDAA    OPTIONS                  ; 23A2: 96 21          ;
                 BEQ     Z23B0                    ; 23AB: 27 03          ; 
                 JSR     Z244A                    ; 23AD: BD 24 4A       ; 
 Z23B0           SCALL   MDENT1                                          ; 
-Z23B2           LDX     #M2466                   ; 23B2: CE 24 66       ; Filenameregion (without drive#)
+MOVSTRNG        LDX     #M2466                   ; 23B2: CE 24 66       ; Filenameregion (without drive#)
                 STX     BUFPTR01                 ; 23B5: FF 25 D6       ; 
                 LDX     #M249F                   ; 23B8: CE 24 9F       ; 
                 STX     M25D8                    ; 23BB: FF 25 D8       ; 
