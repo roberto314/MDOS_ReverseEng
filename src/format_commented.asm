@@ -14,7 +14,7 @@ M000C   EQU     $000C ;
 M001A   EQU     $001A ; 
 LDADDRH EQU     $0020 ; |
 LDADDRL EQU     $0021 ; cont. 76 (max. Track# ?)
-M0022   EQU     $0022 ; 
+TRKNOW  EQU     $0022 ; 
 M0023   EQU     $0023 ; 
 M0024   EQU     $0024 ; 
 NMISAV  EQU     $0025 ; Save old NMI Vector
@@ -211,7 +211,7 @@ Z2126           LDX     #$22AB                   ; |
                 LDX     #$01BD                   ; |
 Z212F           STX     M21EE                    ; |
 Z2132           LDAA    LDADDRH                  ; High Byte is zero
-                STAA    M0022                    ; 
+                STAA    TRKNOW                   ; 
                 LDX     #MFFE6                   ; $10000-$FFE6 = 26
                 TST     EXDSKSD                  ; Bit 7 is now PA5
                 BMI     Z2141                    ; check for SS or DS
@@ -225,14 +225,14 @@ Z2143           LDAB    STRSCTL                  ;
                 STAB    STRSCTH                  ; 
                 DECA                             ; 
                 BPL     Z2143                    ; 
-Z2152           JSR     SEEK         ;EXORDISK   ; get to next track
+NXTTRK          JSR     SEEK         ;EXORDISK   ; get to next track
                 BCS     Z20F4                    ; error or done
                 LDAA    M0024                    ; init w. $10
                 LSRA                             ; 
                 LSRA                             ; 
                 LSRA                             ; 
                 LSRA                             ; should be 1
-                ADDA    M0022                    ; 
+                ADDA    TRKNOW                   ; should be 0 but gets increased (Track?)
                 LDAB    PIAREGA                  ; Load PIAA
                 ORAB    #$04                     ; isolate bit 2 (TG43)
                 CMPA    #$2B                     ; check for Track > 43
@@ -243,9 +243,9 @@ Z216A           STAB    PIAREGA                  ; write
                 STAA    M0023                    ; init w. 1
                 LDAA    PIAREGB                  ; |
                 ORAA    #$40                     ; set Bit 6 (DS3(SIDE) high)
-Z2176           STAA    PIAREGB                  ; or coming from JMP write $23 (DS2 high, DS3(SIDE) low)
-                JSR     SETUPNMI                 ; X is on PIAREGA now
-                LDAB    #$27                     ; <------ why
+Z2176           STAA    PIAREGB                  ; or coming from JMP write $23 (DS2, PB0(Reset inact.); WG high, DS3(SIDE) low)
+                JSR     SETUPNMI                 ; X is on PIAREGA now, also Rerigger NMI Timer
+                LDAB    #$27                     ; Counter for below (approx. $22F5)
                 LDAA    CLKF2                    ; |
 Z2180           DECA                             ; |
                 BNE     Z2180                    ; wait
@@ -303,7 +303,7 @@ M21F0           LDAA    #$82                     ; < gets patched to $22AB - use
                 STAB    SSDA_1                   ; 
 Z220B           BITA    SSDA_0                   ; 
                 BEQ     Z220B                    ; 
-                LDAB    M0022                    ; 
+                LDAB    TRKNOW                   ; 
                 STAB    SSDA_1                   ; 
                 CLRB                             ; 
                 STAB    SSDA_1                   ; 
@@ -366,11 +366,11 @@ Z2291           LDAA    STRSCTL                  ;
                 ADCB    #$00                     ; 
                 STAA    STRSCTL                  ; 
                 STAB    STRSCTH                  ; 
-                INC     M0022                    ; 
+                INC     TRKNOW                   ; 
                 LDAA    LDADDRL                  ; 
-                CMPA    M0022                    ; 
+                CMPA    TRKNOW                   ; 
                 BCS     Z22A9                    ; bail
-                JMP     Z2152                    ; 
+                JMP     NXTTRK                   ; 
 ;------------------------------------------------
 Z22A9           SCALL   MDENT1
 M22AB           LDAA    #$82                     ; 
@@ -411,7 +411,7 @@ Z22EB           DECA                             ;
                 BNE     Z22EB                    ; 
                 LDAA    #$18                     ; 
                 STAA    SSDA_1                   ; 
-                DECB                             ; 
+                DECB                             ; B is init to $27 above (approx. $217B)
                 BNE     Z22E4                    ; 
                 LDX     #$81AA                   ; 
                 LDAB    #$05                     ; 

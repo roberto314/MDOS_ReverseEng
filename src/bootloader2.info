@@ -1,0 +1,23 @@
+file bootloader2.bin 20
+include common.info
+
+#label 98 StartAddressH
+#unused c7f0-c7ff
+#lcomment c019 CC0 and CC1 set - external Serial clock (8xBaudrate)
+#const c559-c55a
+#word c6ef-c6f0
+#label c63F Set_32Char
+#char c724-c741
+#data 0102-020f
+label 00 CURDRV  
+label 01 STRSCTH 
+label 02 STRSCTL 
+label 03 NUMSCTH 
+label 04 NUMSCTL 
+label 05 LSCTLN  
+label 06 CURADRH 
+label 07 CURADRL
+label 08 FDSTAT  
+label 0B SECTCNT 
+
+data 95

@@ -22,7 +22,6 @@ SYEOCB  EQU     $016A
 M017B   EQU     $017B
 M11C2   EQU     $11C2
 M434D   EQU     $434D
-M8649   EQU     $8649
 OSLOAD  EQU     $E800
 CHKERR  EQU     $E853
 PWRUP   EQU     $F000
@@ -80,7 +79,8 @@ Z200E           CLRB                             ; 200E: 5F
                 FCB     $11                      ; 2040: 11             
                 BEQ     Z2063                    ; 2041: 27 20          
                 LDAA    #$52                     ; 2043: 86 52          
-                CPX     #M8649                   ; 2045: 8C 86 49       
+                FCB     $8C                      ; 2045: 8C             
+Z2046           LDAA    #$49                     ; 2046: 86 49          
 Z2048           STAA    M0008                    ; 2048: 97 08          
 Z204A           SEC                              ; 204A: 0D             
                 JSR     CHKERR                   ; 204B: BD E8 53       

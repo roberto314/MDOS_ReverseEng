@@ -1,0 +1,173 @@
+ AS V1.42 Beta [Bld 216] - Source File bootloader2_commented.asm - Page 1 - 01/28/2026 12:19:06 PM
+
+
+       1/       0 :                     ; This file is loaded from floppy to address $20
+       2/       0 :                     ; It sits in sector $17 @ 0xB80
+       3/       0 :                     ;****************************************************
+       4/       0 :                     ; Used Labels
+       5/       0 :                     ;****************************************************
+       6/       0 :                     
+       7/       0 : =$0                  CURDRV  EQU     $0000
+       8/       0 : =$1                  STRSCTH EQU     $0001
+       9/       0 : =$2                  STRSCTL EQU     $0002
+      10/       0 : =$3                  NUMSCTH EQU     $0003
+      11/       0 : =$4                  NUMSCTL EQU     $0004
+      12/       0 : =$5                  LSCTLN  EQU     $0005
+      13/       0 : =$6                  CURADRH EQU     $0006
+      14/       0 : =$7                  CURADRL EQU     $0007
+      15/       0 : =$8                  FDSTAT  EQU     $0008
+      16/       0 : =$B                  SECTCNTH EQU     $000B
+      17/       0 : =$C                  SECTCNTL EQU     $000C
+      18/       0 : =$E853               CHKERR  EQU     $E853
+      19/       0 : =$E86D               READPS  EQU     $E86D
+      20/       0 : =$E875               RESTOR  EQU     $E875
+      21/       0 : =$EBC0               LPINIT  EQU     $EBC0
+      22/       0 : =$E800               OSLOAD  EQU     $E800
+      23/       0 :                     ;****************************************************
+      24/       0 :                     ; Program's Code Areas
+      25/       0 :                     ;****************************************************
+      26/       0 :                     
+      27/       0 :                     ; RIB from System disk
+      28/       0 :                     ;      00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
+      29/       0 :                     ;-----------------------------------------------------
+      30/       0 :                     ; 00 - 40 06 80 3F 00 00 00 00 00 00 00 00 00 00 00 00
+      31/       0 :                     ; 10 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+      32/       0 :                     ; 20 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+      33/       0 :                     ; 30 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+      34/       0 :                     ; 40 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+      35/       0 :                     ; 50 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+      36/       0 :                     ; 60 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+      37/       0 :                     ; 70 - 00 00 00 00 00 10 00 40 01 00 06 23 00 00 00 00
+      38/       0 :                     
+      39/      20 :                                     ORG     $0020
+      40/      20 :                     
+      41/      20 : B6 E8 00                            LDAA    OSLOAD                   ; 0020: B6 E8 00       ; Check E800
+      42/      23 : 81 8E                               CMPA    #$8E                     ; 0023: 81 8E          ; is there a 6800 LDS command or is it a 6809 System?
+      43/      25 : 86 50                               LDAA    #'P'                     ; 0025: 86 50          ; Error 'P' should be wrong CPU ?
+      44/      27 : 25 6F                               BCS     Z0098                    ; 0027: 25 6F          ; No
+      45/      29 : 7C 00 00                            INC     CURDRV                   ; 0029: 7C 00 00       ; Why? - Guess: to check if there is a second drive present
+      46/      2C : BD E8 75                            JSR     RESTOR                   ; 002C: BD E8 75       ; 
+      47/      2F : BD EB C0                            JSR     LPINIT                   ; 002F: BD EB C0       ; 
+      48/      32 : CE 00 A0                            LDX     #$00A0                   ; 0032: CE 00 A0       ; Start of RIB in Memory 128 + $20 = $A0
+      49/      35 : A6 75                               LDAA    $75,X                    ; 0035: A6 75          ; RIB $75: the number of bytes to load from the last sector
+      50/      37 : 97 05                               STAA    LSCTLN                   ; 0037: 97 05          ; LAST SECTOR LENGTH ($10)
+      51/      39 : E6 00                               LDAB    ,X                       ; 0039: E6 00          ; X is at $A0, Get Segment descriptor word ($40)
+      52/      3B : 2B 59                               BMI     SERRQM                   ; 003B: 2B 59          ; RIB SDW Bit 7 set - Error '?'
+      53/      3D : C4 03                               ANDB    #$03                     ; 003D: C4 03          ; isolate Bit 0,1 - is part of starting cluster number
+      54/      3F : A6 01                               LDAA    $01,X                    ; 003F: A6 01          ; LDA from $A1, Get Segment descriptor word ($06)
+      55/      41 : 48                                  ASLA                             ; 0041: 48             ; 
+      56/      42 : 59                                  ROLB                             ; 0042: 59             ; *2
+      57/      43 : 48                                  ASLA                             ; 0043: 48             ; 
+      58/      44 : 59                                  ROLB                             ; 0044: 59             ; *4 - four sectors / cluster (6 * 4 = 24)
+      59/      45 : 8B 01                               ADDA    #$01                     ; 0045: 8B 01          ; |
+      60/      47 : C9 00                               ADCB    #$00                     ; 0047: C9 00          ; +1 (25, $19)
+ AS V1.42 Beta [Bld 216] - Source File bootloader2_commented.asm - Page 2 - 01/28/2026 12:19:06 PM
+
+
+      61/      49 : D7 01                               STAB    STRSCTH                  ; 0049: D7 01          ; |
+      62/      4B : 97 02                               STAA    STRSCTL                  ; 004B: 97 02          ; Startsector (25, $19) 25*128=$C80
+      63/      4D : E6 7A                               LDAB    $7A,X                    ; 004D: E6 7A          ; |
+      64/      4F : A6 7B                               LDAA    $7B,X                    ; 004F: A6 7B          ; ($7A,7B), the starting execution address ($0623)
+      65/      51 : 36                                  PSHA                             ; 0051: 36             ; on stack
+      66/      52 : 37                                  PSHB                             ; 0052: 37             ; on stack
+      67/      53 : A6 77                               LDAA    $77,X                    ; 0053: A6 77          ; |
+      68/      55 : E6 76                               LDAB    $76,X                    ; 0055: E6 76          ; ($76,77), the number of sectors to load ($0040)
+      69/      57 : 97 04                               STAA    NUMSCTL                  ; 0057: 97 04          ; |
+      70/      59 : D7 03                               STAB    NUMSCTH                  ; 0059: D7 03          ; save
+      71/      5B : EE 78                               LDX     $78,X                    ; 005B: EE 78          ; ($78,79), the starting load address ($0100)
+      72/      5D : DF 06                               STX     CURADRH                  ; 005D: DF 06          ; save
+      73/      5F : CE 00 07                            LDX     #$07                     ; 005F: CE 00 07       ; |
+      74/      62 : 48                  Z0062           ASLA                             ; 0062: 48             ; |
+      75/      63 : 59                                  ROLB                             ; 0063: 59             ; | multiply by 128 to get bytecount
+      76/      64 : 09                                  DEX                              ; 0064: 09             ; |
+      77/      65 : 26 FB                               BNE     Z0062                    ; 0065: 26 FB          ; |
+      78/      67 : 9B 07                               ADDA    CURADRL                  ; 0067: 9B 07          ; |
+      79/      69 : D9 06                               ADCB    CURADRH                  ; 0069: D9 06          ; add start address
+      80/      6B : 97 0C                               STAA    SECTCNTL                 ; 006B: 97 0C          ; |
+      81/      6D : D7 0B                               STAB    SECTCNTH                 ; 006D: D7 0B          ; is actually Endaddress
+      82/      6F : CE 00 7F                            LDX     #$0007F                  ; 006F: CE 00 7F       ; Check Memory @ $80 upwards
+      83/      72 : 86 AA               Z0072           LDAA    #$AA                     ; 0072: 86 AA          ;
+      84/      74 : 08                                  INX                              ; 0074: 08             ;
+      85/      75 : E6 00                               LDAB    ,X                       ; 0075: E6 00          ; Load whats there
+      86/      77 : A7 00                               STAA    ,X                       ; 0077: A7 00          ; write $AA
+      87/      79 : A1 00                               CMPA    ,X                       ; 0079: A1 00          ; compare
+      88/      7B : 07                                  TPA                              ; 007B: 07             ; Transfer Status to A
+      89/      7C : E7 00                               STAB    ,X                       ; 007C: E7 00          ; write the old value back
+      90/      7E : 06                                  TAP                              ; 007E: 06             ; restore status reg.
+      91/      7F : 26 10               M007F           BNE     SERRM                    ; 007F: 26 10          ; if not zero - Error 'M'
+      92/      81 : 9C 0B                               CPX     SECTCNTH                 ; 0081: 9C 0B          ; are we done?
+      93/      83 : 26 ED                               BNE     Z0072                    ; 0083: 26 ED          ; no - continue
+      94/      85 : 7F 00 00                            CLR     CURDRV                   ; 0085: 7F 00 00       ; go back to drive 0
+      95/      88 : 86 53                               LDAA    #$53                     ; 0088: 86 53          ; |
+      96/      8A : 36                                  PSHA                             ; 008A: 36             ; |
+      97/      8B : 86 E8                               LDAA    #$E8                     ; 008B: 86 E8          ; |
+      98/      8D : 36                                  PSHA                             ; 008D: 36             ; E853 is CHKERR
+      99/      8E : 7E E8 6D                            JMP     READPS                   ; 008E: 7E E8 6D       ; on stack is CHKERR and Execution Address
+     100/      91 :                     ;------------------------------------------------
+     101/      91 : DF 00               SERRM           STX     CURDRV                   ; 0091: DF 00          ;
+     102/      93 : 86 4D                               LDAA    #'M'                     ; 0093: 86 4D          ; if Problem set Error 'M'
+     103/      95 :                     ;                CPX     #M863F                   ; 0095: 8C 86 3F      ;
+     104/      95 : 8C                                  FCB     $8C                                             ;
+     105/      96 : 86 3F               SERRQM          LDAA    #'?'                     ; 0096: 86 3F          ;
+     106/      98 : 97 08               Z0098           STAA    FDSTAT                   ; 0098: 97 08          ; Store Error
+     107/      9A : 53                                  COMB                             ; 009A: 53             ;
+     108/      9B : 7E E8 53                            JMP     CHKERR                   ; 009B: 7E E8 53       ;
+     109/      9E :                     ;------------------------------------------------
+     110/      9E : 00                                  FCB     $00                      ; 009E: 00             ;
+     111/      9F : 00                                  FCB     $00                      ; 009F: 00             ;
+     112/      A0 :                     
+     113/      A0 :                     
+     114/      A0 :                                     END
+ AS V1.42 Beta [Bld 216] - Source File bootloader2_commented.asm - Page 3 - 01/28/2026 12:19:06 PM
+
+
+  Symbol Table (* = unused):
+  --------------------------
+
+*ARCHITECTURE :                                      "x86_64-unknown-linux" - |
+*BIGENDIAN :                      0 - | *BRANCHEXT :                      0 - |
+*CASESENSITIVE :                  0 - |  CHKERR :                      E853 - |
+*COMPMODE :                       0 - | *CONSTPI :        3.141592653589793 - |
+ CURADRH :                        6 - |  CURADRL :                        7 - |
+ CURDRV :                         0 - | *CUSTOM :                         0 - |
+*DATE :                "01/28/2026" - | *FALSE :                          0 - |
+ FDSTAT :                         8 - | *FULLPMMU :                       1 - |
+*HAS64 :                          1 - | *HASDSP :                         0 - |
+*HASFPU :                         0 - | *HASPMMU :                        0 - |
+*INEXTMODE :                      0 - | *INLWORDMODE :                    0 - |
+*INMAXMODE :                      0 - | *INSRCMODE :                      0 - |
+*INSUPMODE :                      0 - | *LISTON :                         1 - |
+ LPINIT :                      EBC0 - |  LSCTLN :                         5 - |
+*M007F :                         7F C | *MACEXP :                         7 - |
+*MOMCPU :                      6800 - | *MOMCPUNAME :                "6800" - |
+*NESTMAX :                      100 - |  NUMSCTH :                        3 - |
+ NUMSCTL :                        4 - |  OSLOAD :                      E800 - |
+*PACKING :                        0 - | *PADDING :                        0 - |
+ READPS :                      E86D - | *RELAXED :                        0 - |
+ RESTOR :                      E875 - |  SECTCNTH :                       B - |
+ SECTCNTL :                       C - |  SERRM :                         91 C |
+ SERRQM :                        96 C |  STRSCTH :                        1 - |
+ STRSCTL :                        2 - | *TIME :               "12:19:06 PM" - |
+*TRUE :                           1 - | *VERSION :                     142F - |
+ Z0062 :                         62 C |  Z0072 :                         72 C |
+ Z0098 :                         98 C | *Z80SYNTAX :                      0 - |
+
+     53 symbols
+     32 unused symbols
+
+ AS V1.42 Beta [Bld 216] - Source File bootloader2_commented.asm - Page 4 - 01/28/2026 12:19:06 PM
+
+
+  Code Pages:
+  ----------
+
+STANDARD (0 changed characters)
+
+1 code page
+
+0.00 seconds assembly time
+
+    115 lines source file
+      2 passes
+      0 errors
+      0 warnings

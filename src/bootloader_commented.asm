@@ -38,7 +38,7 @@ LPINIT  EQU     $EBC0
 
                 ORG     $0020
 
-                INC     CURDRV                   ; 0020: 7C 00 00  ; Why?
+                INC     CURDRV                   ; 0020: 7C 00 00  ; Why? - Guess: to check if there is a second drive present
                 JSR     RESTOR                   ; 0023: BD E8 75  ; 
                 JSR     LPINIT                   ; 0026: BD EB C0  ; 
                 LDX     #$00A0                   ; 0029: CE 00 A0  ; Start of RIB in Memory 128 + $20 = $A0
@@ -62,8 +62,8 @@ LPINIT  EQU     $EBC0
                 STAB    NUMSCTH                  ; 004A: D7 03     ; save
                 LDAB    $7A,X                    ; 004C: E6 7A     ; |
                 LDAA    $7B,X                    ; 004E: A6 7B     ; ($7A,7B), the starting execution address ($0623)
-                PSHA                             ; 0050: 36        ; 
-                PSHB                             ; 0051: 37        ; 
+                PSHA                             ; 0050: 36        ; on stack
+                PSHB                             ; 0051: 37        ; on stack
                 LDX     $78,X                    ; 0052: EE 78     ; ($78,79), the starting load address ($0100)
                 STX     CURADRH                  ; 0054: DF 06     ; save
                 LDAA    NUMSCTL                  ; 0056: 96 04     ; 
@@ -77,11 +77,11 @@ Z005D           ASLA                             ; 005D: 48        ; |
                 ADCB    CURADRH                  ; 0064: D9 06     ; add start address
                 STAA    SECTCNTL                 ; 0066: 97 0C     ; |
                 STAB    SECTCNTH                 ; 0068: D7 0B     ; is actually Endaddress
-                LDX     #$03FF                   ; 006A: CE 03 FF  ; 
-Z006D           LDAA    #$4D                     ; 006D: 86 4D     ; Check Memory @ $400 upwards
+                LDX     #$03FF                   ; 006A: CE 03 FF  ; Check Memory @ $400 upwards
+Z006D           LDAA    #'M'                     ; 006D: 86 4D     ; if Problem set Error 'M'
                 INX                              ; 006F: 08        ; 
                 LDAB    ,X                       ; 0070: E6 00     ; Load whats there
-                STAA    ,X                       ; 0072: A7 00     ; write $4D
+                STAA    ,X                       ; 0072: A7 00     ; write $4D (='M')
                 CMPA    ,X                       ; 0074: A1 00     ; compare
                 TPA                              ; 0076: 07        ; Transfer Status to A
                 STAB    ,X                       ; 0077: E7 00     ; write the old value back

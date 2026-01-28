@@ -1,0 +1,469 @@
+PAGE 001  NEWS    .SA:0  
+
+ ** 8200SYSTEM      News file **                             Issue #01
+===========================================================================
+
+ ** 6800 MDOS  3.04 NEWS **
+
+---------------- ADDENDUM  M68MDOS3(A1): reprint ---------------------
+ 1.  WHEN COPYING FROM USER-DEFINED DEVICES TO DISKETTE FILES USING
+     THE COPY COMMAND, THERE IS NO "HANDSHAKE" PROTOCOL ISSUED WHEN
+     MDOS IS BUSY WRITING TO THE DISK FILE.  THUS DATA COULD BE LOST
+     WHEN MDOS IS BUSY.  SUCCESSFUL TRANSFERS OF THIS TYPE CAN ONLY
+     BE ACCOMPLISHED WHEN ALL OF THE DATA FITS INSIDE THE DYNAMICALLY
+     SIZED BUFFER ALLOCATED BY THE COPY COMMAND.  ALSO, THE USER
+     DEVICE DRIVER FILE MUST END WITH AN OBJECT BYTE GENERATING
+     DIRECTIVE (I.E., NOT "RMB").
+ 
+ 2.  STARTING WITH VERSION 3.01, THE "DUMP" COMMAND CAN BE USED TO TRY
+     AND CLEAR CRC DISK READ ERRORS.  UNDER "DUMP", THE READ SECTOR (R)
+     COMMAND NOW ACTUALLY TRANSFERS WHAT WAS READ TO THE SECTOR CHANGE
+     BUFFER, EVEN IF A DISK ERROR OCCURS.  THUS READING THE BAD SECTOR,
+     EXAMINING/CHANGING IT, AND WRITING IT BACK MAY CLEAR THE ERROR IF
+     THE DISK IS NOT PHYSICALLY DAMAGED.
+ 
+ 3.  STARTING WITH VERSION 3.02, AN "EP" ERROR WILL OCCUR DURING
+     INITIALIZATION IF A 6809 MDOS DISK IS INITIALIZED ON A 6800
+     EXORCISER OR A 6800 MDOS DISK IS INITIALIZED ON A 6809 EXORCISER.
+     FIXED TO WORK CORRECTLY STARTING WITH  3.03 VERSION.
+ 
+ 4.  STARTING WITH VERSION 3.02, AN "EM" ERROR NOW CAUSES THE ADDRESS
+     OF THE ERROR LOCATION TO BE STORED IN LOCATION $0000.  THIS ERROR
+     LOCATION COULD NOT VERIFY EITHER $AA OR $55.  THE MEMORY SIZING
+     ROUTINE NOW CHECKS MEMORY MORE THOROUGHLY BY STORING $AA AND
+     ALSO $55 IN EACH LOCATION TO BE SURE ALL BITS CAN BE TOGGLED AND
+     ALSO CHECKS FOR AT LEAST 16K ($0000-3FFF) OF CONTIGUOUS MEMORY TO
+     BE PRESENT.
+
+ 5.  SYNTAX ERRORS CAN OCCUR WHEN RUNNING A CHAIN FILE THAT CONTAINS
+     TRAILING SPACES.  THE TRAILING SPACES CAN BE GENERATED WHILE
+     USING THE CRT EDITOR WITHOUT THE USER'S KNOWLEDGE, DEPENDING
+     UPON THE COMMAND SEQUENCE ENTERED.
+ 
+ 6.  WITH VERSION 3.02, THE EQUATE FILE ("EQU.SA") HAS BEEN COSMETICALLY
+     CHANGED.  TO SEE THE CHANGES, ENTER THE FOLLOWING AFTER THE MDOS
+     PROMPT (=):
+                   LIST EQU;L       (FOR PRINTER)
+                       OR
+                   LIST EQU         (FOR CONSOLE)
+ 
+------------------------- NEW INFORMATION --------------------------------
+ 7.  With version 3.04, the delete (DEL=$7F) or backspace (BS=$08) keys
+     will delete the last character from the input buffer and also
+     erase it from a CRT screen as well by sending BS, SPACE, and BS
+     characters.  Any command or utility not using the .KEYIN routine
+     will not recognize the BS character to delete the last entered
+     character from the CRT screen.  In this case, the DEL key must be
+     used.
+
+     A chain file (MDOSMODE.CF) has been provided to allow easy trans-
+     formation between CRT and SCROLL mode handling of the delete
+     character function.  List the chain file by entering
+          =LIST MDOSMODE.CF;L       for printer
+                 or
+          =LIST MDOSMODE.CF         for console
+     for instructions on how to execute it.
+ 
+ 8.  With version 3.04, at the end of a successful FORMAT command the
+     bell is rung and the "FORMAT DRIVE X ?" is reissued.  A "Y"
+     response will start formating again.  Any other response will
+     terminate the command and return control back to MDOS.
+
+
+Corrections to EXORdisk II/III OPERATING SYSTEM User's Guide M68MDOS3(D2)
+
+ 1. Page 26-02, paragraph 26.2.1 Controller Descriptor Block -- CDB
+    Change the diagram wording for bytes 00/01 from
+        "IOCB address"   to   "(reserved =0)"
+
+ 2. Page G-02, Appendix G Directory Hashing Function
+    Change the 2nd from the last source code line from
+       "HASH3  STAB    TMP3"    to    "HASH3  TBA"    
+    The description at the top of the page is then correct.
+
+------------------------------------------------------------------
+ 6800 MDOS CUSTOM PATCHES
+
+ ** Change MDOS "CTRL W" function to "CTRL X" (or other value) for
+    handshaking with high speed, buffered hard copy console
+    terminal, such as Decwriter III.
+      =PATCH MDOS.SY
+      >3F1,0/18                       (WAS $17= CTRL W)
+      Q
+-------------------------------------------------------------------
+ ** KNOWN ERRORS **
+
+  1. IF .PUTRC IS PASSED A BUFFER WITH TRAILING SPACES AND NO CARRIAGE
+     RETURN IN BUFFER, THE TRAILING SPACES ARE NOT INCLUDED AS PART
+     OF THE RECORD.  IN ORDER TO BE SURE TRAILING SPACES ARE INCLUDED,
+     A CARRIAGE RETURN SHOULD BE INSERTED AS THE LAST CHARACTER IN THE
+     BUFFER.  (#14)
+
+  2. WHEN RUNNING ROLLOUT WITH THE 'V' OPTION, THE FOLLOWING SEQUENCE
+     WILL CAUSE A DISK ERROR TO OCCUR:
+
+          ROLLOUT;V
+          LOAD ADDR=XXXX
+          = (PUSH RESTART)
+          EXBUG Y.Y MAID
+          *XXXX;G
+          BEGIN ADDR=AAAA
+          END ADDR=BBBB
+          ARE YOU SURE? Y
+          DRIVE 1 SCRATCH? Y
+          E3
+
+     TO AVOID THE 'E3' ERROR, PRESS ABORT INSTEAD OF RESTART.  (#15)
+
+  3. IF .PUTLS OR .PUTRC ROUTNE IS USED TO EXTEND AN EXISTING FILE AND
+     THE EXTENSION DOES NOT CAUSE ADDITIONAL SECTOR ALLOCATION
+     (I.E. UNUSED SECTORS EXISTED BEYOND THE LOGICAL END OF FILE),
+     THE NEWLY WRITTEN SECTORS ARE NOT INCLUDED IN THE FILE'S SPACE
+     UNTIL AFTER THE FILE IS CLOSED AND THEN, ONLY IF THE TRUNCATE FLAG
+     HAD BEEN SET BY THE CALLING PROGRAM.
+
+     ONE CONSEQUENCE OF THIS IS THAT DATA WRITTEN BY .PUTLS INTO
+     ALLOCATED SECTORS BEYOND EOF CANNOT BE READ BY .GETLS UNTIL A
+     .REWND OR .CLOSE/.OPEN SEQUENCE HAS BEEN PERFORMED.  (#16)
+
+  4. WHEN RUNNING ROLLOUT, IT IS POSSIBLE TO GENERATE A
+     CONTIGUOUS FILE THAT HAS FROM ONE TO THREE EXTRA SECTORS AT
+     THE END OF THE FILE THAT DO NOT CONTAIN DATA FROM THE
+     REQUESTED MEMORY RANGE. (#24)
+
+  5. .PFNAM WILL RETURN A "NULL FILE NAME" IF A FILE NAME BEGINS
+     WITH A NUMERIC DIGIT.  THE SOURCE POINTER HAS BEEN ADJUSTED
+     BUT THERE IS NO ERROR INDICATOR. (#23)
+
+  6. IF A PERCENT SIGN APPEARS IN AN EXECUTION-TIME COMMENT OF A
+     CHAIN FILE, A "SOURCE SYNTAX ERROR" IS GENERATED. (#20)
+
+  7. THE "EXBIN" COMMAND HAS A MAXIMUM INPUT BUFFER LENGTH OF 80 CHAR-
+     ACTERS WHICH MEANS THAT THE MAXIMUM BYTE COUNT FOR AN S-RECORD
+     TYPE FILE (.LX) TO BE CONVERTED IS 38 ($26).  THIS TRANSLATES TO
+     A MAXIMUM OF 35 DATA BYTES/RECORD.  RECORDS OVER 80 CHARACTERS
+     WILL CAUSE ERROR #22, BUFFER OVERFLOW.
+
+  8. User defined device driver for COPY command will not function
+     with .KEYIN under CHAIN operation due to conflict in overlay
+     region #3 with MDOSOV4.SY versus MDOSOV5.SY.
+
+ ** END KNOWN ERRORS **
+===========================================================================
+
+** 6800 CRT EDITOR NEWS **      (E.CM   3.14)
+
+Corrections to EDITORM RESIDENT EDITOR REFERENCE MANUAL - M68EDITORM(D3)
+and addendum A1.
+
+ 1. Page 1-3, under paragraph 1.5, INVOKING THE EDITOR, replace from the
+    top of the page to just preceding "The response to the E command..."
+    with the following:
+
+   TS specifies the initial tab stop settings (see section 2.21 TAB
+    COMMAND) for the Editor as follows:
+
+        A    implies assembler tabs (8,15,24) with the space bar as
+             a special tab character and whereby an "*" in column 1
+             will disable the special tab character.
+
+        C    implies COBOL tabs (6,9,12) with the space bar as a
+             special tab character.
+
+        F    implies FORTRAN tabs (7) with the space bar as a special
+             tab character and whereby a "C" in column 1 will disable
+             the special tab character.
+
+FN is the file numbering option.  An N implies edit with line numbers.
+-N implies edit without line numbers.  FN defaults to -N for the CRT-
+CRT-MODE and to N for the SCROLL-MODE.  If FILENAME1 does not exist,
+it is created according to the resulting FN value (i.e. no line
+numbers for -N, with line numbers for N).  If FILENAME1 exists and FN
+reverts to N, then the first line of the file will determine if we are
+to be editing with line numbers.  If -N results when editing an exist-
+ing file with line numbers, then the line numbers will be treated as
+data.
+
+S specifies that the Editor is to initialized in the scroll mode,
+and that the user is editing from a non-EXORterm type device.  With
+this option, the user is restricted to scroll mode command editing.
+Starting with versions 3.13, auto-mode (CRT/SCROLL) detection is
+implemented.  The presence of a properly set up EXORterm CRT terminal
+will cause the Editor to enter the CRT-MODE of operation.  Non-EXORterm
+terminals will print an extra "F" character (read cursor command= $C6)
+after the sign-on message is displayed before entering the SCROLL-MODE.
+Thus the "S" option is not required unless the user wishes to force the
+SCROLL-MODE on an EXORterm CRT terminal.
+
+When SCROLL-MODE is entered, the Editor configures itself as follows:
+   * CRT terminal is assumed:
+       1. DEL key deletes last entered character from the input
+          buffer and from the CRT screen (via BS,SPACE,BS).
+       2. The backspace character (BS=CRTL H=$08) functions just
+          like the DEL key above.
+   * The default line numbering option (FN) is changed from -N to
+     N (assumes line numbers).
+   * The forward tab character is changed to ESC.  Backward tab
+     commands are ignored in the SCROLL-MODE as before.
+These features are not implemented when the EXORterm F2 key is used to
+switch from CRT to SCROLL-MODE, except for the DEL key."
+
+ 2. Page 1-10, under paragraph 1.6.2, SCROLL MODE, change Table 1-4 to read:
+
+  TERMINAL
+   KEYS                       DESCRIPTION
+
+   CTL-W     Pause the processing of this list. (CTRL and W keys)
+   CTL-X     Cancel this line. (CTRL and X keys)
+   CTL-D     Redisplay the current input characters on the next line.
+   CTL-H     Same as DEL key below.  Some terminals have a seperate key to
+             transmit this code (=$08 backspace) which is usually a left
+             arrow key <-.
+    ESC      Echo spaces to move to the right to next tab stop. (Forward tab)
+    DEL      Delete previous character and indicate so by erasing it from
+             the CRT screen.
+   BREAK     Stop processing; await a new command.
+    F1       Change mode to CRT-MODE. (Not functional with the ;S option).
+
+
+
+    Change FIGURE 1-4 from:
+
+     COPYRIGHT BY MOTOROLA 1978
+
+     EDITING OLD FILE: LTR3    .SA:0 WITH LINE NUMBERS
+
+                        to
+
+     COPYRIGHT BY MOTOROLA 1978
+
+     F
+     EDITING OLD FILE: LTR3    .SA:0 WITH LINE NUMBERS
+
+
+
+ 3. Page 2-8, under paragraph 2.7, E COMMAND, after
+
+    "An editor command that will terminate this edit session and initiate
+     the editing of another named file.  (For command specifics, see
+     INVOKING THE EDITOR, paragraph 1.5)."
+
+                        add the following:
+
+    "If tabs are in effect, they will remain in force for editing the next
+     file unless the user specifies a new tab option or tab command."
+
+
+ 4. Page 2-11, under paragraph 2.9, FIND COMMAND, change Example 8 from:
+        
+    ">F /SAM/cr"     to     ">F /SAM/Acr"
+
+
+ 5. Page 2-13, under paragraph 2.11, LIST COMMAND, change Example 6 from:
+   
+    "... starting from 12th line after current line"
+
+                        to
+
+    "... starting from 4th line prior to the current line"
+
+
+ 6. Page 2-14, under paragraph 2.12, MERGE COMMAND, add the following to the
+    paragraph which starts "The VERTICAL RANGE...":
+
+    "If any character other than Y,y,N, or n is entered, the command will be
+    aborted."
+
+    NOTE:  This applies only to versions 3.13 and later.  Prior versions
+           required a proper response and thus there was no way to abort.
+
+
+ 7. Page 2-15, under paragraph 2.13, MOVE COMMAND, change at the top from:
+   
+    "SYNTAX:    MOVE [VERTICAL RANGE][/NEW LINE NUMBER],NEW INCREMENT]]
+
+                        to
+
+    "SYNTAX:    MOVE [VERTICAL RANGE][/NEW LINE NUMBER[,NEW INCREMENT]]
+
+
+ 8. Page 2-16, under paragraph 2.14, NUMBER COMMAND, change Example 3 from:
+   
+    ">N 100,1cr"     to      ">N 200,1cr"
+
+    and change Example 4 from:
+
+    "4. Insert 3 lines baetween ..."   to   "4. Insert 3 lines between ..."
+
+
+ 9. Page 2-21, under paragraph 2.19, SAVE COMMAND, change:
+     
+    "WHERE:     FILENAME implies that an extract function is to be performed."
+
+                        to
+
+    "WHERE:     FILENAME implies that the output be written to a new file."
+
+
+10. Page 2-22, under paragraph 2.20, SEARCH COMMAND, change:
+
+    "SYNTAX:    SEARCH [STRING] [A]"
+
+                        to
+
+    "SYNTAX:    SEARCH [.TRANSPARENT CHAR] [STRING] [A]"
+
+
+11. Page 2-23, under section 2.21 TAB COMMAND, replace the paragraph
+    starting with "When no CHAR is specified" with the following:
+
+   "When no CHAR is specified, the special tab function is disabled.
+    The special tab request CHAR is not recognized when the Editor is
+    in the command input mode.  This is so it can be entered as a normal
+    text character.  If tabbing is desired on the command line, use the
+    designated tab keys (EXORterm tab keys, or ESC key for other
+    terminals).  Use of one of the Editor invocation tab settings (A,C,
+    F) will set the special tab request CHAR to the space bar.  See
+    section 1.5 INVOKING THE EDITOR.
+
+    All tabs, including the special tab CHAR, are reset by entering a
+    TAB command with no parameters.  The 1 to 20 COUNTN's specified
+    must be separated by commas.  The COUNTN values will add additional
+    tab stops up to the maximum of 20.  There is always a tab stop at
+    column 1, so it does not have to be entered.  Since spaces entered
+    via a tab request are identical internally to spaces entered via
+    the space bar key, the full 4 digit line number must be entered in
+    the line numbered mode if followed by a tab request to column 1.
+    This insures that column 1 information will be placed in column 1 of
+    the file."
+
+
+12. Page A-6, under "ASSEMBLE PROGRAM 2", change at the top from:
+   
+    "=RASM DIST1;L(cr) ..."     to    "=RASM DIST2;L(cr) ..."
+
+--  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
+
+** KNOWN ERRORS **
+
+ 1. Occasionally, when editing in the SCROLL mode, garbage lines 
+    may be appended to the end of the file.
+  
+ 2. Occasionally when running over the end of a line in SCROLL mode,
+    thus creating a blank line, a previously entered line may be
+    deleted after (1) the blank line is deleted and (2) function
+    function key one (F1) is depressed.
+
+ 3. Verify condition sets and resets under conditions that as yet
+    have not been defined.
+
+ 4. A space character is sometimes required in the command syntax
+    between syntactical elements to prevent syntax errors under
+    conditions that as yet have not been defined.
+    Example:   >C 100:30-60/SAM/BILL/      gives syntax error
+               >C 100 :30-60/SAM/BILL/     no error
+
+               >EX 100/./                  gives syntax error
+               >EX 100 /./                 no error
+
+ 5. In scroll mode when entering text into a new file without line numbers,
+    the current line can become off by one as follows:
+      >ABC              insert 3 lines
+      >DEF
+      >GHIAB
+      >                 exit w/return only
+      >F -1             enter find command
+      GHIAB
+      >C /AB//          change current line (actually changes)
+      DEF               current line has changed!
+      >L *-2
+      DEF               new current line
+      GHI
+
+ 6. When adding a character to the last column of a new line in the 
+    CRT mode, that line will sometimes disappear as the editor auto-
+    matically creates the next line.  The line is still present
+    internally.  It is just not displayed.  Hitting "F4" and then "F3"
+    will redisplay the line.  Lines containing at least one blank and
+    ending in "M" or "E" are more likely to do this.           (#147)
+
+ 7. Problem when editing a file with line numbers in CRT-MODE:
+    A "MOVE mmm-nnn/xxx" command where the current line is beyond "mmm"
+    will only duplicate and delete the specified line number(s), and
+    not also extract them to "xxx".  Thus data could be lost from the
+    file unless the user manually does an XTRACT command ("X xxx")
+    before the extract buffer is changed.  Do a "F 0" command or hit
+    function key "F2" prior to any MOVE commands of this type for a
+    temporary fix.  Or manually do the XTRACT command.          (#178)
+
+** END KNOWN ERRORS **
+--  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
+
+** HELPFUL HINTS:
+ 1. The "FIND" command with a repitition count greater than one
+    will not display the last occurence, since it has positioned
+    the editor to this last occurence.
+
+ 2. If the editor crashes, there is no "warm" start recovery
+    procedure.  However, useful information may be present in the
+    SCRATCH1.SA temporary file.  If you want to edit this file, it
+    must be renamed first (see MDOS "NAME" command).
+
+ 3. When editing a file with the 'A' option and the default tab
+    character is the space bar, spaces inserted past the last tab
+    stop are not saved in the file.  This is because the SPACE
+    character is now a TAB character.  Change the TAB character to
+    a non-space character for temporary fix (see ECUSTOM.CF file).
+
+
+ 4. The editor can leave trailing blanks on the end of some lines,
+    depending upon the sequence of commands entered and the EXORterm
+    firmware present.  This normally does not cause any problems
+    except for certain command lines in chain files.
+      
+ 5.  With version 3.1X of the CRT Editor (E.CM), where X>=3, certain
+     new customizing features are available.  List the customizing chain
+     file by entering
+          =LIST ECUSTOM.CF;L        for printer
+                 or
+          =LIST ECUSTOM.CF          for console
+     for instructions on how to execute it.
+
+   ********************************************************************
+   ** CAUTION:  DO NOT REMOVE ANY DISKS FROM THE SYSTEM OR OPEN THE  **
+   **   DRIVE DOOR WHILE THE CRT EDITOR IS IN OPERATION DUE TO       **
+   **   POSSIBLE SCRATCH FILES ON ANY DRIVES.  A DISK ERROR WILL     **
+   **   CAUSE THE EDITOR TO CRASH.                                   **
+   **                                                                **
+   ** CAUTION:  DO NOT INVOKE THE CRT EDITOR WHEN A COBOL DISK IS    **
+   **   IN ANY DRIVE.  COBOL DISKS ARE NON-MDOS COMPATIBLE (FMS      ** 
+   **   FORMAT) AND WILL BE DESTROYED WHEN THE CRT EDITOR CREATES A  **
+   **   SCRATCH FILE ON IT.                                          **
+   ********************************************************************
+
+** END HINTS **
+===========================================================================
+
+** 6800 RASM NEWS **              (RASM.CM   3.01)
+
+** KNOWN ERRORS **
+ 1. THE 'ENDM' DIRECTIVE TERMINATES CONDITIONAL ASSEMBLY.
+    TEMPORARY FIX IS AS FOLLOWS:
+      =PATCH RASM.CM:1
+      >0/21                        
+      >4310,F64/20                 (WAS $26)
+      >Q
+    THIS WILL CAUSE ALL "ENDM" DIRECTIVES INSIDE UNASSEMBLED
+    CONDITIONAL CODE TO BE IGNORED.  THUS MACRO DEFINITIONS MUST
+    NOT STRADDLE CONDITIONALS OR ERROR #251 MAY OCCUR.
+
+ 2. NO ERROR GENERATED IF 'END' DIRECTIVE EXPRESSION IS
+    EXTERNAL.  GENERATES $0000.
+
+ 3. MULTIPLY DEFINED SYMBOLS CAUSE IMPROPER GENERATION OF
+    PHASE ERRORS (#220).
+
+** END KNOWN ERRORS **
+--  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
+
+** EOF **

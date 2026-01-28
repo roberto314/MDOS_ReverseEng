@@ -18,71 +18,78 @@ PWD=`pwd`
 ## Use as0
 #${AS0} ${NAME}.asm -L CRE C S > ${NAME}.lst 
 
-NAME=floppy_commented
+# NAME=floppy_commented
+# ## Use asl
+# ${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
+# ${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
+# rm ${NAME}.p
+# cat out.txt | grep rror   # Check for Errors
+# #######################################################################
+# NAME=floppy2_commented
+# ## Use asl
+# ${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
+# ${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
+# rm ${NAME}.p
+# cat out.txt | grep rror   # Check for Errors
+# #######################################################################
+# NAME=bootloader_commented
+# ## Use asl
+# ${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
+# ${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
+# rm ${NAME}.p
+# cat out.txt | grep rror   # Check for Errors
+# #######################################################################
+NAME=bootloader2_commented
 ## Use asl
 ${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
 ${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
 rm ${NAME}.p
 cat out.txt | grep rror   # Check for Errors
-#######################################################################
-NAME=floppy2_commented
-## Use asl
-${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
-${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
-rm ${NAME}.p
-cat out.txt | grep rror   # Check for Errors
-#######################################################################
-NAME=bootloader_commented
-## Use asl
-${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
-${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
-rm ${NAME}.p
-cat out.txt | grep rror   # Check for Errors
-#######################################################################
-NAME=exbug12_commented
-## Use asl
-${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
-${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
-rm ${NAME}.p
-cat out.txt | grep rror   # Check for Errors
-#######################################################################
-NAME=exbug11_commented
-## Use asl
-${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
-${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
-rm ${NAME}.p
-cat out.txt | grep rror   # Check for Errors
-#######################################################################
-NAME=mdoser_commented
-## Use asl
-${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
-${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
-rm ${NAME}.p
-cat out.txt | grep rror   # Check for Errors
-#######################################################################
-NAME=CIOEX
-## Use asl
-${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
-${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
-rm ${NAME}.p
-cat out.txt | grep rror   # Check for Errors
-OFF=0x2000
-srec_cat ${NAME}_b.bin -binary -offset ${OFF} -o ${NAME}.s19 -Motorola -address_length=2 #-execution-start-address=0x0100
-echo S9 >> ${NAME}.s19
-#######################################################################
-NAME=format_commented
-## Use asl
-${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
-${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
-rm ${NAME}.p
-cat out.txt | grep rror   # Check for Errors
-#######################################################################
-NAME=dir_commented
-## Use asl
-${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
-${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
-rm ${NAME}.p
-cat out.txt | grep rror   # Check for Errors
+# #######################################################################
+# NAME=exbug12_commented
+# ## Use asl
+# ${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
+# ${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
+# rm ${NAME}.p
+# cat out.txt | grep rror   # Check for Errors
+# #######################################################################
+# NAME=exbug11_commented
+# ## Use asl
+# ${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
+# ${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
+# rm ${NAME}.p
+# cat out.txt | grep rror   # Check for Errors
+# #######################################################################
+# NAME=mdoser_commented
+# ## Use asl
+# ${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
+# ${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
+# rm ${NAME}.p
+# cat out.txt | grep rror   # Check for Errors
+# #######################################################################
+# NAME=CIOEX
+# ## Use asl
+# ${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
+# ${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
+# rm ${NAME}.p
+# cat out.txt | grep rror   # Check for Errors
+# OFF=0x2000
+# srec_cat ${NAME}_b.bin -binary -offset ${OFF} -o ${NAME}.s19 -Motorola -address_length=2 #-execution-start-address=0x0100
+# echo S9 >> ${NAME}.s19
+# #######################################################################
+# NAME=format_commented
+# ## Use asl
+# ${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
+# ${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
+# rm ${NAME}.p
+# cat out.txt | grep rror   # Check for Errors
+# #######################################################################
+# NAME=dir_commented
+# ## Use asl
+# ${ASL} -cpu ${CPU} -L ${NAME}.asm > out.txt
+# ${P2B} ${NAME}.p ${NAME}_b.bin >> out.txt
+# rm ${NAME}.p
+# cat out.txt | grep rror   # Check for Errors
 
 
 
