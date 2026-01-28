@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 216] - Source File bootloader2_commented.asm - Page 1 - 01/28/2026 12:19:06 PM
+ AS V1.42 Beta [Bld 216] - Source File bootloader2_commented.asm - Page 1 - 01/28/2026 05:12:38 PM
 
 
        1/       0 :                     ; This file is loaded from floppy to address $20
@@ -43,7 +43,7 @@
       40/      20 :                     
       41/      20 : B6 E8 00                            LDAA    OSLOAD                   ; 0020: B6 E8 00       ; Check E800
       42/      23 : 81 8E                               CMPA    #$8E                     ; 0023: 81 8E          ; is there a 6800 LDS command or is it a 6809 System?
-      43/      25 : 86 50                               LDAA    #'P'                     ; 0025: 86 50          ; Error 'P' should be wrong CPU ?
+      43/      25 : 86 50                               LDAA    #'P'                     ; 0025: 86 50          ; Error 'P' should be wrong CPU (It is, see '6800 MDOS  3.04 NEWS')
       44/      27 : 25 6F                               BCS     Z0098                    ; 0027: 25 6F          ; No
       45/      29 : 7C 00 00                            INC     CURDRV                   ; 0029: 7C 00 00       ; Why? - Guess: to check if there is a second drive present
       46/      2C : BD E8 75                            JSR     RESTOR                   ; 002C: BD E8 75       ; 
@@ -61,7 +61,7 @@
       58/      44 : 59                                  ROLB                             ; 0044: 59             ; *4 - four sectors / cluster (6 * 4 = 24)
       59/      45 : 8B 01                               ADDA    #$01                     ; 0045: 8B 01          ; |
       60/      47 : C9 00                               ADCB    #$00                     ; 0047: C9 00          ; +1 (25, $19)
- AS V1.42 Beta [Bld 216] - Source File bootloader2_commented.asm - Page 2 - 01/28/2026 12:19:06 PM
+ AS V1.42 Beta [Bld 216] - Source File bootloader2_commented.asm - Page 2 - 01/28/2026 05:12:38 PM
 
 
       61/      49 : D7 01                               STAB    STRSCTH                  ; 0049: D7 01          ; |
@@ -118,7 +118,7 @@
      112/      A0 :                     
      113/      A0 :                     
      114/      A0 :                                     END
- AS V1.42 Beta [Bld 216] - Source File bootloader2_commented.asm - Page 3 - 01/28/2026 12:19:06 PM
+ AS V1.42 Beta [Bld 216] - Source File bootloader2_commented.asm - Page 3 - 01/28/2026 05:12:38 PM
 
 
   Symbol Table (* = unused):
@@ -147,7 +147,7 @@
  RESTOR :                      E875 - |  SECTCNTH :                       B - |
  SECTCNTL :                       C - |  SERRM :                         91 C |
  SERRQM :                        96 C |  STRSCTH :                        1 - |
- STRSCTL :                        2 - | *TIME :               "12:19:06 PM" - |
+ STRSCTL :                        2 - | *TIME :               "05:12:38 PM" - |
 *TRUE :                           1 - | *VERSION :                     142F - |
  Z0062 :                         62 C |  Z0072 :                         72 C |
  Z0098 :                         98 C | *Z80SYNTAX :                      0 - |
@@ -155,7 +155,7 @@
      53 symbols
      32 unused symbols
 
- AS V1.42 Beta [Bld 216] - Source File bootloader2_commented.asm - Page 4 - 01/28/2026 12:19:06 PM
+ AS V1.42 Beta [Bld 216] - Source File bootloader2_commented.asm - Page 4 - 01/28/2026 05:12:38 PM
 
 
   Code Pages:

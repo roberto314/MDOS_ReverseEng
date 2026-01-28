@@ -12,19 +12,22 @@ MIL-STD 1750 Generator also (C) 2019 Oliver Kellogg
 GI CP-1600-Generator (C) 2021 Haruo Asano
 
 
-Assembling bootloader2_commented.asm
+Assembling dir_commented.asm
 PASS 1
-bootloader2_commented.asm(115)
+mdoseq.inc(453)
+dir_commented.asm(810)
 PASS 2
-bootloader2_commented.asm(115)
+mdoseq.inc(453)
+dir_commented.asm(810)
 
-0.00 seconds assembly time
+0.01 seconds assembly time
 
-    115 lines source file
+   1263 lines source file
+   1515 lines incl. macro expansions
       2 passes
       0 errors
       0 warnings
 P2BIN/C V1.42 Beta [Bld 216]
 (C) 1992,2022 Alfred Arnold
-Deduced address range: 0x00000020-0x0000009F
-bootloader2_commented.p==>>bootloader2_commented_b.bin  (128 Bytes)
+Deduced address range: 0x00002000-0x0000287F
+dir_commented.p==>>dir_commented_b.bin  (2176 Bytes)

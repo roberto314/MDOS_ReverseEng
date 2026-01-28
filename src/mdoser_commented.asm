@@ -6,220 +6,220 @@
 
                 ORG     $1FFD
 
-         FCC '0B ' 
-         FCC '01 '
-         FCC 'COMMAND SYNTAX ERROR'
-         FCB  $0d,$0a
-         FCC '05 ' 
-         FCC '02 '
-         FCC 'NAME REQUIRED'
-         FCB  $0d,$0a
-         FCC '06 ' 
-         FCC '03 '
-         FCC '\\0 DOES NOT EXIST'
-         FCB  $0d,$0a
-         FCC '1B ' 
-         FCC '04 '
-         FCC 'FILE NAME NOT FOUND'
-         FCB  $0d,$0a
-         FCC '08 ' 
-         FCC '05 '
-         FCC '\\0 DUPLICATE FILE NAME'
-         FCB  $0d,$0a
-         FCC '1A ' 
-         FCC '06 '
-         FCC 'DUPLICATE FILE NAME'
-         FCB  $0d,$0a
-         FCC '0D ' 
-         FCC '07 '
-         FCC 'OPTION CONFLICT'
-         FCB  $0d,$0a
-         FCC '30 ' 
-         FCC '08 '
-         FCC 'CHAIN ABORTED BY BREAK KEY'
-         FCB  $0d,$0a
-         FCC '31 ' 
-         FCC '09 '
-         FCC 'CHAIN ABORTED BY SYSTEM ERROR STATUS WORD'
-         FCB  $0d,$0a
-         FCC '1C ' 
-         FCC '10 '
-         FCC 'FILE IS DELETE PROTECTED'
-         FCB  $0d,$0a
-         FCC '24 ' 
-         FCC '11 '
-         FCC 'DEVICE NOT READY'
-         FCB  $0d,$0a
-         FCC '0E ' 
-         FCC '12 '
-         FCC 'INVALID TYPE OF OBJECT FILE'
-         FCB  $0d,$0a
-         FCC '0F ' 
-         FCC '13 '
-         FCC 'INVALID LOAD ADDRESS'
-         FCB  $0d,$0a
-         FCC '13 ' 
-         FCC '14 '
-         FCC 'INVALID FILE TYPE'
-         FCB  $0d,$0a
-         FCC '1F ' 
-         FCC '15 '
-         FCC '\\0 HAS INVALID FILE TYPE'
-         FCB  $0d,$0a
-         FCC '1E ' 
-         FCC '16 '
-         FCC 'CONFLICTING FILE TYPES'
-         FCB  $0d,$0a
-         FCC '27 ' 
-         FCC '17 '
-         FCC 'INVALID DATA TRANSFER TYPE'
-         FCB  $0d,$0a
-         FCC '22 ' 
-         FCC '18 '
-         FCC 'DEVICE ALREADY RESERVED'
-         FCB  $0d,$0a
-         FCC '23 ' 
-         FCC '19 '
-         FCC 'DEVICE NOT RESERVED'
-         FCB  $0d,$0a
-         FCC '25 ' 
-         FCC '20 '
-         FCC 'INVALID OPEN/CLOSED FLAG'
-         FCB  $0d,$0a
-         FCC '26 ' 
-         FCC '21 '
-         FCC 'END OF FILE'
-         FCB  $0d,$0a
-         FCC '29 ' 
-         FCC '22 '
-         FCC 'BUFFER OVERFLOW'
-         FCB  $0d,$0a
-         FCC '2A ' 
-         FCC '23 '
-         FCC 'CHECKSUM ERROR'
-         FCB  $0d,$0a
-         FCC '15 ' 
-         FCC '24 '
-         FCC 'LOGICAL SECTOR NUMBER OUT OF RANGE'
-         FCB  $0d,$0a
-         FCC '07 ' 
-         FCC '25 '
-         FCC 'INVALID FILE NAME'
-         FCB  $0d,$0a
-         FCC '2B ' 
-         FCC '26 '
-         FCC 'FILE IS WRITE PROTECTED'
-         FCB  $0d,$0a
-         FCC '20 ' 
-         FCC '27 '
-         FCC '\\0 IS WRITE PROTECTED'
-         FCB  $0d,$0a
-         FCC '09 ' 
-         FCC '28 '
-         FCC 'DEVICE NAME NOT FOUND'
-         FCB  $0d,$0a
-         FCC '04 ' 
-         FCC '29 '
-         FCC 'INVALID LOGICAL UNIT NUMBER'
-         FCB  $0d,$0a
-         FCC '12 ' 
-         FCC '30 '
-         FCC 'INVALID EXECUTION ADDRESS'
-         FCB  $0d,$0a
-         FCC '0A ' 
-         FCC '31 '
-         FCC 'INVALID DEVICE'
-         FCB  $0d,$0a
-         FCC '11 ' 
-         FCC '32 '
-         FCC 'INVALID RIB'
-         FCB  $0d,$0a
-         FCC '1D ' 
-         FCC '33 '
-         FCC 'TOO MANY SOURCE FILES'
-         FCB  $0d,$0a
-         FCC '16 ' 
-         FCC '34 '
-         FCC 'INVALID START/END SPECIFICATIONS'
-         FCB  $0d,$0a
-         FCC '17 ' 
-         FCC '35 '
-         FCC 'INVALID PAGE FORMAT'
-         FCB  $0d,$0a
-         FCC '14 ' 
-         FCC '36 '
-         FCC 'FILE EXHAUSTED BEFORE LINE FOUND'
-         FCB  $0d,$0a
-         FCC '28 ' 
-         FCC '37 '
-         FCC 'END OF MEDIA'
-         FCB  $0d,$0a
-         FCC '18 ' 
-         FCC '38 '
-         FCC 'INVALID LINE NUMBER OR RANGE'
-         FCB  $0d,$0a
-         FCC '19 ' 
-         FCC '39 '
-         FCC 'LINE NUMBER ENTERED BEFORE SOURCE FILE'
-         FCB  $0d,$0a
-         FCC '02 ' 
-         FCC '40 '
-         FCC 'DIRECTORY SPACE FULL'
-         FCB  $0d,$0a
-         FCC '03 ' 
-         FCC '41 '
-         FCC 'INSUFFICIENT DISK SPACE'
-         FCB  $0d,$0a
-         FCC '10 ' 
-         FCC '42 '
-         FCC 'SEGMENT DESCRIPTOR SPACE FULL'
-         FCB  $0d,$0a
-         FCC '2C ' 
-         FCC '43 '
-         FCC 'INVALID DIRECTORY ENTRY NO. AT \\8'
-         FCB  $0d,$0a
-         FCC '2D ' 
-         FCC '44 '
-         FCC 'CANNOT DEALLOCATE ALL SPACE, DIRECTORY ENTRY EXISTS AT \\8'
-         FCB  $0d,$0a
-         FCC '2E ' 
-         FCC '45 '
-         FCC 'RECORD LENGTH TOO LARGE'
-         FCB  $0d,$0a
-         FCC '0C ' 
-         FCC '46 '
-         FCC 'INTERNAL SYSTEM ERROR AT \\8'
-         FCB  $0d,$0a
-         FCC '21 ' 
-         FCC '47 '
-         FCC 'INVALID SCALL'
-         FCB  $0d,$0a
-         FCC '2F ' 
-         FCC '48 '
-         FCC 'CHAIN OVERLAY DOES NOT EXIST'
-         FCB  $0d,$0a
-         FCC '32 ' 
-         FCC '49 '
-         FCC 'CHAIN ABORTED BY ILLEGAL OPERATOR'
-         FCB  $0d,$0a
-         FCC '33 ' 
-         FCC '50 '
-         FCC 'CHAIN ABORTED BY UNDEFINED LABEL'
-         FCB  $0d,$0a
-         FCC '34 ' 
-         FCC '51 '
-         FCC 'CHAIN ABORTED BY PREMATURE END OF FILE'
-         FCB  $0d,$0a
-         FCC '35 ' 
-         FCC '52 '
-         FCC 'SECTOR BUFFER SIZE ERROR'
-         FCB  $0d,$0a
-         FCC '36 ' 
-         FCC '53 '
-         FCC 'INSUFFICIENT MEMORY'
-         FCB  $0d,$0a
+         FCC '0B '                                                        ; Index for SCALL MDERR
+         FCC '01 '                                                        ; Error Number Displayed
+         FCC 'COMMAND SYNTAX ERROR'                                       ; Text
+         FCB  $0d,$0a                                                     ; Terminator
+         FCC '05 '                                                        ; 
+         FCC '02 '                                                        ; 
+         FCC 'NAME REQUIRED'                                              ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '06 '                                                        ; 
+         FCC '03 '                                                        ; 
+         FCC '\\0 DOES NOT EXIST'                                         ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '1B '                                                        ; 
+         FCC '04 '                                                        ; 
+         FCC 'FILE NAME NOT FOUND'                                        ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '08 '                                                        ; 
+         FCC '05 '                                                        ; 
+         FCC '\\0 DUPLICATE FILE NAME'                                    ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '1A '                                                        ; 
+         FCC '06 '                                                        ; 
+         FCC 'DUPLICATE FILE NAME'                                        ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '0D '                                                        ; 
+         FCC '07 '                                                        ; 
+         FCC 'OPTION CONFLICT'                                            ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '30 '                                                        ; 
+         FCC '08 '                                                        ; 
+         FCC 'CHAIN ABORTED BY BREAK KEY'                                 ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '31 '                                                        ; 
+         FCC '09 '                                                        ; 
+         FCC 'CHAIN ABORTED BY SYSTEM ERROR STATUS WORD'                  ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '1C '                                                        ; 
+         FCC '10 '                                                        ; 
+         FCC 'FILE IS DELETE PROTECTED'                                   ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '24 '                                                        ; 
+         FCC '11 '                                                        ; 
+         FCC 'DEVICE NOT READY'                                           ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '0E '                                                        ; 
+         FCC '12 '                                                        ; 
+         FCC 'INVALID TYPE OF OBJECT FILE'                                ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '0F '                                                        ; 
+         FCC '13 '                                                        ; 
+         FCC 'INVALID LOAD ADDRESS'                                       ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '13 '                                                        ; 
+         FCC '14 '                                                        ; 
+         FCC 'INVALID FILE TYPE'                                          ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '1F '                                                        ; 
+         FCC '15 '                                                        ; 
+         FCC '\\0 HAS INVALID FILE TYPE'                                  ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '1E '                                                        ; 
+         FCC '16 '                                                        ; 
+         FCC 'CONFLICTING FILE TYPES'                                     ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '27 '                                                        ; 
+         FCC '17 '                                                        ; 
+         FCC 'INVALID DATA TRANSFER TYPE'                                 ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '22 '                                                        ; 
+         FCC '18 '                                                        ; 
+         FCC 'DEVICE ALREADY RESERVED'                                    ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '23 '                                                        ; 
+         FCC '19 '                                                        ; 
+         FCC 'DEVICE NOT RESERVED'                                        ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '25 '                                                        ; 
+         FCC '20 '                                                        ; 
+         FCC 'INVALID OPEN/CLOSED FLAG'                                   ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '26 '                                                        ; 
+         FCC '21 '                                                        ; 
+         FCC 'END OF FILE'                                                ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '29 '                                                        ; 
+         FCC '22 '                                                        ; 
+         FCC 'BUFFER OVERFLOW'                                            ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '2A '                                                        ; 
+         FCC '23 '                                                        ; 
+         FCC 'CHECKSUM ERROR'                                             ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '15 '                                                        ; 
+         FCC '24 '                                                        ; 
+         FCC 'LOGICAL SECTOR NUMBER OUT OF RANGE'                         ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '07 '                                                        ; 
+         FCC '25 '                                                        ; 
+         FCC 'INVALID FILE NAME'                                          ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '2B '                                                        ; 
+         FCC '26 '                                                        ; 
+         FCC 'FILE IS WRITE PROTECTED'                                    ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '20 '                                                        ; 
+         FCC '27 '                                                        ; 
+         FCC '\\0 IS WRITE PROTECTED'                                     ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '09 '                                                        ; 
+         FCC '28 '                                                        ; 
+         FCC 'DEVICE NAME NOT FOUND'                                      ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '04 '                                                        ; 
+         FCC '29 '                                                        ; 
+         FCC 'INVALID LOGICAL UNIT NUMBER'                                ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '12 '                                                        ; 
+         FCC '30 '                                                        ; 
+         FCC 'INVALID EXECUTION ADDRESS'                                  ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '0A '                                                        ; 
+         FCC '31 '                                                        ; 
+         FCC 'INVALID DEVICE'                                             ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '11 '                                                        ; 
+         FCC '32 '                                                        ; 
+         FCC 'INVALID RIB'                                                ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '1D '                                                        ; 
+         FCC '33 '                                                        ; 
+         FCC 'TOO MANY SOURCE FILES'                                      ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '16 '                                                        ; 
+         FCC '34 '                                                        ; 
+         FCC 'INVALID START/END SPECIFICATIONS'                           ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '17 '                                                        ; 
+         FCC '35 '                                                        ; 
+         FCC 'INVALID PAGE FORMAT'                                        ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '14 '                                                        ; 
+         FCC '36 '                                                        ; 
+         FCC 'FILE EXHAUSTED BEFORE LINE FOUND'                           ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '28 '                                                        ; 
+         FCC '37 '                                                        ; 
+         FCC 'END OF MEDIA'                                               ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '18 '                                                        ; 
+         FCC '38 '                                                        ; 
+         FCC 'INVALID LINE NUMBER OR RANGE'                               ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '19 '                                                        ; 
+         FCC '39 '                                                        ; 
+         FCC 'LINE NUMBER ENTERED BEFORE SOURCE FILE'                     ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '02 '                                                        ; 
+         FCC '40 '                                                        ; 
+         FCC 'DIRECTORY SPACE FULL'                                       ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '03 '                                                        ; 
+         FCC '41 '                                                        ; 
+         FCC 'INSUFFICIENT DISK SPACE'                                    ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '10 '                                                        ; 
+         FCC '42 '                                                        ; 
+         FCC 'SEGMENT DESCRIPTOR SPACE FULL'                              ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '2C '                                                        ; 
+         FCC '43 '                                                        ; 
+         FCC 'INVALID DIRECTORY ENTRY NO. AT \\8'                         ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '2D '                                                        ; 
+         FCC '44 '                                                        ; 
+         FCC 'CANNOT DEALLOCATE ALL SPACE, DIRECTORY ENTRY EXISTS AT \\8' ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '2E '                                                        ; 
+         FCC '45 '                                                        ; 
+         FCC 'RECORD LENGTH TOO LARGE'                                    ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '0C '                                                        ; 
+         FCC '46 '                                                        ; 
+         FCC 'INTERNAL SYSTEM ERROR AT \\8'                               ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '21 '                                                        ; 
+         FCC '47 '                                                        ; 
+         FCC 'INVALID SCALL'                                              ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '2F '                                                        ; 
+         FCC '48 '                                                        ; 
+         FCC 'CHAIN OVERLAY DOES NOT EXIST'                               ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '32 '                                                        ; 
+         FCC '49 '                                                        ; 
+         FCC 'CHAIN ABORTED BY ILLEGAL OPERATOR'                          ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '33 '                                                        ; 
+         FCC '50 '                                                        ; 
+         FCC 'CHAIN ABORTED BY UNDEFINED LABEL'                           ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '34 '                                                        ; 
+         FCC '51 '                                                        ; 
+         FCC 'CHAIN ABORTED BY PREMATURE END OF FILE'                     ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '35 '                                                        ; 
+         FCC '52 '                                                        ; 
+         FCC 'SECTOR BUFFER SIZE ERROR'                                   ; 
+         FCB  $0d,$0a                                                     ; 
+         FCC '36 '                                                        ; 
+         FCC '53 '                                                        ; 
+         FCC 'INSUFFICIENT MEMORY'                                        ; 
+         FCB  $0d,$0a                                                     ; 
 
-;Z1FFD           FCB     '0,'B,' ,'0,'1,' ,'C,'O  ; 1FFD: 30 42 20 30 31 20 43 4F 
+;Z1FFD           FCB     '0,'B,' ,'0,'1,' ,'C,'O  ; 1FFD: 30 42 20 30 31 20 43 4F              
 ;                FCB     'M,'M,'A,'N,'D,' ,'S,'Y  ; 2005: 4D 4D 41 4E 44 20 53 59 
 ;                FCB     'N,'T,'A,'X,' ,'E,'R,'R  ; 200D: 4E 54 41 58 20 45 52 52 
 ;                FCB     'O,'R                    ; 2015: 4F 52          
