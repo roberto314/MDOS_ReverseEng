@@ -148,38 +148,80 @@ class class_FDOS(object):
                 track += 1
         return data
     #----------------------------------
-    def print_entry(self, entry):
-        pass
+    def print_entry(self, idx, e):
+        if idx == 0:                 # get the header from the first entry
+            for k, v in e.items():
+                try:
+                    print(f'{v[2]}', end="\t") # Print short entry and TAB
+                except:
+                    if v[0] != "not": # only print if it should actually be printed
+                        print(f'{k}', end="\t") # Print key and TAB
+            print(f'')
+            for k, v in e.items():
+                if 'hx8' == v[0]:                   # Print 8-Bit HEX
+                    print(f'{v[1]:02X}', end="\t")
+                elif 'arr8x' == v[0]:
+                    self.parent.dump_data(v[1],16)
+                elif 'hx16' == v[0]:                  # Print 16-Bit HEX
+                    print(f'{v[1]:04X}', end="\t")
+                elif 'dec5' == v[0]:                  # Print 5 places decimal
+                    print(f'{v[1]:05}', end="\t")
+                elif 'strw' == v[0]:                  # Print String in White
+                    print(f'{v[1]}', end="\t")
+                elif 'strg' == v[0]:                  # Print String in Green
+                    print(f'{self.parent.GRN}',end = '')
+                    print(f'{v[1]}', end="\t")
+                    print(f'{self.parent.END}',end = '')
+            print(f'')
+        else:        
+            for k, v in e.items():
+                if 'hx8' == v[0]:                   # Print 8-Bit HEX
+                    print(f'{v[1]:02X}', end="\t")
+                elif 'arr8x' == v[0]:
+                    self.parent.dump_data(v[1],16)
+                elif 'hx16' == v[0]:                  # Print 16-Bit HEX
+                    print(f'{v[1]:04X}', end="\t")
+                elif 'dec5' == v[0]:                  # Print 5 places decimal
+                    print(f'{v[1]:05}', end="\t")
+                elif 'strw' == v[0]:                  # Print String in White
+                    print(f'{v[1]}', end="\t")
+                elif 'strg' == v[0]:                  # Print String in Green
+                    print(f'{self.parent.GRN}',end = '')
+                    print(f'{v[1]}', end="\t")
+                    print(f'{self.parent.END}',end = '')
+            print(f'')
     #----------------------------------
     # Prints out Directory
     def print_dir(self, entries, stats):
         print(f'Showing Directory. (all values in hex!)') # Directory is easy, it starts @ 0x1400 until a 0xFF is found @ first position
         for idx,e in enumerate(entries): # cycle through entries
-            if idx == 0:                 # get the header from the first entry
-                for k, v in e.items():
-                    try:
-                        print(f'{v[2]}', end="\t") # Print short entry and TAB
-                    except:
-                        if v[0] != "not": # only print if it should actually be printed
-                            print(f'{k}', end="\t") # Print key and TAB
-                print(f'')
-            else:
-                for k, v in e.items():
-                    if 'hx8' == v[0]:                   # Print 8-Bit HEX
-                        print(f'{v[1]:02X}', end="\t")
-                    elif 'arr8x' == v[0]:
-                        self.parent.dump_data(v[1],16)
-                    elif 'hx16' == v[0]:                  # Print 16-Bit HEX
-                        print(f'{v[1]:04X}', end="\t")
-                    elif 'dec5' == v[0]:                  # Print 5 places decimal
-                        print(f'{v[1]:05}', end="\t")
-                    elif 'strw' == v[0]:                  # Print String in White
-                        print(f'{v[1]}', end="\t")
-                    elif 'strg' == v[0]:                  # Print String in Green
-                        print(f'{self.parent.GRN}',end = '')
-                        print(f'{v[1]}', end="\t")
-                        print(f'{self.parent.END}',end = '')
-                print(f'')
+            #if idx == 0:                 # get the header from the first entry
+            #    self.print_entry(idx, e)
+            #    for k, v in e.items():
+            #        try:
+            #            print(f'{v[2]}', end="\t") # Print short entry and TAB
+            #        except:
+            #            if v[0] != "not": # only print if it should actually be printed
+            #                print(f'{k}', end="\t") # Print key and TAB
+            #    print(f'')
+            #else:
+            self.print_entry(idx, e)
+                #for k, v in e.items():
+                #    if 'hx8' == v[0]:                   # Print 8-Bit HEX
+                #        print(f'{v[1]:02X}', end="\t")
+                #    elif 'arr8x' == v[0]:
+                #        self.parent.dump_data(v[1],16)
+                #    elif 'hx16' == v[0]:                  # Print 16-Bit HEX
+                #        print(f'{v[1]:04X}', end="\t")
+                #    elif 'dec5' == v[0]:                  # Print 5 places decimal
+                #        print(f'{v[1]:05}', end="\t")
+                #    elif 'strw' == v[0]:                  # Print String in White
+                #        print(f'{v[1]}', end="\t")
+                #    elif 'strg' == v[0]:                  # Print String in Green
+                #        print(f'{self.parent.GRN}',end = '')
+                #        print(f'{v[1]}', end="\t")
+                #        print(f'{self.parent.END}',end = '')
+                #print(f'')
         
         for k, v in stats.items(): # print stats
             print(f'{k}', end="\t") # Print keys and TAB
@@ -240,15 +282,37 @@ class class_FDOS(object):
         img[ap+30] = sp1
         img[ap+31] = sp2
     #----------------------------------
-    def create_entries_file(self, pathname):
-        entries = []
+    def get_val(self, entry, key):
+        #k,v = entry.items()
+        v = entry.get(key) # values
+        #print(f'Values: {v}')
+        fmt = v[0]
+        try:
+            txt = v[2]
+        except:
+            txt = key
+        inp = input(f'Enter {txt}: ')
+        if 'str' in fmt:
+            retval = inp if inp != '#' else v[1]
+        elif fmt == 'hx8':
+            retval = int(inp,0) if inp != '#' else v[1]
+        elif fmt == 'hx16':
+            retval = int(inp,0) if inp != '#' else v[1]
+
+        return retval
+    #----------------------------------
+    def modify_entries_file(self, entries):
+        print(f'Modify Entries file')
+        #print(f'Entries Len: {len(entries)}')
+        self.print_dir(entries, {})
+        return entries
+    #----------------------------------
+    def set_default_values(self):
         entry = {}
-        entry["Name"]        = ["strw", '       ', "Name        "]
-        entry["Password"]    = ["strw", '        ']
+        entry["Name"]        = ["strw", '        ', "Name        "]
         entry["StartTrack"]  = ["hx8", 0, "STrk"]
         entry["StartSector"] = ["hx8", 0, "SSec"]
-        entry["SizeinSecs"]  = ["hx8", 0, "SSiz"]
-        entry["Attribute"]   = ["hx8", 0, "Atrib"]
+        entry["Attribute"]   = ["hx8", 0x22, "Atrib"]
         entry["SAddr"]       = ["hx16", 0]
         entry["EAddr"]       = ["hx16", 0]
         entry["Exec"]        = ["hx16", 0]
@@ -256,15 +320,36 @@ class class_FDOS(object):
         entry["Sp0"]         = ["hx8",  0]
         entry["Sp1"]         = ["hx8",  0]
         entry["Sp2"]         = ["hx8",  0]
-        entries.append(entry)
+        return entry        
+    #----------------------------------
+    def create_entries_file(self, pathname):
+        entries = []
+        entry = self.set_default_values()
         if self.verbose > 0:
             print(f'Looking in: {pathname}')
             #print(f'Dir: {os.listdir(pathname)}')
+            self.print_entry(0, entry) # Print Header
         for f in os.listdir(pathname):
             if os.path.isfile(pathname+f):
-                print(f'Found File: {f}')
-                self.print_entry(entry)
-
+                #print(f'Found File: {f}')
+                print('---------------------------------------------------------------------------------------------')
+                entry["Name"]        = ["strw", f'{f:8}', "Name        "]
+                self.print_entry(1, entry) # Print values
+                entry["Name"]        = ["strw", self.get_val(entry, "Name"), "Name        "]
+                entry["StartTrack"]  = ["hx8", self.get_val(entry, "StartTrack"), "STrk"]
+                entry["StartSector"] = ["hx8", self.get_val(entry, "StartSector"), "SSec"]
+                entry["Attribute"]   = ["hx8", self.get_val(entry, "Attribute"), "Atrib"]
+                entry["SAddr"]       = ["hx16", self.get_val(entry, "SAddr")]
+                entry["EAddr"]       = ["hx16", self.get_val(entry, "EAddr")]
+                entry["Exec"]        = ["hx16", self.get_val(entry, "Exec")]
+                entry["Hi"]          = ["hx16", self.get_val(entry, "Hi")]
+                entry["Sp0"]         = ["hx8",  self.get_val(entry, "Sp0")]
+                entry["Sp1"]         = ["hx8",  self.get_val(entry, "Sp1")]
+                entry["Sp2"]         = ["hx8",  self.get_val(entry, "Sp2")]
+                self.print_entry(1, entry) # Print values
+                entries.append(entry)
+                entry = self.set_default_values()
+        #print(f'Entries Len: {len(entries)}')
         return entries
     #----------------------------------
     def add_file(self, img, fdata, sttrk, stsec, siz):

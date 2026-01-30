@@ -197,7 +197,7 @@ class DITOOL():
                 if action == 'CREATEENTRIES':
                     print(f'Creating an entries file.')
                     entries = obj.create_entries_file(pathname)
-                    exit()
+                    #exit()
                     with open(pathname + 'entries.pkl', 'wb') as fp:
                         pickle.dump(entries, fp)
                 else:
@@ -210,7 +210,24 @@ class DITOOL():
             print(f'Image with {len(imgfile)} bytes and Name: {fn} created.')
             self.write_file(imgfile, fn, 'binary')
 
+        elif (action == 'MODIFYENTRIES'):
+            try:
+                with open(pathname + 'entries.pkl', 'rb') as fp:
+                    entries = pickle.load(fp)
+                    if entries == {}:
+                        print(f'Error: entries file is empty!')
+                        exit()
+                    else:
+                        entries = obj.modify_entries_file(entries)
+                        with open(pathname + 'entries.pkl', 'wb') as fp:
+                            pickle.dump(entries, fp)
+                        exit()
+            except OSError:
+                print(f'No entries file found! Exiting.')
+                exit()
+
         elif (action == 'EXAMPLE'):
+
             self.print_examples()
             obj.print_examples()
     #----------------------------------
@@ -303,6 +320,8 @@ if __name__ == '__main__':
     subparser.add_argument('file', help='imgfile')
     subparser = subparsers.add_parser('createentries', help='Create an entries file with information on the files to add.')
     subparser.add_argument('file', help='imgfile')
+    subparser = subparsers.add_parser('modifyentries', help='Modify an entries file.')
+    subparser.add_argument('file', help='imgfile')
     subparser = subparsers.add_parser('createboot', help='Create a bootable Imagefile.')
     subparser.add_argument('file', help='imgfile')
     subparser = subparsers.add_parser('dir', help='Show directory of Imagefile.')
@@ -355,7 +374,7 @@ if __name__ == '__main__':
         else:
             input_file = args.file
             # Check if Imagefile exists
-            if ((os.path.isfile(args.file) != True) and ('create' not in args.action)):
+            if ((os.path.isfile(args.file) != True) and (('CREATE' not in action) and 'MODIFY' not in action)):
                 print(f'{me.RED}Image {args.file} not found!{me.END}')
                 exit()
             input_files.append(str(os.path.join(rootdir, args.file)))
@@ -447,7 +466,7 @@ if __name__ == '__main__':
             else:              # Normal binary Image
                 print(f'{me.YEL}Assuming {input_file} is a straight binary Image.{me.END}')
             
-            if 'CREATE' in action:
+            if 'CREATE' in action or 'MODIFY' in action:
                 f = []
             else:
                 f = me.read_file(input_file, 'binary')
