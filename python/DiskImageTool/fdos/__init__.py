@@ -4,6 +4,14 @@
 #
 # Version History:
 # 2.0: rewrite with dictionaries
+#  Features of v2.0:
+#  - Export data as json so it is user-readeable and possible to edit,
+#  - In the json file is also the original Name and Directoryposition so reassembled images are exactly the same
+#  - Possibility to create a new entries.json file with all files from a directory
+#  - Header data is in the entry dictionary items (like a shortened text)
+#  - alternating Disk paramterer can be entered at the commandline
+#  - .imd and .hfe files as input supported (need hxcfe in the directory to convert them to .img)
+#
 # 1: first Version with Lists
 
 import os
@@ -76,6 +84,7 @@ class class_FDOS(object):
     def get_dir(self, imgfile):
         entries = [] # List of all Entries
         offset = self.fspec["Dirstart"]
+        dirpos = 0
         # 
         # One entry is a dictionary item. The key is the name and should be descriptive of the function,
         # the value is a list containing:
@@ -121,7 +130,9 @@ class class_FDOS(object):
                 entry["Sp2"]         = ["hx8",  (imgfile[(offset+31)])]
                 FSIZ = entry["SizeinSecs"][1] * self.fspec["bps"]
                 entry["Filesize"]    = ["dec5",  FSIZ, "FSize"]
+                entry["Directoryposition"] = ["dec2",  dirpos, "Dirpos"]
                 entries.append(entry)                 # append to list of entries
+                dirpos += 1
             else:
                 break
             offset += self.fspec["Direntrysize"]  # cue to next entry
@@ -141,87 +152,57 @@ class class_FDOS(object):
         for s in range(entry["SizeinSecs"][1]):
             off = self.chs_to_offset(track, 0, sector)
             data += imgfile[off:(off+self.fspec["bps"])]
-            #print(f'Track: {track}, Sector: {sector}, Offset: 0x{off:04X}')
+            #if self.verbose > 0:
+            #    print(f'Track: {track}, Sector: {sector}, Offset: 0x{off:04X}')
             sector += 1
             if sector >= self.fspec["Sectors"]:
                 sector = 0
                 track += 1
         return data
     #----------------------------------
+    def print_body(self, e):
+        # Prints out Directory entries only
+        for k, v in e.items():
+            if 'hx8' == v[0]:                   # Print 8-Bit HEX
+                print(f'{v[1]:02X}', end="\t")
+            elif 'arr8x' == v[0]:
+                self.parent.dump_data(v[1],16)
+            elif 'hx16' == v[0]:                  # Print 16-Bit HEX
+                print(f'{v[1]:04X}', end="\t")
+            elif 'dec5' == v[0]:                  # Print 5 places decimal
+                print(f'{v[1]:05}', end="\t")
+            elif 'dec2' == v[0]:                  # Print 2 places decimal
+                print(f'{v[1]:02}', end="\t")
+            elif 'strw' == v[0]:                  # Print String in White
+                print(f'{v[1]}', end="\t")
+            elif 'strg' == v[0]:                  # Print String in Green
+                print(f'{self.parent.GRN}',end = '')
+                print(f'{v[1]}', end="\t")
+                print(f'{self.parent.END}',end = '')
+        print(f'')
+    #----------------------------------
+    def print_header(self, e):
+        # Prints out Directory header only
+        for k, v in e.items():
+            try:
+                print(f'{v[2]}', end="\t") # Print short entry and TAB
+            except:
+                if v[0] != "not": # only print if it should actually be printed
+                    print(f'{k}', end="\t") # Print key and TAB
+        print(f'')        
+    #----------------------------------
     def print_entry(self, idx, e):
         if idx == 0:                 # get the header from the first entry
-            for k, v in e.items():
-                try:
-                    print(f'{v[2]}', end="\t") # Print short entry and TAB
-                except:
-                    if v[0] != "not": # only print if it should actually be printed
-                        print(f'{k}', end="\t") # Print key and TAB
-            print(f'')
-            for k, v in e.items():
-                if 'hx8' == v[0]:                   # Print 8-Bit HEX
-                    print(f'{v[1]:02X}', end="\t")
-                elif 'arr8x' == v[0]:
-                    self.parent.dump_data(v[1],16)
-                elif 'hx16' == v[0]:                  # Print 16-Bit HEX
-                    print(f'{v[1]:04X}', end="\t")
-                elif 'dec5' == v[0]:                  # Print 5 places decimal
-                    print(f'{v[1]:05}', end="\t")
-                elif 'strw' == v[0]:                  # Print String in White
-                    print(f'{v[1]}', end="\t")
-                elif 'strg' == v[0]:                  # Print String in Green
-                    print(f'{self.parent.GRN}',end = '')
-                    print(f'{v[1]}', end="\t")
-                    print(f'{self.parent.END}',end = '')
-            print(f'')
-        else:        
-            for k, v in e.items():
-                if 'hx8' == v[0]:                   # Print 8-Bit HEX
-                    print(f'{v[1]:02X}', end="\t")
-                elif 'arr8x' == v[0]:
-                    self.parent.dump_data(v[1],16)
-                elif 'hx16' == v[0]:                  # Print 16-Bit HEX
-                    print(f'{v[1]:04X}', end="\t")
-                elif 'dec5' == v[0]:                  # Print 5 places decimal
-                    print(f'{v[1]:05}', end="\t")
-                elif 'strw' == v[0]:                  # Print String in White
-                    print(f'{v[1]}', end="\t")
-                elif 'strg' == v[0]:                  # Print String in Green
-                    print(f'{self.parent.GRN}',end = '')
-                    print(f'{v[1]}', end="\t")
-                    print(f'{self.parent.END}',end = '')
-            print(f'')
-    #----------------------------------
-    # Prints out Directory
+            self.print_header(e)
+            self.print_body(e)
+        else:
+            self.print_body(e)  
+     #----------------------------------
+    # Prints out Directory and stats
     def print_dir(self, entries, stats):
         print(f'Showing Directory. (all values in hex!)') # Directory is easy, it starts @ 0x1400 until a 0xFF is found @ first position
         for idx,e in enumerate(entries): # cycle through entries
-            #if idx == 0:                 # get the header from the first entry
-            #    self.print_entry(idx, e)
-            #    for k, v in e.items():
-            #        try:
-            #            print(f'{v[2]}', end="\t") # Print short entry and TAB
-            #        except:
-            #            if v[0] != "not": # only print if it should actually be printed
-            #                print(f'{k}', end="\t") # Print key and TAB
-            #    print(f'')
-            #else:
             self.print_entry(idx, e)
-                #for k, v in e.items():
-                #    if 'hx8' == v[0]:                   # Print 8-Bit HEX
-                #        print(f'{v[1]:02X}', end="\t")
-                #    elif 'arr8x' == v[0]:
-                #        self.parent.dump_data(v[1],16)
-                #    elif 'hx16' == v[0]:                  # Print 16-Bit HEX
-                #        print(f'{v[1]:04X}', end="\t")
-                #    elif 'dec5' == v[0]:                  # Print 5 places decimal
-                #        print(f'{v[1]:05}', end="\t")
-                #    elif 'strw' == v[0]:                  # Print String in White
-                #        print(f'{v[1]}', end="\t")
-                #    elif 'strg' == v[0]:                  # Print String in Green
-                #        print(f'{self.parent.GRN}',end = '')
-                #        print(f'{v[1]}', end="\t")
-                #        print(f'{self.parent.END}',end = '')
-                #print(f'')
         
         for k, v in stats.items(): # print stats
             print(f'{k}', end="\t") # Print keys and TAB
@@ -301,18 +282,16 @@ class class_FDOS(object):
 
         return retval
     #----------------------------------
-    def modify_entries_file(self, entries):
-        print(f'Modify Entries file')
-        #print(f'Entries Len: {len(entries)}')
-        self.print_dir(entries, {})
-        return entries
-    #----------------------------------
     def set_default_values(self):
         entry = {}
-        entry["Name"]        = ["strw", '        ', "Name        "]
+        entry["Name"]        =    ["strw", '        ', "Name        "]
+        entry["Password"]    = ["strw", '\'          \'']
+        entry["Password_Clean"] =  ["not", '        ']
         entry["StartTrack"]  = ["hx8", 0, "STrk"]
         entry["StartSector"] = ["hx8", 0, "SSec"]
+        entry["SizeinSecs"]  = ["hx8", 0, "SSiz"]
         entry["Attribute"]   = ["hx8", 0x22, "Atrib"]
+        entry["Filetype"]    = ["strw",  '     ', "Type"]
         entry["SAddr"]       = ["hx16", 0]
         entry["EAddr"]       = ["hx16", 0]
         entry["Exec"]        = ["hx16", 0]
@@ -320,6 +299,8 @@ class class_FDOS(object):
         entry["Sp0"]         = ["hx8",  0]
         entry["Sp1"]         = ["hx8",  0]
         entry["Sp2"]         = ["hx8",  0]
+        entry["Filesize"]    = ["dec5",  0, "FSize"]
+        entry["Directoryposition"]    = ["dec5",  0, "Dirpos"]
         return entry        
     #----------------------------------
     def create_entries_file(self, pathname):
@@ -328,26 +309,29 @@ class class_FDOS(object):
         if self.verbose > 0:
             print(f'Looking in: {pathname}')
             #print(f'Dir: {os.listdir(pathname)}')
-            self.print_entry(0, entry) # Print Header
+            idx = 0
         for f in os.listdir(pathname):
             if os.path.isfile(pathname+f):
                 #print(f'Found File: {f}')
-                print('---------------------------------------------------------------------------------------------')
+                fsiz = os.path.getsize(pathname+f)
+                #print('---------------------------------------------------------------------------------------------')
                 entry["Name"]        = ["strw", f'{f:8}', "Name        "]
-                self.print_entry(1, entry) # Print values
-                entry["Name"]        = ["strw", self.get_val(entry, "Name"), "Name        "]
-                entry["StartTrack"]  = ["hx8", self.get_val(entry, "StartTrack"), "STrk"]
-                entry["StartSector"] = ["hx8", self.get_val(entry, "StartSector"), "SSec"]
-                entry["Attribute"]   = ["hx8", self.get_val(entry, "Attribute"), "Atrib"]
-                entry["SAddr"]       = ["hx16", self.get_val(entry, "SAddr")]
-                entry["EAddr"]       = ["hx16", self.get_val(entry, "EAddr")]
-                entry["Exec"]        = ["hx16", self.get_val(entry, "Exec")]
-                entry["Hi"]          = ["hx16", self.get_val(entry, "Hi")]
-                entry["Sp0"]         = ["hx8",  self.get_val(entry, "Sp0")]
-                entry["Sp1"]         = ["hx8",  self.get_val(entry, "Sp1")]
-                entry["Sp2"]         = ["hx8",  self.get_val(entry, "Sp2")]
-                self.print_entry(1, entry) # Print values
+                entry["Filesize"]    = ["dec5",  fsiz, "FSize"]
+                #self.print_entry(1, entry) # Print values
+                #entry["Name"]        = ["strw", self.get_val(entry, "Name"), "Name        "]
+                #entry["StartTrack"]  = ["hx8", self.get_val(entry, "StartTrack"), "STrk"]
+                #entry["StartSector"] = ["hx8", self.get_val(entry, "StartSector"), "SSec"]
+                #entry["Attribute"]   = ["hx8", self.get_val(entry, "Attribute"), "Atrib"]
+                #entry["SAddr"]       = ["hx16", self.get_val(entry, "SAddr")]
+                #entry["EAddr"]       = ["hx16", self.get_val(entry, "EAddr")]
+                #entry["Exec"]        = ["hx16", self.get_val(entry, "Exec")]
+                #entry["Hi"]          = ["hx16", self.get_val(entry, "Hi")]
+                #entry["Sp0"]         = ["hx8",  self.get_val(entry, "Sp0")]
+                #entry["Sp1"]         = ["hx8",  self.get_val(entry, "Sp1")]
+                #entry["Sp2"]         = ["hx8",  self.get_val(entry, "Sp2")]
+                self.print_entry(idx, entry) # Print values
                 entries.append(entry)
+                idx += 1
                 entry = self.set_default_values()
         #print(f'Entries Len: {len(entries)}')
         return entries
@@ -370,61 +354,66 @@ class class_FDOS(object):
         c = 0
         h = 0
         s = 0
+        diridx = 0
         bps = self.fspec["bps"]
 
-        for idx,entry in enumerate(entries): # cycle through entries
-            #if idx > 0:                    # first line is the header
-            name = entry["Name"][1].strip() #not anymore!
-            fn = name
-        #----------------------------------
-        # Here we add the filenames to the Directory
-        # We need the stats file for Filetype, Startaddress, Endaddress, Program Counter,
-        # Hiline (Basic) and three 'spares'.
-        # Also the size can come from the stats file or from the actual filesize
-            if ('/' in name):
-                fn = name.replace('/', '_')
-            fdata = self.parent.read_file((fdir+fn), 'binary') # Get the filedata
-            if self.verbose > 0:
-                print(f'Got File: {fn} with size: {len(fdata)}')
-            #-------------------------------------------------------------------------
-            # Get the filesize from the actual file and pad it to the next sector
-            #-------------------------------------------------------------------------
-            flen = len(fdata)
-            tempsiz = flen/bps  # Size (in sectors) from actual filesize
-            temprest = (flen%bps)  # Rest in sectors
-            zeros = bytearray(0 for _ in range(temprest))
-            fdata += zeros
-            nsiz = int(len(fdata)/bps)
-            if self.verbose > 0:
-                print(f'Sectors: {tempsiz}, Rest: {temprest}, new: {nsiz}')
-            siz = nsiz # Use actual filesize padded to next sectorboundry
-            #-------------------------------------------------------------------------
-            #siz = int(entry["SizeinSecs"][1]) # Use size from stats file
-            totalsz += siz * bps
-            #passw = entry["Password_Clean"][1] # this is needed from entries file (can maybe be a default value)
-            passw = '        ' # default is no password
-            if name == '$DOS':
-                totalsz += self.fspec["Sectors"] * bps # Add one track for directory
-                sttrk = 0 # We need to start with $DOS at 0,0
-                stsec = 0 # We need to start with $DOS at 0,0
-            else:
-                sttrk = c
-                stsec = s
-            #sttrk = (entry["StartTrack"][1])  # this is needed from entries file (can be calculated)
-            #stsec = (entry["StartSector"][1]) # this is needed from entries file (can be calculated)
-            saddr = entry["SAddr"][1]         # this is needed from entries file
-            eaddr = entry["EAddr"][1]         # this is needed from entries file
-            pc = entry["Exec"][1]             # this is needed from entries file
-            hilin = entry["Hi"][1]            # this is needed from entries file
-            sp0 = entry["Sp0"][1]             # this is needed from entries file
-            sp1 = entry["Sp1"][1]             # this is needed from entries file
-            sp2 = entry["Sp2"][1]             # this is needed from entries file
-            typ = entry["Attribute"][1]       # this is needed from entries file
-            #print(f'Adding #{idx-1} {name:8} to: {sttrk=:2} {stsec=:2} {siz=:2} NxtOff: {totalsz:>05X} Size of File: {len(fdata)/bps:>5.1f}')
-            self.add_dir_enty(img, idx-1, name, passw, sttrk, stsec, siz, typ, saddr, eaddr, pc, hilin, sp0, sp1, sp2)
-            #----------------------------------
-            # Now add the actual files to the Image
-            self.add_file(img, fdata, sttrk, stsec, siz)
-            c,h,s = self.offset_to_chs(totalsz) # Get position now for next free sector
-        self.add_last_enty(img, idx, totalsz)
+        while len(entries) > diridx:                        # cycle through entries
+            for idx,entry in enumerate(entries):            # look for lowest Directoryposition
+                if entry["Directoryposition"][1] == diridx:
+                    name = entry["Name"][1].strip()
+                    if self.verbose > 0:
+                        print(f'Checking {entry["Directoryposition"]}, diridx: {diridx}, len: {len(entries)}')
+                    fn = name
+                    #----------------------------------
+                    # Here we add the filenames to the Directory
+                    # We need the stats file for Filetype, Startaddress, Endaddress, Program Counter,
+                    # Hiline (Basic) and three 'spares'.
+                    # Also the size can come from the stats file or from the actual filesize
+                    if ('/' in name):
+                        fn = name.replace('/', '_')
+                    fdata = self.parent.read_file((fdir+fn), 'binary') # Get the filedata
+                    if self.verbose > 0:
+                        print(f'Got File: {fn} with size: {len(fdata)}')
+                    #-------------------------------------------------------------------------
+                    # Get the filesize from the actual file and pad it to the next sector
+                    #-------------------------------------------------------------------------
+                    flen = len(fdata)
+                    tempsiz = flen/bps  # Size (in sectors) from actual filesize
+                    temprest = (flen%bps)  # Rest in sectors
+                    zeros = bytearray(0 for _ in range(temprest))
+                    fdata += zeros
+                    nsiz = int(len(fdata)/bps)
+                    if self.verbose > 0:
+                        print(f'Sectors: {tempsiz}, Rest: {temprest}, new: {nsiz}')
+                    siz = nsiz # Use actual filesize padded to next sectorboundry
+                    #-------------------------------------------------------------------------
+                    #siz = int(entry["SizeinSecs"][1]) # Use size from stats file
+                    totalsz += siz * bps
+                    #passw = entry["Password_Clean"][1] # this is needed from entries file (can maybe be a default value)
+                    passw = '        ' # default is no password
+                    if name == '$DOS':
+                        totalsz += self.fspec["Sectors"] * bps # Add one track for directory
+                        sttrk = 0 # We need to start with $DOS at 0,0
+                        stsec = 0 # We need to start with $DOS at 0,0
+                    #else:
+                    #    sttrk = c
+                    #    stsec = s
+                    sttrk = (entry["StartTrack"][1])  # this is needed from entries file (can be calculated)
+                    stsec = (entry["StartSector"][1]) # this is needed from entries file (can be calculated)
+                    saddr = entry["SAddr"][1]         # this is needed from entries file
+                    eaddr = entry["EAddr"][1]         # this is needed from entries file
+                    pc = entry["Exec"][1]             # this is needed from entries file
+                    hilin = entry["Hi"][1]            # this is needed from entries file
+                    sp0 = entry["Sp0"][1]             # this is needed from entries file
+                    sp1 = entry["Sp1"][1]             # this is needed from entries file
+                    sp2 = entry["Sp2"][1]             # this is needed from entries file
+                    typ = entry["Attribute"][1]       # this is needed from entries file
+                    #print(f'Adding #{diridx} {name:8} to: {sttrk=:2} {stsec=:2} {siz=:2} NxtOff: {totalsz:>05X} Size of File: {len(fdata)/bps:>5.1f}')
+                    self.add_dir_enty(img, diridx, name, passw, sttrk, stsec, siz, typ, saddr, eaddr, pc, hilin, sp0, sp1, sp2)
+                    #----------------------------------
+                    # Now add the actual files to the Image
+                    self.add_file(img, fdata, sttrk, stsec, siz)
+                    c,h,s = self.offset_to_chs(totalsz) # Get position now for next free sector
+                    diridx += 1
+        self.add_last_enty(img, diridx, totalsz)
         return img

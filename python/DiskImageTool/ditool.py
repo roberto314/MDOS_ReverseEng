@@ -24,6 +24,7 @@ import argparse                    # for argument parser
 import os,sys                      # for files handling
 from pathlib import Path           # for Batchmode
 import pickle                      # saving stats and entries in file
+import json
 
 #import re, sys, math, time
 exorpath="/home/rob/Data/sync/Computer/CPU\ -\ MC6800/Exorciser/exorsim/"
@@ -161,45 +162,53 @@ class DITOOL():
     
         elif (action == 'EXTRACT'):
             entries, stats = obj.get_dir(imgfile)
-            with open(pathname + 'entries.pkl', 'wb') as fp:
-                pickle.dump(entries, fp)
-            with open(pathname + 'stats.pkl', 'wb') as fp:
-                pickle.dump(stats, fp)
+            #with open(pathname + 'stats.pkl', 'wb') as fp:
+            #    pickle.dump(stats, fp)
+            #with open(pathname + 'entries.pkl', 'wb') as fp:
+            #    pickle.dump(entries, fp)
+            with open(pathname + 'entries.json', 'w') as file:
+                file.write(json.dumps(entries, indent=2))
+            with open(pathname + 'stats.json', 'w') as file:
+                file.write(json.dumps(stats, indent=2))
 
             for idx,e in enumerate(entries):
-                if idx > 0: # first line is header
-                    #print(f'Extracting: {e[0]:2} ({e[4]:2} Sectors from Track {e[2]:2}, Sector {e[3]})')
-                    data = obj.get_file(imgfile, e)
-                    fn = pathname + self.cleanup(e["Name"][1])
-                    if fn == pathname:
-                        print(f'{self.RED}Filename Empty!{self.END}')
-                    else:
-                        self.write_file(data, fn, 'binary')
+                data = obj.get_file(imgfile, e)
+                fn = pathname + self.cleanup(e["Name"][1])
+                if fn == pathname:
+                    print(f'{self.RED}Filename Empty!{self.END}')
+                else:
+                    self.write_file(data, fn, 'binary')
         elif ('CREATE' in action):
-            arr = os.listdir(pathname)
-            numfiles = len(arr)-1 # remove stats file
-            #fn = pathname + 'stats.pkl'
-            #statsfile = self.read_file(fn, 'text')
+
             try:
-                with open(pathname + 'stats.pkl', 'rb') as fp:
-                    stats = pickle.load(fp)
+                with open(pathname + 'stats.json') as fp:
+                    stats = json.load(fp)
+                
+                #with open(pathname + 'stats.pkl', 'rb') as fp:
+                #    stats = pickle.load(fp)
             except OSError:
                 print(f'No stats file found! Not really needed.')
                 stats = {}
 
             try:
-                with open(pathname + 'entries.pkl', 'rb') as fp:
-                    entries = pickle.load(fp)
-                    if entries == {}:
-                        print(f'Error: entries file is empty!')
-                        exit()
+                #with open(pathname + 'entries.pkl', 'rb') as fp:
+                #    entries = pickle.load(fp)
+                with open(pathname + 'entries.json') as fp:
+                    entries = json.load(fp)
+                if entries == {}:
+                    print(f'Error: entries file is empty!')
+                    exit()
+
             except OSError:
                 if action == 'CREATEENTRIES':
                     print(f'Creating an entries file.')
                     entries = obj.create_entries_file(pathname)
                     #exit()
-                    with open(pathname + 'entries.pkl', 'wb') as fp:
-                        pickle.dump(entries, fp)
+                    #with open(pathname + 'entries.pkl', 'wb') as fp:
+                    #    pickle.dump(entries, fp)
+                    with open(pathname + 'entries.json', 'w') as file:
+                        file.write(json.dumps(entries, indent=2))
+                    exit()
                 else:
                     print(f'No entries file found! Making empty image')
                     imgfile = obj.create_image()
@@ -210,21 +219,21 @@ class DITOOL():
             print(f'Image with {len(imgfile)} bytes and Name: {fn} created.')
             self.write_file(imgfile, fn, 'binary')
 
-        elif (action == 'MODIFYENTRIES'):
-            try:
-                with open(pathname + 'entries.pkl', 'rb') as fp:
-                    entries = pickle.load(fp)
-                    if entries == {}:
-                        print(f'Error: entries file is empty!')
-                        exit()
-                    else:
-                        entries = obj.modify_entries_file(entries)
-                        with open(pathname + 'entries.pkl', 'wb') as fp:
-                            pickle.dump(entries, fp)
-                        exit()
-            except OSError:
-                print(f'No entries file found! Exiting.')
-                exit()
+        #elif (action == 'MODIFYENTRIES'):
+        #    try:
+        #        with open(pathname + 'entries.pkl', 'rb') as fp:
+        #            entries = pickle.load(fp)
+        #            if entries == {}:
+        #                print(f'Error: entries file is empty!')
+        #                exit()
+        #            else:
+        #                entries = obj.modify_entries_file(entries)
+        #                with open(pathname + 'entries.pkl', 'wb') as fp:
+        #                    pickle.dump(entries, fp)
+        #                exit()
+        #    except OSError:
+        #        print(f'No entries file found! Exiting.')
+        #        exit()
 
         elif (action == 'EXAMPLE'):
 
@@ -320,8 +329,8 @@ if __name__ == '__main__':
     subparser.add_argument('file', help='imgfile')
     subparser = subparsers.add_parser('createentries', help='Create an entries file with information on the files to add.')
     subparser.add_argument('file', help='imgfile')
-    subparser = subparsers.add_parser('modifyentries', help='Modify an entries file.')
-    subparser.add_argument('file', help='imgfile')
+    #subparser = subparsers.add_parser('modifyentries', help='Modify an entries file.')
+    #subparser.add_argument('file', help='imgfile')
     subparser = subparsers.add_parser('createboot', help='Create a bootable Imagefile.')
     subparser.add_argument('file', help='imgfile')
     subparser = subparsers.add_parser('dir', help='Show directory of Imagefile.')
@@ -420,9 +429,7 @@ if __name__ == '__main__':
                 #------------------------------------------------------------
                 # here we call the external program hxcfe to convert the image
                 #------------------------------------------------------------
-                #cmd = "./hxcfe -finput:" + input_file + " -foutput:" + img_file + " -conv:RAW_LOADER"
-                #cmd = "./hxcfe -finput:\""+input_file+"\" -foutput:\""+img_file+"\" -conv:RAW_LOADER"
-                cmd = f'./hxcfe -finput:+input_file+" -foutput:"{img_file}" -conv:RAW_LOADER'
+                cmd = f'./hxcfe -finput:"{input_file}" -foutput:"{img_file}" -conv:RAW_LOADER'
     
                 exitcode, out, err = me.get_exitcode_stdout_stderr(cmd)
                 if exitcode != 0:
@@ -431,7 +438,6 @@ if __name__ == '__main__':
                     print(f'Error: {self.err}')
                     exit()
                 text = out.decode('ascii')
-                #lines = text.split('\n') # one line per track and side
                 print(text)
                 print(f'{me.CYN}Output File is: {img_file}{me.END}')
                 if ('CREATE' in action):
@@ -445,8 +451,6 @@ if __name__ == '__main__':
                 #------------------------------------------------------------
                 # here we call the external program hxcfe to convert the image
                 #------------------------------------------------------------
-                #cmd = "./hxcfe -finput:" + input_file + " -foutput:" + img_file + " -conv:RAW_LOADER"
-                #cmd = "./hxcfe -finput:\""+input_file+"\" -foutput:\""+img_file+"\" -conv:RAW_LOADER"
                 cmd = f'./hxcfe -finput:"{input_file}" -foutput:"{img_file}" -conv:RAW_LOADER'
     
                 exitcode, out, err = me.get_exitcode_stdout_stderr(cmd)
@@ -456,7 +460,6 @@ if __name__ == '__main__':
                     print(f'Error: {self.err}')
                     exit()
                 text = out.decode('ascii')
-                #lines = text.split('\n') # one line per track and side
                 print(text)
                 print(f'{me.CYN}Output File is: {img_file}{me.END}')
                 if ('CREATE' in action):
@@ -471,9 +474,8 @@ if __name__ == '__main__':
             else:
                 f = me.read_file(input_file, 'binary')
             
-        #print(f'{args=}')
-        if args.convert != True: # Convert to .img and process further
-            me.main(f, fn, variant, action, formatdef, args.verbose)
+            if args.convert != True: # Convert to .img and process further
+                me.main(f, fn, variant, action, formatdef, args.verbose)
         if args.simulate == True:
             print(f'Start exorsim.')
             if args.type == 'fdos':
