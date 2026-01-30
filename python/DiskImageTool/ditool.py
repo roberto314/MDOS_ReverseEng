@@ -183,11 +183,26 @@ class DITOOL():
             try:
                 with open(pathname + 'stats.pkl', 'rb') as fp:
                     stats = pickle.load(fp)
+            except OSError:
+                print(f'No stats file found! Not really needed.')
+                stats = {}
+
+            try:
                 with open(pathname + 'entries.pkl', 'rb') as fp:
                     entries = pickle.load(fp)
+                    if entries == {}:
+                        print(f'Error: entries file is empty!')
+                        exit()
             except OSError:
-                print(f'No stats file found! Making empty image')
-                imgfile = obj.create_image()
+                if action == 'CREATEENTRIES':
+                    print(f'Creating an entries file.')
+                    entries = obj.create_entries_file(pathname)
+                    exit()
+                    with open(pathname + 'entries.pkl', 'wb') as fp:
+                        pickle.dump(entries, fp)
+                else:
+                    print(f'No entries file found! Making empty image')
+                    imgfile = obj.create_image()
             else:
                 imgfile = obj.add_files(pathname, entries, stats, obj.create_image(), action)
             
@@ -229,7 +244,7 @@ class DITOOL():
             fspec["Dirstart"] = 0x1400
             fspec["Filestart"] = 0x1E00
             fspec["Direntrysize"] = 0x20
-            fspec["Emptyval"] = 0
+            fspec["Emptyval"] = 0xE5
             fspec = me.check_alternate_format(fspec)
             from fdos import class_FDOS
             obj = class_FDOS(self, fspec, verbose)
@@ -247,7 +262,7 @@ class DITOOL():
             fspec["Dirstart"] = 0x180
             fspec["Filestart"] = 0xB80
             fspec["Direntrysize"] = 0x10
-            fspec["Emptyval"] = 0
+            fspec["Emptyval"] = 0xE5
             fspec = me.check_alternate_format(fspec)
             from mdos import class_MDOS
             obj = class_MDOS(self, fspec, verbose)
@@ -286,11 +301,13 @@ if __name__ == '__main__':
     #---------------------------------------------------------------------------------    
     subparser = subparsers.add_parser('create', help='Create an Imagefile')
     subparser.add_argument('file', help='imgfile')
-    subparser = subparsers.add_parser('createboot', help='Create a bootable Imagefile')
+    subparser = subparsers.add_parser('createentries', help='Create an entries file with information on the files to add.')
     subparser.add_argument('file', help='imgfile')
-    subparser = subparsers.add_parser('dir', help='Show directory of Imagefile')
+    subparser = subparsers.add_parser('createboot', help='Create a bootable Imagefile.')
     subparser.add_argument('file', help='imgfile')
-    subparser = subparsers.add_parser('extract', help='Extract files from Imagefile')
+    subparser = subparsers.add_parser('dir', help='Show directory of Imagefile.')
+    subparser.add_argument('file', help='imgfile')
+    subparser = subparsers.add_parser('extract', help='Extract files from Imagefile.')
     subparser.add_argument('file', help='imgfile')
     subparser = subparsers.add_parser('example', help='Show Examples for Filetype.')
     #---------------------------------------------------------------------------------    
