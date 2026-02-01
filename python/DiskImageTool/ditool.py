@@ -236,7 +236,6 @@ class DITOOL():
         #        exit()
 
         elif (action == 'EXAMPLE'):
-
             self.print_examples()
             obj.print_examples()
     #----------------------------------
