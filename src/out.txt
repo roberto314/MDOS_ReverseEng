@@ -14,16 +14,16 @@ GI CP-1600-Generator (C) 2021 Haruo Asano
 
 Assembling dir_commented.asm
 PASS 1
-mdoseq.inc(453)
-dir_commented.asm(810)
+mdoseq.inc(452)
+dir_commented.asm(800)
 PASS 2
-mdoseq.inc(453)
-dir_commented.asm(810)
+mdoseq.inc(452)
+dir_commented.asm(800)
 
-0.01 seconds assembly time
+0.00 seconds assembly time
 
-   1263 lines source file
-   1515 lines incl. macro expansions
+   1252 lines source file
+   1504 lines incl. macro expansions
       2 passes
       0 errors
       0 warnings

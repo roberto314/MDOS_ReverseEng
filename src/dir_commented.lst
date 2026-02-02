@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 1 - 01/28/2026 05:12:38 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 1 - 02/02/2026 09:24:09 PM
 
 
        1/       0 :                     
@@ -61,7 +61,7 @@
 (1)   56/       0 : =$15                 NUMD1    EQU $15 ; CHECK DECIMAL DIGIT
 (1)   57/       0 : =$16                 ADDAM1   EQU $16 ; INCREMENT MEMORY (DOUBLE BYTE) BY A
 (1)   58/       0 : =$17                 SUBAM1   EQU $17 ; DECREMENT MEMORY (DOUBLE BYTE) BY A
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 2 - 01/28/2026 05:12:38 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 2 - 02/02/2026 09:24:09 PM
 
 
 (1)   59/       0 : =$18                 MMA1     EQU $18 ; MULTIPLY (SHIFT LEFT) MEMORY BY A
@@ -124,7 +124,7 @@
 (1)  116/       0 : =$D                  CR       EQU  $D ; CARRIAGE RETURN
 (1)  117/       0 : =$E                  SO       EQU  $E ; SHIFT OUT
 (1)  118/       0 : =$F                  SI       EQU  $F ; SHIFT IN
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 3 - 01/28/2026 05:12:38 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 3 - 02/02/2026 09:24:09 PM
 
 
 (1)  119/       0 : =$10                 DLE      EQU $10 ; DATA LINK ESCAPE
@@ -187,7 +187,7 @@
 (1)  176/       0 :                     ;
 (1)  177/       0 :                     ; DIRECTORY ENTRY OFFSET
 (1)  178/       0 :                     ;
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 4 - 01/28/2026 05:12:38 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 4 - 02/02/2026 09:24:09 PM
 
 
 (1)  179/       0 : =$0                  DIRsNM  EQU 0   ; OFFSET TO NAME (8 BYTES)
@@ -228,7 +228,7 @@
 (1)  214/       0 : =$1F                 IOCSBS  EQU 31 ; SECTOR BUFFER START ADDRESS
 (1)  215/       0 : =$21                 IOCSBE  EQU 33 ; SECTOR BUFFER END ADDRESS
 (1)  216/       0 : =$23                 IOCSBI  EQU 35 ; SECTOR BUFFER INTERNAL PTR
-(1)  217/       0 : =$25                 IOCBLN  EQU IOCSBI+2-IOCSTA ; IOCB LENGTH
+(1)  217/       0 : =$25                 IOCBLN  EQU IOCSBI+2-IOCSTA ; IOCB LENGTH            - 37
 (1)  218/       0 :                     
 (1)  219/       0 :                     ;
 (1)  220/       0 :                     ; UNIFIED I/O ERROR STATUS
@@ -250,7 +250,7 @@
 (1)  236/       0 : =$E                  IsCKSM  EQU  $E ; CHECKSUM ERROR
 (1)  237/       0 : =$F                  IsWRIT  EQU  $F ; FILE IS WRITE PROTECTED
 (1)  238/       0 : =$10                 IsDELT  EQU $10 ; FILE IS DELETE PROTECTED
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 5 - 01/28/2026 05:12:38 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 5 - 02/02/2026 09:24:09 PM
 
 
 (1)  239/       0 : =$11                 IsRANG  EQU $11 ; LOQICAL SECTOR NUMBER OUT OF RANG
@@ -268,193 +268,193 @@
 (1)  251/       0 :                     ;
 (1)  252/       0 : =$100                MDOSs   EQU $100  ; START OF MDOS ASECT
 (1)  253/       0 : =$50                 CBUFLs  EQU  80   ; COMMAND BUFFER LENGTH
-(1)  254/       0 : =$AE                 CBUFFs  EQU  MDOSs-CBUFLs-2 ; COMMAND BUFFER LOCATION
-(1)  255/       0 : =$FE                 CBUFPs  EQU  CBUFFs+CBUFLs  ; COMMAND BUFFER SCAN POINTER
-(1)  256/       0 : =$100                VERSss  EQU  MDOSs    ; VERSION#
-(1)  257/       0 : =$102                REVSss  EQU  VERSss+2 ; REVISION#
-(1)  258/       0 : =$104                KYIsSV  EQU  REVSss+2 ; SAVE AREA FOR KEYINs VECTOR
-(1)  259/       0 : =$106                ENDOSs  EQU  KYIsSV+2 ; END OF MDOS
-(1)  260/       0 : =$108                ENDUSs  EQU  ENDOSs+2 ; END OF USER PROGRAM AREA
-(1)  261/       0 : =$10A                ENDSYs  EQU  ENDUSs+2 ; END OF SYSTEM (MDOS) RAM
-(1)  262/       0 : =$10E                RIBBAs  EQU  ENDSYs+4 ; RIB BUFFER ADDRESS
-(1)  263/       0 : =$110                ENDRVs  EQU  RIBBAs+2 ; END OF MDOS ROM VARIABLES
-(1)  264/       0 : =$112                GDBAs   EQU  ENDRVs+2 ; GENERIC DEVICE TABLE ADDRESS
-(1)  265/       0 :                     
-(1)  266/       0 : =$114                SYERRs  EQU GDBAs+2  ; SYSTEM ERROR STATUS WORD
-(1)  267/       0 : =$116                SWIsSV  EQU SYERRs+2 ; SWI VECTOR SAVE AREA
-(1)  268/       0 : =$118                SWIsUV  EQU SWIsSV+2 ; SWI USER VECTOR
-(1)  269/       0 : =$11A                IRGsUV  EQU SWIsUV+2 ; IRG USER VECTOR
-(1)  270/       0 : =$11C                IRGsSV  EQU IRGsUV+2 ; IRG VECTOR SAVE AREA
-(1)  271/       0 : =$11E                CHFLGs  EQU IRGsSV+2 ; CHAIN FUNCTION FLAG WORD
-(1)  272/       0 : =$120                SYIOCB  EQU CHFLGs+2 ; SYSTEM CONSOLE IOCB
-(1)  273/       0 : =$145                SYPOCB  EQU SYIOCB+IOCBLN ; SYSTEM PRINTER IOCB
-(1)  274/       0 : =$16A                SYEOCB  EQU SYPOCB+IOCBLN ; ERR MSG FILE
-(1)  275/       0 :                     
-(1)  276/       0 :                     ;
-(1)  277/       0 :                     ; LOGICAL UNIT NUMBER - BIT DEF
-(1)  278/       0 :                     ;
-(1)  279/       0 : =$40                 LUsRES EQU %01000000 ; IOCB RESERVED FLAG
-(1)  280/       0 :                     
-(1)  281/       0 :                     ;
-(1)  282/       0 :                     ; IOCDTT BIT DEFINITIONS
-(1)  283/       0 :                     ;
-(1)  284/       0 : =$0                  DTsOPP EQU %00000000 ; OPEN UPDATE/INPUT
-(1)  285/       0 : =$1                  DTsOPI EQU %00000001 ; OPEN INPUT MODE
-(1)  286/       0 : =$2                  DTsOPO EQU %00000010 ; OPEN OUTPUT MODE
-(1)  287/       0 : =$3                  DTsOPU EQU %00000011 ; OPEN UPDATE MODE
-(1)  288/       0 : =$4                  DTsNFF EQU %00000100 ; NON-FILE FORMAT I/O FLAG
-(1)  289/       0 : =$8                  DTsTRU EQU %00001000 ; TRUNCATE FLAG
-(1)  290/       0 : =$10                 DTsCLS EQU %00010000 ; FILE OPEN/CLOSE FLAG
-(1)  291/       0 : =$20                 DTsSIO EQU %00100000 ; SECTOR I/O FLAG
-(1)  292/       0 : =$40                 DTsOUT EQU %01000000 ; OUTPUT TRANSFER TYPE
-(1)  293/       0 : =$80                 DTsINP EQU %10000000 ; INPUT TRANSFER TYPE
-(1)  294/       0 :                     
-(1)  295/       0 :                     ;
-(1)  296/       0 :                     ; IOCFDF BIT DEFINITIONS
-(1)  297/       0 :                     ;
-(1)  298/       0 : =$0                  FDsFMU EQU %00000000 ; USER DEFINED FORMAT (SECTOR I/O)
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 6 - 01/28/2026 05:12:38 PM
+(1)  254/       0 : =$AE                 CBUFFs  EQU  MDOSs-CBUFLs-2 ; COMMAND BUFFER LOCATION     - $AE
+(1)  255/       0 : =$FE                 CBUFPs  EQU  CBUFFs+CBUFLs  ; COMMAND BUFFER SCAN POINTER - $FE
+(1)  256/       0 : =$100                VERSss  EQU  MDOSs    ; VERSION#                          - $100
+(1)  257/       0 : =$102                REVSss  EQU  VERSss+2 ; REVISION#                         - $102
+(1)  258/       0 : =$104                KYIsSV  EQU  REVSss+2 ; SAVE AREA FOR KEYINs VECTOR       - $104
+(1)  259/       0 : =$106                ENDOSs  EQU  KYIsSV+2 ; END OF MDOS                       - $106
+(1)  260/       0 : =$108                ENDUSs  EQU  ENDOSs+2 ; END OF USER PROGRAM AREA          - $108
+(1)  261/       0 : =$10A                ENDSYs  EQU  ENDUSs+2 ; END OF SYSTEM (MDOS) RAM          - $10A
+(1)  262/       0 : =$10E                RIBBAs  EQU  ENDSYs+4 ; RIB BUFFER ADDRESS                - $10E
+(1)  263/       0 : =$110                ENDRVs  EQU  RIBBAs+2 ; END OF MDOS ROM VARIABLES         - $110
+(1)  264/       0 : =$112                GDBAs   EQU  ENDRVs+2 ; GENERIC DEVICE TABLE ADDRESS      - $112
+(1)  265/       0 : =$114                SYERRs  EQU GDBAs+2  ; SYSTEM ERROR STATUS WORD           - $114
+(1)  266/       0 : =$116                SWIsSV  EQU SYERRs+2 ; SWI VECTOR SAVE AREA               - $116
+(1)  267/       0 : =$118                SWIsUV  EQU SWIsSV+2 ; SWI USER VECTOR                    - $118
+(1)  268/       0 : =$11A                IRGsUV  EQU SWIsUV+2 ; IRG USER VECTOR                    - $11A
+(1)  269/       0 : =$11C                IRGsSV  EQU IRGsUV+2 ; IRG VECTOR SAVE AREA               - $11C
+(1)  270/       0 : =$11E                CHFLGs  EQU IRGsSV+2 ; CHAIN FUNCTION FLAG WORD           - $11E
+(1)  271/       0 : =$120                SYIOCB  EQU CHFLGs+2 ; SYSTEM CONSOLE IOCB                - $120
+(1)  272/       0 : =$145                SYPOCB  EQU SYIOCB+IOCBLN ; SYSTEM PRINTER IOCB           - $145
+(1)  273/       0 : =$16A                SYEOCB  EQU SYPOCB+IOCBLN ; ERR MSG FILE                  - $16A
+(1)  274/       0 :                     
+(1)  275/       0 :                     ;
+(1)  276/       0 :                     ; LOGICAL UNIT NUMBER - BIT DEF
+(1)  277/       0 :                     ;
+(1)  278/       0 : =$40                 LUsRES EQU %01000000 ; IOCB RESERVED FLAG
+(1)  279/       0 :                     
+(1)  280/       0 :                     ;
+(1)  281/       0 :                     ; IOCDTT BIT DEFINITIONS
+(1)  282/       0 :                     ;
+(1)  283/       0 : =$0                  DTsOPP EQU %00000000 ; OPEN UPDATE/INPUT
+(1)  284/       0 : =$1                  DTsOPI EQU %00000001 ; OPEN INPUT MODE
+(1)  285/       0 : =$2                  DTsOPO EQU %00000010 ; OPEN OUTPUT MODE
+(1)  286/       0 : =$3                  DTsOPU EQU %00000011 ; OPEN UPDATE MODE
+(1)  287/       0 : =$4                  DTsNFF EQU %00000100 ; NON-FILE FORMAT I/O FLAG
+(1)  288/       0 : =$8                  DTsTRU EQU %00001000 ; TRUNCATE FLAG
+(1)  289/       0 : =$10                 DTsCLS EQU %00010000 ; FILE OPEN/CLOSE FLAG
+(1)  290/       0 : =$20                 DTsSIO EQU %00100000 ; SECTOR I/O FLAG
+(1)  291/       0 : =$40                 DTsOUT EQU %01000000 ; OUTPUT TRANSFER TYPE
+(1)  292/       0 : =$80                 DTsINP EQU %10000000 ; INPUT TRANSFER TYPE
+(1)  293/       0 :                     
+(1)  294/       0 :                     ;
+(1)  295/       0 :                     ; IOCFDF BIT DEFINITIONS
+(1)  296/       0 :                     ;
+(1)  297/       0 : =$0                  FDsFMU EQU %00000000 ; USER DEFINED FORMAT (SECTOR I/O)
+(1)  298/       0 : =$1                  FDsFMD EQU %00000001 ; DEFAULT OBJECT REC'D FORMAT
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 6 - 02/02/2026 09:24:09 PM
 
 
-(1)  299/       0 : =$1                  FDsFMD EQU %00000001 ; DEFAULT OBJECT REC'D FORMAT
-(1)  300/       0 : =$2                  FDsFML EQU %00000010 ; BINARY LOAD FORMAT
-(1)  301/       0 : =$3                  FDsFMB EQU %00000011 ; BINARY RECORD FORMAT
-(1)  302/       0 : =$5                  FDsFMA EQU %00000101 ; ASCII RECORD FORMAT
-(1)  303/       0 : =$7                  FDsFMC EQU %00000111 ; ASCI-CONVERTED-BINARY REC'O FORM
-(1)  304/       0 : =$8                  FDsCMP EQU %00001000 ; SPACE COMPRESSION FLAG
-(1)  305/       0 : =$10                 FDsCON EQU %00010000 ; CONTIGUOUS ALLOCATION FLAG
-(1)  306/       0 : =$20                 FDsSYS EQU %00100000 ; SYSTEM FILE ATTRIBUTE
-(1)  307/       0 : =$40                 FDsDEL EQU %01000000 ; DELETE PROTECTION ATTRIBUTE
-(1)  308/       0 : =$80                 FDsWRT EQU %10000000 ; WRITE PROTECTION ATTRIBUTE
-(1)  309/       0 :                     
-(1)  310/       0 :                     ;
-(1)  311/       0 :                     ; UNIFIED I/O CONTROL DESCRIPTION BLOCK OFFSETS
-(1)  312/       0 :                     ;
-(1)  313/       0 : =$0                  CDBIOC EQU  0 ; ADDRESS OF IOCB
-(1)  314/       0 : =$2                  CDBSDA EQU  2 ; SOFTWARE DRIVER ADDRESS
-(1)  315/       0 : =$4                  CDBHAD EQU  4 ; HARDWARE ADDRESS
-(1)  316/       0 : =$6                  CDBDDF EQU  6 ; DEVICE DESCRIPTOR FLAGS
-(1)  317/       0 : =$7                  CDBVDT EQU  7 ; VALID DATA TYPE
-(1)  318/       0 : =$8                  CDBDDA EQU  8 ; DEVICE DEPENDENT AREA
-(1)  319/       0 : =$A                  CDBWST EQU 10 ; WORKING STORAGE
-(1)  320/       0 : =$C                  CDBLEN EQU CDBWST+2 ; CDB LENGTH
-(1)  321/       0 :                     
-(1)  322/       0 :                     ;
-(1)  323/       0 :                     ; CDBDDF BIT DEFINITIONS
-(1)  324/       0 :                     ;
-(1)  325/       0 : =$1                  DDsFMC EQU $00000001 ; ASCII-CONVERTED-BINARY IS DEFAUL
-(1)  326/       0 : =$2                  DDsLOG EQU %00000010 ; LOGICAL SECTOR I/O FLAG
-(1)  327/       0 : =$4                  DDsCNS EQU %00000100 ; CONSOLE FLAG
-(1)  328/       0 : =$8                  DDsRWD EQU %00001000 ; REWIND FLAG
-(1)  329/       0 : =$10                 DDsOCF EQU %00010000 ; OPEN/CLOSE FLAG
-(1)  330/       0 : =$20                 DDsINP EQU %00100000 ; INPUT DEVICE FLAG
-(1)  331/       0 : =$40                 DDsOUT EQU %01000000 ; OUTPUT DEVICE FLAG
-(1)  332/       0 : =$80                 DDsRES EQU %10000000 ; RESERVABLE DEVICE FLAG
-(1)  333/       0 :                     
-(1)  334/       0 :                     ;
-(1)  335/       0 :                     ; CDBVDT BIT DEFINITIONS
-(1)  336/       0 :                     ;
-(1)  337/       0 : =$4                  VDsBIN EQU %00000100 ; BINARY OBJECT FLAG
-(1)  338/       0 : =$8                  VDsGDB EQU %00001000 ; TEMP GDB POINTER FLAG
-(1)  339/       0 : =$10                 VDsSDA EQU %00010000 ; TEMP SDA POINTER FLAG
-(1)  340/       0 : =$80                 VDsNFF EQU %10000000 ; NON-FILE FORMAT FLAG
-(1)  341/       0 :                     
-(1)  342/       0 :                     ;
-(1)  343/       0 :                     ; DEVICE DRIVER ENTRY OFFSET
-(1)  344/       0 :                     ;
-(1)  345/       0 : =$0                  DVsON   EQU 0   ; DEVICE ON OFFSET
-(1)  346/       0 : =$3                  DVsOFF  EQU 3   ; DEVICE OFF OFFSET
-(1)  347/       0 : =$6                  DVsINT  EQU 6   ; DEVICE INTIALIZATION OFFSET
-(1)  348/       0 : =$9                  DVsTRM  EQU 9   ; DEVICE TERMINATION OFFSET
-(1)  349/       0 : =$C                  DVsIO   EQU 12  ; DEVICE CHARACTER INPUT/OUTPUT OFF
-(1)  350/       0 :                     
-(1)  351/       0 :                     ;
-(1)  352/       0 :                     ; DISK EROM EQUATES
-(1)  353/       0 :                     ;
-(1)  354/       0 : =$0                  CURDRV  EQU  0 ; CURRENT DRIVE NUMBER
-(1)  355/       0 : =$1                  STRSCT  EQU  1 ; STARTING PHYSICAL SECTOR NUMBER
-(1)  356/       0 : =$3                  NUMSCT  EQU  3 ; NUMBER OF SECTORS TO OPERATE UPON
-(1)  357/       0 : =$5                  LSCTLN  EQU  5 ; # OF BYTES TO READ FROM LAST SECT
-(1)  358/       0 : =$6                  CURADR  EQU  6 ; MEMORY ADDRESS FOR DISK TRANSFER
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 7 - 01/28/2026 05:12:38 PM
+(1)  299/       0 : =$2                  FDsFML EQU %00000010 ; BINARY LOAD FORMAT
+(1)  300/       0 : =$3                  FDsFMB EQU %00000011 ; BINARY RECORD FORMAT
+(1)  301/       0 : =$5                  FDsFMA EQU %00000101 ; ASCII RECORD FORMAT
+(1)  302/       0 : =$7                  FDsFMC EQU %00000111 ; ASCI-CONVERTED-BINARY REC'O FORM
+(1)  303/       0 : =$8                  FDsCMP EQU %00001000 ; SPACE COMPRESSION FLAG
+(1)  304/       0 : =$10                 FDsCON EQU %00010000 ; CONTIGUOUS ALLOCATION FLAG
+(1)  305/       0 : =$20                 FDsSYS EQU %00100000 ; SYSTEM FILE ATTRIBUTE
+(1)  306/       0 : =$40                 FDsDEL EQU %01000000 ; DELETE PROTECTION ATTRIBUTE
+(1)  307/       0 : =$80                 FDsWRT EQU %10000000 ; WRITE PROTECTION ATTRIBUTE
+(1)  308/       0 :                     
+(1)  309/       0 :                     ;
+(1)  310/       0 :                     ; UNIFIED I/O CONTROL DESCRIPTION BLOCK OFFSETS
+(1)  311/       0 :                     ;
+(1)  312/       0 : =$0                  CDBIOC EQU  0 ; ADDRESS OF IOCB
+(1)  313/       0 : =$2                  CDBSDA EQU  2 ; SOFTWARE DRIVER ADDRESS
+(1)  314/       0 : =$4                  CDBHAD EQU  4 ; HARDWARE ADDRESS
+(1)  315/       0 : =$6                  CDBDDF EQU  6 ; DEVICE DESCRIPTOR FLAGS
+(1)  316/       0 : =$7                  CDBVDT EQU  7 ; VALID DATA TYPE
+(1)  317/       0 : =$8                  CDBDDA EQU  8 ; DEVICE DEPENDENT AREA
+(1)  318/       0 : =$A                  CDBWST EQU 10 ; WORKING STORAGE
+(1)  319/       0 : =$C                  CDBLEN EQU CDBWST+2 ; CDB LENGTH
+(1)  320/       0 :                     
+(1)  321/       0 :                     ;
+(1)  322/       0 :                     ; CDBDDF BIT DEFINITIONS
+(1)  323/       0 :                     ;
+(1)  324/       0 : =$1                  DDsFMC EQU $00000001 ; ASCII-CONVERTED-BINARY IS DEFAUL
+(1)  325/       0 : =$2                  DDsLOG EQU %00000010 ; LOGICAL SECTOR I/O FLAG
+(1)  326/       0 : =$4                  DDsCNS EQU %00000100 ; CONSOLE FLAG
+(1)  327/       0 : =$8                  DDsRWD EQU %00001000 ; REWIND FLAG
+(1)  328/       0 : =$10                 DDsOCF EQU %00010000 ; OPEN/CLOSE FLAG
+(1)  329/       0 : =$20                 DDsINP EQU %00100000 ; INPUT DEVICE FLAG
+(1)  330/       0 : =$40                 DDsOUT EQU %01000000 ; OUTPUT DEVICE FLAG
+(1)  331/       0 : =$80                 DDsRES EQU %10000000 ; RESERVABLE DEVICE FLAG
+(1)  332/       0 :                     
+(1)  333/       0 :                     ;
+(1)  334/       0 :                     ; CDBVDT BIT DEFINITIONS
+(1)  335/       0 :                     ;
+(1)  336/       0 : =$4                  VDsBIN EQU %00000100 ; BINARY OBJECT FLAG
+(1)  337/       0 : =$8                  VDsGDB EQU %00001000 ; TEMP GDB POINTER FLAG
+(1)  338/       0 : =$10                 VDsSDA EQU %00010000 ; TEMP SDA POINTER FLAG
+(1)  339/       0 : =$80                 VDsNFF EQU %10000000 ; NON-FILE FORMAT FLAG
+(1)  340/       0 :                     
+(1)  341/       0 :                     ;
+(1)  342/       0 :                     ; DEVICE DRIVER ENTRY OFFSET
+(1)  343/       0 :                     ;
+(1)  344/       0 : =$0                  DVsON   EQU 0   ; DEVICE ON OFFSET
+(1)  345/       0 : =$3                  DVsOFF  EQU 3   ; DEVICE OFF OFFSET
+(1)  346/       0 : =$6                  DVsINT  EQU 6   ; DEVICE INTIALIZATION OFFSET
+(1)  347/       0 : =$9                  DVsTRM  EQU 9   ; DEVICE TERMINATION OFFSET
+(1)  348/       0 : =$C                  DVsIO   EQU 12  ; DEVICE CHARACTER INPUT/OUTPUT OFF
+(1)  349/       0 :                     
+(1)  350/       0 :                     ;
+(1)  351/       0 :                     ; DISK EROM EQUATES
+(1)  352/       0 :                     ;
+(1)  353/       0 : =$0                  CURDRV  EQU  0 ; CURRENT DRIVE NUMBER
+(1)  354/       0 : =$1                  STRSCT  EQU  1 ; STARTING PHYSICAL SECTOR NUMBER
+(1)  355/       0 : =$3                  NUMSCT  EQU  3 ; NUMBER OF SECTORS TO OPERATE UPON
+(1)  356/       0 : =$5                  LSCTLN  EQU  5 ; # OF BYTES TO READ FROM LAST SECT
+(1)  357/       0 : =$6                  CURADR  EQU  6 ; MEMORY ADDRESS FOR DISK TRANSFER
+(1)  358/       0 : =$8                  FDSTAT  EQU  8 ; DISK TRANSFER STATUS
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 7 - 02/02/2026 09:24:09 PM
 
 
-(1)  359/       0 : =$8                  FDSTAT  EQU  8 ; DISK TRANSFER STATUS
-(1)  360/       0 : =$B                  SCTCNT  EQU 11 ; SECTOR COUNT USED IN DETERMINING
-(1)  361/       0 : =$D                  SIDES   EQU $D ; - ->SINGLEi + -> DOUBLE SIDED
-(1)  362/       0 :                     
-(1)  363/       0 :                     ;
-(1)  364/       0 :                     ; EROM ENTRY POINTS
-(1)  365/       0 :                     ;
-(1)  366/       0 : =$E800               DSLOAD  EQU  $E800 ; BOOTSTRAP THE OPERATING SYSTEM
-(1)  367/       0 : =$E822               FDINIT  EQU  $E822 ; INITIALIZE THE DISK'S PIA AND SSD
-(1)  368/       0 : =$E853               CHKERR  EQU  $E853 ; CHECK AND PRINT ERROR FROM FDSTAT
-(1)  369/       0 : =$E85A               PRNTER  EQU  $E85A ; PRINT ERROR FROM FDSTAT
-(1)  370/       0 : =$E869               READSC  EQU  $E869 ; READ SECTOR(S)
-(1)  371/       0 : =$E86D               READPS  EQU  $E86D ; READ PARTIAL SECTOR
-(1)  372/       0 : =$E86F               RDCRC   EQU  $E86F ; READ AND CHECK FOR CRC
-(1)  373/       0 : =$E872               RWTEST  EQU  $E872 ; WRITE/READ TEST
-(1)  374/       0 : =$E875               RESTOR  EQU  $E875 ; MOVE HEAD TO TRACK 0
-(1)  375/       0 : =$E878               SEEK    EQU  $E878 ; POSITION HEAD TO TRACK OF "STRSCT
-(1)  376/       0 : =$E87B               WRTEST  EQU  $E87B ; WRITE TEST
-(1)  377/       0 : =$E87E               WRDDAM  EQU  $E87E ; WRITE DELETED DATA MARK
-(1)  378/       0 : =$E881               WRVERF  EQU  $E881 ; WRITE AND VERIFY CRC
-(1)  379/       0 : =$E884               WRITSC  EQU  $E884 ; WRITE SECTDR(S)
-(1)  380/       0 :                     
-(1)  381/       0 :                     ;
-(1)  382/       0 :                     ; EROM ERROR EQUATES
-(1)  383/       0 :                     ;
-(1)  384/       0 : ='1'                 ERsCRC  EQU  '1' ; DATA CRC ERROR
-(1)  385/       0 : ='2'                 ERsWRT  EQU  '2' ; WRITE PROTECTED DISK
-(1)  386/       0 : ='3'                 ERsRDY  EQU  '3' ; DISK NOT READY
-(1)  387/       0 : ='4'                 ERsMRK  EQU  '4' ; DELETED DATA MARK ENCOUNTERED
-(1)  388/       0 : ='5'                 ERsTIM  EQU  '5' ; TIMEOUT
-(1)  389/       0 : ='6'                 ERsDAD  EQU  '6' ; INVALID DISK ADDRESS
-(1)  390/       0 : ='7'                 ERsSEK  EQU  '7' ; SEEK ERROR
-(1)  391/       0 : ='8'                 ERsDMA  EQU  '8' ; DATA ADDRESS MARK ERROR
-(1)  392/       0 : ='9'                 ERsACR  EQU  '9' ; ADDRESS MARK CRC ERROR
-(1)  393/       0 :                     
-(1)  394/       0 :                     ;
-(1)  395/       0 :                     ; MISCELLANEOUS EROM EQUATES
-(1)  396/       0 :                     ;
-(1)  397/       0 : =$5                  RETRYs  EQU  5   ; RETRY COUNT FOR DISK READ/WRITE E
-(1)  398/       0 :                     
-(1)  399/       0 :                     ;
-(1)  400/       0 :                     ; LINE PRINTER EQUATES
-(1)  401/       0 :                     ;
-(1)  402/       0 : =$EBC0               LPINIT  EQU $EBC0 ; INIT PRINTER PIA
-(1)  403/       0 : =$EBCC               LIST    EQU $EBCC ; PRINT CONTENTS OF 'A'
-(1)  404/       0 : =$EBE4               LDATA   EQU $EBE4 ; PRINT STRING. CR/LF
-(1)  405/       0 : =$EBF2               LDATA1  EQU $EBF2 ; PRINT STRING, NO CR/LF
-(1)  406/       0 :                     
-(1)  407/       0 :                     ;
-(1)  408/       0 :                     ; EXBUG EQUATES FOR MDOS
-(1)  409/       0 :                     ;
-(1)  410/       0 :                     
-(1)  411/       0 : =$F015               INCHNP EQU  $F015  ; INPUT CHARACTER (NO PARITY)
-(1)  412/       0 : =$F018               OUTCH  EQU  $F018  ; OUTPUT ONE CHARACTER
-(1)  413/       0 : =$F021               PCRLF  EQU  $F021  ; PRINT LF/CR
-(1)  414/       0 : =$F024               PDATA  EQU  $F024  ; PRINT STRING
-(1)  415/       0 : =$FCFD               SBITs  EQU  $FCFD  ; BIT 7 INDICATES IRG OCCURRED (IF
-(1)  416/       0 : =$FF1F               BRKPTs EQU  $FF1F  ; MAID'S BREAKPOINT TABLE <8 FDB'S)
-(1)  417/       0 : =$FF4F               BKPINs EQU  $FF4F  ; EXBUG BREAKPOINTS IN MEMORY
-(1)  418/       0 : =$FF53               AECHO  EQU  $FF53  ; INPUT CHARACTER ECHO FLAG (O=>ECH
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 8 - 01/28/2026 05:12:38 PM
+(1)  359/       0 : =$B                  SCTCNT  EQU 11 ; SECTOR COUNT USED IN DETERMINING
+(1)  360/       0 : =$D                  SIDES   EQU $D ; - ->SINGLEi + -> DOUBLE SIDED
+(1)  361/       0 :                     
+(1)  362/       0 :                     ;
+(1)  363/       0 :                     ; EROM ENTRY POINTS
+(1)  364/       0 :                     ;
+(1)  365/       0 : =$E800               DSLOAD  EQU  $E800 ; BOOTSTRAP THE OPERATING SYSTEM
+(1)  366/       0 : =$E822               FDINIT  EQU  $E822 ; INITIALIZE THE DISK'S PIA AND SSD
+(1)  367/       0 : =$E853               CHKERR  EQU  $E853 ; CHECK AND PRINT ERROR FROM FDSTAT
+(1)  368/       0 : =$E85A               PRNTER  EQU  $E85A ; PRINT ERROR FROM FDSTAT
+(1)  369/       0 : =$E869               READSC  EQU  $E869 ; READ SECTOR(S)
+(1)  370/       0 : =$E86D               READPS  EQU  $E86D ; READ PARTIAL SECTOR
+(1)  371/       0 : =$E86F               RDCRC   EQU  $E86F ; READ AND CHECK FOR CRC
+(1)  372/       0 : =$E872               RWTEST  EQU  $E872 ; WRITE/READ TEST
+(1)  373/       0 : =$E875               RESTOR  EQU  $E875 ; MOVE HEAD TO TRACK 0
+(1)  374/       0 : =$E878               SEEK    EQU  $E878 ; POSITION HEAD TO TRACK OF "STRSCT
+(1)  375/       0 : =$E87B               WRTEST  EQU  $E87B ; WRITE TEST
+(1)  376/       0 : =$E87E               WRDDAM  EQU  $E87E ; WRITE DELETED DATA MARK
+(1)  377/       0 : =$E881               WRVERF  EQU  $E881 ; WRITE AND VERIFY CRC
+(1)  378/       0 : =$E884               WRITSC  EQU  $E884 ; WRITE SECTDR(S)
+(1)  379/       0 :                     
+(1)  380/       0 :                     ;
+(1)  381/       0 :                     ; EROM ERROR EQUATES
+(1)  382/       0 :                     ;
+(1)  383/       0 : ='1'                 ERsCRC  EQU  '1' ; DATA CRC ERROR
+(1)  384/       0 : ='2'                 ERsWRT  EQU  '2' ; WRITE PROTECTED DISK
+(1)  385/       0 : ='3'                 ERsRDY  EQU  '3' ; DISK NOT READY
+(1)  386/       0 : ='4'                 ERsMRK  EQU  '4' ; DELETED DATA MARK ENCOUNTERED
+(1)  387/       0 : ='5'                 ERsTIM  EQU  '5' ; TIMEOUT
+(1)  388/       0 : ='6'                 ERsDAD  EQU  '6' ; INVALID DISK ADDRESS
+(1)  389/       0 : ='7'                 ERsSEK  EQU  '7' ; SEEK ERROR
+(1)  390/       0 : ='8'                 ERsDMA  EQU  '8' ; DATA ADDRESS MARK ERROR
+(1)  391/       0 : ='9'                 ERsACR  EQU  '9' ; ADDRESS MARK CRC ERROR
+(1)  392/       0 :                     
+(1)  393/       0 :                     ;
+(1)  394/       0 :                     ; MISCELLANEOUS EROM EQUATES
+(1)  395/       0 :                     ;
+(1)  396/       0 : =$5                  RETRYs  EQU  5   ; RETRY COUNT FOR DISK READ/WRITE E
+(1)  397/       0 :                     
+(1)  398/       0 :                     ;
+(1)  399/       0 :                     ; LINE PRINTER EQUATES
+(1)  400/       0 :                     ;
+(1)  401/       0 : =$EBC0               LPINIT  EQU $EBC0 ; INIT PRINTER PIA
+(1)  402/       0 : =$EBCC               LIST    EQU $EBCC ; PRINT CONTENTS OF 'A'
+(1)  403/       0 : =$EBE4               LDATA   EQU $EBE4 ; PRINT STRING. CR/LF
+(1)  404/       0 : =$EBF2               LDATA1  EQU $EBF2 ; PRINT STRING, NO CR/LF
+(1)  405/       0 :                     
+(1)  406/       0 :                     ;
+(1)  407/       0 :                     ; EXBUG EQUATES FOR MDOS
+(1)  408/       0 :                     ;
+(1)  409/       0 :                     
+(1)  410/       0 : =$F015               INCHNP EQU  $F015  ; INPUT CHARACTER (NO PARITY)
+(1)  411/       0 : =$F018               OUTCH  EQU  $F018  ; OUTPUT ONE CHARACTER
+(1)  412/       0 : =$F021               PCRLF  EQU  $F021  ; PRINT LF/CR
+(1)  413/       0 : =$F024               PDATA  EQU  $F024  ; PRINT STRING
+(1)  414/       0 : =$FCFD               SBITs  EQU  $FCFD  ; BIT 7 INDICATES IRG OCCURRED (IF
+(1)  415/       0 : =$FF1F               BRKPTs EQU  $FF1F  ; MAID'S BREAKPOINT TABLE <8 FDB'S)
+(1)  416/       0 : =$FF4F               BKPINs EQU  $FF4F  ; EXBUG BREAKPOINTS IN MEMORY
+(1)  417/       0 : =$FF53               AECHO  EQU  $FF53  ; INPUT CHARACTER ECHO FLAG (O=>ECH
+(1)  418/       0 : =$FFF8               IRGsVC EQU  $FFF8  ; IRG VECTOR
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 8 - 02/02/2026 09:24:09 PM
 
 
-(1)  419/       0 : =$FFF8               IRGsVC EQU  $FFF8  ; IRG VECTOR
-(1)  420/       0 : =$FFFA               SWIsVC EQU  $FFFA  ; SWI VECTOR
-(1)  421/       0 : =$FFFC               NMIsVC EQU  $FFFC  ; NMI VECTOR
-(1)  422/       0 : =$FF8A               XSTAKs EQU  $FF8A  ; EXBUG STACK
-(1)  423/       0 : =$F0F3               MAIDs  EQU  $F0F3  ; MAID ENTRY POINT
-(1)  424/       0 : =$FF16               XREGsP EQU  $FF16  ; MAID P-REG.
-(1)  425/       0 : =$FF18               XREGsX EQU  $FF18  ; MAID X-REG.
-(1)  426/       0 : =$FF1A               XREGsA EQU  $FF1A  ; MAID A-REG.
-(1)  427/       0 : =$FF1B               XREGsB EQU  $FF1B  ; MAID B-REG.
-(1)  428/       0 : =$FF1C               XREGsC EQU  $FF1C  ; MAID C-REG.
-(1)  429/       0 : =$FF1D               XREGsS EQU  $FF1D  ; MAID S-REG.
-(1)  430/       0 : =$FF63               BRKPEs EQU  $FF63  ; END OF MAID BREAKPOINT TABLE
-(1)  431/       0 : =$FCF4               CNACIs EQU  $FCF4  ; CONSOLE ACIA
+(1)  419/       0 : =$FFFA               SWIsVC EQU  $FFFA  ; SWI VECTOR
+(1)  420/       0 : =$FFFC               NMIsVC EQU  $FFFC  ; NMI VECTOR
+(1)  421/       0 : =$FF8A               XSTAKs EQU  $FF8A  ; EXBUG STACK
+(1)  422/       0 : =$F0F3               MAIDs  EQU  $F0F3  ; MAID ENTRY POINT
+(1)  423/       0 : =$FF16               XREGsP EQU  $FF16  ; MAID P-REG.
+(1)  424/       0 : =$FF18               XREGsX EQU  $FF18  ; MAID X-REG.
+(1)  425/       0 : =$FF1A               XREGsA EQU  $FF1A  ; MAID A-REG.
+(1)  426/       0 : =$FF1B               XREGsB EQU  $FF1B  ; MAID B-REG.
+(1)  427/       0 : =$FF1C               XREGsC EQU  $FF1C  ; MAID C-REG.
+(1)  428/       0 : =$FF1D               XREGsS EQU  $FF1D  ; MAID S-REG.
+(1)  429/       0 : =$FF63               BRKPEs EQU  $FF63  ; END OF MAID BREAKPOINT TABLE
+(1)  430/       0 : =$FCF4               CNACIs EQU  $FCF4  ; CONSOLE ACIA
+(1)  431/       0 :                     
 (1)  432/       0 :                     
 (1)  433/       0 :                     
 (1)  434/       0 :                     
@@ -476,12 +476,11 @@
 (1)  450/       0 :                     
 (1)  451/       0 :                     
 (1)  452/       0 :                     
-(1)  453/       0 :                     
        3/       0 :                     
-       4/       0 : =$20                 LDADDRH EQU     $0020
-       5/       0 : =$21                 LDADDRL EQU     $0021
-       6/       0 : =$22                 EXADDRH EQU     $0022
-       7/       0 : =$23                 EXADDRL EQU     $0023
+       4/       0 : =$20                 PFNMSTAT EQU     $0020
+       5/       0 : =$21                 OPTIONS EQU     $0021
+       6/       0 : =$22                 DIRSMFLAG EQU     $0022
+       7/       0 : =$23                 ENTRYNUM EQU     $0023
        8/       0 : =$24                 M0024   EQU     $0024
        9/       0 : =$25                 M0025   EQU     $0025
       10/       0 : =$26                 M0026   EQU     $0026
@@ -502,16 +501,16 @@
       25/       0 :                     
       26/    2000 :                                     ORG     $2000
       27/    2000 :                     
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 9 - 01/28/2026 05:12:38 PM
-
-
       28/    2000 : 30 33 30 30                         FCC     '0300'                   ; 2000: 30 33 30 30    ; Version
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 9 - 02/02/2026 09:24:09 PM
+
+
       29/    2004 : 0E                  DIRSTART        CLI                              ; 2004: 0E             ; 
       30/    2005 : 4F                                  CLRA                             ; 2005: 4F             ; |
       31/    2006 : 97 24                               STAA    M0024                    ; 2006: 97 24          ; |
       32/    2008 : 97 25                               STAA    M0025                    ; 2008: 97 25          ; |
       33/    200A : 97 26                               STAA    M0026                    ; 200A: 97 26          ; | Init some Variables
-      34/    200C : 97 23                               STAA    EXADDRL                  ; 200C: 97 23          ; |
+      34/    200C : 97 23                               STAA    ENTRYNUM                 ; 200C: 97 23          ; |
       35/    200E : 4C                                  INCA                             ; 200E: 4C             ; |
       36/    200F : 97 2D                               STAA    M002D                    ; 200F: 97 2D          ; |
       37/    2011 : 86 0D                               LDAA    #CR                      ; 2011: 86 0D          ; 
@@ -519,164 +518,164 @@
       39/    2016 : B7 24 C0                            STAA    M24C0                    ; 2016: B7 24 C0       ; 
       40/    2019 : 7F 24 76                            CLR     M2476                    ; 2019: 7F 24 76       ; 
       41/    201C : 86 30                               LDAA    #'0'                     ; 201C: 86 30          ; Use drive 0 as default
-      42/    201E : B7 24 65                            STAA    M2465                    ; 201E: B7 24 65       ; 
-      43/    2021 : CE 24 66                            LDX     #M2466                   ; 2021: CE 24 66       ; 
-      44/    2024 : C6 0A                               LDAB    #$0A                     ; 2024: C6 0A          ; 
+      42/    201E : B7 24 65                            STAA    FNAMREG                  ; 201E: B7 24 65       ; Store it to Filenameregion (11 bytes long!)
+      43/    2021 : CE 24 66                            LDX     #M2466                   ; 2021: CE 24 66       ; Clear Filenameregion
+      44/    2024 : C6 0A                               LDAB    #$0A                     ; 2024: C6 0A          ; 10 Bytes left
       45/    2026 : (MACRO)                              SCALL   STCHB1                                          ; STORE BLANKS
       45/    2026 : 3F                           SWI
       45/    2027 : 12                           FCB  STCHB1
-      46/    2028 : DE FE                               LDX     M00FE                    ; 2028: DE FE          ; 
-      47/    202A : FF 25 E4                            STX     M25E4                    ; 202A: FF 25 E4       ; 
-      48/    202D : CE 24 65                            LDX     #M2465                   ; 202D: CE 24 65       ; 
-      49/    2030 : FF 25 E6                            STX     M25E6                    ; 2030: FF 25 E6       ; 
-      50/    2033 : CE 25 E4                            LDX     #M25E4                   ; 2033: CE 25 E4       ; 
+      46/    2028 : DE FE                               LDX     CBUFPs                   ; 2028: DE FE          ; Command Buffer Scan Ptr.
+      47/    202A : FF 25 E4                            STX     INPBUF                   ; 202A: FF 25 E4       ; 
+      48/    202D : CE 24 65                            LDX     #FNAMREG                 ; 202D: CE 24 65       ; |
+      49/    2030 : FF 25 E6                            STX     FNAMPTR                  ; 2030: FF 25 E6       ; Build Filanamepacket for PFNAM
+      50/    2033 : CE 25 E4                            LDX     #INPBUF                  ; 2033: CE 25 E4       ; |
       51/    2036 : (MACRO)                              SCALL   PFNAM1                                          ; PROCESS FILE NAME
       51/    2036 : 3F                           SWI
       51/    2037 : 1D                           FCB  PFNAM1
-      52/    2038 : D7 20                               STAB    LDADDRH                  ; 2038: D7 20          ; 
-      53/    203A : 5F                                  CLRB                             ; 203A: 5F             ; 
-      54/    203B : FE 25 E4                            LDX     M25E4                    ; 203B: FE 25 E4       ; 
-      55/    203E : A6 00               Z203E           LDAA    ,X                       ; 203E: A6 00          ; 
+      52/    2038 : D7 20                               STAB    PFNMSTAT                 ; 2038: D7 20          ; Save status of SCALL
+      53/    203A : 5F                                  CLRB                             ; 203A: 5F             ; Clear for Flags
+      54/    203B : FE 25 E4                            LDX     INPBUF                   ; 203B: FE 25 E4       ; 
+      55/    203E : A6 00               NOOPT           LDAA    ,X                       ; 203E: A6 00          ; 
       56/    2040 : 08                                  INX                              ; 2040: 08             ; 
-      57/    2041 : 81 0D                               CMPA    #$0D                     ; 2041: 81 0D          ; 
-      58/    2043 : 27 40                               BEQ     Z2085                    ; 2043: 27 40          ; 
-      59/    2045 : 81 3B                               CMPA    #$3B                     ; 2045: 81 3B          ; 
-      60/    2047 : 26 F5                               BNE     Z203E                    ; 2047: 26 F5          ; 
-      61/    2049 : A6 00               Z2049           LDAA    ,X                       ; 2049: A6 00          ; 
+      57/    2041 : 81 0D                               CMPA    #CR                      ; 2041: 81 0D          ; 
+      58/    2043 : 27 40                               BEQ     ENTRYDONE                ; 2043: 27 40          ; 
+      59/    2045 : 81 3B                               CMPA    #OPTDLM                  ; 2045: 81 3B          ; Compare with ';'
+      60/    2047 : 26 F5                               BNE     NOOPT                    ; 2047: 26 F5          ; 
+      61/    2049 : A6 00               NXTOPT          LDAA    ,X                       ; 2049: A6 00          ; We have Options
       62/    204B : 08                                  INX                              ; 204B: 08             ; 
-      63/    204C : 81 0D                               CMPA    #$0D                     ; 204C: 81 0D          ; 
-      64/    204E : 27 35                               BEQ     Z2085                    ; 204E: 27 35          ; 
-      65/    2050 : 81 45                               CMPA    #$45                     ; 2050: 81 45          ; 
-      66/    2052 : 26 09                               BNE     Z205D                    ; 2052: 26 09          ; 
-      67/    2054 : CA 01                               ORAB    #$01                     ; 2054: CA 01          ; 
+      63/    204C : 81 0D                               CMPA    #CR                      ; 204C: 81 0D          ; 
+      64/    204E : 27 35                               BEQ     ENTRYDONE                ; 204E: 27 35          ; 
+      65/    2050 : 81 45                               CMPA    #'E'                     ; 2050: 81 45          ; Displ. entire dir entry
+      66/    2052 : 26 09                               BNE     NOT_E                    ; 2052: 26 09          ; or not
+      67/    2054 : CA 01                               ORAB    #$01                     ; 2054: CA 01          ; Flags
       68/    2056 : 86 20                               LDAA    #SPACE                   ; 2056: 86 20          ; 
       69/    2058 : B7 24 AA                            STAA    M24AA                    ; 2058: B7 24 AA       ; 
-      70/    205B : 20 EC                               BRA     Z2049                    ; 205B: 20 EC          ; 
+      70/    205B : 20 EC                               BRA     NXTOPT                   ; 205B: 20 EC          ; 
       71/    205D :                     ;------------------------------------------------
-      72/    205D : 81 41               Z205D           CMPA    #$41                     ; 205D: 81 41          ; 
-      73/    205F : 26 0C                               BNE     Z206D                    ; 205F: 26 0C          ; 
-      74/    2061 : CA 02                               ORAB    #$02                     ; 2061: CA 02          ; 
+      72/    205D : 81 41               NOT_E           CMPA    #'A'                     ; 205D: 81 41          ; Disp. allocation info
+      73/    205F : 26 0C                               BNE     NOT_A                    ; 205F: 26 0C          ; or not
+      74/    2061 : CA 02                               ORAB    #$02                     ; 2061: CA 02          ; Flags
       75/    2063 : 86 20                               LDAA    #SPACE                   ; 2063: 86 20          ; 
       76/    2065 : B7 24 AA                            STAA    M24AA                    ; 2065: B7 24 AA       ; 
       77/    2068 : B7 24 C0                            STAA    M24C0                    ; 2068: B7 24 C0       ; 
-      78/    206B : 20 DC                               BRA     Z2049                    ; 206B: 20 DC          ; 
+      78/    206B : 20 DC                               BRA     NXTOPT                   ; 206B: 20 DC          ; 
       79/    206D :                     ;------------------------------------------------
-      80/    206D : 81 4C               Z206D           CMPA    #$4C                     ; 206D: 81 4C          ; 
-      81/    206F : 26 04                               BNE     Z2075                    ; 206F: 26 04          ; 
-      82/    2071 : CA 04                               ORAB    #$04                     ; 2071: CA 04          ; 
-      83/    2073 : 20 D4                               BRA     Z2049                    ; 2073: 20 D4          ; 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 10 - 01/28/2026 05:12:38 PM
-
-
+      80/    206D : 81 4C               NOT_A           CMPA    #'L'                     ; 206D: 81 4C          ; 
+      81/    206F : 26 04                               BNE     NOT_L                    ; 206F: 26 04          ; 
+      82/    2071 : CA 04                               ORAB    #$04                     ; 2071: CA 04          ; Flags
+      83/    2073 : 20 D4                               BRA     NXTOPT                   ; 2073: 20 D4          ; 
       84/    2075 :                     ;------------------------------------------------
-      85/    2075 : 81 53               Z2075           CMPA    #$53                     ; 2075: 81 53          ; 
-      86/    2077 : 26 04                               BNE     Z207D                    ; 2077: 26 04          ; 
-      87/    2079 : CA 08                               ORAB    #$08                     ; 2079: CA 08          ; 
-      88/    207B : 20 CC                               BRA     Z2049                    ; 207B: 20 CC          ; 
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 10 - 02/02/2026 09:24:09 PM
+
+
+      85/    2075 : 81 53               NOT_L           CMPA    #'S'                     ; 2075: 81 53          ; include system files
+      86/    2077 : 26 04                               BNE     NOT_S                    ; 2077: 26 04          ; or not
+      87/    2079 : CA 08                               ORAB    #$08                     ; 2079: CA 08          ; Flags
+      88/    207B : 20 CC                               BRA     NXTOPT                   ; 207B: 20 CC          ; 
       89/    207D :                     ;------------------------------------------------
-      90/    207D : 81 20               Z207D           CMPA    #$20                     ; 207D: 81 20          ; 
-      91/    207F : 27 C8                               BEQ     Z2049                    ; 207F: 27 C8          ; 
-      92/    2081 : C6 0B                               LDAB    #$0B                     ; 2081: C6 0B          ; 
-      93/    2083 : 20 12                               BRA     Z2097                    ; 2083: 20 12          ; 
+      90/    207D : 81 20               NOT_S           CMPA    #SPACE                   ; 207D: 81 20          ; 
+      91/    207F : 27 C8                               BEQ     NXTOPT                   ; 207F: 27 C8          ; 
+      92/    2081 : C6 0B                               LDAB    #$0B                     ; 2081: C6 0B          ; Set Error '$0B' (COMMAND SYNTAX ERROR)
+      93/    2083 : 20 12                               BRA     ERR01                    ; 2083: 20 12          ; no options after ';'
       94/    2085 :                     ;------------------------------------------------
-      95/    2085 : D7 21               Z2085           STAB    LDADDRL                  ; 2085: D7 21          ; 
-      96/    2087 : F6 24 65                            LDAB    M2465                    ; 2087: F6 24 65       ; 
-      97/    208A : F7 24 86                            STAB    M2486                    ; 208A: F7 24 86       ; 
-      98/    208D : C4 0F                               ANDB    #$0F                     ; 208D: C4 0F          ; 
-      99/    208F : 27 09                               BEQ     Z209A                    ; 208F: 27 09          ; 
+      95/    2085 : D7 21               ENTRYDONE       STAB    OPTIONS                  ; 2085: D7 21          ; Store options
+      96/    2087 : F6 24 65                            LDAB    FNAMREG                  ; 2087: F6 24 65       ; Here is the Drive# (as ASCII)
+      97/    208A : F7 24 86                            STAB    HEADER1                  ; 208A: F7 24 86       ; Store Drivenr. into Header
+      98/    208D : C4 0F                               ANDB    #$0F                     ; 208D: C4 0F          ; convert from ASCII
+      99/    208F : 27 09                               BEQ     Z209A                    ; 208F: 27 09          ; Drive 0 ?
      100/    2091 : C1 03                               CMPB    #$03                     ; 2091: C1 03          ; 
-     101/    2093 : 2F 05                               BLE     Z209A                    ; 2093: 2F 05          ; 
-     102/    2095 : C6 04                               LDAB    #$04                     ; 2095: C6 04          ; 
-     103/    2097 : 7E 23 35            Z2097           JMP     Z2335                    ; 2097: 7E 23 35       ; 
+     101/    2093 : 2F 05                               BLE     Z209A                    ; 2093: 2F 05          ; check for drive <= 3
+     102/    2095 : C6 04                               LDAB    #$04                     ; 2095: C6 04          ; Set Error '04' (INVALID LOGICAL UNIT NUMBER)
+     103/    2097 : 7E 23 35            ERR01           JMP     HNDLERR                  ; 2097: 7E 23 35       ; 
      104/    209A :                     ;------------------------------------------------
-     105/    209A : F7 24 65            Z209A           STAB    M2465                    ; 209A: F7 24 65       ; 
-     106/    209D : 96 20                               LDAA    LDADDRH                  ; 209D: 96 20          ; 
-     107/    209F : 85 04                               BITA    #$04                     ; 209F: 85 04          ; 
-     108/    20A1 : 27 04                               BEQ     Z20A7                    ; 20A1: 27 04          ; 
-     109/    20A3 : C6 05                               LDAB    #$05                     ; 20A3: C6 05          ; 
-     110/    20A5 : 20 F0                               BRA     Z2097                    ; 20A5: 20 F0          ; 
+     105/    209A : F7 24 65            Z209A           STAB    FNAMREG                  ; 209A: F7 24 65       ; Here is the Drive# (as Number)
+     106/    209D : 96 20                               LDAA    PFNMSTAT                 ; 209D: 96 20          ; Get status of SCALL PFNAM
+     107/    209F : 85 04                               BITA    #$04                     ; 209F: 85 04          ; Bit 2 (Device specification found) ?
+     108/    20A1 : 27 04                               BEQ     Z20A7                    ; 20A1: 27 04          ; yes
+     109/    20A3 : C6 05                               LDAB    #$05                     ; 20A3: C6 05          ; Set Error '05' (NAME REQUIRED)
+     110/    20A5 : 20 F0                               BRA     ERR01                    ; 20A5: 20 F0          ; 
      111/    20A7 :                     ;------------------------------------------------
-     112/    20A7 : CE 00 00            Z20A7           LDX     #CURDRV                  ; 20A7: CE 00 00       ; 
-     113/    20AA : FF 25 D2                            STX     M25D2                    ; 20AA: FF 25 D2       ; 
-     114/    20AD : CE 24 D1                            LDX     #M24D1                   ; 20AD: CE 24 D1       ; 
-     115/    20B0 : FF 25 D4                            STX     M25D4                    ; 20B0: FF 25 D4       ; 
-     116/    20B3 : 37                                  PSHB                             ; 20B3: 37             ; 
+     112/    20A7 : CE 00 00            Z20A7           LDX     #$0000                   ; 20A7: CE 00 00       ; | Build 5 Byte I/O Parameter Packet
+     113/    20AA : FF 25 D2                            STX     M25D2                    ; 20AA: FF 25 D2       ; | Sector # to read
+     114/    20AD : CE 24 D1                            LDX     #BUF128_1                ; 20AD: CE 24 D1       ; |
+     115/    20B0 : FF 25 D4                            STX     M25D4                    ; 20B0: FF 25 D4       ; | Address of 128 byte buffer
+     116/    20B3 : 37                                  PSHB                             ; 20B3: 37             ; Push Drivenr.
      117/    20B4 : D7 00                               STAB    CURDRV                   ; 20B4: D7 00          ; 
      118/    20B6 : BD E8 75                            JSR     RESTOR      ;EXORDISK    ; 20B6: BD E8 75       ; 
-     119/    20B9 : 33                                  PULB                             ; 20B9: 33             ; 
-     120/    20BA : CE 25 D1                            LDX     #M25D1                   ; 20BA: CE 25 D1       ; 
+     119/    20B9 : 33                                  PULB                             ; 20B9: 33             ; Pull Drivenr.
+     120/    20BA : CE 25 D1                            LDX     #IOPCKT                  ; 20BA: CE 25 D1       ; 5 Byte I/O Parameter Packet
      121/    20BD : (MACRO)                              SCALL   DREAD1                                          ; EROM DISK READ
      121/    20BD : 3F                           SWI
      121/    20BE : 0E                           FCB  DREAD1
      122/    20BF : 24 05                               BCC     Z20C6                    ; 20BF: 24 05          ; 
-     123/    20C1 : C6 01                               LDAB    #$01                     ; 20C1: C6 01          ; 
-     124/    20C3 : 7E 23 35                            JMP     Z2335                    ; 20C3: 7E 23 35       ; 
+     123/    20C1 : C6 01                               LDAB    #$01                     ; 20C1: C6 01          ; Set Error 1 (COMMAND SYNTAX ERROR)
+     124/    20C3 : 7E 23 35                            JMP     HNDLERR                  ; 20C3: 7E 23 35       ; 
      125/    20C6 :                     ;------------------------------------------------
-     126/    20C6 : CE 24 D1            Z20C6           LDX     #M24D1                   ; 20C6: CE 24 D1       ; 
-     127/    20C9 : FF 25 D6                            STX     M25D6                    ; 20C9: FF 25 D6       ; 
-     128/    20CC : CE 24 96                            LDX     #M2496                   ; 20CC: CE 24 96       ; 
-     129/    20CF : FF 25 D8                            STX     M25D8                    ; 20CF: FF 25 D8       ; 
-     130/    20D2 : CE 25 D6                            LDX     #M25D6                   ; 20D2: CE 25 D6       ; 
-     131/    20D5 : C6 08                               LDAB    #$08                     ; 20D5: C6 08          ; 
+     126/    20C6 : CE 24 D1            Z20C6           LDX     #BUF128_1                ; 20C6: CE 24 D1       ; Build Packet (Here is the first Sector)
+     127/    20C9 : FF 25 D6                            STX     BUFPTR01                 ; 20C9: FF 25 D6       ; Source Address
+     128/    20CC : CE 24 96                            LDX     #DSKID                   ; 20CC: CE 24 96       ; |
+     129/    20CF : FF 25 D8                            STX     M25D8                    ; 20CF: FF 25 D8       ; Destination Address
+     130/    20D2 : CE 25 D6                            LDX     #BUFPTR01                ; 20D2: CE 25 D6       ; 4 byte parameter packet
+     131/    20D5 : C6 08                               LDAB    #$08                     ; 20D5: C6 08          ; Number of bytes to move (first 8 Byte on Disk = ID)
      132/    20D7 : (MACRO)                              SCALL   MOVE1                                           ; MOVE A STRING
      132/    20D7 : 3F                           SWI
      132/    20D8 : 10                           FCB  MOVE1
-     133/    20D9 : CE 24 7E                            LDX     #M247E                   ; 20D9: CE 24 7E       ; 
-     134/    20DC : BD 24 31                            JSR     Z2431                    ; 20DC: BD 24 31       ; 
-     135/    20DF : C6 20                               LDAB    #$20                     ; 20DF: C6 20          ; 
-     136/    20E1 : CE 24 65                            LDX     #M2465                   ; 20E1: CE 24 65       ; 
-     137/    20E4 : A6 01                               LDAA    $01,X                    ; 20E4: A6 01          ; 
-     138/    20E6 : 11                                  CBA                              ; 20E6: 11             ; 
-     139/    20E7 : 26 08                               BNE     Z20F1                    ; 20E7: 26 08          ; 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 11 - 01/28/2026 05:12:38 PM
+     133/    20D9 : CE 24 7E                            LDX     #HEADER0                 ; 20D9: CE 24 7E       ; |
+     134/    20DC : BD 24 31                            JSR     OUTPUTTXT                ; 20DC: BD 24 31       ; Output Header
+     135/    20DF : C6 20                               LDAB    #SPACE                   ; 20DF: C6 20          ; 
+     136/    20E1 : CE 24 65                            LDX     #FNAMREG                 ; 20E1: CE 24 65       ; 
+     137/    20E4 : A6 01                               LDAA    $01,X                    ; 20E4: A6 01          ; Get Start of Filename
+     138/    20E6 : 11                                  CBA                              ; 20E6: 11             ; is it SPACE
+     139/    20E7 : 26 08                               BNE     VALIDFN                  ; 20E7: 26 08          ; no
+     140/    20E9 : A6 09                               LDAA    $09,X                    ; 20E9: A6 09          ; check end of string
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 11 - 02/02/2026 09:24:09 PM
 
 
-     140/    20E9 : A6 09                               LDAA    $09,X                    ; 20E9: A6 09          ; 
      141/    20EB : 11                                  CBA                              ; 20EB: 11             ; 
-     142/    20EC : 27 13                               BEQ     Z2101                    ; 20EC: 27 13          ; 
-     143/    20EE : 7E 22 B1            Z20EE           JMP     Z22B1                    ; 20EE: 7E 22 B1       ; 
+     142/    20EC : 27 13                               BEQ     CHKBRK0                  ; 20EC: 27 13          ; only space, check Break
+     143/    20EE : 7E 22 B1            ALLOK           JMP     FNAMGIVEN                ; 20EE: 7E 22 B1       ; Filename given in command
      144/    20F1 :                     ;------------------------------------------------
-     145/    20F1 : D6 20               Z20F1           LDAB    LDADDRH                  ; 20F1: D6 20          ; 
-     146/    20F3 : C5 01                               BITB    #$01                     ; 20F3: C5 01          ; 
-     147/    20F5 : 26 F7                               BNE     Z20EE                    ; 20F5: 26 F7          ; 
-     148/    20F7 : C5 02                               BITB    #$02                     ; 20F7: C5 02          ; 
-     149/    20F9 : 26 F3                               BNE     Z20EE                    ; 20F9: 26 F3          ; 
-     150/    20FB : C6 02                               LDAB    #$02                     ; 20FB: C6 02          ; 
-     151/    20FD : D7 22                               STAB    EXADDRH                  ; 20FD: D7 22          ; 
-     152/    20FF : 20 04                               BRA     Z2105                    ; 20FF: 20 04          ; 
+     145/    20F1 : D6 20               VALIDFN         LDAB    PFNMSTAT                 ; 20F1: D6 20          ; (PFNAM: pg. 381)
+     146/    20F3 : C5 01                               BITB    #$01                     ; 20F3: C5 01          ; family indicator in filename found ?
+     147/    20F5 : 26 F7                               BNE     ALLOK                    ; 20F5: 26 F7          ; 
+     148/    20F7 : C5 02                               BITB    #$02                     ; 20F7: C5 02          ; family indicator in suffix found ?
+     149/    20F9 : 26 F3                               BNE     ALLOK                    ; 20F9: 26 F3          ; 
+     150/    20FB : C6 02                               LDAB    #$02                     ; 20FB: C6 02          ; filename given
+     151/    20FD : D7 22                               STAB    DIRSMFLAG                ; 20FD: D7 22          ; 
+     152/    20FF : 20 04                               BRA     CHKBRK1                  ; 20FF: 20 04          ; 
      153/    2101 :                     ;------------------------------------------------
-     154/    2101 : C6 01               Z2101           LDAB    #$01                     ; 2101: C6 01          ; 
-     155/    2103 : D7 22                               STAB    EXADDRH                  ; 2103: D7 22          ; 
-     156/    2105 : (MACRO)              Z2105           SCALL   CKBRK1                                          ; CHECK CONSOLE FOR BREAK KEY
+     154/    2101 : C6 01               CHKBRK0         LDAB    #$01                     ; 2101: C6 01          ; Bit 0 - Search for Next Direntry
+     155/    2103 : D7 22                               STAB    DIRSMFLAG                ; 2103: D7 22          ; 
+     156/    2105 : (MACRO)              CHKBRK1         SCALL   CKBRK1                                          ; CHECK CONSOLE FOR BREAK KEY
      156/    2105 : 3F                           SWI
      156/    2106 : 0D                           FCB  CKBRK1
-     157/    2107 : 24 03                               BCC     Z210C                    ; 2107: 24 03          ; 
-     158/    2109 : 7E 23 A2                            JMP     Z23A2                    ; 2109: 7E 23 A2       ; 
+     157/    2107 : 24 03                               BCC     NOBRK                    ; 2107: 24 03          ; 
+     158/    2109 : 7E 23 A2                            JMP     BRKDET                   ; 2109: 7E 23 A2       ; 
      159/    210C :                     ;------------------------------------------------
-     160/    210C : D6 22               Z210C           LDAB    EXADDRH                  ; 210C: D6 22          ; 
-     161/    210E : CE 24 65                            LDX     #M2465                   ; 210E: CE 24 65       ; 
-     162/    2111 : (MACRO)                              SCALL   DIRSM1                                          ; DIRECTORY SEARCH AND MODIFY
+     160/    210C : D6 22               NOBRK           LDAB    DIRSMFLAG                ; 210C: D6 22          ; 
+     161/    210E : CE 24 65                            LDX     #FNAMREG                 ; 210E: CE 24 65       ; 
+     162/    2111 : (MACRO)                              SCALL   DIRSM1                                          ; DIRECTORY SEARCH AND MODIFY (pg. 360)
      162/    2111 : 3F                           SWI
      162/    2112 : 1C                           FCB  DIRSM1
-     163/    2113 : 24 03                               BCC     Z2118                    ; 2113: 24 03          ; 
-     164/    2115 : 7E 23 1D                            JMP     Z231D                    ; 2115: 7E 23 1D       ; 
+     163/    2113 : 24 03                               BCC     Z2118                    ; 2113: 24 03          ; no Errors, no end, no deleted entry
+     164/    2115 : 7E 23 1D                            JMP     DIRSMERR                 ; 2115: 7E 23 1D       ; 
      165/    2118 :                     ;------------------------------------------------
-     166/    2118 : 96 23               Z2118           LDAA    EXADDRL                  ; 2118: 96 23          ; 
-     167/    211A : 27 05                               BEQ     Z2121                    ; 211A: 27 05          ; 
+     166/    2118 : 96 23               Z2118           LDAA    ENTRYNUM                 ; 2118: 96 23          ; 
+     167/    211A : 27 05                               BEQ     Z2121                    ; 211A: 27 05          ; first entry is header
      168/    211C : BD 23 D1                            JSR     Z23D1                    ; 211C: BD 23 D1       ; 
-     169/    211F : 26 E4                               BNE     Z2105                    ; 211F: 26 E4          ; 
-     170/    2121 : 96 22               Z2121           LDAA    EXADDRH                  ; 2121: 96 22          ; 
+     169/    211F : 26 E4                               BNE     CHKBRK1                  ; 211F: 26 E4          ; 
+     170/    2121 : 96 22               Z2121           LDAA    DIRSMFLAG                ; 2121: 96 22          ; 
      171/    2123 : 4A                                  DECA                             ; 2123: 4A             ; 
      172/    2124 : 26 0D                               BNE     Z2133                    ; 2124: 26 0D          ; 
-     173/    2126 : 96 21                               LDAA    LDADDRL                  ; 2126: 96 21          ; 
-     174/    2128 : 85 08                               BITA    #$08                     ; 2128: 85 08          ; 
+     173/    2126 : 96 21                               LDAA    OPTIONS                  ; 2126: 96 21          ; 
+     174/    2128 : 85 08                               BITA    #$08                     ; 2128: 85 08          ; include system files ?
      175/    212A : 26 07                               BNE     Z2133                    ; 212A: 26 07          ; 
-     176/    212C : B6 24 72                            LDAA    M2472                    ; 212C: B6 24 72       ; 
+     176/    212C : B6 24 72                            LDAA    M2472                    ; 212C: B6 24 72       ; no
      177/    212F : 85 20                               BITA    #$20                     ; 212F: 85 20          ; 
-     178/    2131 : 26 D2                               BNE     Z2105                    ; 2131: 26 D2          ; 
+     178/    2131 : 26 D2                               BNE     CHKBRK1                  ; 2131: 26 D2          ; 
      179/    2133 : 7C 00 26            Z2133           INC     M0026                    ; 2133: 7C 00 26       ; 
-     180/    2136 : BD 23 B2                            JSR     Z23B2                    ; 2136: BD 23 B2       ; 
-     181/    2139 : 96 21                               LDAA    LDADDRL                  ; 2139: 96 21          ; 
+     180/    2136 : BD 23 B2                            JSR     MOVSTRNG                 ; 2136: BD 23 B2       ; 
+     181/    2139 : 96 21                               LDAA    OPTIONS                  ; 2139: 96 21          ; 
      182/    213B : 84 03                               ANDA    #$03                     ; 213B: 84 03          ; 
      183/    213D : 26 03                               BNE     Z2142                    ; 213D: 26 03          ; 
      184/    213F : 7E 22 9F                            JMP     Z229F                    ; 213F: 7E 22 9F       ; 
@@ -691,10 +690,10 @@
      193/    2156 : BD 26 C3                            JSR     Z26C3                    ; 2156: BD 26 C3       ; 
      194/    2159 : 4F                                  CLRA                             ; 2159: 4F             ; 
      195/    215A : F6 24 76                            LDAB    M2476                    ; 215A: F6 24 76       ; 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 12 - 01/28/2026 05:12:38 PM
-
-
      196/    215D : 97 27                               STAA    M0027                    ; 215D: 97 27          ; 
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 12 - 02/02/2026 09:24:09 PM
+
+
      197/    215F : D7 28                               STAB    M0028                    ; 215F: D7 28          ; 
      198/    2161 : DE 27                               LDX     M0027                    ; 2161: DE 27          ; 
      199/    2163 : FF 25 DA                            STX     M25DA                    ; 2163: FF 25 DA       ; 
@@ -703,22 +702,22 @@
      202/    216C : C6 02                               LDAB    #$02                     ; 216C: C6 02          ; 
      203/    216E : CE 25 DA                            LDX     #M25DA                   ; 216E: CE 25 DA       ; 
      204/    2171 : BD 26 C3                            JSR     Z26C3                    ; 2171: BD 26 C3       ; 
-     205/    2174 : F6 24 65                            LDAB    M2465                    ; 2174: F6 24 65       ; 
+     205/    2174 : F6 24 65                            LDAB    FNAMREG                  ; 2174: F6 24 65       ; Here is the Drive#
      206/    2177 : FE 24 70                            LDX     M2470                    ; 2177: FE 24 70       ; 
      207/    217A : FF 25 D2                            STX     M25D2                    ; 217A: FF 25 D2       ; 
-     208/    217D : CE 25 51                            LDX     #M2551                   ; 217D: CE 25 51       ; 
+     208/    217D : CE 25 51                            LDX     #BUF128_2                ; 217D: CE 25 51       ; 
      209/    2180 : FF 25 D4                            STX     M25D4                    ; 2180: FF 25 D4       ; 
-     210/    2183 : CE 25 D1                            LDX     #M25D1                   ; 2183: CE 25 D1       ; 
+     210/    2183 : CE 25 D1                            LDX     #IOPCKT                  ; 2183: CE 25 D1       ; 
      211/    2186 : (MACRO)                              SCALL   DREAD1                                          ; EROM DISK READ
      211/    2186 : 3F                           SWI
      211/    2187 : 0E                           FCB  DREAD1
      212/    2188 : 24 05                               BCC     Z218F                    ; 2188: 24 05          ; 
-     213/    218A : C6 01                               LDAB    #$01                     ; 218A: C6 01          ; 
-     214/    218C : 7E 23 35                            JMP     Z2335                    ; 218C: 7E 23 35       ; 
+     213/    218A : C6 01                               LDAB    #$01                     ; 218A: C6 01          ; Set Error 1 (COMMAND SYNTAX ERROR)
+     214/    218C : 7E 23 35                            JMP     HNDLERR                  ; 218C: 7E 23 35       ; 
      215/    218F :                     ;------------------------------------------------
      216/    218F : CE 00 00            Z218F           LDX     #CURDRV                  ; 218F: CE 00 00       ; 
      217/    2192 : FF 24 B9                            STX     M24B9                    ; 2192: FF 24 B9       ; 
-     218/    2195 : CE 25 51                            LDX     #M2551                   ; 2195: CE 25 51       ; 
+     218/    2195 : CE 25 51                            LDX     #BUF128_2                ; 2195: CE 25 51       ; 
      219/    2198 : DF 27                               STX     M0027                    ; 2198: DF 27          ; 
      220/    219A : A6 00                               LDAA    ,X                       ; 219A: A6 00          ; 
      221/    219C : 2B 1E                               BMI     Z21BC                    ; 219C: 2B 1E          ; 
@@ -748,27 +747,27 @@
      241/    21C8 : C6 04                               LDAB    #$04                     ; 21C8: C6 04          ; 
      242/    21CA : CE 25 DA                            LDX     #M25DA                   ; 21CA: CE 25 DA       ; 
      243/    21CD : BD 26 C3                            JSR     Z26C3                    ; 21CD: BD 26 C3       ; 
-     244/    21D0 : 96 21                               LDAA    LDADDRL                  ; 21D0: 96 21          ; 
+     244/    21D0 : 96 21                               LDAA    OPTIONS                  ; 21D0: 96 21          ; 
      245/    21D2 : 85 02                               BITA    #$02                     ; 21D2: 85 02          ; 
      246/    21D4 : 26 03                               BNE     Z21D9                    ; 21D4: 26 03          ; 
      247/    21D6 : 7E 22 9F                            JMP     Z229F                    ; 21D6: 7E 22 9F       ; 
      248/    21D9 :                     ;------------------------------------------------
-     249/    21D9 : B6 25 51            Z21D9           LDAA    M2551                    ; 21D9: B6 25 51       ; 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 13 - 01/28/2026 05:12:38 PM
-
-
+     249/    21D9 : B6 25 51            Z21D9           LDAA    BUF128_2                 ; 21D9: B6 25 51       ; 
      250/    21DC : 2A 1C                               BPL     Z21FA                    ; 21DC: 2A 1C          ; 
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 13 - 02/02/2026 09:24:09 PM
+
+
      251/    21DE : 86 40                               LDAA    #$40                     ; 21DE: 86 40          ; 
      252/    21E0 : C6 82                               LDAB    #$82                     ; 21E0: C6 82          ; 
      253/    21E2 : (MACRO)                              SCALL   EWORD1                                          ; SET ERROR STATUS WORD FOR CHAIN
      253/    21E2 : 3F                           SWI
      253/    21E3 : 23                           FCB  EWORD1
      254/    21E4 : CE 26 2E                            LDX     #M262E                   ; 21E4: CE 26 2E       ; 
-     255/    21E7 : FF 25 D6                            STX     M25D6                    ; 21E7: FF 25 D6       ; 
+     255/    21E7 : FF 25 D6                            STX     BUFPTR01                 ; 21E7: FF 25 D6       ; 
      256/    21EA : CE 24 C3                            LDX     #M24C3                   ; 21EA: CE 24 C3       ; 
      257/    21ED : FF 25 D8                            STX     M25D8                    ; 21ED: FF 25 D8       ; 
      258/    21F0 : C6 0B                               LDAB    #$0B                     ; 21F0: C6 0B          ; 
-     259/    21F2 : CE 25 D6                            LDX     #M25D6                   ; 21F2: CE 25 D6       ; 
+     259/    21F2 : CE 25 D6                            LDX     #BUFPTR01                ; 21F2: CE 25 D6       ; 
      260/    21F5 : (MACRO)                              SCALL   MOVE1                                           ; MOVE A STRING
      260/    21F5 : 3F                           SWI
      260/    21F6 : 10                           FCB  MOVE1
@@ -781,7 +780,7 @@
      267/    2205 : (MACRO)                              SCALL   STCHB1                                          ; STORE BLANKS
      267/    2205 : 3F                           SWI
      267/    2206 : 12                           FCB  STCHB1
-     268/    2207 : CE 25 51                            LDX     #M2551                   ; 2207: CE 25 51       ; 
+     268/    2207 : CE 25 51                            LDX     #BUF128_2                ; 2207: CE 25 51       ; 
      269/    220A : DF 29                               STX     M0029                    ; 220A: DF 29          ; 
      270/    220C : A6 01               Z220C           LDAA    $01,X                    ; 220C: A6 01          ; 
      271/    220E : E6 00                               LDAB    ,X                       ; 220E: E6 00          ; 
@@ -814,13 +813,13 @@
      296/    224A : CE 25 DA                            LDX     #M25DA                   ; 224A: CE 25 DA       ; 
      297/    224D : BD 26 C3                            JSR     Z26C3                    ; 224D: BD 26 C3       ; 
      298/    2250 : CE 24 9F                            LDX     #M249F                   ; 2250: CE 24 9F       ; 
-     299/    2253 : BD 24 31                            JSR     Z2431                    ; 2253: BD 24 31       ; 
+     299/    2253 : BD 24 31                            JSR     OUTPUTTXT                ; 2253: BD 24 31       ; 
      300/    2256 : F6 24 9F                            LDAB    M249F                    ; 2256: F6 24 9F       ; 
      301/    2259 : C1 20                               CMPB    #$20                     ; 2259: C1 20          ; 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 14 - 01/28/2026 05:12:38 PM
-
-
      302/    225B : 27 08                               BEQ     Z2265                    ; 225B: 27 08          ; 
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 14 - 02/02/2026 09:24:09 PM
+
+
      303/    225D : CE 24 9F                            LDX     #M249F                   ; 225D: CE 24 9F       ; 
      304/    2260 : F6 24 D0                            LDAB    M24D0                    ; 2260: F6 24 D0       ; 
      305/    2263 : (MACRO)                              SCALL   STCHB1                                          ; STORE BLANKS
@@ -841,7 +840,7 @@
      317/    227F : 3F                           SWI
      317/    2280 : 23                           FCB  EWORD1
      318/    2281 : CE 26 9E                            LDX     #NOTRMFND                ; 2281: CE 26 9E       ; Msg. No Terminator fnd in RIB
-     319/    2284 : BD 24 31                            JSR     Z2431                    ; 2284: BD 24 31       ; 
+     319/    2284 : BD 24 31                            JSR     OUTPUTTXT                ; 2284: BD 24 31       ; 
      320/    2287 : 20 1C                               BRA     Z22A5                    ; 2287: 20 1C          ; 
      321/    2289 :                     ;------------------------------------------------
      322/    2289 : DE 29               Z2289           LDX     M0029                    ; 2289: DE 29          ; 
@@ -855,35 +854,35 @@
      329/    2295 : 3F                           SWI
      329/    2296 : 0D                           FCB  CKBRK1
      330/    2297 : 24 03                               BCC     Z229C                    ; 2297: 24 03          ; 
-     331/    2299 : 7E 23 A2                            JMP     Z23A2                    ; 2299: 7E 23 A2       ; 
+     331/    2299 : 7E 23 A2                            JMP     BRKDET                   ; 2299: 7E 23 A2       ; 
      332/    229C :                     ;------------------------------------------------
      333/    229C : 7E 22 0C            Z229C           JMP     Z220C                    ; 229C: 7E 22 0C       ; 
      334/    229F :                     ;------------------------------------------------
      335/    229F : CE 24 9F            Z229F           LDX     #M249F                   ; 229F: CE 24 9F       ; 
-     336/    22A2 : BD 24 31                            JSR     Z2431                    ; 22A2: BD 24 31       ; 
-     337/    22A5 : 96 22               Z22A5           LDAA    EXADDRH                  ; 22A5: 96 22          ; 
+     336/    22A2 : BD 24 31                            JSR     OUTPUTTXT                ; 22A2: BD 24 31       ; 
+     337/    22A5 : 96 22               Z22A5           LDAA    DIRSMFLAG                ; 22A5: 96 22          ; 
      338/    22A7 : 85 02                               BITA    #$02                     ; 22A7: 85 02          ; 
-     339/    22A9 : 27 03                               BEQ     Z22AE                    ; 22A9: 27 03          ; 
+     339/    22A9 : 27 03                               BEQ     CHKBRK2                  ; 22A9: 27 03          ; 
      340/    22AB : 7E 23 39                            JMP     Z2339                    ; 22AB: 7E 23 39       ; 
      341/    22AE :                     ;------------------------------------------------
-     342/    22AE : 7E 21 05            Z22AE           JMP     Z2105                    ; 22AE: 7E 21 05       ; 
+     342/    22AE : 7E 21 05            CHKBRK2         JMP     CHKBRK1                  ; 22AE: 7E 21 05       ; 
      343/    22B1 :                     ;------------------------------------------------
-     344/    22B1 : 5F                  Z22B1           CLRB                             ; 22B1: 5F             ; 
+     344/    22B1 : 5F                  FNAMGIVEN       CLRB                             ; 22B1: 5F             ; 
      345/    22B2 : D7 2B                               STAB    M002B                    ; 22B2: D7 2B          ; 
      346/    22B4 : D7 2C                               STAB    M002C                    ; 22B4: D7 2C          ; 
-     347/    22B6 : C6 20                               LDAB    #$20                     ; 22B6: C6 20          ; 
-     348/    22B8 : CE 24 66                            LDX     #M2466                   ; 22B8: CE 24 66       ; 
-     349/    22BB : A6 00                               LDAA    ,X                       ; 22BB: A6 00          ; 
-     350/    22BD : 11                                  CBA                              ; 22BD: 11             ; 
-     351/    22BE : 26 05                               BNE     Z22C5                    ; 22BE: 26 05          ; 
+     347/    22B6 : C6 20                               LDAB    #SPACE                   ; 22B6: C6 20          ; 
+     348/    22B8 : CE 24 66                            LDX     #M2466                   ; 22B8: CE 24 66       ; |
+     349/    22BB : A6 00                               LDAA    ,X                       ; 22BB: A6 00          ; Get data from Filenameregion (without drive#)
+     350/    22BD : 11                                  CBA                              ; 22BD: 11             ; is it space ?
+     351/    22BE : 26 05                               BNE     Z22C5                    ; 22BE: 26 05          ; no
      352/    22C0 : 7A 00 2B                            DEC     M002B                    ; 22C0: 7A 00 2B       ; 
      353/    22C3 : 20 1A                               BRA     Z22DF                    ; 22C3: 20 1A          ; 
      354/    22C5 :                     ;------------------------------------------------
-     355/    22C5 : 96 20               Z22C5           LDAA    LDADDRH                  ; 22C5: 96 20          ; 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 15 - 01/28/2026 05:12:38 PM
-
-
+     355/    22C5 : 96 20               Z22C5           LDAA    PFNMSTAT                 ; 22C5: 96 20          ; 
      356/    22C7 : 85 01                               BITA    #$01                     ; 22C7: 85 01          ; 
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 15 - 02/02/2026 09:24:09 PM
+
+
      357/    22C9 : 26 06                               BNE     Z22D1                    ; 22C9: 26 06          ; 
      358/    22CB : 86 08                               LDAA    #$08                     ; 22CB: 86 08          ; 
      359/    22CD : 97 2B                               STAA    M002B                    ; 22CD: 97 2B          ; 
@@ -903,7 +902,7 @@
      373/    22E7 : 7A 00 2C                            DEC     M002C                    ; 22E7: 7A 00 2C       ; 
      374/    22EA : 20 18                               BRA     Z2304                    ; 22EA: 20 18          ; 
      375/    22EC :                     ;------------------------------------------------
-     376/    22EC : 96 20               Z22EC           LDAA    LDADDRH                  ; 22EC: 96 20          ; 
+     376/    22EC : 96 20               Z22EC           LDAA    PFNMSTAT                 ; 22EC: 96 20          ; 
      377/    22EE : 85 02                               BITA    #$02                     ; 22EE: 85 02          ; 
      378/    22F0 : 26 04                               BNE     Z22F6                    ; 22F0: 26 04          ; 
      379/    22F2 : 86 02                               LDAA    #$02                     ; 22F2: 86 02          ; 
@@ -916,43 +915,43 @@
      386/    22FF : A6 00                               LDAA    ,X                       ; 22FF: A6 00          ; 
      387/    2301 : 11                                  CBA                              ; 2301: 11             ; 
      388/    2302 : 26 F2                               BNE     Z22F6                    ; 2302: 26 F2          ; 
-     389/    2304 : 7C 00 23            Z2304           INC     EXADDRL                  ; 2304: 7C 00 23       ; 
+     389/    2304 : 7C 00 23            Z2304           INC     ENTRYNUM                 ; 2304: 7C 00 23       ; 
      390/    2307 : CE 24 66                            LDX     #M2466                   ; 2307: CE 24 66       ; 
-     391/    230A : FF 25 D6                            STX     M25D6                    ; 230A: FF 25 D6       ; 
+     391/    230A : FF 25 D6                            STX     BUFPTR01                 ; 230A: FF 25 D6       ; 
      392/    230D : CE 25 E8                            LDX     #M25E8                   ; 230D: CE 25 E8       ; 
      393/    2310 : FF 25 D8                            STX     M25D8                    ; 2310: FF 25 D8       ; 
-     394/    2313 : CE 25 D6                            LDX     #M25D6                   ; 2313: CE 25 D6       ; 
+     394/    2313 : CE 25 D6                            LDX     #BUFPTR01                ; 2313: CE 25 D6       ; 
      395/    2316 : C6 0A                               LDAB    #$0A                     ; 2316: C6 0A          ; 
      396/    2318 : (MACRO)                              SCALL   MOVE1                                           ; 
      396/    2318 : 3F                           SWI
      396/    2319 : 10                           FCB  MOVE1
-     397/    231A : 7E 21 01                            JMP     Z2101                    ; 231A: 7E 21 01       ; 
+     397/    231A : 7E 21 01                            JMP     CHKBRK0                  ; 231A: 7E 21 01       ; 
      398/    231D :                     ;------------------------------------------------
-     399/    231D : C1 01               Z231D           CMPB    #$01                     ; 231D: C1 01          ; 
-     400/    231F : 26 0E                               BNE     Z232F                    ; 231F: 26 0E          ; 
-     401/    2321 : C6 80               Z2321           LDAB    #$80                     ; 2321: C6 80          ; 
+     399/    231D : C1 01               DIRSMERR        CMPB    #$01                     ; 231D: C1 01          ; Direntry found ?
+     400/    231F : 26 0E                               BNE     Z232F                    ; 231F: 26 0E          ; yes
+     401/    2321 : C6 80               Z2321           LDAB    #$80                     ; 2321: C6 80          ; no
      402/    2323 : 86 40                               LDAA    #$40                     ; 2323: 86 40          ; 
      403/    2325 : (MACRO)                              SCALL   EWORD1                                          ; SET ERROR STATUS WORD FOR CHAIN
      403/    2325 : 3F                           SWI
      403/    2326 : 23                           FCB  EWORD1
      404/    2327 : CE 26 39                            LDX     #NODIRFND                ; 2327: CE 26 39       ; Msg.: No Directory found
-     405/    232A : BD 24 31                            JSR     Z2431                    ; 232A: BD 24 31       ; 
-     406/    232D : 20 73                               BRA     Z23A2                    ; 232D: 20 73          ; 
+     405/    232A : BD 24 31                            JSR     OUTPUTTXT                ; 232A: BD 24 31       ; 
+     406/    232D : 20 73                               BRA     BRKDET                   ; 232D: 20 73          ; 
      407/    232F :                     ;------------------------------------------------
-     408/    232F : C1 03               Z232F           CMPB    #$03                     ; 232F: C1 03          ; 
-     409/    2331 : 27 06                               BEQ     Z2339                    ; 2331: 27 06          ; 
-     410/    2333 : C6 0C                               LDAB    #$0C                     ; 2333: C6 0C          ; 
-     411/    2335 : (MACRO)              Z2335           SCALL   MDERR1                                          ; MDOS ERROR MESSAGE HANDLER
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 16 - 01/28/2026 05:12:38 PM
-
-
+     408/    232F : C1 03               Z232F           CMPB    #$03                     ; 232F: C1 03          ; DFT ?
+     409/    2331 : 27 06                               BEQ     Z2339                    ; 2331: 27 06          ; yes
+     410/    2333 : C6 0C                               LDAB    #$0C                     ; 2333: C6 0C          ; Error (INTERNAL SYSTEM ERROR AT ...)
+     411/    2335 : (MACRO)              HNDLERR         SCALL   MDERR1                                          ; MDOS ERROR MESSAGE HANDLER
      411/    2335 : 3F                           SWI
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 16 - 02/02/2026 09:24:09 PM
+
+
      411/    2336 : 20                           FCB  MDERR1
-     412/    2337 : 20 69                               BRA     Z23A2                    ; 2337: 20 69          ; 
+     412/    2337 : 20 69                               BRA     BRKDET                   ; 2337: 20 69          ; 
      413/    2339 :                     ;------------------------------------------------
      414/    2339 : 96 26               Z2339           LDAA    M0026                    ; 2339: 96 26          ; 
      415/    233B : 27 E4                               BEQ     Z2321                    ; 233B: 27 E4          ; 
-     416/    233D : 96 21                               LDAA    LDADDRL                  ; 233D: 96 21          ; 
+     416/    233D : 96 21                               LDAA    OPTIONS                  ; 233D: 96 21          ; 
      417/    233F : 84 03                               ANDA    #$03                     ; 233F: 84 03          ; 
      418/    2341 : 27 2C                               BEQ     Z236F                    ; 2341: 27 2C          ; 
      419/    2343 : DE 24                               LDX     M0024                    ; 2343: DE 24          ; 
@@ -970,7 +969,7 @@
      431/    2363 : CE 25 DA                            LDX     #M25DA                   ; 2363: CE 25 DA       ; 
      432/    2366 : BD 26 C3                            JSR     Z26C3                    ; 2366: BD 26 C3       ; 
      433/    2369 : CE 26 52                            LDX     #TTLNROFSEC              ; 2369: CE 26 52       ; Msg.: Total Nr. of Sectors
-     434/    236C : BD 24 31                            JSR     Z2431                    ; 236C: BD 24 31       ; 
+     434/    236C : BD 24 31                            JSR     OUTPUTTXT                ; 236C: BD 24 31       ; 
      435/    236F : 96 26               Z236F           LDAA    M0026                    ; 236F: 96 26          ; 
      436/    2371 : 97 28                               STAA    M0028                    ; 2371: 97 28          ; 
      437/    2373 : 7F 00 27                            CLR     M0027                    ; 2373: 7F 00 27       ; 
@@ -989,9 +988,9 @@
      450/    2396 : CE 25 DA                            LDX     #M25DA                   ; 2396: CE 25 DA       ; 
      451/    2399 : BD 26 C3                            JSR     Z26C3                    ; 2399: BD 26 C3       ; 
      452/    239C : CE 26 76                            LDX     #M2676                   ; 239C: CE 26 76       ; 
-     453/    239F : BD 24 31                            JSR     Z2431                    ; 239F: BD 24 31       ; 
-     454/    23A2 : 96 21               Z23A2           LDAA    LDADDRL                  ; 23A2: 96 21          ; 
-     455/    23A4 : 85 04                               BITA    #$04                     ; 23A4: 85 04          ; 
+     453/    239F : BD 24 31                            JSR     OUTPUTTXT                ; 239F: BD 24 31       ; 
+     454/    23A2 : 96 21               BRKDET          LDAA    OPTIONS                  ; 23A2: 96 21          ; 
+     455/    23A4 : 85 04                               BITA    #$04                     ; 23A4: 85 04          ; Output to Printer ?
      456/    23A6 : 27 08                               BEQ     Z23B0                    ; 23A6: 27 08          ; 
      457/    23A8 : D6 2D                               LDAB    M002D                    ; 23A8: D6 2D          ; 
      458/    23AA : 5A                                  DECB                             ; 23AA: 5A             ; 
@@ -1000,16 +999,16 @@
      461/    23B0 : (MACRO)              Z23B0           SCALL   MDENT1                                          ; 
      461/    23B0 : 3F                           SWI
      461/    23B1 : 1A                           FCB  MDENT1
-     462/    23B2 : CE 24 66            Z23B2           LDX     #M2466                   ; 23B2: CE 24 66       ; 
-     463/    23B5 : FF 25 D6                            STX     M25D6                    ; 23B5: FF 25 D6       ; 
+     462/    23B2 : CE 24 66            MOVSTRNG        LDX     #M2466                   ; 23B2: CE 24 66       ; Filenameregion (without drive#)
+     463/    23B5 : FF 25 D6                            STX     BUFPTR01                 ; 23B5: FF 25 D6       ; 
      464/    23B8 : CE 24 9F                            LDX     #M249F                   ; 23B8: CE 24 9F       ; 
      465/    23BB : FF 25 D8                            STX     M25D8                    ; 23BB: FF 25 D8       ; 
-     466/    23BE : CE 25 D6                            LDX     #M25D6                   ; 23BE: CE 25 D6       ; 
+     466/    23BE : CE 25 D6                            LDX     #BUFPTR01                ; 23BE: CE 25 D6       ; 
      467/    23C1 : C6 08                               LDAB    #$08                     ; 23C1: C6 08          ; 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 17 - 01/28/2026 05:12:38 PM
-
-
      468/    23C3 : (MACRO)                              SCALL   MOVE1                                           ; MOVE A STRING
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 17 - 02/02/2026 09:24:09 PM
+
+
      468/    23C3 : 3F                           SWI
      468/    23C4 : 10                           FCB  MOVE1
      469/    23C5 : 86 2E                               LDAA    #$2E                     ; 23C5: 86 2E          ; 
@@ -1020,11 +1019,11 @@
      474/    23D1 :                     ;------------------------------------------------
      475/    23D1 : D6 2B               Z23D1           LDAB    M002B                    ; 23D1: D6 2B          ; 
      476/    23D3 : 2B 13                               BMI     Z23E8                    ; 23D3: 2B 13          ; 
-     477/    23D5 : CE 24 66                            LDX     #M2466                   ; 23D5: CE 24 66       ; 
-     478/    23D8 : FF 25 D6                            STX     M25D6                    ; 23D8: FF 25 D6       ; 
+     477/    23D5 : CE 24 66                            LDX     #M2466                   ; 23D5: CE 24 66       ; Filenameregion (without drive#)
+     478/    23D8 : FF 25 D6                            STX     BUFPTR01                 ; 23D8: FF 25 D6       ; 
      479/    23DB : CE 25 E8                            LDX     #M25E8                   ; 23DB: CE 25 E8       ; 
      480/    23DE : FF 25 D8                            STX     M25D8                    ; 23DE: FF 25 D8       ; 
-     481/    23E1 : CE 25 D6                            LDX     #M25D6                   ; 23E1: CE 25 D6       ; 
+     481/    23E1 : CE 25 D6                            LDX     #BUFPTR01                ; 23E1: CE 25 D6       ; 
      482/    23E4 : (MACRO)                              SCALL   CMPAR1                                          ; 
      482/    23E4 : 3F                           SWI
      482/    23E5 : 11                           FCB  CMPAR1
@@ -1045,10 +1044,10 @@
      497/    2400 : 39                  Z2400           RTS                              ; 2400: 39             ; 
      498/    2401 :                     ;------------------------------------------------
      499/    2401 : CE 25 DE            Z2401           LDX     #M25DE                   ; 2401: CE 25 DE       ; 
-     500/    2404 : FF 25 D6                            STX     M25D6                    ; 2404: FF 25 D6       ; 
+     500/    2404 : FF 25 D6                            STX     BUFPTR01                 ; 2404: FF 25 D6       ; 
      501/    2407 : CE 24 AD                            LDX     #M24AD                   ; 2407: CE 24 AD       ; 
      502/    240A : FF 25 D8                            STX     M25D8                    ; 240A: FF 25 D8       ; 
-     503/    240D : CE 25 D6                            LDX     #M25D6                   ; 240D: CE 25 D6       ; 
+     503/    240D : CE 25 D6                            LDX     #BUFPTR01                ; 240D: CE 25 D6       ; 
      504/    2410 : C6 06                               LDAB    #$06                     ; 2410: C6 06          ; 
      505/    2412 : (MACRO)                              SCALL   MOVE1                                           ; 
      505/    2412 : 3F                           SWI
@@ -1068,13 +1067,13 @@
      518/    242E : A7 00                               STAA    ,X                       ; 242E: A7 00          ; 
      519/    2430 : 39                                  RTS                              ; 2430: 39             ; 
      520/    2431 :                     ;------------------------------------------------
-     521/    2431 : 96 21               Z2431           LDAA    LDADDRL                  ; 2431: 96 21          ; 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 18 - 01/28/2026 05:12:38 PM
+     521/    2431 : 96 21               OUTPUTTXT       LDAA    OPTIONS                  ; 2431: 96 21          ; Get Options
+     522/    2433 : 85 04                               BITA    #$04                     ; 2433: 85 04          ; Output to Printer ?
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 18 - 02/02/2026 09:24:09 PM
 
 
-     522/    2433 : 85 04                               BITA    #$04                     ; 2433: 85 04          ; 
-     523/    2435 : 26 03                               BNE     Z243A                    ; 2435: 26 03          ; 
-     524/    2437 : (MACRO)                              SCALL   DSPLY1                                          ; 
+     523/    2435 : 26 03                               BNE     Z243A                    ; 2435: 26 03          ; yes
+     524/    2437 : (MACRO)                              SCALL   DSPLY1                                          ; no, display Text from X
      524/    2437 : 3F                           SWI
      524/    2438 : 0A                           FCB  DSPLY1
      525/    2439 : 39                                  RTS                              ; 2439: 39             ; 
@@ -1094,7 +1093,7 @@
      536/    244A : 3F                           SWI
      536/    244B : 32                           FCB  PSHX1
      537/    244C : CE 25 F2                            LDX     #M25F2                   ; 244C: CE 25 F2       ; 
-     538/    244F : 86 0D                               LDAA    #$0D                     ; 244F: 86 0D          ; 
+     538/    244F : 86 0D                               LDAA    #CR                      ; 244F: 86 0D          ; 
      539/    2451 : 5A                  Z2451           DECB                             ; 2451: 5A             ; 
      540/    2452 : 27 05                               BEQ     Z2459                    ; 2452: 27 05          ; 
      541/    2454 : A7 00                               STAA    ,X                       ; 2454: A7 00          ; 
@@ -1112,7 +1111,7 @@
      549/    2463 : 33                           FCB  PULX1
      550/    2464 : 39                                  RTS                              ; 2464: 39             ; 
      551/    2465 :                     ;------------------------------------------------
-     552/    2465 : 30                  M2465           FCB     '0'                      ; 2465: 30             
+     552/    2465 : 30                  FNAMREG         FCB     '0'                      ; 2465: 30             
      553/    2466 : 20 20 20 20 20 20   M2466           FCC     '        '               ; 2466: 20 20 20 20 20 20 20 20 
              246C : 20 20             
      554/    246E : 20 20               M246E           FCC     '  '                     ; 246E: 20 20          
@@ -1122,22 +1121,22 @@
      558/    247A : 24                                  FCB     '$'                      ; 247A: 24             
      559/    247B : D1                                  FCB     $d1                      ; 247B: D1             
      560/    247C : 25 50                               FCC     '%P'                     ; 247C: 25 50          
-     561/    247E : 44 52 49 56 45 20   M247E           FCC     'DRIVE : '
+     561/    247E : 44 52 49 56 45 20   HEADER0         FCC     'DRIVE : '
              2484 : 3A 20             
-     562/    2486 : 20 20 20 20 44 49   M2486           FCC     '    DISK I.D. : '
+     562/    2486 : 20 20 20 20 44 49   HEADER1         FCC     '    DISK I.D. : '
              248C : 53 4B 20 49 2E 44 
              2492 : 2E 20 3A 20       
-     563/    2496 : 20 20 20 20 20 20   M2496           FCC     '        '
+     563/    2496 : 20 20 20 20 20 20   DSKID           FCC     '        '
              249C : 20 20             
-     564/    249E : 0D                                  FCB     $0d                      ; 249E: 0D             
-     565/    249F : 20 20 20 20 20 20   M249F           FCC     '        '                ; 249F: 20 20 20 20 20 20 20 20 
+     564/    249E : 0D                                  FCB     CR                       ; 249E: 0D             
+     565/    249F : 20 20 20 20 20 20   M249F           FCC     '        '
              24A5 : 20 20             
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 19 - 01/28/2026 05:12:38 PM
-
-
      566/    24A7 : 2E                  M24A7           FCB     '.'                      ; 24A7: 2E             
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 19 - 02/02/2026 09:24:09 PM
+
+
      567/    24A8 : 20 20               M24A8           FCC     '  '                     ; 24A8: 20 20          
-     568/    24AA : 0D                  M24AA           FCB     $0d                      ; 24AA: 0D             
+     568/    24AA : 0D                  M24AA           FCB     CR                       ; 24AA: 0D             
      569/    24AB : 20 20                               FCC     '  '                     ; 24AB: 20 20          
      570/    24AD : 20 20 20 20 20      M24AD           FCC     '     '                  ; 24AD: 20 20 20 20 20 
      571/    24B2 : 20 20 20 20 20      M24B2           FCC     '     '                  ; 24B2: 20 20 20 20 20 
@@ -1145,17 +1144,17 @@
      573/    24B9 : 20 20 20            M24B9           FCC     '   '                    ; 24B9: 20 20 20       
      574/    24BC : 20 20 20            M24BC           FCC     '   '                    ; 24BC: 20 20 20       
      575/    24BF : 20                  M24BF           FCB     ' '                      ; 24BF: 20             
-     576/    24C0 : 0D                  M24C0           FCB     $0d                      ; 24C0: 0D             
+     576/    24C0 : 0D                  M24C0           FCB     CR                       ; 24C0: 0D             
      577/    24C1 : 20 20                               FCC     '  '                     ; 24C1: 20 20          
      578/    24C3 : 20                  M24C3           FCB     ' '                      ; 24C3: 20             
      579/    24C4 : 20                  M24C4           FCB     ' '                      ; 24C4: 20             
      580/    24C5 : 20 20 20 20         M24C5           FCC     '    '                   ; 24C5: 20 20 20 20    
      581/    24C9 : 20 20 20 20         M24C9           FCC     '    '                   ; 24C9: 20 20 20 20    
      582/    24CD : 20                  M24CD           FCB     ' '                      ; 24CD: 20             
-     583/    24CE : 0D                                  FCB     $0d                      ; 24CE: 0D             
+     583/    24CE : 0D                                  FCB     CR                       ; 24CE: 0D             
      584/    24CF : 00                                  FCB     $00                      ; 24CF: 00             
      585/    24D0 : 21                  M24D0           FCB     $21                      ; 24D0: 21             
-     586/    24D1 : 00 00 00 00 00 00   M24D1           FCB     $00,$00,$00,$00,$00,$00  ; 24D1: 00 00 00 00 00 00 
+     586/    24D1 : 00 00 00 00 00 00   BUF128_1        FCB     $00,$00,$00,$00,$00,$00  ; 24D1: 00 00 00 00 00 00 
      587/    24D7 : 00 00 00 00 00 00                   FCB     $00,$00,$00,$00,$00,$00  ; 24D7: 00 00 00 00 00 00 
      588/    24DD : 00 00 00 00 00 00                   FCB     $00,$00,$00,$00,$00,$00  ; 24DD: 00 00 00 00 00 00 
      589/    24E3 : 00 00 00 00 00 00                   FCB     $00,$00,$00,$00,$00,$00  ; 24E3: 00 00 00 00 00 00 
@@ -1177,7 +1176,7 @@
      605/    2543 : 00 00 00 00 00 00                   FCB     $00,$00,$00,$00,$00,$00  ; 2543: 00 00 00 00 00 00 
      606/    2549 : 00 00 00 00 00 00                   FCB     $00,$00,$00,$00,$00,$00  ; 2549: 00 00 00 00 00 00 
      607/    254F : 00 00                               FCB     $00,$00                  ; 254F: 00 00          
-     608/    2551 : 00 00 00 00 00 00   M2551           FCB     $00,$00,$00,$00,$00,$00  ; 2551: 00 00 00 00 00 00 
+     608/    2551 : 00 00 00 00 00 00   BUF128_2        FCB     $00,$00,$00,$00,$00,$00  ; 2551: 00 00 00 00 00 00 
      609/    2557 : 00 00 00 00 00 00                   FCB     $00,$00,$00,$00,$00,$00  ; 2557: 00 00 00 00 00 00 
      610/    255D : 00 00 00 00 00 00                   FCB     $00,$00,$00,$00,$00,$00  ; 255D: 00 00 00 00 00 00 
      611/    2563 : 00 00 00 00 00 00                   FCB     $00,$00,$00,$00,$00,$00  ; 2563: 00 00 00 00 00 00 
@@ -1195,23 +1194,23 @@
      623/    25AB : 00 00 00 00 00 00                   FCB     $00,$00,$00,$00,$00,$00  ; 25AB: 00 00 00 00 00 00 
      624/    25B1 : 00 00 00 00 00 00                   FCB     $00,$00,$00,$00,$00,$00  ; 25B1: 00 00 00 00 00 00 
      625/    25B7 : 00 00 00 00 00 00                   FCB     $00,$00,$00,$00,$00,$00  ; 25B7: 00 00 00 00 00 00 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 20 - 01/28/2026 05:12:38 PM
-
-
      626/    25BD : 00 00 00 00 00 00                   FCB     $00,$00,$00,$00,$00,$00  ; 25BD: 00 00 00 00 00 00 
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 20 - 02/02/2026 09:24:09 PM
+
+
      627/    25C3 : 00 00 00 00 00 00                   FCB     $00,$00,$00,$00,$00,$00  ; 25C3: 00 00 00 00 00 00 
      628/    25C9 : 00 00 00 00 00 00                   FCB     $00,$00,$00,$00,$00,$00  ; 25C9: 00 00 00 00 00 00 
      629/    25CF : 00 00                               FCB     $00,$00                  ; 25CF: 00 00          
-     630/    25D1 : 00                  M25D1           FCB     $00                      ; 25D1: 00             
-     631/    25D2 : 00 00               M25D2           FCB     $00,$00                  ; 25D2: 00 00          
-     632/    25D4 : 00 00               M25D4           FCB     $00,$00                  ; 25D4: 00 00          
-     633/    25D6 : 00 00               M25D6           FCB     $00,$00                  ; 25D6: 00 00          
+     630/    25D1 : 00                  IOPCKT          FCB     $00                      ; 25D1: 00             
+     631/    25D2 : 00 00               M25D2           FDB     $0000                    ; 25D2: 00 00          
+     632/    25D4 : 00 00               M25D4           FDB     $0000                    ; 25D4: 00 00          
+     633/    25D6 : 00 00               BUFPTR01        FDB     $0000                    ; 25D6: 00 00          
      634/    25D8 : 00 00               M25D8           FCB     $00,$00                  ; 25D8: 00 00          
      635/    25DA : 00 00               M25DA           FCB     $00,$00                  ; 25DA: 00 00          
      636/    25DC : 00 00               M25DC           FCB     $00,$00                  ; 25DC: 00 00          
      637/    25DE : 57 44 53 43 4E 30   M25DE           FCC     'WDSCN0'                 ; 25DE: 57 44 53 43 4E 30 
-     638/    25E4 : 00 00               M25E4           FCB     $00,$00                  ; 25E4: 00 00          
-     639/    25E6 : 00 00               M25E6           FCB     $00,$00                  ; 25E6: 00 00          
+     638/    25E4 : 00 00               INPBUF          FCB     $00,$00                  ; 25E4: 00 00          
+     639/    25E6 : 00 00               FNAMPTR         FDB     $0000                    ; 25E6: 00 00          
      640/    25E8 : 20 20 20 20 20 20   M25E8           FCB     $20,$20,$20,$20,$20,$20  ; 25E8: 20 20 20 20 20 20 
      641/    25EE : 20 20                               FCB     $20,$20                  ; 25EE: 20 20          
      642/    25F0 : 20 20               M25F0           FCB     $20,$20                  ; 25F0: 20 20          
@@ -1231,7 +1230,7 @@
              263F : 45 43 54 4F 52 59 
              2645 : 20 45 4E 54 52 59 
              264B : 20 46 4F 55 4E 44 
-     655/    2651 : 0D                                  FCB     $0d                      ; 2651: 0D             
+     655/    2651 : 0D                                  FCB     CR                       ; 2651: 0D             
      656/    2652 : 54 4F 54 41 4C 20   TTLNROFSEC      FCC     'TOTAL NUMBER OF SECTORS :    '
              2658 : 4E 55 4D 42 45 52 
              265E : 20 4F 46 20 53 45 
@@ -1239,7 +1238,7 @@
              266A : 3A 20 20 20 20    
      657/    266F : 20 2F 24 20 20      M266F           FCC     ' /$  '
      658/    2674 : 20                  M2674           FCB     ' '
-     659/    2675 : 0D                                  FCB     $0d                      ; 2675: 0D             
+     659/    2675 : 0D                                  FCB     CR                       ; 2675: 0D             
      660/    2676 : 54 4F 54 41 4C 20   M2676           FCC     'TOTAL DIRECTORY ENTRIES SHOWN :   '
              267C : 44 49 52 45 43 54 
              2682 : 4F 52 59 20 45 4E 
@@ -1248,20 +1247,20 @@
              2694 : 3A 20 20 20       
      661/    2698 : 20 2F 24 20         M2698           FCC     ' /$ '
      662/    269C : 20                  M269C           FCB     ' '
-     663/    269D : 0D                                  FCB     $0d                      ; 269D: 0D             
+     663/    269D : 0D                                  FCB     CR                       ; 269D: 0D             
      664/    269E : 4E 4F 20 54 45 52   NOTRMFND        FCC     'NO TERMINATOR FOUND IN FILE\'S R.I.B.'
              26A4 : 4D 49 4E 41 54 4F 
              26AA : 52 20 46 4F 55 4E 
              26B0 : 44 20 49 4E 20 46 
              26B6 : 49 4C 45 27 53 20 
              26BC : 52 2E 49 2E 42 2E 
-     665/    26C2 : 0D                                  FCB     $0d                      ; 26C2: 0D             ; 
+     665/    26C2 : 0D                                  FCB     CR                       ; 26C2: 0D             ; 
      666/    26C3 : 5D                  Z26C3           TSTB                             ; 26C3: 5D             ; 
      667/    26C4 : 27 2F                               BEQ     Z26F5                    ; 26C4: 27 2F          ; 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 21 - 01/28/2026 05:12:38 PM
-
-
      668/    26C6 : 6C 03                               INC     $03,X                    ; 26C6: 6C 03          ; 
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 21 - 02/02/2026 09:24:09 PM
+
+
      669/    26C8 : 26 02                               BNE     Z26CC                    ; 26C8: 26 02          ; 
      670/    26CA : 6C 02                               INC     $02,X                    ; 26CA: 6C 02          ; 
      671/    26CC : FF 26 F6            Z26CC           STX     M26F6                    ; 26CC: FF 26 F6       ; 
@@ -1321,10 +1320,10 @@
      725/    2738 : 6C 07                               INC     $07,X                    ; 2738: 6C 07          ; 
      726/    273A : 20 F1                               BRA     Z272D                    ; 273A: 20 F1          ; 
      727/    273C :                     ;------------------------------------------------
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 22 - 01/28/2026 05:12:38 PM
-
-
      728/    273C : EB 01               Z273C           ADDB    $01,X                    ; 273C: EB 01          ; 
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 22 - 02/02/2026 09:24:09 PM
+
+
      729/    273E : A9 00                               ADCA    ,X                       ; 273E: A9 00          ; 
      730/    2740 : CE 27 9B                            LDX     #M279B                   ; 2740: CE 27 9B       ; 
      731/    2743 : 36                                  PSHA                             ; 2743: 36             ; 
@@ -1369,252 +1368,242 @@
      770/    278F : 4F                                  CLRA                             ; 278F: 4F             ; 
      771/    2790 : 39                  Z2790           RTS                              ; 2790: 39             ; 
      772/    2791 :                     ;------------------------------------------------
-     773/    2791 : 27 10               M2791           BEQ     M27A3                    ; 2791: 27 10          ; 
-     774/    2793 : 03                                  FCB     $03                      ; 2793: 03             ; 
-     775/    2794 : E8 00                               EORB    ,X                       ; 2794: E8 00          ; 
-     776/    2796 : 64 00                               LSR     ,X                       ; 2796: 64 00          ; 
-     777/    2798 : 0A                                  CLV                              ; 2798: 0A             ; 
-     778/    2799 : 00                                  FCB     $00                      ; 2799: 00             ; 
-     779/    279A : 01                                  NOP                              ; 279A: 01             ; 
-     780/    279B : 00                  M279B           FCB     $00                      ; 279B: 00             ; 
-     781/    279C : 00                                  FCB     $00                      ; 279C: 00             ; 
-     782/    279D : 00                                  FCB     $00                      ; 279D: 00             ; 
-     783/    279E : 00                                  FCB     $00                      ; 279E: 00             ; 
-     784/    279F : 00                                  FCB     $00                      ; 279F: 00             ; 
-     785/    27A0 : 00                  M27A0           FCB     $00                      ; 27A0: 00             ; 
-     786/    27A1 : 00                                  FCB     $00                      ; 27A1: 00             ; 
-     787/    27A2 : 00                                  FCB     $00                      ; 27A2: 00             ; 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 23 - 01/28/2026 05:12:38 PM
+     773/    2791 : 27                  M2791           FCB     $27                      ; 2791: 27             ; 
+     774/    2792 : 10 03 E8 00                         FCB     $10,$03,$E8,$00          ; 2792: 10 03 E8 00    ; 
+     775/    2796 : 64                                  FCB     $64                      ; 2796: 64             ; 
+     776/    2797 : 00 0A 00 01                         FCB     $00,$0A,$00,$01          ; 2797: 00 0A 00 01    ; 
+     777/    279B : 00 00 00 00 00      M279B           FCB     $00,$00,$00,$00,$00      ; 279B: 00 00 00 00 00 ; 
+     778/    27A0 : 00 00 00            M27A0           FCB     $00,$00,$00              ; 27A0: 00 00 00       ; 
+     779/    27A3 : 00                  M27A3           FCB     $00                      ; 27A3: 00             ; 
+     780/    27A4 : 00                  M27A4           FCB     $00                      ; 27A4: 00             ; 
+     781/    27A5 : 00 00               M27A5           FDB     CURDRV                   ; 27A5: 00 00          ; 
+     782/    27A7 : 86 01               Z27A7           LDAA    #$01                     ; 27A7: 86 01          ; 
+     783/    27A9 : AB 00                               ADDA    ,X                       ; 27A9: AB 00          ; 
+     784/    27AB : 8A 10                               ORAA    #$10                     ; 27AB: 8A 10          ; 
+     785/    27AD : A7 00                               STAA    ,X                       ; 27AD: A7 00          ; 
+     786/    27AF : 8B C6                               ADDA    #$C6                     ; 27AF: 8B C6          ; 
+     787/    27B1 : 24 08                               BCC     Z27BB                    ; 27B1: 24 08          ; 
+     788/    27B3 : 86 30                               LDAA    #$30                     ; 27B3: 86 30          ; 
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 23 - 02/02/2026 09:24:09 PM
 
 
-     788/    27A3 : 00                  M27A3           FCB     $00                      ; 27A3: 00             ; 
-     789/    27A4 : 00                  M27A4           FCB     $00                      ; 27A4: 00             ; 
-     790/    27A5 : 00                  M27A5           FCB     $00                      ; 27A5: 00             ; 
-     791/    27A6 : 00                                  FCB     $00                      ; 27A6: 00             ; 
-     792/    27A7 : 86 01               Z27A7           LDAA    #$01                     ; 27A7: 86 01          ; 
-     793/    27A9 : AB 00                               ADDA    ,X                       ; 27A9: AB 00          ; 
-     794/    27AB : 8A 10                               ORAA    #$10                     ; 27AB: 8A 10          ; 
-     795/    27AD : A7 00                               STAA    ,X                       ; 27AD: A7 00          ; 
-     796/    27AF : 8B C6                               ADDA    #$C6                     ; 27AF: 8B C6          ; 
-     797/    27B1 : 24 08                               BCC     Z27BB                    ; 27B1: 24 08          ; 
-     798/    27B3 : 86 30                               LDAA    #$30                     ; 27B3: 86 30          ; 
-     799/    27B5 : A7 00                               STAA    ,X                       ; 27B5: A7 00          ; 
-     800/    27B7 : 09                                  DEX                              ; 27B7: 09             ; 
-     801/    27B8 : 5A                                  DECB                             ; 27B8: 5A             ; 
-     802/    27B9 : 26 EC                               BNE     Z27A7                    ; 27B9: 26 EC          ; 
-     803/    27BB : 39                  Z27BB           RTS                              ; 27BB: 39             ; 
-     804/    27BC :                     ;------------------------------------------------
-     805/    27BC :                     
-     806/    27BC :                                     REPT    $C4                      ; Filler
-     807/    27BC :                                     FCB     $00
-     808/    27BC :                                     ENDM
-     807/    27BC : 00                                  FCB     $00
-     807/    27BD : 00                                  FCB     $00
-     807/    27BE : 00                                  FCB     $00
-     807/    27BF : 00                                  FCB     $00
-     807/    27C0 : 00                                  FCB     $00
-     807/    27C1 : 00                                  FCB     $00
-     807/    27C2 : 00                                  FCB     $00
-     807/    27C3 : 00                                  FCB     $00
-     807/    27C4 : 00                                  FCB     $00
-     807/    27C5 : 00                                  FCB     $00
-     807/    27C6 : 00                                  FCB     $00
-     807/    27C7 : 00                                  FCB     $00
-     807/    27C8 : 00                                  FCB     $00
-     807/    27C9 : 00                                  FCB     $00
-     807/    27CA : 00                                  FCB     $00
-     807/    27CB : 00                                  FCB     $00
-     807/    27CC : 00                                  FCB     $00
-     807/    27CD : 00                                  FCB     $00
-     807/    27CE : 00                                  FCB     $00
-     807/    27CF : 00                                  FCB     $00
-     807/    27D0 : 00                                  FCB     $00
-     807/    27D1 : 00                                  FCB     $00
-     807/    27D2 : 00                                  FCB     $00
-     807/    27D3 : 00                                  FCB     $00
-     807/    27D4 : 00                                  FCB     $00
-     807/    27D5 : 00                                  FCB     $00
-     807/    27D6 : 00                                  FCB     $00
-     807/    27D7 : 00                                  FCB     $00
-     807/    27D8 : 00                                  FCB     $00
-     807/    27D9 : 00                                  FCB     $00
-     807/    27DA : 00                                  FCB     $00
-     807/    27DB : 00                                  FCB     $00
-     807/    27DC : 00                                  FCB     $00
-     807/    27DD : 00                                  FCB     $00
-     807/    27DE : 00                                  FCB     $00
-     807/    27DF : 00                                  FCB     $00
-     807/    27E0 : 00                                  FCB     $00
-     807/    27E1 : 00                                  FCB     $00
-     807/    27E2 : 00                                  FCB     $00
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 24 - 01/28/2026 05:12:38 PM
+     789/    27B5 : A7 00                               STAA    ,X                       ; 27B5: A7 00          ; 
+     790/    27B7 : 09                                  DEX                              ; 27B7: 09             ; 
+     791/    27B8 : 5A                                  DECB                             ; 27B8: 5A             ; 
+     792/    27B9 : 26 EC                               BNE     Z27A7                    ; 27B9: 26 EC          ; 
+     793/    27BB : 39                  Z27BB           RTS                              ; 27BB: 39             ; 
+     794/    27BC :                     ;------------------------------------------------
+     795/    27BC :                     
+     796/    27BC :                                     REPT    $C4                      ; Filler
+     797/    27BC :                                     FCB     $00
+     798/    27BC :                                     ENDM
+     797/    27BC : 00                                  FCB     $00
+     797/    27BD : 00                                  FCB     $00
+     797/    27BE : 00                                  FCB     $00
+     797/    27BF : 00                                  FCB     $00
+     797/    27C0 : 00                                  FCB     $00
+     797/    27C1 : 00                                  FCB     $00
+     797/    27C2 : 00                                  FCB     $00
+     797/    27C3 : 00                                  FCB     $00
+     797/    27C4 : 00                                  FCB     $00
+     797/    27C5 : 00                                  FCB     $00
+     797/    27C6 : 00                                  FCB     $00
+     797/    27C7 : 00                                  FCB     $00
+     797/    27C8 : 00                                  FCB     $00
+     797/    27C9 : 00                                  FCB     $00
+     797/    27CA : 00                                  FCB     $00
+     797/    27CB : 00                                  FCB     $00
+     797/    27CC : 00                                  FCB     $00
+     797/    27CD : 00                                  FCB     $00
+     797/    27CE : 00                                  FCB     $00
+     797/    27CF : 00                                  FCB     $00
+     797/    27D0 : 00                                  FCB     $00
+     797/    27D1 : 00                                  FCB     $00
+     797/    27D2 : 00                                  FCB     $00
+     797/    27D3 : 00                                  FCB     $00
+     797/    27D4 : 00                                  FCB     $00
+     797/    27D5 : 00                                  FCB     $00
+     797/    27D6 : 00                                  FCB     $00
+     797/    27D7 : 00                                  FCB     $00
+     797/    27D8 : 00                                  FCB     $00
+     797/    27D9 : 00                                  FCB     $00
+     797/    27DA : 00                                  FCB     $00
+     797/    27DB : 00                                  FCB     $00
+     797/    27DC : 00                                  FCB     $00
+     797/    27DD : 00                                  FCB     $00
+     797/    27DE : 00                                  FCB     $00
+     797/    27DF : 00                                  FCB     $00
+     797/    27E0 : 00                                  FCB     $00
+     797/    27E1 : 00                                  FCB     $00
+     797/    27E2 : 00                                  FCB     $00
+     797/    27E3 : 00                                  FCB     $00
+     797/    27E4 : 00                                  FCB     $00
+     797/    27E5 : 00                                  FCB     $00
+     797/    27E6 : 00                                  FCB     $00
+     797/    27E7 : 00                                  FCB     $00
+     797/    27E8 : 00                                  FCB     $00
+     797/    27E9 : 00                                  FCB     $00
+     797/    27EA : 00                                  FCB     $00
+     797/    27EB : 00                                  FCB     $00
+     797/    27EC : 00                                  FCB     $00
+     797/    27ED : 00                                  FCB     $00
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 24 - 02/02/2026 09:24:09 PM
 
 
-     807/    27E3 : 00                                  FCB     $00
-     807/    27E4 : 00                                  FCB     $00
-     807/    27E5 : 00                                  FCB     $00
-     807/    27E6 : 00                                  FCB     $00
-     807/    27E7 : 00                                  FCB     $00
-     807/    27E8 : 00                                  FCB     $00
-     807/    27E9 : 00                                  FCB     $00
-     807/    27EA : 00                                  FCB     $00
-     807/    27EB : 00                                  FCB     $00
-     807/    27EC : 00                                  FCB     $00
-     807/    27ED : 00                                  FCB     $00
-     807/    27EE : 00                                  FCB     $00
-     807/    27EF : 00                                  FCB     $00
-     807/    27F0 : 00                                  FCB     $00
-     807/    27F1 : 00                                  FCB     $00
-     807/    27F2 : 00                                  FCB     $00
-     807/    27F3 : 00                                  FCB     $00
-     807/    27F4 : 00                                  FCB     $00
-     807/    27F5 : 00                                  FCB     $00
-     807/    27F6 : 00                                  FCB     $00
-     807/    27F7 : 00                                  FCB     $00
-     807/    27F8 : 00                                  FCB     $00
-     807/    27F9 : 00                                  FCB     $00
-     807/    27FA : 00                                  FCB     $00
-     807/    27FB : 00                                  FCB     $00
-     807/    27FC : 00                                  FCB     $00
-     807/    27FD : 00                                  FCB     $00
-     807/    27FE : 00                                  FCB     $00
-     807/    27FF : 00                                  FCB     $00
-     807/    2800 : 00                                  FCB     $00
-     807/    2801 : 00                                  FCB     $00
-     807/    2802 : 00                                  FCB     $00
-     807/    2803 : 00                                  FCB     $00
-     807/    2804 : 00                                  FCB     $00
-     807/    2805 : 00                                  FCB     $00
-     807/    2806 : 00                                  FCB     $00
-     807/    2807 : 00                                  FCB     $00
-     807/    2808 : 00                                  FCB     $00
-     807/    2809 : 00                                  FCB     $00
-     807/    280A : 00                                  FCB     $00
-     807/    280B : 00                                  FCB     $00
-     807/    280C : 00                                  FCB     $00
-     807/    280D : 00                                  FCB     $00
-     807/    280E : 00                                  FCB     $00
-     807/    280F : 00                                  FCB     $00
-     807/    2810 : 00                                  FCB     $00
-     807/    2811 : 00                                  FCB     $00
-     807/    2812 : 00                                  FCB     $00
-     807/    2813 : 00                                  FCB     $00
-     807/    2814 : 00                                  FCB     $00
-     807/    2815 : 00                                  FCB     $00
-     807/    2816 : 00                                  FCB     $00
-     807/    2817 : 00                                  FCB     $00
-     807/    2818 : 00                                  FCB     $00
-     807/    2819 : 00                                  FCB     $00
-     807/    281A : 00                                  FCB     $00
-     807/    281B : 00                                  FCB     $00
-     807/    281C : 00                                  FCB     $00
-     807/    281D : 00                                  FCB     $00
-     807/    281E : 00                                  FCB     $00
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 25 - 01/28/2026 05:12:38 PM
+     797/    27EE : 00                                  FCB     $00
+     797/    27EF : 00                                  FCB     $00
+     797/    27F0 : 00                                  FCB     $00
+     797/    27F1 : 00                                  FCB     $00
+     797/    27F2 : 00                                  FCB     $00
+     797/    27F3 : 00                                  FCB     $00
+     797/    27F4 : 00                                  FCB     $00
+     797/    27F5 : 00                                  FCB     $00
+     797/    27F6 : 00                                  FCB     $00
+     797/    27F7 : 00                                  FCB     $00
+     797/    27F8 : 00                                  FCB     $00
+     797/    27F9 : 00                                  FCB     $00
+     797/    27FA : 00                                  FCB     $00
+     797/    27FB : 00                                  FCB     $00
+     797/    27FC : 00                                  FCB     $00
+     797/    27FD : 00                                  FCB     $00
+     797/    27FE : 00                                  FCB     $00
+     797/    27FF : 00                                  FCB     $00
+     797/    2800 : 00                                  FCB     $00
+     797/    2801 : 00                                  FCB     $00
+     797/    2802 : 00                                  FCB     $00
+     797/    2803 : 00                                  FCB     $00
+     797/    2804 : 00                                  FCB     $00
+     797/    2805 : 00                                  FCB     $00
+     797/    2806 : 00                                  FCB     $00
+     797/    2807 : 00                                  FCB     $00
+     797/    2808 : 00                                  FCB     $00
+     797/    2809 : 00                                  FCB     $00
+     797/    280A : 00                                  FCB     $00
+     797/    280B : 00                                  FCB     $00
+     797/    280C : 00                                  FCB     $00
+     797/    280D : 00                                  FCB     $00
+     797/    280E : 00                                  FCB     $00
+     797/    280F : 00                                  FCB     $00
+     797/    2810 : 00                                  FCB     $00
+     797/    2811 : 00                                  FCB     $00
+     797/    2812 : 00                                  FCB     $00
+     797/    2813 : 00                                  FCB     $00
+     797/    2814 : 00                                  FCB     $00
+     797/    2815 : 00                                  FCB     $00
+     797/    2816 : 00                                  FCB     $00
+     797/    2817 : 00                                  FCB     $00
+     797/    2818 : 00                                  FCB     $00
+     797/    2819 : 00                                  FCB     $00
+     797/    281A : 00                                  FCB     $00
+     797/    281B : 00                                  FCB     $00
+     797/    281C : 00                                  FCB     $00
+     797/    281D : 00                                  FCB     $00
+     797/    281E : 00                                  FCB     $00
+     797/    281F : 00                                  FCB     $00
+     797/    2820 : 00                                  FCB     $00
+     797/    2821 : 00                                  FCB     $00
+     797/    2822 : 00                                  FCB     $00
+     797/    2823 : 00                                  FCB     $00
+     797/    2824 : 00                                  FCB     $00
+     797/    2825 : 00                                  FCB     $00
+     797/    2826 : 00                                  FCB     $00
+     797/    2827 : 00                                  FCB     $00
+     797/    2828 : 00                                  FCB     $00
+     797/    2829 : 00                                  FCB     $00
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 25 - 02/02/2026 09:24:09 PM
 
 
-     807/    281F : 00                                  FCB     $00
-     807/    2820 : 00                                  FCB     $00
-     807/    2821 : 00                                  FCB     $00
-     807/    2822 : 00                                  FCB     $00
-     807/    2823 : 00                                  FCB     $00
-     807/    2824 : 00                                  FCB     $00
-     807/    2825 : 00                                  FCB     $00
-     807/    2826 : 00                                  FCB     $00
-     807/    2827 : 00                                  FCB     $00
-     807/    2828 : 00                                  FCB     $00
-     807/    2829 : 00                                  FCB     $00
-     807/    282A : 00                                  FCB     $00
-     807/    282B : 00                                  FCB     $00
-     807/    282C : 00                                  FCB     $00
-     807/    282D : 00                                  FCB     $00
-     807/    282E : 00                                  FCB     $00
-     807/    282F : 00                                  FCB     $00
-     807/    2830 : 00                                  FCB     $00
-     807/    2831 : 00                                  FCB     $00
-     807/    2832 : 00                                  FCB     $00
-     807/    2833 : 00                                  FCB     $00
-     807/    2834 : 00                                  FCB     $00
-     807/    2835 : 00                                  FCB     $00
-     807/    2836 : 00                                  FCB     $00
-     807/    2837 : 00                                  FCB     $00
-     807/    2838 : 00                                  FCB     $00
-     807/    2839 : 00                                  FCB     $00
-     807/    283A : 00                                  FCB     $00
-     807/    283B : 00                                  FCB     $00
-     807/    283C : 00                                  FCB     $00
-     807/    283D : 00                                  FCB     $00
-     807/    283E : 00                                  FCB     $00
-     807/    283F : 00                                  FCB     $00
-     807/    2840 : 00                                  FCB     $00
-     807/    2841 : 00                                  FCB     $00
-     807/    2842 : 00                                  FCB     $00
-     807/    2843 : 00                                  FCB     $00
-     807/    2844 : 00                                  FCB     $00
-     807/    2845 : 00                                  FCB     $00
-     807/    2846 : 00                                  FCB     $00
-     807/    2847 : 00                                  FCB     $00
-     807/    2848 : 00                                  FCB     $00
-     807/    2849 : 00                                  FCB     $00
-     807/    284A : 00                                  FCB     $00
-     807/    284B : 00                                  FCB     $00
-     807/    284C : 00                                  FCB     $00
-     807/    284D : 00                                  FCB     $00
-     807/    284E : 00                                  FCB     $00
-     807/    284F : 00                                  FCB     $00
-     807/    2850 : 00                                  FCB     $00
-     807/    2851 : 00                                  FCB     $00
-     807/    2852 : 00                                  FCB     $00
-     807/    2853 : 00                                  FCB     $00
-     807/    2854 : 00                                  FCB     $00
-     807/    2855 : 00                                  FCB     $00
-     807/    2856 : 00                                  FCB     $00
-     807/    2857 : 00                                  FCB     $00
-     807/    2858 : 00                                  FCB     $00
-     807/    2859 : 00                                  FCB     $00
-     807/    285A : 00                                  FCB     $00
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 26 - 01/28/2026 05:12:38 PM
+     797/    282A : 00                                  FCB     $00
+     797/    282B : 00                                  FCB     $00
+     797/    282C : 00                                  FCB     $00
+     797/    282D : 00                                  FCB     $00
+     797/    282E : 00                                  FCB     $00
+     797/    282F : 00                                  FCB     $00
+     797/    2830 : 00                                  FCB     $00
+     797/    2831 : 00                                  FCB     $00
+     797/    2832 : 00                                  FCB     $00
+     797/    2833 : 00                                  FCB     $00
+     797/    2834 : 00                                  FCB     $00
+     797/    2835 : 00                                  FCB     $00
+     797/    2836 : 00                                  FCB     $00
+     797/    2837 : 00                                  FCB     $00
+     797/    2838 : 00                                  FCB     $00
+     797/    2839 : 00                                  FCB     $00
+     797/    283A : 00                                  FCB     $00
+     797/    283B : 00                                  FCB     $00
+     797/    283C : 00                                  FCB     $00
+     797/    283D : 00                                  FCB     $00
+     797/    283E : 00                                  FCB     $00
+     797/    283F : 00                                  FCB     $00
+     797/    2840 : 00                                  FCB     $00
+     797/    2841 : 00                                  FCB     $00
+     797/    2842 : 00                                  FCB     $00
+     797/    2843 : 00                                  FCB     $00
+     797/    2844 : 00                                  FCB     $00
+     797/    2845 : 00                                  FCB     $00
+     797/    2846 : 00                                  FCB     $00
+     797/    2847 : 00                                  FCB     $00
+     797/    2848 : 00                                  FCB     $00
+     797/    2849 : 00                                  FCB     $00
+     797/    284A : 00                                  FCB     $00
+     797/    284B : 00                                  FCB     $00
+     797/    284C : 00                                  FCB     $00
+     797/    284D : 00                                  FCB     $00
+     797/    284E : 00                                  FCB     $00
+     797/    284F : 00                                  FCB     $00
+     797/    2850 : 00                                  FCB     $00
+     797/    2851 : 00                                  FCB     $00
+     797/    2852 : 00                                  FCB     $00
+     797/    2853 : 00                                  FCB     $00
+     797/    2854 : 00                                  FCB     $00
+     797/    2855 : 00                                  FCB     $00
+     797/    2856 : 00                                  FCB     $00
+     797/    2857 : 00                                  FCB     $00
+     797/    2858 : 00                                  FCB     $00
+     797/    2859 : 00                                  FCB     $00
+     797/    285A : 00                                  FCB     $00
+     797/    285B : 00                                  FCB     $00
+     797/    285C : 00                                  FCB     $00
+     797/    285D : 00                                  FCB     $00
+     797/    285E : 00                                  FCB     $00
+     797/    285F : 00                                  FCB     $00
+     797/    2860 : 00                                  FCB     $00
+     797/    2861 : 00                                  FCB     $00
+     797/    2862 : 00                                  FCB     $00
+     797/    2863 : 00                                  FCB     $00
+     797/    2864 : 00                                  FCB     $00
+     797/    2865 : 00                                  FCB     $00
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 26 - 02/02/2026 09:24:09 PM
 
 
-     807/    285B : 00                                  FCB     $00
-     807/    285C : 00                                  FCB     $00
-     807/    285D : 00                                  FCB     $00
-     807/    285E : 00                                  FCB     $00
-     807/    285F : 00                                  FCB     $00
-     807/    2860 : 00                                  FCB     $00
-     807/    2861 : 00                                  FCB     $00
-     807/    2862 : 00                                  FCB     $00
-     807/    2863 : 00                                  FCB     $00
-     807/    2864 : 00                                  FCB     $00
-     807/    2865 : 00                                  FCB     $00
-     807/    2866 : 00                                  FCB     $00
-     807/    2867 : 00                                  FCB     $00
-     807/    2868 : 00                                  FCB     $00
-     807/    2869 : 00                                  FCB     $00
-     807/    286A : 00                                  FCB     $00
-     807/    286B : 00                                  FCB     $00
-     807/    286C : 00                                  FCB     $00
-     807/    286D : 00                                  FCB     $00
-     807/    286E : 00                                  FCB     $00
-     807/    286F : 00                                  FCB     $00
-     807/    2870 : 00                                  FCB     $00
-     807/    2871 : 00                                  FCB     $00
-     807/    2872 : 00                                  FCB     $00
-     807/    2873 : 00                                  FCB     $00
-     807/    2874 : 00                                  FCB     $00
-     807/    2875 : 00                                  FCB     $00
-     807/    2876 : 00                                  FCB     $00
-     807/    2877 : 00                                  FCB     $00
-     807/    2878 : 00                                  FCB     $00
-     807/    2879 : 00                                  FCB     $00
-     807/    287A : 00                                  FCB     $00
-     807/    287B : 00                                  FCB     $00
-     807/    287C : 00                                  FCB     $00
-     807/    287D : 00                                  FCB     $00
-     807/    287E : 00                                  FCB     $00
-     807/    287F : 00                                  FCB     $00
-     809/    2880 :                                     END
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 27 - 01/28/2026 05:12:38 PM
+     797/    2866 : 00                                  FCB     $00
+     797/    2867 : 00                                  FCB     $00
+     797/    2868 : 00                                  FCB     $00
+     797/    2869 : 00                                  FCB     $00
+     797/    286A : 00                                  FCB     $00
+     797/    286B : 00                                  FCB     $00
+     797/    286C : 00                                  FCB     $00
+     797/    286D : 00                                  FCB     $00
+     797/    286E : 00                                  FCB     $00
+     797/    286F : 00                                  FCB     $00
+     797/    2870 : 00                                  FCB     $00
+     797/    2871 : 00                                  FCB     $00
+     797/    2872 : 00                                  FCB     $00
+     797/    2873 : 00                                  FCB     $00
+     797/    2874 : 00                                  FCB     $00
+     797/    2875 : 00                                  FCB     $00
+     797/    2876 : 00                                  FCB     $00
+     797/    2877 : 00                                  FCB     $00
+     797/    2878 : 00                                  FCB     $00
+     797/    2879 : 00                                  FCB     $00
+     797/    287A : 00                                  FCB     $00
+     797/    287B : 00                                  FCB     $00
+     797/    287C : 00                                  FCB     $00
+     797/    287D : 00                                  FCB     $00
+     797/    287E : 00                                  FCB     $00
+     797/    287F : 00                                  FCB     $00
+     799/    2880 :                                     END
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 27 - 02/02/2026 09:24:09 PM
 
 
   Symbol Table (* = unused):
@@ -1624,43 +1613,49 @@
 *ADBX1 :                         27 - |  ADDAM1 :                        16 - |
  ADDAX1 :                        29 - | *ADXBA1 :                        2A - |
 *AECHO :                       FF53 - | *ALLOC1 :                        21 - |
-*ALPHA1 :                        14 - | *ALUSM1 :                        1E - |
+ ALLOK :                       20EE C | *ALPHA1 :                        14 - |
+*ALUSM1 :                        1E - |
 *ARCHITECTURE :                                      "x86_64-unknown-linux" - |
 *ASLX1 :                         31 - | *ASRX1 :                         30 - |
 *BEL :                            7 - | *BIGENDIAN :                      0 - |
 *BKPINS :                      FF4F - | *BOOT1 :                         3F - |
-*BRANCHEXT :                      0 - | *BRKPES :                      FF63 - |
-*BRKPTS :                      FF1F - | *BS :                             8 - |
+*BRANCHEXT :                      0 - |  BRKDET :                      23A2 C |
+*BRKPES :                      FF63 - | *BRKPTS :                      FF1F - |
+*BS :                             8 - |  BUF128_1 :                    24D1 C |
+ BUF128_2 :                    2551 C |  BUFPTR01 :                    25D6 C |
 *CAN :                           18 - | *CASESENSITIVE :                  0 - |
  CBUFFS :                        AE - |  CBUFLS :                        50 - |
-*CBUFPS :                        FE - | *CDBDDA :                         8 - |
+ CBUFPS :                        FE - | *CDBDDA :                         8 - |
 *CDBDDF :                         6 - | *CDBHAD :                         4 - |
 *CDBIOC :                         0 - | *CDBLEN :                         C - |
 *CDBSDA :                         2 - | *CDBVDT :                         7 - |
  CDBWST :                         A - | *CHANG1 :                        1F - |
- CHFLGS :                       11E - | *CHKERR :                      E853 - |
- CKBRK1 :                         D - | *CLOSE1 :                         3 - |
- CMPAR1 :                        11 - | *CNACIS :                      FCF4 - |
-*COMPMODE :                       0 - | *CONSTPI :        3.141592653589793 - |
-*CPBAX1 :                        2F - |  CR :                             D - |
-*CURADR :                         6 - |  CURDRV :                         0 - |
-*CUSTOM :                         0 - | *DATE :                "01/28/2026" - |
-*DC1 :                           11 - | *DC2 :                           12 - |
-*DC3 :                           13 - | *DC4 :                           14 - |
-*DDSCNS :                         4 - | *DDSFMC :                         1 - |
-*DDSINP :                        20 - | *DDSLOG :                         2 - |
-*DDSOCF :                        10 - | *DDSOUT :                        40 - |
-*DDSRES :                        80 - | *DDSRWD :                         8 - |
-*DEALC1 :                        22 - | *DEVDLM :                       '#' - |
-*DFCLSS :                        20 - | *DIDSDT :                         C - |
-*DIDSID :                         0 - | *DIDSNM :                        12 - |
-*DIDSRB :                        26 - | *DIDSRN :                         A - |
-*DIDSVN :                         8 - | *DIRSAT :                         C - |
- DIRSM1 :                        1C - | *DIRSNM :                         0 - |
-*DIRSNU :                         E - | *DIRSRB :                         A - |
-*DIRSSX :                         8 - | *DIRSTART :                    2004 C |
-*DLE :                           10 - | *DMA1 :                          19 - |
- DREAD1 :                         E - | *DRVDLM :                       ':' - |
+ CHFLGS :                       11E - |  CHKBRK0 :                     2101 C |
+ CHKBRK1 :                     2105 C |  CHKBRK2 :                     22AE C |
+*CHKERR :                      E853 - |  CKBRK1 :                         D - |
+*CLOSE1 :                         3 - |  CMPAR1 :                        11 - |
+*CNACIS :                      FCF4 - | *COMPMODE :                       0 - |
+*CONSTPI :        3.141592653589793 - | *CPBAX1 :                        2F - |
+ CR :                             D - | *CURADR :                         6 - |
+ CURDRV :                         0 - | *CUSTOM :                         0 - |
+*DATE :                "02/02/2026" - | *DC1 :                           11 - |
+*DC2 :                           12 - | *DC3 :                           13 - |
+*DC4 :                           14 - | *DDSCNS :                         4 - |
+*DDSFMC :                         1 - | *DDSINP :                        20 - |
+*DDSLOG :                         2 - | *DDSOCF :                        10 - |
+*DDSOUT :                        40 - | *DDSRES :                        80 - |
+*DDSRWD :                         8 - | *DEALC1 :                        22 - |
+*DEVDLM :                       '#' - | *DFCLSS :                        20 - |
+*DIDSDT :                         C - | *DIDSID :                         0 - |
+*DIDSNM :                        12 - | *DIDSRB :                        26 - |
+*DIDSRN :                         A - | *DIDSVN :                         8 - |
+*DIRSAT :                         C - |  DIRSM1 :                        1C - |
+ DIRSMERR :                    231D C |  DIRSMFLAG :                     22 - |
+*DIRSNM :                         0 - | *DIRSNU :                         E - |
+*DIRSRB :                         A - | *DIRSSX :                         8 - |
+*DIRSTART :                    2004 C | *DLE :                           10 - |
+*DMA1 :                          19 - |  DREAD1 :                         E - |
+*DRVDLM :                       ':' - |  DSKID :                       2496 C |
 *DSLOAD :                      E800 - | *DSPLX1 :                         B - |
  DSPLY1 :                         A - | *DSPLZ1 :                         C - |
 *DTSCLS :                        10 - | *DTSINP :                        80 - |
@@ -1671,37 +1666,41 @@
 *DVSINT :                         6 - | *DVSIO :                          C - |
 *DVSOFF :                         3 - | *DVSON :                          0 - |
 *DVSTRM :                         9 - | *DWRIT1 :                         F - |
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 28 - 02/02/2026 09:24:09 PM
+
+
 *EDT :                            4 - | *EM :                            19 - |
  ENDOSS :                       106 - |  ENDRVS :                       110 - |
  ENDSYS :                       10A - |  ENDUSS :                       108 - |
-*ENG :                            5 - | *EREAD1 :                        39 - |
-*ERSACR :                       '9' - | *ERSCRC :                       '1' - |
-*ERSDAD :                       '6' - | *ERSDMA :                       '8' - |
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 28 - 01/28/2026 05:12:38 PM
-
-
-*ERSMRK :                       '4' - | *ERSRDY :                       '3' - |
-*ERSSEK :                       '7' - | *ERSTIM :                       '5' - |
-*ERSWRT :                       '2' - | *ESC :                           1B - |
-*ETB :                           17 - | *ETX :                            3 - |
- EWORD1 :                        23 - | *EWRIT1 :                        3A - |
- EXADDRH :                       22 - |  EXADDRL :                       23 - |
-*FALSE :                          0 - | *FAMDLM :                       '*' - |
-*FDINIT :                      E822 - | *FDSCMP :                         8 - |
-*FDSCON :                        10 - | *FDSDEL :                        40 - |
-*FDSFMA :                         5 - | *FDSFMB :                         3 - |
-*FDSFMC :                         7 - | *FDSFMD :                         1 - |
-*FDSFML :                         2 - | *FDSFMU :                         0 - |
-*FDSSYS :                        20 - | *FDSTAT :                         8 - |
-*FDSWRT :                        80 - | *FF :                             C - |
+*ENG :                            5 - |  ENTRYDONE :                   2085 C |
+ ENTRYNUM :                      23 - | *EREAD1 :                        39 - |
+ ERR01 :                       2097 C | *ERSACR :                       '9' - |
+*ERSCRC :                       '1' - | *ERSDAD :                       '6' - |
+*ERSDMA :                       '8' - | *ERSMRK :                       '4' - |
+*ERSRDY :                       '3' - | *ERSSEK :                       '7' - |
+*ERSTIM :                       '5' - | *ERSWRT :                       '2' - |
+*ESC :                           1B - | *ETB :                           17 - |
+*ETX :                            3 - |  EWORD1 :                        23 - |
+*EWRIT1 :                        3A - | *FALSE :                          0 - |
+*FAMDLM :                       '*' - | *FDINIT :                      E822 - |
+*FDSCMP :                         8 - | *FDSCON :                        10 - |
+*FDSDEL :                        40 - | *FDSFMA :                         5 - |
+*FDSFMB :                         3 - | *FDSFMC :                         7 - |
+*FDSFMD :                         1 - | *FDSFML :                         2 - |
+*FDSFMU :                         0 - | *FDSSYS :                        20 - |
+*FDSTAT :                         8 - | *FDSWRT :                        80 - |
+*FF :                             C - |  FNAMGIVEN :                   22B1 C |
+ FNAMPTR :                     25E6 C |  FNAMREG :                     2465 C |
 *FS :                            1C - | *FULLPMMU :                       1 - |
  GDBAS :                        112 - | *GETFD1 :                        36 - |
 *GETLS1 :                         7 - | *GETRC1 :                         4 - |
 *GS :                            1D - | *HAS64 :                          1 - |
 *HASDSP :                         0 - | *HASFPU :                         0 - |
-*HASPMMU :                        0 - | *HT :                             9 - |
-*INCHNP :                      F015 - | *INEXTMODE :                      0 - |
-*INLWORDMODE :                    0 - | *INMAXMODE :                      0 - |
+*HASPMMU :                        0 - |  HEADER0 :                     247E C |
+ HEADER1 :                     2486 C |  HNDLERR :                     2335 C |
+*HT :                             9 - | *INCHNP :                      F015 - |
+*INEXTMODE :                      0 - | *INLWORDMODE :                    0 - |
+*INMAXMODE :                      0 - |  INPBUF :                      25E4 C |
 *INSRCMODE :                      0 - | *INSUPMODE :                      0 - |
  IOCBLN :                        25 - | *IOCDBP :                         2 - |
 *IOCDBS :                         4 - | *IOCDEN :                        1B - |
@@ -1713,79 +1712,79 @@
  IOCSBI :                        23 - | *IOCSBP :                        1D - |
 *IOCSBS :                        1F - | *IOCSDW :                         D - |
 *IOCSLS :                         F - |  IOCSTA :                         0 - |
-*IOCSUF :                        13 - |  IRGSSV :                       11C - |
- IRGSUV :                       11A - | *IRGSVC :                      FFF8 - |
-*ISBUFQ :                         D - | *ISCKSM :                         E - |
-*ISCLOS :                         8 - | *ISDEAL :                        17 - |
-*ISDELT :                        10 - | *ISDSPC :                        13 - |
-*ISDTYP :                         B - | *ISDUPE :                         6 - |
-*ISEOF :                          9 - | *ISEOM :                          C - |
-*ISFSPC :                        12 - | *ISFTYP :                         A - |
-*ISIDEN :                        15 - | *ISIVDV :                         5 - |
-*ISNODV :                         1 - | *ISNOER :                         0 - |
-*ISNONM :                         7 - | *ISNORV :                         3 - |
-*ISNRDY :                         4 - | *ISRANG :                        11 - |
-*ISRECL :                        18 - | *ISRES :                          2 - |
-*ISRIB :                         16 - | *ISSECB :                        19 - |
-*ISSSPC :                        14 - | *ISWRIT :                         F - |
-*JOCDBE :                         6 - | *KEYIN1 :                         9 - |
- KYISSV :                       104 - |  LDADDRH :                       20 - |
- LDADDRL :                       21 - | *LDATA :                       EBE4 - |
-*LDATA1 :                      EBF2 - | *LF :                             A - |
-*LIST :                        EBCC - | *LISTON :                         1 - |
-*LOAD1 :                         1B - | *LPINIT :                      EBC0 - |
-*LSCTLN :                         5 - | *LUSRES :                        40 - |
- M0024 :                         24 - |  M0025 :                         25 - |
- M0026 :                         26 - |  M0027 :                         27 - |
- M0028 :                         28 - |  M0029 :                         29 - |
- M002B :                         2B - |  M002C :                         2C - |
- M002D :                         2D - |  M00FE :                         FE - |
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 29 - 01/28/2026 05:12:38 PM
+*IOCSUF :                        13 - |  IOPCKT :                      25D1 C |
+ IRGSSV :                       11C - |  IRGSUV :                       11A - |
+*IRGSVC :                      FFF8 - | *ISBUFQ :                         D - |
+*ISCKSM :                         E - | *ISCLOS :                         8 - |
+*ISDEAL :                        17 - | *ISDELT :                        10 - |
+*ISDSPC :                        13 - | *ISDTYP :                         B - |
+*ISDUPE :                         6 - | *ISEOF :                          9 - |
+*ISEOM :                          C - | *ISFSPC :                        12 - |
+*ISFTYP :                         A - | *ISIDEN :                        15 - |
+*ISIVDV :                         5 - | *ISNODV :                         1 - |
+*ISNOER :                         0 - | *ISNONM :                         7 - |
+*ISNORV :                         3 - | *ISNRDY :                         4 - |
+*ISRANG :                        11 - | *ISRECL :                        18 - |
+*ISRES :                          2 - | *ISRIB :                         16 - |
+*ISSECB :                        19 - | *ISSSPC :                        14 - |
+*ISWRIT :                         F - | *JOCDBE :                         6 - |
+*KEYIN1 :                         9 - |  KYISSV :                       104 - |
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 29 - 02/02/2026 09:24:09 PM
 
 
- M2465 :                       2465 C |  M2466 :                       2466 C |
+*LDATA :                       EBE4 - | *LDATA1 :                      EBF2 - |
+*LF :                             A - | *LIST :                        EBCC - |
+*LISTON :                         1 - | *LOAD1 :                         1B - |
+*LPINIT :                      EBC0 - | *LSCTLN :                         5 - |
+*LUSRES :                        40 - |  M0024 :                         24 - |
+ M0025 :                         25 - |  M0026 :                         26 - |
+ M0027 :                         27 - |  M0028 :                         28 - |
+ M0029 :                         29 - |  M002B :                         2B - |
+ M002C :                         2C - |  M002D :                         2D - |
+*M00FE :                         FE - |  M2466 :                       2466 C |
  M246E :                       246E C |  M2470 :                       2470 C |
  M2472 :                       2472 C |  M2476 :                       2476 C |
- M247E :                       247E C |  M2486 :                       2486 C |
- M2496 :                       2496 C |  M249F :                       249F C |
- M24A7 :                       24A7 C |  M24A8 :                       24A8 C |
- M24AA :                       24AA C |  M24AD :                       24AD C |
- M24B2 :                       24B2 C |  M24B7 :                       24B7 C |
- M24B9 :                       24B9 C |  M24BC :                       24BC C |
- M24BF :                       24BF C |  M24C0 :                       24C0 C |
- M24C3 :                       24C3 C |  M24C4 :                       24C4 C |
- M24C5 :                       24C5 C |  M24C9 :                       24C9 C |
- M24CD :                       24CD C |  M24D0 :                       24D0 C |
- M24D1 :                       24D1 C |  M2551 :                       2551 C |
- M25D1 :                       25D1 C |  M25D2 :                       25D2 C |
- M25D4 :                       25D4 C |  M25D6 :                       25D6 C |
- M25D8 :                       25D8 C |  M25DA :                       25DA C |
- M25DC :                       25DC C |  M25DE :                       25DE C |
- M25E4 :                       25E4 C |  M25E6 :                       25E6 C |
- M25E8 :                       25E8 C |  M25F0 :                       25F0 C |
- M25F2 :                       25F2 C |  M262E :                       262E C |
- M266F :                       266F C |  M2674 :                       2674 C |
- M2676 :                       2676 C |  M2698 :                       2698 C |
- M269C :                       269C C |  M26F6 :                       26F6 C |
- M2791 :                       2791 C |  M279B :                       279B C |
- M27A0 :                       27A0 C |  M27A3 :                       27A3 C |
- M27A4 :                       27A4 C |  M27A5 :                       27A5 C |
- M3030 :                       3030 - |  M3537 :                       3537 - |
-*MACEXP :                         7 - | *MAIDS :                       F0F3 - |
- MDENT1 :                        1A - |  MDERR1 :                        20 - |
- MDOSS :                        100 - | *MERED1 :                        3D - |
-*MEWRT1 :                        3E - |  MMA1 :                          18 - |
-*MOMCPU :                      6800 - | *MOMCPUNAME :                "6800" - |
- MOVE1 :                         10 - | *MREAD1 :                        3B - |
+ M249F :                       249F C |  M24A7 :                       24A7 C |
+ M24A8 :                       24A8 C |  M24AA :                       24AA C |
+ M24AD :                       24AD C |  M24B2 :                       24B2 C |
+ M24B7 :                       24B7 C |  M24B9 :                       24B9 C |
+ M24BC :                       24BC C |  M24BF :                       24BF C |
+ M24C0 :                       24C0 C |  M24C3 :                       24C3 C |
+ M24C4 :                       24C4 C |  M24C5 :                       24C5 C |
+ M24C9 :                       24C9 C |  M24CD :                       24CD C |
+ M24D0 :                       24D0 C |  M25D2 :                       25D2 C |
+ M25D4 :                       25D4 C |  M25D8 :                       25D8 C |
+ M25DA :                       25DA C |  M25DC :                       25DC C |
+ M25DE :                       25DE C |  M25E8 :                       25E8 C |
+ M25F0 :                       25F0 C |  M25F2 :                       25F2 C |
+ M262E :                       262E C |  M266F :                       266F C |
+ M2674 :                       2674 C |  M2676 :                       2676 C |
+ M2698 :                       2698 C |  M269C :                       269C C |
+ M26F6 :                       26F6 C |  M2791 :                       2791 C |
+ M279B :                       279B C |  M27A0 :                       27A0 C |
+ M27A3 :                       27A3 C |  M27A4 :                       27A4 C |
+ M27A5 :                       27A5 C |  M3030 :                       3030 - |
+ M3537 :                       3537 - | *MACEXP :                         7 - |
+*MAIDS :                       F0F3 - |  MDENT1 :                        1A - |
+ MDERR1 :                        20 - |  MDOSS :                        100 - |
+*MERED1 :                        3D - | *MEWRT1 :                        3E - |
+ MMA1 :                          18 - | *MOMCPU :                      6800 - |
+*MOMCPUNAME :                "6800" - |  MOVE1 :                         10 - |
+ MOVSTRNG :                    23B2 C | *MREAD1 :                        3B - |
 *MWRIT1 :                        3C - | *NAK :                           15 - |
 *NESTMAX :                      100 - | *NMISVC :                      FFFC - |
- NODIRFND :                    2639 C |  NOTRMFND :                    269E C |
+ NOBRK :                       210C C |  NODIRFND :                    2639 C |
+ NOOPT :                       203E C |  NOTRMFND :                    269E C |
+ NOT_A :                       206D C |  NOT_E :                       205D C |
+ NOT_L :                       2075 C |  NOT_S :                       207D C |
 *NULL :                           0 - | *NUMD1 :                         15 - |
-*NUMSCT :                         3 - | *OPEN1 :                          2 - |
-*OPTDLM :                       ';' - | *OUTCH :                       F018 - |
-*PACKING :                        0 - | *PADDING :                        0 - |
-*PCRLF :                       F021 - | *PDATA :                       F024 - |
- PFNAM1 :                        1D - |  PRINT1 :                        34 - |
+*NUMSCT :                         3 - |  NXTOPT :                      2049 C |
+*OPEN1 :                          2 - |  OPTDLM :                       ';' - |
+ OPTIONS :                       21 - | *OUTCH :                       F018 - |
+ OUTPUTTXT :                   2431 C | *PACKING :                        0 - |
+*PADDING :                        0 - | *PCRLF :                       F021 - |
+*PDATA :                       F024 - |  PFNAM1 :                        1D - |
+ PFNMSTAT :                      20 - |  PRINT1 :                        34 - |
  PRINX1 :                        35 - | *PRNTER :                      E85A - |
  PSHX1 :                         32 - |  PULX1 :                         33 - |
 *PUTEF1 :                        38 - | *PUTFD1 :                        37 - |
@@ -1793,6 +1792,9 @@
 *RDCRC :                       E86F - | *READPS :                      E86D - |
 *READSC :                      E869 - | *RELAXED :                        0 - |
 *RELES1 :                         1 - | *RESRV1 :                         0 - |
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 30 - 02/02/2026 09:24:09 PM
+
+
  RESTOR :                      E875 - | *RETRYS :                         5 - |
  REVSSS :                       102 - | *REWND1 :                         6 - |
  RIBBAS :                       10E - | *RIBSLA :                        78 - |
@@ -1803,9 +1805,6 @@
 *SCSCAT :                         1 - | *SCSCLS :                         4 - |
 *SCSDID :                         0 - | *SCSDIR :                         3 - |
 *SCSDOS :                        18 - | *SCSDRE :                        16 - |
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 30 - 01/28/2026 05:12:38 PM
-
-
 *SCSLOK :                         2 - | *SCSMAX :                       7D0 - |
 *SCSMXD :                       FA4 - | *SCSSIZ :                        80 - |
 *SCSTKD :                        34 - | *SCSTRK :                        1A - |
@@ -1822,27 +1821,21 @@
 *SWISVC :                      FFFA - | *SYEOCB :                       16A - |
  SYERRS :                       114 - |  SYIOCB :                       120 - |
 *SYN :                           16 - |  SYPOCB :                       145 - |
-*TBAX1 :                         25 - | *TIME :               "05:12:38 PM" - |
+*TBAX1 :                         25 - | *TIME :               "09:24:09 PM" - |
 *TRUE :                           1 - |  TTLNROFSEC :                  2652 C |
 *TXBA1 :                         24 - | *US :                            1F - |
-*VDSBIN :                         4 - | *VDSGDB :                         8 - |
-*VDSNFF :                        80 - | *VDSSDA :                        10 - |
-*VERSION :                     142F - |  VERSSS :                       100 - |
-*VT :                             B - | *WRDDAM :                      E87E - |
-*WRITSC :                      E884 - | *WRTEST :                      E87B - |
-*WRVERF :                      E881 - | *XBAX1 :                         26 - |
-*XREGSA :                      FF1A - | *XREGSB :                      FF1B - |
-*XREGSC :                      FF1C - | *XREGSP :                      FF16 - |
-*XREGSS :                      FF1D - | *XREGSX :                      FF18 - |
-*XSTAKS :                      FF8A - |  Z203E :                       203E C |
- Z2049 :                       2049 C |  Z205D :                       205D C |
- Z206D :                       206D C |  Z2075 :                       2075 C |
- Z207D :                       207D C |  Z2085 :                       2085 C |
- Z2097 :                       2097 C |  Z209A :                       209A C |
- Z20A7 :                       20A7 C |  Z20C6 :                       20C6 C |
- Z20EE :                       20EE C |  Z20F1 :                       20F1 C |
- Z2101 :                       2101 C |  Z2105 :                       2105 C |
- Z210C :                       210C C |  Z2118 :                       2118 C |
+ VALIDFN :                     20F1 C | *VDSBIN :                         4 - |
+*VDSGDB :                         8 - | *VDSNFF :                        80 - |
+*VDSSDA :                        10 - | *VERSION :                     142F - |
+ VERSSS :                       100 - | *VT :                             B - |
+*WRDDAM :                      E87E - | *WRITSC :                      E884 - |
+*WRTEST :                      E87B - | *WRVERF :                      E881 - |
+*XBAX1 :                         26 - | *XREGSA :                      FF1A - |
+*XREGSB :                      FF1B - | *XREGSC :                      FF1C - |
+*XREGSP :                      FF16 - | *XREGSS :                      FF1D - |
+*XREGSX :                      FF18 - | *XSTAKS :                      FF8A - |
+ Z209A :                       209A C |  Z20A7 :                       20A7 C |
+ Z20C6 :                       20C6 C |  Z2118 :                       2118 C |
  Z2121 :                       2121 C |  Z2133 :                       2133 C |
  Z2142 :                       2142 C |  Z218F :                       218F C |
  Z219E :                       219E C |  Z21BC :                       21BC C |
@@ -1850,43 +1843,39 @@
  Z220C :                       220C C |  Z2265 :                       2265 C |
  Z2289 :                       2289 C |  Z229C :                       229C C |
  Z229F :                       229F C |  Z22A5 :                       22A5 C |
- Z22AE :                       22AE C |  Z22B1 :                       22B1 C |
  Z22C5 :                       22C5 C |  Z22D1 :                       22D1 C |
  Z22DF :                       22DF C |  Z22E2 :                       22E2 C |
  Z22EC :                       22EC C |  Z22F6 :                       22F6 C |
- Z2304 :                       2304 C |  Z231D :                       231D C |
- Z2321 :                       2321 C |  Z232F :                       232F C |
- Z2335 :                       2335 C |  Z2339 :                       2339 C |
- Z236F :                       236F C |  Z23A2 :                       23A2 C |
- Z23B0 :                       23B0 C |  Z23B2 :                       23B2 C |
+ Z2304 :                       2304 C |  Z2321 :                       2321 C |
+ Z232F :                       232F C |  Z2339 :                       2339 C |
+ Z236F :                       236F C |  Z23B0 :                       23B0 C |
  Z23D1 :                       23D1 C |  Z23E8 :                       23E8 C |
  Z23EF :                       23EF C |  Z23FA :                       23FA C |
  Z2400 :                       2400 C |  Z2401 :                       2401 C |
  Z241C :                       241C C |  Z2421 :                       2421 C |
- Z2431 :                       2431 C |  Z243A :                       243A C |
- Z2447 :                       2447 C |  Z244A :                       244A C |
- Z2451 :                       2451 C |  Z2459 :                       2459 C |
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 31 - 01/28/2026 05:12:38 PM
+ Z243A :                       243A C |  Z2447 :                       2447 C |
+ Z244A :                       244A C |  Z2451 :                       2451 C |
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 31 - 02/02/2026 09:24:09 PM
 
 
- Z26C3 :                       26C3 C |  Z26CC :                       26CC C |
- Z26CF :                       26CF C |  Z26DC :                       26DC C |
- Z26E4 :                       26E4 C |  Z26F5 :                       26F5 C |
- Z26F8 :                       26F8 C |  Z26FB :                       26FB C |
- Z2704 :                       2704 C |  Z270A :                       270A C |
- Z2710 :                       2710 C |  Z272B :                       272B C |
- Z272D :                       272D C |  Z273C :                       273C C |
- Z274D :                       274D C |  Z2751 :                       2751 C |
- Z275E :                       275E C |  Z2764 :                       2764 C |
- Z276A :                       276A C |  Z2779 :                       2779 C |
- Z2788 :                       2788 C |  Z2790 :                       2790 C |
- Z27A7 :                       27A7 C |  Z27BB :                       27BB C |
-*Z80SYNTAX :                      0 - |
+ Z2459 :                       2459 C |  Z26C3 :                       26C3 C |
+ Z26CC :                       26CC C |  Z26CF :                       26CF C |
+ Z26DC :                       26DC C |  Z26E4 :                       26E4 C |
+ Z26F5 :                       26F5 C |  Z26F8 :                       26F8 C |
+ Z26FB :                       26FB C |  Z2704 :                       2704 C |
+ Z270A :                       270A C |  Z2710 :                       2710 C |
+ Z272B :                       272B C |  Z272D :                       272D C |
+ Z273C :                       273C C |  Z274D :                       274D C |
+ Z2751 :                       2751 C |  Z275E :                       275E C |
+ Z2764 :                       2764 C |  Z276A :                       276A C |
+ Z2779 :                       2779 C |  Z2788 :                       2788 C |
+ Z2790 :                       2790 C |  Z27A7 :                       27A7 C |
+ Z27BB :                       27BB C | *Z80SYNTAX :                      0 - |
 
     498 symbols
-    292 unused symbols
+    291 unused symbols
 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 32 - 01/28/2026 05:12:38 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 32 - 02/02/2026 09:24:09 PM
 
 
   Defined Macros:
@@ -1897,7 +1886,7 @@ SKIP2                                 |
 
       3 macros
 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 33 - 01/28/2026 05:12:38 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 33 - 02/02/2026 09:24:09 PM
 
 
   Code Pages:
@@ -1907,10 +1896,10 @@ STANDARD (0 changed characters)
 
 1 code page
 
-0.01 seconds assembly time
+0.00 seconds assembly time
 
-   1263 lines source file
-   1515 lines incl. macro expansions
+   1252 lines source file
+   1504 lines incl. macro expansions
       2 passes
       0 errors
       0 warnings

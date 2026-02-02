@@ -335,7 +335,7 @@ IE9A5           STAA    $11                                       ;
 ;------------------------------------------------
 ;
 ;------------------------------------------------
-READINIT        LDX     #$D0D8                   ; E9AC: CE D0 D8  ; Select CR2 and Inhibit SM, 2-Byte RDA, 8-Bit Word
+READINIT        LDX     #$D0D8                   ; E9AC: CE D0 D8  ; TXRs, RXRs, ClrSyn, Sel. CR2 | Inhibit SM, 2-Byte RDA, 8-Bit Word
                 STX     SSDA_0                   ; E9AF: FF EC 04  ; |
                 LDX     #PIAREGA                 ; E9B2: CE EC 00  ; 
                 LDAA    #$50                     ; E9B5: 86 50     ; 
@@ -401,7 +401,7 @@ IEA1A           BSR     READINIT                 ; EA1A: 8D 90     ; X is on PIA
 IEA1C           LDAA    $04,X                    ; EA1C: A6 04     ; Read SSDA Status Reg.
                 BPL     IEA1C                    ; EA1E: 2A FC     ; Wait for Data
                 LDAA    $05,X                    ; EA20: A6 05     ; Read SSDA Data Reg
-                CMPA    #$7E                     ; EA22: 81 7E     ; ID address mark ?
+                CMPA    #$7E                     ; EA22: 81 7E     ; ID address mark
                 BNE     IEA1A                    ; EA24: 26 F4     ; No ?, Try again.
 IEA26           LDAA    $04,X                    ; EA26: A6 04     ; *********** Found Id Addr. Mark ***********
                 BPL     IEA26                    ; EA28: 2A FC     ; Wait for Data
@@ -504,60 +504,60 @@ IEACF           SUBA    #$03                     ; EACF: 80 03     ;
                 STX     CURADRH                  ; EAD8: DF 06     ; CRC ok
                 JMP     NXTSEC     ; -->         ; EADA: 7E E9 D3  ; next sector
 ;------------------------------------------------
-;
+; in B is FUNCSAV
 ;------------------------------------------------
-WRITINIT        LDX     #$C0DA                   ; EADD: CE C0 DA  ; 
+WRITINIT        LDX     #$C0DA                   ; EADD: CE C0 DA  ; RXRs, TXRs, Sel. CR2 | PC12 - SM Inhibit, 8-Bit, TX Syn
                 STX     SSDA_0                   ; EAE0: FF EC 04  ; 
-                LDX     #$C1AA                   ; EAE3: CE C1 AA  ; 
+                LDX     #$C1AA                   ; EAE3: CE C1 AA  ; RXRs, TXRs, Sel. Sync Code Reg. | $AA Sync
                 STX     SSDA_0                   ; EAE6: FF EC 04  ; 
-                LDX     #$C270                   ; EAE9: CE C2 70  ; 
+                LDX     #$C270                   ; EAE9: CE C2 70  ; RXRs, TXRs, Sel. CR3 | 1 Sync Char., Clr. CTS, Clr. TUF
                 STX     SSDA_0                   ; EAEC: FF EC 04  ; 
                 INC     PIAREGB                  ; EAEF: 7C EC 01  ; Reset inactive (PB0 high)
                 LDAA    #$82                     ; EAF2: 86 82     ; Bit 1,7
-                STAA    SSDA_0                   ; EAF4: B7 EC 04  ; 
-                DEX                              ; EAF7: 09        ; timing
-                STAA    PIAREGB                  ; EAF8: B7 EC 01  ; WG off, PB0 low, PB7 is an Input 
-                LDAA    #$10                     ; EAFB: 86 10     ; Bit 4 (PB4 = WPT)
-                BITA    PIAREGB                  ; EAFD: B5 EC 01  ; Check Writeprot?
+                STAA    SSDA_0                   ; EAF4: B7 EC 04  ; RXRs, Sel. CR3
+                DEX                         ;+4  ; EAF7: 09        ; timing
+                STAA    PIAREGB             ;+5  ; EAF8: B7 EC 01  ; WG off, PB0 low, PB7 is an Input 
+                LDAA    #$10                ;+2  ; EAFB: 86 10     ; Bit 4 (PB4 = WPT)
+                BITA    PIAREGB             ;+4  ; EAFD: B5 EC 01  ; Check Writeprot?
 ;                BEQ     SERR2                     ; EB00: 27 93     ; If low set Error
-                BNE     SERR2    ;<needs changing! ; EB00: 27 93     ; If high set Error (otherwise it conflicts with format.sy)
-                LDAA    CLKFREQ                  ; EB02: 96 19     ; Waitloop
-                SUBA    #$03                     ; EB04: 80 03     ; |
-                ASLA                             ; EB06: 48        ; |
-IEB07           DECA                             ; EB07: 4A        ; |
-                BPL     IEB07                    ; EB08: 2A FD     ; |
-                CLR     PIAREGB                  ; EB0A: 7F EC 01  ; Clear all PB (Set to Write, Reset active, ShiftCRC off, WG on)
-                RORB                             ; EB0D: 56        ; useless or timing?
-                BCC     IEB11                    ; EB0E: 24 01     ; useless or timing? 
-;                BITA    #$56                     ; EB10: 85 56     ; 
+                BNE     SERR2    ;<needs changing! ;+4  ; EB00: 27 93     ; If high set Error (otherwise it conflicts with format.sy)
+                LDAA    CLKFREQ             ;+3  ; EB02: 96 19     ; Waitloop, A is 3 on 1MHz
+                SUBA    #$03                ;+2  ; EB04: 80 03     ; |
+                ASLA                        ;+2  ; EB06: 48        ; |
+IEB07           DECA                        ;+2  ; EB07: 4A        ; |
+                BPL     IEB07               ;+4  ; EB08: 2A FD     ; | A is FF, Carry should NOT be set
+                CLR     PIAREGB             ;+6  ; EB0A: 7F EC 01  ; Clear all PB (Set to Write, Reset active, ShiftCRC off, WG on)
+                RORB                        ;+2  ; EB0D: 56        ; ROR FUNCSAV (check Bit 0)
+                BCC     IEB11               ;+4  ; EB0E: 24 01     ; useless or timing? 
+;                BITA    #$56               ;+2  ; EB10: 85 56     ; A is now $56, doesn't effect carry
                 FCB     $85                
-IEB11           RORB                             ;                 ; useless or timing?
+IEB11           RORB                             ; EB11: 56        ; ROR FUNCSAV (check Bit 1) set carry
                 LDX     #$0005                   ; EB12: CE 00 05  ; 
                 JSR     WAIT3                    ; EB15: BD E9 53  ; 
                 LDAB    #$40                     ; EB18: C6 40     ; 
                 LDAA    ADDRMRK                  ; EB1A: 96 14     ; 
-                LDX     #$83F5                   ; EB1C: CE 83 F5  ; 
+                LDX     #$83F5                   ; EB1C: CE 83 F5  ; RXRs, sel. TxFIFO | $F5 Transmit FIFO (Sync Code)
                 STX     SSDA_0                   ; EB1F: FF EC 04  ; 
-                LDX     CURADRH                  ; EB22: DE 06     ; 
-                STAA    SSDA_1                   ; EB24: B7 EC 05  ; 
-                JMP     WRITSEC                  ; EB27: 7E EB 31  ; 
+                LDX     CURADRH                  ; EB22: DE 06     ; Load Datapointer
+                STAA    SSDA_1                   ; EB24: B7 EC 05  ; Store Datamark or Deleted Datamark
+                JMP     WRITSEC             ;+3  ; EB27: 7E EB 31  ; 
 
-IEB2A           LDAA    #$40                     ; EB2A: 86 40     ; 
+IEB2A           LDAA    #$40                ;+2  ; EB2A: 86 40     ; 
 IEB2C           BITA    SSDA_0                   ; EB2C: B5 EC 04  ; Transmit Datareg. empty?
                 BEQ     IEB2C                    ; EB2F: 27 FB     ; If no, wait
-WRITSEC         LDAA    PROM_0                   ; EB31: B6 FC FC  ; in PROM_0 is zero
-                NOP                              ; EB34: 01        ;  
+WRITSEC         LDAA    PROM_0              ;+4  ; EB31: B6 FC FC  ; in PROM_0 is zero
+                NOP                         ;+2  ; EB34: 01        ;  
                 LDAA    ,X                       ; EB35: A6 00     ; Load Data from RAM
                 STAA    SSDA_1                   ; EB37: B7 EC 05  ; Write to disk
                 LDAA    $01,X                    ; EB3A: A6 01     ; Load next Byte
                 STAA    SSDA_1                   ; EB3C: B7 EC 05  ; Write to disk
-                BCS     IEB43                    ; EB3F: 25 02     ; all done?
+                BCS     IEB43                    ; EB3F: 25 02     ; if carry is set, don't INX (RWTEST or WRTEST or WRDAM)
                 INX                              ; EB41: 08        ; if not, increase pointer
                 INX                              ; EB42: 08        ; |
 IEB43           DECB                             ; EB43: 5A        ; decrease counter
                 BNE     IEB2A                    ; EB44: 26 E4     ; check if underflow, if not, continue from top
-                STX     CURADRH                  ; EB46: DF 06     ; done, store current address
-                LDX     #PIAREGA                 ; EB48: CE EC 00  ;  
+                STX     CURADRH                  ; EB46: DF 06     ; done, store current address ####### THIS IS WRONG ##########
+                LDX     #PIAREGA                 ; EB48: CE EC 00  ;  #### according to the M68SFDC3 Manual it should NOT change CURADR
                 LDAA    #$40                     ; EB4B: 86 40     ;  
 IEB4D           BITA    $04,X                    ; EB4D: A5 04     ; Check SSDA Status Reg.
                 BEQ     IEB4D                    ; EB4F: 27 FC     ; Wait for Data

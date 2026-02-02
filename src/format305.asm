@@ -122,7 +122,7 @@ Z206A           LDAB    M234B                    ; 206A: F6 23 4B
                 STX     M002E                    ; 2079: DF 2E          
                 LDX     #M2004                   ; 207B: CE 20 04       
                 STX     CURADRH                  ; 207E: DF 06          
-                JSR     FDINIT                   ; 2080: BD E8 22       
+                JSR     FDINIT      ;EXORDISK    ; 2080: BD E8 22       
                 LDAA    CURDRV                   ; 2083: 96 00          
                 LDAB    #$66                     ; 2085: C6 66          
                 LSRA                             ; 2087: 44             
@@ -178,7 +178,7 @@ Z20DE           INCB                             ; 20DE: 5C
                 LDAA    #$03                     ; 20E8: 86 03          
                 STAA    $01,X                    ; 20EA: A7 01          
                 JSR     Z22D0                    ; 20EC: BD 22 D0       
-                JSR     RESTOR                   ; 20EF: BD E8 75       
+                JSR     RESTOR     ;EXORDISK     ; 20EF: BD E8 75       
                 BCC     Z2117                    ; 20F2: 24 23          
 Z20F4           LDAB    STRSCTH                  ; 20F4: D6 01          
                 LDAA    STRSCTL                  ; 20F6: 96 02          
@@ -354,7 +354,7 @@ Z226D           LDAA    PIACTRLB                 ; 226D: B6 EC 03
                 JMP     Z2356                    ; 2284: 7E 23 56       
                 FCB     $21                      ; 2287: 21             
                 FCB     $76                      ; 2288: 76             
-Z2289           JSR     RWTEST                   ; 2289: BD E8 72       
+Z2289           JSR     RWTEST      ;EXORDISK    ; 2289: BD E8 72       
                 BCC     Z2291                    ; 228C: 24 03          
                 JMP     Z2377                    ; 228E: 7E 23 77       
 Z2291           LDAA    STRSCTL                  ; 2291: 96 02          
@@ -427,7 +427,7 @@ Z230D           DECA                             ; 230D: 4A
                 RTS                              ; 2318: 39             
 M2319           LDS     M0027                    ; 2319: 9E 27          
                 BSR     Z22D0                    ; 231B: 8D B3          
-                JSR     FDINIT                   ; 231D: BD E8 22       
+                JSR     FDINIT      ;EXORDISK    ; 231D: BD E8 22       
                 LDAA    #$35                     ; 2320: 86 35          
                 STAA    FDSTAT                   ; 2322: 97 08          
                 LDAA    EXADDRL                  ; 2324: 96 23          
@@ -461,7 +461,7 @@ Z2365           LDAA    #$07                     ; 2365: 86 07
                 JMP     FORMATSTART              ; 236A: 7E 20 06       
 Z236D           LDAA    #$05                     ; 236D: 86 05          
                 STAA    M0030                    ; 236F: 97 30          
-Z2371           JSR     SEEK                     ; 2371: BD E8 78       
+Z2371           JSR     SEEK        ;EXORDISK    ; 2371: BD E8 78       
                 JMP     Z2155                    ; 2374: 7E 21 55       
 Z2377           DEC     M0030                    ; 2377: 7A 00 30       
                 BNE     Z2371                    ; 237A: 26 F5          
