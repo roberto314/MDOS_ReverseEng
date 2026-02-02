@@ -23,8 +23,7 @@ from subprocess import Popen, PIPE # for checking if commands exist
 import argparse                    # for argument parser
 import os,sys                      # for files handling
 from pathlib import Path           # for Batchmode
-import pickle                      # saving stats and entries in file
-import json
+import json                        # saving stats and entries in file
 
 #import re, sys, math, time
 exorpath="/home/rob/Data/sync/Computer/CPU\ -\ MC6800/Exorciser/exorsim/"
@@ -162,10 +161,6 @@ class DITOOL():
     
         elif (action == 'EXTRACT'):
             entries, stats = obj.get_dir(imgfile)
-            #with open(pathname + 'stats.pkl', 'wb') as fp:
-            #    pickle.dump(stats, fp)
-            #with open(pathname + 'entries.pkl', 'wb') as fp:
-            #    pickle.dump(entries, fp)
             with open(pathname + 'entries.json', 'w') as file:
                 file.write(json.dumps(entries, indent=2))
             with open(pathname + 'stats.json', 'w') as file:
@@ -173,26 +168,24 @@ class DITOOL():
 
             for idx,e in enumerate(entries):
                 data = obj.get_file(imgfile, e)
-                fn = pathname + self.cleanup(e["Name"][1])
-                if fn == pathname:
+                fn = self.cleanup(e["Name"][1])
+                if fn == '':
                     print(f'{self.RED}Filename Empty!{self.END}')
                 else:
-                    self.write_file(data, fn, 'binary')
+                    if verbose > 0:
+                        print(f'Extracting file: {fn}')
+                    self.write_file(data, pathname+fn, 'binary')
         elif ('CREATE' in action):
 
             try:
                 with open(pathname + 'stats.json') as fp:
                     stats = json.load(fp)
                 
-                #with open(pathname + 'stats.pkl', 'rb') as fp:
-                #    stats = pickle.load(fp)
             except OSError:
                 print(f'No stats file found! Not really needed.')
                 stats = {}
 
             try:
-                #with open(pathname + 'entries.pkl', 'rb') as fp:
-                #    entries = pickle.load(fp)
                 with open(pathname + 'entries.json') as fp:
                     entries = json.load(fp)
                 if entries == {}:
@@ -203,9 +196,6 @@ class DITOOL():
                 if action == 'CREATEENTRIES':
                     print(f'Creating an entries file.')
                     entries = obj.create_entries_file(pathname)
-                    #exit()
-                    #with open(pathname + 'entries.pkl', 'wb') as fp:
-                    #    pickle.dump(entries, fp)
                     with open(pathname + 'entries.json', 'w') as file:
                         file.write(json.dumps(entries, indent=2))
                     exit()
@@ -255,7 +245,6 @@ class DITOOL():
         lines = text.split('\n') # one line per track and side
         print(f'{lines[0]}') # Version Number of Floppy image file converter
         print(f'{lines[6]}') # Version Number of libhxcfe
-
     #----------------------------------
     def main (self, imgfile, imgname, variant, action, formatdef, verbose):
         fspec = {}
@@ -288,6 +277,11 @@ class DITOOL():
             fspec["Filestart"] = 0xB80
             fspec["Direntrysize"] = 0x10
             fspec["Emptyval"] = 0xE5
+            fspec["DiskID"] = "USER"
+            fspec["Version"] = " 3"
+            fspec["Revision"] = "05"
+            fspec["Date"] = "010101"
+            fspec["DiskName"] = "USER"
             fspec = me.check_alternate_format(fspec)
             from mdos import class_MDOS
             obj = class_MDOS(self, fspec, verbose)
@@ -358,7 +352,10 @@ if __name__ == '__main__':
         df = args.format.split(',')
         for idx,pair in enumerate(df):
             key,vl = pair.split('=')
-            val = int(vl,0)
+            try:
+                val = int(vl,0)
+            except:
+                val = vl
             #print(f'{idx} {pair} {key} {val}')
             formatdef[key] = val
             #formatdef.append(int(df[idx],0))

@@ -37,7 +37,10 @@ class class_MDOS(object):
     def print_examples(self):
         print(f'')
         for k, v in self.fspec.items():
-            print(f'{k}: 0x{v:04X}/{v}')
+            try:
+                print(f'{k}: 0x{v:04X}/{v}')
+            except:
+                print(f'{k}: {v}')
         print(f'')
     #----------------------------------
     def isascii(self,b):
@@ -76,8 +79,83 @@ class class_MDOS(object):
             print(f'off: {off:04X} c: {c} s: {s} totalsec: {totalsec} Track: {track}')
         return c, h, s
     #----------------------------------
+    def write_number2image(self, number, img, off, size):
+        val = number.to_bytes(size, 'big')
+        img[off:off+size] = val
+        return img
+    #----------------------------------
+    def write_text2image(self, text, img, off, size):
+        t = text.encode("ASCII")
+        e = bytearray(0x20 for _ in range(size-len(t)))
+        if self.verbose > 0:
+            print(f'Write {text} w. len {len(t)} to pos {off} Restlen: {len(e)}')
+        img[off:off+size] = t+e
+        return img
+    #----------------------------------
+    def create_ClusterAllocationTable(self, img, start):
+        pos = start
+        end = start + self.fspec["bps"]
+        size = int(len(img) / (self.fspec["bps"]*4)) # Clusters per disk (4 sector / cluster)
+        cbytes = int(size / 8)                       # one bit per cluster
+        rest = size % 8                              # one bit per cluster
+        if self.verbose > 0:
+            print(f'Write 00 for {size} cluster. {cbytes:02X} bytes + {rest} bits rest')
+        for i in range(cbytes):
+            self.write_number2image(0x00, img, pos, 1) # Free cluters
+            pos += 1
+
+        shiftval = 0x007F                         # one cluster free (Bit 7)
+        lastval = 0xFF                            # all occupied
+        for sh in range(rest):                    # write bits for free cluster
+            lastval = lastval & (shiftval & 0xFF) # shift zero from the top for every free cluster
+            shiftval = shiftval >> 1              # one more cluster free ?
+        self.write_number2image(lastval, img, pos, 1) # write last byte
+        if self.verbose > 0:
+            print(f'Write shiftval {shiftval:04X} lastval {lastval:02X} to 0x{pos:02X}')
+        pos += 1
+
+        if self.verbose > 0:
+            print(f'Write FF for 0x{(end - pos):02X} rest of sector')
+
+        for i in range(end - pos):
+            self.write_number2image(0xFF, img, pos, 1) # not allocated cluters
+            pos += 1
+        return img
+    #----------------------------------
     def create_image(self):
+        # create empty image
+        if self.verbose > 0:
+            print(f'Make image w. {self.fspec["Imagesize"]} bytes')
         img = bytearray(self.fspec["Emptyval"] for _ in range(self.fspec["Imagesize"])) # make empty imagefile with correct size
+        end = 0x18*128 # 0x18 Sectors w. 128 Byte
+        if self.verbose > 0:
+            print(f'Clear out {end:04X} bytes')
+        RIB = bytearray(0 for _ in range(end)) # Clear out DiskID, MDOS Overlay RIB, CAT, LCAT, Directory, Bootblock and MDOS RIB
+        img[0:end] = RIB
+
+        # create Diskette ID Block
+        self.write_text2image(self.fspec["DiskID"], img, 0, 8) # "Diskette ID: "]
+        self.write_text2image(self.fspec["Version"], img, 8, 2)                # "Version #: "]  
+        self.write_text2image(self.fspec["Revision"], img, 0x0A, 2)             # "Revision #: "] 
+        self.write_text2image(self.fspec["Date"], img, 0x0C, 6)         # "Gen. Date: "]  
+        self.write_text2image(self.fspec["DiskName"], img, 0x12, 0x14) # "User Name: "]  
+        #----------------------
+        #self.write_number2image(0x5c, img, 0x26, 2) # MDOSOV0
+        #self.write_number2image(0x6c, img, 0x28, 2) # MDOSOV1
+        #self.write_number2image(0x7c, img, 0x2A, 2) # MDOSOV2
+        #self.write_number2image(0x84, img, 0x2C, 2) # MDOSOV3
+        #self.write_number2image(0x8C, img, 0x2E, 2) # MDOSOV4
+        #self.write_number2image(0x94, img, 0x30, 2) # MDOSOV5
+        #self.write_number2image(0x9C, img, 0x32, 2) # MDOSOV6
+        #----------------------
+        # create Cluster Allocation Table 80-FF
+        self.create_ClusterAllocationTable(img, 0x80)
+        #----------------------
+        # create Lockout Cluster Allocation Table
+        self.create_ClusterAllocationTable(img, 0x100)
+        img[0x100] = 0xFC # the first 6 clusters (=24/0x18 sectors) are always occupied!
+        # create Directory Region
+        # nothing to do here
         return img
     #----------------------------------
     # parses the directory block
@@ -143,10 +221,13 @@ class class_MDOS(object):
                 entry["StartPSN"]    = ["hx16", self.conv16(imgfile, (offset+10)), "PSN"]
                 
                 temp = int((offset-self.fspec["Dirstart"])/self.fspec["Direntrysize"]) # DEN (Dir. Entry Nr.)
-                pos = temp & 0x07          # DEN Position 
-                psec = (temp >> 3) & 0x1F  # DEN Physical Sector
-                entry["DEN Position"] = ["hx8", (pos), "POS"]   
-                entry["DEN PhSector"] = ["hx8", (psec), "PSec"]  
+                #pos = (offset>>4) & 0x07          # DEN Position 
+                #psec = int(offset/self.fspec["bps"])<<3 # DEN Physical Sector
+                psec = (offset)>>4 # DEN Physical Sector
+                #psec = (temp >> 3) & 0x1F  # DEN Physical Sector
+                #entry["DEN Position"] = ["hx8", (pos), "POS"]   
+                #entry["DEN PhSector"] = ["hx8", (psec), "PSec"]  
+                entry["DEN"] = ["hx8", (psec-0x18)]  
                 
                 FRIB = entry["StartPSN"][1]*128 # Get Start of File RIB
             #    entry["File RIB: "]  = ["arr8x", imgfile[FRIB:FRIB+128]] # Dump the RIB as Array
@@ -184,11 +265,13 @@ class class_MDOS(object):
                     sdw = self.conv16(imgfile, (FRIB+o))
                     if sdw & 0x8000: # Terminator
                         TERM = sdw
+                        break
                     else:            # regular SDWs
                         SDW.append(sdw)
                     i += 1
 
                 entry["SDW0"]          = ["hx16", SDW[0]]
+                entry["SDW#"]          = ["hx16", len(SDW)]
                 entry["TERM"]          = ["hx16", TERM]
                 startclust = SDW[0] & 0x1FF # only the first 9 Bit
                 contclust = ((SDW[0] & 0x7C00)>>10)+1  # Bits 10-14 are Number of contin. clusters - 1
@@ -214,6 +297,18 @@ class class_MDOS(object):
                 pass
             offset += self.fspec["Direntrysize"]  # cue to next entry
         
+        # Get Bootsector into the files listing
+        bbstart = 0x17*128
+        entry = self.set_default_values()
+        entry["Name"]          = ["strw", "BOOTSECTOR ", "Name        "]
+        entry["Secs"]          = ["hx16", 1]
+        entry["StartAdr"]      = ["hx16", 0x20, "Start"]
+        entry["ExecAdr"]       = ["hx16", 0x20, "Exec"]
+        entry["StartonDisk"]   = ["hx16",  bbstart, "DSTRT"]
+        entry["EndDisk"]        = ["hx16",  bbstart+0x80-1, "DskEnd"]
+        entry["Directoryposition"] = ["dec2",  dirpos, "Dirpos"]
+        entries.append(entry)                 # append to list of entries
+
         # Print statistics at the end of listing
         stats = {}
         stats["Diskette ID: "]        = ["strw", (imgfile[0:8]).decode("ascii")]
@@ -221,10 +316,9 @@ class class_MDOS(object):
         stats["Revision #: "]         = ["strw", (imgfile[10:12]).decode("ascii")]
         stats["Gen. Date: "]          = ["strw", (imgfile[12:18]).decode("ascii")]
         stats["User Name: "]          = ["strw", (imgfile[18:38]).decode("ascii")]
-       #stats["Overlay RIB Addr.: "]  = ["arr8x", imgfile[38:58]]                  # dump the table
-       #stats["Cluster Alloc. Tab.: "]= ["arr8x", imgfile[128:256]]                # dump the table
-       #stats["Lockout Alloc. Tab.: "]= ["arr8x", imgfile[256:384]]                # dump the table
-        bbstart = 0x17*128
+        #stats["Overlay RIB Addr.: "]  = ["arr8x", imgfile[38:58]]                  # dump the table
+        #stats["Cluster Alloc. Tab.: "]= ["arr8x", imgfile[128:256]]                # dump the table
+        #stats["Lockout Alloc. Tab.: "]= ["arr8x", imgfile[256:384]]                # dump the table
         #stats["Bootblock @ PSN17, B80: "]= ["arr8x", imgfile[bbstart:bbstart+128]] # dump the table
 
         return entries, stats
@@ -361,26 +455,28 @@ class class_MDOS(object):
     #----------------------------------
     def set_default_values(self):
         entry = {}
-        #
-        # NEEDS UPDATING!!!!
-        #
-        #entry["Name"]        =    ["strw", '        ', "Name        "]
-        #entry["Password"]    = ["strw", '\'          \'']
-        #entry["Password_Clean"] =  ["not", '        ']
-        #entry["StartTrack"]  = ["hx8", 0, "STrk"]
-        #entry["StartSector"] = ["hx8", 0, "SSec"]
-        #entry["SizeinSecs"]  = ["hx8", 0, "SSiz"]
-        #entry["Attribute"]   = ["hx8", 0x22, "Atrib"]
-        #entry["Filetype"]    = ["strw",  '     ', "Type"]
-        #entry["SAddr"]       = ["hx16", 0]
-        #entry["EAddr"]       = ["hx16", 0]
-        #entry["Exec"]        = ["hx16", 0]
-        #entry["Hi"]          = ["hx16", 0]
-        #entry["Sp0"]         = ["hx8",  0]
-        #entry["Sp1"]         = ["hx8",  0]
-        #entry["Sp2"]         = ["hx8",  0]
-        #entry["Filesize"]    = ["dec5",  0, "FSize"]
-        #entry["Directoryposition"]    = ["dec5",  0, "Dirpos"]
+        entry["Name"]          = ["strw", "        ", "Name        "]
+        entry["Suffix"]        = ["strw", "  ", "SFX"]
+        entry["Attribute"]     = ["hx8", 0x72, "Atrib"]
+        entry["Filetype"]      = ["strw",  "MEM", "FTyp"]
+        entry["Attribute Bit"] = ["strw",  "-----", "WDSCN"]
+        entry["StartPSN"]      = ["hx16", 0, "PSN"]
+        entry["DEN"]           = ["hx8", 0]   
+        #entry["DEN Position"]  = ["hx8", 0, "POS"]   
+        #entry["DEN PhSector"]  = ["hx8", 0, "PSec"]  
+        entry["File RIB Addr.: "]  = ["hx16", 0, "RIB@"]
+        entry["BytLS"]         = ["hx8",  0]
+        entry["Secs"]          = ["hx16", 0]
+        entry["StartAdr"]      = ["hx16", 0, "Start"]
+        entry["ExecAdr"]       = ["hx16", 0, "Exec"]
+        entry["SDW0"]          = ["hx16", 0]
+        entry["TERM"]          = ["hx16", 0]
+        entry["StartonDisk"]   = ["hx16",  0, "DSTRT"]
+        entry["ContinClustr"]  = ["hx16",  0, "CClust"]
+        entry["EOFSec"]        = ["hx16",  0]
+        entry["Filesize"]       = ["hx16",  0x80, "FSize"]
+        entry["EndDisk"]        = ["hx16",  0, "DskEnd"]
+        entry["Directoryposition"] = ["dec2",  0, "Dirpos"]
         return entry        
     #----------------------------------
     def create_entries_file(self, pathname):
@@ -412,6 +508,7 @@ class class_MDOS(object):
     #----------------------------------
     def add_files(self, fdir, entries, stats, img, action):
         if action == 'CREATEBOOT':
+            # Don't forget to update the Disk-RIB with the Overlay Addresses!
             print(f'Creating Boot Image is no really necessary on FDOS.')
             print(f'Just put a file named $DOS in the FILES Directory and it will be the bootfile.')
         

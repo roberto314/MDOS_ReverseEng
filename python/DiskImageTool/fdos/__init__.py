@@ -37,7 +37,10 @@ class class_FDOS(object):
     def print_examples(self):
         print(f'')
         for k, v in self.fspec.items():
-            print(f'{k}: 0x{v:04X}/{v}')
+            try:
+                print(f'{k}: 0x{v:04X}/{v}')
+            except:
+                print(f'{k}: {v}')
         print(f'')
     #----------------------------------
     def isascii(self,b):

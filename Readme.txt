@@ -186,7 +186,7 @@ be ASCII source programs, binary object records, user-generated data, etc. Each
 file must reside wholly on a single diskette. Files are identified to the system 
 by their names, suffixes, and logical unit numbers. 
 
-The name as stored in the directory consists of ten bytes; however the MOOS command interpreter deals with an eight-byte name and,a tWO-byte suffix. This is merely a convention of the command interpreter and has no significance in relation to the 
+The name as stored in the directory consists of ten bytes; however the MDOS command interpreter deals with an eight-byte name and,a two-byte suffix. This is merely a convention of the command interpreter and has no significance in relation to the 
 internal format of the directory. System routines and functions dealing with file 
 names as a parameter use a ten-byte block which is always dealt with as a monolithic
 item.
@@ -416,9 +416,9 @@ multiples of eight bytes. A further restriction placed on memory-image files is 
 their content cannot load below memory location $20 if they are to reside in the single
 memory map of an EXORciser I or EXORciser II system.
 
-Binary record files are used primarily for the relocatable object datA produced by the
+Binary record files are used primarily for the relocatable object data produced by the
 Macro Assembler and the relocatable FORTRAN compiler; however, the user can create data
-files usinq this binary record format as well.
+files using this binary record format as well.
 
 ASCII record files are used to contain all other MDOS-supported data. Such files can be 
 in either space-compressed or non-space-compressed form. Normally, MDOS will always
@@ -435,7 +435,7 @@ with the maximum space that they will ever need.
 24.3 Record Structure
 
 This section describes in detail the two record types supported for diskette files.
-In addition, a special record type used fot COpying binary files to a non-diskette
+In addition, a special record type used fot Copying binary files to a non-diskette
 device is also discussed. fhe actual use of such records is fully discussed in 
 Chapter 25 which describes the supported I/O functions. All records supported by MOOS 
 are terminated by a carriage return, line feed, and null sequence; however, on
@@ -479,7 +479,7 @@ record has the following format:
 | E | BC | CK | CR |
  ------------------
 
-The symbol "E" is the end-ot-file record header which is the letter "E" ($45). 
+The symbol "E" is the end-of-file record header which is the letter "E" ($45). 
 The other symbols are the same as in the above table. The EOF record has no 
 data bytes. Thus, the byte count will be equal to one.
 
@@ -695,7 +695,7 @@ F000 |        EXbug MONITOR            |
 FFF8 |      INTERRUPT VECTORS          |
       ---------------------------------
 
-Locations s0000-001F, inclusive, are reserved for the variables of the diskette
+Locations $0000-001F, inclusive, are reserved for the variables of the diskette
 controller. These locations cannot be initialized by a program loading from the 
 diskette. In addition, if a program requires the use of the diskette functions 
 (either directly through the diskette controller or through the MOOS functions), 

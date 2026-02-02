@@ -1,0 +1,206 @@
+[
+  {
+    "Name": [
+      "strw",
+      "FORMAT  ",
+      "Name        "
+    ],
+    "Suffix": [
+      "strw",
+      "CM",
+      "SFX"
+    ],
+    "Attribute": [
+      "hx8",
+      114,
+      "Atrib"
+    ],
+    "Filetype": [
+      "strw",
+      "MEM",
+      "FTyp"
+    ],
+    "Attribute Bit": [
+      "strw",
+      "-DSC-",
+      "WDSCN"
+    ],
+    "StartPSN": [
+      "hx16",
+      24,
+      "PSN"
+    ],
+    "DEN Position": [
+      "hx8",
+      0,
+      "POS"
+    ],
+    "DEN PhSector": [
+      "hx8",
+      17,
+      "PSec"
+    ],
+    "File RIB Addr.: ": [
+      "hx16",
+      3072,
+      "RIB@"
+    ],
+    "BytLS": [
+      "hx8",
+      56
+    ],
+    "Secs": [
+      "hx16",
+      8
+    ],
+    "StartAdr": [
+      "hx16",
+      8192,
+      "Start"
+    ],
+    "ExecAdr": [
+      "hx16",
+      8198,
+      "Exec"
+    ],
+    "SDW0": [
+      "hx16",
+      2054
+    ],
+    "TERM": [
+      "hx16",
+      32775
+    ],
+    "StartonDisk": [
+      "hx16",
+      3200,
+      "DSTRT"
+    ],
+    "ContinClustr": [
+      "hx16",
+      3,
+      "CClust"
+    ],
+    "EOFSec": [
+      "hx16",
+      7
+    ],
+    "Filesize": [
+      "hx16",
+      952,
+      "FSize"
+    ],
+    "EndDisk": [
+      "hx16",
+      4151,
+      "DskEnd"
+    ],
+    "Directoryposition": [
+      "dec2",
+      0,
+      "Dirpos"
+    ]
+  },
+  {
+    "Name": [
+      "strw",
+      "BOOTSECTOR ",
+      "Name        "
+    ],
+    "Suffix": [
+      "strw",
+      "  ",
+      "SFX"
+    ],
+    "Attribute": [
+      "hx8",
+      114,
+      "Atrib"
+    ],
+    "Filetype": [
+      "strw",
+      "MEM",
+      "FTyp"
+    ],
+    "Attribute Bit": [
+      "strw",
+      "-----",
+      "WDSCN"
+    ],
+    "StartPSN": [
+      "hx16",
+      0,
+      "PSN"
+    ],
+    "DEN Position": [
+      "hx8",
+      0,
+      "POS"
+    ],
+    "DEN PhSector": [
+      "hx8",
+      0,
+      "PSec"
+    ],
+    "File RIB Addr.: ": [
+      "hx16",
+      0,
+      "RIB@"
+    ],
+    "BytLS": [
+      "hx8",
+      0
+    ],
+    "Secs": [
+      "hx16",
+      1
+    ],
+    "StartAdr": [
+      "hx16",
+      32,
+      "Start"
+    ],
+    "ExecAdr": [
+      "hx16",
+      32,
+      "Exec"
+    ],
+    "SDW0": [
+      "hx16",
+      0
+    ],
+    "TERM": [
+      "hx16",
+      0
+    ],
+    "StartonDisk": [
+      "hx16",
+      2944,
+      "DSTRT"
+    ],
+    "ContinClustr": [
+      "hx16",
+      0,
+      "CClust"
+    ],
+    "EOFSec": [
+      "hx16",
+      0
+    ],
+    "Filesize": [
+      "hx16",
+      128,
+      "FSize"
+    ],
+    "EndDisk": [
+      "hx16",
+      3071,
+      "DskEnd"
+    ],
+    "Directoryposition": [
+      "dec2",
+      1,
+      "Dirpos"
+    ]
+  }
+]
