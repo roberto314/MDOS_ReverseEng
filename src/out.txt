@@ -20,7 +20,7 @@ PASS 2
 mdoseq.inc(452)
 dir_commented.asm(800)
 
-0.00 seconds assembly time
+0.01 seconds assembly time
 
    1252 lines source file
    1504 lines incl. macro expansions

@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 1 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 1 - 02/03/2026 01:06:04 PM
 
 
        1/       0 :                     
@@ -61,7 +61,7 @@
 (1)   56/       0 : =$15                 NUMD1    EQU $15 ; CHECK DECIMAL DIGIT
 (1)   57/       0 : =$16                 ADDAM1   EQU $16 ; INCREMENT MEMORY (DOUBLE BYTE) BY A
 (1)   58/       0 : =$17                 SUBAM1   EQU $17 ; DECREMENT MEMORY (DOUBLE BYTE) BY A
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 2 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 2 - 02/03/2026 01:06:04 PM
 
 
 (1)   59/       0 : =$18                 MMA1     EQU $18 ; MULTIPLY (SHIFT LEFT) MEMORY BY A
@@ -124,7 +124,7 @@
 (1)  116/       0 : =$D                  CR       EQU  $D ; CARRIAGE RETURN
 (1)  117/       0 : =$E                  SO       EQU  $E ; SHIFT OUT
 (1)  118/       0 : =$F                  SI       EQU  $F ; SHIFT IN
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 3 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 3 - 02/03/2026 01:06:04 PM
 
 
 (1)  119/       0 : =$10                 DLE      EQU $10 ; DATA LINK ESCAPE
@@ -187,7 +187,7 @@
 (1)  176/       0 :                     ;
 (1)  177/       0 :                     ; DIRECTORY ENTRY OFFSET
 (1)  178/       0 :                     ;
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 4 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 4 - 02/03/2026 01:06:04 PM
 
 
 (1)  179/       0 : =$0                  DIRsNM  EQU 0   ; OFFSET TO NAME (8 BYTES)
@@ -250,7 +250,7 @@
 (1)  236/       0 : =$E                  IsCKSM  EQU  $E ; CHECKSUM ERROR
 (1)  237/       0 : =$F                  IsWRIT  EQU  $F ; FILE IS WRITE PROTECTED
 (1)  238/       0 : =$10                 IsDELT  EQU $10 ; FILE IS DELETE PROTECTED
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 5 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 5 - 02/03/2026 01:06:04 PM
 
 
 (1)  239/       0 : =$11                 IsRANG  EQU $11 ; LOQICAL SECTOR NUMBER OUT OF RANG
@@ -313,7 +313,7 @@
 (1)  296/       0 :                     ;
 (1)  297/       0 : =$0                  FDsFMU EQU %00000000 ; USER DEFINED FORMAT (SECTOR I/O)
 (1)  298/       0 : =$1                  FDsFMD EQU %00000001 ; DEFAULT OBJECT REC'D FORMAT
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 6 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 6 - 02/03/2026 01:06:04 PM
 
 
 (1)  299/       0 : =$2                  FDsFML EQU %00000010 ; BINARY LOAD FORMAT
@@ -376,7 +376,7 @@
 (1)  356/       0 : =$5                  LSCTLN  EQU  5 ; # OF BYTES TO READ FROM LAST SECT
 (1)  357/       0 : =$6                  CURADR  EQU  6 ; MEMORY ADDRESS FOR DISK TRANSFER
 (1)  358/       0 : =$8                  FDSTAT  EQU  8 ; DISK TRANSFER STATUS
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 7 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 7 - 02/03/2026 01:06:04 PM
 
 
 (1)  359/       0 : =$B                  SCTCNT  EQU 11 ; SECTOR COUNT USED IN DETERMINING
@@ -439,7 +439,7 @@
 (1)  416/       0 : =$FF4F               BKPINs EQU  $FF4F  ; EXBUG BREAKPOINTS IN MEMORY
 (1)  417/       0 : =$FF53               AECHO  EQU  $FF53  ; INPUT CHARACTER ECHO FLAG (O=>ECH
 (1)  418/       0 : =$FFF8               IRGsVC EQU  $FFF8  ; IRG VECTOR
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 8 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm(mdoseq.inc) - Page 8 - 02/03/2026 01:06:04 PM
 
 
 (1)  419/       0 : =$FFFA               SWIsVC EQU  $FFFA  ; SWI VECTOR
@@ -502,7 +502,7 @@
       26/    2000 :                                     ORG     $2000
       27/    2000 :                     
       28/    2000 : 30 33 30 30                         FCC     '0300'                   ; 2000: 30 33 30 30    ; Version
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 9 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 9 - 02/03/2026 01:06:04 PM
 
 
       29/    2004 : 0E                  DIRSTART        CLI                              ; 2004: 0E             ; 
@@ -565,7 +565,7 @@
       82/    2071 : CA 04                               ORAB    #$04                     ; 2071: CA 04          ; Flags
       83/    2073 : 20 D4                               BRA     NXTOPT                   ; 2073: 20 D4          ; 
       84/    2075 :                     ;------------------------------------------------
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 10 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 10 - 02/03/2026 01:06:04 PM
 
 
       85/    2075 : 81 53               NOT_L           CMPA    #'S'                     ; 2075: 81 53          ; include system files
@@ -628,7 +628,7 @@
      138/    20E6 : 11                                  CBA                              ; 20E6: 11             ; is it SPACE
      139/    20E7 : 26 08                               BNE     VALIDFN                  ; 20E7: 26 08          ; no
      140/    20E9 : A6 09                               LDAA    $09,X                    ; 20E9: A6 09          ; check end of string
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 11 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 11 - 02/03/2026 01:06:04 PM
 
 
      141/    20EB : 11                                  CBA                              ; 20EB: 11             ; 
@@ -691,7 +691,7 @@
      194/    2159 : 4F                                  CLRA                             ; 2159: 4F             ; 
      195/    215A : F6 24 76                            LDAB    M2476                    ; 215A: F6 24 76       ; 
      196/    215D : 97 27                               STAA    M0027                    ; 215D: 97 27          ; 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 12 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 12 - 02/03/2026 01:06:04 PM
 
 
      197/    215F : D7 28                               STAB    M0028                    ; 215F: D7 28          ; 
@@ -754,7 +754,7 @@
      248/    21D9 :                     ;------------------------------------------------
      249/    21D9 : B6 25 51            Z21D9           LDAA    BUF128_2                 ; 21D9: B6 25 51       ; 
      250/    21DC : 2A 1C                               BPL     Z21FA                    ; 21DC: 2A 1C          ; 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 13 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 13 - 02/03/2026 01:06:04 PM
 
 
      251/    21DE : 86 40                               LDAA    #$40                     ; 21DE: 86 40          ; 
@@ -817,7 +817,7 @@
      300/    2256 : F6 24 9F                            LDAB    M249F                    ; 2256: F6 24 9F       ; 
      301/    2259 : C1 20                               CMPB    #$20                     ; 2259: C1 20          ; 
      302/    225B : 27 08                               BEQ     Z2265                    ; 225B: 27 08          ; 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 14 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 14 - 02/03/2026 01:06:04 PM
 
 
      303/    225D : CE 24 9F                            LDX     #M249F                   ; 225D: CE 24 9F       ; 
@@ -880,7 +880,7 @@
      354/    22C5 :                     ;------------------------------------------------
      355/    22C5 : 96 20               Z22C5           LDAA    PFNMSTAT                 ; 22C5: 96 20          ; 
      356/    22C7 : 85 01                               BITA    #$01                     ; 22C7: 85 01          ; 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 15 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 15 - 02/03/2026 01:06:04 PM
 
 
      357/    22C9 : 26 06                               BNE     Z22D1                    ; 22C9: 26 06          ; 
@@ -943,7 +943,7 @@
      410/    2333 : C6 0C                               LDAB    #$0C                     ; 2333: C6 0C          ; Error (INTERNAL SYSTEM ERROR AT ...)
      411/    2335 : (MACRO)              HNDLERR         SCALL   MDERR1                                          ; MDOS ERROR MESSAGE HANDLER
      411/    2335 : 3F                           SWI
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 16 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 16 - 02/03/2026 01:06:04 PM
 
 
      411/    2336 : 20                           FCB  MDERR1
@@ -1006,7 +1006,7 @@
      466/    23BE : CE 25 D6                            LDX     #BUFPTR01                ; 23BE: CE 25 D6       ; 
      467/    23C1 : C6 08                               LDAB    #$08                     ; 23C1: C6 08          ; 
      468/    23C3 : (MACRO)                              SCALL   MOVE1                                           ; MOVE A STRING
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 17 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 17 - 02/03/2026 01:06:04 PM
 
 
      468/    23C3 : 3F                           SWI
@@ -1069,7 +1069,7 @@
      520/    2431 :                     ;------------------------------------------------
      521/    2431 : 96 21               OUTPUTTXT       LDAA    OPTIONS                  ; 2431: 96 21          ; Get Options
      522/    2433 : 85 04                               BITA    #$04                     ; 2433: 85 04          ; Output to Printer ?
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 18 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 18 - 02/03/2026 01:06:04 PM
 
 
      523/    2435 : 26 03                               BNE     Z243A                    ; 2435: 26 03          ; yes
@@ -1132,7 +1132,7 @@
      565/    249F : 20 20 20 20 20 20   M249F           FCC     '        '
              24A5 : 20 20             
      566/    24A7 : 2E                  M24A7           FCB     '.'                      ; 24A7: 2E             
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 19 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 19 - 02/03/2026 01:06:04 PM
 
 
      567/    24A8 : 20 20               M24A8           FCC     '  '                     ; 24A8: 20 20          
@@ -1195,7 +1195,7 @@
      624/    25B1 : 00 00 00 00 00 00                   FCB     $00,$00,$00,$00,$00,$00  ; 25B1: 00 00 00 00 00 00 
      625/    25B7 : 00 00 00 00 00 00                   FCB     $00,$00,$00,$00,$00,$00  ; 25B7: 00 00 00 00 00 00 
      626/    25BD : 00 00 00 00 00 00                   FCB     $00,$00,$00,$00,$00,$00  ; 25BD: 00 00 00 00 00 00 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 20 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 20 - 02/03/2026 01:06:04 PM
 
 
      627/    25C3 : 00 00 00 00 00 00                   FCB     $00,$00,$00,$00,$00,$00  ; 25C3: 00 00 00 00 00 00 
@@ -1258,7 +1258,7 @@
      666/    26C3 : 5D                  Z26C3           TSTB                             ; 26C3: 5D             ; 
      667/    26C4 : 27 2F                               BEQ     Z26F5                    ; 26C4: 27 2F          ; 
      668/    26C6 : 6C 03                               INC     $03,X                    ; 26C6: 6C 03          ; 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 21 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 21 - 02/03/2026 01:06:04 PM
 
 
      669/    26C8 : 26 02                               BNE     Z26CC                    ; 26C8: 26 02          ; 
@@ -1321,7 +1321,7 @@
      726/    273A : 20 F1                               BRA     Z272D                    ; 273A: 20 F1          ; 
      727/    273C :                     ;------------------------------------------------
      728/    273C : EB 01               Z273C           ADDB    $01,X                    ; 273C: EB 01          ; 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 22 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 22 - 02/03/2026 01:06:04 PM
 
 
      729/    273E : A9 00                               ADCA    ,X                       ; 273E: A9 00          ; 
@@ -1384,7 +1384,7 @@
      786/    27AF : 8B C6                               ADDA    #$C6                     ; 27AF: 8B C6          ; 
      787/    27B1 : 24 08                               BCC     Z27BB                    ; 27B1: 24 08          ; 
      788/    27B3 : 86 30                               LDAA    #$30                     ; 27B3: 86 30          ; 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 23 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 23 - 02/03/2026 01:06:04 PM
 
 
      789/    27B5 : A7 00                               STAA    ,X                       ; 27B5: A7 00          ; 
@@ -1447,7 +1447,7 @@
      797/    27EB : 00                                  FCB     $00
      797/    27EC : 00                                  FCB     $00
      797/    27ED : 00                                  FCB     $00
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 24 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 24 - 02/03/2026 01:06:04 PM
 
 
      797/    27EE : 00                                  FCB     $00
@@ -1510,7 +1510,7 @@
      797/    2827 : 00                                  FCB     $00
      797/    2828 : 00                                  FCB     $00
      797/    2829 : 00                                  FCB     $00
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 25 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 25 - 02/03/2026 01:06:04 PM
 
 
      797/    282A : 00                                  FCB     $00
@@ -1573,7 +1573,7 @@
      797/    2863 : 00                                  FCB     $00
      797/    2864 : 00                                  FCB     $00
      797/    2865 : 00                                  FCB     $00
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 26 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 26 - 02/03/2026 01:06:04 PM
 
 
      797/    2866 : 00                                  FCB     $00
@@ -1603,7 +1603,7 @@
      797/    287E : 00                                  FCB     $00
      797/    287F : 00                                  FCB     $00
      799/    2880 :                                     END
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 27 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 27 - 02/03/2026 01:06:04 PM
 
 
   Symbol Table (* = unused):
@@ -1638,7 +1638,7 @@
 *CONSTPI :        3.141592653589793 - | *CPBAX1 :                        2F - |
  CR :                             D - | *CURADR :                         6 - |
  CURDRV :                         0 - | *CUSTOM :                         0 - |
-*DATE :                "02/02/2026" - | *DC1 :                           11 - |
+*DATE :                "02/03/2026" - | *DC1 :                           11 - |
 *DC2 :                           12 - | *DC3 :                           13 - |
 *DC4 :                           14 - | *DDSCNS :                         4 - |
 *DDSFMC :                         1 - | *DDSINP :                        20 - |
@@ -1666,7 +1666,7 @@
 *DVSINT :                         6 - | *DVSIO :                          C - |
 *DVSOFF :                         3 - | *DVSON :                          0 - |
 *DVSTRM :                         9 - | *DWRIT1 :                         F - |
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 28 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 28 - 02/03/2026 01:06:04 PM
 
 
 *EDT :                            4 - | *EM :                            19 - |
@@ -1729,7 +1729,7 @@
 *ISSECB :                        19 - | *ISSSPC :                        14 - |
 *ISWRIT :                         F - | *JOCDBE :                         6 - |
 *KEYIN1 :                         9 - |  KYISSV :                       104 - |
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 29 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 29 - 02/03/2026 01:06:04 PM
 
 
 *LDATA :                       EBE4 - | *LDATA1 :                      EBF2 - |
@@ -1792,7 +1792,7 @@
 *RDCRC :                       E86F - | *READPS :                      E86D - |
 *READSC :                      E869 - | *RELAXED :                        0 - |
 *RELES1 :                         1 - | *RESRV1 :                         0 - |
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 30 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 30 - 02/03/2026 01:06:04 PM
 
 
  RESTOR :                      E875 - | *RETRYS :                         5 - |
@@ -1821,7 +1821,7 @@
 *SWISVC :                      FFFA - | *SYEOCB :                       16A - |
  SYERRS :                       114 - |  SYIOCB :                       120 - |
 *SYN :                           16 - |  SYPOCB :                       145 - |
-*TBAX1 :                         25 - | *TIME :               "09:24:09 PM" - |
+*TBAX1 :                         25 - | *TIME :               "01:06:04 PM" - |
 *TRUE :                           1 - |  TTLNROFSEC :                  2652 C |
 *TXBA1 :                         24 - | *US :                            1F - |
  VALIDFN :                     20F1 C | *VDSBIN :                         4 - |
@@ -1855,7 +1855,7 @@
  Z241C :                       241C C |  Z2421 :                       2421 C |
  Z243A :                       243A C |  Z2447 :                       2447 C |
  Z244A :                       244A C |  Z2451 :                       2451 C |
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 31 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 31 - 02/03/2026 01:06:04 PM
 
 
  Z2459 :                       2459 C |  Z26C3 :                       26C3 C |
@@ -1875,7 +1875,7 @@
     498 symbols
     291 unused symbols
 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 32 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 32 - 02/03/2026 01:06:04 PM
 
 
   Defined Macros:
@@ -1886,7 +1886,7 @@ SKIP2                                 |
 
       3 macros
 
- AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 33 - 02/02/2026 09:24:09 PM
+ AS V1.42 Beta [Bld 216] - Source File dir_commented.asm - Page 33 - 02/03/2026 01:06:04 PM
 
 
   Code Pages:
@@ -1896,7 +1896,7 @@ STANDARD (0 changed characters)
 
 1 code page
 
-0.00 seconds assembly time
+0.01 seconds assembly time
 
    1252 lines source file
    1504 lines incl. macro expansions

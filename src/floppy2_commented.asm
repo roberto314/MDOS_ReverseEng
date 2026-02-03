@@ -285,9 +285,9 @@ WAIT2           LDX     #$0187                   ; E95C: CE 01 87  ;
                 BRA     WAIT3                    ; E95F: 20 F2     ; 
 ;------------------------------------------------
 IE961           LDAA    TRACKSAV                 ; E961: 96 13     ; Function = RESTOR
-                BEQ     SERR7                    ; E963: 27 D9     ; Is Track 0? If no Set Error '7' (SEEK ERROR)
+                BEQ     SERR7                    ; E963: 27 D9     ; Is Track 0? If yes Set Error '7' (SEEK ERROR)
                 CLRA                             ; E965: 4F        ; 
-                LDAB    #$56                     ; E966: C6 56     ; = 86 <------------------------------------ What is this??????
+                LDAB    #$56                     ; E966: C6 56     ; = 86 <---- What is this??????
                 BRA     RESTORY   ; -->          ; E968: 20 A0     ; 
 ;------------------------------------------------
 ; Comes from RESTORY
@@ -528,9 +528,9 @@ IEB07           DECA                        ;+2  ; EB07: 4A        ; |
                 BPL     IEB07               ;+4  ; EB08: 2A FD     ; | A is FF, Carry should NOT be set
                 CLR     PIAREGB             ;+6  ; EB0A: 7F EC 01  ; Clear all PB (Set to Write, Reset active, ShiftCRC off, WG on)
                 RORB                        ;+2  ; EB0D: 56        ; ROR FUNCSAV (check Bit 0)
-                BCC     IEB11               ;+4  ; EB0E: 24 01     ; useless or timing? 
+                BCC     IEB11               ;+4  ; EB0E: 24 01     ; if carry is clear ROR again
 ;                BITA    #$56               ;+2  ; EB10: 85 56     ; A is now $56, doesn't effect carry
-                FCB     $85                
+                FCB     $85                                        ; but it deactivates the second ROR
 IEB11           RORB                             ; EB11: 56        ; ROR FUNCSAV (check Bit 1) set carry
                 LDX     #$0005                   ; EB12: CE 00 05  ; 
                 JSR     WAIT3                    ; EB15: BD E9 53  ; 
@@ -556,8 +556,8 @@ WRITSEC         LDAA    PROM_0              ;+4  ; EB31: B6 FC FC  ; in PROM_0 i
                 INX                              ; EB42: 08        ; |
 IEB43           DECB                             ; EB43: 5A        ; decrease counter
                 BNE     IEB2A                    ; EB44: 26 E4     ; check if underflow, if not, continue from top
-                STX     CURADRH                  ; EB46: DF 06     ; done, store current address ####### THIS IS WRONG ##########
-                LDX     #PIAREGA                 ; EB48: CE EC 00  ;  #### according to the M68SFDC3 Manual it should NOT change CURADR
+                STX     CURADRH                  ; EB46: DF 06     ; done, store current address
+                LDX     #PIAREGA                 ; EB48: CE EC 00  ; 
                 LDAA    #$40                     ; EB4B: 86 40     ;  
 IEB4D           BITA    $04,X                    ; EB4D: A5 04     ; Check SSDA Status Reg.
                 BEQ     IEB4D                    ; EB4F: 27 FC     ; Wait for Data
