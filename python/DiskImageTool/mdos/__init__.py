@@ -127,6 +127,7 @@ class class_MDOS(object):
         if self.verbose > 0:
             print(f'Make image w. {self.fspec["Imagesize"]} bytes')
         img = bytearray(self.fspec["Emptyval"] for _ in range(self.fspec["Imagesize"])) # make empty imagefile with correct size
+        #return img
         end = 0x18*128 # 0x18 Sectors w. 128 Byte
         if self.verbose > 0:
             print(f'Clear out {end:04X} bytes')

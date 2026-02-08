@@ -20,3 +20,4 @@
 ../bin/dasmfw -dasm=6800 -info format.info > format.asm
 ../bin/dasmfw -dasm=6800 -info format305.info > format305.asm
 #../bin/dasmfw -dasm=6809 -info exorset_bug.info > exorset_bug.asm
+../bin/dasmfw -dasm=6800 -info exbug.info > exbug.asm

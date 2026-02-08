@@ -809,7 +809,7 @@ ZF58E           CLR     ,X                       ; F58E: 6F 00     ; |
                 STAA    ACIA_0                   ; F5B7: B7 FC F4  ; set up ACIA
                 LDAA    PROM_1                   ; F5BA: B6 FC FD  ; for this we actually need the PROM
                 ANDA    #$35                     ; F5BD: 84 35     ; |
-                STAA    ACIA_0                   ; F5BF: B7 FC F4  ; ste up ACIA again
+                STAA    ACIA_0                   ; F5BF: B7 FC F4  ; set up ACIA again
                 LDAA    #$10                     ; F5C2: 86 10     ; |
                 JSR     OUTCNSF                  ; F5C4: BD F9 CF  ; Print a DLE char
                 LDAA    #':'                     ; F5C7: 86 3A     ; |
