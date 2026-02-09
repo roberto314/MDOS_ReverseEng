@@ -168,15 +168,15 @@ class DITOOL():
 
             for idx,e in enumerate(entries):
                 data = obj.get_file(imgfile, e)
-                fn = self.cleanup(e["Name"][1])
+                fn = self.cleanup(e["Name"][1]) + '.' + self.cleanup(e["Suffix"][1])
                 if fn == '':
                     print(f'{self.RED}Filename Empty!{self.END}')
                 else:
                     if verbose > 0:
                         print(f'Extracting file: {fn}')
                     self.write_file(data, pathname+fn, 'binary')
-        elif ('CREATE' in action):
 
+        elif ('CREATE' in action):
             try:
                 with open(pathname + 'stats.json') as fp:
                     stats = json.load(fp)
@@ -201,9 +201,9 @@ class DITOOL():
                     exit()
                 else:
                     print(f'No entries file found! Making empty image')
-                    imgfile = obj.create_image()
+                    imgfile = obj.create_image(stats)
             else:
-                imgfile = obj.add_files(pathname, entries, stats, obj.create_image(), action)
+                imgfile = obj.add_files(pathname, entries, stats, obj.create_image(stats), action)
             
             fn = imgname + '.img'
             print(f'Image with {len(imgfile)} bytes and Name: {fn} created.')
@@ -277,11 +277,11 @@ class DITOOL():
             fspec["Filestart"] = 0xB80
             fspec["Direntrysize"] = 0x10
             fspec["Emptyval"] = 0xE5
-            fspec["DiskID"] = "USER"
-            fspec["Version"] = " 3"
-            fspec["Revision"] = "05"
-            fspec["Date"] = "010101"
-            fspec["DiskName"] = "USER"
+            #fspec["DiskID"] = "USER"
+            #fspec["Version"] = " 3"
+            #fspec["Revision"] = "05"
+            #fspec["Date"] = "010101"
+            #fspec["UserName"] = "USER"
             fspec = me.check_alternate_format(fspec)
             from mdos import class_MDOS
             obj = class_MDOS(self, fspec, verbose)
@@ -406,6 +406,8 @@ if __name__ == '__main__':
                     os.system(MKDIRCMD)
                     print(f'{me.YEL}You probably want some files there too!.{me.END}')
                     #exit()
+                else:
+                    print(f'{me.YEL}Looking for files in: {DIRNAM}.{me.END}')
             if (action == 'EXTRACT'): # Creating Directory for EXTRACT images
                 if (os.path.isdir(DIRNAM) == False):
                     print(f'{me.YEL}Directory: {DIRNAM} does not exist - creating it.{me.END}')

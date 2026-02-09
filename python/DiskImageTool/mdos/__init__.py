@@ -79,7 +79,11 @@ class class_MDOS(object):
             print(f'off: {off:04X} c: {c} s: {s} totalsec: {totalsec} Track: {track}')
         return c, h, s
     #----------------------------------
-    def write_number2image(self, number, img, off, size):
+    def write_number2image(self, v_in, img, off, size):
+        if type(v_in) == str:
+            number = 0
+        else:
+            number = v_in
         val = number.to_bytes(size, 'big')
         img[off:off+size] = val
         return img
@@ -87,8 +91,8 @@ class class_MDOS(object):
     def write_text2image(self, text, img, off, size):
         t = text.encode("ASCII")
         e = bytearray(0x20 for _ in range(size-len(t)))
-        if self.verbose > 0:
-            print(f'Write {text} w. len {len(t)} to pos {off} Restlen: {len(e)}')
+        #if self.verbose > 0:
+        #    print(f'Write {text} w. len {len(t)} to pos {off} Restlen: {len(e)}')
         img[off:off+size] = t+e
         return img
     #----------------------------------
@@ -122,7 +126,7 @@ class class_MDOS(object):
             pos += 1
         return img
     #----------------------------------
-    def create_image(self):
+    def create_image(self, stats):
         # create empty image
         if self.verbose > 0:
             print(f'Make image w. {self.fspec["Imagesize"]} bytes')
@@ -135,19 +139,51 @@ class class_MDOS(object):
         img[0:end] = RIB
 
         # create Diskette ID Block
-        self.write_text2image(self.fspec["DiskID"], img, 0, 8) # "Diskette ID: "]
-        self.write_text2image(self.fspec["Version"], img, 8, 2)                # "Version #: "]  
-        self.write_text2image(self.fspec["Revision"], img, 0x0A, 2)             # "Revision #: "] 
-        self.write_text2image(self.fspec["Date"], img, 0x0C, 6)         # "Gen. Date: "]  
-        self.write_text2image(self.fspec["DiskName"], img, 0x12, 0x14) # "User Name: "]  
-        #----------------------
-        #self.write_number2image(0x5c, img, 0x26, 2) # MDOSOV0
-        #self.write_number2image(0x6c, img, 0x28, 2) # MDOSOV1
-        #self.write_number2image(0x7c, img, 0x2A, 2) # MDOSOV2
-        #self.write_number2image(0x84, img, 0x2C, 2) # MDOSOV3
-        #self.write_number2image(0x8C, img, 0x2E, 2) # MDOSOV4
-        #self.write_number2image(0x94, img, 0x30, 2) # MDOSOV5
-        #self.write_number2image(0x9C, img, 0x32, 2) # MDOSOV6
+        try:
+            diskid = self.fspec["DiskID"]
+        except:
+            if stats != {}:
+                diskid = stats["Diskette ID: "][1]
+            else:
+                diskid = ' '
+        self.write_text2image(diskid, img, 0, 8)         # Diskette ID
+
+        try:
+            version = self.fspec["Version"]
+        except:
+            if stats != {}:
+                version = stats["Version #: "][1]
+            else:
+                version = ' '
+        self.write_text2image(version, img, 8, 2)        # Version #
+
+        try:
+            revision = self.fspec["Revision"]
+        except:
+            if stats != {}:
+                revision = stats["Revision #: "] [1]
+            else:
+                revision = ' '
+        self.write_text2image(revision, img, 0x0A, 2)    # Revision #
+
+        try:
+            generationdate = self.fspec["Date"]
+        except:
+            if stats != {}:
+                generationdate = stats["Gen. Date: "] [1]
+            else:
+                generationdate = ''
+        self.write_text2image(generationdate, img, 0x0C, 6) # Gen. Date
+
+        try:
+            username = self.fspec["UserName"]
+        except:
+            if stats != {}:
+                username = stats["User Name: "][1]
+            else:
+                username = ' '
+        self.write_text2image(username, img, 0x12, 0x14) # User Name
+
         #----------------------
         # create Cluster Allocation Table 80-FF
         self.create_ClusterAllocationTable(img, 0x80)
@@ -391,49 +427,14 @@ class class_MDOS(object):
                 print(f'{v[1]}',end = '')
                 print(f'{self.parent.END}')
     #----------------------------------
-    # adds the last entry which indicates no more files and free space on floppy
-    def add_last_enty(self, img, pos, off):
-        totalsec = (self.fspec["Imagesize"] - off) / self.fspec["bps"] + self.fspec["Sectors"] # remove extra track for dir
-        nft,h,nfs = self.offset_to_chs(off)
-        track = int(off / self.fspec["bps"]) # How many Tracks are these
-        print(f'Next Free Trk.: {nft}, Next Free Sec.: {nfs}, Tracks used: {track} Rest: {self.fspec["Imagesize"]-off} TotalFree: {totalsec}/ 0x{int(totalsec):02X}')       
-        ap = pos * self.fspec["Direntrysize"] + self.fspec["Dirstart"] # actual Position
-        clrpos = pos * self.fspec["Direntrysize"] + self.fspec["Dirstart"]
-        zeros = bytearray(0 for _ in range(0x1700 - clrpos)) # Clear out part of dir
-        #zeros = bytearray(0 for _ in range(self.fspec["Filestart"] - clrpos)) # Clear out rest of dir
-        #zeros = bytearray(0 for _ in range(self.fspec["Direntrysize"])) # Clear out direntry only
-        if self.verbose > 0:
-            print(f'Clear: {len(zeros)}, 0x{len(zeros):04X}, Clrpos: 0x{clrpos:04X}')
-        img[ap:ap+len(zeros)] = zeros
-        img[ap] = 0xFF # Signature for no more entries
-        img[ap+16] = nft # Next free Track
-        img[ap+17] = nfs # Next free Sector
-        free = int(totalsec)
-        if self.verbose > 0:
-            print(f'Total Free Trk.: {free}, 0x{free:04X}')
-        img[ap+18:ap+20] = (free).to_bytes(2, 'big')
-    #----------------------------------
     # adds a file to the directory including all the necessary data
-    def add_dir_enty(self, img, pos, name, passw, sttrk, stsec, siz, typ, saddr, eaddr, pc, hilin, sp0, sp1, sp2):
-        ap = pos * self.fspec["Direntrysize"] + self.fspec["Dirstart"] # actual Position
-        text = bytearray(0x20 for _ in range(16)) # Clear out name and password
-        namtxt = (name.encode("ascii")).strip()
-        passtxt = (passw.encode("ascii")).strip()
-        text[0:len(namtxt)] = namtxt
-        text[8:8+len(passtxt)] = passtxt
-        #print(f'Adding: {text} @ {ap:04X}')
-        img[ap:ap+16] = text
-        img[ap+16] = int(sttrk)
-        img[ap+17] = int(stsec)
-        img[ap+18:ap+20] = siz.to_bytes(2, 'big')
-        img[ap+20] = typ
-        img[ap+21:ap+23] = saddr.to_bytes(2, 'big')
-        img[ap+23:ap+25] = eaddr.to_bytes(2, 'big')
-        img[ap+25:ap+27] = pc.to_bytes(2, 'big')
-        img[ap+27:ap+29] = hilin.to_bytes(2, 'big')
-        img[ap+29] = sp0
-        img[ap+30] = sp1
-        img[ap+31] = sp2
+    def add_dir_enty(self, img, pos, name, suffx, psn, attrib):
+        start = pos
+        self.write_text2image(name, img, start+0, 8)
+        self.write_text2image(suffx, img, start+8, 2)
+        self.write_number2image(psn, img, start+0x0A, 2)
+        self.write_number2image(attrib, img, start+0x0C, 1)
+        return img
     #----------------------------------
     def get_val(self, entry, key):
         #k,v = entry.items()
@@ -500,12 +501,28 @@ class class_MDOS(object):
                 entry = self.set_default_values()
         return entries
     #----------------------------------
-    def add_file(self, img, fdata, sttrk, stsec, siz):
-        off = self.chs_to_offset(sttrk, 0, stsec)
+    def add_rib(self, img, start, entry):
+        bps = self.fspec["bps"]
+        pos = start
+        #print(f'Add RIB @ {pos:06X}')
+        zeros = bytearray(0 for _ in range(bps))
+        img[pos:pos+bps] = zeros
+        self.write_number2image(entry["BytLS"][1], img, start+0x75, 1)
+        self.write_number2image(entry["Secs"][1], img, start+0x76, 2)
+        self.write_number2image(entry["StartAdr"][1], img, start+0x78, 2)
+        self.write_number2image(entry["ExecAdr"][1], img, start+0x7A, 2)
+        return img
+    #----------------------------------
+    def add_file(self, img, start, fdata, siz):
+        bps = self.fspec["bps"]
+        pos = start
+        #print(f'Add file @ {pos:06X} Size: {len(fdata):04X}')
         for idx in range(siz): # go through the sectors
-            cstart = idx * self.fspec["bps"]
-            start = off + cstart
-            img[start:start+self.fspec["bps"]] = fdata[cstart:cstart+self.fspec["bps"]]
+            b = idx*bps
+            #print(f'Add chunk {idx} sector @ {pos:04X} chunk {b:04X} sectors: {len(fdata)/bps}')
+            img[pos:pos+bps] = fdata[b:b+bps]
+            pos += bps
+        return img
     #----------------------------------
     def add_files(self, fdir, entries, stats, img, action):
         if action == 'CREATEBOOT':
@@ -520,66 +537,80 @@ class class_MDOS(object):
         h = 0
         s = 0
         diridx = 0
+        dirstart = self.fspec["Dirstart"]
+        direntrysize = self.fspec["Direntrysize"]
         bps = self.fspec["bps"]
 
         while len(entries) > diridx:                        # cycle through entries
             for idx,entry in enumerate(entries):            # look for lowest Directoryposition
                 if entry["Directoryposition"][1] == diridx:
                     name = entry["Name"][1].strip()
-                    if self.verbose > 0:
-                        print(f'Checking {entry["Directoryposition"]}, diridx: {diridx}, len: {len(entries)}')
-                    fn = name
+                    suffx = entry["Suffix"][1].strip()
+                    psn = entry["StartPSN"][1]
+                    attrib = entry["Attribute"][1]
+                    fn = name + '.' + suffx
                     #----------------------------------
                     # Here we add the filenames to the Directory
                     # We need the stats file for Filetype, Startaddress, Endaddress, Program Counter,
                     # Hiline (Basic) and three 'spares'.
                     # Also the size can come from the stats file or from the actual filesize
-                    if ('/' in name):
+                    if ('/' in name): # in FDOS Filenames can contain slash, we change them to underline
                         fn = name.replace('/', '_')
                     fdata = self.parent.read_file((fdir+fn), 'binary') # Get the filedata
-                    if self.verbose > 0:
-                        print(f'Got File: {fn} with size: {len(fdata)}')
                     #-------------------------------------------------------------------------
                     # Get the filesize from the actual file and pad it to the next sector
                     #-------------------------------------------------------------------------
                     flen = len(fdata)
                     tempsiz = flen/bps  # Size (in sectors) from actual filesize
                     temprest = (flen%bps)  # Rest in sectors
-                    zeros = bytearray(0 for _ in range(temprest))
-                    fdata += zeros
-                    nsiz = int(len(fdata)/bps)
-                    if self.verbose > 0:
-                        print(f'Sectors: {tempsiz}, Rest: {temprest}, new: {nsiz}')
+                    zeros = bytearray(0 for _ in range(bps-temprest)) # Pad to full sector
+                    fdata += zeros 
+                    nsiz = int(tempsiz)
+                    if temprest > 0:
+                        nsiz += 1
+                    #if self.verbose > 0:
+                    #    print(f'Sectors: {tempsiz}, Rest: {temprest}/0x{temprest:02X}, needed sectors: {nsiz}/0x{nsiz:02X} Sectors: {len(fdata)/bps}')
                     siz = nsiz # Use actual filesize padded to next sectorboundry
                     #-------------------------------------------------------------------------
-                    #siz = int(entry["SizeinSecs"][1]) # Use size from stats file
-                    totalsz += siz * bps
-                    #passw = entry["Password_Clean"][1] # this is needed from entries file (can maybe be a default value)
-                    passw = '        ' # default is no password
-                    if name == '$DOS':
-                        totalsz += self.fspec["Sectors"] * bps # Add one track for directory
-                        sttrk = 0 # We need to start with $DOS at 0,0
-                        stsec = 0 # We need to start with $DOS at 0,0
-                    #else:
-                    #    sttrk = c
-                    #    stsec = s
-                    sttrk = (entry["StartTrack"][1])  # this is needed from entries file (can be calculated)
-                    stsec = (entry["StartSector"][1]) # this is needed from entries file (can be calculated)
-                    saddr = entry["SAddr"][1]         # this is needed from entries file
-                    eaddr = entry["EAddr"][1]         # this is needed from entries file
-                    pc = entry["Exec"][1]             # this is needed from entries file
-                    hilin = entry["Hi"][1]            # this is needed from entries file
-                    sp0 = entry["Sp0"][1]             # this is needed from entries file
-                    sp1 = entry["Sp1"][1]             # this is needed from entries file
-                    sp2 = entry["Sp2"][1]             # this is needed from entries file
-                    typ = entry["Attribute"][1]       # this is needed from entries file
-                    #print(f'Adding #{diridx} {name:8} to: {sttrk=:2} {stsec=:2} {siz=:2} NxtOff: {totalsz:>05X} Size of File: {len(fdata)/bps:>5.1f}')
-                    self.add_dir_enty(img, diridx, name, passw, sttrk, stsec, siz, typ, saddr, eaddr, pc, hilin, sp0, sp1, sp2)
-                    #----------------------------------
-                    # Now add the actual files to the Image
-                    self.add_file(img, fdata, sttrk, stsec, siz)
-                    c,h,s = self.offset_to_chs(totalsz) # Get position now for next free sector
+                    #pos = dirstart + diridx * direntrysize
+                    pos = dirstart + entry["DEN"][1] * direntrysize
+                    if "MDOS" in name:
+                        print(f'{self.parent.GRN}Got System file: {name}{self.parent.END}')
+                        #----------------------
+                        if "OV0" in name:
+                            img = self.write_number2image(psn, img, 0x26, 2) # MDOSOV0
+                        elif "OV1" in name:
+                            img = self.write_number2image(psn, img, 0x28, 2) # MDOSOV1
+                        elif "OV2" in name:
+                            img = self.write_number2image(psn, img, 0x2A, 2) # MDOSOV2
+                        elif "OV3" in name:
+                            img = self.write_number2image(psn, img, 0x2C, 2) # MDOSOV3
+                        elif "OV4" in name:
+                            img = self.write_number2image(psn, img, 0x2E, 2) # MDOSOV4
+                        elif "OV5" in name:
+                            img = self.write_number2image(psn, img, 0x30, 2) # MDOSOV5
+                        elif "OV6" in name:
+                            img = self.write_number2image(psn, img, 0x32, 2) # MDOSOV6
+
+                    #if self.verbose > 0:
+                    #    print(f'Checking {entry["Directoryposition"][1]}, diridx: {diridx}, of {len(entries)} entries. Pos: {pos:04X}')
+                    if name == 'BOOTSECTOR':
+                        print(f'{self.parent.YEL}Found Bootsector{self.parent.END}')
+                        img = self.add_file(img, 0xB80, fdata, 1)
+                    else:
+                        img = self.add_dir_enty(img, pos, name, suffx, psn, attrib)
+                        #----------------------------------
+                        # Now add the actual files to the Image
+                        pos = psn * bps
+                        if self.verbose > 0:
+                            print(f'Got File: {fn} with secs: {nsiz:02X} and rest: {temprest:02X} on pos: {pos:04X}')
+                        img = self.add_rib(img, pos, entry)
+                        pos += bps # RIB is always one sector
+                        img = self.add_file(img, pos, fdata, siz)
+                        #if diridx >= 0:
+                        #    return img
+                    #c,h,s = self.offset_to_chs(totalsz) # Get position now for next free sector
                     diridx += 1
-        self.add_last_enty(img, diridx, totalsz)
+        #self.add_last_enty(img, diridx, totalsz)
         return img
 
