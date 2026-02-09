@@ -276,12 +276,6 @@ class class_MDOS(object):
                     entry["BytLS"]       = ["strw",  '--']
                 else:
                     entry["BytLS"]       = ["hx8",  byteLS]
-                # number of sectors to load
-                sec2load = self.conv16(imgfile, (FRIB+0x76))
-                if sec2load == 0:
-                    entry["Secs"]        = ["strw",  '----']
-                else:
-                    entry["Secs"]        = ["hx16", sec2load]
                 # the starting load address
                 startAddr = self.conv16(imgfile, (FRIB+0x78))
                 if startAddr == 0:
@@ -319,12 +313,20 @@ class class_MDOS(object):
                 entry["StartonDisk"]   = ["hx16",  diskstart, "DSTRT"]
                 entry["ContinClustr"]  = ["hx16",  contclust, "CClust"]
                 entry["EOFSec"]        = ["hx16",  logsecEOF]
+                
+                sec2load = self.conv16(imgfile, (FRIB+0x76))
                 if byteLS == 0 or startAddr == 0:    # ASCII Files
                     FSIZ = (logsecEOF  + 2 ) * 128
                 else:                                # Binary Files
                     FSIZ = (sec2load-1)*128 + byteLS # looks good!
                 
                 ENDDSK = FSIZ + diskstart - 1     # End on Disk
+                # number of sectors to load
+                if sec2load == 0:
+                    #entry["Secs"]        = ["strw",  '----']
+                    entry["Secs"]        = ["hx16", int(FSIZ/128)]
+                else:
+                    entry["Secs"]        = ["hx16", sec2load]
                 entry["Filesize"]       = ["hx16",  FSIZ, "FSize"]
                 entry["EndDisk"]        = ["hx16",  ENDDSK, "DskEnd"]
                 entry["Directoryposition"] = ["dec2",  dirpos, "Dirpos"]

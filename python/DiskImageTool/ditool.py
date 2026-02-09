@@ -276,7 +276,7 @@ class DITOOL():
             fspec["Dirstart"] = 0x180
             fspec["Filestart"] = 0xB80
             fspec["Direntrysize"] = 0x10
-            fspec["Emptyval"] = 0xE5
+            fspec["Emptyval"] = 0 #xE5
             #fspec["DiskID"] = "USER"
             #fspec["Version"] = " 3"
             #fspec["Revision"] = "05"
