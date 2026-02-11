@@ -1,0 +1,103 @@
+file COPY.CM 2000
+#option ldchar *
+#option cchar *
+#option multilabel on
+#option schowzero
+option noasc
+#option noaddr #disable for comments
+#option nohex #disable for comments
+option noflex
+option nofcc
+#option noforced # makes > before variable
+option labellen 16
+option copndlen 25
+
+data 2000-2003
+char 2000-2003
+used 2004 START
+
+data 29b4-2de1
+char 29b4-2de1
+
+data 2e98-2ea0
+unused 2EA1-2f07
+
+label fe CBUFPs
+
+
+data 2014
+data 2049
+data 20AD
+data 2177
+data 21BD
+data 21C2
+data 21C9
+data 2201
+data 2205
+data 2225
+data 2247
+data 224F
+data 2268
+data 2271
+data 2281
+data 228C
+data 229D
+data 22B5
+data 22C9
+data 22D4
+data 230E
+data 2322
+data 2337
+data 233E
+data 2366
+data 237A
+data 2381
+data 238A
+data 239A
+data 23AF
+data 23C0
+data 23DC
+data 23E3
+data 243E
+data 24AF
+data 24B4
+data 24BB
+data 2523
+data 252A
+data 2534
+data 2558
+data 258D
+data 259D
+data 25D9
+data 25FC
+data 260B
+data 2628
+data 262F
+data 2691
+data 269B
+data 26A2
+data 26DD
+data 26F3
+data 26F8
+data 2734
+data 273B
+data 276C
+data 2775
+data 277A
+data 2783
+data 2798
+data 279C
+data 27A3
+data 27AE
+data 2801
+data 2812
+data 2819
+data 2824
+data 2829
+data 282E
+data 2837
+data 2840
+data 2856
+data 2976
+data 2978
+data 29A7

@@ -1,0 +1,134 @@
+file BACKUP.CM 2000
+#option ldchar *
+#option cchar *
+#option multilabel on
+#option schowzero
+option noasc
+#option noaddr #disable for comments
+#option nohex #disable for comments
+option noflex
+option nofcc
+#option noforced # makes > before variable
+option labellen 16
+option copndlen 25
+
+data 2000-23FF
+char 2000-23FF
+
+used 2400 START
+label 2088 STACK
+
+label fe CBUFPs
+
+label $0000 CURDRV    
+label $0001 STRSCTH  
+label $0002 STRSCTL  
+label $0003 NUMSCTH  
+label $0004 NUMSCTL  
+label $0005 LSCTLN
+label $0006 CURADRH  
+label $0007 CURADRL
+label $0008 FDSTAT
+label $0009 CWRDCNT  
+label $000A SofTRK   
+label $000B SECTCNT  
+label $000D SIDES  
+label $000E FUNCSAV  
+
+data 240A
+data 24AD
+data 24B5
+data 24D9
+data 24E0
+data 2595
+data 2597
+data 25BF
+data 2616
+data 261A
+data 26B8
+data 26FB
+data 2726
+data 2757
+data 27BD
+data 27C2
+data 27E5
+data 2815
+data 281D
+data 2844
+data 28A5
+data 28E7
+data 28FA
+data 291E
+data 2940
+data 2996
+data 299C
+data 2A17
+data 2A52
+data 2A54
+data 2A56
+data 2A58
+data 2A5C
+data 2A69
+data 2B38
+data 2B76
+data 2B92
+data 2BB2
+data 2BC8
+data 2BF2
+data 2C14
+data 2C53
+data 2C6A
+data 2C73
+data 2C7F
+data 2C88
+data 2CB5
+data 2CEE
+data 2D32
+data 2D38
+data 2D41
+data 2D6D
+data 2D7A
+data 2D9E
+data 2DA2
+data 2DAA
+data 2DAD
+data 2DB0
+data 2DB6
+data 2DCB
+data 2DFB
+data 2E01
+data 2E0F
+data 2E30
+data 2E65
+data 2E79
+data 2E85
+data 2E9B
+data 2F15
+data 2F21
+data 2F6E
+data 2F80
+data 2F92
+data 2F9B
+data 2FC5
+data 2FD7
+data 2FDF
+data 2FE8
+data 2FF3
+data 2FF7
+data 300F
+data 3016
+data 301C
+data 3021
+data 3025
+data 3029
+data 302B
+data 3051
+data 307A
+data 30F2
+data 30FE
+data 3102
+data 310D
+data 3113
+data 312A
+data 313B
+data 313F

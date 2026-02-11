@@ -266,7 +266,7 @@ calculated quantity and is interpreted as follows:
 |           |       |
 ---------------------
       ^         ^
-      |         |___ Position within sector (0-7) *ROB: should be position within cluster?*
+      |         |___ Position within sector (0-7)
       |_____________ Physical Sector Number ($03-$16)
 
 

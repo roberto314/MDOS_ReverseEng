@@ -1,7 +1,7 @@
 ; Ready to assemble with asl. binary matches original
 
          include "mdoseq.inc"
-
+CURDRV  EQU     0 
 STRSCTH EQU     $0001
 STRSCTL EQU     $0002
 NUMSCTH EQU     $0003

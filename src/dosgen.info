@@ -1,0 +1,131 @@
+file DOSGEN.CM 2000
+#option ldchar *
+#option cchar *
+#option multilabel on
+#option schowzero
+option noasc
+#option noaddr #disable for comments
+#option nohex #disable for comments
+option noflex
+option nofcc
+#option noforced # makes > before variable
+option labellen 16
+option copndlen 25
+
+data 2000-2003
+char 2000-2003
+used 2004 START
+
+data 262e-2966
+char 262e-2966
+unused 2A1B-2A7F
+data 2079
+data 207c
+data 207f
+data 2082
+
+label $0000 CURDRV    
+label $0001 STRSCTH  
+label $0002 STRSCTL  
+label $0003 NUMSCTH  
+label $0004 NUMSCTL  
+label $0005 LSCTLN
+label $0006 CURADRH  
+label $0007 CURADRL
+label $0008 FDSTAT
+label $0009 CWRDCNT  
+label $000A SofTRK   
+label $000B SECTCNT  
+label $000D SIDES  
+label $000E FUNCSAV  
+;label $000F NMIVECSAV
+;label $0013 TRACKSAV 
+;label $0014 ADDRMRK  
+;label $0015 DWRDCNT  
+;label $0016 STACKSAV 
+;label $0018 DRDCNT   
+;label $0019 CLKFREQ  
+;label $0020 LDADDR   
+;label $0022 EXADDR   
+;label $0024 ONECON   
+
+label fe CBUFPs
+
+data 201A
+data 206D
+data 2076
+data 2086
+data 20BB
+data 20C2
+data 20C9
+data 20E8
+data 20ED
+data 20F4
+data 20FB
+data 211B
+data 2120
+data 2127
+data 212E
+data 2145
+data 2164
+data 2177
+data 217F
+data 218D
+data 219D
+data 21AE
+data 21EA
+data 2221
+data 2225
+data 2237
+data 2241
+data 2254
+data 225E
+data 2278
+data 227F
+data 2285
+data 228C
+data 2296
+data 22B1
+data 22BB
+data 22CE
+data 22D9
+data 22E4
+data 22EB
+data 22F8
+data 2306
+data 2319
+data 232C
+data 2361
+data 236C
+data 2377
+data 237B
+data 238C
+data 239E
+data 23BF
+data 23DA
+data 2408
+data 2426
+data 245D
+data 2463
+data 2488
+data 24A6
+data 24AB
+data 24B5
+data 24B9
+data 24C6
+data 24CA
+data 24D4
+data 24D9
+data 24E6
+data 24FA
+data 2507
+data 2521
+data 252D
+data 2539
+data 2541
+data 2553
+data 2579
+data 258F
+data 259C
+data 25A6
+data 25AE
