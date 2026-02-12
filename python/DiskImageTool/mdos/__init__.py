@@ -257,14 +257,14 @@ class class_MDOS(object):
                 #--------------------------------------------------------------------------------
                 entry["StartPSN"]    = ["hx16", self.conv16(imgfile, (offset+10)), "PSN"]
                 
-                temp = int((offset-self.fspec["Dirstart"])/self.fspec["Direntrysize"]) # DEN (Dir. Entry Nr.)
-                #pos = (offset>>4) & 0x07          # DEN Position 
-                #psec = int(offset/self.fspec["bps"])<<3 # DEN Physical Sector
-                psec = (offset)>>4 # DEN Physical Sector
+                #temp = int((offset-self.fspec["Dirstart"])/self.fspec["Direntrysize"]) # DEN (Dir. Entry Nr.)
+                pos = (offset>>4) & 0x07          # DEN Position 
+                psec = int(offset/self.fspec["bps"])<<3 # DEN Physical Sector
+                #psec = (offset)>>4 # DEN Physical Sector
                 #psec = (temp >> 3) & 0x1F  # DEN Physical Sector
                 #entry["DEN Position"] = ["hx8", (pos), "POS"]   
                 #entry["DEN PhSector"] = ["hx8", (psec), "PSec"]  
-                entry["DEN"] = ["hx8", (psec-0x18)]  
+                entry["DEN"] = ["hx8", (psec+pos)]  
                 
                 FRIB = entry["StartPSN"][1]*128 # Get Start of File RIB
             #    entry["File RIB: "]  = ["arr8x", imgfile[FRIB:FRIB+128]] # Dump the RIB as Array
@@ -406,7 +406,6 @@ class class_MDOS(object):
             self.print_body(e)
         else:
             self.print_body(e)  
-     #----------------------------------
     #----------------------------------
     # Prints out Directory and stats
     def print_dir(self, entries, stats):
@@ -430,8 +429,30 @@ class class_MDOS(object):
                 print(f'{self.parent.END}')
     #----------------------------------
     # adds a file to the directory including all the necessary data
-    def add_dir_enty(self, img, pos, name, suffx, psn, attrib):
+    def add_dir_enty(self, img, entry):
+        name = entry["Name"][1].strip()
+        suffx = entry["Suffix"][1].strip()
+        attrib = entry["Attribute"][1]
         start = pos
+        if "MDOS" in name: # these files have fixed positions
+            print(f'{self.parent.GRN}Got System file: {name}{self.parent.END}')
+            #----------------------
+            if "OV0" in name:
+                img = self.write_number2image(psn, img, 0x26, 2) # MDOSOV0
+            elif "OV1" in name:
+                img = self.write_number2image(psn, img, 0x28, 2) # MDOSOV1
+            elif "OV2" in name:
+                img = self.write_number2image(psn, img, 0x2A, 2) # MDOSOV2
+            elif "OV3" in name:
+                img = self.write_number2image(psn, img, 0x2C, 2) # MDOSOV3
+            elif "OV4" in name:
+                img = self.write_number2image(psn, img, 0x2E, 2) # MDOSOV4
+            elif "OV5" in name:
+                img = self.write_number2image(psn, img, 0x30, 2) # MDOSOV5
+            elif "OV6" in name:
+                img = self.write_number2image(psn, img, 0x32, 2) # MDOSOV6
+        else: # normal file
+            pass
         self.write_text2image(name, img, start+0, 8)
         self.write_text2image(suffx, img, start+8, 2)
         self.write_number2image(psn, img, start+0x0A, 2)
@@ -549,7 +570,7 @@ class class_MDOS(object):
                     name = entry["Name"][1].strip()
                     suffx = entry["Suffix"][1].strip()
                     psn = entry["StartPSN"][1]
-                    attrib = entry["Attribute"][1]
+                    
                     fn = name + '.' + suffx
                     #----------------------------------
                     # Here we add the filenames to the Directory
@@ -576,23 +597,6 @@ class class_MDOS(object):
                     #-------------------------------------------------------------------------
                     #pos = dirstart + diridx * direntrysize
                     pos = dirstart + entry["DEN"][1] * direntrysize
-                    if "MDOS" in name:
-                        print(f'{self.parent.GRN}Got System file: {name}{self.parent.END}')
-                        #----------------------
-                        if "OV0" in name:
-                            img = self.write_number2image(psn, img, 0x26, 2) # MDOSOV0
-                        elif "OV1" in name:
-                            img = self.write_number2image(psn, img, 0x28, 2) # MDOSOV1
-                        elif "OV2" in name:
-                            img = self.write_number2image(psn, img, 0x2A, 2) # MDOSOV2
-                        elif "OV3" in name:
-                            img = self.write_number2image(psn, img, 0x2C, 2) # MDOSOV3
-                        elif "OV4" in name:
-                            img = self.write_number2image(psn, img, 0x2E, 2) # MDOSOV4
-                        elif "OV5" in name:
-                            img = self.write_number2image(psn, img, 0x30, 2) # MDOSOV5
-                        elif "OV6" in name:
-                            img = self.write_number2image(psn, img, 0x32, 2) # MDOSOV6
 
                     #if self.verbose > 0:
                     #    print(f'Checking {entry["Directoryposition"][1]}, diridx: {diridx}, of {len(entries)} entries. Pos: {pos:04X}')
@@ -600,7 +604,7 @@ class class_MDOS(object):
                         print(f'{self.parent.YEL}Found Bootsector{self.parent.END}')
                         img = self.add_file(img, 0xB80, fdata, 1)
                     else:
-                        img = self.add_dir_enty(img, pos, name, suffx, psn, attrib)
+                        img = self.add_dir_enty(img, entry)
                         #----------------------------------
                         # Now add the actual files to the Image
                         pos = psn * bps
