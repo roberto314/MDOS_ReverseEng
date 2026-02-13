@@ -30,15 +30,9 @@
       220,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      0,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      0,
-      "PSec"
+      24
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -48,10 +42,6 @@
     "BytLS": [
       "hx8",
       40
-    ],
-    "Secs": [
-      "hx16",
-      10
     ],
     "StartAdr": [
       "hx16",
@@ -66,6 +56,10 @@
     "SDW0": [
       "hx16",
       2103
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -84,6 +78,10 @@
     "EOFSec": [
       "hx16",
       9
+    ],
+    "Secs": [
+      "hx16",
+      10
     ],
     "Filesize": [
       "hx16",
@@ -132,15 +130,9 @@
       456,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      1,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      0,
-      "PSec"
+      25
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -150,10 +142,6 @@
     "BytLS": [
       "hx8",
       120
-    ],
-    "Secs": [
-      "hx16",
-      15
     ],
     "StartAdr": [
       "hx16",
@@ -168,6 +156,10 @@
     "SDW0": [
       "hx16",
       3186
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -186,6 +178,10 @@
     "EOFSec": [
       "hx16",
       14
+    ],
+    "Secs": [
+      "hx16",
+      15
     ],
     "Filesize": [
       "hx16",
@@ -234,15 +230,9 @@
       92,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      0,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      1,
-      "PSec"
+      32
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -252,10 +242,6 @@
     "BytLS": [
       "hx8",
       8
-    ],
-    "Secs": [
-      "hx16",
-      13
     ],
     "StartAdr": [
       "hx16",
@@ -270,6 +256,10 @@
     "SDW0": [
       "hx16",
       3095
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -288,6 +278,10 @@
     "EOFSec": [
       "hx16",
       12
+    ],
+    "Secs": [
+      "hx16",
+      13
     ],
     "Filesize": [
       "hx16",
@@ -336,15 +330,9 @@
       328,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      0,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      2,
-      "PSec"
+      40
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -354,10 +342,6 @@
     "BytLS": [
       "hx8",
       32
-    ],
-    "Secs": [
-      "hx16",
-      17
     ],
     "StartAdr": [
       "hx16",
@@ -372,6 +356,10 @@
     "SDW0": [
       "hx16",
       4178
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -390,6 +378,10 @@
     "EOFSec": [
       "hx16",
       16
+    ],
+    "Secs": [
+      "hx16",
+      17
     ],
     "Filesize": [
       "hx16",
@@ -438,15 +430,9 @@
       480,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      1,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      2,
-      "PSec"
+      41
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -456,10 +442,6 @@
     "BytLS": [
       "hx8",
       40
-    ],
-    "Secs": [
-      "hx16",
-      18
     ],
     "StartAdr": [
       "hx16",
@@ -474,6 +456,10 @@
     "SDW0": [
       "hx16",
       4216
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -492,6 +478,10 @@
     "EOFSec": [
       "hx16",
       17
+    ],
+    "Secs": [
+      "hx16",
+      18
     ],
     "Filesize": [
       "hx16",
@@ -540,15 +530,9 @@
       596,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      2,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      2,
-      "PSec"
+      42
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -558,10 +542,6 @@
     "BytLS": [
       "hx8",
       48
-    ],
-    "Secs": [
-      "hx16",
-      69
     ],
     "StartAdr": [
       "hx16",
@@ -576,6 +556,10 @@
     "SDW0": [
       "hx16",
       17557
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -594,6 +578,10 @@
     "EOFSec": [
       "hx16",
       68
+    ],
+    "Secs": [
+      "hx16",
+      69
     ],
     "Filesize": [
       "hx16",
@@ -642,15 +630,9 @@
       140,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      0,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      3,
-      "PSec"
+      48
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -660,10 +642,6 @@
     "BytLS": [
       "hx8",
       72
-    ],
-    "Secs": [
-      "hx16",
-      7
     ],
     "StartAdr": [
       "hx16",
@@ -678,6 +656,10 @@
     "SDW0": [
       "hx16",
       1059
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -696,6 +678,10 @@
     "EOFSec": [
       "hx16",
       6
+    ],
+    "Secs": [
+      "hx16",
+      7
     ],
     "Filesize": [
       "hx16",
@@ -744,15 +730,9 @@
       24,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      0,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      4,
-      "PSec"
+      56
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -762,10 +742,6 @@
     "BytLS": [
       "hx8",
       16
-    ],
-    "Secs": [
-      "hx16",
-      64
     ],
     "StartAdr": [
       "hx16",
@@ -780,6 +756,10 @@
     "SDW0": [
       "hx16",
       16390
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -798,6 +778,10 @@
     "EOFSec": [
       "hx16",
       63
+    ],
+    "Secs": [
+      "hx16",
+      64
     ],
     "Filesize": [
       "hx16",
@@ -846,15 +830,9 @@
       156,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      0,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      5,
-      "PSec"
+      64
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -864,10 +842,6 @@
     "BytLS": [
       "hx8",
       120
-    ],
-    "Secs": [
-      "hx16",
-      4
     ],
     "StartAdr": [
       "hx16",
@@ -882,6 +856,10 @@
     "SDW0": [
       "hx16",
       1063
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -900,6 +878,10 @@
     "EOFSec": [
       "hx16",
       3
+    ],
+    "Secs": [
+      "hx16",
+      4
     ],
     "Filesize": [
       "hx16",
@@ -948,15 +930,9 @@
       832,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      0,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      6,
-      "PSec"
+      72
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -966,10 +942,6 @@
     "BytLS": [
       "hx8",
       48
-    ],
-    "Secs": [
-      "hx16",
-      126
     ],
     "StartAdr": [
       "hx16",
@@ -984,6 +956,10 @@
     "SDW0": [
       "hx16",
       31952
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -1002,6 +978,10 @@
     "EOFSec": [
       "hx16",
       125
+    ],
+    "Secs": [
+      "hx16",
+      126
     ],
     "Filesize": [
       "hx16",
@@ -1050,15 +1030,9 @@
       444,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      0,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      7,
-      "PSec"
+      80
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -1068,10 +1042,6 @@
     "BytLS": [
       "hx8",
       32
-    ],
-    "Secs": [
-      "hx16",
-      8
     ],
     "StartAdr": [
       "hx16",
@@ -1086,6 +1056,10 @@
     "SDW0": [
       "hx16",
       2159
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -1104,6 +1078,10 @@
     "EOFSec": [
       "hx16",
       7
+    ],
+    "Secs": [
+      "hx16",
+      8
     ],
     "Filesize": [
       "hx16",
@@ -1152,15 +1130,9 @@
       668,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      1,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      7,
-      "PSec"
+      81
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -1170,10 +1142,6 @@
     "BytLS": [
       "hx8",
       48
-    ],
-    "Secs": [
-      "hx16",
-      22
     ],
     "StartAdr": [
       "hx16",
@@ -1188,6 +1156,10 @@
     "SDW0": [
       "hx16",
       5287
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -1206,6 +1178,10 @@
     "EOFSec": [
       "hx16",
       21
+    ],
+    "Secs": [
+      "hx16",
+      22
     ],
     "Filesize": [
       "hx16",
@@ -1254,15 +1230,9 @@
       692,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      2,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      7,
-      "PSec"
+      82
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -1272,10 +1242,6 @@
     "BytLS": [
       "strw",
       "--"
-    ],
-    "Secs": [
-      "strw",
-      "----"
     ],
     "StartAdr": [
       "strw",
@@ -1290,6 +1256,10 @@
     "SDW0": [
       "hx16",
       28845
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -1308,6 +1278,10 @@
     "EOFSec": [
       "hx16",
       114
+    ],
+    "Secs": [
+      "hx16",
+      116
     ],
     "Filesize": [
       "hx16",
@@ -1356,15 +1330,9 @@
       372,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      0,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      8,
-      "PSec"
+      88
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -1374,10 +1342,6 @@
     "BytLS": [
       "hx8",
       72
-    ],
-    "Secs": [
-      "hx16",
-      23
     ],
     "StartAdr": [
       "hx16",
@@ -1392,6 +1356,10 @@
     "SDW0": [
       "hx16",
       5213
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -1410,6 +1378,10 @@
     "EOFSec": [
       "hx16",
       22
+    ],
+    "Secs": [
+      "hx16",
+      23
     ],
     "Filesize": [
       "hx16",
@@ -1458,15 +1430,9 @@
       416,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      1,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      8,
-      "PSec"
+      89
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -1476,10 +1442,6 @@
     "BytLS": [
       "hx8",
       120
-    ],
-    "Secs": [
-      "hx16",
-      14
     ],
     "StartAdr": [
       "hx16",
@@ -1494,6 +1456,10 @@
     "SDW0": [
       "hx16",
       3176
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -1512,6 +1478,10 @@
     "EOFSec": [
       "hx16",
       13
+    ],
+    "Secs": [
+      "hx16",
+      14
     ],
     "Filesize": [
       "hx16",
@@ -1560,15 +1530,9 @@
       500,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      2,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      8,
-      "PSec"
+      90
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -1578,10 +1542,6 @@
     "BytLS": [
       "hx8",
       104
-    ],
-    "Secs": [
-      "hx16",
-      9
     ],
     "StartAdr": [
       "hx16",
@@ -1596,6 +1556,10 @@
     "SDW0": [
       "hx16",
       2173
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -1614,6 +1578,10 @@
     "EOFSec": [
       "hx16",
       8
+    ],
+    "Secs": [
+      "hx16",
+      9
     ],
     "Filesize": [
       "hx16",
@@ -1662,15 +1630,9 @@
       108,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      0,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      9,
-      "PSec"
+      96
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -1680,10 +1642,6 @@
     "BytLS": [
       "hx8",
       112
-    ],
-    "Secs": [
-      "hx16",
-      12
     ],
     "StartAdr": [
       "hx16",
@@ -1698,6 +1656,10 @@
     "SDW0": [
       "hx16",
       3099
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -1716,6 +1678,10 @@
     "EOFSec": [
       "hx16",
       11
+    ],
+    "Secs": [
+      "hx16",
+      12
     ],
     "Filesize": [
       "hx16",
@@ -1764,15 +1730,9 @@
       512,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      0,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      10,
-      "PSec"
+      104
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -1782,10 +1742,6 @@
     "BytLS": [
       "hx8",
       128
-    ],
-    "Secs": [
-      "hx16",
-      31
     ],
     "StartAdr": [
       "hx16",
@@ -1800,6 +1756,10 @@
     "SDW0": [
       "hx16",
       7296
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -1818,6 +1778,10 @@
     "EOFSec": [
       "hx16",
       30
+    ],
+    "Secs": [
+      "hx16",
+      31
     ],
     "Filesize": [
       "hx16",
@@ -1866,15 +1830,9 @@
       232,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      0,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      11,
-      "PSec"
+      112
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -1884,10 +1842,6 @@
     "BytLS": [
       "hx8",
       88
-    ],
-    "Secs": [
-      "hx16",
-      17
     ],
     "StartAdr": [
       "hx16",
@@ -1902,6 +1856,10 @@
     "SDW0": [
       "hx16",
       4154
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -1920,6 +1878,10 @@
     "EOFSec": [
       "hx16",
       16
+    ],
+    "Secs": [
+      "hx16",
+      17
     ],
     "Filesize": [
       "hx16",
@@ -1968,15 +1930,9 @@
       396,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      1,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      11,
-      "PSec"
+      113
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -1986,10 +1942,6 @@
     "BytLS": [
       "hx8",
       40
-    ],
-    "Secs": [
-      "hx16",
-      2
     ],
     "StartAdr": [
       "hx16",
@@ -2004,6 +1956,10 @@
     "SDW0": [
       "hx16",
       99
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -2022,6 +1978,10 @@
     "EOFSec": [
       "hx16",
       1
+    ],
+    "Secs": [
+      "hx16",
+      2
     ],
     "Filesize": [
       "hx16",
@@ -2070,15 +2030,9 @@
       472,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      2,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      11,
-      "PSec"
+      114
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -2088,10 +2042,6 @@
     "BytLS": [
       "hx8",
       120
-    ],
-    "Secs": [
-      "hx16",
-      5
     ],
     "StartAdr": [
       "hx16",
@@ -2106,6 +2056,10 @@
     "SDW0": [
       "hx16",
       1142
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -2124,6 +2078,10 @@
     "EOFSec": [
       "hx16",
       4
+    ],
+    "Secs": [
+      "hx16",
+      5
     ],
     "Filesize": [
       "hx16",
@@ -2172,15 +2130,9 @@
       808,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      3,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      11,
-      "PSec"
+      115
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -2190,10 +2142,6 @@
     "BytLS": [
       "hx8",
       120
-    ],
-    "Secs": [
-      "hx16",
-      20
     ],
     "StartAdr": [
       "hx16",
@@ -2208,6 +2156,10 @@
     "SDW0": [
       "hx16",
       5322
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -2226,6 +2178,10 @@
     "EOFSec": [
       "hx16",
       19
+    ],
+    "Secs": [
+      "hx16",
+      20
     ],
     "Filesize": [
       "hx16",
@@ -2274,15 +2230,9 @@
       960,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      4,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      11,
-      "PSec"
+      116
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -2292,10 +2242,6 @@
     "BytLS": [
       "hx8",
       72
-    ],
-    "Secs": [
-      "hx16",
-      49
     ],
     "StartAdr": [
       "hx16",
@@ -2310,6 +2256,10 @@
     "SDW0": [
       "hx16",
       12528
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -2328,6 +2278,10 @@
     "EOFSec": [
       "hx16",
       48
+    ],
+    "Secs": [
+      "hx16",
+      49
     ],
     "Filesize": [
       "hx16",
@@ -2376,15 +2330,9 @@
       132,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      0,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      12,
-      "PSec"
+      120
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -2394,10 +2342,6 @@
     "BytLS": [
       "hx8",
       56
-    ],
-    "Secs": [
-      "hx16",
-      7
     ],
     "StartAdr": [
       "hx16",
@@ -2412,6 +2356,10 @@
     "SDW0": [
       "hx16",
       1057
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -2430,6 +2378,10 @@
     "EOFSec": [
       "hx16",
       6
+    ],
+    "Secs": [
+      "hx16",
+      7
     ],
     "Filesize": [
       "hx16",
@@ -2478,15 +2430,9 @@
       164,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      1,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      12,
-      "PSec"
+      121
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -2496,10 +2442,6 @@
     "BytLS": [
       "strw",
       "--"
-    ],
-    "Secs": [
-      "strw",
-      "----"
     ],
     "StartAdr": [
       "strw",
@@ -2514,6 +2456,10 @@
     "SDW0": [
       "hx16",
       3113
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -2532,6 +2478,10 @@
     "EOFSec": [
       "hx16",
       12
+    ],
+    "Secs": [
+      "hx16",
+      14
     ],
     "Filesize": [
       "hx16",
@@ -2580,15 +2530,9 @@
       316,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      2,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      12,
-      "PSec"
+      122
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -2598,10 +2542,6 @@
     "BytLS": [
       "hx8",
       64
-    ],
-    "Secs": [
-      "hx16",
-      8
     ],
     "StartAdr": [
       "hx16",
@@ -2616,6 +2556,10 @@
     "SDW0": [
       "hx16",
       2127
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -2634,6 +2578,10 @@
     "EOFSec": [
       "hx16",
       7
+    ],
+    "Secs": [
+      "hx16",
+      8
     ],
     "Filesize": [
       "hx16",
@@ -2682,15 +2630,9 @@
       252,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      0,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      14,
-      "PSec"
+      136
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -2700,10 +2642,6 @@
     "BytLS": [
       "hx8",
       104
-    ],
-    "Secs": [
-      "hx16",
-      29
     ],
     "StartAdr": [
       "hx16",
@@ -2718,6 +2656,10 @@
     "SDW0": [
       "hx16",
       7231
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -2736,6 +2678,10 @@
     "EOFSec": [
       "hx16",
       28
+    ],
+    "Secs": [
+      "hx16",
+      29
     ],
     "Filesize": [
       "hx16",
@@ -2784,15 +2730,9 @@
       180,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      0,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      15,
-      "PSec"
+      144
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -2802,10 +2742,6 @@
     "BytLS": [
       "hx8",
       40
-    ],
-    "Secs": [
-      "hx16",
-      36
     ],
     "StartAdr": [
       "hx16",
@@ -2820,6 +2756,10 @@
     "SDW0": [
       "hx16",
       9261
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -2838,6 +2778,10 @@
     "EOFSec": [
       "hx16",
       35
+    ],
+    "Secs": [
+      "hx16",
+      36
     ],
     "Filesize": [
       "hx16",
@@ -2886,15 +2830,9 @@
       544,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      1,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      15,
-      "PSec"
+      145
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -2904,10 +2842,6 @@
     "BytLS": [
       "hx8",
       120
-    ],
-    "Secs": [
-      "hx16",
-      51
     ],
     "StartAdr": [
       "hx16",
@@ -2922,6 +2856,10 @@
     "SDW0": [
       "hx16",
       12424
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -2940,6 +2878,10 @@
     "EOFSec": [
       "hx16",
       50
+    ],
+    "Secs": [
+      "hx16",
+      51
     ],
     "Filesize": [
       "hx16",
@@ -2988,15 +2930,9 @@
       148,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      0,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      16,
-      "PSec"
+      152
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -3006,10 +2942,6 @@
     "BytLS": [
       "hx8",
       88
-    ],
-    "Secs": [
-      "hx16",
-      7
     ],
     "StartAdr": [
       "hx16",
@@ -3024,6 +2956,10 @@
     "SDW0": [
       "hx16",
       1061
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -3042,6 +2978,10 @@
     "EOFSec": [
       "hx16",
       6
+    ],
+    "Secs": [
+      "hx16",
+      7
     ],
     "Filesize": [
       "hx16",
@@ -3090,15 +3030,9 @@
       348,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      1,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      16,
-      "PSec"
+      153
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -3108,10 +3042,6 @@
     "BytLS": [
       "hx8",
       128
-    ],
-    "Secs": [
-      "hx16",
-      21
     ],
     "StartAdr": [
       "hx16",
@@ -3126,6 +3056,10 @@
     "SDW0": [
       "hx16",
       5207
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -3144,6 +3078,10 @@
     "EOFSec": [
       "hx16",
       20
+    ],
+    "Secs": [
+      "hx16",
+      21
     ],
     "Filesize": [
       "hx16",
@@ -3192,15 +3130,9 @@
       400,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      2,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      16,
-      "PSec"
+      154
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -3210,10 +3142,6 @@
     "BytLS": [
       "hx8",
       24
-    ],
-    "Secs": [
-      "hx16",
-      14
     ],
     "StartAdr": [
       "hx16",
@@ -3228,6 +3156,10 @@
     "SDW0": [
       "hx16",
       3172
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -3246,6 +3178,10 @@
     "EOFSec": [
       "hx16",
       13
+    ],
+    "Secs": [
+      "hx16",
+      14
     ],
     "Filesize": [
       "hx16",
@@ -3294,15 +3230,9 @@
       284,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      0,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      17,
-      "PSec"
+      160
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -3312,10 +3242,6 @@
     "BytLS": [
       "hx8",
       8
-    ],
-    "Secs": [
-      "hx16",
-      31
     ],
     "StartAdr": [
       "hx16",
@@ -3330,6 +3256,10 @@
     "SDW0": [
       "hx16",
       7239
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -3348,6 +3278,10 @@
     "EOFSec": [
       "hx16",
       30
+    ],
+    "Secs": [
+      "hx16",
+      31
     ],
     "Filesize": [
       "hx16",
@@ -3396,15 +3330,9 @@
       432,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      1,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      17,
-      "PSec"
+      161
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -3414,10 +3342,6 @@
     "BytLS": [
       "hx8",
       56
-    ],
-    "Secs": [
-      "hx16",
-      8
     ],
     "StartAdr": [
       "hx16",
@@ -3432,6 +3356,10 @@
     "SDW0": [
       "hx16",
       2156
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -3450,6 +3378,10 @@
     "EOFSec": [
       "hx16",
       7
+    ],
+    "Secs": [
+      "hx16",
+      8
     ],
     "Filesize": [
       "hx16",
@@ -3498,15 +3430,9 @@
       124,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      0,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      18,
-      "PSec"
+      168
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -3516,10 +3442,6 @@
     "BytLS": [
       "hx8",
       96
-    ],
-    "Secs": [
-      "hx16",
-      7
     ],
     "StartAdr": [
       "hx16",
@@ -3534,6 +3456,10 @@
     "SDW0": [
       "hx16",
       1055
+    ],
+    "SDW#": [
+      "hx16",
+      1
     ],
     "TERM": [
       "hx16",
@@ -3552,6 +3478,10 @@
     "EOFSec": [
       "hx16",
       6
+    ],
+    "Secs": [
+      "hx16",
+      7
     ],
     "Filesize": [
       "hx16",
@@ -3600,15 +3530,9 @@
       0,
       "PSN"
     ],
-    "DEN Position": [
+    "DEN": [
       "hx8",
-      0,
-      "POS"
-    ],
-    "DEN PhSector": [
-      "hx8",
-      0,
-      "PSec"
+      0
     ],
     "File RIB Addr.: ": [
       "hx16",
