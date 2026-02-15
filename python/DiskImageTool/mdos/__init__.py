@@ -14,7 +14,7 @@
 #
 # 1: first Version with Lists
 
-import os
+import os, math
 
 class class_MDOS(object):
 
@@ -78,6 +78,15 @@ class class_MDOS(object):
         if self.verbose > 0:
             print(f'off: {off:04X} c: {c} s: {s} totalsec: {totalsec} Track: {track}')
         return c, h, s
+    #----------------------------------
+    def get_number(self, img, pos, siz):
+        number = 0
+        mul = pow(256,siz-1)
+        for n in range(pos, pos+siz):
+            number += img[n] * mul
+            mul /= 256
+            #print(f'IDX: {n:02X}, MUL: {mul}, SIZ: {siz} Number: {number} IMG: {img[n]:02X}')
+        return int(number)
     #----------------------------------
     def write_number2image(self, v_in, img, off, size):
         if type(v_in) == str:
@@ -187,6 +196,9 @@ class class_MDOS(object):
         #----------------------
         # create Cluster Allocation Table 80-FF
         self.create_ClusterAllocationTable(img, 0x80)
+        for p in range(0x80, 0x85): # Reserve space for System Files
+            img[p] = 0xFF
+        img[0x85] = 0xF8
         #----------------------
         # create Lockout Cluster Allocation Table
         self.create_ClusterAllocationTable(img, 0x100)
@@ -304,7 +316,7 @@ class class_MDOS(object):
                 entry["SDW0"]          = ["hx16", SDW[0]]
                 entry["SDW#"]          = ["hx16", len(SDW)]
                 entry["TERM"]          = ["hx16", TERM]
-                startclust = SDW[0] & 0x1FF # only the first 9 Bit
+                startclust = SDW[0] & 0x3FF # only the first 10 Bit
                 contclust = ((SDW[0] & 0x7C00)>>10)+1  # Bits 10-14 are Number of contin. clusters - 1
                 logsecEOF = TERM & 0x7FFF # lower 15 Bits only
                 
@@ -428,12 +440,139 @@ class class_MDOS(object):
                 print(f'{v[1]}',end = '')
                 print(f'{self.parent.END}')
     #----------------------------------
-    # adds a file to the directory including all the necessary data
-    def add_dir_enty(self, img, entry):
+    def occupy_cat(self, img, pos, siz):
+        startbyte = int(pos/8)+0x80            # first byte which is NOT 0xFF
+        mask = pow(2,siz)-1 # we mask this value with the CAT value
+        bytes_needed = math.ceil(siz/8) + 1 # we need to look at minimum two bytes, more if sizclu > 8
+        startbit = (bytes_needed*8)-siz - int(pos%8)  # shift number (from bottom)
+        mask = mask << startbit
+        #print(f'Start: Byte: {startbyte:02X} Bit: {startbit} needed:  {bytes_needed} Mask: {mask:08b}')
+        number = self.get_number(img, startbyte, bytes_needed)
+        #print(f'Got Number: {number:08X} {(number|mask):08X}')
+        img = self.write_number2image(number|mask, img, startbyte, bytes_needed)
+        return img
+    #----------------------------------
+    def find_free_space(self, siz, img):
+        pos = 0
+        # Cluster Allocation Table sits at 0x80 and one bit is one cluster (4 sectors)
+        bytes_needed = math.ceil(siz/8) + 1 # we need to look at minimum two bytes, more if sizclu > 8
+        clusterstr = (bytearray(0x30 for _ in range(siz)).decode("ASCII")) # make string with n times '0'
+        #print(f'Looking for space for {siz} clusters in {bytes_needed} bytes. STR: {clusterstr}')
+        for i in range(0x80, 0xFF):
+            #print(f'Looking at: {i:02X}, Num: {img[i]:02X}')
+            if img[i] != 0xFF: # we could have space
+                number = self.get_number(img, i, bytes_needed)
+                #bitstr = format(number,'b') # format numbers in CAT as string so we can find zeros
+                bitstr = f'{number:016b}' # format numbers in CAT as string so we can find zeros
+                bpos = bitstr.find(clusterstr) # actually look for n zeros
+                #print(f'Looking at: {i:02X}, Num: {number:08X}, IMG: {img[i]:02X} bitstr: {bitstr}')
+                if bpos == -1: # not found means no more space
+                    print(f'No more space at: {i:02X}')
+                    return 0
+                cpos = bpos + (i-0x80)*8 # cpos is at first free cluster
+                pos = cpos               # next free cluster is at position....
+                #print(f'Got nr.: {number:08X}, IDX: {i:02X} BPOS: {bpos} CPOS: {cpos}')
+                return pos
+        return pos
+    #----------------------------------
+    def as_rol(self, nr, carry):
+        c = 0
+        out = (nr << 1) | carry
+        if out > 0xFF:
+            c = 1
+        return (out&0xFF),c
+    #----------------------------------
+    def as_ror(self, nr, carry):
+        c = 0
+        out = (nr >> 1) | carry << 7
+        if nr & 1:
+            c = 1
+        return (out&0xFF),c
+    #----------------------------------
+    def mdos_hash(self, name, sfx):
+        # Fill rest of characters with space
+        nt = name.encode("ASCII")
+        ns = bytearray(0x20 for _ in range(8-len(name)))
+        st = sfx.encode("ASCII")
+        ss = bytearray(0x20 for _ in range(2-len(sfx)))
+        name_bytes = nt+ns+st+ss 
+        A = 0
+        B = 0
+        carry = 0
+        for i in range(10):
+            temp = name_bytes[i] - 0x25
+            if temp < 0:
+                tmp1 = 0
+            else:
+                tmp1 = temp & 0xFF
+            
+            B = B + tmp1 + carry
+            carry = 0
+            #print(f'char {(name_bytes[i]):02X} {tmp1:02X} {B:02X}')
+            if B>0xFF:
+                carry = 1
+                B = B&0xFF
+            B, carry = self.as_rol(B, carry)
+
+        B, carry = self.as_ror(B, carry)
+        A = B
+        #print(f'A now {A:02x}')
+        for _ in range(4):
+            #print(f'ror {A:08b}')
+            A, carry = self.as_ror(A, carry)
+
+        #print(f'A now2 {carry} {A:02x}')
+        A += B
+        #print(f'A now3 {carry} {A:02x}')
+        B = A & 0xFF
+        #print(f'B now {carry} {B:02x}')
+        B &= 0x1F
+        #print(f'B now2 {carry} {B:02x}')
+        if B <= 0x13:
+            return B
+        B -= 0x14
+        #print(f'B now3 {carry} B:{B:02x} A:{A:02X}')
+        if B > 9:
+            return B
+        if A&1:
+            carry = 1
+        else:
+            carry = 0
+        B, carry = self.as_rol(B, carry)
+        return B
+    #----------------------------------
+    def add_dir_entry(self, img, dirpos, filepos, entry):
         name = entry["Name"][1].strip()
         suffx = entry["Suffix"][1].strip()
         attrib = entry["Attribute"][1]
-        start = pos
+        for p in range(self.fspec["Dirstart"], self.fspec["Filestart"], self.fspec["Direntrysize"]):
+            if ((p >= dirpos) and (img[p] == 0)): 
+                #print(f'pos: {p:04X}')
+                img = self.write_text2image(name, img, p, 8)
+                img = self.write_text2image(suffx, img, p+8, 2)
+                img = self.write_number2image(filepos, img, p+0x0a, 2)
+                img = self.write_number2image(attrib, img, p+0x0c, 1)
+                return img
+        return img
+    #----------------------------------
+    # adds a file to the directory including all the necessary data
+    def add_files_to_img(self, img, entry, fdata):
+        name = entry["Name"][1].strip()
+        suffx = entry["Suffix"][1].strip()
+        sizclu = math.ceil((len(fdata) + 128) / 128 / 4) # size in clusters (filesize + RIB)
+        fhash = self.mdos_hash(name, suffx) # HASH is from 0-20 (sectors)
+        dirpos = (fhash + 3) * 128 # DIR starts at sector 3
+        print(f'HASH: {fhash:02} - {name:8}.{suffx} Pos: {dirpos:04X} Size in clusters: {sizclu:02X}')
+        clpos = self.find_free_space(sizclu, img) # returns cluster or zero if disk is full
+        if clpos == 0:
+            print(f'{self.parent.RED}No more Space in Image!{self.parent.END}')
+            exit()
+        filepos = clpos * 4 * 128
+        img = self.add_dir_entry(img, dirpos, clpos * 4, entry)
+        #print(f'Found position: {clpos}, {filepos:06X}')
+        img = self.occupy_cat(img, clpos, sizclu)
+        
+        return img
         if "MDOS" in name: # these files have fixed positions
             print(f'{self.parent.GRN}Got System file: {name}{self.parent.END}')
             #----------------------
@@ -604,15 +743,15 @@ class class_MDOS(object):
                         print(f'{self.parent.YEL}Found Bootsector{self.parent.END}')
                         img = self.add_file(img, 0xB80, fdata, 1)
                     else:
-                        img = self.add_dir_enty(img, entry)
+                        img = self.add_files_to_img(img, entry, fdata)
                         #----------------------------------
                         # Now add the actual files to the Image
-                        pos = psn * bps
-                        if self.verbose > 0:
-                            print(f'Got File: {fn} with secs: {nsiz:02X} and rest: {temprest:02X} on pos: {pos:04X}')
-                        img = self.add_rib(img, pos, entry)
-                        pos += bps # RIB is always one sector
-                        img = self.add_file(img, pos, fdata, siz)
+                        #pos = psn * bps
+                        #if self.verbose > 0:
+                        #    print(f'Got File: {fn} with secs: {nsiz:02X} and rest: {temprest:02X} on pos: {pos:04X}')
+                        #img = self.add_rib(img, pos, entry)
+                        #pos += bps # RIB is always one sector
+                        #img = self.add_file(img, pos, fdata, siz)
                         #if diridx >= 0:
                         #    return img
                     #c,h,s = self.offset_to_chs(totalsz) # Get position now for next free sector

@@ -32,7 +32,7 @@
     ],
     "DEN": [
       "hx8",
-      0
+      24
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -132,7 +132,7 @@
     ],
     "DEN": [
       "hx8",
-      1
+      25
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -232,7 +232,7 @@
     ],
     "DEN": [
       "hx8",
-      8
+      32
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -332,7 +332,7 @@
     ],
     "DEN": [
       "hx8",
-      16
+      40
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -432,7 +432,7 @@
     ],
     "DEN": [
       "hx8",
-      17
+      41
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -532,7 +532,7 @@
     ],
     "DEN": [
       "hx8",
-      18
+      42
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -632,7 +632,7 @@
     ],
     "DEN": [
       "hx8",
-      19
+      43
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -732,7 +732,7 @@
     ],
     "DEN": [
       "hx8",
-      22
+      46
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -767,7 +767,7 @@
     ],
     "StartonDisk": [
       "hx16",
-      8320,
+      270464,
       "DSTRT"
     ],
     "ContinClustr": [
@@ -790,7 +790,7 @@
     ],
     "EndDisk": [
       "hx16",
-      27103,
+      289247,
       "DskEnd"
     ],
     "Directoryposition": [
@@ -832,7 +832,7 @@
     ],
     "DEN": [
       "hx8",
-      24
+      48
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -932,7 +932,7 @@
     ],
     "DEN": [
       "hx8",
-      25
+      49
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -1032,7 +1032,7 @@
     ],
     "DEN": [
       "hx8",
-      26
+      50
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -1132,7 +1132,7 @@
     ],
     "DEN": [
       "hx8",
-      27
+      51
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -1201,6 +1201,106 @@
   },
   {
     "Name": [
+      "strw",
+      "HASH    ",
+      "Name        "
+    ],
+    "Suffix": [
+      "strw",
+      "SA",
+      "SFX"
+    ],
+    "Attribute": [
+      "hx8",
+      5,
+      "Atrib"
+    ],
+    "Filetype": [
+      "strw",
+      "ASCI",
+      "FTyp"
+    ],
+    "Attribute Bit": [
+      "strw",
+      "-----",
+      "WDSCN"
+    ],
+    "StartPSN": [
+      "hx16",
+      2884,
+      "PSN"
+    ],
+    "DEN": [
+      "hx8",
+      52
+    ],
+    "File RIB Addr.: ": [
+      "hx16",
+      369152,
+      "RIB@"
+    ],
+    "BytLS": [
+      "strw",
+      "--"
+    ],
+    "StartAdr": [
+      "strw",
+      "----",
+      "Start"
+    ],
+    "ExecAdr": [
+      "strw",
+      "----",
+      "Exec"
+    ],
+    "SDW0": [
+      "hx16",
+      721
+    ],
+    "SDW#": [
+      "hx16",
+      1
+    ],
+    "TERM": [
+      "hx16",
+      32768
+    ],
+    "StartonDisk": [
+      "hx16",
+      369280,
+      "DSTRT"
+    ],
+    "ContinClustr": [
+      "hx16",
+      1,
+      "CClust"
+    ],
+    "EOFSec": [
+      "hx16",
+      0
+    ],
+    "Secs": [
+      "hx16",
+      2
+    ],
+    "Filesize": [
+      "hx16",
+      256,
+      "FSize"
+    ],
+    "EndDisk": [
+      "hx16",
+      369535,
+      "DskEnd"
+    ],
+    "Directoryposition": [
+      "dec2",
+      12,
+      "Dirpos"
+    ]
+  },
+  {
+    "Name": [
       "strg",
       "MDOS    ",
       "Name        "
@@ -1232,7 +1332,7 @@
     ],
     "DEN": [
       "hx8",
-      32
+      56
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -1295,7 +1395,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      12,
+      13,
       "Dirpos"
     ]
   },
@@ -1332,7 +1432,7 @@
     ],
     "DEN": [
       "hx8",
-      33
+      57
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -1367,7 +1467,7 @@
     ],
     "StartonDisk": [
       "hx16",
-      103552,
+      365696,
       "DSTRT"
     ],
     "ContinClustr": [
@@ -1390,12 +1490,12 @@
     ],
     "EndDisk": [
       "hx16",
-      106287,
+      368431,
       "DskEnd"
     ],
     "Directoryposition": [
       "dec2",
-      13,
+      14,
       "Dirpos"
     ]
   },
@@ -1432,7 +1532,7 @@
     ],
     "DEN": [
       "hx8",
-      40
+      64
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -1495,7 +1595,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      14,
+      15,
       "Dirpos"
     ]
   },
@@ -1532,7 +1632,7 @@
     ],
     "DEN": [
       "hx8",
-      41
+      65
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -1567,7 +1667,7 @@
     ],
     "StartonDisk": [
       "hx16",
-      106624,
+      368768,
       "DSTRT"
     ],
     "ContinClustr": [
@@ -1590,12 +1690,12 @@
     ],
     "EndDisk": [
       "hx16",
-      106879,
+      369023,
       "DskEnd"
     ],
     "Directoryposition": [
       "dec2",
-      15,
+      16,
       "Dirpos"
     ]
   },
@@ -1632,7 +1732,7 @@
     ],
     "DEN": [
       "hx8",
-      48
+      72
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -1695,7 +1795,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      16,
+      17,
       "Dirpos"
     ]
   },
@@ -1732,7 +1832,7 @@
     ],
     "DEN": [
       "hx8",
-      49
+      73
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -1795,7 +1895,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      17,
+      18,
       "Dirpos"
     ]
   },
@@ -1832,7 +1932,7 @@
     ],
     "DEN": [
       "hx8",
-      56
+      80
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -1895,7 +1995,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      18,
+      19,
       "Dirpos"
     ]
   },
@@ -1932,7 +2032,7 @@
     ],
     "DEN": [
       "hx8",
-      57
+      81
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -1995,7 +2095,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      19,
+      20,
       "Dirpos"
     ]
   },
@@ -2032,7 +2132,7 @@
     ],
     "DEN": [
       "hx8",
-      58
+      82
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -2095,7 +2195,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      20,
+      21,
       "Dirpos"
     ]
   },
@@ -2132,7 +2232,7 @@
     ],
     "DEN": [
       "hx8",
-      59
+      83
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -2195,7 +2295,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      21,
+      22,
       "Dirpos"
     ]
   },
@@ -2232,7 +2332,7 @@
     ],
     "DEN": [
       "hx8",
-      64
+      88
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -2295,7 +2395,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      22,
+      23,
       "Dirpos"
     ]
   },
@@ -2332,7 +2432,7 @@
     ],
     "DEN": [
       "hx8",
-      65
+      89
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -2395,7 +2495,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      23,
+      24,
       "Dirpos"
     ]
   },
@@ -2432,7 +2532,7 @@
     ],
     "DEN": [
       "hx8",
-      66
+      90
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -2495,7 +2595,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      24,
+      25,
       "Dirpos"
     ]
   },
@@ -2532,7 +2632,7 @@
     ],
     "DEN": [
       "hx8",
-      67
+      91
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -2595,7 +2695,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      25,
+      26,
       "Dirpos"
     ]
   },
@@ -2632,7 +2732,7 @@
     ],
     "DEN": [
       "hx8",
-      72
+      96
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -2695,7 +2795,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      26,
+      27,
       "Dirpos"
     ]
   },
@@ -2732,7 +2832,7 @@
     ],
     "DEN": [
       "hx8",
-      73
+      97
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -2795,7 +2895,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      27,
+      28,
       "Dirpos"
     ]
   },
@@ -2832,7 +2932,7 @@
     ],
     "DEN": [
       "hx8",
-      80
+      104
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -2895,7 +2995,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      28,
+      29,
       "Dirpos"
     ]
   },
@@ -2932,7 +3032,7 @@
     ],
     "DEN": [
       "hx8",
-      81
+      105
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -2995,7 +3095,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      29,
+      30,
       "Dirpos"
     ]
   },
@@ -3032,7 +3132,7 @@
     ],
     "DEN": [
       "hx8",
-      88
+      112
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -3095,7 +3195,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      30,
+      31,
       "Dirpos"
     ]
   },
@@ -3132,7 +3232,7 @@
     ],
     "DEN": [
       "hx8",
-      89
+      113
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -3195,7 +3295,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      31,
+      32,
       "Dirpos"
     ]
   },
@@ -3232,7 +3332,7 @@
     ],
     "DEN": [
       "hx8",
-      90
+      114
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -3295,7 +3395,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      32,
+      33,
       "Dirpos"
     ]
   },
@@ -3332,7 +3432,7 @@
     ],
     "DEN": [
       "hx8",
-      91
+      115
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -3395,7 +3495,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      33,
+      34,
       "Dirpos"
     ]
   },
@@ -3432,7 +3532,7 @@
     ],
     "DEN": [
       "hx8",
-      92
+      116
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -3495,7 +3595,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      34,
+      35,
       "Dirpos"
     ]
   },
@@ -3532,7 +3632,7 @@
     ],
     "DEN": [
       "hx8",
-      93
+      117
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -3595,7 +3695,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      35,
+      36,
       "Dirpos"
     ]
   },
@@ -3632,7 +3732,7 @@
     ],
     "DEN": [
       "hx8",
-      94
+      118
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -3695,7 +3795,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      36,
+      37,
       "Dirpos"
     ]
   },
@@ -3732,7 +3832,7 @@
     ],
     "DEN": [
       "hx8",
-      95
+      119
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -3795,7 +3895,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      37,
+      38,
       "Dirpos"
     ]
   },
@@ -3832,7 +3932,7 @@
     ],
     "DEN": [
       "hx8",
-      96
+      120
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -3895,7 +3995,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      38,
+      39,
       "Dirpos"
     ]
   },
@@ -3932,7 +4032,7 @@
     ],
     "DEN": [
       "hx8",
-      97
+      121
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -3995,7 +4095,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      39,
+      40,
       "Dirpos"
     ]
   },
@@ -4032,7 +4132,7 @@
     ],
     "DEN": [
       "hx8",
-      98
+      122
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -4095,7 +4195,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      40,
+      41,
       "Dirpos"
     ]
   },
@@ -4132,7 +4232,7 @@
     ],
     "DEN": [
       "hx8",
-      99
+      123
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -4195,7 +4295,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      41,
+      42,
       "Dirpos"
     ]
   },
@@ -4232,7 +4332,7 @@
     ],
     "DEN": [
       "hx8",
-      100
+      124
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -4267,7 +4367,7 @@
     ],
     "StartonDisk": [
       "hx16",
-      44160,
+      306304,
       "DSTRT"
     ],
     "ContinClustr": [
@@ -4290,12 +4390,12 @@
     ],
     "EndDisk": [
       "hx16",
-      97151,
+      359295,
       "DskEnd"
     ],
     "Directoryposition": [
       "dec2",
-      42,
+      43,
       "Dirpos"
     ]
   },
@@ -4332,7 +4432,7 @@
     ],
     "DEN": [
       "hx8",
-      104
+      128
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -4395,7 +4495,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      43,
+      44,
       "Dirpos"
     ]
   },
@@ -4432,7 +4532,7 @@
     ],
     "DEN": [
       "hx8",
-      112
+      136
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -4495,7 +4595,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      44,
+      45,
       "Dirpos"
     ]
   },
@@ -4532,7 +4632,7 @@
     ],
     "DEN": [
       "hx8",
-      113
+      137
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -4595,7 +4695,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      45,
+      46,
       "Dirpos"
     ]
   },
@@ -4632,7 +4732,7 @@
     ],
     "DEN": [
       "hx8",
-      114
+      138
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -4695,7 +4795,107 @@
     ],
     "Directoryposition": [
       "dec2",
-      46,
+      47,
+      "Dirpos"
+    ]
+  },
+  {
+    "Name": [
+      "strw",
+      "HASH    ",
+      "Name        "
+    ],
+    "Suffix": [
+      "strw",
+      "CM",
+      "SFX"
+    ],
+    "Attribute": [
+      "hx8",
+      18,
+      "Atrib"
+    ],
+    "Filetype": [
+      "strw",
+      "MEM",
+      "FTyp"
+    ],
+    "Attribute Bit": [
+      "strw",
+      "---C-",
+      "WDSCN"
+    ],
+    "StartPSN": [
+      "hx16",
+      3156,
+      "PSN"
+    ],
+    "DEN": [
+      "hx8",
+      139
+    ],
+    "File RIB Addr.: ": [
+      "hx16",
+      403968,
+      "RIB@"
+    ],
+    "BytLS": [
+      "hx8",
+      96
+    ],
+    "StartAdr": [
+      "hx16",
+      8192,
+      "Start"
+    ],
+    "ExecAdr": [
+      "hx16",
+      8192,
+      "Exec"
+    ],
+    "SDW0": [
+      "hx16",
+      789
+    ],
+    "SDW#": [
+      "hx16",
+      1
+    ],
+    "TERM": [
+      "hx16",
+      32768
+    ],
+    "StartonDisk": [
+      "hx16",
+      404096,
+      "DSTRT"
+    ],
+    "ContinClustr": [
+      "hx16",
+      1,
+      "CClust"
+    ],
+    "EOFSec": [
+      "hx16",
+      0
+    ],
+    "Secs": [
+      "hx16",
+      1
+    ],
+    "Filesize": [
+      "hx16",
+      96,
+      "FSize"
+    ],
+    "EndDisk": [
+      "hx16",
+      404191,
+      "DskEnd"
+    ],
+    "Directoryposition": [
+      "dec2",
+      48,
       "Dirpos"
     ]
   },
@@ -4732,7 +4932,7 @@
     ],
     "DEN": [
       "hx8",
-      120
+      144
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -4795,7 +4995,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      47,
+      49,
       "Dirpos"
     ]
   },
@@ -4832,7 +5032,7 @@
     ],
     "DEN": [
       "hx8",
-      121
+      145
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -4895,7 +5095,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      48,
+      50,
       "Dirpos"
     ]
   },
@@ -4932,7 +5132,7 @@
     ],
     "DEN": [
       "hx8",
-      122
+      146
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -4995,7 +5195,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      49,
+      51,
       "Dirpos"
     ]
   },
@@ -5032,7 +5232,7 @@
     ],
     "DEN": [
       "hx8",
-      128
+      152
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -5095,7 +5295,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      50,
+      52,
       "Dirpos"
     ]
   },
@@ -5132,7 +5332,7 @@
     ],
     "DEN": [
       "hx8",
-      129
+      153
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -5195,7 +5395,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      51,
+      53,
       "Dirpos"
     ]
   },
@@ -5232,7 +5432,7 @@
     ],
     "DEN": [
       "hx8",
-      130
+      154
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -5295,7 +5495,107 @@
     ],
     "Directoryposition": [
       "dec2",
-      52,
+      54,
+      "Dirpos"
+    ]
+  },
+  {
+    "Name": [
+      "strw",
+      "HASH    ",
+      "Name        "
+    ],
+    "Suffix": [
+      "strw",
+      "RO",
+      "SFX"
+    ],
+    "Attribute": [
+      "hx8",
+      3,
+      "Atrib"
+    ],
+    "Filetype": [
+      "strw",
+      "BIN",
+      "FTyp"
+    ],
+    "Attribute Bit": [
+      "strw",
+      "-----",
+      "WDSCN"
+    ],
+    "StartPSN": [
+      "hx16",
+      3024,
+      "PSN"
+    ],
+    "DEN": [
+      "hx8",
+      155
+    ],
+    "File RIB Addr.: ": [
+      "hx16",
+      387072,
+      "RIB@"
+    ],
+    "BytLS": [
+      "strw",
+      "--"
+    ],
+    "StartAdr": [
+      "strw",
+      "----",
+      "Start"
+    ],
+    "ExecAdr": [
+      "strw",
+      "----",
+      "Exec"
+    ],
+    "SDW0": [
+      "hx16",
+      756
+    ],
+    "SDW#": [
+      "hx16",
+      1
+    ],
+    "TERM": [
+      "hx16",
+      32768
+    ],
+    "StartonDisk": [
+      "hx16",
+      387200,
+      "DSTRT"
+    ],
+    "ContinClustr": [
+      "hx16",
+      1,
+      "CClust"
+    ],
+    "EOFSec": [
+      "hx16",
+      0
+    ],
+    "Secs": [
+      "hx16",
+      2
+    ],
+    "Filesize": [
+      "hx16",
+      256,
+      "FSize"
+    ],
+    "EndDisk": [
+      "hx16",
+      387455,
+      "DskEnd"
+    ],
+    "Directoryposition": [
+      "dec2",
+      55,
       "Dirpos"
     ]
   },
@@ -5332,7 +5632,7 @@
     ],
     "DEN": [
       "hx8",
-      136
+      160
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -5395,7 +5695,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      53,
+      56,
       "Dirpos"
     ]
   },
@@ -5432,7 +5732,7 @@
     ],
     "DEN": [
       "hx8",
-      137
+      161
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -5495,7 +5795,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      54,
+      57,
       "Dirpos"
     ]
   },
@@ -5532,7 +5832,7 @@
     ],
     "DEN": [
       "hx8",
-      138
+      162
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -5595,7 +5895,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      55,
+      58,
       "Dirpos"
     ]
   },
@@ -5632,7 +5932,7 @@
     ],
     "DEN": [
       "hx8",
-      139
+      163
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -5695,7 +5995,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      56,
+      59,
       "Dirpos"
     ]
   },
@@ -5732,7 +6032,7 @@
     ],
     "DEN": [
       "hx8",
-      144
+      168
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -5795,7 +6095,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      57,
+      60,
       "Dirpos"
     ]
   },
@@ -5832,7 +6132,7 @@
     ],
     "DEN": [
       "hx8",
-      152
+      176
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -5895,7 +6195,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      58,
+      61,
       "Dirpos"
     ]
   },
@@ -5932,7 +6232,7 @@
     ],
     "DEN": [
       "hx8",
-      153
+      177
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -5995,7 +6295,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      59,
+      62,
       "Dirpos"
     ]
   },
@@ -6032,7 +6332,7 @@
     ],
     "DEN": [
       "hx8",
-      154
+      178
     ],
     "File RIB Addr.: ": [
       "hx16",
@@ -6095,7 +6395,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      60,
+      63,
       "Dirpos"
     ]
   },
@@ -6191,7 +6491,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      61,
+      64,
       "Dirpos"
     ]
   }

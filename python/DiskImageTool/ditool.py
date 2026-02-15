@@ -277,11 +277,11 @@ class DITOOL():
             fspec["Filestart"] = 0xB80
             fspec["Direntrysize"] = 0x10
             fspec["Emptyval"] = 0 #xE5
-            #fspec["DiskID"] = "USER"
-            #fspec["Version"] = " 3"
-            #fspec["Revision"] = "05"
-            #fspec["Date"] = "010101"
-            #fspec["UserName"] = "USER"
+            fspec["DiskID"] = "MASTEREU"
+            fspec["Version"] = "03"
+            fspec["Revision"] = "00"
+            fspec["Date"] = "010479"
+            fspec["UserName"] = "RASM ASM EDIT RLOAD"
             fspec = me.check_alternate_format(fspec)
             from mdos import class_MDOS
             obj = class_MDOS(self, fspec, verbose)
