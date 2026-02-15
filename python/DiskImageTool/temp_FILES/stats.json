@@ -1,22 +1,22 @@
 {
   "Diskette ID: ": [
     "strw",
-    "MASTEREU"
+    "SYSTEM  "
   ],
   "Version #: ": [
     "strw",
-    "03"
+    " 3"
   ],
   "Revision #: ": [
     "strw",
-    "00"
+    "05"
   ],
   "Gen. Date: ": [
     "strw",
-    "010479"
+    "010101"
   ],
   "User Name: ": [
     "strw",
-    "RASM ASM EDIT RLOAD "
+    "SYSTEM              "
   ]
 }

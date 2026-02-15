@@ -15,6 +15,7 @@
 # 1: first Version with Lists
 
 import os, math
+#from bitstring import BitStream, BitArray
 
 class class_MDOS(object):
 
@@ -42,6 +43,13 @@ class class_MDOS(object):
             except:
                 print(f'{k}: {v}')
         print(f'')
+        print(f'Needed for all Files: (must be in entries.json!)')
+        print(f'Name')
+        print(f'Suffix')
+        print(f'Attribute')
+        print(f'Needed for Binary Files:')
+        print(f'StartAdr')
+        print(f'ExecAdr')
     #----------------------------------
     def isascii(self,b):
         try:
@@ -198,7 +206,7 @@ class class_MDOS(object):
         self.create_ClusterAllocationTable(img, 0x80)
         for p in range(0x80, 0x85): # Reserve space for System Files
             img[p] = 0xFF
-        img[0x85] = 0xF8
+        img[0x85] = 0xF8 # also for system files
         #----------------------
         # create Lockout Cluster Allocation Table
         self.create_ClusterAllocationTable(img, 0x100)
@@ -267,8 +275,51 @@ class class_MDOS(object):
                 entry["Attribute Bit"]    = ["strw",  ABIT, "WDSCN"]
 
                 #--------------------------------------------------------------------------------
-                entry["StartPSN"]    = ["hx16", self.conv16(imgfile, (offset+10)), "PSN"]
+                psn = self.conv16(imgfile, (offset+10))
+                entry["StartPSN"]    = ["hx16", psn, "PSN"]
                 
+                FRIB = entry["StartPSN"][1]*128 # Get Start of File RIB
+                # Get all the valid SDWs
+                SDW = []
+                ContCluster = []
+                StartingCluster = []
+                TERM = 0
+                contclust = 0
+                #logsecEOF = 0
+                i = 0
+                for o in range(0,0x74,2):
+                    sdw = self.conv16(imgfile, (FRIB+o))
+                    if sdw & 0x8000: # Terminator
+                        logsecEOF = sdw & 0x7FFF # lower 15 Bits only
+                        break
+                    else:            # regular SDWs
+                        SDW.append(sdw)
+                        StartingCluster.append(sdw&0x3FF)  # only the first 10 Bit
+                        ContCluster.append(((sdw & 0x7C00)>>10)+1) # Bits 10-14 are Number of contin. clusters - 1
+                    i += 1
+                # Cluster * 4 = Sectors*0x80 = Bytes, Add size of RIB 
+                diskstart = (StartingCluster[0]*4)*0x80+0x80
+                for s in range(len(SDW)):
+                    contclust += ContCluster[s]
+
+                PhysicalSize = contclust * 4 # convert to clusters, round up, back to sectors
+                # the number of bytes to load from the last sector
+                byteLS = imgfile[(FRIB+0x75)]
+                # Sectors to load
+                sec2load = self.conv16(imgfile, (FRIB+0x76))
+                # the starting load address
+                startAddr = self.conv16(imgfile, (FRIB+0x78))
+                # the starting execution address
+                exexAddr = self.conv16(imgfile, (FRIB+0x7A))
+
+                #if byteLS == 0 or startAddr == 0:    # ASCII Files
+                if attrib & 4:    # ASCII Files
+                    FSIZ = (logsecEOF +1) * 128 # Since Rest == 0 we need an additional sector! (see Chap. 24.2.1)
+                else:                                # Binary Files
+                    FSIZ = (sec2load-1)*128 + byteLS # looks good!
+                ENDDSK = FSIZ + diskstart - 1     # End on Disk
+                entry["PSecs"]        = ["hx16", PhysicalSize]
+
                 #temp = int((offset-self.fspec["Dirstart"])/self.fspec["Direntrysize"]) # DEN (Dir. Entry Nr.)
                 pos = (offset>>4) & 0x07          # DEN Position 
                 psec = int(offset/self.fspec["bps"])<<3 # DEN Physical Sector
@@ -277,75 +328,44 @@ class class_MDOS(object):
                 #entry["DEN Position"] = ["hx8", (pos), "POS"]   
                 #entry["DEN PhSector"] = ["hx8", (psec), "PSec"]  
                 entry["DEN"] = ["hx8", (psec+pos)]  
+                entry["SDW"] = ["dec2", 0]
+                entry["SecSt"] = ["hx16", psn]
+                entry["SecSz"] = ["hx8", ContCluster[0]*4]
                 
-                FRIB = entry["StartPSN"][1]*128 # Get Start of File RIB
             #    entry["File RIB: "]  = ["arr8x", imgfile[FRIB:FRIB+128]] # Dump the RIB as Array
-                entry["File RIB Addr.: "]  = ["hx16", FRIB, "RIB@"]               # Show only RIB Start
+                #entry["File RIB Addr.: "]  = ["hx16", FRIB, "RIB@"]               # Show only RIB Start
                 # Stuff in File RIB (Retrieval Information Block)
-                # the number of bytes to load from the last sector
-                byteLS = imgfile[(FRIB+0x75)]
                 if byteLS == 0:
                     entry["BytLS"]       = ["strw",  '--']
                 else:
                     entry["BytLS"]       = ["hx8",  byteLS]
-                # the starting load address
-                startAddr = self.conv16(imgfile, (FRIB+0x78))
                 if startAddr == 0:
                     entry["StartAdr"]    = ["strw",  '----', "Start"]
                 else:
                     entry["StartAdr"]    = ["hx16", startAddr, "Start"]
-                # the starting execution address
-                exexAddr = self.conv16(imgfile, (FRIB+0x7A))
                 if exexAddr == 0:
                     entry["ExecAdr"]     = ["strw",  '----', "Exec"]
                 else:
                     entry["ExecAdr"]     = ["hx16", exexAddr, "Exec"]
-                # Get all the valid SDWs
-                SDW = []
-                TERM = 0
-                i = 0
-                for o in range(0,0x74,2):
-                    sdw = self.conv16(imgfile, (FRIB+o))
-                    if sdw & 0x8000: # Terminator
-                        TERM = sdw
-                        break
-                    else:            # regular SDWs
-                        SDW.append(sdw)
-                    i += 1
 
-                entry["SDW0"]          = ["hx16", SDW[0]]
-                entry["SDW#"]          = ["hx16", len(SDW)]
-                entry["TERM"]          = ["hx16", TERM]
-                startclust = SDW[0] & 0x3FF # only the first 10 Bit
-                contclust = ((SDW[0] & 0x7C00)>>10)+1  # Bits 10-14 are Number of contin. clusters - 1
-                logsecEOF = TERM & 0x7FFF # lower 15 Bits only
-                
-                # Cluster * 4 = Sectors*0x80 = Bytes, Add size of RIB 
-                diskstart = (startclust*4)*0x80+0x80
+                #entry["SDW0"]          = ["hx16", SDW[0]]#                entry["SDW#"]          = ["hx16", len(SDW)]#                
                 entry["StartonDisk"]   = ["hx16",  diskstart, "DSTRT"]
                 entry["ContinClustr"]  = ["hx16",  contclust, "CClust"]
-                entry["EOFSec"]        = ["hx16",  logsecEOF]
+                entry["LSec"]        = ["hx16",  logsecEOF]
                 
-                sec2load = self.conv16(imgfile, (FRIB+0x76))
-                if byteLS == 0 or startAddr == 0:    # ASCII Files
-                    FSIZ = (logsecEOF  + 2 ) * 128
-                else:                                # Binary Files
-                    FSIZ = (sec2load-1)*128 + byteLS # looks good!
                 
-                ENDDSK = FSIZ + diskstart - 1     # End on Disk
-                # number of sectors to load
-                if sec2load == 0:
-                    #entry["Secs"]        = ["strw",  '----']
-                    entry["Secs"]        = ["hx16", int(FSIZ/128)]
-                else:
-                    entry["Secs"]        = ["hx16", sec2load]
+                #if sec2load == 0:
+                #    #entry["Secs"]        = ["strw",  '----']
+                #    entry["LSecs"]        = ["hx16", int(FSIZ/128)]
+                #else:
+                #    entry["LSecs"]        = ["hx16", sec2load]
                 entry["Filesize"]       = ["hx16",  FSIZ, "FSize"]
                 entry["EndDisk"]        = ["hx16",  ENDDSK, "DskEnd"]
-                entry["Directoryposition"] = ["dec2",  dirpos, "Dirpos"]
+                #entry["Directoryposition"] = ["dec2",  dirpos, "Dirpos"]
                 entries.append(entry)                 # append to list of entries
                 dirpos += 1
             else:
-                pass
+                pass # not a "real" Direntry - skip
             offset += self.fspec["Direntrysize"]  # cue to next entry
         
         # Get Bootsector into the files listing
@@ -357,7 +377,7 @@ class class_MDOS(object):
         entry["ExecAdr"]       = ["hx16", 0x20, "Exec"]
         entry["StartonDisk"]   = ["hx16",  bbstart, "DSTRT"]
         entry["EndDisk"]        = ["hx16",  bbstart+0x80-1, "DskEnd"]
-        entry["Directoryposition"] = ["dec2",  dirpos, "Dirpos"]
+        #entry["Directoryposition"] = ["dec2",  dirpos, "Dirpos"]
         entries.append(entry)                 # append to list of entries
 
         # Print statistics at the end of listing
@@ -446,13 +466,44 @@ class class_MDOS(object):
         bytes_needed = math.ceil(siz/8) + 1 # we need to look at minimum two bytes, more if sizclu > 8
         startbit = (bytes_needed*8)-siz - int(pos%8)  # shift number (from bottom)
         mask = mask << startbit
-        #print(f'Start: Byte: {startbyte:02X} Bit: {startbit} needed:  {bytes_needed} Mask: {mask:08b}')
+        if self.verbose > 0:
+            print(f'StartByte: {startbyte:02X} Shift: {startbit} needed: {bytes_needed} Mask: {mask:08b}/{mask:4X}')
         number = self.get_number(img, startbyte, bytes_needed)
-        #print(f'Got Number: {number:08X} {(number|mask):08X}')
+        if self.verbose > 0:
+            print(f'Got Number: before: {number:8X} after: {(number|mask):8X}')
         img = self.write_number2image(number|mask, img, startbyte, bytes_needed)
         return img
     #----------------------------------
     def find_free_space(self, siz, img):
+        # returns the first free cluster
+        bpos = -1
+        # Cluster Allocation Table sits at 0x80 and one bit is one cluster (4 sectors)
+        catstr = ''
+        for i in range(0x80, 0x100): # read the whole CAT and convert it to a string of bits.
+            catstr += f'{img[i]:08b}'
+        filestr = (bytearray(0x30 for _ in range(siz)).decode("ASCII")) # make string with n times '0'
+        bpos = catstr.find(filestr)          # actually look for n zeros in big string of clusters
+        #print(f'Got free cluster @ POS: {bpos} filestr: {len(filestr)} bit {len(catstr)}')
+        return bpos
+    #----------------------------------
+    def get_free_cluster(self, img):
+        catstr = ''
+        lcatstr = ''
+        for i in range(0x80, 0x100): # read the whole CAT and convert it to a string of bits.
+            catstr += f'{img[i]:08b}'
+        for i in range(0x100, 0x180): # read the whole LCAT and convert it to a string of bits.
+            lcatstr += f'{img[i]:08b}'
+        frc = catstr.count('0')
+        lc = lcatstr.count('0')
+        print(f'Free Clusters: {frc}')
+        if self.fspec["Sides"] == 1:
+            totalclusters = 500
+        else:
+            totalclusters = 1001
+        locked = totalclusters - lc - 6
+        print(f'Lockout Clusters: {locked} (except 6 system clusters)')
+    #----------------------------------
+    def find_free_space_old(self, siz, img):
         pos = 0
         # Cluster Allocation Table sits at 0x80 and one bit is one cluster (4 sectors)
         bytes_needed = math.ceil(siz/8) + 1 # we need to look at minimum two bytes, more if sizclu > 8
@@ -465,7 +516,7 @@ class class_MDOS(object):
                 #bitstr = format(number,'b') # format numbers in CAT as string so we can find zeros
                 bitstr = f'{number:016b}' # format numbers in CAT as string so we can find zeros
                 bpos = bitstr.find(clusterstr) # actually look for n zeros
-                #print(f'Looking at: {i:02X}, Num: {number:08X}, IMG: {img[i]:02X} bitstr: {bitstr}')
+                #print(f'Looking at: {i:02X}, Num: {number:08X}, bitstr: {bitstr} bpos: {bpos}')
                 if bpos == -1: # not found means no more space
                     print(f'No more space at: {i:02X}')
                     return 0
@@ -559,43 +610,69 @@ class class_MDOS(object):
     def add_files_to_img(self, img, entry, fdata):
         name = entry["Name"][1].strip()
         suffx = entry["Suffix"][1].strip()
-        sizclu = math.ceil((len(fdata) + 128) / 128 / 4) # size in clusters (filesize + RIB)
+        sizsec = int(math.ceil(len(fdata)/128))
+        sizclu = int(math.ceil((sizsec+1) / 4)) # size in clusters (filesize + RIB)
         fhash = self.mdos_hash(name, suffx) # HASH is from 0-20 (sectors)
         dirpos = (fhash + 3) * 128 # DIR starts at sector 3
-        print(f'HASH: {fhash:02} - {name:8}.{suffx} Pos: {dirpos:04X} Size in clusters: {sizclu:02X}')
-        clpos = self.find_free_space(sizclu, img) # returns cluster or zero if disk is full
-        if clpos == 0:
-            print(f'{self.parent.RED}No more Space in Image!{self.parent.END}')
-            exit()
-        filepos = clpos * 4 * 128
-        img = self.add_dir_entry(img, dirpos, clpos * 4, entry)
-        #print(f'Found position: {clpos}, {filepos:06X}')
-        img = self.occupy_cat(img, clpos, sizclu)
-        
-        return img
-        if "MDOS" in name: # these files have fixed positions
+        print(f'-------------------------------------------------------')
+        print(f'HASH: {fhash:02} - {name:8}.{suffx} Pos: {dirpos:04X} Size in clusters: {sizclu:02X}, secs: {sizsec:02X}')
+        cluster = 0
+        psn = 0
+        if name == "MDOS":
             print(f'{self.parent.GRN}Got System file: {name}{self.parent.END}')
-            #----------------------
-            if "OV0" in name:
-                img = self.write_number2image(psn, img, 0x26, 2) # MDOSOV0
-            elif "OV1" in name:
-                img = self.write_number2image(psn, img, 0x28, 2) # MDOSOV1
-            elif "OV2" in name:
-                img = self.write_number2image(psn, img, 0x2A, 2) # MDOSOV2
-            elif "OV3" in name:
-                img = self.write_number2image(psn, img, 0x2C, 2) # MDOSOV3
-            elif "OV4" in name:
-                img = self.write_number2image(psn, img, 0x2E, 2) # MDOSOV4
-            elif "OV5" in name:
-                img = self.write_number2image(psn, img, 0x30, 2) # MDOSOV5
-            elif "OV6" in name:
-                img = self.write_number2image(psn, img, 0x32, 2) # MDOSOV6
-        else: # normal file
-            pass
-        self.write_text2image(name, img, start+0, 8)
-        self.write_text2image(suffx, img, start+8, 2)
-        self.write_number2image(psn, img, start+0x0A, 2)
-        self.write_number2image(attrib, img, start+0x0C, 1)
+            psn = 0x18
+        elif name == "MDOSOV0":
+            print(f'{self.parent.GRN}Got System file: {name}{self.parent.END}')
+            psn = 0x5C
+            self.write_number2image(psn, img, 0x26, 2)
+        elif name == "MDOSOV1":
+            print(f'{self.parent.GRN}Got System file: {name}{self.parent.END}')
+            psn = 0x6C
+            self.write_number2image(psn, img, 0x28, 2)
+        elif name == "MDOSOV2":
+            print(f'{self.parent.GRN}Got System file: {name}{self.parent.END}')
+            psn = 0x7C
+            self.write_number2image(psn, img, 0x2A, 2)
+        elif name == "MDOSOV3":
+            print(f'{self.parent.GRN}Got System file: {name}{self.parent.END}')
+            psn = 0x84
+            self.write_number2image(psn, img, 0x2C, 2)
+        elif name == "MDOSOV4":
+            print(f'{self.parent.GRN}Got System file: {name}{self.parent.END}')
+            psn = 0x8C
+            self.write_number2image(psn, img, 0x2E, 2)
+        elif name == "MDOSOV5":
+            print(f'{self.parent.GRN}Got System file: {name}{self.parent.END}')
+            psn = 0x94
+            self.write_number2image(psn, img, 0x30, 2)
+        elif name == "MDOSOV6":
+            print(f'{self.parent.GRN}Got System file: {name}{self.parent.END}')
+            psn = 0x9C
+            self.write_number2image(psn, img, 0x32, 2)
+        elif name == "MDOSER":
+            print(f'{self.parent.GRN}Got System file: {name}{self.parent.END}')
+            psn = 0xA4
+        else: # normal file, look for free space
+            cluster = (self.find_free_space(sizclu, img)) # returns cluster or -1 if disk is full
+        
+        if cluster == -1:
+            print(f'{self.parent.RED}No more Space in Image!{self.parent.END}')
+            exit(1)
+        if psn:
+            filepos = psn * 128
+            cluster = int(psn / 4)
+        else:
+            filepos = cluster * 4 * 128
+            psn = cluster * 4
+
+        if psn > 0x9C: # non-systemfile
+            print(f'Found free cluster @: {cluster:02X}/{cluster} psn: {psn:02X}, {filepos:06X}')
+            img = self.occupy_cat(img, int(psn/4), sizclu)
+
+        img = self.add_dir_entry(img, dirpos, psn, entry)
+        img = self.add_rib(img, psn*128, entry, len(fdata))
+        img = self.add_file(img, (psn+1)*128, fdata)
+
         return img
     #----------------------------------
     def get_val(self, entry, key):
@@ -663,27 +740,73 @@ class class_MDOS(object):
                 entry = self.set_default_values()
         return entries
     #----------------------------------
-    def add_rib(self, img, start, entry):
+    def add_rib(self, img, start, entry, filelen):
         bps = self.fspec["bps"]
+        #filetype = entry["Filetype"][1]
+        attrib = (entry["Attribute"][1] & 7)
         pos = start
-        #print(f'Add RIB @ {pos:06X}')
+        sizclu = math.ceil((filelen + 128) / 128 / 4) # size in clusters (filesize + RIB)
+        sizsec = math.ceil(filelen/128)
+        rest = filelen%128
+        newstart = int(start/128/4)
+        print(f'Add RIB @ {pos:06X} Size: {sizclu:02X} clusters')
         zeros = bytearray(0 for _ in range(bps))
-        img[pos:pos+bps] = zeros
-        self.write_number2image(entry["BytLS"][1], img, start+0x75, 1)
-        self.write_number2image(entry["Secs"][1], img, start+0x76, 2)
-        self.write_number2image(entry["StartAdr"][1], img, start+0x78, 2)
-        self.write_number2image(entry["ExecAdr"][1], img, start+0x7A, 2)
+        img[pos:pos+bps] = zeros # clear all 
+        sdws = 1
+
+        sdws = int(math.ceil(sizclu / 32)) # max cotniguous clusters in SDW is 32-1
+
+        if self.verbose > 0:
+            print(f'Size: {sizclu} cluster, need {sdws} SDWs')
+
+        for s in range(sdws):
+            if s == sdws-1:
+                newsize = sizclu - 32*s
+            else:
+                newsize = 32
+    
+            if self.verbose > 0:
+                print(f'Starting Cluster {newstart:04X} @ {newstart*4*128:04X} Size: {newsize:02X}')
+            SDW = newstart # starting cluster
+            SDW |= ((newsize-1)<<10)
+            self.write_number2image(SDW, img, pos, 2)
+            newstart += 0x20
+            pos += 2
+
+        if self.verbose > 0:
+            print(f'Logical Sectors: {int(filelen/128):04X}, Rest: {rest:02X} Attribute: {attrib}')
+        if rest == 0: # This does not work, see Chapter 24.2.1 (...must be non-zero)
+            rest = 0x80
+            TERM = 0x8000 | int(filelen/128)-1 # change TERM to reflect that
+            self.write_number2image(TERM, img, pos, 2)
+        else:
+            TERM = 0x8000 | int(filelen/128)
+            self.write_number2image(TERM, img, pos, 2)
+        if (attrib & 4) == 0: # Bit 2 set means ASCII or ASCII-converted-binary
+            self.write_number2image(rest, img, start+0x75, 1)
+            self.write_number2image(sizsec, img, start+0x76, 2)
+            self.write_number2image(entry["StartAdr"][1], img, start+0x78, 2)
+            self.write_number2image(entry["ExecAdr"][1], img, start+0x7A, 2)
         return img
     #----------------------------------
-    def add_file(self, img, start, fdata, siz):
+    def add_file(self, img, start, fdata):
         bps = self.fspec["bps"]
+        sizsec = int(math.ceil(len(fdata)/128))
+        rest = len(fdata)%128
+        filelen = len(fdata)
+        padding = 0
+        if rest:
+            zeros = bytearray(0 for _ in range(bps-rest)) # Pad to full sector
+            fdata += zeros
+            padding = len(zeros)
         pos = start
-        #print(f'Add file @ {pos:06X} Size: {len(fdata):04X}')
-        for idx in range(siz): # go through the sectors
-            b = idx*bps
-            #print(f'Add chunk {idx} sector @ {pos:04X} chunk {b:04X} sectors: {len(fdata)/bps}')
-            img[pos:pos+bps] = fdata[b:b+bps]
-            pos += bps
+        print(f'Add file @ {pos:06X} Size: {filelen:04X} or {sizsec:02X} sectors, padding with {padding:02X} zeros')
+        img[start:start+len(fdata)] = fdata
+        #for idx in range(sizsec): # go through the sectors
+        #    b = idx*bps
+        #    #print(f'Add chunk {idx} sector @ {pos:04X} chunk {b:04X} sectors: {len(fdata)/bps}')
+        #    img[pos:pos+bps] = fdata[b:b+bps]
+        #    pos += bps
         return img
     #----------------------------------
     def add_files(self, fdir, entries, stats, img, action):
@@ -703,59 +826,60 @@ class class_MDOS(object):
         direntrysize = self.fspec["Direntrysize"]
         bps = self.fspec["bps"]
 
-        while len(entries) > diridx:                        # cycle through entries
-            for idx,entry in enumerate(entries):            # look for lowest Directoryposition
-                if entry["Directoryposition"][1] == diridx:
-                    name = entry["Name"][1].strip()
-                    suffx = entry["Suffix"][1].strip()
-                    psn = entry["StartPSN"][1]
-                    
-                    fn = name + '.' + suffx
-                    #----------------------------------
-                    # Here we add the filenames to the Directory
-                    # We need the stats file for Filetype, Startaddress, Endaddress, Program Counter,
-                    # Hiline (Basic) and three 'spares'.
-                    # Also the size can come from the stats file or from the actual filesize
-                    if ('/' in name): # in FDOS Filenames can contain slash, we change them to underline
-                        fn = name.replace('/', '_')
-                    fdata = self.parent.read_file((fdir+fn), 'binary') # Get the filedata
-                    #-------------------------------------------------------------------------
-                    # Get the filesize from the actual file and pad it to the next sector
-                    #-------------------------------------------------------------------------
-                    flen = len(fdata)
-                    tempsiz = flen/bps  # Size (in sectors) from actual filesize
-                    temprest = (flen%bps)  # Rest in sectors
-                    zeros = bytearray(0 for _ in range(bps-temprest)) # Pad to full sector
-                    fdata += zeros 
-                    nsiz = int(tempsiz)
-                    if temprest > 0:
-                        nsiz += 1
-                    #if self.verbose > 0:
-                    #    print(f'Sectors: {tempsiz}, Rest: {temprest}/0x{temprest:02X}, needed sectors: {nsiz}/0x{nsiz:02X} Sectors: {len(fdata)/bps}')
-                    siz = nsiz # Use actual filesize padded to next sectorboundry
-                    #-------------------------------------------------------------------------
-                    #pos = dirstart + diridx * direntrysize
-                    pos = dirstart + entry["DEN"][1] * direntrysize
+        #while len(entries) > diridx:                        # cycle through entries
+        for idx,entry in enumerate(entries):            # look for lowest Directoryposition
+        #if entry["Directoryposition"][1] == diridx:
+            name = entry["Name"][1].strip()
+            suffx = entry["Suffix"][1].strip()
+            fn = name + '.' + suffx
 
-                    #if self.verbose > 0:
-                    #    print(f'Checking {entry["Directoryposition"][1]}, diridx: {diridx}, of {len(entries)} entries. Pos: {pos:04X}')
-                    if name == 'BOOTSECTOR':
-                        print(f'{self.parent.YEL}Found Bootsector{self.parent.END}')
-                        img = self.add_file(img, 0xB80, fdata, 1)
-                    else:
-                        img = self.add_files_to_img(img, entry, fdata)
-                        #----------------------------------
-                        # Now add the actual files to the Image
-                        #pos = psn * bps
-                        #if self.verbose > 0:
-                        #    print(f'Got File: {fn} with secs: {nsiz:02X} and rest: {temprest:02X} on pos: {pos:04X}')
-                        #img = self.add_rib(img, pos, entry)
-                        #pos += bps # RIB is always one sector
-                        #img = self.add_file(img, pos, fdata, siz)
-                        #if diridx >= 0:
-                        #    return img
-                    #c,h,s = self.offset_to_chs(totalsz) # Get position now for next free sector
-                    diridx += 1
+            #psn = entry["StartPSN"][1]
+            #----------------------------------
+            # Here we add the filenames to the Directory
+            # We need the stats file for Filetype, Startaddress, Endaddress, Program Counter,
+            # Hiline (Basic) and three 'spares'.
+            # Also the size can come from the stats file or from the actual filesize
+            if ('/' in name): # in FDOS Filenames can contain slash, we change them to underline
+                fn = name.replace('/', '_')
+            fdata = self.parent.read_file((fdir+fn), 'binary') # Get the filedata
+            #-------------------------------------------------------------------------
+            # Get the filesize from the actual file and pad it to the next sector
+            #-------------------------------------------------------------------------
+            flen = len(fdata)
+            tempsiz = flen/bps  # Size (in sectors) from actual filesize
+            temprest = (flen%bps)  # Rest in sectors
+            zeros = bytearray(0 for _ in range(bps-temprest)) # Pad to full sector
+            #fdata += zeros 
+            nsiz = int(math.ceil(tempsiz))
+            #if temprest > 0:
+            #    nsiz += 1
+            if self.verbose > 0:
+                if temprest:
+                    print(f'{self.parent.YEL}Sectors: {tempsiz}, Rest: {temprest}/0x{temprest:02X}, needed sectors: {nsiz}/0x{nsiz:02X} Sectors: {len(fdata)/bps}{self.parent.END}')
+            #siz = nsiz # Use actual filesize padded to next sectorboundry
+            #-------------------------------------------------------------------------
+            #pos = dirstart + diridx * direntrysize
+            #pos = dirstart + entry["DEN"][1] * direntrysize
+        #if self.verbose > 0:
+            #    print(f'Checking {entry["Directoryposition"][1]}, diridx: {diridx}, of {len(entries)} entries. Pos: {pos:04X}')
+            if name == 'BOOTSECTOR':
+                print(f'{self.parent.YEL}Found Bootsector{self.parent.END}')
+                img = self.add_file(img, 0xB80, fdata)
+            else:
+                img = self.add_files_to_img(img, entry, fdata)
+                #----------------------------------
+                # Now add the actual files to the Image
+                #pos = psn * bps
+                #if self.verbose > 0:
+                #    print(f'Got File: {fn} with secs: {nsiz:02X} and rest: {temprest:02X} on pos: {pos:04X}')
+                #img = self.add_rib(img, pos, entry)
+                #pos += bps # RIB is always one sector
+                #img = self.add_file(img, pos, fdata, siz)
+                #if diridx >= 0:
+                #    return img
+            #c,h,s = self.offset_to_chs(totalsz) # Get position now for next free sector
+            #diridx += 1
         #self.add_last_enty(img, diridx, totalsz)
+        self.get_free_cluster(img)
         return img
 

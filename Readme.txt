@@ -351,14 +351,14 @@ SEGMENT DESCRIPTOR WORD
 F  E  D  C  B  A  9  8  7  6  5  4  3  2  1  0
 | |             | <-- Starting Cluster Nr. -->
 |  <-----------> 
-|        |________ Number of contiguous clusters - 1
+|        |________ Number of contiguous clusters - 1 
 |_________________ Zero(non-terminator bit)
 
 
 TERMINATOR
 
 F  E  D  C  B  A  9  8  7  6  5  4  3  2  1  0
-|  <-- Logical Sector nr. of logical EOF ---->
+|  <-- Logical Sector nr. of logical EOF ---->  (ROB: = number of sectors!)
 |__ One (Terminator bit)
 
 The SDW terminator is used to monitor the logical end-of-file. It contains the logical

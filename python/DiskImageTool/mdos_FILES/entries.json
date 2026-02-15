@@ -30,14 +30,25 @@
       180,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      12
+    ],
     "DEN": [
       "hx8",
       24
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      23040,
-      "RIB@"
+      180
+    ],
+    "SecSz": [
+      "hx8",
+      12
     ],
     "BytLS": [
       "hx8",
@@ -53,18 +64,6 @@
       8704,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      2093
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32777
-    ],
     "StartonDisk": [
       "hx16",
       23168,
@@ -75,13 +74,9 @@
       3,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       9
-    ],
-    "Secs": [
-      "hx16",
-      10
     ],
     "Filesize": [
       "hx16",
@@ -92,11 +87,6 @@
       "hx16",
       24359,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      0,
-      "Dirpos"
     ]
   },
   {
@@ -130,14 +120,25 @@
       192,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      16
+    ],
     "DEN": [
       "hx8",
       25
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      24576,
-      "RIB@"
+      192
+    ],
+    "SecSz": [
+      "hx8",
+      16
     ],
     "BytLS": [
       "hx8",
@@ -153,18 +154,6 @@
       8196,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      3120
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32782
-    ],
     "StartonDisk": [
       "hx16",
       24704,
@@ -175,13 +164,9 @@
       4,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       14
-    ],
-    "Secs": [
-      "hx16",
-      15
     ],
     "Filesize": [
       "hx16",
@@ -192,11 +177,6 @@
       "hx16",
       26615,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      1,
-      "Dirpos"
     ]
   },
   {
@@ -230,14 +210,25 @@
       92,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      16
+    ],
     "DEN": [
       "hx8",
       32
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      11776,
-      "RIB@"
+      92
+    ],
+    "SecSz": [
+      "hx8",
+      16
     ],
     "BytLS": [
       "hx8",
@@ -253,18 +244,6 @@
       4723,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      3095
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32780
-    ],
     "StartonDisk": [
       "hx16",
       11904,
@@ -275,13 +254,9 @@
       4,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       12
-    ],
-    "Secs": [
-      "hx16",
-      13
     ],
     "Filesize": [
       "hx16",
@@ -292,11 +267,6 @@
       "hx16",
       13447,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      2,
-      "Dirpos"
     ]
   },
   {
@@ -330,14 +300,25 @@
       208,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      20
+    ],
     "DEN": [
       "hx8",
       40
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      26624,
-      "RIB@"
+      208
+    ],
+    "SecSz": [
+      "hx8",
+      20
     ],
     "BytLS": [
       "hx8",
@@ -353,18 +334,6 @@
       8196,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      4148
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32784
-    ],
     "StartonDisk": [
       "hx16",
       26752,
@@ -375,13 +344,9 @@
       5,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       16
-    ],
-    "Secs": [
-      "hx16",
-      17
     ],
     "Filesize": [
       "hx16",
@@ -392,11 +357,6 @@
       "hx16",
       28831,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      3,
-      "Dirpos"
     ]
   },
   {
@@ -430,14 +390,25 @@
       228,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      20
+    ],
     "DEN": [
       "hx8",
       41
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      29184,
-      "RIB@"
+      228
+    ],
+    "SecSz": [
+      "hx8",
+      20
     ],
     "BytLS": [
       "hx8",
@@ -453,18 +424,6 @@
       8196,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      4153
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32785
-    ],
     "StartonDisk": [
       "hx16",
       29312,
@@ -475,13 +434,9 @@
       5,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       17
-    ],
-    "Secs": [
-      "hx16",
-      18
     ],
     "Filesize": [
       "hx16",
@@ -492,11 +447,6 @@
       "hx16",
       31527,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      4,
-      "Dirpos"
     ]
   },
   {
@@ -530,14 +480,25 @@
       248,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      72
+    ],
     "DEN": [
       "hx8",
       42
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      31744,
-      "RIB@"
+      248
+    ],
+    "SecSz": [
+      "hx8",
+      72
     ],
     "BytLS": [
       "hx8",
@@ -553,18 +514,6 @@
       9587,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      17470
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32836
-    ],
     "StartonDisk": [
       "hx16",
       31872,
@@ -575,13 +524,9 @@
       18,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       68
-    ],
-    "Secs": [
-      "hx16",
-      69
     ],
     "Filesize": [
       "hx16",
@@ -592,11 +537,6 @@
       "hx16",
       40623,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      5,
-      "Dirpos"
     ]
   },
   {
@@ -630,14 +570,25 @@
       320,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      24
+    ],
     "DEN": [
       "hx8",
       43
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      40960,
-      "RIB@"
+      320
+    ],
+    "SecSz": [
+      "hx8",
+      24
     ],
     "BytLS": [
       "hx8",
@@ -653,18 +604,6 @@
       25471,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      5200
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32788
-    ],
     "StartonDisk": [
       "hx16",
       41088,
@@ -675,13 +614,9 @@
       6,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       20
-    ],
-    "Secs": [
-      "hx16",
-      21
     ],
     "Filesize": [
       "hx16",
@@ -692,11 +627,6 @@
       "hx16",
       43695,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      6,
-      "Dirpos"
     ]
   },
   {
@@ -730,14 +660,25 @@
       2112,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      148
+    ],
     "DEN": [
       "hx8",
       46
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      270336,
-      "RIB@"
+      2112
+    ],
+    "SecSz": [
+      "hx8",
+      128
     ],
     "BytLS": [
       "hx8",
@@ -753,18 +694,6 @@
       10496,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      32272
-    ],
-    "SDW#": [
-      "hx16",
-      2
-    ],
-    "TERM": [
-      "hx16",
-      32914
-    ],
     "StartonDisk": [
       "hx16",
       270464,
@@ -772,16 +701,12 @@
     ],
     "ContinClustr": [
       "hx16",
-      32,
+      37,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       146
-    ],
-    "Secs": [
-      "hx16",
-      147
     ],
     "Filesize": [
       "hx16",
@@ -792,11 +717,6 @@
       "hx16",
       289247,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      7,
-      "Dirpos"
     ]
   },
   {
@@ -830,14 +750,25 @@
       140,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      8
+    ],
     "DEN": [
       "hx8",
       48
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      17920,
-      "RIB@"
+      140
+    ],
+    "SecSz": [
+      "hx8",
+      8
     ],
     "BytLS": [
       "hx8",
@@ -853,18 +784,6 @@
       7181,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      1059
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32774
-    ],
     "StartonDisk": [
       "hx16",
       18048,
@@ -875,13 +794,9 @@
       2,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       6
-    ],
-    "Secs": [
-      "hx16",
-      7
     ],
     "Filesize": [
       "hx16",
@@ -892,11 +807,6 @@
       "hx16",
       18887,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      8,
-      "Dirpos"
     ]
   },
   {
@@ -930,14 +840,25 @@
       344,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      8
+    ],
     "DEN": [
       "hx8",
       49
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      44032,
-      "RIB@"
+      344
+    ],
+    "SecSz": [
+      "hx8",
+      8
     ],
     "BytLS": [
       "hx8",
@@ -953,18 +874,6 @@
       28079,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      1110
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32772
-    ],
     "StartonDisk": [
       "hx16",
       44160,
@@ -975,13 +884,9 @@
       2,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       4
-    ],
-    "Secs": [
-      "hx16",
-      5
     ],
     "Filesize": [
       "hx16",
@@ -992,11 +897,6 @@
       "hx16",
       44679,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      9,
-      "Dirpos"
     ]
   },
   {
@@ -1030,14 +930,25 @@
       352,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      24
+    ],
     "DEN": [
       "hx8",
       50
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      45056,
-      "RIB@"
+      352
+    ],
+    "SecSz": [
+      "hx8",
+      24
     ],
     "BytLS": [
       "hx8",
@@ -1053,18 +964,6 @@
       25471,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      5208
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32788
-    ],
     "StartonDisk": [
       "hx16",
       45184,
@@ -1075,13 +974,9 @@
       6,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       20
-    ],
-    "Secs": [
-      "hx16",
-      21
     ],
     "Filesize": [
       "hx16",
@@ -1092,11 +987,6 @@
       "hx16",
       47791,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      10,
-      "Dirpos"
     ]
   },
   {
@@ -1130,14 +1020,25 @@
       1736,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      88
+    ],
     "DEN": [
       "hx8",
       51
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      222208,
-      "RIB@"
+      1736
+    ],
+    "SecSz": [
+      "hx8",
+      88
     ],
     "BytLS": [
       "hx8",
@@ -1153,18 +1054,6 @@
       12065,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      21938
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32854
-    ],
     "StartonDisk": [
       "hx16",
       222336,
@@ -1175,13 +1064,9 @@
       22,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       86
-    ],
-    "Secs": [
-      "hx16",
-      87
     ],
     "Filesize": [
       "hx16",
@@ -1192,11 +1077,6 @@
       "hx16",
       233351,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      11,
-      "Dirpos"
     ]
   },
   {
@@ -1230,14 +1110,25 @@
       2884,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      4
+    ],
     "DEN": [
       "hx8",
       52
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      369152,
-      "RIB@"
+      2884
+    ],
+    "SecSz": [
+      "hx8",
+      4
     ],
     "BytLS": [
       "strw",
@@ -1253,18 +1144,6 @@
       "----",
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      721
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32768
-    ],
     "StartonDisk": [
       "hx16",
       369280,
@@ -1275,13 +1154,9 @@
       1,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
-      0
-    ],
-    "Secs": [
-      "hx16",
-      2
+      1
     ],
     "Filesize": [
       "hx16",
@@ -1292,11 +1167,6 @@
       "hx16",
       369535,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      12,
-      "Dirpos"
     ]
   },
   {
@@ -1330,14 +1200,25 @@
       24,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      68
+    ],
     "DEN": [
       "hx8",
       56
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      3072,
-      "RIB@"
+      24
+    ],
+    "SecSz": [
+      "hx8",
+      68
     ],
     "BytLS": [
       "hx8",
@@ -1353,18 +1234,6 @@
       1571,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      16390
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32831
-    ],
     "StartonDisk": [
       "hx16",
       3200,
@@ -1375,13 +1244,9 @@
       17,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       63
-    ],
-    "Secs": [
-      "hx16",
-      64
     ],
     "Filesize": [
       "hx16",
@@ -1392,11 +1257,6 @@
       "hx16",
       11391,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      13,
-      "Dirpos"
     ]
   },
   {
@@ -1430,14 +1290,25 @@
       2856,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      24
+    ],
     "DEN": [
       "hx8",
       57
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      365568,
-      "RIB@"
+      2856
+    ],
+    "SecSz": [
+      "hx8",
+      24
     ],
     "BytLS": [
       "hx8",
@@ -1453,18 +1324,6 @@
       9465,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      5834
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32789
-    ],
     "StartonDisk": [
       "hx16",
       365696,
@@ -1475,13 +1334,9 @@
       6,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       21
-    ],
-    "Secs": [
-      "hx16",
-      22
     ],
     "Filesize": [
       "hx16",
@@ -1492,11 +1347,6 @@
       "hx16",
       368431,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      14,
-      "Dirpos"
     ]
   },
   {
@@ -1530,14 +1380,25 @@
       156,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      8
+    ],
     "DEN": [
       "hx8",
       64
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      19968,
-      "RIB@"
+      156
+    ],
+    "SecSz": [
+      "hx8",
+      8
     ],
     "BytLS": [
       "hx8",
@@ -1553,18 +1414,6 @@
       8189,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      1063
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32771
-    ],
     "StartonDisk": [
       "hx16",
       20096,
@@ -1575,13 +1424,9 @@
       2,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       3
-    ],
-    "Secs": [
-      "hx16",
-      4
     ],
     "Filesize": [
       "hx16",
@@ -1592,11 +1437,6 @@
       "hx16",
       20599,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      15,
-      "Dirpos"
     ]
   },
   {
@@ -1630,14 +1470,25 @@
       2880,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      4
+    ],
     "DEN": [
       "hx8",
       65
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      368640,
-      "RIB@"
+      2880
+    ],
+    "SecSz": [
+      "hx8",
+      4
     ],
     "BytLS": [
       "strw",
@@ -1653,18 +1504,6 @@
       "----",
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      720
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32768
-    ],
     "StartonDisk": [
       "hx16",
       368768,
@@ -1675,28 +1514,19 @@
       1,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       0
     ],
-    "Secs": [
-      "hx16",
-      2
-    ],
     "Filesize": [
       "hx16",
-      256,
+      128,
       "FSize"
     ],
     "EndDisk": [
       "hx16",
-      369023,
+      368895,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      16,
-      "Dirpos"
     ]
   },
   {
@@ -1730,14 +1560,25 @@
       376,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      8
+    ],
     "DEN": [
       "hx8",
       72
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      48128,
-      "RIB@"
+      376
+    ],
+    "SecSz": [
+      "hx8",
+      8
     ],
     "BytLS": [
       "hx8",
@@ -1753,18 +1594,6 @@
       28079,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      1118
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32772
-    ],
     "StartonDisk": [
       "hx16",
       48256,
@@ -1775,13 +1604,9 @@
       2,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       4
-    ],
-    "Secs": [
-      "hx16",
-      5
     ],
     "Filesize": [
       "hx16",
@@ -1792,11 +1617,6 @@
       "hx16",
       48775,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      17,
-      "Dirpos"
     ]
   },
   {
@@ -1830,14 +1650,25 @@
       1192,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      128
+    ],
     "DEN": [
       "hx8",
       73
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      152576,
-      "RIB@"
+      1192
+    ],
+    "SecSz": [
+      "hx8",
+      128
     ],
     "BytLS": [
       "hx8",
@@ -1853,18 +1684,6 @@
       10064,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      32042
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32893
-    ],
     "StartonDisk": [
       "hx16",
       152704,
@@ -1875,13 +1694,9 @@
       32,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       125
-    ],
-    "Secs": [
-      "hx16",
-      126
     ],
     "Filesize": [
       "hx16",
@@ -1892,11 +1707,6 @@
       "hx16",
       168751,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      18,
-      "Dirpos"
     ]
   },
   {
@@ -1930,14 +1740,25 @@
       384,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      12
+    ],
     "DEN": [
       "hx8",
       80
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      49152,
-      "RIB@"
+      384
+    ],
+    "SecSz": [
+      "hx8",
+      12
     ],
     "BytLS": [
       "hx8",
@@ -1953,18 +1774,6 @@
       8196,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      2144
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32775
-    ],
     "StartonDisk": [
       "hx16",
       49280,
@@ -1975,13 +1784,9 @@
       3,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       7
-    ],
-    "Secs": [
-      "hx16",
-      8
     ],
     "Filesize": [
       "hx16",
@@ -1992,11 +1797,6 @@
       "hx16",
       50207,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      19,
-      "Dirpos"
     ]
   },
   {
@@ -2030,14 +1830,25 @@
       396,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      24
+    ],
     "DEN": [
       "hx8",
       81
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      50688,
-      "RIB@"
+      396
+    ],
+    "SecSz": [
+      "hx8",
+      24
     ],
     "BytLS": [
       "hx8",
@@ -2053,18 +1864,6 @@
       8704,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      5219
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32789
-    ],
     "StartonDisk": [
       "hx16",
       50816,
@@ -2075,13 +1874,9 @@
       6,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       21
-    ],
-    "Secs": [
-      "hx16",
-      22
     ],
     "Filesize": [
       "hx16",
@@ -2092,11 +1887,6 @@
       "hx16",
       53551,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      20,
-      "Dirpos"
     ]
   },
   {
@@ -2130,14 +1920,25 @@
       420,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      120
+    ],
     "DEN": [
       "hx8",
       82
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      53760,
-      "RIB@"
+      420
+    ],
+    "SecSz": [
+      "hx8",
+      120
     ],
     "BytLS": [
       "strw",
@@ -2153,18 +1954,6 @@
       "----",
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      29801
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32884
-    ],
     "StartonDisk": [
       "hx16",
       53888,
@@ -2175,28 +1964,19 @@
       30,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       116
     ],
-    "Secs": [
-      "hx16",
-      118
-    ],
     "Filesize": [
       "hx16",
-      15104,
+      14976,
       "FSize"
     ],
     "EndDisk": [
       "hx16",
-      68991,
+      68863,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      21,
-      "Dirpos"
     ]
   },
   {
@@ -2230,14 +2010,25 @@
       2036,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      76
+    ],
     "DEN": [
       "hx8",
       83
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      260608,
-      "RIB@"
+      2036
+    ],
+    "SecSz": [
+      "hx8",
+      76
     ],
     "BytLS": [
       "hx8",
@@ -2253,18 +2044,6 @@
       17622,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      18941
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32842
-    ],
     "StartonDisk": [
       "hx16",
       260736,
@@ -2275,13 +2054,9 @@
       19,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       74
-    ],
-    "Secs": [
-      "hx16",
-      75
     ],
     "Filesize": [
       "hx16",
@@ -2292,11 +2067,6 @@
       "hx16",
       270335,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      22,
-      "Dirpos"
     ]
   },
   {
@@ -2330,14 +2100,25 @@
       540,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      24
+    ],
     "DEN": [
       "hx8",
       88
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      69120,
-      "RIB@"
+      540
+    ],
+    "SecSz": [
+      "hx8",
+      24
     ],
     "BytLS": [
       "hx8",
@@ -2353,18 +2134,6 @@
       9216,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      5255
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32790
-    ],
     "StartonDisk": [
       "hx16",
       69248,
@@ -2375,13 +2144,9 @@
       6,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       22
-    ],
-    "Secs": [
-      "hx16",
-      23
     ],
     "Filesize": [
       "hx16",
@@ -2392,11 +2157,6 @@
       "hx16",
       72135,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      23,
-      "Dirpos"
     ]
   },
   {
@@ -2430,14 +2190,25 @@
       564,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      16
+    ],
     "DEN": [
       "hx8",
       89
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      72192,
-      "RIB@"
+      564
+    ],
+    "SecSz": [
+      "hx8",
+      16
     ],
     "BytLS": [
       "hx8",
@@ -2453,18 +2224,6 @@
       8960,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      3213
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32781
-    ],
     "StartonDisk": [
       "hx16",
       72320,
@@ -2475,13 +2234,9 @@
       4,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       13
-    ],
-    "Secs": [
-      "hx16",
-      14
     ],
     "Filesize": [
       "hx16",
@@ -2492,11 +2247,6 @@
       "hx16",
       74103,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      24,
-      "Dirpos"
     ]
   },
   {
@@ -2530,14 +2280,25 @@
       580,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      12
+    ],
     "DEN": [
       "hx8",
       90
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      74240,
-      "RIB@"
+      580
+    ],
+    "SecSz": [
+      "hx8",
+      12
     ],
     "BytLS": [
       "hx8",
@@ -2553,18 +2314,6 @@
       8196,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      2193
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32776
-    ],
     "StartonDisk": [
       "hx16",
       74368,
@@ -2575,13 +2324,9 @@
       3,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       8
-    ],
-    "Secs": [
-      "hx16",
-      9
     ],
     "Filesize": [
       "hx16",
@@ -2592,11 +2337,6 @@
       "hx16",
       75495,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      25,
-      "Dirpos"
     ]
   },
   {
@@ -2630,14 +2370,25 @@
       1320,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      60
+    ],
     "DEN": [
       "hx8",
       91
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      168960,
-      "RIB@"
+      1320
+    ],
+    "SecSz": [
+      "hx8",
+      60
     ],
     "BytLS": [
       "strw",
@@ -2653,18 +2404,6 @@
       "----",
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      14666
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32826
-    ],
     "StartonDisk": [
       "hx16",
       169088,
@@ -2675,28 +2414,19 @@
       15,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       58
     ],
-    "Secs": [
-      "hx16",
-      60
-    ],
     "Filesize": [
       "hx16",
-      7680,
+      7552,
       "FSize"
     ],
     "EndDisk": [
       "hx16",
-      176767,
+      176639,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      26,
-      "Dirpos"
     ]
   },
   {
@@ -2730,14 +2460,25 @@
       108,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      16
+    ],
     "DEN": [
       "hx8",
       96
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      13824,
-      "RIB@"
+      108
+    ],
+    "SecSz": [
+      "hx8",
+      16
     ],
     "BytLS": [
       "hx8",
@@ -2753,18 +2494,6 @@
       4723,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      3099
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32779
-    ],
     "StartonDisk": [
       "hx16",
       13952,
@@ -2775,13 +2504,9 @@
       4,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       11
-    ],
-    "Secs": [
-      "hx16",
-      12
     ],
     "Filesize": [
       "hx16",
@@ -2792,11 +2517,6 @@
       "hx16",
       15471,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      27,
-      "Dirpos"
     ]
   },
   {
@@ -2830,14 +2550,25 @@
       592,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      24
+    ],
     "DEN": [
       "hx8",
       97
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      75776,
-      "RIB@"
+      592
+    ],
+    "SecSz": [
+      "hx8",
+      24
     ],
     "BytLS": [
       "hx8",
@@ -2853,18 +2584,6 @@
       25471,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      5268
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32788
-    ],
     "StartonDisk": [
       "hx16",
       75904,
@@ -2875,13 +2594,9 @@
       6,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       20
-    ],
-    "Secs": [
-      "hx16",
-      21
     ],
     "Filesize": [
       "hx16",
@@ -2892,11 +2607,6 @@
       "hx16",
       78511,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      28,
-      "Dirpos"
     ]
   },
   {
@@ -2930,14 +2640,25 @@
       616,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      32
+    ],
     "DEN": [
       "hx8",
       104
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      78848,
-      "RIB@"
+      616
+    ],
+    "SecSz": [
+      "hx8",
+      32
     ],
     "BytLS": [
       "hx8",
@@ -2953,18 +2674,6 @@
       9216,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      7322
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32798
-    ],
     "StartonDisk": [
       "hx16",
       78976,
@@ -2975,13 +2684,9 @@
       8,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       30
-    ],
-    "Secs": [
-      "hx16",
-      31
     ],
     "Filesize": [
       "hx16",
@@ -2992,11 +2697,6 @@
       "hx16",
       82943,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      29,
-      "Dirpos"
     ]
   },
   {
@@ -3030,14 +2730,25 @@
       648,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      8
+    ],
     "DEN": [
       "hx8",
       105
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      82944,
-      "RIB@"
+      648
+    ],
+    "SecSz": [
+      "hx8",
+      8
     ],
     "BytLS": [
       "hx8",
@@ -3053,18 +2764,6 @@
       28079,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      1186
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32772
-    ],
     "StartonDisk": [
       "hx16",
       83072,
@@ -3075,13 +2774,9 @@
       2,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       4
-    ],
-    "Secs": [
-      "hx16",
-      5
     ],
     "Filesize": [
       "hx16",
@@ -3092,11 +2787,6 @@
       "hx16",
       83591,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      30,
-      "Dirpos"
     ]
   },
   {
@@ -3130,14 +2820,25 @@
       656,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      20
+    ],
     "DEN": [
       "hx8",
       112
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      83968,
-      "RIB@"
+      656
+    ],
+    "SecSz": [
+      "hx8",
+      20
     ],
     "BytLS": [
       "hx8",
@@ -3153,18 +2854,6 @@
       8196,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      4260
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32784
-    ],
     "StartonDisk": [
       "hx16",
       84096,
@@ -3175,13 +2864,9 @@
       5,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       16
-    ],
-    "Secs": [
-      "hx16",
-      17
     ],
     "Filesize": [
       "hx16",
@@ -3192,11 +2877,6 @@
       "hx16",
       86231,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      31,
-      "Dirpos"
     ]
   },
   {
@@ -3230,14 +2910,25 @@
       676,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      4
+    ],
     "DEN": [
       "hx8",
       113
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      86528,
-      "RIB@"
+      676
+    ],
+    "SecSz": [
+      "hx8",
+      4
     ],
     "BytLS": [
       "hx8",
@@ -3253,18 +2944,6 @@
       8196,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      169
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32769
-    ],
     "StartonDisk": [
       "hx16",
       86656,
@@ -3275,13 +2954,9 @@
       1,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       1
-    ],
-    "Secs": [
-      "hx16",
-      2
     ],
     "Filesize": [
       "hx16",
@@ -3292,11 +2967,6 @@
       "hx16",
       86823,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      32,
-      "Dirpos"
     ]
   },
   {
@@ -3330,14 +3000,25 @@
       680,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      8
+    ],
     "DEN": [
       "hx8",
       114
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      87040,
-      "RIB@"
+      680
+    ],
+    "SecSz": [
+      "hx8",
+      8
     ],
     "BytLS": [
       "hx8",
@@ -3353,18 +3034,6 @@
       8196,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      1194
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32772
-    ],
     "StartonDisk": [
       "hx16",
       87168,
@@ -3375,13 +3044,9 @@
       2,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       4
-    ],
-    "Secs": [
-      "hx16",
-      5
     ],
     "Filesize": [
       "hx16",
@@ -3392,11 +3057,6 @@
       "hx16",
       87799,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      33,
-      "Dirpos"
     ]
   },
   {
@@ -3430,14 +3090,25 @@
       688,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      24
+    ],
     "DEN": [
       "hx8",
       115
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      88064,
-      "RIB@"
+      688
+    ],
+    "SecSz": [
+      "hx8",
+      24
     ],
     "BytLS": [
       "hx8",
@@ -3453,18 +3124,6 @@
       25471,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      5292
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32788
-    ],
     "StartonDisk": [
       "hx16",
       88192,
@@ -3475,13 +3134,9 @@
       6,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       20
-    ],
-    "Secs": [
-      "hx16",
-      21
     ],
     "Filesize": [
       "hx16",
@@ -3492,11 +3147,6 @@
       "hx16",
       90799,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      34,
-      "Dirpos"
     ]
   },
   {
@@ -3530,14 +3180,25 @@
       712,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      24
+    ],
     "DEN": [
       "hx8",
       116
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      91136,
-      "RIB@"
+      712
+    ],
+    "SecSz": [
+      "hx8",
+      24
     ],
     "BytLS": [
       "hx8",
@@ -3553,18 +3214,6 @@
       25471,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      5298
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32788
-    ],
     "StartonDisk": [
       "hx16",
       91264,
@@ -3575,13 +3224,9 @@
       6,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       20
-    ],
-    "Secs": [
-      "hx16",
-      21
     ],
     "Filesize": [
       "hx16",
@@ -3592,11 +3237,6 @@
       "hx16",
       93871,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      35,
-      "Dirpos"
     ]
   },
   {
@@ -3630,14 +3270,25 @@
       1684,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      52
+    ],
     "DEN": [
       "hx8",
       117
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      215552,
-      "RIB@"
+      1684
+    ],
+    "SecSz": [
+      "hx8",
+      52
     ],
     "BytLS": [
       "hx8",
@@ -3653,18 +3304,6 @@
       9444,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      12709
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32816
-    ],
     "StartonDisk": [
       "hx16",
       215680,
@@ -3675,13 +3314,9 @@
       13,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       48
-    ],
-    "Secs": [
-      "hx16",
-      49
     ],
     "Filesize": [
       "hx16",
@@ -3692,11 +3327,6 @@
       "hx16",
       221895,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      36,
-      "Dirpos"
     ]
   },
   {
@@ -3730,14 +3360,25 @@
       1824,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      56
+    ],
     "DEN": [
       "hx8",
       118
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      233472,
-      "RIB@"
+      1824
+    ],
+    "SecSz": [
+      "hx8",
+      56
     ],
     "BytLS": [
       "hx8",
@@ -3753,18 +3394,6 @@
       8625,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      13768
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32821
-    ],
     "StartonDisk": [
       "hx16",
       233600,
@@ -3775,13 +3404,9 @@
       14,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       53
-    ],
-    "Secs": [
-      "hx16",
-      54
     ],
     "Filesize": [
       "hx16",
@@ -3792,11 +3417,6 @@
       "hx16",
       240399,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      37,
-      "Dirpos"
     ]
   },
   {
@@ -3830,14 +3450,25 @@
       1880,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      24
+    ],
     "DEN": [
       "hx8",
       119
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      240640,
-      "RIB@"
+      1880
+    ],
+    "SecSz": [
+      "hx8",
+      24
     ],
     "BytLS": [
       "hx8",
@@ -3853,18 +3484,6 @@
       8639,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      5590
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32787
-    ],
     "StartonDisk": [
       "hx16",
       240768,
@@ -3875,13 +3494,9 @@
       6,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       19
-    ],
-    "Secs": [
-      "hx16",
-      20
     ],
     "Filesize": [
       "hx16",
@@ -3892,11 +3507,6 @@
       "hx16",
       243319,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      38,
-      "Dirpos"
     ]
   },
   {
@@ -3930,14 +3540,25 @@
       132,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      8
+    ],
     "DEN": [
       "hx8",
       120
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      16896,
-      "RIB@"
+      132
+    ],
+    "SecSz": [
+      "hx8",
+      8
     ],
     "BytLS": [
       "hx8",
@@ -3953,18 +3574,6 @@
       6301,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      1057
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32774
-    ],
     "StartonDisk": [
       "hx16",
       17024,
@@ -3975,13 +3584,9 @@
       2,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       6
-    ],
-    "Secs": [
-      "hx16",
-      7
     ],
     "Filesize": [
       "hx16",
@@ -3992,11 +3597,6 @@
       "hx16",
       17847,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      39,
-      "Dirpos"
     ]
   },
   {
@@ -4030,14 +3630,25 @@
       164,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      16
+    ],
     "DEN": [
       "hx8",
       121
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      20992,
-      "RIB@"
+      164
+    ],
+    "SecSz": [
+      "hx8",
+      16
     ],
     "BytLS": [
       "strw",
@@ -4053,18 +3664,6 @@
       "----",
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      3113
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32780
-    ],
     "StartonDisk": [
       "hx16",
       21120,
@@ -4075,28 +3674,19 @@
       4,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       12
     ],
-    "Secs": [
-      "hx16",
-      14
-    ],
     "Filesize": [
       "hx16",
-      1792,
+      1664,
       "FSize"
     ],
     "EndDisk": [
       "hx16",
-      22911,
+      22783,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      40,
-      "Dirpos"
     ]
   },
   {
@@ -4130,14 +3720,25 @@
       736,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      12
+    ],
     "DEN": [
       "hx8",
       122
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      94208,
-      "RIB@"
+      736
+    ],
+    "SecSz": [
+      "hx8",
+      12
     ],
     "BytLS": [
       "hx8",
@@ -4153,18 +3754,6 @@
       8196,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      2232
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32775
-    ],
     "StartonDisk": [
       "hx16",
       94336,
@@ -4175,13 +3764,9 @@
       3,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       7
-    ],
-    "Secs": [
-      "hx16",
-      8
     ],
     "Filesize": [
       "hx16",
@@ -4192,11 +3777,6 @@
       "hx16",
       95295,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      41,
-      "Dirpos"
     ]
   },
   {
@@ -4230,14 +3810,25 @@
       748,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      8
+    ],
     "DEN": [
       "hx8",
       123
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      95744,
-      "RIB@"
+      748
+    ],
+    "SecSz": [
+      "hx8",
+      8
     ],
     "BytLS": [
       "hx8",
@@ -4253,18 +3844,6 @@
       28079,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      1211
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32772
-    ],
     "StartonDisk": [
       "hx16",
       95872,
@@ -4275,13 +3854,9 @@
       2,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       4
-    ],
-    "Secs": [
-      "hx16",
-      5
     ],
     "Filesize": [
       "hx16",
@@ -4292,11 +3867,6 @@
       "hx16",
       96391,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      42,
-      "Dirpos"
     ]
   },
   {
@@ -4330,14 +3900,25 @@
       2392,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      416
+    ],
     "DEN": [
       "hx8",
       124
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      306176,
-      "RIB@"
+      2392
+    ],
+    "SecSz": [
+      "hx8",
+      128
     ],
     "BytLS": [
       "strw",
@@ -4353,18 +3934,6 @@
       "----",
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      32342
-    ],
-    "SDW#": [
-      "hx16",
-      4
-    ],
-    "TERM": [
-      "hx16",
-      33180
-    ],
     "StartonDisk": [
       "hx16",
       306304,
@@ -4372,31 +3941,22 @@
     ],
     "ContinClustr": [
       "hx16",
-      32,
+      104,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       412
     ],
-    "Secs": [
-      "hx16",
-      414
-    ],
     "Filesize": [
       "hx16",
-      52992,
+      52864,
       "FSize"
     ],
     "EndDisk": [
       "hx16",
-      359295,
+      359167,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      43,
-      "Dirpos"
     ]
   },
   {
@@ -4430,14 +3990,25 @@
       756,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      8
+    ],
     "DEN": [
       "hx8",
       128
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      96768,
-      "RIB@"
+      756
+    ],
+    "SecSz": [
+      "hx8",
+      8
     ],
     "BytLS": [
       "hx8",
@@ -4453,18 +4024,6 @@
       28079,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      1213
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32772
-    ],
     "StartonDisk": [
       "hx16",
       96896,
@@ -4475,13 +4034,9 @@
       2,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       4
-    ],
-    "Secs": [
-      "hx16",
-      5
     ],
     "Filesize": [
       "hx16",
@@ -4492,11 +4047,6 @@
       "hx16",
       97415,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      44,
-      "Dirpos"
     ]
   },
   {
@@ -4530,14 +4080,25 @@
       764,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      32
+    ],
     "DEN": [
       "hx8",
       136
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      97792,
-      "RIB@"
+      764
+    ],
+    "SecSz": [
+      "hx8",
+      32
     ],
     "BytLS": [
       "hx8",
@@ -4553,18 +4114,6 @@
       9503,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      7359
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32796
-    ],
     "StartonDisk": [
       "hx16",
       97920,
@@ -4575,13 +4124,9 @@
       8,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       28
-    ],
-    "Secs": [
-      "hx16",
-      29
     ],
     "Filesize": [
       "hx16",
@@ -4592,11 +4137,6 @@
       "hx16",
       101607,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      45,
-      "Dirpos"
     ]
   },
   {
@@ -4630,14 +4170,25 @@
       1028,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      164
+    ],
     "DEN": [
       "hx8",
       137
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      131584,
-      "RIB@"
+      1028
+    ],
+    "SecSz": [
+      "hx8",
+      128
     ],
     "BytLS": [
       "hx8",
@@ -4653,18 +4204,6 @@
       11117,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      32001
-    ],
-    "SDW#": [
-      "hx16",
-      2
-    ],
-    "TERM": [
-      "hx16",
-      32927
-    ],
     "StartonDisk": [
       "hx16",
       131712,
@@ -4672,16 +4211,12 @@
     ],
     "ContinClustr": [
       "hx16",
-      32,
+      41,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       159
-    ],
-    "Secs": [
-      "hx16",
-      160
     ],
     "Filesize": [
       "hx16",
@@ -4692,11 +4227,6 @@
       "hx16",
       152119,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      46,
-      "Dirpos"
     ]
   },
   {
@@ -4730,14 +4260,25 @@
       1520,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      12
+    ],
     "DEN": [
       "hx8",
       138
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      194560,
-      "RIB@"
+      1520
+    ],
+    "SecSz": [
+      "hx8",
+      12
     ],
     "BytLS": [
       "strw",
@@ -4753,18 +4294,6 @@
       "----",
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      2428
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32776
-    ],
     "StartonDisk": [
       "hx16",
       194688,
@@ -4775,28 +4304,19 @@
       3,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       8
     ],
-    "Secs": [
-      "hx16",
-      10
-    ],
     "Filesize": [
       "hx16",
-      1280,
+      1152,
       "FSize"
     ],
     "EndDisk": [
       "hx16",
-      195967,
+      195839,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      47,
-      "Dirpos"
     ]
   },
   {
@@ -4830,18 +4350,29 @@
       3156,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      4
+    ],
     "DEN": [
       "hx8",
       139
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      403968,
-      "RIB@"
+      3156
+    ],
+    "SecSz": [
+      "hx8",
+      4
     ],
     "BytLS": [
       "hx8",
-      96
+      112
     ],
     "StartAdr": [
       "hx16",
@@ -4853,18 +4384,6 @@
       8192,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      789
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32768
-    ],
     "StartonDisk": [
       "hx16",
       404096,
@@ -4875,28 +4394,19 @@
       1,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       0
     ],
-    "Secs": [
-      "hx16",
-      1
-    ],
     "Filesize": [
       "hx16",
-      96,
+      112,
       "FSize"
     ],
     "EndDisk": [
       "hx16",
-      404191,
+      404207,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      48,
-      "Dirpos"
     ]
   },
   {
@@ -4930,14 +4440,25 @@
       796,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      40
+    ],
     "DEN": [
       "hx8",
       144
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      101888,
-      "RIB@"
+      796
+    ],
+    "SecSz": [
+      "hx8",
+      40
     ],
     "BytLS": [
       "hx8",
@@ -4953,18 +4474,6 @@
       9216,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      9415
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32803
-    ],
     "StartonDisk": [
       "hx16",
       102016,
@@ -4975,13 +4484,9 @@
       10,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       35
-    ],
-    "Secs": [
-      "hx16",
-      36
     ],
     "Filesize": [
       "hx16",
@@ -4992,11 +4497,6 @@
       "hx16",
       106535,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      49,
-      "Dirpos"
     ]
   },
   {
@@ -5030,14 +4530,25 @@
       836,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      52
+    ],
     "DEN": [
       "hx8",
       145
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      107008,
-      "RIB@"
+      836
+    ],
+    "SecSz": [
+      "hx8",
+      52
     ],
     "BytLS": [
       "hx8",
@@ -5053,18 +4564,6 @@
       11342,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      12497
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32818
-    ],
     "StartonDisk": [
       "hx16",
       107136,
@@ -5075,13 +4574,9 @@
       13,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       50
-    ],
-    "Secs": [
-      "hx16",
-      51
     ],
     "Filesize": [
       "hx16",
@@ -5092,11 +4587,6 @@
       "hx16",
       113663,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      50,
-      "Dirpos"
     ]
   },
   {
@@ -5130,14 +4620,25 @@
       888,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      24
+    ],
     "DEN": [
       "hx8",
       146
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      113664,
-      "RIB@"
+      888
+    ],
+    "SecSz": [
+      "hx8",
+      24
     ],
     "BytLS": [
       "hx8",
@@ -5153,18 +4654,6 @@
       25471,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      5342
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32788
-    ],
     "StartonDisk": [
       "hx16",
       113792,
@@ -5175,13 +4664,9 @@
       6,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       20
-    ],
-    "Secs": [
-      "hx16",
-      21
     ],
     "Filesize": [
       "hx16",
@@ -5192,11 +4677,6 @@
       "hx16",
       116399,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      51,
-      "Dirpos"
     ]
   },
   {
@@ -5230,14 +4710,25 @@
       148,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      8
+    ],
     "DEN": [
       "hx8",
       152
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      18944,
-      "RIB@"
+      148
+    ],
+    "SecSz": [
+      "hx8",
+      8
     ],
     "BytLS": [
       "hx8",
@@ -5253,18 +4744,6 @@
       7181,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      1061
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32774
-    ],
     "StartonDisk": [
       "hx16",
       19072,
@@ -5275,13 +4754,9 @@
       2,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       6
-    ],
-    "Secs": [
-      "hx16",
-      7
     ],
     "Filesize": [
       "hx16",
@@ -5292,11 +4767,6 @@
       "hx16",
       19927,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      52,
-      "Dirpos"
     ]
   },
   {
@@ -5330,14 +4800,25 @@
       912,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      24
+    ],
     "DEN": [
       "hx8",
       153
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      116736,
-      "RIB@"
+      912
+    ],
+    "SecSz": [
+      "hx8",
+      24
     ],
     "BytLS": [
       "hx8",
@@ -5353,18 +4834,6 @@
       8196,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      5348
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32788
-    ],
     "StartonDisk": [
       "hx16",
       116864,
@@ -5375,13 +4844,9 @@
       6,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       20
-    ],
-    "Secs": [
-      "hx16",
-      21
     ],
     "Filesize": [
       "hx16",
@@ -5392,11 +4857,6 @@
       "hx16",
       119551,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      53,
-      "Dirpos"
     ]
   },
   {
@@ -5430,14 +4890,25 @@
       936,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      16
+    ],
     "DEN": [
       "hx8",
       154
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      119808,
-      "RIB@"
+      936
+    ],
+    "SecSz": [
+      "hx8",
+      16
     ],
     "BytLS": [
       "hx8",
@@ -5453,18 +4924,6 @@
       8196,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      3306
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32781
-    ],
     "StartonDisk": [
       "hx16",
       119936,
@@ -5475,13 +4934,9 @@
       4,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       13
-    ],
-    "Secs": [
-      "hx16",
-      14
     ],
     "Filesize": [
       "hx16",
@@ -5492,111 +4947,6 @@
       "hx16",
       121623,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      54,
-      "Dirpos"
-    ]
-  },
-  {
-    "Name": [
-      "strw",
-      "HASH    ",
-      "Name        "
-    ],
-    "Suffix": [
-      "strw",
-      "RO",
-      "SFX"
-    ],
-    "Attribute": [
-      "hx8",
-      3,
-      "Atrib"
-    ],
-    "Filetype": [
-      "strw",
-      "BIN",
-      "FTyp"
-    ],
-    "Attribute Bit": [
-      "strw",
-      "-----",
-      "WDSCN"
-    ],
-    "StartPSN": [
-      "hx16",
-      3024,
-      "PSN"
-    ],
-    "DEN": [
-      "hx8",
-      155
-    ],
-    "File RIB Addr.: ": [
-      "hx16",
-      387072,
-      "RIB@"
-    ],
-    "BytLS": [
-      "strw",
-      "--"
-    ],
-    "StartAdr": [
-      "strw",
-      "----",
-      "Start"
-    ],
-    "ExecAdr": [
-      "strw",
-      "----",
-      "Exec"
-    ],
-    "SDW0": [
-      "hx16",
-      756
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32768
-    ],
-    "StartonDisk": [
-      "hx16",
-      387200,
-      "DSTRT"
-    ],
-    "ContinClustr": [
-      "hx16",
-      1,
-      "CClust"
-    ],
-    "EOFSec": [
-      "hx16",
-      0
-    ],
-    "Secs": [
-      "hx16",
-      2
-    ],
-    "Filesize": [
-      "hx16",
-      256,
-      "FSize"
-    ],
-    "EndDisk": [
-      "hx16",
-      387455,
-      "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      55,
-      "Dirpos"
     ]
   },
   {
@@ -5630,14 +4980,25 @@
       952,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      32
+    ],
     "DEN": [
       "hx8",
       160
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      121856,
-      "RIB@"
+      952
+    ],
+    "SecSz": [
+      "hx8",
+      32
     ],
     "BytLS": [
       "hx8",
@@ -5653,18 +5014,6 @@
       8196,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      7406
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32798
-    ],
     "StartonDisk": [
       "hx16",
       121984,
@@ -5675,13 +5024,9 @@
       8,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       30
-    ],
-    "Secs": [
-      "hx16",
-      31
     ],
     "Filesize": [
       "hx16",
@@ -5692,11 +5037,6 @@
       "hx16",
       125831,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      56,
-      "Dirpos"
     ]
   },
   {
@@ -5730,14 +5070,25 @@
       984,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      12
+    ],
     "DEN": [
       "hx8",
       161
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      125952,
-      "RIB@"
+      984
+    ],
+    "SecSz": [
+      "hx8",
+      12
     ],
     "BytLS": [
       "hx8",
@@ -5753,18 +5104,6 @@
       8198,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      2294
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32775
-    ],
     "StartonDisk": [
       "hx16",
       126080,
@@ -5775,13 +5114,9 @@
       3,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       7
-    ],
-    "Secs": [
-      "hx16",
-      8
     ],
     "Filesize": [
       "hx16",
@@ -5792,11 +5127,6 @@
       "hx16",
       127031,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      57,
-      "Dirpos"
     ]
   },
   {
@@ -5830,14 +5160,25 @@
       996,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      8
+    ],
     "DEN": [
       "hx8",
       162
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      127488,
-      "RIB@"
+      996
+    ],
+    "SecSz": [
+      "hx8",
+      8
     ],
     "BytLS": [
       "hx8",
@@ -5853,18 +5194,6 @@
       28079,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      1273
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32772
-    ],
     "StartonDisk": [
       "hx16",
       127616,
@@ -5875,13 +5204,9 @@
       2,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       4
-    ],
-    "Secs": [
-      "hx16",
-      5
     ],
     "Filesize": [
       "hx16",
@@ -5892,11 +5217,6 @@
       "hx16",
       128135,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      58,
-      "Dirpos"
     ]
   },
   {
@@ -5930,14 +5250,25 @@
       1004,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      24
+    ],
     "DEN": [
       "hx8",
       163
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      128512,
-      "RIB@"
+      1004
+    ],
+    "SecSz": [
+      "hx8",
+      24
     ],
     "BytLS": [
       "hx8",
@@ -5953,18 +5284,6 @@
       25471,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      5371
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32788
-    ],
     "StartonDisk": [
       "hx16",
       128640,
@@ -5975,13 +5294,9 @@
       6,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       20
-    ],
-    "Secs": [
-      "hx16",
-      21
     ],
     "Filesize": [
       "hx16",
@@ -5992,11 +5307,6 @@
       "hx16",
       131247,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      59,
-      "Dirpos"
     ]
   },
   {
@@ -6030,14 +5340,25 @@
       124,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      8
+    ],
     "DEN": [
       "hx8",
       168
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      15872,
-      "RIB@"
+      124
+    ],
+    "SecSz": [
+      "hx8",
+      8
     ],
     "BytLS": [
       "hx8",
@@ -6053,18 +5374,6 @@
       6301,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      1055
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32774
-    ],
     "StartonDisk": [
       "hx16",
       16000,
@@ -6075,13 +5384,9 @@
       2,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       6
-    ],
-    "Secs": [
-      "hx16",
-      7
     ],
     "Filesize": [
       "hx16",
@@ -6092,11 +5397,6 @@
       "hx16",
       16863,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      60,
-      "Dirpos"
     ]
   },
   {
@@ -6130,14 +5430,25 @@
       1380,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      140
+    ],
     "DEN": [
       "hx8",
       176
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      176640,
-      "RIB@"
+      1380
+    ],
+    "SecSz": [
+      "hx8",
+      128
     ],
     "BytLS": [
       "strw",
@@ -6153,18 +5464,6 @@
       "----",
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      32089
-    ],
-    "SDW#": [
-      "hx16",
-      2
-    ],
-    "TERM": [
-      "hx16",
-      32905
-    ],
     "StartonDisk": [
       "hx16",
       176768,
@@ -6172,31 +5471,22 @@
     ],
     "ContinClustr": [
       "hx16",
-      32,
+      35,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       137
     ],
-    "Secs": [
-      "hx16",
-      139
-    ],
     "Filesize": [
       "hx16",
-      17792,
+      17664,
       "FSize"
     ],
     "EndDisk": [
       "hx16",
-      194559,
+      194431,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      61,
-      "Dirpos"
     ]
   },
   {
@@ -6230,14 +5520,25 @@
       1680,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      4
+    ],
     "DEN": [
       "hx8",
       177
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      215040,
-      "RIB@"
+      1680
+    ],
+    "SecSz": [
+      "hx8",
+      4
     ],
     "BytLS": [
       "hx8",
@@ -6253,18 +5554,6 @@
       8192,
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      420
-    ],
-    "SDW#": [
-      "hx16",
-      1
-    ],
-    "TERM": [
-      "hx16",
-      32768
-    ],
     "StartonDisk": [
       "hx16",
       215168,
@@ -6275,13 +5564,9 @@
       1,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       0
-    ],
-    "Secs": [
-      "hx16",
-      1
     ],
     "Filesize": [
       "hx16",
@@ -6292,11 +5577,6 @@
       "hx16",
       215183,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      62,
-      "Dirpos"
     ]
   },
   {
@@ -6330,14 +5610,25 @@
       1904,
       "PSN"
     ],
+    "PSecs": [
+      "hx16",
+      132
+    ],
     "DEN": [
       "hx8",
       178
     ],
-    "File RIB Addr.: ": [
+    "SDW": [
+      "dec2",
+      0
+    ],
+    "SecSt": [
       "hx16",
-      243712,
-      "RIB@"
+      1904
+    ],
+    "SecSz": [
+      "hx8",
+      128
     ],
     "BytLS": [
       "strw",
@@ -6353,18 +5644,6 @@
       "----",
       "Exec"
     ],
-    "SDW0": [
-      "hx16",
-      32220
-    ],
-    "SDW#": [
-      "hx16",
-      2
-    ],
-    "TERM": [
-      "hx16",
-      32897
-    ],
     "StartonDisk": [
       "hx16",
       243840,
@@ -6372,31 +5651,22 @@
     ],
     "ContinClustr": [
       "hx16",
-      32,
+      33,
       "CClust"
     ],
-    "EOFSec": [
+    "LSec": [
       "hx16",
       129
     ],
-    "Secs": [
-      "hx16",
-      131
-    ],
     "Filesize": [
       "hx16",
-      16768,
+      16640,
       "FSize"
     ],
     "EndDisk": [
       "hx16",
-      260607,
+      260479,
       "DskEnd"
-    ],
-    "Directoryposition": [
-      "dec2",
-      63,
-      "Dirpos"
     ]
   },
   {
@@ -6491,7 +5761,7 @@
     ],
     "Directoryposition": [
       "dec2",
-      64,
+      0,
       "Dirpos"
     ]
   }
