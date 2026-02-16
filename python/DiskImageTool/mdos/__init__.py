@@ -441,7 +441,7 @@ class class_MDOS(object):
     #----------------------------------
     # Prints out Directory and stats
     def print_dir(self, entries, stats):
-        print(f'Showing Directory. (all values in hex!)') # Directory is easy, it starts @ 0x1400 until a 0xFF is found @ first position
+        print(f'Showing all entries in json. (all values in hex!)') # Directory is easy, it starts @ 0x1400 until a 0xFF is found @ first position
         for idx,e in enumerate(entries): # cycle through entries
             self.print_entry(idx, e)
         
@@ -826,12 +826,25 @@ class class_MDOS(object):
         direntrysize = self.fspec["Direntrysize"]
         bps = self.fspec["bps"]
 
+        for f in os.listdir(fdir):
+            if os.path.isfile(fdir+f) and 'json' not in f:
+                #print(f'Found File: {f}')
+                fdata = self.parent.read_file((fdir+f), 'binary') # Get the filedata
+                if 'BOOTSECTOR' in f:
+                    print(f'{self.parent.YEL}Found Bootsector{self.parent.END}')
+                    img = self.add_file(img, 0xB80, fdata)
+                else:
+                    for idx,entry in enumerate(entries):            # look for lowest Directoryposition
+                        ename = entry["Name"][1].strip()
+                        esuffx = entry["Suffix"][1].strip()
+                        efn = ename + '.' + esuffx
+                        if efn == f:
+                            print(f'Found File in entry: {efn}')
+                            img = self.add_files_to_img(img, entry, fdata)
+
+        #exit()
         #while len(entries) > diridx:                        # cycle through entries
-        for idx,entry in enumerate(entries):            # look for lowest Directoryposition
         #if entry["Directoryposition"][1] == diridx:
-            name = entry["Name"][1].strip()
-            suffx = entry["Suffix"][1].strip()
-            fn = name + '.' + suffx
 
             #psn = entry["StartPSN"][1]
             #----------------------------------
@@ -839,34 +852,34 @@ class class_MDOS(object):
             # We need the stats file for Filetype, Startaddress, Endaddress, Program Counter,
             # Hiline (Basic) and three 'spares'.
             # Also the size can come from the stats file or from the actual filesize
-            if ('/' in name): # in FDOS Filenames can contain slash, we change them to underline
-                fn = name.replace('/', '_')
-            fdata = self.parent.read_file((fdir+fn), 'binary') # Get the filedata
+            #if ('/' in name): # in FDOS Filenames can contain slash, we change them to underline
+            #    fn = name.replace('/', '_')
+            #fdata = self.parent.read_file((fdir+fn), 'binary') # Get the filedata
             #-------------------------------------------------------------------------
             # Get the filesize from the actual file and pad it to the next sector
             #-------------------------------------------------------------------------
-            flen = len(fdata)
-            tempsiz = flen/bps  # Size (in sectors) from actual filesize
-            temprest = (flen%bps)  # Rest in sectors
-            zeros = bytearray(0 for _ in range(bps-temprest)) # Pad to full sector
-            #fdata += zeros 
-            nsiz = int(math.ceil(tempsiz))
+            #flen = len(fdata)
+            #tempsiz = flen/bps  # Size (in sectors) from actual filesize
+            #temprest = (flen%bps)  # Rest in sectors
+            #zeros = bytearray(0 for _ in range(bps-temprest)) # Pad to full sector
+            ##fdata += zeros 
+            #nsiz = int(math.ceil(tempsiz))
             #if temprest > 0:
             #    nsiz += 1
-            if self.verbose > 0:
-                if temprest:
-                    print(f'{self.parent.YEL}Sectors: {tempsiz}, Rest: {temprest}/0x{temprest:02X}, needed sectors: {nsiz}/0x{nsiz:02X} Sectors: {len(fdata)/bps}{self.parent.END}')
+            #if self.verbose > 0:
+            #    if temprest:
+            #        print(f'{self.parent.YEL}Sectors: {tempsiz}, Rest: {temprest}/0x{temprest:02X}, needed sectors: {nsiz}/0x{nsiz:02X} Sectors: {len(fdata)/bps}{self.parent.END}')
             #siz = nsiz # Use actual filesize padded to next sectorboundry
             #-------------------------------------------------------------------------
             #pos = dirstart + diridx * direntrysize
             #pos = dirstart + entry["DEN"][1] * direntrysize
         #if self.verbose > 0:
             #    print(f'Checking {entry["Directoryposition"][1]}, diridx: {diridx}, of {len(entries)} entries. Pos: {pos:04X}')
-            if name == 'BOOTSECTOR':
-                print(f'{self.parent.YEL}Found Bootsector{self.parent.END}')
-                img = self.add_file(img, 0xB80, fdata)
-            else:
-                img = self.add_files_to_img(img, entry, fdata)
+        #if name == 'BOOTSECTOR':
+        #    print(f'{self.parent.YEL}Found Bootsector{self.parent.END}')
+        #    img = self.add_file(img, 0xB80, fdata)
+        #else:
+        #    img = self.add_files_to_img(img, entry, fdata)
                 #----------------------------------
                 # Now add the actual files to the Image
                 #pos = psn * bps
