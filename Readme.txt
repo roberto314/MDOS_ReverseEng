@@ -243,6 +243,7 @@ E-F    2   Zeroes
 
 The attribute field of a directory has the following format:
 F  E  D  C  B  A  9  8  7  6  5  4  3  2  1  0
+7  6  5  4  3  2  1  0 (ROB: since the lower Byte is always zero, this is more readeable)
 |  |  |  |  |  |  |  |  <-- not used (=0) --->
 |  |  |  |  |  |__|__|_ File Format (0 = user defined,
 |  |  |  |  |                        2 = memory-image,

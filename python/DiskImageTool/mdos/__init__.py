@@ -50,6 +50,13 @@ class class_MDOS(object):
         print(f'Needed for Binary Files:')
         print(f'StartAdr')
         print(f'ExecAdr')
+        print(f'Optional for the Image: (may be supplied via commandline with the ''-format'' option)')
+        print(f'DiskID')
+        print(f'Version')
+        print(f'Revision')
+        print(f'Date')
+        print(f'UserName')
+        print(f'Possible Valies to override:')
     #----------------------------------
     def isascii(self,b):
         try:
@@ -143,12 +150,13 @@ class class_MDOS(object):
             pos += 1
         return img
     #----------------------------------
-    def create_image(self, stats):
+    def create_image(self, stats, variant):
         # create empty image
         if self.verbose > 0:
             print(f'Make image w. {self.fspec["Imagesize"]} bytes')
         img = bytearray(self.fspec["Emptyval"] for _ in range(self.fspec["Imagesize"])) # make empty imagefile with correct size
-        #return img
+        if variant == "virgin": # Output a 'formatted' image (all E5)
+            return img
         end = 0x18*128 # 0x18 Sectors w. 128 Byte
         if self.verbose > 0:
             print(f'Clear out {end:04X} bytes')
@@ -699,41 +707,54 @@ class class_MDOS(object):
         entry["Name"]          = ["strw", "        ", "Name        "]
         entry["Suffix"]        = ["strw", "  ", "SFX"]
         entry["Attribute"]     = ["hx8", 0x72, "Atrib"]
-        entry["Filetype"]      = ["strw",  "MEM", "FTyp"]
-        entry["Attribute Bit"] = ["strw",  "-----", "WDSCN"]
-        entry["StartPSN"]      = ["hx16", 0, "PSN"]
-        entry["DEN"]           = ["hx8", 0]   
+        #entry["Filetype"]      = ["strw",  "MEM", "FTyp"]
+        #entry["Attribute Bit"] = ["strw",  "-----", "WDSCN"]
+        #entry["StartPSN"]      = ["hx16", 0, "PSN"]
+        #entry["DEN"]           = ["hx8", 0]   
         #entry["DEN Position"]  = ["hx8", 0, "POS"]   
         #entry["DEN PhSector"]  = ["hx8", 0, "PSec"]  
-        entry["File RIB Addr.: "]  = ["hx16", 0, "RIB@"]
-        entry["BytLS"]         = ["hx8",  0]
-        entry["Secs"]          = ["hx16", 0]
+        #entry["File RIB Addr.: "]  = ["hx16", 0, "RIB@"]
+        #entry["BytLS"]         = ["hx8",  0]
+        #entry["Secs"]          = ["hx16", 0]
         entry["StartAdr"]      = ["hx16", 0, "Start"]
         entry["ExecAdr"]       = ["hx16", 0, "Exec"]
-        entry["SDW0"]          = ["hx16", 0]
-        entry["TERM"]          = ["hx16", 0]
-        entry["StartonDisk"]   = ["hx16",  0, "DSTRT"]
-        entry["ContinClustr"]  = ["hx16",  0, "CClust"]
-        entry["EOFSec"]        = ["hx16",  0]
-        entry["Filesize"]       = ["hx16",  0x80, "FSize"]
-        entry["EndDisk"]        = ["hx16",  0, "DskEnd"]
-        entry["Directoryposition"] = ["dec2",  0, "Dirpos"]
+        #entry["SDW0"]          = ["hx16", 0]
+        #entry["TERM"]          = ["hx16", 0]
+        #entry["StartonDisk"]   = ["hx16",  0, "DSTRT"]
+        #entry["ContinClustr"]  = ["hx16",  0, "CClust"]
+        #entry["EOFSec"]        = ["hx16",  0]
+        #entry["Filesize"]       = ["hx16",  0x80, "FSize"]
+        #entry["EndDisk"]        = ["hx16",  0, "DskEnd"]
+        #entry["Directoryposition"] = ["dec2",  0, "Dirpos"]
         return entry        
     #----------------------------------
     def create_entries_file(self, pathname):
         entries = []
+        fn = ''
+        sfx = ''
+        attrib = 0x72 # Default: Non-compressed, Contiguous alloc., System File, Binary Record
         entry = self.set_default_values()
         if self.verbose > 0:
             print(f'Looking in: {pathname}')
             #print(f'Dir: {os.listdir(pathname)}')
             idx = 0
         for f in os.listdir(pathname):
-            if os.path.isfile(pathname+f):
-                #print(f'Found File: {f}')
+            if os.path.isfile(pathname+f) and "json" not in f:
+                fn,sfx = f.split('.')
+                #print(f'Found File: {f} {fn} . {sfx}')
                 fsiz = os.path.getsize(pathname+f)
+                attrib = 0x72
+                if fn == "MDOSER":
+                    attrib = 0x65
+                if sfx == "SA":
+                    attrib = 0x05
+                if sfx == "CF":
+                    attrib = 0x45
                 #print('---------------------------------------------------------------------------------------------')
-                entry["Name"]        = ["strw", f'{f:8}', "Name        "]
+                entry["Name"]        = ["strw", f'{fn:8}', "Name        "]
+                entry["Suffix"]        = ["strw", f'{sfx:2}', "SFX"]
                 entry["Filesize"]    = ["dec5",  fsiz, "FSize"]
+                entry["Attribute"]     = ["hx8", attrib, "Atrib"]
                 self.print_entry(idx, entry) # Print values
                 entries.append(entry)
                 idx += 1
@@ -812,8 +833,9 @@ class class_MDOS(object):
     def add_files(self, fdir, entries, stats, img, action):
         if action == 'CREATEBOOT':
             # Don't forget to update the Disk-RIB with the Overlay Addresses!
-            print(f'Creating Boot Image is no really necessary on FDOS.')
-            print(f'Just put a file named $DOS in the FILES Directory and it will be the bootfile.')
+            print(f'Creating Boot Image is not really necessary on MDOS.')
+            print(f'Every Disk is bootable and there is no space saving omitting the BOOTSECTOR.')
+            print(f'Also it is necessary to include the MDOS and MDOSOV* Files (It is the FORMAT ;U Option in MDOS.)')
         
         self.print_dir(entries, stats)
         
@@ -825,8 +847,10 @@ class class_MDOS(object):
         dirstart = self.fspec["Dirstart"]
         direntrysize = self.fspec["Direntrysize"]
         bps = self.fspec["bps"]
+        all_files = os.listdir(fdir)
+        all_files.sort(reverse=True) # Optionally apply some sorting to match the original disk
 
-        for f in os.listdir(fdir):
+        for f in all_files:
             if os.path.isfile(fdir+f) and 'json' not in f:
                 #print(f'Found File: {f}')
                 fdata = self.parent.read_file((fdir+f), 'binary') # Get the filedata

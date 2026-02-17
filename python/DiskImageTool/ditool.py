@@ -198,12 +198,13 @@ class DITOOL():
                     entries = obj.create_entries_file(pathname)
                     with open(pathname + 'entries.json', 'w') as file:
                         file.write(json.dumps(entries, indent=2))
+                    print(f'{self.RED}Don\'t forget to manually edit entries.json!{self.END}')
                     exit()
                 else:
                     print(f'No entries file found! Making empty image')
-                    imgfile = obj.create_image(stats)
+                    imgfile = obj.create_image(stats, "virgin")
             else:
-                imgfile = obj.add_files(pathname, entries, stats, obj.create_image(stats), action)
+                imgfile = obj.add_files(pathname, entries, stats, obj.create_image(stats, "normal"), action)
             
             fn = imgname + '.img'
             print(f'Image with {len(imgfile)} bytes and Name: {fn} created.')
