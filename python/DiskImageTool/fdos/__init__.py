@@ -79,7 +79,7 @@ class class_FDOS(object):
             print(f'off: {off:04X} c: {c} s: {s} totalsec: {totalsec} Track: {track}')
         return c, h, s
     #----------------------------------
-    def create_image(self):
+    def create_image(self, stats, variant):
         img = bytearray(self.fspec["Emptyval"] for _ in range(self.fspec["Imagesize"])) # make empty imagefile with correct size
         return img
     #----------------------------------

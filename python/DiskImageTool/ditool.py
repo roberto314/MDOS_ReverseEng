@@ -168,7 +168,10 @@ class DITOOL():
 
             for idx,e in enumerate(entries):
                 data = obj.get_file(imgfile, e)
-                fn = self.cleanup(e["Name"][1]) + '.' + self.cleanup(e["Suffix"][1])
+                try:
+                    fn = self.cleanup(e["Name"][1]) + '.' + self.cleanup(e["Suffix"][1])
+                except:
+                    fn = self.cleanup(e["Name"][1])
                 if fn == '':
                     print(f'{self.RED}Filename Empty!{self.END}')
                 else:
