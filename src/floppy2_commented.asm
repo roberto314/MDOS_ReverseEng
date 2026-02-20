@@ -200,6 +200,8 @@ RESTORN         BITB    #$04                     ; E8CB: C5 04     ; Get Bit2 fr
                 BEQ     CLOCKN                   ; E8CD: 27 03     ; No Clock
                 JMP     CLKDMD                   ; E8CF: 7E EB 85  ; Calculate CPU Freq., goes to CLKDMD, ERRHNDLR and RST
 ;------------------------------------------------
+; check for number of (numsector + startsector) < 2003
+;------------------------------------------------
 CLOCKN          LDAB    STRSCTL                  ; E8D2: D6 02     ; normal code flow (no CLOCK, no RESTOR)
                 LDAA    STRSCTH                  ; E8D4: 96 01     ; Get Startsector
                 ADDB    NUMSCTL                  ; E8D6: DB 04     ; |
@@ -208,6 +210,9 @@ CLOCKN          LDAB    STRSCTL                  ; E8D2: D6 02     ; normal code
                 CMPB    #$D3                     ; E8DC: C1 D3     ; |
                 SBCA    #$07                     ; E8DE: 82 07     ; 0x7D3 = 2003 (sector too big)
                 BCC     SERR6                    ; E8E0: 24 DC     ; Set Error '6': INVALID DISK ADDRESS
+;------------------------------------------------
+; Calculate Track for Sector Input
+;------------------------------------------------
                 LDAA    #$FF                     ; E8E2: 86 FF     ; 
                 STAA    SofTRK                   ; E8E4: 97 0A     ; 
                 LDAA    STRSCTH                  ; E8E6: 96 01     ; Startsector is usually at $17 at boot
@@ -217,29 +222,32 @@ IE8EA           INC     SofTRK                   ; E8EA: 7C 00 0A  ; is now at 0
                 SBCA    #$00                     ; E8EF: 82 00     ; 
                 BCC     IE8EA                    ; E8F1: 24 F7     ; $17-$D0 is negative, carry is set
                 ADDB    #$D0                     ; E8F3: CB D0     ; add $d0 again
-                LDAA    SofTRK                   ; E8F5: 96 0A     ; is 0
-                ASLA                             ; E8F7: 48        ; 
+                LDAA    SofTRK                   ; E8F5: 96 0A     ; is 0 or not if STARTSEC > $D0
+                ASLA                             ; E8F7: 48        ; if SofTRK > 0 it means n*8 Tracks in
                 ASLA                             ; E8F8: 48        ; 
-                ASLA                             ; E8F9: 48        ; Sector * 8
+                ASLA                             ; E8F9: 48        ; SofTRK * 8
                 DECA                             ; E8FA: 4A        ; 
-IE8FB           INCA                             ; E8FB: 4C        ; A is still 0
+IE8FB           INCA                             ; E8FB: 4C        ; A is still 0 or TRACKS
                 SUBB    #$1A                     ; E8FC: C0 1A     ; $1a = 26, is STRTSCT > 26
-                BCC     IE8FB                    ; E8FE: 24 FB     ; 
+                BCC     IE8FB                    ; E8FE: 24 FB     ; add single Tracks now
                 ADDB    #$1A                     ; E900: CB 1A     ; $1a = 26, if no add it again
-                STAB    SofTRK                   ; E902: D7 0A     ; store it in Sector of Track
-                LDX     NUMSCTH                  ; E904: DE 03     ; 
+                STAB    SofTRK                   ; E902: D7 0A     ; store it in Sector of Track (1-26)
+                LDX     NUMSCTH                  ; E904: DE 03     ; A is Track wanted!
                 STX     SECTCNT                  ; E906: DF 0B     ; 
                 LDAB    TRACKSAV                 ; E908: D6 13     ; 
-RESTORY         STAA    TRACKSAV                 ; E90A: 97 13     ; contains track (0 if RESTOR or 3)
-                SBA                              ; E90C: 10        ; B cont. 0 if RESTOR
+;------------------------------------------------
+; actually STEP to Track
+;------------------------------------------------
+RESTORY         STAA    TRACKSAV                 ; E90A: 97 13     ; contains wanted track (A=3, B=0 if RESTOR or A=0, B=$56)
+                SBA                              ; E90C: 10        ; B=0 if RESTOR so A-B=3 no carry, 0-$56 carry is set
                 LDAB    PIAREGA                  ; E90D: F6 EC 00  ; 
-                ORAB    #$08                     ; E910: CA 08     ; Set Bit 3 (DIRQ) | Check direction to STEP
-                BCC     IE917                    ; E912: 24 03     ;                      | Check direction to STEP
-                ANDB    #$F7                     ; E914: C4 F7     ; Clear Bit 3 (DIRQ) | Check direction to STEP
-                NEGA                             ; E916: 40        ; 
+                ORAB    #$08                     ; E910: CA 08     ; Set Bit 3 (DIRQ) Step in
+                BCC     IE917                    ; E912: 24 03     ; B is Track now, A is wanted Track
+                ANDB    #$F7                     ; E914: C4 F7     ; Clear Bit 3 (DIRQ) Step out
+                NEGA                             ; E916: 40        ; If Result is negative, negate.
 IE917           ANDB    #$EF                     ; E917: C4 EF     ; Isolate PA4 (HLD)
                 CMPA    #$04                     ; E919: 81 04     ; Compare A with Track 4
-                BLS     IE91F                    ; E91B: 23 02     ; 
+                BLS     IE91F                    ; E91B: 23 02     ; Looks like HLD is activated if Track <= 4
                 ORAB    #$10                     ; E91D: CA 10     ; Set Bit 4 (HLD)
 IE91F           STAB    PIAREGA                  ; E91F: F7 EC 00  ; Write to Port
                 DECA                             ; E922: 4A        ; 

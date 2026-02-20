@@ -367,7 +367,7 @@ SIDEDONE        LDAA    PIACTRLB                 ; |
                 BNE     WRITDAT                  ; 
                 LDAA    EXDSKSD                  ; Bit 7 is now PA5
                 BMI     WRITDAT                  ; check for SS or DS, if PA5 is high -> Single Sided
-                JMP     Z2356    ; 2284: 7E 23 56  ; Different from v300! (sets PB0-RESET and WG, clears all but DS2)
+                JMP     Z2356    ; 2284: 7E 23 56  ; Different from v300! (sets PB0-RESET and WG, clears all but DS2) and Jumps to 2176
 ;                LDAA    #$23                     ; value for PIAREGB
                 FDB     $2176                    ; old code, not used anymore
 ;------------------------------------------------
