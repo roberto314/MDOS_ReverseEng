@@ -353,7 +353,7 @@ SIDEDONE        LDAA    PIACTRLB                 ; |
                 BNE     WRITDAT                  ; 
                 LDAA    EXDSKSD                  ; Bit 7 is now PA5
                 BMI     WRITDAT                  ; check for SS or DS
-                LDAA    #$23                     ; value for PIAREGB
+                LDAA    #$23                     ; value for PIAREGB, next Side
                 JMP     Z2176                    ; 
 ;------------------------------------------------
 WRITDAT         JSR     RWTEST    ;EXORDISK      ; actually write data to disk

@@ -368,7 +368,7 @@ SIDEDONE        LDAA    PIACTRLB                 ; |
                 LDAA    EXDSKSD                  ; Bit 7 is now PA5
                 BMI     WRITDAT                  ; check for SS or DS, if PA5 is high -> Single Sided
                 JMP     Z2356    ; 2284: 7E 23 56  ; Different from v300! (sets PB0-RESET and WG, clears all but DS2) and Jumps to 2176
-;                LDAA    #$23                     ; value for PIAREGB
+;                LDAA    #$23                     ; value for PIAREGB, next Side
                 FDB     $2176                    ; old code, not used anymore
 ;------------------------------------------------
 WRITDAT         JSR     RWTEST    ;EXORDISK      ; actually write data to disk
@@ -489,7 +489,7 @@ Z2365           LDAA    #$07                     ;
                 JMP     FORMATSTART              ; 
 Z236D           LDAA    #$05                     ; 
                 STAA    M0030                    ; 
-Z2371           JSR     SEEK                     ; 
+Z2371           JSR     SEEK        ;EXORDISK    ; 
                 JMP     NXTTRK                   ; 
 Z2377           DEC     M0030                    ; 
                 BNE     Z2371                    ; 
