@@ -134,24 +134,24 @@ Z208C           STAB    PIAREGB                  ; ******************* PROBLEM: 
                 LSRB                             ; 2>>1 = 1, DS0 high (DS1 active)
 Z2094           JSR     Z2350     ; 2094: BD 23 50  ; Different to v300! (sets DIRQ high)
 ;Z2094           STAB    PIAREGA                  ; or DS1 high, DS0 active, ****** PROBLEM: DS1 + DS2 is on!
-                TST     M0024                    ; init. with $10
-                BNE     Z20A7                    ; 
-                LDAA    MEBFE                    ; Get some kind of Disk EPROM Version
-                CMPA    #$11                     ; 
-                BEQ     Z20A7                    ; Version 11 ignores RDY
-                CMPA    #$12                     ; Version 12 ignores RDY too
-                BNE     CHKRDY                   ; all other Versions use RDY Signal
-Z20A7           LDAA    #$FF                     ; 
-                BRA     Z20B0                    ; 
+                TST     M0024            ; 2097      ; init. with $10
+                BNE     Z20A7            ; 209A      ; 
+                LDAA    MEBFE            ; 209C      ; Get some kind of Disk EPROM Version
+                CMPA    #$11             ; 209F      ; 
+                BEQ     Z20A7            ; 20A1      ; Version 11 ignores RDY
+                CMPA    #$12             ; 20A3      ; Version 12 ignores RDY too
+                BNE     CHKRDY           ; 20A5      ; all other Versions use RDY Signal
+Z20A7           LDAA    #$FF             ; 20A7      ; 
+                BRA     Z20B0            ; 20A9      ; 
 ;------------------------------------------------
-CHKRDY          LDAA    PIAREGA                  ; 
-                ASLA                             ; |
-                ASLA                             ; shift PA6 (RDY) into carry, PA5 into Bit 7
-Z20B0           STAA    EXDSKSD                  ; |
-                BCC     Z20BA                    ; no problem if RDY is low
-                LDAA    #$33                     ; Error '3' (DISK NOT READY)
-                STAA    FDSTAT                   ; 
-                BRA     Z210A                    ; Jump to show Error Msg.
+CHKRDY          LDAA    PIAREGA          ; 20AB      ; 
+                ASLA                     ; 20AE      ; |
+                ASLA                     ; 20AF      ; shift PA6 (RDY) into carry, PA5 into Bit 7
+Z20B0           STAA    EXDSKSD          ; 20B0      ; |
+                BCC     Z20BA            ; 20B2      ; no problem if RDY is low
+                LDAA    #$33             ; 20B4      ; Error '3' (DISK NOT READY)
+                STAA    FDSTAT           ; 20B6      ; 
+                BRA     Z210A            ; 20B8      ; Jump to show Error Msg.
 ;------------------------------------------------
 Z20BA           LDX     #$001A                   ; $1a = 26
                 LDAA    EXDSKSD                  ; |
@@ -237,137 +237,137 @@ Z2152           JMP     Z236D   ; 2152: 7E 23 6D   ; Different from v300! (store
 ;------------------------------------------------
 ; #############  Writeloop  #####################
 ;------------------------------------------------
-NXTTRK          BCS     Z20F4                    ; error or done
-                LDAA    M0024                    ; init w. $10
-                LSRA                             ; 
-                LSRA                             ; 
-                LSRA                             ; 
-                LSRA                             ; should be 1
-                ADDA    TRKNOW                   ; should be 0 but gets increased (Track?)
-                LDAB    PIAREGA                  ; Load PIAA
-                ORAB    #$04                     ; isolate bit 2 (TG43)
-                CMPA    #$2B                     ; check for Track > 43
-                BLS     Z216A                    ; No
-                ANDB    #$FB                     ; Clr Bit 2 (TG43 on PA2)
-Z216A           STAB    PIAREGA                  ; write
-                LDAA    #$01                     ; 
-                STAA    SECNUM                   ; init w. 1
-                LDAA    PIAREGB                  ; |
-                ORAA    #$40                     ; set Bit 6 (DS3(SIDE) high)
-Z2176           STAA    PIAREGB                  ; or coming from JMP write $23 (DS2, PB0(Reset inact.); WG high, DS3(SIDE) whatever)
-                JSR     SETUPNMI                 ; X is on PIAREGA now, also Rerigger NMI Timer
-                LDAB    #$27                     ; Counter for below (approx. $22F5)
-                LDAA    CLKF2                    ; |
-Z2180           DECA                             ; |
-                BNE     Z2180                    ; wait
-                LDX     #$C0DA                   ; RXRs, TXRs, Sel. CR2 | PC12 - SM Inhibit, 8-Bit, TX Syn 
-                STX     SSDA_0                   ; |
-                LDX     #$C1FF                   ; RXRs, TXRs, Sel. Sync Code Reg. | $FF Sync 
-                STX     SSDA_0                   ; |
-                LDX     #$8270                   ; RXRs, Sel. CR3 | 1 Sync Char., Clr. CTS, Clr. TUF 
-                STX     SSDA_0                   ; |
-                LDAA    PIAREGB                  ; |
-                ANDA    #$F2                     ; clr bit 0,2,3 (RESET, WRITE, SHIFT-CRC)
-                STAA    PIAREGB                  ; |
-Z219D           EORA    M0024                    ; init w. $10 (do A EXOR $10) basically check PB4 and toggle it
-                BITA    #$10                     ; check PB4 (WPROT)
-                BNE     WRITID                   ; if PB4 was low then continue ** THIS IS THE OPPOSITE OF EXORDISK2 ROM **
-                JSR     INITPIA                  ; Init PIA
-                LDAA    #$32                     ; |
-                STAA    FDSTAT                   ; Error: "DISK WRITE PROTECTED"
+NXTTRK          BCS     Z20F4                ; 2155    ; error or done
+                LDAA    M0024                ; 2157    ; init w. $10
+                LSRA                         ; 2159    ; 
+                LSRA                         ; 215A    ; 
+                LSRA                         ; 215B    ; 
+                LSRA                         ; 215C    ; should be 1
+                ADDA    TRKNOW               ; 215D    ; should be 0 but gets increased (Track?)
+                LDAB    PIAREGA              ; 215F    ; Load PIAA
+                ORAB    #$04                 ; 2162    ; isolate bit 2 (TG43)
+                CMPA    #$2B                 ; 2164    ; check for Track > 43
+                BLS     Z216A                ; 2166    ; No
+                ANDB    #$FB                 ; 2168    ; Clr Bit 2 (TG43 on PA2)
+Z216A           STAB    PIAREGA              ; 216A    ; write
+                LDAA    #$01                 ; 216D    ; 
+                STAA    SECNUM               ; 216F    ; init w. 1
+                LDAA    PIAREGB              ; 2171    ; |
+                ORAA    #$40                 ; 2174    ; set Bit 6 (DS3(SIDE) high)
+Z2176           STAA    PIAREGB              ; 2176    ; or coming from JMP write $23 (DS2, PB0(Reset inact.); WG high, DS3(SIDE) whatever)
+                JSR     SETUPNMI             ; 2179    ; X is on PIAREGA now, also Rerigger NMI Timer
+                LDAB    #$27                 ; 217C    ; Counter for below (approx. $22F5)
+                LDAA    CLKF2                ; 217E    ; |
+Z2180           DECA                         ; 2180    ; |
+                BNE     Z2180                ; 2181    ; wait
+                LDX     #$C0DA               ; 2183    ; RXRs, TXRs, Sel. CR2 | PC12 - SM Inhibit, 8-Bit, TX Syn 
+                STX     SSDA_0               ; 2186    ; |
+                LDX     #$C1FF               ; 2189    ; RXRs, TXRs, Sel. Sync Code Reg. | $FF Sync 
+                STX     SSDA_0               ; 218C    ; |
+                LDX     #$8270               ; 218F    ; RXRs, Sel. CR3 | 1 Sync Char., Clr. CTS, Clr. TUF 
+                STX     SSDA_0               ; 2192    ; |
+                LDAA    PIAREGB              ; 2195    ; |
+                ANDA    #$F2                 ; 2198    ; clr bit 0,2,3 (RESET, WRITE, SHIFT-CRC)
+                STAA    PIAREGB              ; 219A    ; |
+Z219D           EORA    M0024                ; 219D    ; init w. $10 (do A EXOR $10) basically check PB4 and toggle it
+                BITA    #$10                 ; 219F    ; check PB4 (WPROT)
+                BNE     WRITID               ; 21A1    ; if PB4 was low then continue ** THIS IS THE OPPOSITE OF EXORDISK2 ROM **
+                JSR     INITPIA              ; 21A3    ; Init PIA
+                LDAA    #$32                 ; 21A6    ; |
+                STAA    FDSTAT               ; 21A8    ; Error: "DISK WRITE PROTECTED"
                 JMP     Z210A       --> ERROR    ; Output Error "PROM I/O..."
 ;------------------------------------------------
-WRITID          ANDA    #$60                     ; Clear all except Bit 5,6 (DS2 and DS3(SIDE) )
-                STAA    PIAREGB                  ; 
-Z21B2           LDAA    PIACTRLB                 ; |
-                BPL     Z21B2                    ; Wait for IRQB on CB1 (IDX)
-                LDX     #$8210                   ; RXRs, Sel. CR3 | Clr TUF
-                STX     SSDA_0                   ; |
-                JSR     Z22E2                    ; 
-                LDX     #$83F7                   ; RXRs, sel. TxFIFO | $F7 Transmit FIFO
-                STX     SSDA_0                   ; |
-                LDAA    #$7A                     ; ?
-                STAA    SSDA_1                   ; |
-                LDX     #$81FF                   ; RXRs, Sel Sync Code Reg. | $FF > Sync Code
-                STX     SSDA_0                   ; 
-                LDAB    #$17                     ; 
+WRITID          ANDA    #$60                 ; 21AD    ; Clear all except Bit 5,6 (DS2 and DS3(SIDE) )
+                STAA    PIAREGB              ; 21AF    ; 
+Z21B2           LDAA    PIACTRLB             ; 21B2    ; |
+                BPL     Z21B2                ; 21B5    ; Wait for IRQB on CB1 (IDX)
+                LDX     #$8210               ; 21B7    ; RXRs, Sel. CR3 | Clr TUF
+                STX     SSDA_0               ; 21BA    ; |
+                JSR     Z22E2                ; 21BD    ; 
+                LDX     #$83F7               ; 21C0    ; RXRs, sel. TxFIFO | $F7 Transmit FIFO
+                STX     SSDA_0               ; 21C3    ; |
+                LDAA    #$7A                 ; 21C6    ; ?
+                STAA    SSDA_1               ; 21C8    ; |
+                LDX     #$81FF               ; 21CB    ; RXRs, Sel Sync Code Reg. | $FF > Sync Code
+                STX     SSDA_0               ; 21CE    ; 
+                LDAB    #$17                 ; 21D1    ; 
 ;------------------------------------------------
 ; #########  Sector Writeloop  ##############
 ;------------------------------------------------
-NXTSEC          LDAA    #$18                     ; 
-                LDX     #$8210                   ; RXRs, Sel. CR3 | Clr. TUF
-                STX     SSDA_0                   ; |
-Z21DB           BITA    SSDA_0                   ; |
-                BEQ     Z21DB                    ; wait for Transmitter empty
-                STAA    SSDA_1                   ; CR2<$18 - 8-bit word
-Z21E3           BITA    SSDA_0                   ; |
-                BEQ     Z21E3                    ; wait for Transmitter empty
-                LDX     #$C270                   ; RXRs, TXRs, sel. CR3 | 1 Sync Char, Clr. CTS, Clr. TUF
-                STX     SSDA_0                   ; |
-M21EE           BITA    #$00                     ; < gets patched to $01BD - NOP, JSR M22AB or $2000 - BRA M21F0
-M21F0           LDAA    #$82                     ; < gets patched to $22AB - used only with JSR from above!
-                INC     PIAREGB                  ; |
-                DEC     PIAREGB                  ; Toggle PB0 (RESET)
-                STAA    SSDA_0                   ; A is still $82, CR1: RXRs, Sel. CR3
-                JSR     Z22E2                    ; 
-                LDX     #$83F5                   ; RXRs, sel. TxFIFO | $F5 Transmit FIFO (Sync Code)
-                STX     SSDA_0                   ; |
-                LDAB    #$7E                     ; ID address mark 
-                LDAA    #$40                     ; 
-                STAB    SSDA_1                   ; Store ID mark 
-Z220B           BITA    SSDA_0                   ; |
-                BEQ     Z220B                    ; Wait for TX FIFO write to finish
-                LDAB    TRKNOW                   ; |
-                STAB    SSDA_1                   ; Store Track#
-                CLRB                             ; |
-                STAB    SSDA_1                   ; Write 0
-Z2219           BITA    SSDA_0                   ; |
-                BEQ     Z2219                    ; Wait for TX FIFO write to finish
-                LDAB    SECNUM                   ; init w. 1
-                STAB    SSDA_1                   ; Store Sector#
-                CLRB                             ; |
-                STAB    SSDA_1                   ; write 0
-Z2227           BITA    SSDA_0                   ; |
-                BEQ     Z2227                    ; Wait for TX FIFO write to finish
-                STAB    SSDA_1                   ; write 0
-Z222F           BITA    SSDA_0                   ; |
-                BEQ     Z222F                    ; Wait for TX FIFO write to finish
-                LDAB    PIAREGB                  ; |
-                ORAB    #$08                     ; Set SHIFT-CRC high
-                STAB    PIAREGB                  ; |
-                STAB    SSDA_1                   ; ?
-Z223F           BITA    SSDA_0                   ; Wait for TX FIFO write to finish
-                BEQ     Z223F                    ; |
-                LDAA    #$FF                     ; |
-                STAA    SSDA_1                   ; Write Gap
-                LDAA    #$40                     ; |
-Z224B           BITA    SSDA_0                   ; Wait for TX FIFO write to finish
-                BEQ     Z224B                    ; |
-                ANDB    #$60                     ; Clear all bits except Bit 5,6 (DS2 and DS3(SIDE) unaffected)
-                STAB    PIAREGB                  ; |
-                LDX     #$81FF                   ; RXRs, Sel Sync Code Reg. | $FF > Sync Code
-                STX     SSDA_0                   ; |
-                LDAB    #$AC                     ; 
-                LDAA    SECNUM                   ; |
-                INCA                             ; incr. $23
-                STAA    SECNUM                   ; |
-                CMPA    #$1B                     ; $1B = 27
-                BEQ     SIDEDONE                 ; 
-                CMPA    #$35                     ; $35 = 53
-                BEQ     SIDEDONE                 ; 
-                JMP     NXTSEC      --> BACK     ; 
+NXTSEC          LDAA    #$18                 ; 21D3    ; 
+                LDX     #$8210               ; 21D5    ; RXRs, Sel. CR3 | Clr. TUF
+                STX     SSDA_0               ; 21D8    ; |
+Z21DB           BITA    SSDA_0               ; 21DB    ; |
+                BEQ     Z21DB                ; 21DE    ; wait for Transmitter empty
+                STAA    SSDA_1               ; 21E0    ; CR2 ? <$18 - 8-bit word
+Z21E3           BITA    SSDA_0               ; 21E3    ; |
+                BEQ     Z21E3                ; 21E6    ; wait for Transmitter empty
+                LDX     #$C270               ; 21E8    ; RXRs, TXRs, sel. CR3 | 1 Sync Char, Clr. CTS, Clr. TUF
+                STX     SSDA_0               ; 21EB    ; |
+M21EE           BITA    #$00                 ; 21EE    ; < gets patched to $01BD - NOP, JSR M22AB or $2000 - BRA M21F0
+M21F0           LDAA    #$82                 ; 21F0    ; < gets patched to $22AB - used only with JSR from above!
+                INC     PIAREGB              ; 21F2    ; |
+                DEC     PIAREGB              ; 21F5    ; Toggle PB0 (RESET)
+                STAA    SSDA_0               ; 21F8    ; A is still $82, CR1: RXRs, Sel. CR3
+                JSR     Z22E2                ; 21FB    ; 
+                LDX     #$83F5               ; 21FE    ; RXRs, sel. TxFIFO | $F5 Transmit FIFO (Sync Code)
+                STX     SSDA_0               ; 2201    ; |
+                LDAB    #$7E                 ; 2204    ; ID address mark 
+                LDAA    #$40                 ; 2206    ; 
+                STAB    SSDA_1               ; 2208    ; Store ID mark 
+Z220B           BITA    SSDA_0               ; 220B    ; |
+                BEQ     Z220B                ; 220E    ; Wait for TX FIFO write to finish
+                LDAB    TRKNOW               ; 2210    ; |
+                STAB    SSDA_1               ; 2212    ; Store Track#
+                CLRB                         ; 2215    ; |
+                STAB    SSDA_1               ; 2216    ; Write 0
+Z2219           BITA    SSDA_0               ; 2219    ; |
+                BEQ     Z2219                ; 221C    ; Wait for TX FIFO write to finish
+                LDAB    SECNUM               ; 221E    ; init w. 1
+                STAB    SSDA_1               ; 2220    ; Store Sector#
+                CLRB                         ; 2223    ; |
+                STAB    SSDA_1               ; 2224    ; write 0
+Z2227           BITA    SSDA_0               ; 2227    ; |
+                BEQ     Z2227                ; 222A    ; Wait for TX FIFO write to finish
+                STAB    SSDA_1               ; 222C    ; write 0
+Z222F           BITA    SSDA_0               ; 222F    ; |
+                BEQ     Z222F                ; 2232    ; Wait for TX FIFO write to finish
+                LDAB    PIAREGB              ; 2234    ; |
+                ORAB    #$08                 ; 2237    ; Set SHIFT-CRC high
+                STAB    PIAREGB              ; 2239    ; |
+                STAB    SSDA_1               ; 223C    ; ?
+Z223F           BITA    SSDA_0               ; 223F    ; Wait for TX FIFO write to finish
+                BEQ     Z223F                ; 2242    ; |
+                LDAA    #$FF                 ; 2244    ; |
+                STAA    SSDA_1               ; 2246    ; Write Gap
+                LDAA    #$40                 ; 2249    ; |
+Z224B           BITA    SSDA_0               ; 224B    ; Wait for TX FIFO write to finish
+                BEQ     Z224B                ; 224E    ; |
+                ANDB    #$60                 ; 2250    ; Clear all bits except Bit 5,6 (DS2 and DS3(SIDE) unaffected)
+                STAB    PIAREGB              ; 2252    ; |
+                LDX     #$81FF               ; 2255    ; RXRs, Sel Sync Code Reg. | $FF > Sync Code
+                STX     SSDA_0               ; 2258    ; |
+                LDAB    #$AC                 ; 225B    ; 
+                LDAA    SECNUM               ; 225D    ; |
+                INCA                         ; 225F    ; incr. $23
+                STAA    SECNUM               ; 2260    ; |
+                CMPA    #$1B                 ; 2262    ; $1B = 27
+                BEQ     SIDEDONE             ; 2264    ; 
+                CMPA    #$35                 ; 2266    ; $35 = 53
+                BEQ     SIDEDONE             ; 2268    ; 
+                JMP     NXTSEC      --> BACK ; 226A    ; 
 ;------------------------------------------------
-SIDEDONE        LDAA    PIACTRLB                 ; |
-                BPL     SIDEDONE                 ; Wait for IRQB on CB1 (IDX)
-                DEC     PIAREGB                  ; Toggle RESET
-                DEC     PIAREGB                  ; 
-                BSR     INITPIA                  ; Init PIA
-                LDAA    SECNUM                   ; 
-                CMPA    #$1B                     ; $1B = 27
-                BNE     WRITDAT                  ; 
-                LDAA    EXDSKSD                  ; Bit 7 is now PA5
-                BMI     WRITDAT                  ; check for SS or DS, if PA5 is high -> Single Sided
-                JMP     Z2356    ; 2284: 7E 23 56  ; Different from v300! (sets PB0-RESET and WG, clears all but DS2) and Jumps to 2176
+SIDEDONE        LDAA    PIACTRLB             ; 226D    ; |
+                BPL     SIDEDONE             ; 2270    ; Wait for IRQB on CB1 (IDX)
+                DEC     PIAREGB              ; 2272    ; Toggle RESET
+                DEC     PIAREGB              ; 2275    ; 
+                BSR     INITPIA              ; 2278    ; Init PIA
+                LDAA    SECNUM               ; 227A    ; 
+                CMPA    #$1B                 ; 227C    ; $1B = 27
+                BNE     WRITDAT              ; 227E    ; 
+                LDAA    EXDSKSD              ; 2280    ; Bit 7 is now PA5
+                BMI     WRITDAT              ; 2282    ; check for SS or DS, if PA5 is high -> Single Sided
+                JMP     Z2356                ; 2284 ; Different from v300! (sets PB0-RESET and WG, clears all but DS2) and Jumps to 2176
 ;                LDAA    #$23                     ; value for PIAREGB, next Side
                 FDB     $2176                    ; old code, not used anymore
 ;------------------------------------------------
@@ -422,33 +422,33 @@ INITPIA         LDX     #$3C3E                   ; Select both Output Reg., Set 
                 TAP                              ; 
                 RTS                              ; 
 ;------------------------------------------------
-Z22E2           LDAA    #$18                     ; CR3 selected
-Z22E4           BITA    SSDA_0                   ; |
-                BEQ     Z22E4                    ; wait for Transmitter empty
-                LDAA    CLKF2                    ; 
-Z22EB           DECA                             ; 
-                BNE     Z22EB                    ; 
-                LDAA    #$18                     ; |
-                STAA    SSDA_1                   ; CR3: Clr. TUF, 8 has no effet
-                DECB                             ; B is init to $27 above (approx. $217B)
-                BNE     Z22E4                    ; 
-                LDX     #$81AA                   ; RXRs, Sel. SyncCodeReg | $AA Sync
-                LDAB    #$05                     ; 
-                NOP                              ; 
-                NOP                              ; 
-                STX     SSDA_0                   ; 
-                LDX     #$8210                   ; RxRs, Sel. CR3 | Clr. TUF
-                STX     SSDA_0                   ; 
-Z2306           BITA    SSDA_0                   ; |
-                BEQ     Z2306                    ; wait for Transmitter empty
-                LDAA    CLKF2                    ; 
-Z230D           DECA                             ; |
-                BNE     Z230D                    ; wait
-                LDAA    #$18                     ; |
-                STAA    SSDA_1                   ; CR3: Clr. TUF, 8 has no effet
-                DECB                             ; 
-                BNE     Z2306                    ; 
-                RTS                              ; 
+Z22E2           LDAA    #$18              ; 22E2      ; CR3 selected
+Z22E4           BITA    SSDA_0            ; 22E4      ; |
+                BEQ     Z22E4             ; 22E7      ; wait for Transmitter empty
+                LDAA    CLKF2             ; 22E9      ; 
+Z22EB           DECA                      ; 22EB      ; 
+                BNE     Z22EB             ; 22EC      ; 
+                LDAA    #$18              ; 22EE      ; |
+                STAA    SSDA_1            ; 22F0      ; CR3: Clr. TUF, 8 has no effet
+                DECB                      ; 22F3      ; B is init to $27 above (approx. $217B)
+                BNE     Z22E4             ; 22F4      ; 
+                LDX     #$81AA            ; 22F6      ; RXRs, Sel. SyncCodeReg | $AA Sync
+                LDAB    #$05              ; 22F9      ; 
+                NOP                       ; 22FB      ; 
+                NOP                       ; 22FC      ; 
+                STX     SSDA_0            ; 22FD      ; 
+                LDX     #$8210            ; 2300      ; RxRs, Sel. CR3 | Clr. TUF
+                STX     SSDA_0            ; 2303      ; 
+Z2306           BITA    SSDA_0            ; 2306      ; |
+                BEQ     Z2306             ; 2309      ; wait for Transmitter empty
+                LDAA    CLKF2             ; 230B      ; 
+Z230D           DECA                      ; 230D      ; |
+                BNE     Z230D             ; 230E      ; wait
+                LDAA    #$18              ; 2310      ; |
+                STAA    SSDA_1            ; 2312      ; CR3: Clr. TUF, 8 has no effet
+                DECB                      ; 2315      ; 
+                BNE     Z2306             ; 2316      ; 
+                RTS                       ; 2318      ; 
 ;------------------------------------------------
 NMI_ISR         LDS     STACKSAV                 ; 
                 BSR     INITPIA                  ; Init PIA
