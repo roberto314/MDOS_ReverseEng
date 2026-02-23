@@ -134,13 +134,13 @@ Z208C           STAB    PIAREGB                  ; ******************* PROBLEM: 
                 LSRB                             ; 2>>1 = 1, DS0 high (DS1 active)
 Z2094           JSR     Z2350     ; 2094: BD 23 50  ; Different to v300! (sets DIRQ high)
 ;Z2094           STAB    PIAREGA                  ; or DS1 high, DS0 active, ****** PROBLEM: DS1 + DS2 is on!
-                TST     M0024            ; 2097      ; init. with $10
+                TST     M0024            ; 2097      ; init. with $10, gets reset by exordisk, if not, assume single sided 
                 BNE     Z20A7            ; 209A      ; 
                 LDAA    MEBFE            ; 209C      ; Get some kind of Disk EPROM Version
                 CMPA    #$11             ; 209F      ; 
-                BEQ     Z20A7            ; 20A1      ; Version 11 ignores RDY
-                CMPA    #$12             ; 20A3      ; Version 12 ignores RDY too
-                BNE     CHKRDY           ; 20A5      ; all other Versions use RDY Signal
+                BEQ     Z20A7            ; 20A1      ; Version 11 ignores RDY and is Singlesided
+                CMPA    #$12             ; 20A3      ; Version 12 ignores RDY too and is Singlesided
+                BNE     CHKRDY           ; 20A5      ; all other Versions use RDY Signal and are Doublesided
 Z20A7           LDAA    #$FF             ; 20A7      ; 
                 BRA     Z20B0            ; 20A9      ; 
 ;------------------------------------------------
