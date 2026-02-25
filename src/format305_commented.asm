@@ -132,7 +132,7 @@ Z208C           STAB    PIAREGB                  ; ******************* PROBLEM: 
                 LDAB    #$02                     ; Bit 1 - DS1
                 BCC     Z2094                    ; carry clr = Drv. 2 (0 is not allowed!)
                 LSRB                             ; 2>>1 = 1, DS0 high (DS1 active)
-Z2094           JSR     Z2350     ; 2094: BD 23 50  ; Different to v300! (sets DIRQ high)
+Z2094           JSR     SETDIRQ   ; 2094: BD 23 50  ; Different to v300! (sets DIRQ high)
 ;Z2094           STAB    PIAREGA                  ; or DS1 high, DS0 active, ****** PROBLEM: DS1 + DS2 is on!
                 TST     M0024            ; 2097      ; init. with $10, gets reset by exordisk, if not, assume single sided 
                 BNE     Z20A7            ; 209A      ; 
@@ -188,7 +188,8 @@ Z20DE           INCB                             ;
                 JSR     INITPIA                  ; Init PIA
                 JSR     RESTOR   ;EXORDISK       ; Set up drive
                 BCC     Z2117                    ; no error
-Z20F4           LDAB    STRSCTH                  ; 
+;------------------------------------------------
+FATALERROR      LDAB    STRSCTH                  ; 
                 LDAA    STRSCTL                  ; 
                 ADDA    NUMSCTL                  ; |
                 ADCB    NUMSCTH                  ; contains 26 or 52 according to SS or DS
@@ -232,18 +233,18 @@ Z2143           LDAB    STRSCTL                  ;
                 STAB    STRSCTH                  ; 
                 DECA                             ; 
                 BPL     Z2143                    ; 
-Z2152           JMP     Z236D   ; 2152: 7E 23 6D   ; Different from v300! (stores $5 to $0030)
+Z2152           JMP     RELOADNXTTR   ; 2152: 7E 23 6D   ; Different from v300! (stores $5 to $0030)
 ;NXTTRK          JSR     SEEK         ;EXORDISK   ; get to next track
 ;------------------------------------------------
 ; #############  Writeloop  #####################
 ;------------------------------------------------
-NXTTRK          BCS     Z20F4                ; 2155    ; error or done
-                LDAA    M0024                ; 2157    ; init w. $10
+NXTTRK          BCS     FATALERROR           ; 2155    ; error or done
+                LDAA    M0024                ; 2157    ; init w. $10 for SS or $00 for DS (gets reset from exordisk firmware)
                 LSRA                         ; 2159    ; 
                 LSRA                         ; 215A    ; 
                 LSRA                         ; 215B    ; 
-                LSRA                         ; 215C    ; should be 1
-                ADDA    TRKNOW               ; 215D    ; should be 0 but gets increased (Track?)
+                LSRA                         ; 215C    ; should be 1 for SS or 0 for DS
+                ADDA    TRKNOW               ; 215D    ; gets increased in DATADONE
                 LDAB    PIAREGA              ; 215F    ; Load PIAA
                 ORAB    #$04                 ; 2162    ; isolate bit 2 (TG43)
                 CMPA    #$2B                 ; 2164    ; check for Track > 43
@@ -275,7 +276,9 @@ Z219D           EORA    M0024                ; 219D    ; init w. $10 (do A EXOR 
                 JSR     INITPIA              ; 21A3    ; Init PIA
                 LDAA    #$32                 ; 21A6    ; |
                 STAA    FDSTAT               ; 21A8    ; Error: "DISK WRITE PROTECTED"
-                JMP     Z210A       --> ERROR    ; Output Error "PROM I/O..."
+                JMP     Z210A       ;--> ERROR    ; Output Error "PROM I/O..."
+;------------------------------------------------
+; Write Index Mark $F7, $7A
 ;------------------------------------------------
 WRITID          ANDA    #$60                 ; 21AD    ; Clear all except Bit 5,6 (DS2 and DS3(SIDE) )
                 STAA    PIAREGB              ; 21AF    ; 
@@ -286,7 +289,7 @@ Z21B2           LDAA    PIACTRLB             ; 21B2    ; |
                 JSR     Z22E2                ; 21BD    ; 
                 LDX     #$83F7               ; 21C0    ; RXRs, sel. TxFIFO | $F7 Transmit FIFO
                 STX     SSDA_0               ; 21C3    ; |
-                LDAA    #$7A                 ; 21C6    ; ?
+                LDAA    #$7A                 ; 21C6    ; $7A TX FIFO
                 STAA    SSDA_1               ; 21C8    ; |
                 LDX     #$81FF               ; 21CB    ; RXRs, Sel Sync Code Reg. | $FF > Sync Code
                 STX     SSDA_0               ; 21CE    ; 
@@ -310,39 +313,55 @@ M21F0           LDAA    #$82                 ; 21F0    ; < gets patched to $22AB
                 DEC     PIAREGB              ; 21F5    ; Toggle PB0 (RESET)
                 STAA    SSDA_0               ; 21F8    ; A is still $82, CR1: RXRs, Sel. CR3
                 JSR     Z22E2                ; 21FB    ; 
+;------------------------------------------------
+; Write ID Mark $F5, $7E and build ID Record
+; Format: F5 | 7E | TRK | 00 | SEC | 00 | 00 | 
+;------------------------------------------------
                 LDX     #$83F5               ; 21FE    ; RXRs, sel. TxFIFO | $F5 Transmit FIFO (Sync Code)
                 STX     SSDA_0               ; 2201    ; |
                 LDAB    #$7E                 ; 2204    ; ID address mark 
-                LDAA    #$40                 ; 2206    ; 
+                LDAA    #$40                 ; 2206    ; get Bit 6 from Status Reg.
                 STAB    SSDA_1               ; 2208    ; Store ID mark 
+;--------------
 Z220B           BITA    SSDA_0               ; 220B    ; |
                 BEQ     Z220B                ; 220E    ; Wait for TX FIFO write to finish
+;--------------
                 LDAB    TRKNOW               ; 2210    ; |
                 STAB    SSDA_1               ; 2212    ; Store Track#
                 CLRB                         ; 2215    ; |
                 STAB    SSDA_1               ; 2216    ; Write 0
+;--------------
 Z2219           BITA    SSDA_0               ; 2219    ; |
                 BEQ     Z2219                ; 221C    ; Wait for TX FIFO write to finish
+;--------------
                 LDAB    SECNUM               ; 221E    ; init w. 1
                 STAB    SSDA_1               ; 2220    ; Store Sector#
                 CLRB                         ; 2223    ; |
                 STAB    SSDA_1               ; 2224    ; write 0
+;--------------
 Z2227           BITA    SSDA_0               ; 2227    ; |
                 BEQ     Z2227                ; 222A    ; Wait for TX FIFO write to finish
+;--------------
                 STAB    SSDA_1               ; 222C    ; write 0
+;--------------
 Z222F           BITA    SSDA_0               ; 222F    ; |
                 BEQ     Z222F                ; 2232    ; Wait for TX FIFO write to finish
+;--------------
                 LDAB    PIAREGB              ; 2234    ; |
                 ORAB    #$08                 ; 2237    ; Set SHIFT-CRC high
                 STAB    PIAREGB              ; 2239    ; |
                 STAB    SSDA_1               ; 223C    ; ?
+;--------------
 Z223F           BITA    SSDA_0               ; 223F    ; Wait for TX FIFO write to finish
                 BEQ     Z223F                ; 2242    ; |
+;--------------
                 LDAA    #$FF                 ; 2244    ; |
                 STAA    SSDA_1               ; 2246    ; Write Gap
                 LDAA    #$40                 ; 2249    ; |
+;--------------
 Z224B           BITA    SSDA_0               ; 224B    ; Wait for TX FIFO write to finish
                 BEQ     Z224B                ; 224E    ; |
+;--------------
                 ANDB    #$60                 ; 2250    ; Clear all bits except Bit 5,6 (DS2 and DS3(SIDE) unaffected)
                 STAB    PIAREGB              ; 2252    ; |
                 LDX     #$81FF               ; 2255    ; RXRs, Sel Sync Code Reg. | $FF > Sync Code
@@ -355,40 +374,41 @@ Z224B           BITA    SSDA_0               ; 224B    ; Wait for TX FIFO write 
                 BEQ     SIDEDONE             ; 2264    ; 
                 CMPA    #$35                 ; 2266    ; $35 = 53
                 BEQ     SIDEDONE             ; 2268    ; 
-                JMP     NXTSEC      --> BACK ; 226A    ; 
+                JMP     NXTSEC      ;--> BACK ; 226A    ; 
 ;------------------------------------------------
 SIDEDONE        LDAA    PIACTRLB             ; 226D    ; |
                 BPL     SIDEDONE             ; 2270    ; Wait for IRQB on CB1 (IDX)
+;--------------
                 DEC     PIAREGB              ; 2272    ; Toggle RESET
                 DEC     PIAREGB              ; 2275    ; 
                 BSR     INITPIA              ; 2278    ; Init PIA
-                LDAA    SECNUM               ; 227A    ; 
+                LDAA    SECNUM               ; 227A    ; at this point SECNUM can only be $1B or $35
                 CMPA    #$1B                 ; 227C    ; $1B = 27
-                BNE     WRITDAT              ; 227E    ; 
+                BNE     WRITDAT              ; 227E    ; it was $35, now write data
                 LDAA    EXDSKSD              ; 2280    ; Bit 7 is now PA5
                 BMI     WRITDAT              ; 2282    ; check for SS or DS, if PA5 is high -> Single Sided
-                JMP     Z2356                ; 2284 ; Different from v300! (sets PB0-RESET and WG, clears all but DS2) and Jumps to 2176
+                JMP     WRITEDONE            ; 2284 ; Different from v300! (sets PB0-RESET and WG, clears all but DS2) and Jumps to 2176
 ;                LDAA    #$23                     ; value for PIAREGB, next Side
                 FDB     $2176                    ; old code, not used anymore
 ;------------------------------------------------
 WRITDAT         JSR     RWTEST    ;EXORDISK      ; actually write data to disk
-                BCC     Z2291                    ; 
-                JMP     Z2377    ; 228E: 7E 23 77  ;  Different from v300! Jumps to 20F4 if Error persists 5 times
+                BCC     DATADONE                 ; Data written successfully
+                JMP     TRYAGAIN ; 228E: 7E 23 77  ;  Different from v300! Jumps to 20F4 if Error persists 5 times
                                              ; otherwise SEEK & NXTTRK
-;               JMP     Z20F4                    ; Error or done
+;               JMP     FATALERROR               ; Error or done
 ;------------------------------------------------
-Z2291           LDAA    STRSCTL                  ; 
+DATADONE        LDAA    STRSCTL                  ; 
                 LDAB    STRSCTH                  ; 
                 ADDA    NUMSCTL                  ; contains 26 or 52 according to SS or DS
                 ADCB    #$00                     ; 
                 STAA    STRSCTL                  ; 
                 STAB    STRSCTH                  ; 
                 INC     TRKNOW                   ; 
-                LDAA    LDADDRL                  ; 
-                CMPA    TRKNOW                   ; 
-                JMP     Z2360      ; 22A4: 7E 23 60  ;  Different from v300!
-;                BCS     Z22A9                    ; bail
-;                JMP     NXTTRK                   ; 
+                LDAA    LDADDRL                  ; contains $76
+                CMPA    TRKNOW                   ; are we finished?
+                JMP     CHKDONE    ; 22A4: 7E 23 60  ;  Different from v300!
+;                BCS     Z22A9                    ; if yes, restart
+;                JMP     NXTTRK                   ; if no, seek to next track
                 FDB     $2152                     ; old code
 ;------------------------------------------------
 Z22A9           SCALL   MDENT1
@@ -475,25 +495,30 @@ STORAGE         FDB     $0000                    ;
 ; Here are all the Patches which makes this
 ; Version different from 300.
 ;------------------------------------------------
-Z2350           ORAB    #$08                     ; Set DIRQ high
+SETDIRQ         ORAB    #$08                     ; Set DIRQ high
                 STAB    PIAREGA                  ; store it.
                 RTS                              ; 
-Z2356           LDAA    PIAREGB                  ; 
-                ANDA    #$20                     ; 
-                ORAA    #$03                     ; 
+;------------------------------------------------
+WRITEDONE       LDAA    PIAREGB                  ; 
+                ANDA    #$20                     ; Clear all but DS2
+                ORAA    #$03                     ; Set PB0 (RESET inactive) and WG inactive
                 JMP     Z2176                    ; 
-Z2360           BCS     Z2365                    ; 
-                JMP     Z236D                    ; 
-Z2365           LDAA    #$07                     ; 
-                JSR     XOUTCH                   ; 
-                JMP     FORMATSTART              ; 
-Z236D           LDAA    #$05                     ; 
-                STAA    M0030                    ; 
-Z2371           JSR     SEEK        ;EXORDISK    ; 
-                JMP     NXTTRK                   ; 
-Z2377           DEC     M0030                    ; 
+;------------------------------------------------
+CHKDONE         BCS     SIGNALDONE               ; 
+                JMP     RELOADNXTTR              ; 
+;------------------------------------------------
+SIGNALDONE      LDAA    #$07                     ; Bell for finished
+                JSR     XOUTCH                   ; output
+                JMP     FORMATSTART              ; restart
+;------------------------------------------------
+RELOADNXTTR     LDAA    #$05                     ; Reload 5 tries and
+                STAA    M0030                    ; |
+Z2371           JSR     SEEK        ;EXORDISK    ; go to next track
+                JMP     NXTTRK                   ; go again
+;------------------------------------------------
+TRYAGAIN        DEC     M0030                    ; try again for max 5 times
                 BNE     Z2371                    ; 
-                JMP     Z20F4                    ; 
+                JMP     FATALERROR               ; give up...
 
 
                 END

@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 1 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 1 - 02/25/2026 12:33:12 PM
 
 
        1/       0 :                              include "mdoseq.inc"
@@ -61,7 +61,7 @@
 (1)   57/       0 : =$16                 ADDAM1   EQU $16 ; INCREMENT MEMORY (DOUBLE BYTE) BY A
 (1)   58/       0 : =$17                 SUBAM1   EQU $17 ; DECREMENT MEMORY (DOUBLE BYTE) BY A
 (1)   59/       0 : =$18                 MMA1     EQU $18 ; MULTIPLY (SHIFT LEFT) MEMORY BY A
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 2 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 2 - 02/25/2026 12:33:12 PM
 
 
 (1)   60/       0 : =$19                 DMA1     EQU $19 ; DIVIDE (SHIFT RIGHT) MEMORY BY A
@@ -124,7 +124,7 @@
 (1)  117/       0 : =$E                  SO       EQU  $E ; SHIFT OUT
 (1)  118/       0 : =$F                  SI       EQU  $F ; SHIFT IN
 (1)  119/       0 : =$10                 DLE      EQU $10 ; DATA LINK ESCAPE
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 3 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 3 - 02/25/2026 12:33:12 PM
 
 
 (1)  120/       0 : =$11                 DC1      EQU $11 ; DEVICE CONTROL 1
@@ -187,7 +187,7 @@
 (1)  177/       0 :                     ; DIRECTORY ENTRY OFFSET
 (1)  178/       0 :                     ;
 (1)  179/       0 : =$0                  DIRsNM  EQU 0   ; OFFSET TO NAME (8 BYTES)
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 4 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 4 - 02/25/2026 12:33:12 PM
 
 
 (1)  180/       0 : =$8                  DIRsSX  EQU 8   ; OFFSET TO SUFFIX (2 BYTES)
@@ -250,7 +250,7 @@
 (1)  237/       0 : =$F                  IsWRIT  EQU  $F ; FILE IS WRITE PROTECTED
 (1)  238/       0 : =$10                 IsDELT  EQU $10 ; FILE IS DELETE PROTECTED
 (1)  239/       0 : =$11                 IsRANG  EQU $11 ; LOQICAL SECTOR NUMBER OUT OF RANG
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 5 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 5 - 02/25/2026 12:33:12 PM
 
 
 (1)  240/       0 : =$12                 IsFSPC  EQU $12 ; NO DISK FILE SPACE AVAILABLE
@@ -313,7 +313,7 @@
 (1)  297/       0 : =$0                  FDsFMU EQU %00000000 ; USER DEFINED FORMAT (SECTOR I/O)
 (1)  298/       0 : =$1                  FDsFMD EQU %00000001 ; DEFAULT OBJECT REC'D FORMAT
 (1)  299/       0 : =$2                  FDsFML EQU %00000010 ; BINARY LOAD FORMAT
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 6 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 6 - 02/25/2026 12:33:12 PM
 
 
 (1)  300/       0 : =$3                  FDsFMB EQU %00000011 ; BINARY RECORD FORMAT
@@ -376,7 +376,7 @@
 (1)  357/       0 : =$6                  CURADR  EQU  6 ; MEMORY ADDRESS FOR DISK TRANSFER
 (1)  358/       0 : =$8                  FDSTAT  EQU  8 ; DISK TRANSFER STATUS
 (1)  359/       0 : =$B                  SCTCNT  EQU 11 ; SECTOR COUNT USED IN DETERMINING
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 7 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 7 - 02/25/2026 12:33:12 PM
 
 
 (1)  360/       0 : =$D                  SIDES   EQU $D ; - ->SINGLEi + -> DOUBLE SIDED
@@ -439,7 +439,7 @@
 (1)  417/       0 : =$FF53               AECHO  EQU  $FF53  ; INPUT CHARACTER ECHO FLAG (O=>ECH
 (1)  418/       0 : =$FFF8               IRGsVC EQU  $FFF8  ; IRG VECTOR
 (1)  419/       0 : =$FFFA               SWIsVC EQU  $FFFA  ; SWI VECTOR
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 8 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm(mdoseq.inc) - Page 8 - 02/25/2026 12:33:12 PM
 
 
 (1)  420/       0 : =$FFFC               NMIsVC EQU  $FFFC  ; NMI VECTOR
@@ -502,7 +502,7 @@
       26/       0 : =$2D                 M002D   EQU     $002D ; 
       27/       0 : =$2E                 M002E   EQU     $002E ; 
       28/       0 : =$34                 M0034   EQU     $0034 ; 
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 9 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 9 - 02/25/2026 12:33:12 PM
 
 
       29/       0 : =$4C                 M004C   EQU     $004C ; 
@@ -565,7 +565,7 @@
       80/    2040 : 26 D3                               BNE     SERRB                    ; Set Error index to $B (COMMAND SYNTAX ERROR)
       81/    2042 : B1 23 38                            CMPA    M2338                    ; check last Byte for $20 (SPACE)
       82/    2045 : 26 CE                               BNE     SERRB                    ; Set Error index to $B (COMMAND SYNTAX ERROR)
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 10 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 10 - 02/25/2026 12:33:12 PM
 
 
       83/    2047 : F6 23 2F                            LDAB    M232F                    ; Check LUN
@@ -628,7 +628,7 @@
      134/    20A1 : 27 04                               BEQ     Z20A7                    ; Version 11 ignores RDY
      135/    20A3 : 81 12                               CMPA    #$12                     ; Version 12 ignores RDY too
      136/    20A5 : 26 04                               BNE     CHKRDY                   ; all other Versions use RDY Signal
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 11 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 11 - 02/25/2026 12:33:12 PM
 
 
      137/    20A7 : 86 FF               Z20A7           LDAA    #$FF                     ; 
@@ -691,7 +691,7 @@
      194/    2108 : 96 08                               LDAA    FDSTAT                   ; 
      195/    210A : 97 2D               Z210A           STAA    M002D                    ; first part of Error Packet (pg. 380 of MDOS User Guide Jun79)
      196/    210C : C6 01               Z210C           LDAB    #$01                     ; Error: "**PROM I/O ERROR -- STATUS = \3 AT h DRIVE i - PSN j"
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 12 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 12 - 02/25/2026 12:33:12 PM
 
 
      197/    210E : CE 00 2D                            LDX     #M002D                   ; set pointer to Error Packet
@@ -754,7 +754,7 @@
      250/    2180 : 4A                  Z2180           DECA                             ; |
      251/    2181 : 26 FD                               BNE     Z2180                    ; wait
      252/    2183 : CE C0 DA                            LDX     #$C0DA                   ; RXRs, TXRs, Sel. CR2 | PC12 - SM Inhibit, 8-Bit, TX Syn 
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 13 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 13 - 02/25/2026 12:33:12 PM
 
 
      253/    2186 : FF EC 04                            STX     SSDA_0                   ; |
@@ -817,7 +817,7 @@
      310/    2219 : B5 EC 04            Z2219           BITA    SSDA_0                   ; |
      311/    221C : 27 FB                               BEQ     Z2219                    ; Wait for TX FIFO write to finish
      312/    221E : D6 23                               LDAB    SECNUM                   ; init w. 1
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 14 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 14 - 02/25/2026 12:33:12 PM
 
 
      313/    2220 : F7 EC 05                            STAB    SSDA_1                   ; Store Sector#
@@ -863,7 +863,7 @@
      353/    227E : 26 09                               BNE     WRITDAT                  ; 
      354/    2280 : 96 2C                               LDAA    EXDSKSD                  ; Bit 7 is now PA5
      355/    2282 : 2B 05                               BMI     WRITDAT                  ; check for SS or DS
-     356/    2284 : 86 23                               LDAA    #$23                     ; value for PIAREGB
+     356/    2284 : 86 23                               LDAA    #$23                     ; value for PIAREGB, next Side
      357/    2286 : 7E 21 76                            JMP     Z2176                    ; 
      358/    2289 :                     ;------------------------------------------------
      359/    2289 : BD E8 72            WRITDAT         JSR     RWTEST    ;EXORDISK      ; actually write data to disk
@@ -880,7 +880,7 @@
      370/    22A0 : 96 21                               LDAA    LDADDRL                  ; 
      371/    22A2 : 91 22                               CMPA    TRKNOW                   ; 
      372/    22A4 : 25 03                               BCS     Z22A9                    ; bail
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 15 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 15 - 02/25/2026 12:33:12 PM
 
 
      373/    22A6 : 7E 21 52                            JMP     NXTTRK                   ; 
@@ -943,7 +943,7 @@
      428/    2310 : 86 18                               LDAA    #$18                     ; |
      429/    2312 : B7 EC 05                            STAA    SSDA_1                   ; CR3: Clr. TUF, 8 has no effet
      430/    2315 : 5A                                  DECB                             ; 
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 16 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 16 - 02/25/2026 12:33:12 PM
 
 
      431/    2316 : 26 EE                               BNE     Z2306                    ; 
@@ -1006,7 +1006,7 @@
      456/    236A : 00                                  FCB     $00
      456/    236B : 00                                  FCB     $00
      456/    236C : 00                                  FCB     $00
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 17 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 17 - 02/25/2026 12:33:12 PM
 
 
      456/    236D : 00                                  FCB     $00
@@ -1069,7 +1069,7 @@
      456/    23A6 : 00                                  FCB     $00
      456/    23A7 : 00                                  FCB     $00
      456/    23A8 : 00                                  FCB     $00
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 18 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 18 - 02/25/2026 12:33:12 PM
 
 
      456/    23A9 : 00                                  FCB     $00
@@ -1132,7 +1132,7 @@
      456/    23E2 : 00                                  FCB     $00
      456/    23E3 : 00                                  FCB     $00
      456/    23E4 : 00                                  FCB     $00
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 19 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 19 - 02/25/2026 12:33:12 PM
 
 
      456/    23E5 : 00                                  FCB     $00
@@ -1163,7 +1163,7 @@
      456/    23FE : 00                                  FCB     $00
      456/    23FF : 00                                  FCB     $00
      458/    2400 :                                     END
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 20 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 20 - 02/25/2026 12:33:12 PM
 
 
   Symbol Table (* = unused):
@@ -1195,7 +1195,7 @@
 *CONSTPI :        3.141592653589793 - | *CPBAX1 :                        2F - |
 *CR :                             D - | *CURADR :                         6 - |
  CURADRH :                        6 - |  CURDRV :                         0 - |
-*CUSTOM :                         0 - | *DATE :                "02/18/2026" - |
+*CUSTOM :                         0 - | *DATE :                "02/25/2026" - |
 *DC1 :                           11 - | *DC2 :                           12 - |
 *DC3 :                           13 - | *DC4 :                           14 - |
 *DDSCNS :                         4 - | *DDSFMC :                         1 - |
@@ -1226,7 +1226,7 @@
  ENDOSS :                       106 - |  ENDRVS :                       110 - |
  ENDSYS :                       10A - |  ENDUSS :                       108 - |
 *ENG :                            5 - | *EREAD1 :                        39 - |
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 21 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 21 - 02/25/2026 12:33:12 PM
 
 
 *ERSACR :                       '9' - | *ERSCRC :                       '1' - |
@@ -1289,7 +1289,7 @@
  M000C :                          C - | *M001A :                         1A - |
  M0024 :                         24 - |  M002D :                         2D - |
  M002E :                         2E - | *M0034 :                         34 - |
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 22 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 22 - 02/25/2026 12:33:12 PM
 
 
 *M004C :                         4C - |  M00FE :                         FE - |
@@ -1352,7 +1352,7 @@
  STORAGE :                     234E C | *STRSCT :                         1 - |
  STRSCTH :                        1 - |  STRSCTL :                        2 - |
 *STX :                            2 - | *SUAX1 :                         2C - |
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 23 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 23 - 02/25/2026 12:33:12 PM
 
 
 *SUB :                           1A - | *SUBAM1 :                        17 - |
@@ -1362,7 +1362,7 @@
 *SWISVC :                      FFFA - | *SYEOCB :                       16A - |
  SYERRS :                       114 - |  SYIOCB :                       120 - |
 *SYN :                           16 - |  SYPOCB :                       145 - |
-*TBAX1 :                         25 - | *TIME :               "05:54:45 PM" - |
+*TBAX1 :                         25 - | *TIME :               "12:33:12 PM" - |
  TRKNOW :                        22 - | *TRUE :                           1 - |
 *TXBA1 :                         24 - | *US :                            1F - |
 *VDSBIN :                         4 - | *VDSGDB :                         8 - |
@@ -1403,7 +1403,7 @@
     441 symbols
     310 unused symbols
 
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 24 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 24 - 02/25/2026 12:33:12 PM
 
 
   Defined Macros:
@@ -1414,7 +1414,7 @@ SKIP2                                 |
 
       3 macros
 
- AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 25 - 02/18/2026 05:54:45 PM
+ AS V1.42 Beta [Bld 216] - Source File format_commented.asm - Page 25 - 02/25/2026 12:33:12 PM
 
 
   Code Pages:
@@ -1424,7 +1424,7 @@ STANDARD (0 changed characters)
 
 1 code page
 
-0.01 seconds assembly time
+0.00 seconds assembly time
 
     911 lines source file
    1106 lines incl. macro expansions
